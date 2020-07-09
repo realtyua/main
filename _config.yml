@@ -1,12 +1,12 @@
 # Site settings
 baseurl: ''
-url: 'https://www.realestate.if.ua/'
+url: 'https://www.realestate.if.ua'
 
 encoding: UTF-8
 lang: uk_UA
 timezone: Europe/Kiev
 
-title: Нерухомість в Івано-Франківській області
+title: Мережа вебсайтів нерухомості
 description: Вся нерухомість в місті Івано-Франківської та області
 name: Регіональна нерухомість
 brand: Нерухомість
@@ -21,7 +21,61 @@ developer:
   website: http://www.vasyl.net
   email: info@vasyl.net
 
+contact:
+  name: Мережа вебсайтів нерухомості України
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: (067) 433 00 66
+  phone_hot:  (067) 433 00 66
+  phone_fax:  (067) 433 00 66
+  email: info@realestate.if.ua
+  www: https://www.realestate.if.ua/
+
+legal:
+  name: Мережа вебсайтів нерухомості України
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;С.&nbsp;Стрільців,&nbsp;56
+  phone:
+    main: (067) 433 00 66
+    hot:  (067) 433 00 66
+    fax:  (067) 433 00 66
+  email: info@realestate.if.ua
+  www: https://www.realestate.if.ua/
+
+defaults:
+  - scope:
+      path: /*/data/*.json
+    values:
+      sitemap: false
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: /*/news/
+      type: "news"
+    values:
+      layout: "news"
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
 plugins:
   - jekyll-sitemap
   - jekyll-timeago
   - jekyll-paginate-v2
+
+compress_html:
+  clippings: all
+  comments: [""]
+  endings: all
+  ignore:
+    envs: []
+  blanklines: false
+  profile: false
+  startings: [html, head, body]
