@@ -1,0 +1,33 @@
+---
+layout: compress
+---
+{%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
+{%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+<!doctype html>
+<html dir="ltr" lang="uk-UA">
+  <head>
+    {%- include head.html -%}
+  </head>
+  <body>
+    <div id="top"></div>
+    <div class="main">
+      {%- include header.html -%}
+      <main class="content"{% if page.url == "/" %} class="my-4"{% else %} class="mb-4"{% endif %}>
+        <div class="container">
+          {%- include breadcrumb.html -%}
+          {%- assign isContent = content | strip_newlines -%}
+          {%- if isContent == "" -%}
+            <p>Вміст відсутній...</p>
+          {%- else -%}
+            {{ content }}
+          {%- endif -%}
+        </div>
+      </main>
+      <footer>
+        {%- include footer.html -%}
+      </footer>
+    </div>
+    {%- include scroll-top.html -%}
+    {%- include java-script.html -%}
+  </body>
+</html>

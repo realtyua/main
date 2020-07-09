@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://www.realestate.if.ua/sitemap.xml

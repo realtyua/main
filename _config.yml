@@ -1,13 +1,25 @@
 # Site settings
 baseurl: ''
-url: 'https://www.realestate.if.ua'
+url: 'https://www.realestate.if.ua/'
 
 encoding: UTF-8
 lang: uk_UA
 timezone: Europe/Kiev
 
-title: Ради в Івано-Франківській області
-description: Представни́цькі органи влади Івано-Франківської області
+title: Нерухомість в Івано-Франківській області
+description: Вся нерухомість в місті Івано-Франківської та області
+name: Регіональна нерухомість
+brand: Нерухомість
+logo: "/assets/images/logo.svg"
+
+author:
+  name: Vasyl&nbsp;Mosiychuk
+  website: http://www.vasyl.net
+  email: info@vasyl.net
+developer:
+  name: vasyl.net
+  website: http://www.vasyl.net
+  email: info@vasyl.net
 
 plugins:
   - jekyll-sitemap
