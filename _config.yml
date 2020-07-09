@@ -1,0 +1,15 @@
+# Site settings
+baseurl: ''
+url: 'https://www.realestate.if.ua'
+
+encoding: UTF-8
+lang: uk_UA
+timezone: Europe/Kiev
+
+title: Ради в Івано-Франківській області
+description: Представни́цькі органи влади Івано-Франківської області
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-timeago
+  - jekyll-paginate-v2
