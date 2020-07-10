@@ -3,23 +3,23 @@
 #
 - type: region
   item: ivano-frankivska
-  name: Івано-Франківська обласна&nbsp;рада
-  address: 76004, м. Івано-Франківськ, вул.&nbsp;Михайла&nbsp;Грушевського,&nbsp;21
-  phone_main: (034) 255 26 16
-  phone_hot:  (034) 255 63 11
-  phone_fax:  (034) 255 61 33
-  email: orada.if@realestate.if.ua
-  www: https://www.realestate.if.ua
+  name: Нерухо́мість у Іва́но-Франкі́вській о́бласті
+  # address: 76004, м. Івано-Франківськ, вул.&nbsp;Михайла&nbsp;Грушевського,&nbsp;21
+  # phone_main: (034) 255 26 16
+  # phone_hot:  (034) 255 63 11
+  # phone_fax:  (034) 255 61 33
+  # email: orada.if@realestate.if.ua
+  # www: https://www.realestate.if.ua
 
 #
 # Region / City
 #
 - type: city
   item: ivano-frankivsk
-  name: Івано-Франківська міська&nbsp;рада
-  address: 76004, м. Івано-Франківськ, вул.&nbsp;Михайла&nbsp;Грушевського,&nbsp;21
-  phone_main: (034) 255 65 15
-  phone_hot:  (034) 255 60 20
-  phone_fax:  (034) 255 60 20
-  email: mvk@realestate.if.ua
-  www: https://www.realestate.if.ua
+  name: Нерухо́мість у місті Іва́но-Франкі́вськ
+  # address: 76004, м. Івано-Франківськ, вул.&nbsp;Михайла&nbsp;Грушевського,&nbsp;21
+  # phone_main: (034) 255 65 15
+  # phone_hot:  (034) 255 60 20
+  # phone_fax:  (034) 255 60 20
+  # email: mvk@realestate.if.ua
+  # www: https://www.realestate.if.ua
