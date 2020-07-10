@@ -12,12 +12,12 @@ layout: compress
     <div id="top"></div>
     <div class="main">
       {%- include header.html -%}
-      <main class="content"{% if page.url == "/" %} class="my-4"{% else %} class="mb-4"{% endif %}>
+      <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
         <div class="container">
           {%- include breadcrumb.html -%}
           {%- assign isContent = content | strip_newlines -%}
           {%- if isContent == "" -%}
-            <p>Вміст відсутній...</p>
+            {%- include info-visitors.html -%}
           {%- else -%}
             {{ content }}
           {%- endif -%}
