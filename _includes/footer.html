@@ -18,9 +18,19 @@
               </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3"></div>
-        <div class="col-md-6 col-lg-2"></div>
-        <div class="col-md-6 col-lg-2"></div>
+        <div class="col-md-6 col-lg-3">
+          <h6 class="mt-1">{{ site.data.lang-uk.phone_main }}</h6>
+          <p class="mb-0">{%- include footer/contact.html legal="phone_main" -%}</p>
+          <p>{{ site.data.labels.phone_fax }}:&nbsp;{%- include footer/contact.html legal="phone_fax" -%}</p>
+        </div>
+        <div class="col-md-6 col-lg-2">
+          <h6 class="mt-1">{{ site.data.lang-uk.phone_hot }}</h6>
+          <p>{%- include footer/contact.html legal="phone_hot" -%}</p>
+        </div>
+        <div class="col-md-6 col-lg-2">
+          <h6 class="mt-1">{{ site.data.lang-uk.email }}</h6>
+          <p>{%- include footer/contact.html legal="email" -%}</p>
+        </div>
     </div>
     <div class="row">
 

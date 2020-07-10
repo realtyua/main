@@ -2,6 +2,12 @@
 # Site
 #
 map_site: Мапа вебсайту
-no_email:
-no_number:
-no_data:
+no_email: немає пошти
+no_number: немає номера
+no_data: немає даних
+you_are_here: Ти тут:
+phone_main: Телефон
+phone_fax: Факс
+phone_hot: Гаряча лінія
+email: Електронна пошта
+www: Вебсайт
