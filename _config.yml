@@ -60,6 +60,9 @@ plugins:
   - jekyll-timeago
   - jekyll-paginate-v2
 
+sass:
+  style: compressed
+
 compress_html:
   clippings: all
   comments: [""]
