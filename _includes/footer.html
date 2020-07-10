@@ -10,11 +10,11 @@
     </div>
     <div class="row justify-content-md-center mt-4">
         <div class="col-md-6 col-lg-5">
-          <div class="media">
-              {%- include icons/trezub.svg width="27" height="45" -%}
-              <div class="media-body ml-3">
+          <div class="d-flex position-relative">
+              {%- include icons/trezub.svg width="27" height="45" class="flex-shrink-0 mr-3" -%}
+              <div>
                   <h5 class="my-0">{%- include footer/contact.html legal="name" -%}</h5>
-                  {%- include footer/contact.html legal="address" -%}
+                  <p>{%- include footer/contact.html legal="address" -%}</p>
               </div>
           </div>
         </div>
