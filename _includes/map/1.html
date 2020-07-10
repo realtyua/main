@@ -1,0 +1,28 @@
+{%- assign secondlevel = site.pages | sort: "path" -%}
+
+{%- assign parts = include.current | split: '/' -%}
+{%- assign depth = parts | size -%}
+{%- assign depth = depth | plus:1 -%}
+{%- assign isChildren = false -%}
+{%- for second in secondlevel -%}
+  {%- if second.url contains include.current and second.url != include.current -%}
+    {%- assign isChildren = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if isChildren == true -%}
+<ul class="list-unstyled">
+  {%- for second in secondlevel -%}
+    {%- capture slug -%}{{ second.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ second.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and second.navhide != 1 and second.title != '' -%}
+    <li class="mb-2">
+      <a href="{{ second.url }}">
+        {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+      </a>
+      {%- include map/2.html current=second.url -%}
+    </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{%- endif -%}

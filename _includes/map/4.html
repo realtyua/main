@@ -1,0 +1,28 @@
+{%- assign sixlevel = site.pages | sort: "path" -%}
+
+{%- assign parts = include.current | split: '/' -%}
+{%- assign depth = parts | size -%}
+{%- assign depth = depth | plus:1 -%}
+{%- assign isChildren = false -%}
+{%- for six in sixlevel -%}
+  {%- if six.url contains include.current and six.url != include.current -%}
+    {%- assign isChildren = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if isChildren == true -%}
+<ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
+  {%- for six in sixlevel -%}
+    {%- capture slug -%}{{ six.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ six.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and six.navhide != 1 and six.title != '' -%}
+    <li class="mb-2">
+      <a href="{{ six.url }}">
+        {%- if six.navtitle -%}{{ six.navtitle }}{%- else -%}{{ six.title }}{%- endif -%}
+      </a>
+      {%- include map/5.html current=six.url -%}
+    </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{%- endif -%}

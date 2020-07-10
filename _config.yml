@@ -30,16 +30,6 @@ contact:
   email: info@realestate.if.ua
   www: https://www.realestate.if.ua/
 
-legal:
-  name: Мережа вебсайтів нерухомості України
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;С.&nbsp;Стрільців,&nbsp;56
-  phone:
-    main: (067) 433 00 66
-    hot:  (067) 433 00 66
-    fax:  (067) 433 00 66
-  email: info@realestate.if.ua
-  www: https://www.realestate.if.ua/
-
 defaults:
   - scope:
       path: /*/data/*.json

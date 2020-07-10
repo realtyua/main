@@ -1,0 +1,38 @@
+<hr>
+<div class="row mt-3">
+  {%- assign ones = site.pages | sort: 'path' | reverse -%}
+  {%- for one in ones -%}
+    {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if "/" == current and one.navhide != 1 -%}
+      <div class="col-sm-6 col-md-3">
+        <h6>
+          <a href="{{ one.url }}">
+            {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+          </a>
+        </h6>
+        {%- include map/1.html current=one.url -%}
+      </div>
+      {%- if one.url -%}
+        {%- assign twos = site.pages -%}
+        {%- for two in twos -%}
+          {%- if two -%}
+            {%- capture slug -%}{{ two.url | split: "/" | last }}{%- endcapture -%}
+            {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+            {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
+            <div class="col-sm-6 col-md-3">
+              <h6>
+                <a href="{{ two.url }}">
+                  {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+                </a>
+              </h6>
+              {%- include map/1.html current=two.url -%}
+            </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+<hr>

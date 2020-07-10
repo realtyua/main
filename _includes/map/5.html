@@ -1,0 +1,27 @@
+{%- assign sevenlevel = site.pages | sort: "path" -%}
+
+{%- assign parts = include.current | split: '/' -%}
+{%- assign depth = parts | size -%}
+{%- assign depth = depth | plus:1 -%}
+{%- assign isChildren = false -%}
+{%- for seven in sevenlevel -%}
+  {%- if seven.url contains include.current and seven.url != include.current -%}
+    {%- assign isChildren = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if isChildren == true -%}
+<ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
+  {%- for seven in sevenlevel -%}
+    {%- capture slug -%}{{ seven.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ seven.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and seven.navhide != 1 and seven.title != '' -%}
+    <li class="mb-2">
+      <a href="{{ seven.url }}">
+        {%- if seven.navtitle -%}{{ seven.navtitle }}{%- else -%}{{ seven.title }}{%- endif -%}
+      </a>
+    </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{%- endif -%}

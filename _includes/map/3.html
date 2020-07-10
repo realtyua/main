@@ -1,0 +1,28 @@
+{%- assign fivelevel = site.pages | sort: "path" -%}
+
+{%- assign parts = include.current | split: '/' -%}
+{%- assign depth = parts | size -%}
+{%- assign depth = depth | plus:1 -%}
+{%- assign isChildren = false -%}
+{%- for five in fivelevel -%}
+  {%- if five.url contains include.current and five.url != include.current -%}
+    {%- assign isChildren = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if isChildren == true -%}
+<ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
+  {%- for five in fivelevel -%}
+    {%- capture slug -%}{{ five.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ five.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and five.navhide != 1 and five.title != '' -%}
+    <li class="mb-2">
+      <a href="{{ five.url }}">
+        {%- if five.navtitle -%}{{ five.navtitle }}{%- else -%}{{ five.title }}{%- endif -%}
+      </a>
+      {%- include map/4.html current=five.url -%}
+    </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{%- endif -%}

@@ -1,0 +1,7 @@
+{%- if contact[include.legal] -%}
+  <a href="tel:+38{{ contact[include.legal] | strip | remove: '(' | remove: ')' | remove: ' ' }}">
+    {{ contact[include.legal] | replace: " ", "&nbsp;" }}
+  </a>
+{%- else -%}
+  <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
+{%- endif -%}
