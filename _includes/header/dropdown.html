@@ -1,0 +1,18 @@
+<div class="dropdown-menu mt-n2 w-100 border-0 rounded-0" aria-labelledby="navDrop{{ slug | capitalize }}">
+  <div class="container">
+    <div class="row w-100">
+    {%- assign secondlevel = site.pages | sort: "path" -%}
+    {%- for second in secondlevel -%}
+      {%- capture slug -%}{{ second.url | split: "/" | last }}{%- endcapture -%}
+      {%- capture current -%}{{ second.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+      {%- if include.current == current and second.navhide != 1 -%}
+      <div class="col-sm-6 col-md-4">
+        <a href="{{ second.url }}" class="dropdown-item{% if page.url == second.url %} active{% endif %}">
+          {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+        </a>
+      </div>
+      {%- endif -%}
+    {%- endfor -%}
+    </div>
+  </div>
+</div>
