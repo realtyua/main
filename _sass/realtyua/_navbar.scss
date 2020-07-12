@@ -45,14 +45,14 @@ $dropDown       : true;
     }
 
     .navbar-nav {
-        // .nav-item {
-        //     margin-right: .85rem;
-        // }
+        .nav-item {
+            margin-right: 0;
+        }
 
         .nav-link {
             color: $colDefault;
             font-weight: 600;
-            // padding: .65rem;
+            padding: .5rem;
             &:not(.disabled) {
 
                 &:hover,
