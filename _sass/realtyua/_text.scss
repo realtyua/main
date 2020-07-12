@@ -1,0 +1,9 @@
+//
+// Responsive Weight
+//
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-down($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+    .font#{$infix}-weight-bold  { font-weight: 700!important; }
+  }
+}
