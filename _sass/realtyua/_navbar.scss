@@ -3,7 +3,6 @@ $bgHighlight    : #2d5ca6; // #273043;
 $colDefault     : #ffffff;
 $colHighlight   : #ffe358;
 $dropDown       : true;
-// $navbar-toggler-focus-width: 0;
 
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
@@ -86,7 +85,7 @@ $dropDown       : true;
                 .dropdown-item {
                     color: $colDefault;
                     font-weight: 600;
-                    padding: .25rem;
+                    padding: .2rem;
                     &:hover,
                     &:focus,
                     &.active {
