@@ -48,6 +48,17 @@ $dropDown       : true;
     }
 
     .navbar-nav {
+        .dropdown-toggle::after {
+            display: inline-block;
+            margin-left: unset;
+            vertical-align: unset;
+            content: unset;
+            border-top: unset;
+            border-right: unset;
+            border-bottom: unset;
+            border-left: unset;
+        }
+
         .nav-link {
             color: $colDefault;
 
