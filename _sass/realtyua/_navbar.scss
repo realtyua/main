@@ -52,7 +52,7 @@ $navbar-toggler-focus-width: 0;
         .nav-link {
             color: $colDefault;
             font-weight: 600;
-            padding: .5rem;
+            padding: .65rem;
             &:not(.disabled) {
 
                 &:hover,
@@ -86,7 +86,7 @@ $navbar-toggler-focus-width: 0;
                 .dropdown-item {
                     color: $colDefault;
                     font-weight: 600;
-                    padding: .65rem;
+                    padding: .25rem;
                     &:hover,
                     &:focus,
                     &.active {
