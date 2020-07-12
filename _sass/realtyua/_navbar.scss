@@ -3,6 +3,7 @@ $bgHighlight    : #2d5ca6; // #273043;
 $colDefault     : #ffffff;
 $colHighlight   : #ffe358;
 $dropDown       : true;
+$navbar-toggler-focus-width: none !default;
 
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
@@ -61,6 +62,11 @@ $dropDown       : true;
                 &:hover,
                 &:focus {
                     color: $colHighlight;
+                }
+                &:hover {
+                  transition: all 0.3s ease;
+                  position: relative;
+                  white-space: nowrap;
                 }
             }
         }
@@ -121,9 +127,6 @@ $dropDown       : true;
 
         .navbar-toggler-icon {
             color: $colDefault;
-        }
-        .navbar-toggler:focus {
-          box-shadow: none;
         }
     }
 
