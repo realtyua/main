@@ -24,7 +24,7 @@
                   {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
                   {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
                   <li class="nav-item dropdown position-static">
-                    <a class="nav-link dropdown-toggle" href="{{ two.url }}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="{{ slug | capitalize | prepend: "#" }}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                     </a>
                     {%- include header/dropdown.html current=two.url -%}
