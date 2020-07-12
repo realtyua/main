@@ -3,7 +3,7 @@ $bgHighlight    : #2d5ca6; // #273043;
 $colDefault     : #ffffff;
 $colHighlight   : #ffe358;
 $dropDown       : true;
-$navbar-toggler-focus-width: none;
+$navbar-toggler-focus-width: 0;
 
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
@@ -289,6 +289,6 @@ $navbar-toggler-focus-width: none;
     }
 }
 
-// .navbar-toggler:focus {
-//     box-shadow: 0 0 0 0;
-// }
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0;
+}
