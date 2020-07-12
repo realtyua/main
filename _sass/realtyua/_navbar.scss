@@ -48,6 +48,23 @@ $dropDown       : true;
     }
 
     .navbar-nav {
+        .nav-item {
+            margin-right: 1rem;
+        }
+
+        .nav-link {
+            color: $colDefault;
+            font-weight: 600;
+            padding: .5rem;
+            &:not(.disabled) {
+
+                &:hover,
+                &:focus {
+                    color: $colHighlight;
+                }
+            }
+        }
+
         .dropdown-toggle::after {
             display: inline-block;
             margin-left: unset;
@@ -59,18 +76,6 @@ $dropDown       : true;
             border-left: unset;
         }
 
-        .nav-link {
-            color: $colDefault;
-
-            &:not(.disabled) {
-
-                &:hover,
-                &:focus {
-                    color: $colHighlight;
-                }
-            }
-        }
-
         @if ($dropDown) {
             .dropdown-menu {
                 background-color: $bgDefault;
@@ -78,7 +83,8 @@ $dropDown       : true;
 
                 .dropdown-item {
                     color: $colDefault;
-
+                    font-weight: 600;
+                    padding: .5rem;
                     &:hover,
                     &:focus,
                     &.active {
@@ -115,6 +121,9 @@ $dropDown       : true;
 
         .navbar-toggler-icon {
             color: $colDefault;
+        }
+        .navbar-toggler:focus {
+          box-shadow: none;
         }
     }
 
@@ -217,5 +226,66 @@ $dropDown       : true;
     .dropdown-item.active {
         color: $colHighlight;
         background-color: $bgHighlight;
+    }
+}
+
+
+//
+// Toggler
+//
+.navbar-toggler {
+    padding: 0;
+    height: 34px;
+    width: 34px;
+    position: relative;
+    border: 0;
+    &:focus {
+        outline: 0;
+    }
+}
+.navbar-toggler-icon:after,
+.navbar-toggler-icon,
+.navbar-toggler-icon:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: none !important;
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background-color: $colDefault;
+    transition: all .3s ease-in;
+}
+.navbar-toggler-icon {
+    top: 50%;
+    left: 50%;
+    height: 0;
+    transform: translate(-50%, -50%);
+}
+.navbar-toggler-icon:before {
+    transition-delay: .1s;
+    transform: rotate(-45deg);
+    top: 0;
+}
+.navbar-toggler-icon:after {
+    transition-delay: .1s;
+    transform: rotate(45deg);
+    top: 0;
+}
+.navbar-toggler.collapsed {
+    .navbar-toggler-icon {
+        transition-delay: .2s;
+        height: 2px;
+    }
+    .navbar-toggler-icon:before {
+        transition-delay: 0;
+        transform: rotate(0);
+        top: -6px;
+    }
+    .navbar-toggler-icon:after {
+        transition-delay: 0;
+        transform: rotate(0);
+        top: 6px;
     }
 }
