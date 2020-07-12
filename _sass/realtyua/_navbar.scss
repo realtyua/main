@@ -45,9 +45,9 @@ $dropDown       : true;
     }
 
     .navbar-nav {
-        .nav-item {
-            margin-right: .85rem;
-        }
+        // .nav-item {
+        //     margin-right: .85rem;
+        // }
 
         .nav-link {
             color: $colDefault;
@@ -144,7 +144,7 @@ $dropDown       : true;
     .navbar {
         .navbar-nav {
             .nav-item {
-                margin-right: 2rem;
+                margin-right: 0;
             }
         }
     }
@@ -169,7 +169,7 @@ $dropDown       : true;
     .navbar {
         .navbar-nav {
             .nav-item {
-                margin-right: 3rem;
+                margin-right: .85rem;
             }
         }
     }
@@ -194,7 +194,7 @@ $dropDown       : true;
     .navbar {
         .navbar-nav {
             .nav-item {
-                margin-right: 4rem;
+                margin-right: .85rem;
             }
         }
     }
@@ -219,7 +219,7 @@ $dropDown       : true;
     .navbar {
         .navbar-nav {
             .nav-item {
-                margin-right: 5rem;
+                margin-right: .85rem;
             }
         }
     }
