@@ -6,45 +6,44 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarRealEstate">
         <ul class="navbar-nav">
-          {%- assign mones = site.pages | sort: 'path' | reverse -%}
+          {%- assign ones = site.pages | sort: 'path' | reverse -%}
 
-          {%- assign ifOneIsChildren = false -%}
-          {%- for 1 in mones -%}
+          {%- assign isChildren = false -%}
+          {%- for 1 in ones -%}
             {%- if 1.url contains page.url and 1.url != page.url -%}
-              {%- assign ifOneIsChildren = true -%}
+              {%- assign isChildren = true -%}
             {%- endif -%}
           {%- endfor -%}
 
-          {%- for mone in mones -%}
-            {%- capture mslug -%}{{ mone.url | split: "/" | last }}{%- endcapture -%}
-            {%- capture mcurrent -%}{{ mone.url | remove: mslug | remove: "//" | append: "/" }}{%- endcapture -%}
-            {%- if "/" == mcurrent and mone.navhide != 1 -%}
-              <li class="nav-item position-static{% if ifOneIsChildren == true %} dropdown{% endif %}">
-                <a class="nav-link{% if ifOneIsChildren == true %} dropdown-toggle{% endif %}{% if page.url == mone.url %} active{% endif %}" href="{%- if ifOneIsChildren == true -%}{{ mslug | prepend: '#' }}{%- else -%}{{ mone.url }}{%- endif -%}" id="navDrop{{ mslug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {%- if mone.navtitle -%}{{ mone.navtitle }}{%- else -%}{{ mone.title }}{%- endif -%}
+          {%- for one in ones -%}
+            {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
+            {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+            {%- if "/" == current and one.navhide != 1 -%}
+              <li class="nav-item position-static{% if isChildren == true %} dropdown{% endif %}">
+                <a class="nav-link{% if isChildren == true %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - {{isChildren}}
                 </a>
-                {% if ifOneIsChildren == true %}
-                  {%- include header/dropdown.html current=mone.url -%}
+                {% if isChildren == true %}
+                  {%- include header/dropdown.html current=one.url -%}
                 {%- endif -%}
               </li>
-              {%- if mone.url -%}
-                {%- assign mtwos = site.pages -%}
-                {%- assign ifTwoIsChildren = false -%}
-                {%- for 2 in mtwos -%}
+              {%- if one.url -%}
+                {%- assign twos = site.pages -%}
+                {%- for 2 in twos -%}
                   {%- if 2.url contains page.url and 2.url != page.url -%}
-                    {%- assign ifTwoIsChildren = true -%}
+                    {%- assign isChildren = true -%}
                   {%- endif -%}
                 {%- endfor -%}
-                {%- for mtwo in mtwos -%}
-                  {%- capture mslug -%}{{ mtwo.url | split: "/" | last }}{%- endcapture -%}
-                  {%- capture mcurrent -%}{{ mtwo.url | remove: mslug | remove: "//" | append: "/" }}{%- endcapture -%}
-                  {%- if mone.url == mcurrent and mtwo.url contains "city" or mtwo.url contains "town" -%}
-                  <li class="nav-item position-static{% if ifTwoIsChildren == true %} dropdown{%- endif -%}">
-                    <a class="nav-link{% if ifTwoIsChildren == true %} dropdown-toggle{%- endif -%}" href="{%- if ifTwoIsChildren == true -%}{{ mslug | prepend: '#' }}{%- else -%}{{ mtwo.url }}{%- endif -%}" id="navDrop{{ mslug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {%- if mtwo.navtitle -%}{{ mtwo.navtitle }}{%- else -%}{{ mtwo.title }}{%- endif -%}
+                {%- for two in twos -%}
+                  {%- capture slug -%}{{ two.url | split: "/" | last }}{%- endcapture -%}
+                  {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+                  {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
+                  <li class="nav-item position-static{% if isChildren == true %} dropdown{%- endif -%}">
+                    <a class="nav-link{% if isChildren == true %} dropdown-toggle{%- endif -%}" href="{%- if isChildren == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ two.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%} - {{isChildren}}
                     </a>
-                    {% if ifTwoIsChildren == true %}
-                      {%- include header/dropdown.html current=mtwo.url -%}
+                    {% if isChildren == true %}
+                      {%- include header/dropdown.html current=two.url -%}
                     {%- endif -%}
                   </li>
                   {%- endif -%}

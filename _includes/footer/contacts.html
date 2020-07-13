@@ -3,7 +3,7 @@
 {%- assign city = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "city" -%}{%- assign city = city | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign town = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "town" -%}{%- assign town = town | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign village = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "village" -%}{%- assign village = village | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign developers = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "developers" -%}{%- assign developers = developers | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign developer = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "developer" -%}{%- assign developer = developer | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign url = page.url | split: "/" -%}{%- assign size = url | size -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 {%- if page.url contains "developer" -%}{%- assign isDeveloper = true -%}{%- else -%}{%- assign isDeveloper = false -%}{%- endif -%}
