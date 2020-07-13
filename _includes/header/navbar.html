@@ -7,21 +7,20 @@
       <div class="collapse navbar-collapse" id="navbarRealEstate">
         <ul class="navbar-nav">
           {%- assign ones = site.pages | sort: 'path' | reverse -%}
-
+          {% assign level = page.url | size %}
           {%- assign isChildren = false -%}
           {%- for 1 in ones -%}
             {%- if 1.url contains page.url and 1.url != page.url -%}
               {%- assign isChildren = true -%}
             {%- endif -%}
           {%- endfor -%}
-
           {%- for one in ones -%}
             {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
             {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
             {%- if "/" == current and one.navhide != 1 -%}
               <li class="nav-item position-static{% if isChildren == true %} dropdown{% endif %}">
                 <a class="nav-link{% if isChildren == true %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - {{isChildren}}
+                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - {{isChildren}} | {{level}}
                 </a>
                 {% if isChildren == true %}
                   {%- include header/dropdown.html current=one.url -%}

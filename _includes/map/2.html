@@ -1,10 +1,13 @@
 {%- assign fourlevel = site.pages | sort: "path" -%}
 
+{% comment %}
 {%- assign parts = include.current | split: '/' -%}
 {%- assign depth = parts | size -%}
 {%- assign depth = depth | plus:1 -%}
+{% endcomment %}
+
 {%- assign isChildren = false -%}
-{%- for four in secondlevel -%}
+{%- for four in fourlevel -%}
   {%- if four.url contains include.current and four.url != include.current -%}
     {%- assign isChildren = true -%}
   {%- endif -%}

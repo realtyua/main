@@ -7,9 +7,7 @@
     {%- if "/" == current and 0.navhide != 1 -%}
       <div class="col-sm-6 col-md-3">
         <h6>
-          <a href="{{ 0.url }}">
-            {%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}
-          </a>
+          <a href="{{ 0.url }}">{%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}</a>
         </h6>
         {%- include map/1.html current=0.url -%}
       </div>

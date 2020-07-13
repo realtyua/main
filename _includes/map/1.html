@@ -1,26 +1,29 @@
-{%- assign secondlevel = site.pages | sort: "path" -%}
+{%- assign 2s = site.pages | sort: "path" -%}
 
+{% comment %}
 {%- assign parts = include.current | split: '/' -%}
 {%- assign depth = parts | size -%}
 {%- assign depth = depth | plus:1 -%}
+{% endcomment %}
+
 {%- assign isChildren = false -%}
-{%- for second in secondlevel -%}
-  {%- if second.url contains include.current and second.url != include.current -%}
+{%- for 2 in 2s -%}
+  {%- if 2.url contains include.current and 2.url != include.current -%}
     {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
 
 {%- if isChildren == true -%}
 <ul class="list-unstyled">
-  {%- for second in secondlevel -%}
-    {%- capture slug -%}{{ second.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ second.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-    {%- if include.current == current and second.navhide != 1 and second.title != '' -%}
+  {%- for 2 in 2s -%}
+    {%- capture slug -%}{{ 2.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ 2.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and 2.navhide != 1 and 2.title != '' -%}
     <li class="mb-2">
-      <a href="{{ second.url }}">
-        {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+      <a href="{{ 2.url }}">
+        {%- if 2.navtitle -%}{{ 2.navtitle }}{%- else -%}{{ 2.title }}{%- endif -%}
       </a>
-      {%- include map/2.html current=second.url -%}
+      {%- include map/2.html current=2.url -%}
     </li>
     {%- endif -%}
   {%- endfor -%}
