@@ -3,8 +3,10 @@
 {%- assign city = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "city" -%}{%- assign city = city | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign town = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "town" -%}{%- assign town = town | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign village = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "village" -%}{%- assign village = village | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign developers = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "developers" -%}{%- assign developers = developers | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign url = page.url | split: "/" -%}{%- assign size = url | size -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+{%- if page.url contains "developers" -%}{%- assign isDevelopers = true -%}{%- else -%}{%- assign isDevelopers = false -%}{%- endif -%}
 
 {%- if size != 9 -%}
   {%- for contact in region -%}
@@ -62,6 +64,18 @@
 {%- endfor -%}
 
 {%- for contact in village -%}
+  {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
+    {%- if include.legal contains "phone" -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == "email" -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for contact in developers -%}
   {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
     {%- if include.legal contains "phone" -%}
       {%- include footer/phone.html legal=include.legal -%}

@@ -95,16 +95,16 @@ $dropDown       : true;
             }
         }
 
-        .nav-item.active,
-        .nav-item.show {
-
-            .nav-link,
-            .nav-link:hover,
-            .nav-link:focus {
-                // color: $colHighlight;
-                // background-color: $bgHighlight;
-            }
-        }
+        // .nav-item.active,
+        // .nav-item.show {
+        //
+        //     .nav-link,
+        //     .nav-link:hover,
+        //     .nav-link:focus {
+        //         // color: $colHighlight;
+        //         // background-color: $bgHighlight;
+        //     }
+        // }
 
         .nav-link.show {
             background-color: $blue-800; // $bgHighlight;
@@ -144,9 +144,9 @@ $dropDown       : true;
             .nav-item {
                 margin-right: 0;
             }
-            .nav-link {
-                //padding: .5rem .2rem;
-            }
+            // .nav-link {
+            //     //padding: .5rem .2rem;
+            // }
         }
     }
     .navbar-expend-sm .navbar-nav .show .dropdown-menu {
