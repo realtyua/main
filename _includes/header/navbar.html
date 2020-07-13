@@ -16,7 +16,8 @@
           {%- for one in ones -%}
             {% comment %}{%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}{% endcomment %}
             {%- assign slug = one.url | split: '/' | last -%}
-            {%- assign part = slug | size -%}
+            {%- assign path = one.url | split: '/' -%}
+            {%- assign part = path | size -%}
             {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
             {%- if "/" == current and one.navhide != 1 -%}
               <li class="nav-item position-static{% if isChildren == true %} dropdown{% endif %}">
@@ -37,7 +38,8 @@
                 {%- for two in twos -%}
                   {% comment %}{%- capture slug -%}{{ two.url | split: "/" | last }}{%- endcapture -%}{% endcomment %}
                   {%- assign slug = two.url | split: '/' | last -%}
-                  {%- assign part = slug | size -%}
+                  {%- assign path = two.url | split: '/' -%}
+                  {%- assign part = path | size -%}
                   {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
                   {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
                   <li class="nav-item position-static{% if isChildren == true %} dropdown{%- endif -%}">
