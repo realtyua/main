@@ -4,6 +4,10 @@ $colDefault     : #ffffff;
 $colHighlight   : #ffe358;
 $dropDown       : true;
 
+.bg-dropdown {
+    background-color: $blue-900;
+}
+
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
     background-color: #000;
