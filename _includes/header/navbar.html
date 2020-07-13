@@ -17,7 +17,7 @@
             {%- if "/" == current and one.navhide != 1 -%}
               <li class="nav-item position-static{% if isChildren == true %} dropdown{% endif %}">
                 <a class="nav-link{% if isChildren == true %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - {{isChildren}}
+                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - one: {{isChildren}}
                 </a>
                 {%- include header/dropdown.html current=one.url -%}
               </li>
@@ -32,7 +32,7 @@
                   {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
                   <li class="nav-item position-static{% if isChildren == true %} dropdown{%- endif -%}">
                     <a class="nav-link{% if isChildren == true %} dropdown-toggle{%- endif -%}" href="{%- if isChildren == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ two.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%} - two: {{isChildren}}
                     </a>
                     {%- include header/dropdown.html current=two.url -%}
                   </li>
