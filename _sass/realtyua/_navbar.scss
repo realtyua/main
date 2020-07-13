@@ -83,7 +83,7 @@ $dropDown       : true;
 
         @if ($dropDown) {
             .dropdown-menu {
-                background-color: $bgDefault;
+                //background-color: $bgDefault;
                 border-color: $bgHighlight;
 
                 .dropdown-item {
@@ -94,7 +94,7 @@ $dropDown       : true;
                     &:focus,
                     &.active {
                         color: $colHighlight;
-                        background-color: $bgHighlight;
+                        //background-color: $bgHighlight;
                     }
                 }
 
