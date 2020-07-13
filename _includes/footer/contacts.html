@@ -22,7 +22,7 @@
   {%- endfor -%}
 {%- endif -%}
 
-{%- if isVillage == false or isDeveloper == false -%}
+{%- if isVillage == false or isDeveloper = false -%}
   {%- for contact in city -%}
     {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
       {%- if include.legal contains "phone" -%}
@@ -75,7 +75,7 @@
   {%- endif -%}
 {%- endfor -%}
 
-{%- for contact in developers -%}
+{%- for contact in developer -%}
   {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
     {%- if include.legal contains "phone" -%}
       {%- include footer/phone.html legal=include.legal -%}

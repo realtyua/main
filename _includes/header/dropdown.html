@@ -1,13 +1,13 @@
-<div class="dropdown-menu mt-0 w-100 border-0 rounded-0" aria-labelledby="navDrop{{ slug | capitalize }}">
+<div class="dropdown-menu mt-0 w-100 border-0 rounded-0" aria-labelledby="navDrop{{ mslug | capitalize }}">
   <div class="row w-100 mx-0 px-0">
-  {%- assign secondlevel = site.pages | sort: "path" -%}
-  {%- for second in secondlevel -%}
-    {%- capture slug -%}{{ second.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ second.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-    {%- if include.current == current and second.navhide != 1 -%}
+  {%- assign msecondlevel = site.pages | sort: "path" -%}
+  {%- for msecond in msecondlevel -%}
+    {%- capture mslug -%}{{ msecond.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture mcurrent -%}{{ msecond.url | remove: mslug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == mcurrent and msecond.navhide != 1 -%}
     <div class="col-sm-6 col-md-4 col-lg-3">
-      <a href="{{ second.url }}" class="dropdown-item{% if page.url == second.url %} active{% endif %}">
-        {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+      <a href="{{ msecond.url }}" class="dropdown-item{% if page.url == msecond.url %} active{% endif %}">
+        {%- if msecond.navtitle -%}{{ msecond.navtitle }}{%- else -%}{{ msecond.title }}{%- endif -%}
       </a>
     </div>
     {%- endif -%}
