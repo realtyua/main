@@ -23,3 +23,16 @@
   # phone_fax:  (034) 255 60 20
   # email: mvk@realestate.if.ua
   # www: https://www.realestate.if.ua
+
+#
+# Developers / Company
+#
+- type: developers
+  item: company
+  name: Нерухо́мість від Компанії БУД
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Будівельників,&nbsp;0
+  phone_main: (034) 200 00 00
+  phone_hot:  (034) 200 00 00
+  phone_fax:  (034) 200 00 00
+  email: bud@realestate.if.ua
+  www: https://bud.realestate.if.ua

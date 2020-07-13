@@ -8,10 +8,10 @@
         <ul class="navbar-nav">
           {%- assign ones = site.pages | sort: 'path' | reverse -%}
 
-          {%- assign isChildrenFor1 = false -%}
-          {%- for 1 in ones -%}
-            {%- if 1.url contains page.url and 1.url != page.url -%}
-              {%- assign isChildrenFor1 = true -%}
+          {%- assign isChildren = false -%}
+          {%- for i in ones -%}
+            {%- if i.url contains page.url and i.url != page.url -%}
+              {%- assign isChildren = true -%}
             {%- endif -%}
           {%- endfor -%}
 
@@ -19,27 +19,26 @@
             {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
             {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
             {%- if "/" == current and one.navhide != 1 -%}
-              <li class="nav-item position-static{% if isChildrenFor1 == true %} dropdown{% endif %}">
-                <a class="nav-link{% if isChildrenFor1 == true %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildrenFor1 == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - one: {{isChildrenFor1}}
+              <li class="nav-item position-static{% if isChildren == true %} dropdown{% endif %}">
+                <a class="nav-link{% if isChildren == true %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
                 </a>
                 {%- include header/dropdown.html current=one.url -%}
               </li>
               {%- if one.url -%}
                 {%- assign twos = site.pages -%}
-                {%- assign isChildrenFor2 = false -%}
-                {%- for 2 in twos -%}
-                  {%- if 2.url contains page.url and 2.url != page.url -%}
-                    {%- assign isChildrenFor2 = true -%}
+                {%- for i in twos -%}
+                  {%- if i.url contains page.url and i.url != page.url -%}
+                    {%- assign isChildren = true -%}
                   {%- endif -%}
                 {%- endfor -%}
                 {%- for two in twos -%}
                   {%- capture slug -%}{{ two.url | split: "/" | last }}{%- endcapture -%}
                   {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
                   {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
-                  <li class="nav-item position-static{% if isChildrenFor2 == true %} dropdown{%- endif -%}">
-                    <a class="nav-link{% if isChildrenFor2 == true %} dropdown-toggle{%- endif -%}" href="{%- if isChildrenFor2 == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ two.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%} - two: {{isChildrenFor2}}
+                  <li class="nav-item position-static{% if isChildren == true %} dropdown{%- endif -%}">
+                    <a class="nav-link{% if isChildren == true %} dropdown-toggle{%- endif -%}" href="{%- if isChildren == true -%}{{ slug | prepend: '#' }}{%- else -%}{{ two.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                     </a>
                     {%- include header/dropdown.html current=two.url -%}
                   </li>
