@@ -4,10 +4,6 @@ $colDefault     : #ffffff;
 $colHighlight   : #ffe358;
 $dropDown       : true;
 
-// .bg-dropdown {
-//     background-color: $blue-900;
-// }
-
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
     background-color: #000;
@@ -62,11 +58,6 @@ $dropDown       : true;
                 &:focus {
                     color: $colHighlight;
                 }
-                &:hover {
-                  transition: all 0.3s ease;
-                  position: relative;
-                  white-space: nowrap;
-                }
             }
         }
 
@@ -111,7 +102,7 @@ $dropDown       : true;
             .nav-link:hover,
             .nav-link:focus {
                 color: $colHighlight;
-                background-color: $bgHighlight;
+                background-color: $blue-800; // $bgHighlight;
             }
         }
     }
