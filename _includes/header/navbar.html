@@ -15,8 +15,8 @@
             {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
             {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
             {%- if "/" == current and one.navhide != 1 -%}
-              <li class="nav-item dropdown position-static">
-                <a class="nav-link dropdown-toggle" href="{% if has_children == true %}{{ one.url }}{%- else -%}{{ slug | prepend: '#' }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li class="nav-item position-static{% if has_children == true %} dropdown{%- endif -%}">
+                <a class="nav-link{% if has_children == true %} dropdown-toggle{%- endif -%}{% if page.url == one.url %} active{% endif %}" href="{% if has_children == true %}{{ one.url }}{%- else -%}{{ slug | prepend: '#' }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
                 </a>
                 {%- include header/dropdown.html current=one.url -%}
