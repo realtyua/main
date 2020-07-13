@@ -1,32 +1,32 @@
 <hr>
 <div class="row mt-3">
-  {%- assign ones = site.pages | sort: 'path' | reverse -%}
-  {%- for one in ones -%}
-    {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-    {%- if "/" == current and one.navhide != 1 -%}
+  {%- assign 0s = site.pages | sort: 'path' | reverse -%}
+  {%- for 0 in 0s -%}
+    {%- capture slug -%}{{ 0.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ 0.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if "/" == current and 0.navhide != 1 -%}
       <div class="col-sm-6 col-md-3">
         <h6>
-          <a href="{{ one.url }}">
-            {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+          <a href="{{ 0.url }}">
+            {%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}
           </a>
         </h6>
-        {%- include map/1.html current=one.url -%}
+        {%- include map/1.html current=0.url -%}
       </div>
-      {%- if one.url -%}
-        {%- assign twos = site.pages -%}
-        {%- for two in twos -%}
-          {%- if two -%}
-            {%- capture slug -%}{{ two.url | split: "/" | last }}{%- endcapture -%}
-            {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-            {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
+      {%- if 0.url -%}
+        {%- assign 1s = site.pages -%}
+        {%- for 1 in 1s -%}
+          {%- if 1 -%}
+            {%- capture slug -%}{{ 1.url | split: "/" | last }}{%- endcapture -%}
+            {%- capture current -%}{{ 1.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+            {%- if 0.url == current and 1.url contains "city" or 1.url contains "town" -%}
             <div class="col-sm-6 col-md-3">
               <h6>
-                <a href="{{ two.url }}">
-                  {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+                <a href="{{ 1.url }}">
+                  {%- if 1.navtitle -%}{{ 1.navtitle }}{%- else -%}{{ 1.title }}{%- endif -%}
                 </a>
               </h6>
-              {%- include map/1.html current=two.url -%}
+              {%- include map/1.html current=1.url -%}
             </div>
             {%- endif -%}
           {%- endif -%}
