@@ -4,9 +4,9 @@ $colDefault     : #ffffff;
 $colHighlight   : #ffe358;
 $dropDown       : true;
 
-.bg-dropdown {
-    background-color: $blue-900;
-}
+// .bg-dropdown {
+//     background-color: $blue-900;
+// }
 
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
@@ -83,7 +83,7 @@ $dropDown       : true;
 
         @if ($dropDown) {
             .dropdown-menu {
-                //background-color: $bgDefault;
+                background-color: $blue-800; //$bgDefault;
                 border-color: $bgHighlight;
 
                 .dropdown-item {
@@ -94,7 +94,7 @@ $dropDown       : true;
                     &:focus,
                     &.active {
                         color: $colHighlight;
-                        //background-color: $bgHighlight;
+                        background-color: $blue-800; //$bgHighlight;
                     }
                 }
 
