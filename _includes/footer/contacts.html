@@ -6,7 +6,7 @@
 {%- assign developers = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "developers" -%}{%- assign developers = developers | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign url = page.url | split: "/" -%}{%- assign size = url | size -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
-{%- if page.url contains "developers" -%}{%- assign isDevelopers = true -%}{%- else -%}{%- assign isDevelopers = false -%}{%- endif -%}
+{%- if page.url contains "developer" -%}{%- assign isDeveloper = true -%}{%- else -%}{%- assign isDeveloper = false -%}{%- endif -%}
 
 {%- if size != 9 -%}
   {%- for contact in region -%}
@@ -22,7 +22,7 @@
   {%- endfor -%}
 {%- endif -%}
 
-{%- if isVillage == false or isDevelopers == true -%}
+{%- if isVillage == false or isDeveloper == false -%}
   {%- for contact in city -%}
     {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
       {%- if include.legal contains "phone" -%}
