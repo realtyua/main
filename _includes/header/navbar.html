@@ -1,3 +1,5 @@
+{%- assign path = page.url | split: '/' -%}
+{%- assign part = path | size -%}
 <div class="row">
   <div class="col-12 px-2 p-lg-0">
     <nav class="navbar navbar-expand-lg justify-content-between pb-lg-0 px-0 px-lg-2" aria-label="Main navigation">
@@ -14,14 +16,11 @@
             {%- endif -%}
           {%- endfor -%}
           {%- for one in ones -%}
-            {% comment %}{%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}{% endcomment %}
             {%- assign slug = one.url | split: '/' | last -%}
-            {%- assign path = one.url | split: '/' -%}
-            {%- assign part = path | size -%}
             {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
             {%- if "/" == current and one.navhide != 1 -%}
               <li class="nav-item position-static{% if isChildren == true and part >= 2 %} dropdown{% endif %}">
-                <a class="nav-link{% if isChildren == true and part >= 2 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true and part >= 2 -%}{{ slug | prepend: '#' }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link{% if isChildren == true and part >= 2 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true and part >= 2 -%}{{ slug | prepend: '#' | prepend: site.url }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - {{isChildren}} | {{part}}
                 </a>
                 {% if isChildren == true %}
@@ -36,14 +35,11 @@
                   {%- endif -%}
                 {%- endfor -%}
                 {%- for two in twos -%}
-                  {% comment %}{%- capture slug -%}{{ two.url | split: "/" | last }}{%- endcapture -%}{% endcomment %}
                   {%- assign slug = two.url | split: '/' | last -%}
-                  {%- assign path = two.url | split: '/' -%}
-                  {%- assign part = path | size -%}
                   {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
                   {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
                   <li class="nav-item position-static{% if isChildren == true and part >= 2 %} dropdown{%- endif -%}">
-                    <a class="nav-link{% if isChildren == true and part >= 2 %} dropdown-toggle{%- endif -%}" href="{%- if isChildren == true and part >= 2 -%}{{ slug | prepend: '#' }}{%- else -%}{{ two.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link{% if isChildren == true and part >= 2 %} dropdown-toggle{%- endif -%}" href="{%- if isChildren == true and part >= 2 -%}{{ slug | prepend: '#' | prepend: site.url }}{%- else -%}{{ two.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%} - {{isChildren}} | {{part}}
                     </a>
                     {% if isChildren == true %}
