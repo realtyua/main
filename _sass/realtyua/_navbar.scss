@@ -101,9 +101,15 @@ $dropDown       : true;
             .nav-link,
             .nav-link:hover,
             .nav-link:focus {
-                color: $colHighlight;
-                background-color: $bgHighlight;
+                // color: $colHighlight;
+                // background-color: $bgHighlight;
             }
+        }
+
+        .show > .nav-link,
+        .nav-link.active {
+            color: $colHighlight;
+            background-color: $blue-800; // $bgHighlight;
         }
     }
 
