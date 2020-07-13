@@ -106,9 +106,7 @@ $dropDown       : true;
             }
         }
 
-        .show > .nav-link,
-        .nav-link.active {
-            color: $colHighlight;
+        .nav-link.show {
             background-color: $blue-800; // $bgHighlight;
         }
     }
