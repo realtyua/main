@@ -7,6 +7,10 @@
         </button>
       </div>
       <div class="modal-body py-0">
+        {% for item in site.data.realestate %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+        {% comment %}
         <ul class="outer-links">
           <li>
             <a href="#" target="_blank" rel="nofollow">
@@ -31,8 +35,10 @@
             </a>
           </li>
         </ul>
+        {% endcomment %}
       </div>
       <div class="modal-footer border-0">
+        {% comment %}
         <ul class="outer-links">
           <li>
             <a href="#" target="_blank" rel="nofollow">
@@ -45,6 +51,7 @@
             </a>
           </li>
         </ul>
+        {% endcomment %}
       </div>
     </div>
   </div>
