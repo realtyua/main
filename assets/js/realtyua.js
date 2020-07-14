@@ -1,16 +1,10 @@
-// var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
-// var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-//   return new bootstrap.Tooltip(tooltipTriggerEl)
-// })
 
-$(document).ready(function () {
-    $("a").tooltip({});
+var isSvg = false
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
 
-    $("svg circle").tooltip({
-        'container': 'body',
-        'placement': 'right'
-    });
-});
 
 
 // $('a[data-toggle="tooltip"]').tooltip({
