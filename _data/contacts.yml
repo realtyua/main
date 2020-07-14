@@ -17,12 +17,12 @@
 - type: city
   item: ivano-frankivsk
   name: Нерухо́мість у місті Іва́но-Франкі́вськ
-  # address: 76004, м. Івано-Франківськ, вул.&nbsp;Михайла&nbsp;Грушевського,&nbsp;21
-  # phone_main: (034) 255 65 15
-  # phone_hot:  (034) 255 60 20
-  # phone_fax:  (034) 255 60 20
-  # email: mvk@realestate.if.ua
-  # www: https://www.realestate.if.ua
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Незалежності,&nbsp;0
+  phone_main: (034) 200 00 00
+  phone_hot:  (034) 200 00 00
+  phone_fax:  (034) 200 00 00
+  email: city@realestate.if.ua
+  www: https://www.realestate.if.ua
 
 #
 # Developers / Company
