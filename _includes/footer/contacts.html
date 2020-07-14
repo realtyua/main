@@ -4,9 +4,11 @@
 {%- assign town = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "town" -%}{%- assign town = town | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign village = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "village" -%}{%- assign village = village | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign developer = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "developer" -%}{%- assign developer = developer | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign realtor = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "realtor" -%}{%- assign realtor = realtor | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign url = page.url | split: "/" -%}{%- assign size = url | size -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 {%- if page.url contains "developer" -%}{%- assign isDeveloper = true -%}{%- else -%}{%- assign isDeveloper = false -%}{%- endif -%}
+{%- if page.url contains "realtor" -%}{%- assign isRealtor = true -%}{%- else -%}{%- assign isRealtor = false -%}{%- endif -%}
 
 {%- if size != 9 -%}
   {%- for contact in region -%}
@@ -22,7 +24,7 @@
   {%- endfor -%}
 {%- endif -%}
 
-{%- if isDeveloper == true -%}
+{%- if isDeveloper == true or isRealtor == true -%}
 {%- else -%}
   {%- for contact in city -%}
     {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
