@@ -1,29 +1,23 @@
-{%- assign sixlevel = site.pages | sort: "path" -%}
-
-{% comment %}
-{%- assign parts = include.current | split: '/' -%}
-{%- assign depth = parts | size -%}
-{%- assign depth = depth | plus:1 -%}
-{% endcomment %}
+{%- assign 5s = site.pages | sort: "path" -%}
 
 {%- assign isChildren = false -%}
-{%- for six in sixlevel -%}
-  {%- if six.url contains include.current and six.url != include.current -%}
+{%- for 5 in 5s -%}
+  {%- if 5.url contains include.current and 5.url != include.current -%}
     {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
 
 {%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
-  {%- for six in sixlevel -%}
-    {%- capture slug -%}{{ six.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ six.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-    {%- if include.current == current and six.navhide != 1 and six.title != '' -%}
+  {%- for 5 in 5s -%}
+    {%- capture slug -%}{{ 5.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ 5.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and 5.navhide != 1 and 5.title != '' -%}
     <li class="mb-2">
-      <a href="{{ six.url }}">
-        {%- if six.navtitle -%}{{ six.navtitle }}{%- else -%}{{ six.title }}{%- endif -%}
+      <a href="{{ 5.url }}">
+        {%- if 5.navtitle -%}{{ 5.navtitle }}{%- else -%}{{ 5.title }}{%- endif -%}
       </a>
-      {%- include map/5.html current=six.url -%}
+      {%- include map/5.html current=5.url -%}
     </li>
     {%- endif -%}
   {%- endfor -%}

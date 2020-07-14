@@ -1,11 +1,5 @@
 {%- assign 3s = site.pages | sort: "path" -%}
 
-{% comment %}
-{%- assign parts = include.current | split: '/' -%}
-{%- assign depth = parts | size -%}
-{%- assign depth = depth | plus:1 -%}
-{% endcomment %}
-
 {%- assign isChildren = false -%}
 {%- for 3 in 3s -%}
   {%- if 3.url contains include.current and 3.url != include.current -%}

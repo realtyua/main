@@ -1,27 +1,21 @@
-{%- assign sevenlevel = site.pages | sort: "path" -%}
-
-{% comment %}
-{%- assign parts = include.current | split: '/' -%}
-{%- assign depth = parts | size -%}
-{%- assign depth = depth | plus:1 -%}
-{% endcomment %}
+{%- assign 6s = site.pages | sort: "path" -%}
 
 {%- assign isChildren = false -%}
-{%- for seven in sevenlevel -%}
-  {%- if seven.url contains include.current and seven.url != include.current -%}
+{%- for 6 in 6s -%}
+  {%- if 6.url contains include.current and 6.url != include.current -%}
     {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
 
 {%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
-  {%- for seven in sevenlevel -%}
-    {%- capture slug -%}{{ seven.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ seven.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-    {%- if include.current == current and seven.navhide != 1 and seven.title != '' -%}
+  {%- for 6 in 6s -%}
+    {%- capture slug -%}{{ 6.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ 6.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and 6.navhide != 1 and 6.title != '' -%}
     <li class="mb-2">
-      <a href="{{ seven.url }}">
-        {%- if seven.navtitle -%}{{ seven.navtitle }}{%- else -%}{{ seven.title }}{%- endif -%}
+      <a href="{{ 6.url }}">
+        {%- if 6.navtitle -%}{{ 6.navtitle }}{%- else -%}{{ 6.title }}{%- endif -%}
       </a>
     </li>
     {%- endif -%}

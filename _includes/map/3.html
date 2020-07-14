@@ -1,29 +1,23 @@
-{%- assign fivelevel = site.pages | sort: "path" -%}
-
-{% comment %}
-{%- assign parts = include.current | split: '/' -%}
-{%- assign depth = parts | size -%}
-{%- assign depth = depth | plus:1 -%}
-{% endcomment %}
+{%- assign 4s = site.pages | sort: "path" -%}
 
 {%- assign isChildren = false -%}
-{%- for five in fivelevel -%}
-  {%- if five.url contains include.current and five.url != include.current -%}
+{%- for 4 in 4s -%}
+  {%- if 4.url contains include.current and 4.url != include.current -%}
     {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
 
 {%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
-  {%- for five in fivelevel -%}
-    {%- capture slug -%}{{ five.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ five.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-    {%- if include.current == current and five.navhide != 1 and five.title != '' -%}
+  {%- for 4 in 4s -%}
+    {%- capture slug -%}{{ 4.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ 4.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and 4.navhide != 1 and 4.title != '' -%}
     <li class="mb-2">
-      <a href="{{ five.url }}">
-        {%- if five.navtitle -%}{{ five.navtitle }}{%- else -%}{{ five.title }}{%- endif -%}
+      <a href="{{ 4.url }}">
+        {%- if 4.navtitle -%}{{ 4.navtitle }}{%- else -%}{{ 4.title }}{%- endif -%}
       </a>
-      {%- include map/4.html current=five.url -%}
+      {%- include map/4.html current=4.url -%}
     </li>
     {%- endif -%}
   {%- endfor -%}
