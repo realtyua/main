@@ -1,9 +1,9 @@
 
-var isSvg = false
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+// var isSvg = false
+// var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
+// var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+//   return new bootstrap.Tooltip(tooltipTriggerEl)
+// })
 
 
 
@@ -39,9 +39,16 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 //   $('[data-toggle="tooltip"]').tooltip();
 // });
 
-// $(function () {
-//     $('[data-toggle="tooltip"]').tooltip()
-// });
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+
+$(function () {
+    $('circle').tooltip({
+      'container': 'body'
+    })
+});
+
 //
 // $(function (tooltip) {
 //   new bootstrap.Tooltip(
