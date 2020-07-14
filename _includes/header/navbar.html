@@ -30,7 +30,7 @@
                   {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
                   {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
                   <li class="nav-item position-static{% if part >= 3 %} dropdown{%- endif -%}">
-                    <a class="nav-link{% if part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if part >= 3 -%}#{%- else -%}{{ two.url }}{%- endif -%}"{% if part >= 3 %} id="navDropRealEstate" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
+                    <a class="nav-link{% if part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if part >= 3 -%}#{%- else -%}{{ two.url }}{%- endif -%}"{% if part >= 3 %} id="navDropRealEstate{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
                       {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                     </a>
                     {% if part >= 3 %}
