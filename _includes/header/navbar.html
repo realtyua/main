@@ -21,7 +21,7 @@
             {%- if "/" == current and one.navhide != 1 -%}
               <li class="nav-item position-static{% if isChildren == true and part > 1 %} dropdown{% endif %}">
                 <a class="nav-link{% if isChildren == true and part > 1 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true and part > 1 -%}#{%- else -%}{{ one.url }}{%- endif -%}"{% if isChildren == true and part > 1 %} id="navDropRealEstate" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
-                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+                  {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - {{part}}
                 </a>
                 {% if isChildren == true %}
                   {%- include header/dropdown.html current=one.url -%}
@@ -42,7 +42,7 @@
                   {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
                   <li class="nav-item position-static{% if isChildren == true and part > 1 %} dropdown{%- endif -%}">
                     <a class="nav-link{% if isChildren == true and part > 1 %} dropdown-toggle{%- endif -%}" href="{%- if isChildren == true -%}#{%- else -%}{{ two.url }}{%- endif -%}"{% if isChildren == true and part > 1 %} id="navDropRealEstate" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
-                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%} - {{part}}
                     </a>
                     {% if isChildren == true %}
                       {%- include header/dropdown.html current=two.url -%}
