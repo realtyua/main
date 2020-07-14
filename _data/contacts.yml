@@ -37,15 +37,15 @@
   email: bud@realestate.if.ua
   www: https://bud.realestate.if.ua
 
-  #
-  # Realtor / Agent
-  #
-  - type: realtor
-    item: agent
-    name: Агент з нерухомості Шевченко Тарас
-    address: 76000, м. Івано-Франківськ, вул.&nbsp;Шевченка,&nbsp;0
-    phone_main: (034) 200 00 00
-    phone_hot:  (034) 200 00 00
-    phone_fax:  (034) 200 00 00
-    email: shevchenko@realestate.if.ua
-    www: https://shevchenko.realestate.if.ua
+#
+# Realtor / Agent
+#
+- type: realtor
+  item: agent
+  name: Агент з нерухомості Шевченко Тарас
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Шевченка,&nbsp;0
+  phone_main: (034) 200 00 00
+  phone_hot:  (034) 200 00 00
+  phone_fax:  (034) 200 00 00
+  email: shevchenko@realestate.if.ua
+  www: https://shevchenko.realestate.if.ua
