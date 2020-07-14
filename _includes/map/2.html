@@ -1,4 +1,4 @@
-{%- assign fourlevel = site.pages | sort: "path" -%}
+{%- assign 3s = site.pages | sort: "path" -%}
 
 {% comment %}
 {%- assign parts = include.current | split: '/' -%}
@@ -7,23 +7,23 @@
 {% endcomment %}
 
 {%- assign isChildren = false -%}
-{%- for four in fourlevel -%}
-  {%- if four.url contains include.current and four.url != include.current -%}
+{%- for 3 in 3s -%}
+  {%- if 3.url contains include.current and 3.url != include.current -%}
     {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
 
 {%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
-  {%- for four in fourlevel -%}
-    {%- capture slug -%}{{ four.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ four.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-    {%- if include.current == current and four.navhide != 1 and four.title != '' -%}
+  {%- for 3 in 3s -%}
+    {%- capture slug -%}{{ 3.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ 3.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.current == current and 3.navhide != 1 and 3.title != '' -%}
     <li class="mb-2">
-      <a href="{{ four.url }}">
-        {%- if four.navtitle -%}{{ four.navtitle }}{%- else -%}{{ four.title }}{%- endif -%}
+      <a href="{{ 3.url }}">
+        {%- if 3.navtitle -%}{{ 3.navtitle }}{%- else -%}{{ 3.title }}{%- endif -%}
       </a>
-      {%- include map/3.html current=four.url -%}
+      {%- include map/3.html current=3.url -%}
     </li>
     {%- endif -%}
   {%- endfor -%}

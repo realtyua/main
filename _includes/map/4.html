@@ -1,8 +1,11 @@
 {%- assign sixlevel = site.pages | sort: "path" -%}
 
+{% comment %}
 {%- assign parts = include.current | split: '/' -%}
 {%- assign depth = parts | size -%}
 {%- assign depth = depth | plus:1 -%}
+{% endcomment %}
+
 {%- assign isChildren = false -%}
 {%- for six in sixlevel -%}
   {%- if six.url contains include.current and six.url != include.current -%}

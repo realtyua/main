@@ -1,8 +1,11 @@
 {%- assign fivelevel = site.pages | sort: "path" -%}
 
+{% comment %}
 {%- assign parts = include.current | split: '/' -%}
 {%- assign depth = parts | size -%}
 {%- assign depth = depth | plus:1 -%}
+{% endcomment %}
+
 {%- assign isChildren = false -%}
 {%- for five in fivelevel -%}
   {%- if five.url contains include.current and five.url != include.current -%}
