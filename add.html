@@ -35,3 +35,24 @@ title: Додати нерухомість
 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
   Tooltip with HTML
 </button>
+
+<br><br>
+<hr>
+
+<!-- HTML to write -->
+<a href="#" data-toggle="tooltip" title="Some tooltip text!">Hover over me</a>
+
+<!-- Generated markup by the plugin -->
+<div class="tooltip bs-tooltip-top" role="tooltip">
+  <div class="tooltip-arrow"></div>
+  <div class="tooltip-inner">
+    Some tooltip text!
+  </div>
+</div>
+
+<br><br>
+<hr>
+
+<a href="#" data-toggle="tooltip" data-placement="left" data-html="true" title="Перейти до сторінки<br>'<strong>Сторінка</strong>'" class="d-inline small dropdown-item">
+  {%- include icons/arrow-down-square.svg width="32" height="232" -%}
+</a>
