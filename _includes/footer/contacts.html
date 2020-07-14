@@ -22,7 +22,7 @@
   {%- endfor -%}
 {%- endif -%}
 
-{%- if isVillage == false or isDeveloper = false -%}
+
   {%- for contact in city -%}
     {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
       {%- if include.legal contains "phone" -%}
@@ -34,7 +34,7 @@
       {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
-{%- endif -%}
+
 
 {%- if size != 6 and size != 7 and size != 10 -%}
   {%- for contact in district -%}
