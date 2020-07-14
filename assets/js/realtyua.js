@@ -5,6 +5,12 @@
 //   })
 // })
 
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
+// $(function () {
+//     $('[data-toggle="tooltip"]').tooltip()
+// });
+
+$(function (tooltip) {
+  new bootstrap.Tooltip(
+    tooltip,{selector:'[data-toggle="tooltip"]'}
+  )
+})
