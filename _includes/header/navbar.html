@@ -18,7 +18,7 @@
                   {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
                 </a>
                 {% if part >= 2 %}
-                  {%- include header/dropdown.html current=one.url -%}
+                  {%- include header/dropdown.html current=one.url title=one.title -%}
                 {%- endif -%}
               </li>
               {%- if one.url -%}
@@ -34,7 +34,7 @@
                       {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                     </a>
                     {% if part >= 3 %}
-                      {%- include header/dropdown.html current=two.url -%}
+                      {%- include header/dropdown.html current=two.url title=two.title -%}
                     {%- endif -%}
                   </li>
                   {%- endif -%}
