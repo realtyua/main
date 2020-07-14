@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#1" id="navDropRealEstate" role="button" data-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="/1/" id="navDropRealEstate" role="button" data-target="#1" data-toggle="dropdown" aria-expanded="false">
                 Dropdown 1
               </a>
               <ul id="1" class="dropdown-menu" aria-labelledby="navDropRealEstate">
@@ -21,7 +21,7 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navDropRealEstate" role="button" data-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="/2/" id="navDropRealEstate" role="button" data-target="#2" data-toggle="dropdown" aria-expanded="false">
                 Dropdown 2
               </a>
               <ul class="dropdown-menu" aria-labelledby="navDropRealEstate">
@@ -32,7 +32,7 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navDropRealEstate" role="button" data-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="/3/" id="navDropRealEstate" role="button" data-target="#3" data-toggle="dropdown" aria-expanded="false">
                 Dropdown 3
               </a>
               <ul class="dropdown-menu" aria-labelledby="navDropRealEstate">
@@ -43,7 +43,7 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navDropRealEstate" role="button" data-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="/4/" id="navDropRealEstate" role="button" data-target="#4" data-toggle="dropdown" aria-expanded="false">
                 Dropdown 4
               </a>
               <ul class="dropdown-menu" aria-labelledby="navDropRealEstate">
@@ -61,6 +61,8 @@
 </div>
 
 {% comment %}
+
+{%- if isChildren == true -%}data-target="#{{ slug }}" {%- endif -%}
 
 {%- assign path = page.url | split: '/' -%}
 {%- assign part = path | size -%}
@@ -84,7 +86,7 @@
             {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
             {%- if "/" == current and one.navhide != 1 -%}
               <li class="nav-item position-static{% if isChildren == true or part > 0 %} dropdown{% endif %}">
-                <a class="nav-link{% if isChildren == true or part > 0 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if isChildren == true or part > 0 -%}{{ slug | prepend: '#' }}{%- else -%}{{ one.url }}{%- endif -%}" id="navDrop{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link{% if isChildren == true or part > 0 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{{ one.url }}" id="navDrop{{ slug | capitalize }}" role="button" {% if isChildren == true %}data-target="#{{ slug }}" {% endif %}data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%} - {{isChildren}} | {{part}}
                 </a>
                 {% if isChildren == true %}
