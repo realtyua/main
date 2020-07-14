@@ -6,17 +6,14 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body py-0">
-
-          <div class="list-unstyled row row-cols-1 row-cols-sm-2 g-4">
-            {% for item in site.data.realestate %}
-            <li class="col">
-              <a href="{{ item.url }}" class="text-white">{{ item.title }}</a>
-            </li>
-            {% endfor %}
-          </div>
-
-
+      <div class="modal-body pt-0 pb-4 px-4">
+        <div class="list-unstyled row row-cols-1 row-cols-sm-2 g-3">
+          {% for item in site.data.realestate %}
+          <li class="col">
+            <a href="{{ item.url }}" class="text-white">{{ item.title }}</a>
+          </li>
+          {% endfor %}
+        </div>
         {% comment %}
         <ul class="outer-links">
           <li>
