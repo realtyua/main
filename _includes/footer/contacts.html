@@ -89,3 +89,15 @@
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
+
+{%- for contact in realtor -%}
+  {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
+    {%- if include.legal contains "phone" -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == "email" -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
