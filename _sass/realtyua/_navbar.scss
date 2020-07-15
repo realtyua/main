@@ -3,8 +3,6 @@ $bgHighlight    : #2d5ca6; // #273043;
 $colHighlight   : #ffe358;
 $dropDown       : true;
 
-
-
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
     background-color: transparent;
@@ -253,44 +251,6 @@ $dropDown       : true;
     .dropdown-item.active {
         color: $colHighlight;
         background-color: $bgHighlight;
-    }
-}
-
-//
-// Status
-//
-.navbar {
-    .navbar-nav > li {
-        > .nav-link:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: $colHighlight;
-            opacity: 0;
-            transition: opacity .25s ease-in-out;
-        }
-        > .nav-link:focus:before,
-        > .nav-link:hover:before,
-        &:hover > .nav-link:before {
-            opacity: .75;
-        }
-        &.show > .nav-link:before,
-        &.active > .nav-link:before {
-            opacity: .6;
-        }
-        @media (min-width: 992px) {
-            > .nav-link:before {
-                top: auto;
-                left: .6rem;
-                right: .6rem;
-                bottom: (1rem / 2);
-                height: 2px;
-                width: auto;
-            }
-        }
     }
 }
 //
