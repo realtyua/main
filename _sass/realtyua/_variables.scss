@@ -6,7 +6,11 @@ $primary:                     #2d5ca6 !default;
 // Fonts system
 //
 $font-family-sans:            -apple-system, "Source Sans Pro", 'Open Sans', sans-serif !default;
-$font-family-base:            $font-family-sans !default;
+$font-family-base:            $font-family-sans !default
+
+$link-decoration:             none !default;
+//$link-hover-decoration:       null !default;
+
 //
 // Font weight
 //
