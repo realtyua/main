@@ -4,8 +4,8 @@ a {
   border-bottom: $border-width solid transparent;
   transition: 0.4s ease-in-out;
 
-  // @include hover() {
-  //   transition: .4s ease-in-out;
-  //   border-bottom: $border-width solid $link-color;
-  // }
+  &:hover {
+    transition: .4s ease-in-out;
+    border-bottom: $border-width solid $link-color;
+  }
 }
