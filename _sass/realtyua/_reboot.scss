@@ -1,11 +1,11 @@
-// a {
-//   background-color: transparent;
-//   -webkit-text-decoration-skip: objects;
-//   border-bottom: $border-width solid transparent;
-//   transition: 0.4s ease-in-out;
-//
-//   @include hover() {
-//     transition: .4s ease-in-out;
-//     border-bottom: $border-width solid $link-color;
-//   }
-// }
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+  border-bottom: $border-width solid transparent;
+  transition: 0.4s ease-in-out;
+
+  // @include hover() {
+  //   transition: .4s ease-in-out;
+  //   border-bottom: $border-width solid $link-color;
+  // }
+}
