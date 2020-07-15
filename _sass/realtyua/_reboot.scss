@@ -4,14 +4,14 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 
-  text-decoration: none;
+  text-decoration: $link-decoration;
   border-bottom: $border-width solid transparent;
   transition: 0.4s ease-in-out;
 
   @include hover() {
     color: $link-hover-color;
     //text-decoration: $link-hover-decoration;
-    text-decoration: none;
+    text-decoration: $link-decoration;
     transition: .4s ease-in-out;
     border-bottom: $border-width solid $link-color;
   }
