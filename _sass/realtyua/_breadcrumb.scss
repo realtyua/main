@@ -1,59 +1,64 @@
 .main-breadcrumbs .breadcrumb {
-  flex-wrap: nowrap
+    flex-wrap: nowrap
 }
-@media screen and (max-width:768px) {
-  .main-breadcrumbs {
-    padding-bottom: 0
-  }
-}
+
 .main-breadcrumbs .breadcrumb {
-  background-color:transparent;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+    background-color: transparent;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
-.main-breadcrumbs .breadcrumb>li{
-  display:inline-block
+
+.main-breadcrumbs .breadcrumb > li {
+    display: inline-block
 }
-@media screen and (max-width:768px){
-  .main-breadcrumbs .breadcrumb>li{
-    display: none
-  }
+
+@media screen and (max-width:768px) {
+    .main-breadcrumbs {
+        padding-bottom: 0
+    }
+
+    .main-breadcrumbs .breadcrumb > li {
+        display: none
+    }
+
+    .main-breadcrumbs .breadcrumb > li:nth-last-child(2) {
+        display: block;
+        padding-left: unset
+    }
+
+    .main-breadcrumbs .breadcrumb > li:nth-last-child(2):before {
+        display: inline-block;
+        content: "\2190";
+        color: #2669e3;
+        padding-left: 0;
+        padding-right: 10px
+    }
+
+    .main-breadcrumbs .breadcrumb > li + li:before {
+        display: none
+    }
 }
-@media screen and (max-width:768px){
-  .main-breadcrumbs .breadcrumb>li:nth-last-child(2){
-    display: block;
-    padding-left: unset
-  }
-  .main-breadcrumbs .breadcrumb>li:nth-last-child(2):before{
-    display: inline-block;
-    content: "\2190";
-    color: #2669e3;
-    padding-left: 0;
-    padding-right: 10px
-  }
+
+.main-breadcrumbs .breadcrumb > li > a {
+    font-weight: 600;
 }
-.main-breadcrumbs .breadcrumb>li>a{
-  font-weight: 600;
+
+.main-breadcrumbs .breadcrumb > li + li:before {
+    color: #a7a9af
 }
-.main-breadcrumbs .breadcrumb>li+li:before {
-  color: #a7a9af
+
+@media screen and (max-width:480px) {
+    .main-breadcrumbs .breadcrumb > li + li:before {
+        padding: 0;
+        padding-right: 10px
+    }
 }
-@media screen and (max-width:768px){
-  .main-breadcrumbs .breadcrumb>li+li:before {
-    display: none
-  }
-}
-@media screen and (max-width:480px){
-  .main-breadcrumbs .breadcrumb>li+li:before {
-    padding: 0;
-    padding-right: 10px
-  }
-}
-.main-breadcrumbs .breadcrumb>li.active {
-  max-width: 750px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  position: relative;
+
+.main-breadcrumbs .breadcrumb > li.active {
+    max-width: 750px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
 }
