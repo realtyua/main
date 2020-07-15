@@ -10,7 +10,7 @@
         <div class="list-unstyled row row-cols-1 row-cols-sm-2 g-3">
           {% for item in site.data.realestate %}
           <li class="col">
-            <a href="{{ item.url }}" class="text-white">{{ item.title }}</a>
+            <a rel="noopener noreferrer" href="{{ item.url }}" target="_blank" class="link-light">{{ item.title }}</a>
           </li>
           {% endfor %}
         </div>
