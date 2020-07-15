@@ -1,6 +1,5 @@
-a {
+main a, footer a {
   background-color: transparent;
-  -webkit-text-decoration-skip: objects;
   border-bottom: $border-width solid transparent;
   transition: 0.4s ease-in-out;
 

@@ -35,14 +35,14 @@
 }
 .main-breadcrumbs .breadcrumb>li>a{
   font-weight: 600;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: .4s ease-in-out
+  // text-decoration: none;
+  // border-bottom: 1px solid transparent;
+  // transition: .4s ease-in-out
 }
 .main-breadcrumbs .breadcrumb>li>a:hover {
-  text-decoration: none;
-  transition: .4s ease-in-out;
-  border-bottom: 1px solid #2d5ca6
+  // text-decoration: none;
+  // transition: .4s ease-in-out;
+  // border-bottom: 1px solid #2d5ca6
 }
 .main-breadcrumbs .breadcrumb>li+li:before {
   color: #a7a9af
