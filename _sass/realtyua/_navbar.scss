@@ -275,18 +275,18 @@ $dropDown       : true;
         > .nav-link:focus:before,
         > .nav-link:hover:before,
         &:hover > .nav-link:before {
-            opacity: .25;
+            opacity: .75;
         }
         &.show > .nav-link:before,
         &.active > .nav-link:before {
-            opacity: .5;
+            opacity: .6;
         }
         @media (min-width: 992px) {
             > .nav-link:before {
                 top: auto;
-                left: .5rem;
-                right: .5rem;
-                bottom: (.5rem / 2);
+                left: .6rem;
+                right: .6rem;
+                bottom: (1rem / 2);
                 height: 2px;
                 width: auto;
             }
