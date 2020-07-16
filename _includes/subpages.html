@@ -1,5 +1,5 @@
 {%- assign slug = page.url | split: "/" | last -%}
-{%- if include.page == slug and include.dir != page.dir and include.dir contains page.dir -%}
+{%- if include.dir != page.dir and include.dir contains page.dir -%}
 
 {%- assign items = include.page -%}
 {%- assign items = '' | split:'' -%}
@@ -10,7 +10,7 @@
   {%- endif -%}
 {%- endfor -%}
 {%- if items -%}
-  {%- for item in items offset:1 limit:6 -%}
+  {%- for item in items limit:6 -%}
     {%- if forloop.first -%}
     <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2">
     {%- endif -%}
