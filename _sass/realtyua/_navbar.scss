@@ -21,11 +21,37 @@ $dropDown       : true;
     .navbar {
         background-color: $white;
 
+        .navbar-brand {
+            color: $black;
+        }
+
         .navbar-nav {
             .nav-link {
                 color: $primary;
             }
         }
+
+        .nav-tabs {
+            .nav-item {
+                font-weight: 600;
+                margin-bottom: 0;
+                margin-right: 30px;
+            }
+
+            .nav-link {
+                color: #2d5ca6;
+                border: none;
+                border-bottom: 4px solid #ffffff;
+                background: transparent;
+                padding: .5rem 0rem;
+            }
+        }
+    }
+
+    .navbar-toggler-icon:after,
+    .navbar-toggler-icon,
+    .navbar-toggler-icon:before {
+        background-color: $primary;
     }
 }
 
