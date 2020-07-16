@@ -32,6 +32,7 @@
     {%- endif -%}
       {%- assign slug = content.url | split: "/" | last -%}
       {%- capture current -%}{{ content.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+      {%- capture title -%}{%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}{%- endcapture -%}
       {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
         <div class="tab-pane fade{% if forloop.first %} show activ{% endif %}e" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
           <div class="row">
@@ -39,16 +40,17 @@
               {%- if slug == 'realtor' -%}
 
                 {%- assign dir = page.dir | append: slug | append: '/' -%}
-                {%- include subpages.html dir=dir page=slug -%}
+                {%- include subpages.html dir=dir page=slug title=title -%}
 
               {%- elsif slug == 'developer' -%}
 
                 {%- assign dir = page.dir | append: slug | append: '/' -%}
-                {%- include subpages.html dir=dir page=slug-%}
+                {%- include subpages.html dir=dir page=slug title=title -%}
 
               {%- endif -%}
             </div>
           </div>
+          {% comment %}
           <div class="row">
             <div class="col-auto ml-auto">
               <a class="btn btn-primary" href="{{ content.url }}">
@@ -56,6 +58,7 @@
               </a>
             </div>
           </div>
+          {% endcomment %}
         </div>
       {%- endif -%}
     {%- if forloop.last -%}
