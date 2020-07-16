@@ -32,7 +32,7 @@
     {%- endif -%}
       {%- assign slug = content.url | split: "/" | last -%}
       {%- capture current -%}{{ content.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-      {%- capture title -%}{%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}{%- endcapture -%}
+      {%- capture title -%}{%- if content.navtitle -%}{{ content.navtitle }}{%- else -%}{{ content.title }}{%- endif -%}{%- endcapture -%}
       {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
         <div class="tab-pane fade{% if forloop.first %} show activ{% endif %}e" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
           <div class="row">
@@ -46,6 +46,8 @@
 
                 {%- assign dir = page.dir | append: slug | append: '/' -%}
                 {%- include subpages.html dir=dir page=slug title=title -%}
+
+              {%- else -%}
 
               {%- endif -%}
             </div>
