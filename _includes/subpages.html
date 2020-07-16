@@ -1,0 +1,52 @@
+{%- assign slug = page.url | split: "/" | last -%}
+{%- if include.page == slug and include.dir != page.dir and include.dir contains page.dir -%}
+
+{%- assign items = include.page -%}
+{%- assign items = '' | split:'' -%}
+{%- assign pages = site.pages | sort: 'path' | reverse -%}
+{%- for i in pages -%}
+  {%- if i.dir contains include.dir -%}
+    {%- assign items = items | push:i -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if items -%}
+  {%- for item in items offset:1 limit:6 -%}
+    {%- if forloop.first -%}
+    <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2">
+    {%- endif -%}
+      <div class="col mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{{ item.url }}">
+                {%- if item.navtitle -%}{{ item.navtitle }}{%- else -%}{{ item.title }}{%- endif -%}
+              </a>
+            </h5>
+            <p class="card-text mb-1">
+              ...
+            </p>
+          </div>
+        </div>
+      </div>
+    {%- if forloop.last -%}
+    </div>
+    <div class="row">
+      <div class="col-auto ml-auto">
+        <a class="btn btn-primary" href="{{include.dir}}">...</a>
+      </div>
+    </div>
+    {%- endif -%}
+  {%- else -%}
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="alert alert-info" role="alert">
+          ....
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+{%- endif -%}
+
+{%- else -%}
+
+{%- endif -%}
