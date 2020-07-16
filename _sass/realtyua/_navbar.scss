@@ -38,6 +38,10 @@ $dropDown       : true;
                 margin-right: 30px;
             }
 
+            .nav-item:last-child {
+                margin-right: 0;
+            }
+
             .nav-link {
                 color: #2d5ca6;
                 border: none;
