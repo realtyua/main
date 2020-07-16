@@ -45,6 +45,20 @@ $dropDown       : true;
                 background: transparent;
                 padding: .5rem 0rem;
             }
+
+            .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+                color: #000000;
+                border: none;
+                background: transparent;
+                border-bottom: 4px solid #2d5ca6;
+            }
+
+            .nav-link:hover, .nav-tabs .nav-link:focus {
+                color: #000000;
+                border: none;
+                background: transparent;
+                border-bottom: 4px solid #2d5ca6;
+            }
         }
     }
 
