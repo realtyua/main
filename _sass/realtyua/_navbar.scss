@@ -35,7 +35,6 @@ $dropDown       : true;
             .nav-item {
                 font-weight: 600;
                 margin-bottom: 0;
-                margin-right: 30px;
             }
 
             .nav-item:last-child {
@@ -50,7 +49,7 @@ $dropDown       : true;
                 padding: .5rem 0rem;
             }
 
-            .nav-link.active, .nav-tabs .nav-item.show .nav-link span {
+            .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
                 color: #000000;
                 border: none;
                 background: transparent;
