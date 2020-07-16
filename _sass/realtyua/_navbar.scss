@@ -17,6 +17,16 @@ $dropDown       : true;
     background-color: transparent;
 }
 
+.navbar-light {
+    background-color: $white;
+
+    .navbar-nav {
+        .nav-link {
+            color: $primary;
+        }
+    }
+}
+
 .navbar {
     background-color: $primary;
 
@@ -56,9 +66,6 @@ $dropDown       : true;
                 &:hover,
                 &:focus {
                     color: $colHighlight;
-                    transition: all 0.3s ease;
-                    position: relative;
-                    white-space: nowrap;
                 }
             }
         }
