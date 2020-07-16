@@ -17,12 +17,14 @@ $dropDown       : true;
     background-color: transparent;
 }
 
-.navbar-light {
-    background-color: $white;
+.content {
+    .navbar {
+        background-color: $white;
 
-    .navbar-nav {
-        .nav-link {
-            color: $primary;
+        .navbar-nav {
+            .nav-link {
+                color: $primary;
+            }
         }
     }
 }
