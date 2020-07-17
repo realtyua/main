@@ -183,6 +183,15 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(sm) {
+    .content {
+        .navbar {
+            .nav-tabs {
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
     .navbar {
         .navbar-nav {
             .nav-item {
@@ -264,15 +273,6 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(xl) {
-    .content {
-        .navbar {
-            .nav-tabs {
-                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 0;
-                }
-            }
-        }
-    }
     .navbar {
         .navbar-nav {
             .nav-item {

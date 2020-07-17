@@ -6,6 +6,11 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarTwoRealEstate">
     <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link border-0 active" href="#home" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
+          <span>{%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}</span>
+        </a>
+      </li>
     {%- for tab in lists -%}
       {%- if forloop.first -%}
       {%- endif -%}
@@ -13,7 +18,7 @@
         {%- capture current -%}{{ tab.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
         {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
           <li class="nav-item" role="presentation">
-            <a class="nav-link border-0{% if forloop.first %} active{% endif %}" href="#{{ slug }}" id="{{ slug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ slug }}" aria-selected="true">
+            <a class="nav-link border-0" href="#{{ slug }}" id="{{ slug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ slug }}" aria-selected="true">
               <span>{%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}</span>
             </a>
           </li>
@@ -27,6 +32,14 @@
 </nav>
 <hr class="mt-2 mt-md-0">
 <div class="tab-content" id="realestate-content">
+  <div class="tab-pane fade show active" id="property" role="tabpanel" aria-labelledby="propertyt-tab">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-3">Вся {{ title | downcase }}</h2>
+        <p>...</p>
+      </div>
+    </div>
+  </div>
   {%- for content in lists -%}
     {%- if forloop.first -%}
     {%- endif -%}
@@ -34,22 +47,20 @@
       {%- capture current -%}{{ content.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
       {%- capture title -%}{%- if content.navtitle -%}{{ content.navtitle }}{%- else -%}{{ content.title }}{%- endif -%}{%- endcapture -%}
       {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
-        <div class="tab-pane fade{% if forloop.first %} show activ{% endif %}e" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
+        <div class="tab-pane fade" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
           <div class="row">
             <div class="col-12">
               {%- assign addtitle = page.title | split: " " | slice: 1, 4 | join: " " -%}
-              <h2>{{ title | append: addtitle }}</h2>
-              {%- if slug == 'realtor' -%}
 
-                {%- assign dir = page.dir | append: slug | append: '/' -%}
-                {%- include subpages.html dir=dir page=slug title=title -%}
+              {%- if slug == 'realtor' or slug == 'developer' -%}
 
-              {%- elsif slug == 'developer' -%}
-
+                <h2 class="mb-3">{{ title }} нерухо́місті {{ addtitle }}</h2>
                 {%- assign dir = page.dir | append: slug | append: '/' -%}
                 {%- include subpages.html dir=dir page=slug title=title -%}
 
               {%- else -%}
+
+                <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
 
               {%- endif -%}
             </div>
