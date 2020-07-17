@@ -46,14 +46,16 @@
 
 {%- assign file = region-city-[region]-realtor-[section]-offers-all -%}
 
+<p>file: {{assign}}</p>
+
                     <ul>
-                    {% for offer in site.data[file] %}
+                    {%- for offer in site.data.region-city-ivano-frankivsk-realtor-franko-offers-all -%}
                       <li>
                         <a href="#">
                           {{ offer.type }} - {{ offer.price }}
                         </a>
                       </li>
-                    {% endfor %}
+                    {%- endfor -%}
                     </ul>
 
 
