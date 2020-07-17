@@ -40,7 +40,23 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-                    ...Нещодавні Пропозиції
+{% comment %}
+  region-city-ivano-frankivsk-realtor-franko-offers-apartment.json
+{% endcomment %}
+
+{%- assign file = region-city-[region]-realtor-[section]-offers-all -%}
+
+                    <ul>
+                    {% for offer in site.data[file] %}
+                      <li>
+                        <a href="#">
+                          {{ offer.type }} - {{ offer.price }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                    </ul>
+
+
                   </div>
                   <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-actions-tab">
                     ...Акції
