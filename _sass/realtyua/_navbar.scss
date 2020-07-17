@@ -184,6 +184,9 @@ $dropDown       : true;
 @include media-breakpoint-down(sm) {
     .content {
         .navbar {
+            .navbar-brand {
+                margin-right: 0;
+            }
             .nav-tabs {
                 .nav-link {
                     padding: .5rem 0;
