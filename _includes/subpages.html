@@ -44,17 +44,21 @@
                       ivano-frankivsk-franko-offers.json
                     {% endcomment %}
 
-                    {%- assign seller = region | append: '-' | append: section | append: "-offers" -%}
+                    {%- assign seller = region | append: '-' | append: section | append: '-offers' -%}
+                    {%- assign offers = site.data[seller] | sort: 'date' | reverse -%}
+
                     {%- if seller -%}
                       <ul>
-                      {%- for offer in site.data[seller] limit: 3 | sort: 'date' | reverse -%}
+                      {%- for offer in offers limit: 3 -%}
                         <li>
                           <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
                           {%- if offer.gallery -%}
                             <ul>
                             {% for i in offer.gallery %}
                               {% for img in i.images %}
-                                <li><img src="{{ include.dir }}/img/{{ offer.id }}/{{ img.src }}" title="{{ img.title }}" alt="{{ img.alt }}"></li>
+                                {%- img.src -%}
+                                <li><img src="{{ include.dir }}img/{{ offer.id }}/{{ img.src }}" title="{{ img.title }}" alt="{{ img.alt }}"></li>
+                                {%- endif -%}
                               {% endfor %}
                             {% endfor %}
                             </ul>
