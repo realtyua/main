@@ -44,9 +44,11 @@
   region-city-ivano-frankivsk-realtor-franko-offers-apartment.json
 {% endcomment %}
 
-{%- assign file = region-city-{{region}}-realtor-{{section}}-offers-all -%}
+{%- assign foo = region-city-{{region}}-realtor-{{section}}-offers-all -%}
+{%- assign too = region-city-[region]-realtor-[section]-offers-all -%}
 
-<p>file: {{assign}}</p>
+<p>foo: {{foo}}</p>
+<p>too: {{too}}</p>
 
                     <ul>
                     {%- for offer in site.data.region-city-ivano-frankivsk-realtor-franko-offers-all -%}
