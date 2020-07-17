@@ -57,9 +57,18 @@
                             <ul>
                             {% for i in offer.gallery %}
                               {% for img in i.images %}
-                                {%- if img.src -%}
-                                <li><img src="{{ include.dir }}{{ section }}/img/{{ offer.id }}/{{ img.src }}" width="100" title="{{ img.title }}" alt="{{ img.alt }}"></li>
+
+                                {%- capture image -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{{ img.src }}{%- endcapture -%}
+                                {% for file in site.static_files %}
+                                  {% if file.path == image %}
+                                    {% assign isImage = true %}
+                                  {% endif %}
+                                {% endfor %}
+
+                                {%- if isImage == true -%}
+                                <li><img src="{{ image }}" width="100" title="{{ img.title }}" alt="{{ img.alt }}"></li>
                                 {%- endif -%}
+
                               {% endfor %}
                             {% endfor %}
                             </ul>
