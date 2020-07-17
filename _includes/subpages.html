@@ -49,7 +49,7 @@
                     <ul>
                     {%- for offer in site.data[doo] -%}
                       <li>
-                        <a href="#">{{ offer.type }} - {{ offer.price }}</a>
+                        <a href="#">{{ offer.type }} - {{ offer.price }} - {{ offer.images }}</a>
                         <hr>
                         {%- if offer.images -%}
                           <ul>
@@ -59,17 +59,25 @@
                           </ul>
                         {%- endif -%}
                         <hr>
-                        {% for record in site.data[doo].gallery %}
+                        {% for too in site.data[doo].gallery %}
                           <ul>
-                            {% for img in record.images %}
+                            {% for img in too.images %}
                               <li>{{ img.src }}</li>
                             {% endfor %}
                           </ul>
                         {% endfor %}
                         <hr>
-                        {% for record in site.data[doo]gallery %}
+                        {% for foo in site.data[doo]gallery %}
                           <ul>
-                            {% for img in record.images %}
+                            {% for img in foo.images %}
+                              <li>{{ img.src }}</li>
+                            {% endfor %}
+                          </ul>
+                        {% endfor %}
+                        <hr>
+                        {% for zoo in site.data.ivano-frankivsk-franko-offers.gallery %}
+                          <ul>
+                            {% for img in zoo.images %}
                               <li>{{ img.src }}</li>
                             {% endfor %}
                           </ul>
