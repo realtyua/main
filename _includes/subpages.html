@@ -58,38 +58,6 @@
                           {% endfor %}
                           </ul>
                         {%- endif -%}
-                        <hr>
-                        {%- if offer.images -%}
-                          <ul>
-                          {% for img in offer.images %}
-                            <li>{{ img.src }}</li>
-                          {% endfor %}
-                          </ul>
-                        {%- endif -%}
-                        <hr>
-                        {% for too in site.data[doo].gallery %}
-                          <ul>
-                            {% for img in too.images %}
-                              <li>{{ img.src }}</li>
-                            {% endfor %}
-                          </ul>
-                        {% endfor %}
-                        <hr>
-                        {% for foo in site.data[doo]gallery %}
-                          <ul>
-                            {% for img in foo.images %}
-                              <li>{{ img.src }}</li>
-                            {% endfor %}
-                          </ul>
-                        {% endfor %}
-                        <hr>
-                        {% for zoo in site.data.ivano-frankivsk-franko-offers.gallery %}
-                          <ul>
-                            {% for img in zoo.images %}
-                              <li>{{ img.src }}</li>
-                            {% endfor %}
-                          </ul>
-                        {% endfor %}
                       </li>
                     {%- else -%}
                       <li>...</li>
