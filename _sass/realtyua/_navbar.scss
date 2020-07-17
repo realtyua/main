@@ -3,6 +3,7 @@ $bgHighlight    : #2d5ca6; // #273043;
 $colHighlight   : #ffe358;
 $dropDown       : true;
 
+
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
     background-color: transparent;
@@ -182,6 +183,23 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(sm) {
+    .content {
+        .navbar {
+            .nav-tabs {
+                .nav-link span {
+                    border-bottom: 0;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 0;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
     .navbar {
         .navbar-nav {
             .nav-item {
