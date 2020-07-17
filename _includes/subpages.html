@@ -49,7 +49,15 @@
                     <ul>
                     {%- for offer in site.data[doo] -%}
                       <li>
-                        <a href="#">{{ offer.type }} - {{ offer.price }} - {{ offer.images }}</a>
+                        <a href="#">{{ offer.type }} - {{ offer.price }} - {{ offer.images }} - {{ offer.gallery }}</a>
+                        <hr>
+                        {%- if offer.gallery -%}
+                          <ul>
+                          {% for img in offer.gallery %}
+                            <li>{{ img.src }}</li>
+                          {% endfor %}
+                          </ul>
+                        {%- endif -%}
                         <hr>
                         {%- if offer.images -%}
                           <ul>
