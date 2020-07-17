@@ -44,7 +44,7 @@
   region-city-ivano-frankivsk-realtor-franko-offers-all.json
 {% endcomment %}
 
-{%- assign doo = region | append: section | append: "-offers-all" -%}
+{%- assign doo = region | append: '-' | append: section | append: "-offers-all" -%}
 {%- assign foo = region-city-{{region}}-realtor-{{section}}-offers-all -%}
 {%- assign too = region-city-[region]-realtor-[section]-offers-all -%}
 {%- assign zoo = region-city[region]realtor[section]offers-all -%}
@@ -52,10 +52,10 @@
 <p>doo: {{doo}}</p>
 <p>foo: {{foo}}</p>
 <p>too: {{too}}</p>
-<p>too: {{zoo}}</p>
+<p>zoo: {{zoo}}</p>
 
                     <ul>
-                    {%- for offer in site.data.region-city-ivano-frankivsk-realtor-franko-offers-all -%}
+                    {%- for offer in site.data[doo] -%}
                       <li>
                         <a href="#">
                           {{ offer.type }} - {{ offer.price }}
