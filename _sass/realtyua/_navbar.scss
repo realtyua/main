@@ -3,7 +3,6 @@ $bgHighlight    : #2d5ca6; // #273043;
 $colHighlight   : #ffe358;
 $dropDown       : true;
 
-
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
     background-color: transparent;
@@ -45,7 +44,7 @@ $dropDown       : true;
             .nav-link span {
                 color: #2d5ca6;
                 border: none;
-                border-bottom: 4px solid #ffffff;
+                //border-bottom: 4px solid #ffffff;
                 background: transparent;
                 padding: .5rem 0rem;
             }
@@ -54,14 +53,14 @@ $dropDown       : true;
                 color: #000000;
                 border: none;
                 background: transparent;
-                border-bottom: 4px solid #2d5ca6;
+                //border-bottom: 4px solid #2d5ca6;
             }
 
             .nav-link span:hover, .nav-tabs .nav-link span:focus {
                 color: #000000;
                 border: none;
                 background: transparent;
-                border-bottom: 4px solid #2d5ca6;
+                //border-bottom: 4px solid #2d5ca6;
             }
         }
     }
@@ -183,15 +182,6 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(sm) {
-    .content {
-        .navbar {
-            .nav-tabs {
-                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 0;
-                }
-            }
-        }
-    }
     .navbar {
         .navbar-nav {
             .nav-item {
@@ -217,6 +207,23 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(md) {
+    .content {
+        .navbar {
+            .nav-tabs {
+                .nav-link span {
+                    border-bottom: 4px solid #fff;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 4px solid #2d5ca6;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 4px solid #2d5ca6;
+                }
+            }
+        }
+    }
     .navbar {
         .navbar-nav {
             .nav-item {
@@ -245,6 +252,23 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(lg) {
+    .content {
+        .navbar {
+            .nav-tabs {
+                .nav-link span {
+                    border-bottom: 4px solid #fff;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 4px solid #2d5ca6;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 4px solid #2d5ca6;
+                }
+            }
+        }
+    }
     .navbar {
         .navbar-nav {
             .nav-item {
@@ -273,6 +297,23 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(xl) {
+    .content {
+        .navbar {
+            .nav-tabs {
+                .nav-link span {
+                    border-bottom: 4px solid #fff;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 4px solid #2d5ca6;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 4px solid #2d5ca6;
+                }
+            }
+        }
+    }
     .navbar {
         .navbar-nav {
             .nav-item {
