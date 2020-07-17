@@ -1,5 +1,5 @@
 
-{%- assign region = page.url | split: "/" | last -%}
+{%- assign region = include.dir | split: "/" | last -%}
 
 {%- if include.dir != page.dir and include.dir contains page.dir -%}
 
@@ -30,25 +30,25 @@
                   {%- assign section = item.url | split: "/" | last -%}
 
                   <nav>
-                    <ul class="nav nav-tabs" id="{{ region }}-{{ section }}-tab" role="tablist">
+                    <ul class="nav nav-tabs" id="{{ region }}-{{ include.page }}-tab" role="tablist">
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="{{ region }}-{{ section }}-offers-tab" data-toggle="tab" href="#{{ region }}-{{ section }}-offers" role="tab" aria-controls="{{ region }}-{{ section }}-offers" aria-selected="false">
+                        <a class="nav-link d-none active" id="{{ region }}-{{ include.page }}-offers-tab" data-toggle="tab" href="#{{ region }}-{{ include.page }}-offers" role="tab" aria-controls="{{ region }}-{{ include.page }}-offers" aria-selected="false">
                           Пропозиції
                         </a>
                       </li>
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="{{ region }}-{{ section }}-actions-tab" data-toggle="tab" href="#{{ region }}-{{ section }}-actions" role="tab" aria-controls="{{ region }}-{{ section }}-actions" aria-selected="false">
+                        <a class="nav-link" id="{{ region }}-{{ include.page }}-actions-tab" data-toggle="tab" href="#{{ region }}-{{ include.page }}-actions" role="tab" aria-controls="{{ region }}-{{ include.page }}-actions" aria-selected="false">
                           Акції
                         </a>
                       </li>
                     </ul>
                   </nav>
 
-                  <div class="tab-content" id="{{ region }}-{{ section }}-content">
-                    <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
+                  <div class="tab-content" id="{{ region }}-{{ include.page }}-content">
+                    <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ include.page }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ include.page }}-offers-tab">
                       ...Пропозиції
                     </div>
-                    <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-actions-tab">
+                    <div class="tab-pane pt-3 fade" id="{{ region }}-{{ include.page }}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ include.page }}-actions-tab">
                       ...Акції
                     </div>
                   </div>
