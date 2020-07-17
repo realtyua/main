@@ -41,7 +41,7 @@
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
 {% comment %}
-  region-city-ivano-frankivsk-realtor-franko-offers-all.json
+  ivano-frankivsk-franko-offers.json
 {% endcomment %}
 
 {%- assign doo = region | append: '-' | append: section | append: "-offers" -%}
@@ -49,16 +49,31 @@
                     <ul>
                     {%- for offer in site.data[doo] -%}
                       <li>
-                        <a href="#">
-                          {{ offer.type }} - {{ offer.price }}
-                          {%- if offer.images -%}
-                            <ul>
-                            {% for img in offer.images %}
+                        <a href="#">{{ offer.type }} - {{ offer.price }}</a>
+                        <hr>
+                        {%- if offer.images -%}
+                          <ul>
+                          {% for img in offer.images %}
+                            <li>{{ img.src }}</li>
+                          {% endfor %}
+                          </ul>
+                        {%- endif -%}
+                        <hr>
+                        {% for record in site.data[doo].gallery %}
+                          <ul>
+                            {% for img in record.images %}
                               <li>{{ img.src }}</li>
                             {% endfor %}
-                            </ul>
-                          {%- endif -%}
-                        </a>
+                          </ul>
+                        {% endfor %}
+                        <hr>
+                        {% for record in site.data[doo]gallery %}
+                          <ul>
+                            {% for img in record.images %}
+                              <li>{{ img.src }}</li>
+                            {% endfor %}
+                          </ul>
+                        {% endfor %}
                       </li>
                     {%- else -%}
                       <li>...</li>
