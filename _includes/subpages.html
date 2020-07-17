@@ -45,9 +45,10 @@
                     {% endcomment %}
 
                     {%- assign seller = region | append: '-' | append: section | append: '-offers' -%}
-                    {%- assign offers = site.data[seller] | sort: 'date' | reverse -%}
+                    {%- assign records = site.data[seller] -%}
 
-                    {%- if seller -%}
+                    {%- if records -%}
+                      {%- assign offers = records | sort: 'date' | reverse -%}
                       <ul>
                       {%- for offer in offers limit: 3 -%}
                         <li>
