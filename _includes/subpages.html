@@ -58,7 +58,7 @@
                             {% for i in offer.gallery %}
                               {% for img in i.images %}
                                 {%- if img.src -%}
-                                <li><img src="{{ include.dir }}img/{{ offer.id }}/{{ img.src }}" title="{{ img.title }}" alt="{{ img.alt }}"></li>
+                                <li><img src="{{ include.dir }}{{ section }}/img/{{ offer.id }}/{{ img.src }}" width="100" title="{{ img.title }}" alt="{{ img.alt }}"></li>
                                 {%- endif -%}
                               {% endfor %}
                             {% endfor %}
