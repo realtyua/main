@@ -37,7 +37,7 @@
         <div class="tab-pane fade{% if forloop.first %} show activ{% endif %}e" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
           <div class="row">
             <div class="col-12">
-              {%- assign addtitle = page.title | split: " " | slice: 0, 3 -%}
+              {%- assign addtitle = page.title | split: " " | slice: 1, 4 -%}
               <h2>{{ title | append: addtitle }}</h2>
               {%- if slug == 'realtor' -%}
 
