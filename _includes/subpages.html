@@ -1,4 +1,6 @@
 
+{%- assign region = page.url | split: "/" | last -%}
+
 {%- if include.dir != page.dir and include.dir contains page.dir -%}
 
   {%- assign items = include.page -%}
@@ -23,9 +25,34 @@
                   {%- if item.title -%}{{ item.title }}{%- else -%}{{ item.navtitle }}{%- endif -%}
                 </a>
               </h5>
-              <p class="card-text mb-1">
-                ...
-              </p>
+              <div class="card-text mb-1">
+
+                  {%- assign section = item.url | split: "/" | last -%}
+
+                  <nav>
+                    <ul class="nav nav-tabs" id="{{ region }}-{{ section }}-tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="{{ region }}-{{ section }}-offers" data-toggle="tab" href="#{{ region }}-{{ section }}-offers" role="tab" aria-controls="{{ region }}-{{ section }}-offers" aria-selected="false">
+                          Пропозиції
+                        </a>
+                        <a class="nav-link" id="{{ region }}-{{ section }}-actions" data-toggle="tab" href="#{{ region }}-{{ section }}-actions" role="tab" aria-controls="{{ region }}-{{ section }}-actions" aria-selected="false">
+                          Акції
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+
+                  <div class="tab-content" id="{{ region }}-{{ section }}-content">
+                    <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers">
+                      ...Пропозиції
+                    </div>
+                    <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-actions">
+                      ...Акції
+                    </div>
+                  </div>
+
+
+              </div>
             </div>
           </div>
         </div>
