@@ -5,13 +5,13 @@
   {%- assign items = '' | split:'' -%}
   {%- assign pages = site.pages | sort: 'path' | reverse -%}
   {%- for i in pages -%}
-    {%- if i.dir contains include.dir -%}
+    {%- if i.dir contains include.dir and i.dir != include.dir -%}
       {%- assign items = items | push: i -%}
     {%- endif -%}
   {%- endfor -%}
 
   {%- if items -%}
-    {%- for item in items limit: 6 -%}
+    {%- for item in items limit:6 -%}
       {%- if forloop.first -%}
       <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2">
       {%- endif -%}
