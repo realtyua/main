@@ -51,10 +51,10 @@
                       <li>
                         <a href="#">
                           {{ offer.type }} - {{ offer.price }}
-                          {% for realestate in site.data[doo]gallery %}
+                          {% for photos in site.data[doo].gallery %}
                             <ul>
-                              {% for image in realestate.images %}
-                                <li>{{ image.src }}</li>
+                              {% for img in photos.images %}
+                                <li>{{ img.src }}</li>
                               {% endfor %}
                             </ul>
                           {% endfor %}
