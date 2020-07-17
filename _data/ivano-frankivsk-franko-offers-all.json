@@ -20,17 +20,17 @@
             "images": [
               {
                 "src":"image1.jpg",
-                "alt"::"image1 alt",
+                "alt":"image1 alt",
                 "title":"image1 title"
               },
               {
                 "src":"image2.jpg",
-                "alt"::"image2 alt",
+                "alt":"image2 alt",
                 "title":"image2 title"
               },
               {
                 "src":"image3.jpg",
-                "alt"::"image3 alt",
+                "alt":"image3 alt",
                 "title":"image3 title"
               }
             ]
@@ -58,12 +58,12 @@
             "images": [
               {
                 "src":"image1.jpg",
-                "alt"::"image1 alt",
+                "alt":"image1 alt",
                 "title":"image1 title"
               },
               {
                 "src":"image3.jpg",
-                "alt"::"image3 alt",
+                "alt":"image3 alt",
                 "title":"image3 title"
               }
             ]
@@ -91,7 +91,7 @@
             "images": [
               {
                 "src":"image3.jpg",
-                "alt"::"image3 alt",
+                "alt":"image3 alt",
                 "title":"image3 title"
               }
             ]
@@ -136,7 +136,7 @@
             "images": [
               {
                 "src":"image1.jpg",
-                "alt"::"image1 alt",
+                "alt":"image1 alt",
                 "title":"image1 title"
               }
             ]
