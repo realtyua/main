@@ -54,7 +54,25 @@
                         {%- if offer.gallery -%}
                           <ul>
                           {% for img in offer.gallery.images %}
-                            <li>{{ img.src }}</li>
+                            <li>{{ img.src }} - {{ img }}</li>
+                          {% endfor %}
+                          </ul>
+                        {%- endif -%}
+                        <hr>
+                        {%- if offer.gallery -%}
+                          <ul>
+                          {% for img in offer.gallery %}
+                            <li>{{ img.src }} - {{ img }} - {{ img.images.src }}</li>
+                          {% endfor %}
+                          </ul>
+                        {%- endif -%}
+                        <hr>
+                        {%- if offer.gallery -%}
+                          <ul>
+                          {% for i in offer.gallery %}
+                            {% for img in i.images %}
+                              <li>{{ img.src }}</li>
+                            {% endfor %}
                           {% endfor %}
                           </ul>
                         {%- endif -%}
