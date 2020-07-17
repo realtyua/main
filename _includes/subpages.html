@@ -47,31 +47,14 @@
                     {%- assign doo = region | append: '-' | append: section | append: "-offers" -%}
 
                     <ul>
-                    {%- for offer in site.data[doo] -%}
+                    {%- for offer in site.data[doo] | sort: 'date' limit: 3 -%}
                       <li>
-                        <a href="#">{{ offer.type }} - {{ offer.price }} - {{ offer.gallery.images }}</a>
-                        <hr>
-                        {%- if offer.gallery -%}
-                          <ul>
-                          {% for img in offer.gallery.images %}
-                            <li>{{ img.src }} - {{ img }}</li>
-                          {% endfor %}
-                          </ul>
-                        {%- endif -%}
-                        <hr>
-                        {%- if offer.gallery -%}
-                          <ul>
-                          {% for img in offer.gallery %}
-                            <li>{{ img.src }} - {{ img }} - {{ img.images.src }}</li>
-                          {% endfor %}
-                          </ul>
-                        {%- endif -%}
-                        <hr>
+                        <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
                         {%- if offer.gallery -%}
                           <ul>
                           {% for i in offer.gallery %}
                             {% for img in i.images %}
-                              <li>{{ img.src }}</li>
+                              <li><img src="{{ img.src }}" title="{{ img.title }}" alt="{{ img.alt }}"></li>
                             {% endfor %}
                           {% endfor %}
                           </ul>
