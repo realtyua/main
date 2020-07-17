@@ -56,7 +56,7 @@
                             <ul>
                             {% for i in offer.gallery %}
                               {% for img in i.images %}
-                                {%- img.src -%}
+                                {%- if img.src -%}
                                 <li><img src="{{ include.dir }}img/{{ offer.id }}/{{ img.src }}" title="{{ img.title }}" alt="{{ img.alt }}"></li>
                                 {%- endif -%}
                               {% endfor %}
