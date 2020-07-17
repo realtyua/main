@@ -44,27 +44,29 @@
                       ivano-frankivsk-franko-offers.json
                     {% endcomment %}
 
-                    {%- assign doo = region | append: '-' | append: section | append: "-offers" -%}
-
-                    <ul>
-                    {%- for offer in site.data[doo] | sort: 'date' limit: 3 -%}
-                      <li>
-                        <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
-                        {%- if offer.gallery -%}
-                          <ul>
-                          {% for i in offer.gallery %}
-                            {% for img in i.images %}
-                              <li><img src="{{ img.src }}" title="{{ img.title }}" alt="{{ img.alt }}"></li>
+                    {%- assign seller = region | append: '-' | append: section | append: "-offers" -%}
+                    {%- if seller -%}
+                      <ul>
+                      {%- for offer in site.data[seller] limit: 3 | sort: 'date' | reverse -%}
+                        <li>
+                          <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
+                          {%- if offer.gallery -%}
+                            <ul>
+                            {% for i in offer.gallery %}
+                              {% for img in i.images %}
+                                <li><img src="{{ include.dir }}/img/{{ offer.id }}/{{ img.src }}" title="{{ img.title }}" alt="{{ img.alt }}"></li>
+                              {% endfor %}
                             {% endfor %}
-                          {% endfor %}
-                          </ul>
-                        {%- endif -%}
-                      </li>
+                            </ul>
+                          {%- endif -%}
+                        </li>
+                      {%- else -%}
+                        <li>...</li>
+                      {%- endfor -%}
+                      </ul>
                     {%- else -%}
-                      <li>...</li>
-                    {%- endfor -%}
-                    </ul>
-
+                      <p>...</p>
+                    {%- endif -%}
 
                   </div>
                   <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-actions-tab">
