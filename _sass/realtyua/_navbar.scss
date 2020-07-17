@@ -44,7 +44,7 @@ $dropDown       : true;
             .nav-link span {
                 color: #2d5ca6;
                 border: none;
-                //border-bottom: 4px solid #ffffff;
+                border-bottom: 4px solid #ffffff;
                 background: transparent;
                 padding: .5rem 0rem;
             }
@@ -53,14 +53,14 @@ $dropDown       : true;
                 color: #000000;
                 border: none;
                 background: transparent;
-                //border-bottom: 4px solid #2d5ca6;
+                border-bottom: 4px solid #2d5ca6;
             }
 
             .nav-link span:hover, .nav-tabs .nav-link span:focus {
                 color: #000000;
                 border: none;
                 background: transparent;
-                //border-bottom: 4px solid #2d5ca6;
+                border-bottom: 4px solid #2d5ca6;
             }
         }
     }
@@ -188,6 +188,17 @@ $dropDown       : true;
                 .nav-link {
                     padding: .5rem 0;
                 }
+                .nav-link span {
+                    border-bottom: 4px solid #fff;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 4px solid #fff;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 4px solid #fff;
+                }
             }
         }
     }
@@ -219,23 +230,23 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(md) {
-    .content {
-        .navbar {
-            .nav-tabs {
-                .nav-link span {
-                    border-bottom: 4px solid #fff;
-                }
-
-                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 4px solid #2d5ca6;
-                }
-
-                .nav-link span:hover, .nav-tabs .nav-link span:focus {
-                    border-bottom: 4px solid #2d5ca6;
-                }
-            }
-        }
-    }
+    // .content {
+    //     .navbar {
+    //         .nav-tabs {
+    //             .nav-link span {
+    //                 border-bottom: 4px solid #fff;
+    //             }
+    //
+    //             .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+    //                 border-bottom: 4px solid #2d5ca6;
+    //             }
+    //
+    //             .nav-link span:hover, .nav-tabs .nav-link span:focus {
+    //                 border-bottom: 4px solid #2d5ca6;
+    //             }
+    //         }
+    //     }
+    // }
     .navbar {
         .navbar-nav {
             .nav-item {
@@ -264,23 +275,23 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(lg) {
-    .content {
-        .navbar {
-            .nav-tabs {
-                .nav-link span {
-                    border-bottom: 4px solid #fff;
-                }
-
-                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 4px solid #2d5ca6;
-                }
-
-                .nav-link span:hover, .nav-tabs .nav-link span:focus {
-                    border-bottom: 4px solid #2d5ca6;
-                }
-            }
-        }
-    }
+    // .content {
+    //     .navbar {
+    //         .nav-tabs {
+    //             .nav-link span {
+    //                 border-bottom: 4px solid #fff;
+    //             }
+    //
+    //             .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+    //                 border-bottom: 4px solid #2d5ca6;
+    //             }
+    //
+    //             .nav-link span:hover, .nav-tabs .nav-link span:focus {
+    //                 border-bottom: 4px solid #2d5ca6;
+    //             }
+    //         }
+    //     }
+    // }
     .navbar {
         .navbar-nav {
             .nav-item {
@@ -309,23 +320,23 @@ $dropDown       : true;
 }
 
 @include media-breakpoint-up(xl) {
-    .content {
-        .navbar {
-            .nav-tabs {
-                .nav-link span {
-                    border-bottom: 4px solid #fff;
-                }
-
-                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 4px solid #2d5ca6;
-                }
-
-                .nav-link span:hover, .nav-tabs .nav-link span:focus {
-                    border-bottom: 4px solid #2d5ca6;
-                }
-            }
-        }
-    }
+    // .content {
+    //     .navbar {
+    //         .nav-tabs {
+    //             .nav-link span {
+    //                 border-bottom: 4px solid #fff;
+    //             }
+    //
+    //             .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+    //                 border-bottom: 4px solid #2d5ca6;
+    //             }
+    //
+    //             .nav-link span:hover, .nav-tabs .nav-link span:focus {
+    //                 border-bottom: 4px solid #2d5ca6;
+    //             }
+    //         }
+    //     }
+    // }
     .navbar {
         .navbar-nav {
             .nav-item {
