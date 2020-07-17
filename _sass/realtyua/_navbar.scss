@@ -181,7 +181,7 @@ $dropDown       : true;
     }
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-down(sm) {
     .content {
         .navbar {
             .nav-tabs {
@@ -191,6 +191,9 @@ $dropDown       : true;
             }
         }
     }
+}
+
+@include media-breakpoint-up(sm) {
     .navbar {
         .navbar-nav {
             .nav-item {
