@@ -40,11 +40,11 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-{% comment %}
-  ivano-frankivsk-franko-offers.json
-{% endcomment %}
+                    {% comment %}
+                      ivano-frankivsk-franko-offers.json
+                    {% endcomment %}
 
-{%- assign doo = region | append: '-' | append: section | append: "-offers" -%}
+                    {%- assign doo = region | append: '-' | append: section | append: "-offers" -%}
 
                     <ul>
                     {%- for offer in site.data[doo] -%}
