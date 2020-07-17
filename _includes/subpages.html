@@ -44,20 +44,20 @@
   region-city-ivano-frankivsk-realtor-franko-offers-all.json
 {% endcomment %}
 
-{%- assign doo = region | append: '-' | append: section | append: "-offers-all" -%}
+{%- assign doo = region | append: '-' | append: section | append: "-offers" -%}
 
                     <ul>
                     {%- for offer in site.data[doo] -%}
                       <li>
                         <a href="#">
                           {{ offer.type }} - {{ offer.price }}
-                          {% for photos in site.data[doo].gallery %}
+                          {%- if offer.images -%}
                             <ul>
-                              {% for img in photos.images %}
-                                <li>{{ img.src }}</li>
-                              {% endfor %}
+                            {% for img in offer.images %}
+                              <li>{{ img.src }}</li>
+                            {% endfor %}
                             </ul>
-                          {% endfor %}
+                          {%- endif -%}
                         </a>
                       </li>
                     {%- else -%}
