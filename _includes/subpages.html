@@ -49,53 +49,43 @@
 
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
-                      <ul>
+
                       {%- for offer in offers limit: 3 -%}
+
+                      <div class="card mb-3">
+                        <div class="row g-0">
+                          <div class="col-md-4">
+                            <img src="#"  alt="#">
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title">Продається {{ offer.type }}, площею {{ offer.surface }} м², кімнат {{ offer.rooms }}, знаходиться у {{ offer.location }} за адресою {{ offer.address }}</h5>
+                              <p class="card-text"><small class="text-muted">Нерухомість доступна з {{ offer.date }}</small></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {%- comment -%}
                         <li>
                           <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
                           {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
 
                           {%- for file in site.static_files -%}
                             {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG'-%}
-                            <a href="{{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
+                            <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
                               <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
                             </a>
                             {%- endif -%}
                           {%- endfor -%}
 
-{%- comment -%}
-                          {%- if offer.gallery -%}
-
-                            {% for i in offer.gallery %}
-                              {% for img in i.images %}
-                                {%- if img -%}
-                                  {%- capture image -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{{ img.src }}{%- endcapture -%}
-
-                                  {%- for file in site.static_files -%}
-                                    {%- if file.path == image -%}
-                                      {%- assign isImage = true -%}
-                                    {%- endif -%}
-                                  {%- endfor -%}
-
-                                  {%- if isImage == true -%}
-
-                                      <a href="{{ image }}" class="lightbox" title="{{ img.title }}" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ section }}">
-                                        <img src="{{ image }}" width="100" height="100" title="{{ img.title }}" alt="{{ img.alt }}">
-                                      </a>
-
-                                  {%- endif -%}
-
-                                {%- endif -%}
-                              {% endfor %}
-                            {% endfor %}
-
-                          {%- endif -%}
-{%- endcomment -%}
                         </li>
+                      {%- endcomment -%}
+
                       {%- else -%}
-                        <li>...</li>
+                        <p>...</p>
                       {%- endfor -%}
-                      </ul>
+
                     {%- else -%}
                       <p>...</p>
                     {%- endif -%}
