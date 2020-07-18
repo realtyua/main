@@ -53,17 +53,30 @@
                       {%- for offer in offers limit: 3 -%}
                         <li>
                           <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
+                          {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
+
+                          {%- for file in site.static_files -%}
+                            {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG'-%}
+                            <a href="{{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
+                              <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
+                            </a>
+                            {%- endif -%}
+                          {%- endfor -%}
+
+{%- comment -%}
                           {%- if offer.gallery -%}
 
                             {% for i in offer.gallery %}
                               {% for img in i.images %}
                                 {%- if img -%}
                                   {%- capture image -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{{ img.src }}{%- endcapture -%}
+
                                   {%- for file in site.static_files -%}
                                     {%- if file.path == image -%}
                                       {%- assign isImage = true -%}
                                     {%- endif -%}
                                   {%- endfor -%}
+
                                   {%- if isImage == true -%}
 
                                       <a href="{{ image }}" class="lightbox" title="{{ img.title }}" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ section }}">
@@ -71,11 +84,13 @@
                                       </a>
 
                                   {%- endif -%}
+
                                 {%- endif -%}
                               {% endfor %}
                             {% endfor %}
 
                           {%- endif -%}
+{%- endcomment -%}
                         </li>
                       {%- else -%}
                         <li>...</li>
