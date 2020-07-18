@@ -68,11 +68,11 @@
                                 <p class="card-text mb-1">
                                   <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
                                 </p>
-                                <p class="card-text mb-1">
-                                  <a class="card-link navbar-toggler" title="Детальніше про цю нерухомість" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
-                                    <span class="navbar-toggler-icon"></span>
-                                  </a>
-                                </p>
+                              </div>
+                              <div class="card-footer border-top-0 bg-white">
+                                <a class="navbar-toggler" title="Детальніше про цю нерухомість" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }} photo{{ offer.id }}{{ section }}">
+                                  <span class="navbar-toggler-icon"></span>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -111,7 +111,7 @@
                                       Показати фотознімки
                                     </a>
                                     {%- endif -%}
-                                    <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ section }}" href="#" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }} photo{{ offer.id }}{{ section }}">
+                                    <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ section }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }} photo{{ offer.id }}{{ section }}">
                                       Приховати все
                                     </a>
                                   </dd>
