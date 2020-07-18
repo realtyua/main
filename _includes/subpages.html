@@ -109,7 +109,8 @@
                                   <dt>Контакти продавця</dt>
                                   <dd>{{ offer.phone }}</dd>
                                   <dd>
-                                    {%- if isImage >= '1' -%}
+                                    {%- if isFile == "" or isFile == nil -%}
+                                    {%- else -%}
                                     <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
                                       Показати фотознімки
                                     </a>
@@ -122,7 +123,8 @@
                               </div>
                             </div>
                           </div>
-                          {%- if isImage >= '1' -%}
+                          {%- if isFile == "" or isFile == nil -%}
+                          {%- else -%}
                           <div class="collapse multi-collapse" id="photo{{ offer.id }}{{ section }}">
                             <div class="row">
                               <div class="col">
