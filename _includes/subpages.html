@@ -54,11 +54,9 @@
                         {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
                         {%- for file in site.static_files -%}
                           {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-                            {%- if file.path -%}
-                              {%- assign isImage = true -%}
-                            {%- else -%}
-                              {%- assign isImage = false -%}
-                            {%- endif -%}
+                            {%- assign isImage = true -%}
+                          {%- else -%}
+                            {%- assign isImage = false -%}
                           {%- endif -%}
                         {%- endfor -%}
 
