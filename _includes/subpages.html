@@ -54,24 +54,27 @@
                         <li>
                           <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
                           {%- if offer.gallery -%}
-                            <ul>
+
                             {% for i in offer.gallery %}
                               {% for img in i.images %}
+                                {%- if img -%}
+                                  {%- capture image -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{{ img.src }}{%- endcapture -%}
+                                  {%- for file in site.static_files -%}
+                                    {%- if file.path == image -%}
+                                      {%- assign isImage = true -%}
+                                    {%- endif -%}
+                                  {%- endfor -%}
+                                  {%- if isImage == true -%}
 
-                                {%- capture image -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{{ img.src }}{%- endcapture -%}
-                                {% for file in site.static_files %}
-                                  {% if file.path == image %}
-                                    {% assign isImage = true %}
-                                  {% endif %}
-                                {% endfor %}
+                                      <a href="{{ image }}" class="lightbox" title="{{ img.title }}" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ section }}">
+                                        <img src="{{ image }}" width="100" height="100" title="{{ img.title }}" alt="{{ img.alt }}">
+                                      </a>
 
-                                {%- if isImage == true -%}
-                                <li><img src="{{ image }}" width="100" title="{{ img.title }}" alt="{{ img.alt }}"></li>
+                                  {%- endif -%}
                                 {%- endif -%}
-
                               {% endfor %}
                             {% endfor %}
-                            </ul>
+
                           {%- endif -%}
                         </li>
                       {%- else -%}
