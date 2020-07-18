@@ -54,24 +54,20 @@
 
                       <div class="card mb-3">
                         <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="#"  alt="#">
-                          </div>
-                          <div class="col-md-8">
+                          <div class="col">
                             <div class="card-body">
                               <p class="card-text">Продається {{ offer.type }}, площею {{ offer.surface }} м², кімнат {{ offer.rooms }}, знаходиться у {{ offer.location }} за адресою {{ offer.address }} вартістю {{ offer.price }}</p>
-                              <p class="card-text">
-                                <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">Більше</a>
-                              </p>
                               <p class="card-text"><small class="text-muted">Нерухомість доступна з {{ offer.date }}</small></p>
+                              <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">i</a>
+                              <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">i</a>
                             </div>
                           </div>
                         </div>
                         <div class="collapse multi-collapse" id="more{{ offer.id }}{{ section }}">
                           <div class="row">
                             <div class="col">
-                              <hr>
-                              <dl>
+                              <hr class="mt-0 mx-3">
+                              <dl class="mx-3">
                                 <dt>Поверх</dt>
                                 <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
                                 <dt>Стоя́нка</dt>
@@ -85,6 +81,21 @@
                                 <dt>Контакти продавця</dt>
                                 <dd>{{ offer.phone }}</dd>
                               </dl>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="collapse multi-collapse" id="more{{ offer.id }}{{ section }}">
+                          <div class="row">
+                            <div class="col">
+                              <hr class="mt-0 mx-3">
+                              {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
+                              {%- for file in site.static_files -%}
+                                {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG'-%}
+                                <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
+                                  <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
+                                </a>
+                                {%- endif -%}
+                              {%- endfor -%}
                             </div>
                           </div>
                         </div>
