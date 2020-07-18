@@ -63,7 +63,6 @@
                           {%- if file.path contains folder -%}
                             {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
                               {%- capture isFile -%}{{ file.path }}{%- endcapture -%}
-                              {{ isFile }}
                             {%- endif -%}
                           {%- else -%}
                           {%- endif -%}
@@ -74,7 +73,7 @@
                           <div class="row g-0">
                             <div class="col">
                               <div class="card-body">
-                                <p class="card-text mb-1">{{ isImage }} - Продається <strong>{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <strong>{{ offer.price }}</strong></p>
+                                <p class="card-text mb-1">{{ isFile }} - Продається <strong>{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <strong>{{ offer.price }}</strong></p>
                                 <p class="card-text mb-1">
                                   <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
                                   <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
@@ -109,7 +108,7 @@
                                   <dt>Контакти продавця</dt>
                                   <dd>{{ offer.phone }}</dd>
                                   <dd>
-                                    {%- if isFile == "" or isFile == nil -%}
+                                    {%- if isFile == "" -%}
                                     {%- else -%}
                                     <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
                                       Показати фотознімки
@@ -123,7 +122,7 @@
                               </div>
                             </div>
                           </div>
-                          {%- if isFile == "" or isFile == nil -%}
+                          {%- if isFile == "" -%}
                           {%- else -%}
                           <div class="collapse multi-collapse" id="photo{{ offer.id }}{{ section }}">
                             <div class="row">
