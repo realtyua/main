@@ -64,6 +64,9 @@
                             {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
 
                               {%- capture isFile -%}{{ file.path }}{%- endcapture -%}
+
+                              "{{ isFile }}"
+                              
                               {%- if isFile != '' -%}
                                 {%- assign isImage = true -%}
                               {%- endif -%}
