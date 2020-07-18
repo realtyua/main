@@ -67,11 +67,7 @@
 
                               "{{ isFile }}"
 
-                              {%- if isFile -%}
-                                {%- assign isImage = true -%}
-                              {%- else -%}
-                                {%- assign isImage = false -%}
-                              {%- endif -%}
+                              {%- if isFile -%}1{%- else -%}0{%- endif -%}
 
                             {%- endif -%}
                           {%- else -%}
