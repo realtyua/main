@@ -63,9 +63,13 @@
                         <div class="row g-0">
                           <div class="col">
                             <div class="card-body">
-                              <p class="card-text">Продається <strong>{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <strong>{{ offer.price }}</strong></p>
-                              <p class="card-text"><small class="text-muted">Нерухомість доступна з {{ offer.date }}</small></p>
-                              <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">Інше</a>
+                              <p class="card-text mb-1">{{ isImage }} - Продається <strong>{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <strong>{{ offer.price }}</strong></p>
+                              <p class="card-text mb-1"><small class="text-muted">Нерухомість доступна з {{ offer.date }}</small></p>
+                              <p class="card-text text-right">
+                                <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+                                  <span class="badge rounded-pill bg-primary">i</span>
+                                </a>
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -92,7 +96,7 @@
                                     Показати фотознімки
                                   </a>
                                   {%- endif -%}
-                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
+                                  <a class="card-link" data-toggle="collapse" data-target=".multi-collapse" href="#close{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }} more{{ offer.id }}{{ section }}">
                                     Приховати все
                                   </a>
                                 </dd>
