@@ -52,6 +52,11 @@
                       {%- for offer in offers limit: 3 -%}
 
                         {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
+
+                        {%- assign file = site.static_files | where: "folder", path | first -%}
+                        {%- if file -%}{%- assign isImage = true -%}{%- endif -%}
+
+                        {%- comment -%}
                         {%- for file in site.static_files -%}
                           {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
                             {%- assign isImage = true -%}
@@ -59,6 +64,7 @@
                             {%- assign isImage = false -%}
                           {%- endif -%}
                         {%- endfor -%}
+                        {%- endcomment -%}
 
                         <div class="card mb-3">
                           <div class="row g-0">
