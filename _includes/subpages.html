@@ -10,7 +10,7 @@
     {%- endif -%}
   {%- endfor -%}
   {%- if items -%}
-    {%- for item in items limit:6 -%}
+    {%- for item in items limit:3 -%}
       {%- if forloop.first -%}
       <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2">
       {%- endif -%}
@@ -53,18 +53,20 @@
 
                         {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
 
+                        {%- comment -%}
                         {%- assign file = site.static_files | where: "folder", path | first -%}
                         {%- if file -%}{%- assign isImage = true -%}{%- endif -%}
+                        {%- endcomment -%}
 
-                        {%- comment -%}
+
                         {%- for file in site.static_files -%}
-                          {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-                            {%- assign isImage = true -%}
-                          {%- else -%}
-                            {%- assign isImage = false -%}
+                          {%- if file.path contains folder -%}
+                            {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+                              {%- assign isImage = true -%}
+                            {%- endif -%}
                           {%- endif -%}
                         {%- endfor -%}
-                        {%- endcomment -%}
+
 
                         <div class="card mb-3">
                           <div class="row g-0">
