@@ -46,7 +46,7 @@
 
                     {%- assign seller = region | append: '-' | append: section | append: '-offers' -%}
                     {%- assign records = site.data[seller] -%}
-                    {%- assign isImage = false -%}
+
 
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
@@ -66,9 +66,11 @@
                               {%- capture isFile -%}{{ file.path }}{%- endcapture -%}
 
                               "{{ isFile }}"
-                              
-                              {%- if isFile != '' -%}
+
+                              {%- if isFile -%}
                                 {%- assign isImage = true -%}
+                              {%- else -%}
+                                {%- assign isImage = false -%}
                               {%- endif -%}
 
                             {%- endif -%}
