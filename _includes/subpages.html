@@ -46,6 +46,7 @@
 
                     {%- assign seller = region | append: '-' | append: section | append: '-offers' -%}
                     {%- assign records = site.data[seller] -%}
+                    {%- assign isImage = false -%}
 
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
@@ -58,15 +59,15 @@
                         {%- if file -%}{%- assign isImage = true -%}{%- endif -%}
                         {%- endcomment -%}
 
-
                         {%- for file in site.static_files -%}
                           {%- if file.path contains folder -%}
                             {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
 
-                            <p>{{file.path}}</p>
+                              {%- capture isFile -%}{{ file.path }}{%- endcapture -%}
+                              {%- if isFile != '' -%}
+                                {%- assign isImage = true -%}
+                              {%- endif -%}
 
-                            {%- else -%}
-                              {%- assign isImage = false -%}
                             {%- endif -%}
                           {%- else -%}
                           {%- endif -%}
