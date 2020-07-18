@@ -56,10 +56,9 @@
                         <div class="row g-0">
                           <div class="col">
                             <div class="card-body">
-                              <p class="card-text">Продається {{ offer.type }}, площею {{ offer.surface }} м², кімнат {{ offer.rooms }}, знаходиться у {{ offer.location }} за адресою {{ offer.address }} вартістю {{ offer.price }}</p>
+                              <p class="card-text">Продається <strong>{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <strong>{{ offer.price }}</strong></p>
                               <p class="card-text"><small class="text-muted">Нерухомість доступна з {{ offer.date }}</small></p>
-                              <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">i</a>
-                              <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">i</a>
+                              <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">Інше</a>
                             </div>
                           </div>
                         </div>
@@ -80,11 +79,17 @@
                                 <dd>{{ offer.seller }}</dd>
                                 <dt>Контакти продавця</dt>
                                 <dd>{{ offer.phone }}</dd>
+                                <dt>Фотознімки нерухомості</dt>
+                                <dd>
+                                  <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
+                                    Показати фотознімки нерухомості
+                                  </a>
+                                </dd>
                               </dl>
                             </div>
                           </div>
                         </div>
-                        <div class="collapse multi-collapse" id="more{{ offer.id }}{{ section }}">
+                        <div class="collapse multi-collapse" id="photo{{ offer.id }}{{ section }}">
                           <div class="row">
                             <div class="col">
                               <hr class="mt-0 mx-3">
