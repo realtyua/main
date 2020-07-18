@@ -63,7 +63,7 @@
                           {%- if file.path contains folder -%}
                             {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
                               {%- capture isFile -%}{{ file.path }}{%- endcapture -%}
-                              {%- capture isImage -%}{%- if isFile -%}1{%- else -%}0{%- endif -%}{%- endcapture -%}
+                              {%- if isFile -%}{%- capture isImage -%}1{%- endcapture -%}{%- endif -%}
                             {%- endif -%}
                           {%- else -%}
                           {%- endif -%}
@@ -109,7 +109,7 @@
                                   <dt>Контакти продавця</dt>
                                   <dd>{{ offer.phone }}</dd>
                                   <dd>
-                                    {%- if isImage == '1' -%}
+                                    {%- if isImage >= '1' -%}
                                     <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
                                       Показати фотознімки
                                     </a>
@@ -122,7 +122,7 @@
                               </div>
                             </div>
                           </div>
-                          {%- if isImage == '1' -%}
+                          {%- if isImage >= '1' -%}
                           <div class="collapse multi-collapse" id="photo{{ offer.id }}{{ section }}">
                             <div class="row">
                               <div class="col">
