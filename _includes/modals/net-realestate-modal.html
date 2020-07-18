@@ -7,13 +7,13 @@
         </button>
       </div>
       <div class="modal-body pt-0 pb-4 px-4">
-        <div class="list-unstyled row row-cols-1 row-cols-sm-2 g-3">
+        <ul class="list-unstyled mb-0 row row-cols-1 row-cols-sm-2 g-3">
           {% for item in site.data.realestate %}
           <li class="col">
             <a rel="noopener noreferrer" href="{{ item.url }}" target="_blank" class="link-light">{{ item.title }}</a>
           </li>
           {% endfor %}
-        </div>
+        </ul>
         {% comment %}
         <ul class="outer-links">
           <li>
