@@ -55,82 +55,81 @@
                         {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
                         {%- for file in site.static_files -%}
                           {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-                            {%- assign isImage = true -%}
-                            <p>{{ file.path }}</p>
+                            {%- if file.path -%}
+                              {%- assign isImage = true -%}
+                            {%- endif -%}
                           {%- endif -%}
                         {%- endfor -%}
 
-                        <hr>
-
-                      <div class="card mb-3">
-                        <div class="row g-0">
-                          <div class="col">
-                            <div class="card-body">
-                              <p class="card-text mb-1">{{ isImage }} - Продається <strong>{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <strong>{{ offer.price }}</strong></p>
-                              <p class="card-text mb-1">
-                                <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
-                                <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
-                                  <span class="badge rounded-pill bg-primary">i</span>
-                                </a>
-                              </p>
-                              {%- comment -%}
-                              <p class="card-text text-right">
-                                <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
-                                  <span class="badge rounded-pill bg-primary">i</span>
-                                </a>
-                              </p>
-                              {%- endcomment -%}
+                        <div class="card mb-3">
+                          <div class="row g-0">
+                            <div class="col">
+                              <div class="card-body">
+                                <p class="card-text mb-1">{{ isImage }} - Продається <strong>{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <strong>{{ offer.price }}</strong></p>
+                                <p class="card-text mb-1">
+                                  <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
+                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+                                    <span class="badge rounded-pill bg-primary">i</span>
+                                  </a>
+                                </p>
+                                {%- comment -%}
+                                <p class="card-text text-right">
+                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+                                    <span class="badge rounded-pill bg-primary">i</span>
+                                  </a>
+                                </p>
+                                {%- endcomment -%}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="collapse multi-collapse" id="more{{ offer.id }}{{ section }}">
-                          <div class="row">
-                            <div class="col">
-                              <hr class="mt-0 mx-3">
-                              <dl class="mx-3">
-                                <dt>Поверх</dt>
-                                <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
-                                <dt>Стоя́нка</dt>
-                                <dd>{{ offer.parking }}</dd>
-                                <dt>Площа землі</dt>
-                                <dd>{{ offer.surface_land }} м²</dd>
-                                <dt>Вартість</dt>
-                                <dd>{{ offer.price_sqmt }} за 1 м²</dd>
-                                <dt>Продавець</dt>
-                                <dd>{{ offer.seller }}</dd>
-                                <dt>Контакти продавця</dt>
-                                <dd>{{ offer.phone }}</dd>
-                                <dd>
-                                  {%- if isImage == true -%}
-                                  <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
-                                    Показати фотознімки
+                          <div class="collapse multi-collapse" id="more{{ offer.id }}{{ section }}">
+                            <div class="row">
+                              <div class="col">
+                                <hr class="mt-0 mx-3">
+                                <dl class="mx-3">
+                                  <dt>Поверх</dt>
+                                  <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+                                  <dt>Стоя́нка</dt>
+                                  <dd>{{ offer.parking }}</dd>
+                                  <dt>Площа землі</dt>
+                                  <dd>{{ offer.surface_land }} м²</dd>
+                                  <dt>Вартість</dt>
+                                  <dd>{{ offer.price_sqmt }} за 1 м²</dd>
+                                  <dt>Продавець</dt>
+                                  <dd>{{ offer.seller }}</dd>
+                                  <dt>Контакти продавця</dt>
+                                  <dd>{{ offer.phone }}</dd>
+                                  <dd>
+                                    {%- if isImage == true -%}
+                                    <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
+                                      Показати фотознімки
+                                    </a>
+                                    {%- endif -%}
+                                    <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+                                      Приховати все
+                                    </a>
+                                  </dd>
+                                </dl>
+                              </div>
+                            </div>
+                          </div>
+                          {%- if isImage == true -%}
+                          <div class="collapse multi-collapse" id="photo{{ offer.id }}{{ section }}">
+                            <div class="row">
+                              <div class="col">
+                                <hr class="mt-0 mx-3">
+                                {%- for file in site.static_files -%}
+                                  {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+                                  <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
+                                    <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
                                   </a>
                                   {%- endif -%}
-                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
-                                    Приховати все
-                                  </a>
-                                </dd>
-                              </dl>
+                                {%- endfor -%}
+                              </div>
                             </div>
                           </div>
+                          {%- endif -%}
                         </div>
-                        {%- if isImage == true -%}
-                        <div class="collapse multi-collapse" id="photo{{ offer.id }}{{ section }}">
-                          <div class="row">
-                            <div class="col">
-                              <hr class="mt-0 mx-3">
-                              {%- for file in site.static_files -%}
-                                {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-                                <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
-                                  <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
-                                </a>
-                                {%- endif -%}
-                              {%- endfor -%}
-                            </div>
-                          </div>
-                        </div>
-                        {%- endif -%}
-                      </div>
 
                       {%- comment -%}
                         <li>
