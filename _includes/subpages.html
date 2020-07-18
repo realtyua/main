@@ -76,30 +76,42 @@
                               </div>
                             </div>
                           </div>
-                          <div class="collapse multi-collapse" id="more{{ offer.id }}{{ section }}">
+                          <div class="collapse multi-collapse collapse{{ offer.id }}{{ section }}" id="more{{ offer.id }}{{ section }}">
                             <div class="row">
                               <div class="col">
                                 <hr class="mt-0 mx-3">
                                 <dl class="mx-3">
+                                  {%- if offer.floor -%}
                                   <dt>Поверх</dt>
                                   <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+                                  {%- endif -%}
+                                  {%- if offer.parking -%}
                                   <dt>Стоя́нка</dt>
                                   <dd>{{ offer.parking }}</dd>
+                                  {%- endif -%}
+                                  {%- if offer.surface_land -%}
                                   <dt>Площа землі</dt>
                                   <dd>{{ offer.surface_land }} м²</dd>
+                                  {%- endif -%}
+                                  {%- if offer.price_sqmt -%}
                                   <dt>Вартість</dt>
                                   <dd>{{ offer.price_sqmt }} за 1 м²</dd>
+                                  {%- endif -%}
+                                  {%- if offer.seller -%}
                                   <dt>Продавець</dt>
                                   <dd>{{ offer.seller }}</dd>
+                                  {%- endif -%}
+                                  {%- if offer.phone -%}
                                   <dt>Контакти продавця</dt>
                                   <dd>{{ offer.phone }}</dd>
+                                  {%- endif -%}
                                   <dd>
                                     {%- if isImage != "" -%}
                                     <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
                                       Показати фотознімки
                                     </a>
                                     {%- endif -%}
-                                    <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+                                    <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ section }}" href="#" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }} photo{{ offer.id }}{{ section }}">
                                       Приховати все
                                     </a>
                                   </dd>
@@ -108,7 +120,7 @@
                             </div>
                           </div>
                           {%- if isImage != "" -%}
-                          <div class="collapse multi-collapse" id="photo{{ offer.id }}{{ section }}">
+                          <div class="collapse multi-collapse collapse{{ offer.id }}{{ section }}" id="photo{{ offer.id }}{{ section }}">
                             <div class="row">
                               <div class="col">
                                 <hr class="mt-0 mx-3">
