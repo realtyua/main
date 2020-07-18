@@ -10,7 +10,7 @@
     {%- endif -%}
   {%- endfor -%}
   {%- if items -%}
-    {%- for item in items limit:3 -%}
+    {%- for item in items limit:6 -%}
       {%- if forloop.first -%}
       <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2">
       {%- endif -%}
@@ -62,7 +62,11 @@
                         {%- for file in site.static_files -%}
                           {%- if file.path contains folder -%}
                             {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-                              {%- assign isImage = true -%}
+
+                            <p>file.path</p>
+
+                            {%- else -%}
+                              {%- assign isImage = false -%}
                             {%- endif -%}
                           {%- endif -%}
                         {%- endfor -%}
