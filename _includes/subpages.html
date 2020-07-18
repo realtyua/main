@@ -40,9 +40,6 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-                    {% comment %}
-                      ivano-frankivsk-franko-offers.json
-                    {% endcomment %}
 
                     {%- assign seller = region | append: '-' | append: section | append: '-offers' -%}
                     {%- assign records = site.data[seller] -%}
@@ -50,7 +47,7 @@
 
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
-                      {%- for offer in offers limit: 3 -%}
+                      {%- for offer in offers limit:3 -%}
 
                         {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
 
@@ -67,20 +64,15 @@
                           <div class="row g-0">
                             <div class="col">
                               <div class="card-body">
-                                <p class="card-text mb-1">Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <<mark>>{{ offer.price }}</<mark>></p>
+                                <p class="card-text mb-1">
+                                  Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <mark>{{ offer.price }}</mark>
+                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+                                    <strong>...</strong>
+                                  </a>
+                                </p>
                                 <p class="card-text mb-1">
                                   <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
-                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
-                                    <span class="badge rounded-pill bg-primary">i</span>
-                                  </a>
                                 </p>
-                                {%- comment -%}
-                                <p class="card-text text-right">
-                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
-                                    <span class="badge rounded-pill bg-primary">i</span>
-                                  </a>
-                                </p>
-                                {%- endcomment -%}
                               </div>
                             </div>
                           </div>
