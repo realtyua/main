@@ -54,7 +54,8 @@
 
                         {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
                         {%- for file in site.static_files -%}
-                          {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG'-%}
+                          {%- assign id = file.path | split: "/" | last -%}
+                          {%- if file.path contains folder and id == offer.id and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG'-%}
                             {%- assign isImage = true -%}
                           {%- endif -%}
                         {%- endfor -%}
@@ -96,7 +97,7 @@
                                     Показати фотознімки
                                   </a>
                                   {%- endif -%}
-                                  <a class="card-link" data-toggle="collapse" data-target=".multi-collapse" href="#close{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }} more{{ offer.id }}{{ section }}">
+                                  <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
                                     Приховати все
                                   </a>
                                 </dd>
