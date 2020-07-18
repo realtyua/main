@@ -63,11 +63,13 @@
                           {%- if file.path contains folder -%}
                             {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
 
-                            <p>file.path</p>
+                            <p>{{file.path}}</p>
 
                             {%- else -%}
                               {%- assign isImage = false -%}
                             {%- endif -%}
+                          {%- else -%}
+                            {%- assign isImage = false -%}
                           {%- endif -%}
                         {%- endfor -%}
 
