@@ -59,27 +59,32 @@
                           </div>
                           <div class="col-md-8">
                             <div class="card-body">
-                              <h5 class="card-title">Продається {{ offer.type }}, площею {{ offer.surface }} м², кімнат {{ offer.rooms }}, знаходиться у {{ offer.location }} за адресою {{ offer.address }} вартістю {{ offer.price }}</h5>
+                              <p class="card-text">Продається {{ offer.type }}, площею {{ offer.surface }} м², кімнат {{ offer.rooms }}, знаходиться у {{ offer.location }} за адресою {{ offer.address }} вартістю {{ offer.price }}</p>
                               <p class="card-text">
-                                <a class="btn btn-primary" data-toggle="collapse" href="#more{{ offer.type }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.type }}{{ section }}">Детальніше</a>
+                                <a class="card-link" data-toggle="collapse" href="#more{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">Більше</a>
                               </p>
-                              <div class="collapse multi-collapse" id="more{{ offer.type }}{{ section }}">
-                                <dl>
-                                  <dt>Поверх</dt>
-                                  <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
-                                  <dt>Стоя́нка</dt>
-                                  <dd>{{ offer.parking }}</dd>
-                                  <dt>Площа землі</dt>
-                                  <dd>{{ offer.surface_land }} м²</dd>
-                                  <dt>Вартість</dt>
-                                  <dd>{{ offer.price_sqmt }} за 1 м²</dd>
-                                  <dt>Продавець</dt>
-                                  <dd>{{ offer.seller }}</dd>
-                                  <dt>Контакти продавця</dt>
-                                  <dd>{{ offer.phone }}</dd>
-                                </dl>
-                              </div>
                               <p class="card-text"><small class="text-muted">Нерухомість доступна з {{ offer.date }}</small></p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="collapse multi-collapse" id="more{{ offer.id }}{{ section }}">
+                          <div class="row">
+                            <div class="col">
+                              <hr>
+                              <dl>
+                                <dt>Поверх</dt>
+                                <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+                                <dt>Стоя́нка</dt>
+                                <dd>{{ offer.parking }}</dd>
+                                <dt>Площа землі</dt>
+                                <dd>{{ offer.surface_land }} м²</dd>
+                                <dt>Вартість</dt>
+                                <dd>{{ offer.price_sqmt }} за 1 м²</dd>
+                                <dt>Продавець</dt>
+                                <dd>{{ offer.seller }}</dd>
+                                <dt>Контакти продавця</dt>
+                                <dd>{{ offer.phone }}</dd>
+                              </dl>
                             </div>
                           </div>
                         </div>
