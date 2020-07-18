@@ -390,3 +390,11 @@ $dropDown       : true;
         top: 6px;
     }
 }
+.card {
+    .card-footer {
+        .navbar-toggler {
+            height: 24px;
+            width: 24px;
+        }
+    }
+}
