@@ -68,16 +68,9 @@
                               </div>
                               <div class="card-footer border-top-0 bg-white pt-0 pb-1 px-3 text-right">
                                 <div class="row row-cols-auto justify-content-end">
-                                  <div class="col pr-0">
-                                    {%- include footer/phone.html legal=offer.phone type='icon' -%}
-                                  </div>
-                                  <div class="col pr-0">
-                                    <a href="#" title="Телефон {{ offer.phone }}" class="card-link">
-                                      <span class="align-middle" style="font-size:large;">&phone;</span>
-                                    </a>
-                                  </div>
+                                  <div class="col pr-0">{%- include footer/phone.html legal=offer.phone type='icon' -%}</div>
                                   <div class="col">
-                                    <a class="navbar-toggler d-inline-block border-0 shadow-none collapsed" title="Детальніше про цю нерухомість" href="#more{{ offer.id }}{{ section }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+                                    <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" title="Детальніше про цю нерухомість" href="#more{{ offer.id }}{{ section }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
                                       <span class="navbar-toggler-icon"></span>
                                     </a>
                                   </div>
@@ -147,6 +140,11 @@
                         </div>
 
                       {%- comment -%}
+
+                      <div class="col pr-0">
+                        {%- include footer/phone.html legal=offer.phone type='icon' -%}
+                      </div>
+
                         <li>
                           <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
                           {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
