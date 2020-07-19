@@ -61,7 +61,7 @@
                           <div class="row g-0">
                             <div class="col">
                               <div class="card-body pb-0">
-                                <p class="card-text mb-1">Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <mark>{{ offer.price }}</mark>.</p>
+                                <p class="card-text mb-1">Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <mark>{{ offer.price | money }}</mark>.</p>
                                 <p class="card-text mb-1">
                                   <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
                                 </p>
@@ -139,30 +139,9 @@
                           </div>
                         </div>
 
-                      {%- comment -%}
-
-                      <div class="col pr-0">
-                        {%- include footer/phone.html legal=offer.phone type='icon' -%}
-                      </div>
-
-                        <li>
-                          <a href="#">{{ offer.date }}: {{ offer.type }} - {{ offer.price }}</a>
-                          {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
-
-                          {%- for file in site.static_files -%}
-                            {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG'-%}
-                            <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
-                              <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
-                            </a>
-                            {%- endif -%}
-                          {%- endfor -%}
-
-                        </li>
-                      {%- endcomment -%}
-
-                      {%- else -%}
-                        <p>...</p>
                       {%- endfor -%}
+
+                      <a href="#" class="link-primary">Всі {{ offers | size }} пропозиції</a>
 
                     {%- else -%}
                       <p>...</p>
