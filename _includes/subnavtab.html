@@ -42,10 +42,10 @@
         <p>
 
           <ul>
-          {% for if_all in site.data.ivano-frankivsk %}
-          {% assign if = if_all[1] %}
+          {% for too in site.data.ivano-frankivsk %}
+          {% assign if = too[1] %}
             <li>
-                {{ if.id }} - {{ if.type }}
+                {{ if.id }} - {{ if.type }} = {{ too.id }} - {{ too.type }}
             </li>
           {% endfor %}
           </ul>
@@ -56,10 +56,23 @@
         <p>
 
           <ul>
-          {% for if_all in site.data.ivano-frankivsk %}
-            {% assign if = if_all %}
+          {% for zoo in site.data.ivano-frankivsk %}
+            {% assign loo = zoo[2] %}
             <li>
-                {{ if.id }} - {{ if.type }}
+                {{ loo.id }} - {{ loo.type }} = {{ zoo.id }} - {{ zoo.type }}
+            </li>
+          {% endfor %}
+          </ul>
+
+
+        </p>
+        <hr>
+        <p>
+
+          <ul>
+          {% for koo in site.data.ivano-frankivsk %}
+            <li>
+                {{ koo.id }} - {{ koo.type }}
             </li>
           {% endfor %}
           </ul>
