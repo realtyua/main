@@ -47,7 +47,7 @@
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
                       {%- for offer in offers limit:3 -%}
-                        {%- capture folder_n -%}{{ page.dir }}/img/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+                        {%- capture folder_n -%}{{ page.dir }}img/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
                         {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
                         {%- capture files -%}
                           {%- for file in site.static_files -%}

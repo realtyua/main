@@ -1,5 +1,6 @@
 {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
-folder: {{ folder }}
+{%- capture folder_n -%}{{ page.dir }}img/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+folder: {{ folder_n }}
 {%- capture files -%}
   {%- for file in site.static_files -%}
     {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
