@@ -9,13 +9,13 @@
       {%- include icons/telephone-outbound.svg width="18" height="18" -%}
     </span>
     <br>
-    {{ t | slice: -9, 2 }} <br>
-    {{ t | slice: 0, 9 }} <br>
+    {{ t | slice: -11, 1 }} <br>
+    {{ t | slice: -10, 3 }} <br>
     {{ t | slice: -7, 3 }} <br>
-    {{ t | slice: 2 }} <br>
-    {{ t | slice: 4 }} <br>
-    {{ t | slice: -2 }} <br>
-    {{ t | slice: -4 }} <br>
+    {{ t | slice: -4, 2 }} <br>
+    {{ t | slice: -2, 0 }} <br>
+    {{ t | slice: 2, 5 }} <br>
+    {{ t | slice: -4, 0 }} <br>
   </a>
 {%- else -%}
   <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
