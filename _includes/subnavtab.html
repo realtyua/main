@@ -47,9 +47,9 @@
           {%- assign offers = records | sort: 'date' | reverse -%}
 
           <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
-            {% for offer in offers %}
+            {% for offer in offers limit:6 %}
               <div class="col mb-4">
-                {%- include card.html offer=offer -%}
+                {%- include card.html -%}
               </div>
             {% endfor %}
           </div>
