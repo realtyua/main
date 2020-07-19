@@ -1,21 +1,18 @@
+{%- assign t = include.legal -%}
+{%- capture n -%}+&nbsp;{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
 {%- if contact[include.legal] -%}
   <a href="tel:+38{{ contact[include.legal] | strip | remove: '(' | remove: ')' | remove: ' ' }}">
     {{ contact[include.legal] | replace: " ", "&nbsp;" }}
   </a>
 {%- elsif include.legal and include.type == 'icon' -%}
-{%- assign t = include.legal -%}
-  <a href="tel:+{{ t }}" class="text-decoration-none" title="Продавець +{{ t | slice: 0, 2 }}&nbsp;{{ t | slice: 2, 3 }}&nbsp;{{ t | slice: 5, 3 }}&nbsp;{{ t | slice: 8, 2 }}&nbsp;{{ t | slice: 10, 12 }}}">
-    {{ t | slice: 0, 2 }}&nbsp;{{ t | slice: 2, 3 }}&nbsp;{{ t | slice: 5, 3 }}&nbsp;{{ t | slice: 8, 2 }}&nbsp;{{ t | slice: 10, 12 }}
+  <a href="tel:+{{ t }}" class="text-decoration-none" title="Продавець {{ n }}">
+    <span>{%- include icons/telephone-outbound.svg width="18" height="18" -%}</span>
+  </a>
+{%- else -%}
+{%- elsif include.legal and include.type == 'text' -%}
+  <a href="tel:+{{ t }}" class="text-decoration-none" title="Продавець {{ n }}">
+    {{ n }}
   </a>
 {%- else -%}
   <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
 {%- endif -%}
-
-{%- comment -%}
-<span>
-  {%- include icons/telephone-outbound.svg width="18" height="18" -%}
-</span>
-<br>
- <br>
-<hr>
-{%- endcomment -%}

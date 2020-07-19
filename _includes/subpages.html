@@ -44,7 +44,6 @@
                     {%- assign seller = region | append: '-' | append: section | append: '-offers' -%}
                     {%- assign records = site.data[seller] -%}
 
-
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
                       {%- for offer in offers limit:3 -%}
@@ -53,9 +52,7 @@
 
                         {%- capture files -%}
                           {%- for file in site.static_files -%}
-                            {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-                              {{ file.path }}
-                            {%- endif -%}
+                            {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
                           {%- endfor -%}
                         {%- endcapture -%}
                         {%- assign isImage = files | strip_newlines -%}
@@ -115,7 +112,7 @@
                                   {%- endif -%}
                                   {%- if offer.phone -%}
                                   <dt>Контакти продавця</dt>
-                                  <dd>{{ offer.phone }}</dd>
+                                  <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
                                   {%- endif -%}
                                   <dd>
                                     {%- if isImage != "" -%}
