@@ -2,6 +2,13 @@
   <a href="tel:+38{{ contact[include.legal] | strip | remove: '(' | remove: ')' | remove: ' ' }}">
     {{ contact[include.legal] | replace: " ", "&nbsp;" }}
   </a>
+{%- elsif include.legal and include.type == 'icon' -%}
+  <a href="tel:+38{{ include.legal }}">
+    <span>
+      {%- include icons/telephone-outbound.svg width="24" height="24" -%}
+    </span>
+    {{ include.legal | slice: 0 }}&nbsp;{{ include.legal | slice: -3, 2 }}&nbsp;{{ include.legal | slice: -5, 2 }}
+  </a>
 {%- else -%}
   <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
 {%- endif -%}

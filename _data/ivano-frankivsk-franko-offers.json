@@ -15,25 +15,21 @@
         "date": "2020-05-20",
         "seller": "Приватна особа",
         "phone": 380002340089,
-        "gallery": [
+        "images": [
           {
-            "images": [
-              {
-                "src":"image1.jpg",
-                "alt":"image1 alt",
-                "title":"image1 title"
-              },
-              {
-                "src":"image2.jpg",
-                "alt":"image2 alt",
-                "title":"image2 title"
-              },
-              {
-                "src":"image3.jpg",
-                "alt":"image3 alt",
-                "title":"image3 title"
-              }
-            ]
+            "src":"image1.jpg",
+            "alt":"image1 alt",
+            "title":"image1 title"
+          },
+          {
+            "src":"image2.jpg",
+            "alt":"image2 alt",
+            "title":"image2 title"
+          },
+          {
+            "src":"image3.jpg",
+            "alt":"image3 alt",
+            "title":"image3 title"
           }
         ]
     },
@@ -53,20 +49,16 @@
         "date": "2020-06-10",
         "seller": "Приватна особа",
         "phone": 380006450076,
-        "gallery": [
+        "images": [
           {
-            "images": [
-              {
-                "src":"image1.jpg",
-                "alt":"image1 alt",
-                "title":"image1 title"
-              },
-              {
-                "src":"image3.jpg",
-                "alt":"image3 alt",
-                "title":"image3 title"
-              }
-            ]
+            "src":"image1.jpg",
+            "alt":"image1 alt",
+            "title":"image1 title"
+          },
+          {
+            "src":"image3.jpg",
+            "alt":"image3 alt",
+            "title":"image3 title"
           }
         ]
     },
@@ -86,15 +78,11 @@
         "date": "2020-06-15",
         "seller": "Приватна особа",
         "phone": 380002341189,
-        "gallery": [
+        "images": [
           {
-            "images": [
-              {
-                "src":"image3.jpg",
-                "alt":"image3 alt",
-                "title":"image3 title"
-              }
-            ]
+            "src":"image3.jpg",
+            "alt":"image3 alt",
+            "title":"image3 title"
           }
         ]
     },
@@ -131,15 +119,11 @@
         "date": "2020-05-25",
         "seller": "Приватна особа",
         "phone": 380506660066,
-        "gallery": [
+        "images": [
           {
-            "images": [
-              {
-                "src":"image1.jpg",
-                "alt":"image1 alt",
-                "title":"image1 title"
-              }
-            ]
+            "src":"image1.jpg",
+            "alt":"image1 alt",
+            "title":"image1 title"
           }
         ]
     }
