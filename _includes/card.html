@@ -1,102 +1,93 @@
-{%- if include.records -%}
-  {%- assign offers = include.records | sort: 'date' | reverse -%}
-  {%- for offer in offers limit:6 -%}
 
-    {%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
+{%- assign offer = include.offer -%}
 
-    {%- capture files -%}
-      {%- for file in site.static_files -%}
-        {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
-    {%- assign isImage = files | strip_newlines -%}
+{%- capture folder -%}{{ include.dir }}{{ section }}/img/{{ offer.id }}/{%- endcapture -%}
 
-    <div class="card mb-3">
-      <div class="row g-0">
-        <div class="col">
-          <div class="card-body pb-0">
-            <p class="card-text mb-1">Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <mark>{{ offer.price | money }}</mark>.</p>
-            <p class="card-text mb-1">
-              <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
-            </p>
-          </div>
-          <div class="card-footer border-top-0 bg-white pt-0 pb-1 px-3 text-right">
-            <div class="row row-cols-auto justify-content-end">
-              <div class="col pr-0">{%- include footer/phone.html legal=offer.phone type='icon' -%}</div>
-              <div class="col">
-                <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" title="Детальніше про цю нерухомість" href="#more{{ offer.id }}{{ section }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
-                  <span class="navbar-toggler-icon"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+{%- capture files -%}
+  {%- for file in site.static_files -%}
+    {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign isImage = files | strip_newlines -%}
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col">
+      <div class="card-body pb-0">
+        <p class="card-text mb-1">Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <mark>{{ offer.price | money }}</mark>.</p>
+        <p class="card-text mb-1">
+          <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
+        </p>
       </div>
-      <div class="collapse multi-collapse collapse{{ offer.id }}{{ section }}" id="more{{ offer.id }}{{ section }}">
-        <div class="row">
+      <div class="card-footer border-top-0 bg-white pt-0 pb-1 px-3 text-right">
+        <div class="row row-cols-auto justify-content-end">
+          <div class="col pr-0">{%- include footer/phone.html legal=offer.phone type='icon' -%}</div>
           <div class="col">
-            <hr class="mt-0 mx-3">
-            <dl class="mx-3">
-              {%- if offer.floor -%}
-              <dt>Поверх</dt>
-              <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
-              {%- endif -%}
-              {%- if offer.parking -%}
-              <dt>Стоя́нка</dt>
-              <dd>{{ offer.parking }}</dd>
-              {%- endif -%}
-              {%- if offer.surface_land -%}
-              <dt>Площа землі</dt>
-              <dd>{{ offer.surface_land }} м²</dd>
-              {%- endif -%}
-              {%- if offer.price_sqmt -%}
-              <dt>Вартість</dt>
-              <dd>{{ offer.price_sqmt }} за 1 м²</dd>
-              {%- endif -%}
-              {%- if offer.seller -%}
-              <dt>Продавець</dt>
-              <dd>{{ offer.seller }}</dd>
-              {%- endif -%}
-              {%- if offer.phone -%}
-              <dt>Контакти продавця</dt>
-              <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
-              {%- endif -%}
-              <dd>
-                {%- if isImage != "" -%}
-                <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
-                  Фотознімки
-                </a>
-                {%- endif -%}
-                <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ section }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }} photo{{ offer.id }}{{ section }}">
-                  Згорнути
-                </a>
-              </dd>
-            </dl>
-            {%- if isImage != "" -%}
-              <div class="collapse multi-collapse collapse{{ offer.id }}{{ section }}" id="photo{{ offer.id }}{{ section }}">
-                <div class="row">
-                  <div class="col">
-                    <hr class="mt-0 mx-3">
-                    {%- for file in site.static_files -%}
-                      {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-                      <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
-                        <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
-                      </a>
-                      {%- endif -%}
-                    {%- endfor -%}
-                  </div>
-                </div>
-              </div>
-            {%- endif -%}
+            <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" title="Детальніше про цю нерухомість" href="#more{{ offer.id }}{{ section }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }}">
+              <span class="navbar-toggler-icon"></span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-
-  {%- endfor -%}
-
-  <a href="{{ item.url }}" class="link-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
-
-{%- else -%}
-  <p>...</p>
-{%- endif -%}
+  </div>
+  <div class="collapse multi-collapse collapse{{ offer.id }}{{ section }}" id="more{{ offer.id }}{{ section }}">
+    <div class="row">
+      <div class="col">
+        <hr class="mt-0 mx-3">
+        <dl class="mx-3">
+          {%- if offer.floor -%}
+          <dt>Поверх</dt>
+          <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+          {%- endif -%}
+          {%- if offer.parking -%}
+          <dt>Стоя́нка</dt>
+          <dd>{{ offer.parking }}</dd>
+          {%- endif -%}
+          {%- if offer.surface_land -%}
+          <dt>Площа землі</dt>
+          <dd>{{ offer.surface_land }} м²</dd>
+          {%- endif -%}
+          {%- if offer.price_sqmt -%}
+          <dt>Вартість</dt>
+          <dd>{{ offer.price_sqmt }} за 1 м²</dd>
+          {%- endif -%}
+          {%- if offer.seller -%}
+          <dt>Продавець</dt>
+          <dd>{{ offer.seller }}</dd>
+          {%- endif -%}
+          {%- if offer.phone -%}
+          <dt>Контакти продавця</dt>
+          <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
+          {%- endif -%}
+          <dd>
+            {%- if isImage != "" -%}
+            <a class="card-link" data-toggle="collapse" href="#photo{{ offer.id }}{{ section }}" role="button" aria-expanded="false" aria-controls="photo{{ offer.id }}{{ section }}">
+              Фотознімки
+            </a>
+            {%- endif -%}
+            <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ section }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more{{ offer.id }}{{ section }} photo{{ offer.id }}{{ section }}">
+              Згорнути
+            </a>
+          </dd>
+        </dl>
+        {%- if isImage != "" -%}
+          <div class="collapse multi-collapse collapse{{ offer.id }}{{ section }}" id="photo{{ offer.id }}{{ section }}">
+            <div class="row">
+              <div class="col">
+                <hr class="mt-0 mx-3">
+                {%- for file in site.static_files -%}
+                  {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+                  <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ offer.id }}-{{ section }}">
+                    <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
+                  </a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

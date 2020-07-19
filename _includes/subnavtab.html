@@ -44,12 +44,14 @@
           {%- assign shevchenko_all = site.data.ivano-frankivsk-shevchenko-all -%}
           {%- assign records = shevchenko_all | concat: franko_all -%}
 
+          {%- assign offers = records | sort: 'date' | reverse -%}
+
           <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
-          {% for foo in all %}
-            <div class="col mb-4">
-              {%- include card.html records=records -%}
-            </div>
-          {% endfor %}
+            {% for offer in offers %}
+              <div class="col mb-4">
+                {%- include card.html offer=offer -%}
+              </div>
+            {% endfor %}
           </div>
 
 
