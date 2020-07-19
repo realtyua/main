@@ -20,7 +20,6 @@
         {%- assign slug = tab.url | split: "/" | last -%}
         {%- capture current -%}{{ tab.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
         {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
-          {%- assign dir = page.dir | append: slug | append: '/' -%}
           <li class="nav-item" role="presentation">
             <a class="nav-link border-0" href="#{{ slug }}" id="{{ slug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ slug }}" aria-selected="true">
               <span>{%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}</span>
@@ -50,7 +49,7 @@
           <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
             {% for offer in offers limit:6 %}
               <div class="col mb-4">
-                {%- include card.html dir=dir page=slug -%}
+                {%- include card.html -%}
               </div>
             {% endfor %}
           </div>
@@ -63,7 +62,6 @@
     {%- if forloop.first -%}
     {%- endif -%}
       {%- assign slug = content.url | split: "/" | last -%}
-      {%- assign dir = page.dir | append: slug | append: '/' -%}
       {%- capture current -%}{{ content.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
       {%- capture title -%}{%- if content.navtitle -%}{{ content.navtitle }}{%- else -%}{{ content.title }}{%- endif -%}{%- endcapture -%}
       {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
@@ -73,6 +71,7 @@
               {%- assign addtitle = page.title | split: " " | slice: 1, 4 | join: " " -%}
               {%- if slug == 'realtor' or slug == 'developer' -%}
                 <h2 class="mb-3">{{ title }} {{ site.data.lang-uk.nerukhomisti }} {{ addtitle }}</h2>
+                {%- assign dir = page.dir | append: slug | append: '/' -%}
                 {%- include subpages.html dir=dir page=slug title=title -%}
               {%- else -%}
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
