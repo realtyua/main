@@ -126,5 +126,29 @@
             "title":"image1 title"
           }
         ]
+    },
+    {
+        "id": 5,
+        "type": "Квартира",
+        "rooms": 2,
+        "surface": 41,
+        "surface_land": 0,
+        "price": 20000,
+        "price_sqmt": 650,
+        "floor": 2,
+        "floors": 8,
+        "parking": "Прибудинкова територія",
+        "location": "м. Надвірна",
+        "address": "вул. Славетна",
+        "date": "2020-07-10",
+        "seller": "Агентство нерухо́місті Франко",
+        "phone": 380506660066,
+        "images": [
+          {
+            "src":"image3.jpg",
+            "alt":"image3 alt",
+            "title":"image3 title"
+          }
+        ]
     }
 ]

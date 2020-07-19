@@ -41,47 +41,6 @@
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
         <p>
 
-          <ul>
-          {% for too in site.data.ivano-frankivsk %}
-          {% assign if = too[1] %}
-            <li>
-                {{ if.id }} - {{ if.type }} = {{ too.id }} - {{ too.type }}
-            </li>
-          {% endfor %}
-          </ul>
-
-
-        </p>
-        <hr>
-        <p>
-
-          <ul>
-          {% for zoo in site.data.ivano-frankivsk %}
-            {% assign loo = zoo[2] %}
-            <li>
-                {{ loo.id }} - {{ loo.type }} = {{ zoo.id }} - {{ zoo.type }}
-            </li>
-          {% endfor %}
-          </ul>
-
-
-        </p>
-        <hr>
-        <p>
-
-          <ul>
-          {% for koo in site.data.ivano-frankivsk %}
-            <li>
-                {{ koo.id }} - {{ koo.type }}
-            </li>
-          {% endfor %}
-          </ul>
-
-
-        </p>
-        <hr>
-        <p>
-
           {% assign uniq_array = site.data.elements | map: 'phone' | uniq %}
 
           {%- assign franko_all = site.data.ivano-frankivsk-franko-all -%}
