@@ -3,7 +3,7 @@
         "id": 0,
         "type": "Квартира",
         "rooms": 1,
-        "surface": 36,
+        "surface": 34,
         "surface_land": 0,
         "price": 12000,
         "price_sqmt": 450,

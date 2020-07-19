@@ -41,7 +41,7 @@
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
 
-                    {%- assign seller = region | append: '-' | append: section | append: '-offers' -%}
+                    {%- assign seller = region | append: '-' | append: section | append: '-all' -%}
                     {%- assign records = site.data[seller] -%}
 
                     {%- if records -%}
