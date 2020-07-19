@@ -11,14 +11,14 @@
     <br>
      <br>
     <hr>
-    {{ t | slice: -11, 0 }} <br>
+    {{ t | slice: -11 }} <br>
     {{ t | slice: -10, 3 }} <br>
     {{ t | slice: -7, 3 }} <br>
     {{ t | slice: -4, 2 }} <br>
-    {{ t | slice: 4, 2 }} <br>
+    {{ t | slice: 5, 3 }} <br>
     <hr>
-    {{ t | slice: 2, 2 }} <br>
-    {{ t | slice: 9, 12 }} <br>
+    {{ t | slice: 1, 2 }} <br>
+    {{ t | slice: 10, 12 }} <br>
   </a>
 {%- else -%}
   <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
