@@ -13,7 +13,7 @@
       <span class="small text-muted">Нерухомість доступна з&nbsp;{%- include date.html date=offer.date -%}</span>
     </p>
   </div>
-  <div class="card-footer border-top-0 bg-white pt-0 pb-1 px-3 text-right">
+  <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
     <div class="row row-cols-auto justify-content-end">
       <div class="col pr-0">{%- include footer/phone.html legal=offer.phone type='icon' -%}</div>
       <div class="col">
@@ -25,7 +25,7 @@
   </div>
   <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}" id="more-about-property-0{{ offer.id }}{{ offer.phone }}">
     <hr class="mt-0 mx-3">
-    <dl class="mx-3">
+    <dl class="mx-3 mb-2">
       {%- if offer.floor -%}
       <dt>Поверх</dt>
       <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
@@ -50,7 +50,7 @@
       <dt>Контакти продавця</dt>
       <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
       {%- endif -%}
-      <dd class="text-right">
+      <dd class="mb-0 text-right">
         {%- if isImage != "" -%}
         <a class="card-link" data-toggle="collapse" href="#photo-property-1{{ offer.id }}{{ offer.phone }}" role="button" aria-expanded="false" aria-controls="photo-property-1{{ offer.id }}{{ offer.phone }}">
           Фотознімки
