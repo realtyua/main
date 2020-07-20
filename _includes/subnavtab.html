@@ -45,20 +45,18 @@
         {%- assign offers = records | sort: 'date' | reverse -%}
         {% comment %}<div class="row">{% endcomment %}
           {% for offer in offers limit:9 %}
-
+            {%- assign i = forloop.index0 | modulo: 4 -%}
             {%- if forloop.first -%}
             <div class="row">
             {%- endif -%}
 
-            {% capture modulo %}{{ forloop.index0 | modulo: 3 }}{% endcapture %}
-
-            {% if modulo == '0' %}
+            {% if i == 0 %}
               <div class="col-md-4">
             {% endif %}
 
               {%- include card.html offer=offer -%}
 
-            {% if modulo == '1' %}
+            {% if i == 1 %}
               </div>
             {% endif %}
 
