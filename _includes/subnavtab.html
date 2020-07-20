@@ -49,8 +49,8 @@
             {%- if forloop.first -%}
               <div class="col-md-4">
             {%- endif -%}
-            {%- if col == 0 and forloop.index != 1 -%}
-              </div><div class="col-md-4">
+            {%- if col == 0 -%}
+              </div><div class="col-md-4">{{col}}
             {%- endif -%}
             {%- include card.html offer=offer -%}
             {%- if forloop.last -%}
