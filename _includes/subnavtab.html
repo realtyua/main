@@ -48,25 +48,15 @@
 
           {% for offer in offers limit:9 %}
 
-            {% cycle '<div class="col-md-4">', '', '' %}
-
-              {%- include card.html offer=offer -%}
-
-            {% cycle '', '', '</div>' %}
-
-{% comment %}
-            {%- assign col = forloop.index | modulo: 3 -%}
-            {%- if forloop.first -%}
+            {% assign i = forloop.index | modulo: 2 %}
+            {% if i == 1 %}
               <div class="col-md-4">
-            {%- endif -%}
-            {%- if col == 0 -%}
-              </div><div class="col-md-4">{{col}}
-            {%- endif -%}
-            {%- include card.html offer=offer -%}
-            {%- if forloop.last -%}
-            </div>
-            {%- endif -%}
-{% endcomment %}
+                {%- include card.html offer=offer -%}
+            {% else %}
+                {%- include card.html offer=offer -%}
+              </div>
+            {% endif %}
+
           {% endfor %}
 
         </div>
