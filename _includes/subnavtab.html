@@ -43,9 +43,12 @@
         {%- assign shevchenko_all = site.data.ivano-frankivsk-shevchenko-all -%}
         {%- assign records = shevchenko_all | concat: franko_all -%}
         {%- assign offers = records | sort: 'date' | reverse -%}
-        <div class="row">
+        {% comment %}<div class="row">{% endcomment %}
           {% for offer in offers limit:9 %}
 
+          {%- if forloop.first -%}
+            <div class="row">
+          {%- endif -%}
 
           {% capture modulo %}{{ forloop.index0 | mod:3 }}{% endcapture %}
 
@@ -59,8 +62,11 @@
             </div>
           {% endif %}
 
+          {%- if forloop.last -%}
+          </div>
+          {%- endif -%}
 
-{% endcomment %}
+{% comment %}
             {%- assign col = forloop.index | modulo: 3 -%}
             {%- if forloop.first -%}
               <div class="col-md-4">
@@ -74,7 +80,8 @@
             {%- endif -%}
 {% endcomment %}
           {% endfor %}
-        </div>
+        {% comment %}</div>{% endcomment %}
+
       </div>
     </div>
   </div>
