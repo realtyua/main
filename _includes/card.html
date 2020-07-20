@@ -62,20 +62,20 @@
       </dd>
     </dl>
     {%- if isImage != "" -%}
-      <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}" id="photo-property-1{{ offer.id }}{{ offer.phone }}">
-        <div class="row">
+    <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}" id="photo-property-1{{ offer.id }}{{ offer.phone }}">
+      <hr class="mt-0 mx-3">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-4">
+        {%- for file in site.static_files -%}
+          {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
           <div class="col">
-            <hr class="mt-0 mx-3">
-            {%- for file in site.static_files -%}
-              {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-              <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-2{{ offer.id }}{{ offer.phone }}">
-                <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
-              </a>
-              {%- endif -%}
-            {%- endfor -%}
+            <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-2{{ offer.id }}{{ offer.phone }}">
+              <img src="{{ file.path | url_decode | relative_url }}" width="100" height="100" title="Image Title" alt="Image Alt">
+            </a>
           </div>
-        </div>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
+    </div>
     {%- endif -%}
   </div>
 </div>

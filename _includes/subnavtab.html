@@ -44,18 +44,15 @@
         {%- assign records = shevchenko_all | concat: franko_all -%}
         {%- assign offers = records | sort: 'date' | reverse -%}
         <div class="row">
-          {% for offer in offers limit:6 %}
+          {% for offer in offers limit:9 %}
             {%- assign col = forloop.index | modulo: 3 -%}
             {%- if forloop.first -%}
               <div class="col-md-4">
             {%- endif -%}
-
             {%- if col == 0 -%}
               </div><div class="col-md-4">
             {%- endif -%}
-
             {%- include card.html offer=offer -%}
-
             {%- if forloop.last -%}
             </div>
             {%- endif -%}
