@@ -64,6 +64,8 @@
     {%- if isImage != "" -%}
     <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }} pb-3 px-3" id="photo-property-1{{ offer.id }}{{ offer.phone }}">
       <hr class="mt-0">
+      <p>If you are using the <picture> element to specify multiple <source> elements for a specific <img>, make sure to add the .img-* classes to the <img> and not to the <picture> tag.</p>
+      {% comment %}
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
         {%- for file in site.static_files -%}
           {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
@@ -75,6 +77,7 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
+      {% endcomment %}
     </div>
     {%- endif -%}
   </div>
