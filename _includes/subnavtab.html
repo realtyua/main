@@ -45,26 +45,19 @@
         {%- assign offers = records | sort: 'date' | reverse -%}
 
         {% comment %}<div class="row">{% endcomment %}
-
+<div class="row">
           {% for offer in offers limit:9 %}
 
-            {%- assign i = forloop.index0 | modulo: 2 -%}
-            {%- if forloop.first -%}
-            <div class="row">
-            {%- endif -%}
+            {%- assign i = forloop.index0 | modulo: 3 -%}
 
-            {% if i == 0 %}
+            {%- if i == 0 -%}
               <div class="col-md-4">
-            {% endif %}
+            {%- endif -%}
 
               {%- include card.html offer=offer -%}
 
-            {% if i == 1 %}
+            {%- if i == 1 -%}
               </div>
-            {% endif %}
-
-            {%- if forloop.last -%}
-            </div>
             {%- endif -%}
 
 {% comment %}
@@ -81,6 +74,7 @@
             {%- endif -%}
 {% endcomment %}
           {% endfor %}
+  </div>
 
         {% comment %}</div>{% endcomment %}
 
