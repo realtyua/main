@@ -48,7 +48,7 @@
 
           {% for offer in offers limit:9 %}
 
-            {% assign i = forloop.index | modulo: 2 %}
+            {% assign i = forloop.index | modulo: 3 %}
             {% if i == 1 %}
               <div class="col-md-4">
                 {%- include card.html offer=offer -%}
