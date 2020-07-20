@@ -52,13 +52,13 @@
 
           {% capture modulo %}{{ forloop.index0 | mod:3 }}{% endcapture %}
 
-          {% if modulo == '0' or forloop.first %}
+          {% if modulo == '0' %}
             <div class="col-md-4">
           {% endif %}
 
             {%- include card.html offer=offer -%}
 
-          {% if modulo == '1' or forloop.last %}
+          {% if modulo == '1' %}
             </div>
           {% endif %}
 
