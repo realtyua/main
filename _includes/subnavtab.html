@@ -44,21 +44,15 @@
         {%- assign records = shevchenko_all | concat: franko_all -%}
         {%- assign offers = records | sort: 'date' | reverse -%}
 
-        {% comment %}<div class="row">{% endcomment %}
-<div class="row">
+        <div class="row">
+
           {% for offer in offers limit:9 %}
 
-            {%- assign i = forloop.index | modulo: 3 -%}
-
-            {%- if i == 0 -%}
-              <div class="col-md-4">
-            {%- endif -%}
+            {% cycle '<div class="col-md-4">', '', '' %}
 
               {%- include card.html offer=offer -%}
 
-            {%- if i == 1 -%}
-              </div>
-            {%- endif -%}
+            {% cycle '', '', '</div>' %}
 
 {% comment %}
             {%- assign col = forloop.index | modulo: 3 -%}
@@ -74,9 +68,8 @@
             {%- endif -%}
 {% endcomment %}
           {% endfor %}
-  </div>
 
-        {% comment %}</div>{% endcomment %}
+        </div>
 
       </div>
     </div>
