@@ -43,24 +43,17 @@
         {%- assign shevchenko_all = site.data.ivano-frankivsk-shevchenko-all -%}
         {%- assign records = shevchenko_all | concat: franko_all -%}
         {%- assign offers = records | sort: 'date' | reverse -%}
-
-        <div class="row">
-
-          {% for offer in offers limit:9 %}
-
-            {% assign i = forloop.index | modulo: 3 %}
-            {% if i == 0 %}
-              <div class="col-md-4">
-                {%- include card.html offer=offer -%}
-            {% else %}
-                {%- include card.html offer=offer -%}
-              </div>
-            {% endif %}
-
-          {% endfor %}
-
-        </div>
-
+        {% for offer in offers limit:9 %}
+          {%- if forloop.first -%}
+          <div class="row">
+          {%- endif -%}
+            {% cycle '<div class="col-md-4">', '', '' %}
+            {%- include card.html offer=offer -%}
+            {% cycle '', '', '</div>' %}
+          {%- if forloop.last -%}
+          </div>
+          {%- endif -%}
+        {% endfor %}
       </div>
     </div>
   </div>
