@@ -45,13 +45,13 @@
         {%- assign offers = records | sort: 'date' | reverse -%}
         <div class="row">
           {% for offer in offers limit:6 %}
+            {%- assign col = forloop.index | modulo: 3 -%}
             {%- if forloop.first -%}
               <div class="col-md-4">
             {%- endif -%}
 
-            {%- if forloop.index | modulo: 3 -%}
-              </div>
-              <div class="col-md-4">
+            {%- if col == 0 -%}
+              </div><div class="col-md-4">
             {%- endif -%}
 
             {%- include card.html offer=offer -%}
