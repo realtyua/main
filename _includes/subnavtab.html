@@ -46,7 +46,7 @@
         <div class="row">
           {% for offer in offers limit:9 %}
             {%- assign col = forloop.index | modulo: 3 -%}
-            {%- if forloop.first and forloop.index == 1 and col == 0 -%}
+            {%- if forloop.first and col == 0 -%}
               <div class="col-md-4">
             {%- endif -%}
             {%- if col == 0 -%}
