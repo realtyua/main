@@ -14,22 +14,22 @@
           <span>{{ site.data.lang-uk.all_realestate }}</span>
         </a>
       </li>
-    {%- for tab in lists -%}
-      {%- if forloop.first -%}
-      {%- endif -%}
-        {%- assign slug = tab.url | split: "/" | last -%}
-        {%- capture current -%}{{ tab.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-        {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
-          <li class="nav-item" role="presentation">
-            <a class="nav-link border-0" href="#{{ slug }}" id="{{ slug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ slug }}" aria-selected="true">
-              <span>{%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}</span>
-            </a>
-          </li>
+      {%- for tab in lists -%}
+        {%- if forloop.first -%}
         {%- endif -%}
-      {%- if forloop.last -%}
-      {%- endif -%}
-    {%- else -%}
-    {%- endfor -%}
+          {%- assign slug = tab.url | split: "/" | last -%}
+          {%- capture current -%}{{ tab.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+          {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
+            <li class="nav-item" role="presentation">
+              <a class="nav-link border-0" href="#{{ slug }}" id="{{ slug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ slug }}" aria-selected="true">
+                <span>{%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}</span>
+              </a>
+            </li>
+          {%- endif -%}
+        {%- if forloop.last -%}
+        {%- endif -%}
+      {%- else -%}
+      {%- endfor -%}
     </ul>
   </div>
 </nav>
@@ -47,9 +47,9 @@
           {%- if forloop.first -%}
           <div class="row">
           {%- endif -%}
-            {% cycle '<div class="col-md-4">', '', '' %}
+            {%- cycle '<div class="col-md-4">','','' -%}
             {%- include card.html offer=offer -%}
-            {% cycle '', '', '</div>' %}
+            {%- cycle '','','</div>' -%}
           {%- if forloop.last -%}
           </div>
           {%- endif -%}
