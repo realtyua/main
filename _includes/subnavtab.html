@@ -46,27 +46,21 @@
         <div class="row">
           {% for offer in offers limit:9 %}
 
-          {%- assign module = forloop.index | modulo: 3 -%}
 
-          {%- if module == 1 -%}
-            {%- unless forloop.first -%}
+          {% capture modulo %}{{ forloop.index0 | mod:3 }}{% endcapture %}
+
+          {% if modulo == '0' or forloop.first %}
             <div class="col-md-4">
-            {% endunless %}
-          {%- endif -%}
+          {% endif %}
+
+            {%- include card.html offer=offer -%}
+
+          {% if modulo == '1' or forloop.last %}
+            </div>
+          {% endif %}
 
 
-              {%- include card.html offer=offer -%}
-
-
-          {%- if module == 0 -%}
-            {%- unless forloop.last -%}
-              </div>
-            {%- endunless -%}
-          {%- endif -%}
-
-
-
-{% comment %}
+{% endcomment %}
             {%- assign col = forloop.index | modulo: 3 -%}
             {%- if forloop.first -%}
               <div class="col-md-4">
