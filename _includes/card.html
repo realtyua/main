@@ -1,14 +1,11 @@
 {%- assign offer = include.offer -%}
-
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
-
 {%- capture files -%}
   {%- for file in site.static_files -%}
     {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
-
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col">

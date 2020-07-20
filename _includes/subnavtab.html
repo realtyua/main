@@ -39,22 +39,17 @@
     <div class="row">
       <div class="col-12">
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
-
-          {%- assign franko_all = site.data.ivano-frankivsk-franko-all -%}
-          {%- assign shevchenko_all = site.data.ivano-frankivsk-shevchenko-all -%}
-          {%- assign records = shevchenko_all | concat: franko_all -%}
-
-          {%- assign offers = records | sort: 'date' | reverse -%}
-
-          <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
-            {% for offer in offers limit:6 %}
-              <div class="col mb-4">
-                {%- include card.html offer=offer -%}
-              </div>
-            {% endfor %}
-          </div>
-
-
+        {%- assign franko_all = site.data.ivano-frankivsk-franko-all -%}
+        {%- assign shevchenko_all = site.data.ivano-frankivsk-shevchenko-all -%}
+        {%- assign records = shevchenko_all | concat: franko_all -%}
+        {%- assign offers = records | sort: 'date' | reverse -%}
+        <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+          {% for offer in offers limit:6 %}
+            <div class="col mb-4">
+              {%- include card.html offer=offer -%}
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
