@@ -46,16 +46,20 @@
         <div class="row">
           {% for offer in offers limit:9 %}
             {%- assign col = forloop.index | modulo: 3 -%}
+{% comment %}
             {%- if forloop.first -%}
               <div class="col-md-4">
             {%- endif -%}
+{% endcomment %}
             {%- if col == 0 -%}
-              </div><div class="col-md-4">{{col}}
+              <div class="col-md-4">{{col}}
             {%- endif -%}
             {%- include card.html offer=offer -%}
+{% comment %}
             {%- if forloop.last -%}
             </div>
             {%- endif -%}
+{% endcomment %}
           {% endfor %}
         </div>
       </div>
