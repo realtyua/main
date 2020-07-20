@@ -12,7 +12,7 @@
       <div class="card-body pb-0">
         <p class="card-text mb-1">Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <mark>{{ offer.price | money }}</mark>.</p>
         <p class="card-text mb-1">
-          <span class="small text-muted">Нерухомість доступна з {{ offer.date }}</span>
+          <span class="small text-muted">Нерухомість доступна з {%- include date.html date=offer.date -%}</span>
         </p>
       </div>
       <div class="card-footer border-top-0 bg-white pt-0 pb-1 px-3 text-right">
@@ -56,7 +56,7 @@
           <dt>Контакти продавця</dt>
           <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
           {%- endif -%}
-          <dd>
+          <dd class="text-right">
             {%- if isImage != "" -%}
             <a class="card-link" data-toggle="collapse" href="#photo-property-1{{ offer.id }}{{ offer.phone }}" role="button" aria-expanded="false" aria-controls="photo-property-1{{ offer.id }}{{ offer.phone }}">
               Фотознімки
