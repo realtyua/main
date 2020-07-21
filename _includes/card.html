@@ -51,12 +51,12 @@
       <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
       {%- endif -%}
       <dd class="mb-0 text-right">
-        {%- if isImage != "" -%}
+        {%- if isImage != '' -%}
         <a class="card-link" data-toggle="collapse" href="#photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}" role="button" aria-expanded="false" aria-controls="photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
           Фотознімки
         </a>
         {%- endif -%}
-        <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }} photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
+        <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}{%- if isImage != '' -%} photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}{%- endif -%}">
           Згорнути
         </a>
       </dd>
