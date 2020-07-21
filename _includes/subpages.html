@@ -16,7 +16,7 @@
       {%- endif -%}
         <div class="col mb-4">
           <div class="card h-100">
-            <img src="https://unsplash.it/400/200/?image=70{% increment %}" class="card-img-top" alt="Image {{ item.title }}">
+            <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
             <div class="card-body">
               <h5 class="card-title">
                 <a href="{{ item.url }}">
