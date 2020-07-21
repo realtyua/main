@@ -5,7 +5,7 @@
     {{ contact[include.legal] | replace: " ", "&nbsp;" }}
   </a>
 {%- elsif include.legal and include.type == 'icon' -%}
-  <a href="tel:+{{ t }}" class="card-link" title="Продавець {{ n }}">
+  <a href="tel:+{{ t }}" class="card-link" data-toggle="tooltip" data-placement="left" title="Продавець {{ n }}">
     <span class="align-middle" style="font-size:large;">&phone;</span>
   </a>
 {%- elsif include.legal and include.type == 'text' -%}
