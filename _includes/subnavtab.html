@@ -48,7 +48,7 @@
           <div class="row">
           {%- endif -%}
             {%- cycle '<div class="col-md-4">','','' -%}
-            {%- include card.html offer=offer -%}
+            {%- include card.html offer=offer aid='0' -%}
             {%- cycle '','','</div>' -%}
           {%- if forloop.last -%}
           </div>
