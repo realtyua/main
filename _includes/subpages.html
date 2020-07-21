@@ -49,7 +49,9 @@
                         {%- include card.html offer=offer aid='1' -%}
                       {%- endfor -%}
 
-                      <a href="{{ item.url }}" class="link-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
+                      <div class="card border-0 text-center">
+                        <a href="{{ item.url }}" class="btn btn-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
+                      </div>
 
                     {%- else -%}
                       <p>...</p>
