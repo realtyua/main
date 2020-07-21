@@ -54,7 +54,9 @@
           </div>
           <div class="row">
             <div class="col-auto ml-auto">
-              <a class="btn btn-primary" href="#">Інші {{ offers | size }} пропозиції нерухомості</a>
+              <a class="btn btn-primary" href="{{ page.dir | append: 'all/' }}">
+                Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості
+              </a>
             </div>
           </div>
           {%- endif -%}
