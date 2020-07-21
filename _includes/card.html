@@ -56,7 +56,7 @@
           Фотознімки
         </a>
         {%- endif -%}
-        <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}{%- if isImage != '' -%} photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}{%- endif -%}">
+        <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% if isImage != '' %} photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% endif %}">
           Згорнути
         </a>
       </dd>
