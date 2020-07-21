@@ -52,6 +52,11 @@
             {%- cycle '','','</div>' -%}
           {%- if forloop.last -%}
           </div>
+          <div class="row">
+            <div class="col-auto ml-auto">
+              <a class="btn btn-primary" href="#">Інші {{ offers | size }} пропозиції нерухомості</a>
+            </div>
+          </div>
           {%- endif -%}
         {% endfor %}
       </div>
