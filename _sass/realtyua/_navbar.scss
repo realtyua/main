@@ -28,6 +28,7 @@ $dropDown       : true;
         .navbar-nav {
             .nav-link {
                 color: $primary;
+                padding: .65rem;
             }
         }
 
@@ -240,7 +241,7 @@ $dropDown       : true;
                 margin-right: 0;
             }
             .nav-link {
-                padding: .6rem .75rem;
+                padding: .55rem .75rem;
             }
         }
     }
