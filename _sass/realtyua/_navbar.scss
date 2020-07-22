@@ -128,8 +128,8 @@ $dropDown       : true;
 
         @if ($dropDown) {
             .dropdown-menu {
-                background-color: $blue-800; //$bgDefault;
-                border-color: $bgHighlight;
+                background-color: $blue-800;
+                border-color: $blue-800;
 
                 .dropdown-item {
                     color: $white;
@@ -139,7 +139,7 @@ $dropDown       : true;
                     &:focus,
                     &.active {
                         color: $colHighlight;
-                        background-color: $blue-800; //$bgHighlight;
+                        background-color: $blue-800;
                     }
                 }
 
@@ -150,7 +150,7 @@ $dropDown       : true;
         }
 
         .nav-link.show {
-            background-color: $blue-800; // $bgHighlight;
+            background-color: $blue-800;
         }
     }
 
@@ -267,7 +267,7 @@ $dropDown       : true;
                 margin-right: .85rem;
             }
             .nav-link {
-                padding: .65rem;
+                padding: 0.75rem 0.65rem;
             }
         }
     }
