@@ -193,6 +193,9 @@ $dropDown       : true;
                 .nav-link {
                     padding: .5rem 0;
                 }
+                .nav-link:last-child {
+                    padding-right: 0;
+                }
                 .nav-link span {
                     border-bottom: 4px solid $white;
                 }
