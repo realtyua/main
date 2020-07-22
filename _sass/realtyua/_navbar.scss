@@ -28,7 +28,7 @@ $dropDown       : true;
         .navbar-nav {
             .nav-link {
                 color: $primary;
-                padding: .65rem;
+                padding: .5rem;
             }
         }
 
@@ -47,7 +47,7 @@ $dropDown       : true;
                 border: none;
                 border-bottom: 4px solid #ffffff;
                 background: transparent;
-                padding: .55rem 0rem;
+                padding: .35rem 0rem;
             }
 
             .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
