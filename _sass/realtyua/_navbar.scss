@@ -30,6 +30,9 @@ $dropDown       : true;
                 color: $primary;
                 padding: .5rem;
             }
+            .nav-link:last-child {
+                padding-right: 0;
+            }
         }
 
         .nav-tabs {
