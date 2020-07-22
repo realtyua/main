@@ -1,0 +1,20 @@
+header .flag-ua {
+    display: flex;
+    cursor: pointer;
+}
+header .flag-ua .icon {
+    position: relative;
+    width: 10px;
+    height: 40px;
+    background-color: #2669e3;
+}
+header .flag-ua .icon:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 10px;
+    height: 20px;
+    background-color: #ffe358;
+}

@@ -1,0 +1,29 @@
+//
+// Color system
+//
+$primary:                     #2d5ca6 !default;
+//
+// Fonts system
+//
+$font-family-sans:            -apple-system, "Source Sans Pro", 'Open Sans', sans-serif !default;
+$font-family-base:            $font-family-sans !default;
+//
+// Link
+//
+$link-decoration:             none !default;
+//
+// Font weight
+//
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            600 !default;
+$headings-font-weight:        700 !default;
+//
+// Responsive font sizes
+//
+$enable-responsive-font-sizes:  true !default;
+$enable-negative-margins: true !default;
+//
+// Grid system
+//
+$grid-gutter-width: 2rem !default;
