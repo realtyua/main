@@ -19,6 +19,10 @@ $font-weight-normal:          400 !default;
 $font-weight-bold:            600 !default;
 $headings-font-weight:        700 !default;
 //
+// Set a specific jump point for requesting color jumps
+//
+$theme-color-interval: 8% !default;
+//
 // fusv-disable
 //
 $blue:     #0d6efd !default;
