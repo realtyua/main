@@ -19,6 +19,18 @@ $font-weight-normal:          400 !default;
 $font-weight-bold:            600 !default;
 $headings-font-weight:        700 !default;
 //
+// fusv-disable
+//
+$blue-100: tint-color($blue, 8) !default;
+$blue-200: tint-color($blue, 6) !default;
+$blue-300: tint-color($blue, 4) !default;
+$blue-400: tint-color($blue, 2) !default;
+$blue-500: $blue !default;
+$blue-600: shade-color($blue, 2) !default;
+$blue-700: shade-color($blue, 4) !default;
+$blue-800: shade-color($blue, 6) !default;
+$blue-900: shade-color($blue, 8) !default;
+//
 // Responsive font sizes
 //
 $enable-responsive-font-sizes:  true !default;
