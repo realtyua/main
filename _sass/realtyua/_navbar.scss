@@ -1,5 +1,5 @@
-$bgDefault      : #2d5ca6; // #234161;
-$bgHighlight    : #2d5ca6; // #273043;
+$bgDefault      : #2d5ca6;
+$bgHighlight    : #2d5ca6;
 $colHighlight   : #ffe358;
 $dropDown       : true;
 
@@ -115,6 +115,10 @@ $dropDown       : true;
             }
         }
 
+        .nav-link.show {
+            background-color: $blue-800;
+        }
+
         .dropdown-toggle::after {
             display: inline-block;
             margin-left: unset;
@@ -192,15 +196,15 @@ $dropDown       : true;
                     padding: .5rem 0;
                 }
                 .nav-link span {
-                    border-bottom: 4px solid #fff;
+                    border-bottom: 4px solid $white;
                 }
 
                 .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 4px solid #fff;
+                    border-bottom: 4px solid $white;
                 }
 
                 .nav-link span:hover, .nav-tabs .nav-link span:focus {
-                    border-bottom: 4px solid #fff;
+                    border-bottom: 4px solid $white;
                 }
             }
         }
