@@ -149,8 +149,7 @@ $dropDown       : true;
             }
         }
 
-        .show > .nav-link,
-        .nav-link.active {
+        .show > .nav-link {
             color: $colHighlight;
             background-color: $blue-800;
         }
