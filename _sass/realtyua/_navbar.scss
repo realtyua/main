@@ -2,29 +2,23 @@ $bgDefault      : #2d5ca6;
 $bgHighlight    : #2d5ca6;
 $colHighlight   : #ffe358;
 $dropDown       : true;
-
 .dropdown-menu .dropdown-item > li > a:hover {
     background-image: none;
     background-color: transparent;
 }
-
 .dropdown-menu a:hover {
     background-color: transparent;
 }
-
 .dropdown-item.active,
 .dropdown-item:active {
     background-color: transparent;
 }
-
 .content {
     .navbar {
         background-color: $white;
-
         .navbar-brand {
             color: $black;
         }
-
         .navbar-nav {
             .nav-link {
                 color: $primary;
@@ -34,17 +28,14 @@ $dropDown       : true;
                 padding-right: 0;
             }
         }
-
         .nav-tabs {
             .nav-item {
                 font-weight: 600;
                 margin-bottom: 0;
             }
-
             .nav-item:last-child {
                 margin-right: 0;
             }
-
             .nav-link span {
                 color: #2d5ca6;
                 border: none;
@@ -52,14 +43,12 @@ $dropDown       : true;
                 background: transparent;
                 padding: .35rem 0rem;
             }
-
             .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
                 color: #000000;
                 border: none;
                 background: transparent;
                 border-bottom: 4px solid #2d5ca6;
             }
-
             .nav-link span:hover, .nav-tabs .nav-link span:focus {
                 color: #000000;
                 border: none;
@@ -68,57 +57,46 @@ $dropDown       : true;
             }
         }
     }
-
     .navbar-toggler-icon:after,
     .navbar-toggler-icon,
     .navbar-toggler-icon:before {
         background-color: $primary;
     }
 }
-
 .navbar {
     background-color: $primary;
-
     .navbar-brand {
         color: $white;
-
         &:hover,
         &:focus {
             color: $colHighlight;
         }
     }
-
     .navbar-text {
         color: $white;
-
         a {
             color: $colHighlight;
-
             &:hover,
             &:focus {
                 color: $colHighlight;
             }
         }
     }
-
     .navbar-nav {
         .nav-item {
             margin-right: 0;
         }
-
         .nav-link {
             color: $white;
             font-weight: 600;
             padding: .5rem;
             &:not(.disabled) {
-
                 &:hover,
                 &:focus {
                     color: $colHighlight;
                 }
             }
         }
-
         .dropdown-toggle::after {
             display: inline-block;
             margin-left: unset;
@@ -129,12 +107,10 @@ $dropDown       : true;
             border-bottom: unset;
             border-left: unset;
         }
-
         @if ($dropDown) {
             .dropdown-menu {
                 background-color: $blue-800;
                 border-color: $blue-800;
-
                 .dropdown-item {
                     color: $white;
                     font-weight: 600;
@@ -146,37 +122,30 @@ $dropDown       : true;
                         background-color: $blue-800;
                     }
                 }
-
                 .dropdown-divider {
                     border-top-color: $bgHighlight;
                 }
             }
         }
-
         .show > .nav-link {
             color: $colHighlight;
             background-color: $blue-800;
         }
     }
-
     .navbar-toggle {
         border-color: $bgHighlight;
-
         &:hover,
         &:focus {
             background-color: $bgHighlight;
         }
-
         .navbar-toggler-icon {
             color: $white;
         }
     }
-
     .navbar-collapse,
     .navbar-form {
         border-color: $white;
     }
-
     .navbar-link {
         color: $white;
 
@@ -185,12 +154,16 @@ $dropDown       : true;
         }
     }
 }
-
 @include media-breakpoint-down(sm) {
     .content {
         .navbar {
             .navbar-brand {
                 margin-right: 0;
+            }
+            .navbar-brand {
+                .small {
+                    font-size: 72%;
+                }
             }
             .nav-tabs {
                 .nav-link {
@@ -214,7 +187,6 @@ $dropDown       : true;
         }
     }
 }
-
 @include media-breakpoint-up(sm) {
     .navbar {
         .navbar-nav {
@@ -232,14 +204,12 @@ $dropDown       : true;
                 color: $colHighlight;
             }
         }
-
         .dropdown-item.active {
             color: $colHighlight;
             background-color: $bgHighlight;
         }
     }
 }
-
 @include media-breakpoint-up(md) {
     .navbar {
         .navbar-nav {
@@ -254,20 +224,17 @@ $dropDown       : true;
     .navbar-expend-md .navbar-nav .show .dropdown-menu {
         .dropdown-item {
             color: $white;
-
             &:hover,
             &:focus {
                 color: $colHighlight;
             }
         }
-
         .dropdown-item.active {
             color: $colHighlight;
             background-color: $bgHighlight;
         }
     }
 }
-
 @include media-breakpoint-up(lg) {
     .navbar {
         .navbar-nav {
@@ -288,14 +255,12 @@ $dropDown       : true;
                 color: $colHighlight;
             }
         }
-
         .dropdown-item.active {
             color: $colHighlight;
             background-color: $bgHighlight;
         }
     }
 }
-
 @include media-breakpoint-up(xl) {
     .navbar {
         .navbar-nav {
@@ -310,30 +275,25 @@ $dropDown       : true;
     .navbar-expend-xl .navbar-nav .show .dropdown-menu {
         .dropdown-item {
             color: $white;
-
             &:hover,
             &:focus {
                 color: $colHighlight;
             }
         }
-
         .dropdown-item.active {
             color: $colHighlight;
             background-color: $bgHighlight;
         }
     }
 }
-
 .navbar-expend .navbar-nav .show .dropdown-menu {
     .dropdown-item {
         color: $white;
-
         &:hover,
         &:focus {
             color: $colHighlight;
         }
     }
-
     .dropdown-item.active {
         color: $colHighlight;
         background-color: $bgHighlight;
