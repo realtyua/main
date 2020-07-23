@@ -14,6 +14,23 @@
       "address": "вул. Українська",
       "date": "2020-02-22",
       "seller": "Тарас Григорович Шевченко",
-      "phone": 380000000000
+      "phone": 380000000000,
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        },
+        {
+          "src":"image2.jpg",
+          "alt":"image2 alt",
+          "title":"image2 title"
+        },
+        {
+          "src":"image3.png",
+          "alt":"image3 alt",
+          "title":"image3 title"
+        }
+      ]
   }
 ]
