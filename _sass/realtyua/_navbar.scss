@@ -189,6 +189,11 @@ $dropDown       : true;
 }
 @include media-breakpoint-up(sm) {
     .navbar {
+        .navbar-brand {
+            .small {
+                font-size: 72%;
+            }
+        }
         .navbar-nav {
             .nav-item {
                 margin-right: 0;
