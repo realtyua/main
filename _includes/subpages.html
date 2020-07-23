@@ -3,9 +3,9 @@
   {%- assign items = include.page -%}
   {%- assign items = '' | split:'' -%}
   {%- assign pages = site.pages | sort: 'path' | reverse -%}
-  {%- for i in pages -%}
-    {%- if i.dir contains include.dir and i.dir != include.dir -%}
-      {%- assign items = items | push: i -%}
+  {%- for p in pages -%}
+    {%- if p.dir contains include.dir and p.dir != include.dir -%}
+      {%- assign items = items | push: p -%}
     {%- endif -%}
   {%- endfor -%}
   {%- if items -%}
@@ -40,20 +40,16 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-
                     {%- assign seller = region | append: '-' | append: section | append: '-all' -%}
                     {%- assign records = site.data[seller] -%}
                     {%- if records -%}
-
                       {%- assign offers = records | sort: 'date' | reverse -%}
-                      {%- for offer in offers limit:3 -%}
+                      {%- for offer in offers limit: 1 -%}
                         {%- include card.html offer=offer aid='1' -%}
                       {%- endfor -%}
-
                       <div class="card border-0 text-center">
                         <a href="{{ item.url }}" class="btn btn-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
                       </div>
-
                     {%- else -%}
                       <div class="alert alert-primary" role="alert">
                         <p>Поки що тут жодної нерухомості, але ви можете виправити це додавши свої пропозиції, а ми залюбки опублікуємо їх тут.</p>
@@ -61,7 +57,6 @@
                         <p class="mb-0">Про те, як це зробити ви можете дізнатись перейшовши за цим посиланням '<a href="#" class="alert-link">додати свою нерухомість</a>'.</p>
                       </div>
                     {%- endif -%}
-
                   </div>
                   <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-actions-tab">
                     ...Акції
