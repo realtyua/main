@@ -1,8 +1,8 @@
-{%- capture i -%}
+{%- capture l -%}
   {%- include footer/contacts.html legal=include.legal -%}
 {%- endcapture -%}
-{%- assign i = i | strip_newlines -%}
-{%- if i == empty -%}
+{%- assign l = l | strip_newlines -%}
+{%- if l == empty -%}
   {%- include contact.html legal=include.legal -%}
 {%- else -%}
   {%- include footer/contacts.html legal=include.legal -%}
