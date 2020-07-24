@@ -46,19 +46,14 @@
       "parking": "Немає",
       "location": "м. Івано-Франківськ",
       "address": "вул. Українського Генерала",
-      "date": "2020-02-22",
+      "date": "2020-04-24",
       "seller": "Петро Тарасович Франківський",
-      "phone": 380002000000,
+      "phone": 380001000000,
       "images": [
         {
           "src":"image1.jpg",
           "alt":"image1 alt",
           "title":"image1 title"
-        },
-        {
-          "src":"image2.jpg",
-          "alt":"image2 alt",
-          "title":"image2 title"
         },
         {
           "src":"image3.png",
@@ -80,24 +75,14 @@
       "parking": "Прибудинкова територія",
       "location": "м. Надвірна",
       "address": "вул. Надвірнянська",
-      "date": "2020-07-20",
+      "date": "2020-07-08",
       "seller": "Тарас Птерович Надвірненко",
-      "phone": 380001000000,
+      "phone": 380002000000,
       "images": [
         {
           "src":"image1.jpg",
           "alt":"image1 alt",
           "title":"image1 title"
-        },
-        {
-          "src":"image2.jpg",
-          "alt":"image2 alt",
-          "title":"image2 title"
-        },
-        {
-          "src":"image3.png",
-          "alt":"image3 alt",
-          "title":"image3 title"
         }
       ]
   }
