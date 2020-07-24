@@ -43,7 +43,7 @@
 {%- capture f_phone_array -%}
   {%- for item in site.data.owners -%}{{ item.phone }}|{%- endfor -%}
 {%- endcapture -%}
-{%- assign owners = '' | split:'' -%}
+{%- assign owners = '' | split: '' -%}
 {%- for item in site.data.owners -%}
   {%- assign f_phone = item.phone | append: '|' -%}
   {%- if f_phone_array contains f_phone -%}
@@ -65,26 +65,6 @@
 <ul>
   {%- for zoo in f_phone_array -%}
   <li>{{ zoo.type }} / {{ zoo.phone }}</li>
-  {%- endfor -%}
-</ul>
-
-<hr>
-<br>
-
-{%- assign foo = site.data.owners | where: 'phone', true | uniq -%}
-{{foo}}
-<ul>
-  {%- for ioo in foo -%}
-  <li>{{ ioo.type }} / {{ ioo.phone }}</li>
-  {%- endfor -%}
-</ul>
-
-<hr>
-<br>
-
-<ul>
-  {%- for soo in site.data.owners | uniq -%}
-  <li>{{ soo.type }}</li>
   {%- endfor -%}
 </ul>
 
