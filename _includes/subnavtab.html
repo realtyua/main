@@ -48,6 +48,8 @@
   {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
 {%- endfor -%}
 
+{{ f_phone_array }}
+
 <ul>
   {%- for zoo in f_phone_array -%}
   <li>{{ zoo.type }} | {{ zoo.phone }}</li>
