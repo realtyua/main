@@ -37,28 +37,28 @@
 <div class="tab-content" id="realestate-content">
   <div class="tab-pane fade show active" id="newly" role="tabpanel" aria-labelledby="newly-tab">
     <div class="row">
-      <div class="col-12">
-        <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
-        {%- include data/ivano-frankivsk.html -%}
-        {% for offer in offers limit:9 %}
-          {%- if forloop.first -%}
+      {%- include data/ivano-frankivsk.html -%}
+      {% for offer in offers limit:9 %}
+        {%- if forloop.first -%}
+        <div class="col-12">
+          <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
           <div class="row">
-          {%- endif -%}
-            {%- cycle '<div class="col-md-4">','','' -%}
-            {%- include card.html offer=offer aid='0' -%}
-            {%- cycle '','','</div>' -%}
-          {%- if forloop.last -%}
+        {%- endif -%}
+          {%- cycle '<div class="col-md-4">','','' -%}
+          {%- include card.html offer=offer aid='0' -%}
+          {%- cycle '','','</div>' -%}
+        {%- if forloop.last -%}
           </div>
-          <div class="row">
-            <div class="col-auto ml-auto">
-              <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-                Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості
-              </a>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-auto ml-auto">
+            <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
+              Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості
+            </a>
           </div>
-          {%- endif -%}
-        {% endfor %}
-      </div>
+        </div>
+        {%- endif -%}
+      {% endfor %}s
     </div>
   </div>
   {%- for content in lists -%}

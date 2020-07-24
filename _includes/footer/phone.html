@@ -1,9 +1,9 @@
 {%- assign t = include.legal -%}
 {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
-{%- if contact[include.legal] -%}
-  <a href="tel:+{{ contact[include.legal] }}">
-    {{ contact[include.legal] | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}
-  </a>
+{%- assign tt = contact[include.legal] -%}
+{%- capture nn -%}+{{ tt | slice:0,2 }}&nbsp;{{ tt | slice:2,3 }}&nbsp;{{ tt | slice:5,3 }}&nbsp;{{ tt | slice:8,2 }}&nbsp;{{ tt | slice:10,12 }}{%- endcapture -%}
+{%- if tt -%}
+  <a href="tel:+{{ tt }}">{{ nn }}</a>
 {%- elsif include.legal and include.type == 'icon' -%}
   <a href="tel:+{{ t }}" class="card-link">
     <span class="align-middle" data-toggle="tooltip" data-placement="left" title="Продавець {{ n }}" style="font-size:large;">&phone;</span>
