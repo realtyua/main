@@ -45,26 +45,15 @@
 {%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
 {%- for tel in site.data.owners -%}
-  {%- assign f_phone = tel.phone | append: '|' -%}
+  {%- assign f_phone = tel.phone | append: '|' | uniq -%}
   {%- if f_phone_array contains f_phone -%}
-      <p>{{ tel.type }} - {{ tel.phone }}</p>
       {%- assign owners = owners | push: tel -%}
   {%- endif -%}
-  {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
 {%- endfor -%}
 
 <ul>
   {%- for koo in owners -%}
   <li>{{ koo.type }} / {{ koo.phone }}</li>
-  {%- endfor -%}
-</ul>
-
-<hr>
-<br>
-
-<ul>
-  {%- for zoo in f_phone_array -%}
-  <li>{{ zoo.type }} / {{ zoo.phone }}</li>
   {%- endfor -%}
 </ul>
 
