@@ -4,12 +4,12 @@
 - type: region
   item: ivano-frankivska
   name: Нерухо́мість у Іва́но-Франкі́вській о́бласті
-  # address: 76004, м. Івано-Франківськ, вул.&nbsp;Михайла&nbsp;Грушевського,&nbsp;21
-  # phone_main: (034) 255 26 16
-  # phone_hot:  (034) 255 63 11
-  # phone_fax:  (034) 255 61 33
-  # email: orada.if@realestate.if.ua
-  # www: https://www.realestate.if.ua
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Лбласна,&nbsp;0
+  phone_main: 380342000066
+  phone_hot:  380342000066
+  phone_fax:  380342000066
+  email: region@realestate.if.ua
+  www: https://www.realestate.if.ua
 
 #
 # Region / City
@@ -17,10 +17,10 @@
 - type: city
   item: ivano-frankivsk
   name: Нерухо́мість у місті Іва́но-Франкі́вськ
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Незалежності,&nbsp;0
-  phone_main: (034) 200 00 00
-  phone_hot:  (034) 200 00 00
-  phone_fax:  (034) 200 00 00
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Міська,&nbsp;0
+  phone_main: 380342000055
+  phone_hot:  380342000055
+  phone_fax:  380342000055
   email: city@realestate.if.ua
   www: https://www.realestate.if.ua
 
@@ -31,9 +31,9 @@
   item: bud
   name: Нерухо́мість від Компанії БУД
   address: 76000, м. Івано-Франківськ, вул.&nbsp;Будівельників,&nbsp;0
-  phone_main: (034) 200 00 00
-  phone_hot:  (034) 200 00 00
-  phone_fax:  (034) 200 00 00
+  phone_main: 380342000033
+  phone_hot:  380342000033
+  phone_fax:  380342000033
   email: bud@realestate.if.ua
   www: https://bud.realestate.if.ua
 
@@ -41,9 +41,9 @@
   item: sum
   name: Нерухо́мість від Компанії САМ
   address: 76000, м. Івано-Франківськ, вул.&nbsp;Самостійна,&nbsp;0
-  phone_main: (034) 200 00 00
-  phone_hot:  (034) 200 00 00
-  phone_fax:  (034) 200 00 00
+  phone_main: 380342000044
+  phone_hot:  380342000044
+  phone_fax:  380342000044
   email: sum@realestate.if.ua
   www: https://sum.realestate.if.ua
 
@@ -54,9 +54,9 @@
   item: shevchenko
   name: Агент з нерухомості Шевченко Тарас
   address: 76000, м. Івано-Франківськ, вул.&nbsp;Шевченка,&nbsp;0
-  phone_main: (034) 200 00 00
-  phone_hot:  (034) 200 00 00
-  phone_fax:  (034) 200 00 00
+  phone_main: 380342000022
+  phone_hot:  380342000022
+  phone_fax:  380342000022
   email: shevchenko@realestate.if.ua
   www: https://shevchenko.realestate.if.ua
 
@@ -64,8 +64,8 @@
   item: franko
   name: Агент з нерухомості Іван Франко
   address: 76000, м. Івано-Франківськ, вул.&nbsp;Франка,&nbsp;0
-  phone_main: (034) 200 00 00
-  phone_hot:  (034) 200 00 00
-  phone_fax:  (034) 200 00 00
+  phone_main: 380342000011
+  phone_hot:  380342000011
+  phone_fax:  380342000011
   email: franko@realestate.if.ua
   www: https://franko.realestate.if.ua

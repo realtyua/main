@@ -1,4 +1,4 @@
-{%- assign franko_all = site.data.ivano-frankivsk-franko-all -%}
-{%- assign shevchenko_all = site.data.ivano-frankivsk-shevchenko-all -%}
+{%- assign franko_all = site.data.ivano-frankivsk-franko-all | where: "location", "м. Івано-Франківськ" -%}
+{%- assign shevchenko_all = site.data.ivano-frankivsk-shevchenko-all | where: "location", "м. Івано-Франківськ" -%}
 {%- assign records = shevchenko_all | concat: franko_all -%}
 {%- assign offers = records | sort: 'date' | reverse -%}
