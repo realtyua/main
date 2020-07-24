@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-12">
 
-{%- assign foo = site.data.owners | where: 'phone', 'true' | uniq -%}
+{%- assign foo = site.data.owners | where: 'phone', true | uniq -%}
 {{foo}}
 <ul>
   {%- for ioo in foo -%}
@@ -51,7 +51,7 @@
 <br>
 
 <ul>
-  {%- for soo in site.data.owners -%}
+  {%- for soo in site.data.owners | uniq -%}
   <li>{{ soo.type }}</li>
   {%- endfor -%}
 </ul>
