@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-12">
 
-
+{%- comment -%}
 {%- capture f_phone_array -%}
   {%- for tel in site.data.owners -%}{{ tel.phone }}|{%- endfor -%}
 {%- endcapture -%}
@@ -60,6 +60,7 @@
 
 <hr>
 <br>
+{%- endcomment -%}
 
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
         {%- include data/ivano-frankivsk.html -%}
