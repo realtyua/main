@@ -40,7 +40,7 @@
       <div class="col-12">
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
         {%- include data/ivano-frankivsk.html -%}
-        {% for offer in offers limit:9 %}
+        {%- for offer in offers limit:9 -%}
           {%- if forloop.first -%}
           <div class="row">
           {%- endif -%}
@@ -67,7 +67,7 @@
             </div>
           </div>
           {%- endif -%}
-        {% endfor %}
+        {%- endfor -%}
       </div>
     </div>
   </div>
