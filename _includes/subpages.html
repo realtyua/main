@@ -40,15 +40,7 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-{%- comment -%}
-    {%- assign seller = region | append: '-' | append: section | append: '-all' -%}
-    {%- else -%}
-      {%- assign records = site.data[seller] -%}
-{%- endcomment -%}
-                    {%- if section == contact.item -%}
-                      {%- assign records = site.data[contact.phone_main] -%}
-                    {%- endif -%}
-
+                    {%- assign records = site.data[section] -%}
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
                       {%- for offer in offers limit: 1 -%}
