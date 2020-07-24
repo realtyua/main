@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-12">
 
-%- assign foo = site.data.owners | map: "phone" | uniq -%}
+{%- assign foo = site.data.owners | map: "phone" | uniq -%}
 
 <ul>
   {%- for i in foo limit:9 -%}
