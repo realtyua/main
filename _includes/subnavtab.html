@@ -37,19 +37,37 @@
 <div class="tab-content" id="realestate-content">
   <div class="tab-pane fade show active" id="newly" role="tabpanel" aria-labelledby="newly-tab">
     <div class="row">
-      {%- include data/ivano-frankivsk.html -%}
-      {%- if offers -%}
+      <div class="col-12">
+        <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
+        {%- include data/ivano-frankivsk.html -%}
         {% for offer in offers limit:9 %}
           {%- if forloop.first -%}
-          <div class="col-12">
-            <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
-            <div class="row">
+          <div class="row">
           {%- endif -%}
-          {%- cycle '<div class="col-md-4">','<div class="col-md-4">','<div class="col-md-4">' -%}
-          {%- include card.html offer=offer aid='0' -%}
-          {%- cycle '</div>','</div>','</div>' -%}
+
+          {%- assign index = forloop.index0 | modulo: 2 -%}
+          {%- assign cycle = forloop.index | modulo: 2 -%}
+
+{%- if index == 0 -%}
+<div class="col-md-4">
+{%- endif -%}
+  {%- include card.html offer=offer aid='0' -%}
+{%- if cycle == 0 -%}
+</div>
+{%- else -%}
+  {%- if forloop.last -%}
+  </div>
+  {%- endif -%}
+{%- endif -%}
+
+
+          {%- comment -%}
+            {%- cycle '<div class="col-md-4">','','' -%}
+            {%- include card.html offer=offer aid='0' -%}
+            {%- cycle '','','</div>' -%}
+          {%- endcomment -%}
+
           {%- if forloop.last -%}
-            </div>
           </div>
           <div class="row">
             <div class="col-auto ml-auto">
@@ -60,13 +78,7 @@
           </div>
           {%- endif -%}
         {% endfor %}
-      {%- else -%}
-        <div class="col-md-6 offset-md-3">
-          <div class="alert alert-info" role="alert">
-           ...
-          </div>
-        </div>
-      {%- endif -%}
+      </div>
     </div>
   </div>
   {%- for content in lists -%}
