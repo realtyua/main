@@ -39,12 +39,11 @@
     <div class="row">
       <div class="col-12">
 
-{%- assign foo = site.data.owners | map: "phone" | uniq -%}
-{%- assign too = foo | jsonify -%}
-{{ too }}
+{%- assign foo = site.data.owners | uniq -%}
+{{ foo }}
 <ul>
-  {%- for ioo in too limit:9 -%}
-  <li>{{ ioo.type }}</li>
+  {%- for ioo in foo limit:9 -%}
+  <li>{{ ioo.type }} / {{ ioo.phone }}</li>
   {%- endfor -%}
 </ul>
 
