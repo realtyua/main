@@ -1,4 +1,5 @@
 {%- assign franko = site.data.franko | where: "location", "м. Івано-Франківськ" -%}
 {%- assign shevchenko = site.data.shevchenko | where: "location", "м. Івано-Франківськ" -%}
-{%- assign records = shevchenko | concat: franko -%}
+{%- assign owners = site.data.owners | map: 'phone' | uniq  | where: "location", "м. Івано-Франківськ" -%}
+{%- assign records = owners | concat: shevchenko | concat: franko -%}
 {%- assign offers = records | sort: 'date' | reverse -%}

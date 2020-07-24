@@ -1,0 +1,104 @@
+[
+  {
+      "id": 0,
+      "type": "Гараж",
+      "rooms": 1,
+      "surface": 20,
+      "surface_land": 22,
+      "price": 9000,
+      "price_sqmt": 350,
+      "floor": 1,
+      "floors": 1,
+      "parking": "Гараж",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Франківськв",
+      "date": "2020-02-22",
+      "seller": "Іван Петрович Шерудко",
+      "phone": 380001000000,
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        },
+        {
+          "src":"image2.jpg",
+          "alt":"image2 alt",
+          "title":"image2 title"
+        },
+        {
+          "src":"image3.png",
+          "alt":"image3 alt",
+          "title":"image3 title"
+        }
+      ]
+  },
+  {
+      "id": 2,
+      "type": "Квартира",
+      "rooms": 3,
+      "surface": 65,
+      "surface_land": 0,
+      "price": 21000,
+      "price_sqmt": 700,
+      "floor": 2,
+      "floors": 8,
+      "parking": "Немає",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Українського Генерала",
+      "date": "2020-02-22",
+      "seller": "Петро Тарасович Франківський",
+      "phone": 380002000000,
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        },
+        {
+          "src":"image2.jpg",
+          "alt":"image2 alt",
+          "title":"image2 title"
+        },
+        {
+          "src":"image3.png",
+          "alt":"image3 alt",
+          "title":"image3 title"
+        }
+      ]
+  },
+  {
+      "id": 3,
+      "type": "Будинок",
+      "rooms": 2,
+      "surface": 70,
+      "surface_land": 100,
+      "price": 20000,
+      "price_sqmt": 500,
+      "floor": 1,
+      "floors": 1,
+      "parking": "Прибудинкова територія",
+      "location": "м. Надвірна",
+      "address": "вул. Надвірнянська",
+      "date": "2020-07-20",
+      "seller": "Тарас Птерович Надвірненко",
+      "phone": 380001000000,
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        },
+        {
+          "src":"image2.jpg",
+          "alt":"image2 alt",
+          "title":"image2 title"
+        },
+        {
+          "src":"image3.png",
+          "alt":"image3 alt",
+          "title":"image3 title"
+        }
+      ]
+  }
+]
