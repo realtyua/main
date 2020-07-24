@@ -38,6 +38,18 @@
   <div class="tab-pane fade show active" id="newly" role="tabpanel" aria-labelledby="newly-tab">
     <div class="row">
       <div class="col-12">
+
+%- assign foo = site.data.owners | map: "phone" | uniq -%}
+
+<ul>
+  {%- for i in foo limit:9 -%}
+  <li>{{ i.type }}</li>
+  {%- endfor -%}
+</ul>
+
+<hr>
+<br>
+
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
         {%- include data/ivano-frankivsk.html -%}
         {%- for offer in offers limit:9 -%}
