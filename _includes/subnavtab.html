@@ -41,10 +41,19 @@
 
 {%- assign foo = site.data.owners | map: "phone" | uniq -%}
 {%- assign too = foo | jsonify -%}
+{{ too }}
+<ul>
+  {%- for ioo in too limit:9 -%}
+  <li>{{ ioo.type }}</li>
+  {%- endfor -%}
+</ul>
+
+<hr>
+<br>
 
 <ul>
-  {%- for i in too limit:9 -%}
-  <li>{{ i.type }}</li>
+  {%- for soo in site.data.owners -%}
+  <li>{{ soo.type }}</li>
   {%- endfor -%}
 </ul>
 
