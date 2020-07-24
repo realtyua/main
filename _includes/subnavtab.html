@@ -39,6 +39,22 @@
     <div class="row">
       <div class="col-12">
 
+
+{%- capture f_phone_array -%}
+  {%- for item in site.data.owners -%}{{ item.phone }}|{%- endfor -%}
+{%- endcapture -%}
+
+{%- for item in site.data.owners -%}
+  {%- assign f_phone = item.phone | append: '|' -%}
+  {%- if f_phone_array contains f_phone -%}
+      <p>{{ item.type }} - {{ item.phone }}</p><br>
+  {%- endif -%}
+  {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
+{%- endfor -%}
+
+<hr>
+<br>
+
 {%- assign foo = site.data.owners | where: 'phone', true | uniq -%}
 {{foo}}
 <ul>
