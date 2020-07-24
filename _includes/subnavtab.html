@@ -44,29 +44,19 @@
           {%- if forloop.first -%}
           <div class="row">
           {%- endif -%}
-
-          {%- assign index = forloop.index0 | modulo: 2 -%}
-          {%- assign cycle = forloop.index | modulo: 2 -%}
-
-{%- if index == 0 -%}
-<div class="col-md-4">
-{%- endif -%}
-  {%- include card.html offer=offer aid='0' -%}
-{%- if cycle == 0 -%}
-</div>
-{%- else -%}
-  {%- if forloop.last -%}
-  </div>
-  {%- endif -%}
-{%- endif -%}
-
-
-          {%- comment -%}
-            {%- cycle '<div class="col-md-4">','','' -%}
+            {%- assign index = forloop.index0 | modulo: 3 -%}
+            {%- assign cycle = forloop.index | modulo: 3 -%}
+            {%- if index == 0 -%}
+            <div class="col-md-4">
+            {%- endif -%}
             {%- include card.html offer=offer aid='0' -%}
-            {%- cycle '','','</div>' -%}
-          {%- endcomment -%}
-
+            {%- if cycle == 0 -%}
+            </div>
+            {%- else -%}
+            {%- if forloop.last -%}
+            </div>
+            {%- endif -%}
+            {%- endif -%}
           {%- if forloop.last -%}
           </div>
           <div class="row">
