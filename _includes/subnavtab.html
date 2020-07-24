@@ -41,14 +41,14 @@
 
 
 {%- capture f_phone_array -%}
-  {%- for item in site.data.owners -%}{{ item.phone }}|{%- endfor -%}
+  {%- for tel in site.data.owners -%}{{ tel.phone }}|{%- endfor -%}
 {%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
-{%- for item in site.data.owners -%}
-  {%- assign f_phone = item.phone | append: '|' -%}
+{%- for tel in site.data.owners -%}
+  {%- assign f_phone = tel.phone | append: '|' -%}
   {%- if f_phone_array contains f_phone -%}
-      <p>{{ item.type }} - {{ item.phone }}</p><br>
-      {%- assign owners = owners | push:i -%}
+      <p>{{ tel.type }} - {{ tel.phone }}</p>
+      {%- assign owners = owners | push: tel -%}
   {%- endif -%}
   {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
 {%- endfor -%}
