@@ -45,10 +45,11 @@
 {%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
 {%- for tel in site.data.owners -%}
-  {%- assign f_phone = tel.phone | append: '|' | uniq -%}
+  {%- assign f_phone = tel.phone | append: '|' -%}
   {%- if f_phone_array contains f_phone -%}
       {%- assign owners = owners | push: tel -%}
   {%- endif -%}
+  {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
 {%- endfor -%}
 
 <ul>
