@@ -39,10 +39,10 @@
     <div class="row">
       <div class="col-12">
 
-{%- assign foo = site.data.owners | uniq -%}
-{{ foo }}
+{%- assign foo = site.data.owners | group_by: "phone" | uniq -%}
+
 <ul>
-  {%- for ioo in foo limit:9 -%}
+  {%- for ioo in foo -%}
   <li>{{ ioo.type }} / {{ ioo.phone }}</li>
   {%- endfor -%}
 </ul>
