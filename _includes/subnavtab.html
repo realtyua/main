@@ -43,14 +43,16 @@
 {%- capture f_phone_array -%}
   {%- for item in site.data.owners -%}{{ item.phone }}|{%- endfor -%}
 {%- endcapture -%}
-
 {%- for item in site.data.owners -%}
   {%- assign f_phone = item.phone | append: '|' -%}
-  {%- if f_phone_array contains f_phone -%}
-      <p>{{ item.type }} - {{ item.phone }}</p><br>
-  {%- endif -%}
   {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
 {%- endfor -%}
+
+<ul>
+  {%- for zoo in f_phone_array -%}
+  <li>{{ zoo.type }} | {{ zoo.phone }}</li>
+  {%- endfor -%}
+</ul>
 
 <hr>
 <br>
