@@ -191,5 +191,30 @@
             "title":"image3 title"
           }
         ]
+    },
+    {
+        "id": "7",
+        "type": "Земля",
+        "rooms": "",
+        "surface": "",
+        "surface_land": "150",
+        "price": "4000",
+        "price_sqmt": "220",
+        "floor": "",
+        "floors": "",
+        "parking": "",
+        "region": "",
+        "location": "м. Івано-Франківськ",
+        "address": "вул. Земельна",
+        "date": "2020-07-14",
+        "seller": "Агент нерухо́місті Шевченко",
+        "phone": "380007770077",
+        "images": [
+          {
+            "src":"image1.jpg",
+            "alt":"image1 alt",
+            "title":"image1 title"
+          }
+        ]
     }
 ]

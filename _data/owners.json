@@ -138,5 +138,55 @@
           "title":"image1 title"
         }
       ]
+  },
+  {
+      "id": "5",
+      "type": "Земля",
+      "rooms": "",
+      "surface": "",
+      "surface_land": "200",
+      "price": "7000",
+      "price_sqmt": "320",
+      "floor": "",
+      "floors": "",
+      "parking": "",
+      "region": "",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Земляна",
+      "date": "2020-07-14",
+      "seller": "Степан Андрійович Землеко",
+      "phone": "380506550266",
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        }
+      ]
+  },
+  {
+      "id": "6",
+      "type": "Магазин",
+      "rooms": "1",
+      "surface": "120",
+      "surface_land": "0",
+      "price": "100000",
+      "price_sqmt": "920",
+      "floor": "1",
+      "floors": "4",
+      "parking": "Вулиці міста",
+      "region": "",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Комерційна",
+      "date": "2020-06-25",
+      "seller": "Сергій Веларійович Товариний",
+      "phone": "380006551166",
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        }
+      ]
   }
 ]
