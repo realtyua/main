@@ -89,8 +89,8 @@
               {%- else -%}
 
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
-
-                {%- include data/[slug].html -%}
+                {%- capture data -%}data/[slug].html{%- endcapture -%}
+                {%- include {{ data }} -%}
                 {%- for offer in offers limit:9 -%}
                   {%- if forloop.first -%}
                   <div class="row mx-n2">
