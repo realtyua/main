@@ -90,10 +90,8 @@
 
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
 
-{% comment %}
                 {%- assign data = slug | prepend: 'data/' | append: '.html' -%}
-{% endcomment %}
-                {%- include data/house.html -%}
+                {%- include {{ data }} -%}
                 {%- for offer in offers limit: 9 -%}
                   {%- if forloop.first -%}
                   <div class="row mx-n2">
