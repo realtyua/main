@@ -12,9 +12,9 @@
     {%- for item in items limit:6 -%}
       {%- assign section = item.url | split: "/" | last -%}
       {%- if forloop.first -%}
-      <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+      <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
       {%- endif -%}
-        <div class="col mb-4">
+        <div class="col px-2 mb-3">
           <div class="card h-100">
             <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
             <div class="card-body">
