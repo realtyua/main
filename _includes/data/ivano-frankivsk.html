@@ -1,13 +1,4 @@
-{%- capture f_phone_array -%}{%- for tel in site.data.owners -%}{{ tel.phone }}|{%- endfor -%}{%- endcapture -%}
-{%- assign owners = '' | split: '' -%}
-{%- for tel in site.data.owners -%}
-  {%- assign f_phone = tel.phone | append: '|' -%}
-  {%- if f_phone_array contains f_phone -%}
-      {%- assign owners = owners | push: tel -%}
-  {%- endif -%}
-  {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
-{%- endfor -%}
-
+{%- include owner.html -%}
 {%- assign franko = site.data.franko | where: "location", "м. Івано-Франківськ" -%}
 {%- assign shevchenko = site.data.shevchenko | where: "location", "м. Івано-Франківськ" -%}
 {%- assign owners = owners | where: "location", "м. Івано-Франківськ" -%}

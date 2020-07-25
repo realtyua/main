@@ -1,0 +1,6 @@
+{%- include owner.html -%}
+{%- assign owners = owners | where_exp: "re", "re.location == 'м. Івано-Франківськ' and re.type == 'Квартира'" -%}
+{%- assign franko = site.data.franko | where_exp: "re", "re.location == 'м. Івано-Франківськ' and re.type == 'Квартира'" -%}
+{%- assign shevchenko = site.data.shevchenko | where_exp: "re", "re.location == 'м. Івано-Франківськ' and re.type == 'Квартира'" -%}
+{%- assign records = owners | concat: shevchenko | concat: franko -%}
+{%- assign offers = records | sort: "date" | reverse -%}

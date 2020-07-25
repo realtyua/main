@@ -38,30 +38,6 @@
   <div class="tab-pane fade show active" id="newly" role="tabpanel" aria-labelledby="newly-tab">
     <div class="row">
       <div class="col-12">
-
-{%- comment -%}
-{%- capture f_phone_array -%}
-  {%- for tel in site.data.owners -%}{{ tel.phone }}|{%- endfor -%}
-{%- endcapture -%}
-{%- assign owners = '' | split: '' -%}
-{%- for tel in site.data.owners -%}
-  {%- assign f_phone = tel.phone | append: '|' -%}
-  {%- if f_phone_array contains f_phone -%}
-      {%- assign owners = owners | push: tel -%}
-  {%- endif -%}
-  {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
-{%- endfor -%}
-
-<ul>
-  {%- for koo in owners -%}
-  <li>{{ koo.type }} / {{ koo.phone }}</li>
-  {%- endfor -%}
-</ul>
-
-<hr>
-<br>
-{%- endcomment -%}
-
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
         {%- include data/ivano-frankivsk.html -%}
         {%- for offer in offers limit:9 -%}
@@ -111,7 +87,39 @@
                 {%- assign dir = page.dir | append: slug | append: '/' -%}
                 {%- include subpages.html dir=dir page=slug title=title -%}
               {%- else -%}
+
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
+
+                {%- include data/[slug].html -%}
+                {%- for offer in offers limit:9 -%}
+                  {%- if forloop.first -%}
+                  <div class="row mx-n2">
+                  {%- endif -%}
+                    {%- assign index = forloop.index0 | modulo: 3 -%}
+                    {%- assign cycle = forloop.index | modulo: 3 -%}
+                    {%- if index == 0 -%}
+                    <div class="col-md-4 px-2">
+                    {%- endif -%}
+                    {%- include card.html offer=offer aid='0' -%}
+                    {%- if cycle == 0 -%}
+                    </div>
+                    {%- else -%}
+                    {%- if forloop.last -%}
+                    </div>
+                    {%- endif -%}
+                    {%- endif -%}
+                  {%- if forloop.last -%}
+                  </div>
+                  <div class="row">
+                    <div class="col-auto ml-auto">
+                      <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
+                        Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості
+                      </a>
+                    </div>
+                  </div>
+                  {%- endif -%}
+                {%- endfor -%}
+
               {%- endif -%}
             </div>
           </div>
