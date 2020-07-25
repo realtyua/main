@@ -41,20 +41,3 @@ $blue-900: shade-color($blue, 8) !default;
 //
 $enable-responsive-font-sizes:  true !default;
 $enable-negative-margins: true !default;
-//
-// Spacing
-//
-$spacer: 1rem !default;
-$spacers: (
-  0: 0,
-  1: $spacer / 4,
-  2: $spacer / 2,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
-) !default;
-//
-// Grid system
-//
-//$grid-gutter-width: 2rem !default;
-$gutters: $spacers !default;
