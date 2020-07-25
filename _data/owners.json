@@ -76,8 +76,32 @@
       "location": "м. Надвірна",
       "address": "вул. Надвірнянська",
       "date": "2020-07-08",
-      "seller": "Тарас Птерович Надвірненко",
+      "seller": "Тарас Петрович Надвірненко",
       "phone": "380002000000",
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        }
+      ]
+  },
+  {
+      "id": "3",
+      "type": "Будинок",
+      "rooms": "5",
+      "surface": "150",
+      "surface_land": "200",
+      "price": "200000",
+      "price_sqmt": "800",
+      "floor": "2",
+      "floors": "2",
+      "parking": "Власний гараж",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Будинкова",
+      "date": "2020-05-18",
+      "seller": "Панас Петрович Будинко",
+      "phone": "380003000000",
       "images": [
         {
           "src":"image1.jpg",

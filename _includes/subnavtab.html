@@ -91,6 +91,7 @@
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
 
                 {%- assign data = slug | prepend: 'data/' | append: '.html' -%}
+                {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
                 {%- include {{ data }} -%}
                 {%- for offer in offers limit: 9 -%}
                   {%- if forloop.first -%}
@@ -101,7 +102,7 @@
                     {%- if index == 0 -%}
                     <div class="col-md-4 px-2">
                     {%- endif -%}
-                    {%- include card.html offer=offer aid='0' -%}
+                    {%- include card.html offer=offer aid=aid -%}
                     {%- if cycle == 0 -%}
                     </div>
                     {%- else -%}
@@ -113,8 +114,8 @@
                   </div>
                   <div class="row">
                     <div class="col-auto ml-auto">
-                      <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-                        Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості
+                      <a class="btn btn-primary" href="{{ content.url }}">
+                        Інші <strong>{{ offers | size }}</strong> пропозиції у розділі {{ content.navtitle }}
                       </a>
                     </div>
                   </div>
