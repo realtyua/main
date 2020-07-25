@@ -89,10 +89,11 @@
               {%- else -%}
 
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
-                
+
 {% comment %}
                 {%- assign data = slug | prepend: 'data/' | append: '.html' -%}
-                {%- include {{ data }} -%}
+{% endcomment %}
+                {%- include data/apartment.html -%}
                 {%- for offer in offers limit: 9 -%}
                   {%- if forloop.first -%}
                   <div class="row mx-n2">
@@ -121,7 +122,7 @@
                   </div>
                   {%- endif -%}
                 {%- endfor -%}
-{% endcomment %}
+
 
               {%- endif -%}
             </div>
