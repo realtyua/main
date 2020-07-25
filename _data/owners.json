@@ -109,5 +109,29 @@
           "title":"image1 title"
         }
       ]
+  },
+  {
+      "id": "4",
+      "type": "Частина будиноку",
+      "rooms": "2",
+      "surface": "60",
+      "surface_land": "100",
+      "price": "70000",
+      "price_sqmt": "620",
+      "floor": "1",
+      "floors": "2",
+      "parking": "Гараж",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Часткова",
+      "date": "2020-07-21",
+      "seller": "Іван Сергійович Панасенко",
+      "phone": "380506550066",
+      "images": [
+        {
+          "src":"image1.jpg",
+          "alt":"image1 alt",
+          "title":"image1 title"
+        }
+      ]
   }
 ]

@@ -1,6 +1,6 @@
 {%- include data/owner.html -%}
-{%- assign owners = owners | where_exp: "i", "i.type == 'Будинок' and i.location == 'м. Івано-Франківськ'" -%}
-{%- assign franko = site.data.franko | where_exp: "i", "i.type == 'Будинок' and i.location == 'м. Івано-Франківськ'" -%}
-{%- assign shevchenko = site.data.shevchenko | where_exp: "i", "i.type == 'Будинок' and i.location == 'м. Івано-Франківськ'" -%}
+{%- assign owners = owners | where_exp: "i", "i.type == 'Будинок' or i.type == 'Частина будиноку' and i.location == 'м. Івано-Франківськ'" -%}
+{%- assign franko = site.data.franko | where_exp: "i", "i.type == 'Будинок' or i.type == 'Частина будиноку' and i.location == 'м. Івано-Франківськ'" -%}
+{%- assign shevchenko = site.data.shevchenko | where_exp: "i", "i.type == 'Будинок' or i.type == 'Частина будиноку' and i.location == 'м. Івано-Франківськ'" -%}
 {%- assign records = owners | concat: shevchenko | concat: franko -%}
 {%- assign offers = records | sort: "date" | reverse -%}
