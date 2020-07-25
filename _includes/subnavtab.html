@@ -93,7 +93,7 @@
 {% comment %}
                 {%- assign data = slug | prepend: 'data/' | append: '.html' -%}
 {% endcomment %}
-                {%- include data/apartment.html -%}
+                {%- include data/house.html -%}
                 {%- for offer in offers limit: 9 -%}
                   {%- if forloop.first -%}
                   <div class="row mx-n2">
