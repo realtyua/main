@@ -1,4 +1,4 @@
-{%- include owner.html -%}
+{%- include data/owner.html -%}
 {%- assign owners = owners | where_exp: "re", "re.location == 'м. Івано-Франківськ' and re.type == 'Будинок'" -%}
 {%- assign franko = site.data.franko | where_exp: "re", "re.location == 'м. Івано-Франківськ' and re.type == 'Будинок'" -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: "re", "re.location == 'м. Івано-Франківськ' and re.type == 'Будинок'" -%}
