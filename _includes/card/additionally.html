@@ -1,0 +1,27 @@
+{%- if offer.type == 'Земля' -%}
+{%- else -%}
+  {%- if offer.floor -%}
+  <dt>Поверх</dt>
+  <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+  {%- endif -%}
+  {%- if offer.parking -%}
+  <dt>Стоя́нка</dt>
+  <dd>{{ offer.parking }}</dd>
+  {%- endif -%}
+  {%- if offer.surface_land -%}
+  <dt>Площа землі</dt>
+  <dd>{{ offer.surface_land }} м²</dd>
+  {%- endif -%}
+{%- endif -%}
+{%- if offer.price_sqmt -%}
+<dt>Вартість за 1 м²</dt>
+<dd>{{ offer.price_sqmt }}</dd>
+{%- endif -%}
+{%- if offer.seller -%}
+<dt>Продавець</dt>
+<dd>{{ offer.seller }}</dd>
+{%- endif -%}
+{%- if offer.phone -%}
+<dt>Контакти продавця</dt>
+<dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
+{%- endif -%}

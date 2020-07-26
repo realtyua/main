@@ -8,16 +8,7 @@
 {%- assign isImage = files | strip_newlines -%}
 <div class="card mb-3">
   <div class="card-body pb-0">
-    <p class="card-text mb-1">
-      {%- if offer.type -%}Продається <strong class="text-lowercase">{{ offer.type }}</strong>, {%- endif -%}
-      {%- if offer.type == 'Земля' -%} площею <strong>{{ offer.surface_land }}</strong> м², {%- else -%}
-      {%- if offer.surface -%}площею <strong>{{ offer.surface }}</strong> м², {%- endif -%}
-      {%- if offer.rooms -%}кімнат <strong>{{ offer.rooms }}</strong>, {%- endif -%}
-      {%- endif -%}
-      {%- if offer.location -%}знаходиться у <strong>{{ offer.location }}</strong> {%- endif -%}
-      {%- if offer.address -%}за адресою <strong>{{ offer.address }}</strong>, {%- endif -%}
-      {%- if offer.price -%}вартість нерухомості <mark>{{ offer.price }}</mark>{%- endif -%}.
-    </p>
+    <p class="card-text mb-1">{% include card/body.html %}</p>
     <p class="card-text mb-1">
       <span class="small text-muted">Нерухомість доступна з&nbsp;{%- include date.html date=offer.date -%}</span>
     </p>
@@ -35,33 +26,7 @@
   <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" id="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
     <hr class="mt-0 mx-3">
     <dl class="mx-3 mb-2">
-      {%- if offer.type == 'Земля' -%}
-      {%- else -%}
-        {%- if offer.floor -%}
-        <dt>Поверх</dt>
-        <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
-        {%- endif -%}
-        {%- if offer.parking -%}
-        <dt>Стоя́нка</dt>
-        <dd>{{ offer.parking }}</dd>
-        {%- endif -%}
-        {%- if offer.surface_land -%}
-        <dt>Площа землі</dt>
-        <dd>{{ offer.surface_land }} м²</dd>
-        {%- endif -%}
-      {%- endif -%}
-      {%- if offer.price_sqmt -%}
-      <dt>Вартість</dt>
-      <dd>{{ offer.price_sqmt }} за 1 м²</dd>
-      {%- endif -%}
-      {%- if offer.seller -%}
-      <dt>Продавець</dt>
-      <dd>{{ offer.seller }}</dd>
-      {%- endif -%}
-      {%- if offer.phone -%}
-      <dt>Контакти продавця</dt>
-      <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
-      {%- endif -%}
+      {%- include card/additionally.html -%}
       <dd class="mb-0 text-right">
         {%- if isImage != '' -%}
         <a class="card-link" data-toggle="collapse" href="#photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}" role="button" aria-expanded="false" aria-controls="photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
@@ -73,23 +38,6 @@
         </a>
       </dd>
     </dl>
-    {%- if isImage != "" -%}
-    <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" id="photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-      <div class="pb-3 px-3">
-        <hr class="mt-0">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
-          {%- for file in site.static_files -%}
-            {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-            <div class="col">
-              <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="2{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-                <img src="{{ file.path | url_decode | relative_url }}" class="img-fluid img-thumbnail" title="Image Title" alt="Image Alt">
-              </a>
-            </div>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      </div>
-    </div>
-    {%- endif -%}
+    {%- if isImage != "" -%}{%- include card/images.html -%}{%- endif -%}
   </div>
 </div>

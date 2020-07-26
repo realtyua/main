@@ -1,0 +1,16 @@
+<div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" id="photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
+  <div class="pb-3 px-3">
+    <hr class="mt-0">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+      {%- for file in site.static_files -%}
+        {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+        <div class="col">
+          <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="2{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
+            <img src="{{ file.path | url_decode | relative_url }}" class="img-fluid img-thumbnail" title="Image Title" alt="Image Alt">
+          </a>
+        </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
