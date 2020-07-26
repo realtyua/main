@@ -6,10 +6,10 @@
   <a href="tel:+{{ tt }}">{{ nn }}</a>
 {%- elsif include.legal and include.type == 'icon' -%}
   <a href="tel:+{{ t }}" class="card-link">
-    <span class="align-middle" data-toggle="tooltip" data-placement="left" title="Продавець {{ n }}" style="font-size:large;">&phone;</span>
+    <span class="align-middle" data-toggle="tooltip" data-placement="left" title="{{ site.data.lang-uk.re_seller }} {{ n }}" style="font-size:large;">&phone;</span>
   </a>
 {%- elsif include.legal and include.type == 'text' -%}
-  <a href="tel:+{{ t }}" title="Продавець {{ n }}">{{ n }}</a>
+  <a href="tel:+{{ t }}" title="{{ site.data.lang-uk.re_seller }} {{ n }}">{{ n }}</a>
 {%- else -%}
   <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
 {%- endif -%}

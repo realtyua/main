@@ -70,7 +70,7 @@
           <div class="row">
             <div class="col-auto ml-auto">
               <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-                Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості
+                {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
               </a>
             </div>
           </div>
@@ -125,7 +125,7 @@
                   <div class="row">
                     <div class="col-auto ml-auto">
                       <a class="btn btn-primary" href="{{ content.url }}">
-                        Інші <strong>{{ offers | size }}</strong> пропозиції у розділі {{ content.navtitle }}
+                        {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_section }} {{ content.navtitle }}
                       </a>
                     </div>
                   </div>
