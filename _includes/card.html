@@ -11,6 +11,7 @@
     <p class="card-text mb-1">
       {%- if offer.type -%}Продається <strong class="text-lowercase">{{ offer.type }}</strong>,{%- endif -%}
       {%- if offer.type == 'Земля' -%}
+        площею <strong>{{ offer.surface_land }}</strong> м²,
       {%- else -%}
         {%- if offer.surface -%}площею <strong>{{ offer.surface }}</strong> м²,{%- endif -%}
         {%- if offer.rooms -%}кімнат <strong>{{ offer.rooms }}</strong>,{%- endif -%}
