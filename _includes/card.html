@@ -9,17 +9,14 @@
 <div class="card mb-3">
   <div class="card-body pb-0">
     <p class="card-text mb-1">
-      {%- if offer.type -%}Продається <strong class="text-lowercase">{{ offer.type }}</strong>,{%- endif -%}
-      {%- if offer.type == 'Земля' -%}
-        площею <strong>{{ offer.surface_land }}</strong> м²,
-      {%- else -%}
-        {%- if offer.surface -%}площею <strong>{{ offer.surface }}</strong> м²,{%- endif -%}
-        {%- if offer.rooms -%}кімнат <strong>{{ offer.rooms }}</strong>,{%- endif -%}
+      {%- if offer.type -%}Продається <strong class="text-lowercase">{{ offer.type }}</strong>, {%- endif -%}
+      {%- if offer.type == 'Земля' -%} площею <strong>{{ offer.surface_land }}</strong> м², {%- else -%}
+      {%- if offer.surface -%}площею <strong>{{ offer.surface }}</strong> м², {%- endif -%}
+      {%- if offer.rooms -%}кімнат <strong>{{ offer.rooms }}</strong>, {%- endif -%}
       {%- endif -%}
-      {%- if offer.location -%}знаходиться у <strong>{{ offer.location }}</strong>{%- endif -%}
-      {%- if offer.address -%}за адресою <strong>{{ offer.address }}</strong>,{%- endif -%}
-      {%- if offer.price -%}вартість нерухомості <mark>{{ offer.price }}</mark>{%- endif -%}
-      .
+      {%- if offer.location -%}знаходиться у <strong>{{ offer.location }}</strong> {%- endif -%}
+      {%- if offer.address -%}за адресою <strong>{{ offer.address }}</strong>, {%- endif -%}
+      {%- if offer.price -%}вартість нерухомості <mark>{{ offer.price }}</mark>{%- endif -%}.
     </p>
     <p class="card-text mb-1">
       <span class="small text-muted">Нерухомість доступна з&nbsp;{%- include date.html date=offer.date -%}</span>
