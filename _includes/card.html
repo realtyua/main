@@ -6,11 +6,12 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
+{%- capture land -%}{{ site.data.lang-uk.re_land }}{%- endcapture -%}
 <div class="card mb-3">
   <div class="card-body pb-0">
     <p class="card-text mb-1">{% include card/body.html %}</p>
     <p class="card-text mb-1">
-      <span class="small text-muted">Нерухомість доступна з&nbsp;{%- include date.html date=offer.date -%}</span>
+      <span class="small text-muted">{{ site.data.lang-uk.re_date }}&nbsp;{%- include date.html date=offer.date -%}</span>
     </p>
   </div>
   <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
@@ -18,7 +19,7 @@
       <div class="col-auto pr-0">{%- include footer/phone.html legal=offer.phone type='icon' -%}</div>
       <div class="col-auto">
         <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" href="#more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-          <span data-toggle="tooltip" data-placement="left" title="Детальніше про нерухомість" class="navbar-toggler-icon"></span>
+          <span data-toggle="tooltip" data-placement="left" title="{{ site.data.lang-uk.re_more }}" class="navbar-toggler-icon"></span>
         </a>
       </div>
     </div>
@@ -30,11 +31,11 @@
       <dd class="mb-0 text-right">
         {%- if isImage != '' -%}
         <a class="card-link" data-toggle="collapse" href="#photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}" role="button" aria-expanded="false" aria-controls="photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-          Фотознімки
+          {{ site.data.lang-uk.re_images }}
         </a>
         {%- endif -%}
-        <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" href="#realtor" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% if isImage != '' %} photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% endif %}">
-          Згорнути
+        <a class="card-link" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" href="#close" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% if isImage != '' %} photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% endif %}">
+          {{ site.data.lang-uk.re_collapse }}
         </a>
       </dd>
     </dl>

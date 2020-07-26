@@ -1,6 +1,26 @@
 #
 # Property
 #
+re_for_sale: Продається
+re_surface: площею
+re_rooms: кімнат
+re_floor: Поверх
+re_at: у
+re_m: м
+re_floors: поверховому будинку
+re_location: знаходиться
+re_address: за адресою
+re_price: вартість нерухомості
+re_date: Нерухомість доступна з
+re_parking: Паркування
+re_surface_land: Площа землі
+re_land: Земля
+re_price_sqmt: Вартість за 1
+re_seller: Продавець
+re_phone: Контакти продавця
+re_images: Фотознімки
+re_collapse: Згорнути
+re_more: Детальніше про нерухомість
 #
 # Site
 #

@@ -1,30 +1,30 @@
-{%- if offer.type == 'Земля' -%}
+{%- if offer.type == land -%}
 {%- else -%}
   {%- if offer.floor and offer.floors -%}
-  <dt>Поверх</dt>
-  <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+  <dt>{{ site.data.lang-uk.re_floor }}</dt>
+  <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
   {% elsif offer.floor and offer.floor != '' %}
-  <dt>Поверх</dt>
+  <dt>{{ site.data.lang-uk.re_floor }}</dt>
   <dd>{{ offer.floor }}</dd>
   {%- endif -%}
   {%- if offer.parking and offer.parking != '' -%}
-  <dt>Стоя́нка</dt>
+  <dt>{{ site.data.lang-uk.re_parking }}</dt>
   <dd>{{ offer.parking }}</dd>
   {%- endif -%}
   {%- if offer.surface_land and offer.surface_land != '' and offer.surface_land != '0' -%}
-  <dt>Площа землі</dt>
-  <dd>{{ offer.surface_land }}&nbsp;м<sup>2</sup></dd>
+  <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
+  <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
   {%- endif -%}
 {%- endif -%}
 {%- if offer.price_sqmt -%}
-<dt>Вартість за 1&nbsp;м<sup>2</sup></dt>
+<dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
 <dd>{{ offer.price_sqmt }}</dd>
 {%- endif -%}
 {%- if offer.seller -%}
-<dt>Продавець</dt>
+<dt>{{ site.data.lang-uk.re_seller }}</dt>
 <dd>{{ offer.seller }}</dd>
 {%- endif -%}
 {%- if offer.phone -%}
-<dt>Контакти продавця</dt>
+<dt>{{ site.data.lang-uk.re_phone }}</dt>
 <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
 {%- endif -%}
