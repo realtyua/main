@@ -1,14 +1,17 @@
 {%- if offer.type == 'Земля' -%}
 {%- else -%}
-  {%- if offer.floor -%}
+  {%- if offer.floor and offer.floors -%}
   <dt>Поверх</dt>
   <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+  {% elsif offer.floor and offer.floor != '' %}
+  <dt>Поверх</dt>
+  <dd>{{ offer.floor }}</dd>
   {%- endif -%}
-  {%- if offer.parking -%}
+  {%- if offer.parking and offer.parking != '' -%}
   <dt>Стоя́нка</dt>
   <dd>{{ offer.parking }}</dd>
   {%- endif -%}
-  {%- if offer.surface_land -%}
+  {%- if offer.surface_land and offer.surface_land != '' and offer.surface_land != '0' -%}
   <dt>Площа землі</dt>
   <dd>{{ offer.surface_land }}&nbsp;м<sup>2</sup></dd>
   {%- endif -%}
