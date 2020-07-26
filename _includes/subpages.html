@@ -1,4 +1,3 @@
-{%- assign region = page.url | split: "/" | last -%}
 {%- if include.dir != page.dir and include.dir contains page.dir -%}
   {%- assign items = include.page -%}
   {%- assign items = '' | split:'' -%}
