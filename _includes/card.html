@@ -8,7 +8,18 @@
 {%- assign isImage = files | strip_newlines -%}
 <div class="card mb-3">
   <div class="card-body pb-0">
-    <p class="card-text mb-1">Продається <strong class="text-lowercase">{{ offer.type }}</strong>, площею <strong>{{ offer.surface }}</strong> м², кімнат <strong>{{ offer.rooms }}</strong>, знаходиться у <strong>{{ offer.location }}</strong> за адресою <strong>{{ offer.address }}</strong>, вартість нерухомості <mark>{{ offer.price | money }}</mark>.</p>
+    <p class="card-text mb-1">
+      {%- if offer.type -%}Продається <strong class="text-lowercase">{{ offer.type }}</strong>,{%- endif -%}
+      {%- if offer.type == 'Земля' -%}
+      {%- else -%}
+        {%- if offer.surface -%}площею <strong>{{ offer.surface }}</strong> м²,{%- endif -%}
+        {%- if offer.rooms -%}кімнат <strong>{{ offer.rooms }}</strong>,{%- endif -%}
+      {%- endif -%}
+      {%- if offer.location -%}знаходиться у <strong>{{ offer.location }}</strong>{%- endif -%}
+      {%- if offer.address -%}за адресою <strong>{{ offer.address }}</strong>,{%- endif -%}
+      {%- if offer.price -%}вартість нерухомості <mark>{{ offer.price }}</mark>{%- endif -%}
+      .
+    </p>
     <p class="card-text mb-1">
       <span class="small text-muted">Нерухомість доступна з&nbsp;{%- include date.html date=offer.date -%}</span>
     </p>
@@ -26,17 +37,20 @@
   <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" id="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
     <hr class="mt-0 mx-3">
     <dl class="mx-3 mb-2">
-      {%- if offer.floor -%}
-      <dt>Поверх</dt>
-      <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
-      {%- endif -%}
-      {%- if offer.parking -%}
-      <dt>Стоя́нка</dt>
-      <dd>{{ offer.parking }}</dd>
-      {%- endif -%}
-      {%- if offer.surface_land -%}
-      <dt>Площа землі</dt>
-      <dd>{{ offer.surface_land }} м²</dd>
+      {%- if offer.type == 'Земля' -%}
+      {%- else -%}
+        {%- if offer.floor -%}
+        <dt>Поверх</dt>
+        <dd>{{ offer.floor }} у {{ offer.floors }} поверховому будинку</dd>
+        {%- endif -%}
+        {%- if offer.parking -%}
+        <dt>Стоя́нка</dt>
+        <dd>{{ offer.parking }}</dd>
+        {%- endif -%}
+        {%- if offer.surface_land -%}
+        <dt>Площа землі</dt>
+        <dd>{{ offer.surface_land }} м²</dd>
+        {%- endif -%}
       {%- endif -%}
       {%- if offer.price_sqmt -%}
       <dt>Вартість</dt>
