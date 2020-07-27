@@ -3,3 +3,9 @@ layout: default
 ---
 
 {%- include nav-section.html -%}
+{%- assign isContent = content | strip_newlines -%}
+{%- if isContent == "" -%}
+  {%- include info-visitors.html -%}
+{%- else -%}
+  {{ content }}
+{%- endif -%}
