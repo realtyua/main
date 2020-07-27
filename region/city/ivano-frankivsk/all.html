@@ -1,25 +1,5 @@
 ---
+layout: table
 title: Вся нерухо́мість у місті іва́но-франкі́вськ
 navtitle: Вся нерухо́мість
 ---
-
-{%- assign ones = site.pages | sort: 'dir' | reverse -%}
-<nav class="navbar navbar-expand-md navbar-light bg-white p-0">
-  <div class="navbar-brand d-md-none">
-    <span class="small">{{ site.data.lang-uk.brand_content }}</span>
-    <span class="ml-1 float-right align-middle text-primary">→</span>
-  </div>
-  <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarThreeRealEstate" aria-controls="navbarThreeRealEstate" aria-expanded="false" aria-label="Toggle button">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
-    <ul class="navbar-nav nav nav-tabs border-0">
-      {%- for one in ones -%}
-        {%- assign slug = one.url | split: '/' | last -%}
-        {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- include nav-item.html -%}
-      {%- endfor -%}
-    </ul>
-  </div>
-</nav>
-<hr class="mt-2 mt-md-0">
