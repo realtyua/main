@@ -1,5 +1,54 @@
 {%- assign back = page.dir | split: "/" -%}{%- assign size = back | size | minus:1 -%}{%- assign here = back | slice: 0, size | join: "/" | append: "/" -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
+
+<nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+  <div class="navbar-brand d-md-none">
+    <span class="small">{{ site.data.lang-uk.brand_content }}</span>
+    <span class="ml-1 float-right align-middle text-primary">→</span>
+  </div>
+  <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarTwoRealEstate" aria-controls="navbarTwoRealEstate" aria-expanded="false" aria-label="Toggle button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarTwoRealEstate">
+    <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
+      {%- for one in ones -%}
+        {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
+        {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+        {%- if here == current and one.url contains here and one.navhide != 1 -%}
+        <li class="nav-item">
+          {%- if one.url == page.url -%}
+          <span class="nav-link border-0">
+            {%- if one.navtitle -%}
+              {{ one.navtitle }}
+            {%- elsif one.breadcrumb -%}
+              {{ one.breadcrumb }}
+            {%- else -%}
+              {{ one.title }}
+            {%- endif -%}
+          </span>
+          {%- else -%}
+          <a href="{{ one.url }}" class="nav-link border-0">
+            <span>
+              {%- if one.navtitle -%}
+                {{ one.navtitle }}
+              {%- elsif one.breadcrumb -%}
+                {{ one.breadcrumb }}
+              {%- else -%}
+                {{ one.title }}
+              {%- endif -%}
+            </span>
+          </a>
+          {%- endif -%}
+        </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</nav>
+<hr class="mt-2 mt-md-0">
+
+
+{%- comment -%}
 <div class="row mb-4 justify-content-end">
   <div class="col-md-auto">
     <div class="list-group list-group-horizontal-sm section">
@@ -33,3 +82,4 @@
     </div>
   </div>
 </div>
+{%- endcomment -%}
