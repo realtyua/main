@@ -15,7 +15,36 @@
       {%- for one in ones -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- if here == current and one.url contains here or one.url contains '/all' and one.navhide != 1 -%}
+        {%- if one.url contains 'all' and one.navhide != 1 -%}
+        <li class="nav-item">
+          {%- if one.url == page.url -%}
+          <span class="nav-link border-0 active">
+            <span>
+              {%- if one.navtitle -%}
+                {{ one.navtitle }}
+              {%- elsif one.breadcrumb -%}
+                {{ one.breadcrumb }}
+              {%- else -%}
+                {{ one.title }}
+              {%- endif -%}
+            </span>
+          </span>
+          {%- else -%}
+          <a href="{{ one.url }}" class="nav-link border-0">
+            <span>
+              {%- if one.navtitle -%}
+                {{ one.navtitle }}
+              {%- elsif one.breadcrumb -%}
+                {{ one.breadcrumb }}
+              {%- else -%}
+                {{ one.title }}
+              {%- endif -%}
+            </span>
+          </a>
+          {%- endif -%}
+        </li>
+        {%- endif -%}
+        {%- if here == current and one.url contains here and one.navhide != 1 -%}
         <li class="nav-item">
           {%- if one.url == page.url -%}
           <span class="nav-link border-0 active">
