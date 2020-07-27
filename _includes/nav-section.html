@@ -43,6 +43,7 @@
             </a>
             {%- endif -%}
           </li>
+        {%- else -%}
           {%- if here == current and one.url contains here and one.navhide != 1 -%}
           <li class="nav-item">
             {%- if one.url == page.url -%}
