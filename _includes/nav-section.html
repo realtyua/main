@@ -2,7 +2,6 @@
 {%- assign size = back | size | minus:1 -%}
 {%- assign here = back | slice: 0, size | join: "/" | append: "/" -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
-
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
@@ -14,10 +13,10 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
     <ul class="navbar-nav nav nav-tabs border-0">
       {%- for one in ones -%}
-        url: {{ one.url }}<br>
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- if here == current and one.url contains here or here contains 'all.html' and one.navhide != 1 -%}
+        {%- if here == current and one.url contains here or here contains '/all.html' and one.navhide != 1 -%}
+        url: {{ one.url }}<br>
         <li class="nav-item">
           {%- if one.url == page.url -%}
           <span class="nav-link border-0 active">
