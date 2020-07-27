@@ -1,4 +1,6 @@
-{%- assign back = page.dir | split: "/" -%}{%- assign size = back | size | minus:1 -%}{%- assign here = back | slice: 0, size | join: "/" | append: "/" -%}
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:1 -%}
+{%- assign here = back | slice: 0, size | join: "/" | append: "/" -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
 
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
@@ -14,13 +16,15 @@
       <li class="nav-item">
         <a href="{{ page.url }}" class="nav-link border-0">
           <span>
-            {{ page.title }} - {{ page.title | split: " " | slice: 2 | join: " " }}
+            {{ page.title }} - {{ page.title | split: ' ' | slice: 2 | join: ' ' }}
           </span>
         </a>
       </li>
       {%- for one in ones -%}
-        {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
-        {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+        <li>{{one.url}}</li>
+        <hr>
+        {%- assign slug = one.url | split: '/' | last -%}
+        {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
         {%- if here == current and one.url contains here and one.navhide != 1 -%}
         <li class="nav-item">
           {%- if one.url == page.url -%}
@@ -55,40 +59,3 @@
   </div>
 </nav>
 <hr class="mt-2 mt-md-0">
-
-
-{%- comment -%}
-<div class="row mb-4 justify-content-end">
-  <div class="col-md-auto">
-    <div class="list-group list-group-horizontal-sm section">
-    {%- for one in ones -%}
-      {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
-      {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-      {%- if here == current and one.url contains here and one.navhide != 1 -%}
-        {%- if one.url == page.url -%}
-        <span class="list-group-item list-group-item-action active">
-          {%- if one.navtitle -%}
-            {{ one.navtitle }}
-          {%- elsif one.breadcrumb -%}
-            {{ one.breadcrumb }}
-          {%- else -%}
-            {{ one.title }}
-          {%- endif -%}
-        </span>
-        {%- else -%}
-        <a href="{{ one.url }}" class="list-group-item list-group-item-action">
-          {%- if one.navtitle -%}
-            {{ one.navtitle }}
-          {%- elsif one.breadcrumb -%}
-            {{ one.breadcrumb }}
-          {%- else -%}
-            {{ one.title }}
-          {%- endif -%}
-        </a>
-        {%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
-    </div>
-  </div>
-</div>
-{%- endcomment -%}
