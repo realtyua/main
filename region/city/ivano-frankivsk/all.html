@@ -17,7 +17,6 @@ navtitle: Вся нерухо́мість
       {%- for one in ones -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        cur: {{page.url}}
         {%- if page.dir == current or one.url contains page.url and page.navhide != 1 -%}
         <li class="nav-item">
           {%- if one.url == page.url -%}
