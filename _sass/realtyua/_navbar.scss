@@ -13,6 +13,13 @@ $dropDown       : true;
 .dropdown-item:active {
     background-color: transparent;
 }
+#navbarThreeRealEstate {
+  .nav-tabs {
+    .nav-link span {
+        padding: .4rem 0rem;
+    }
+  }
+}
 .content {
     .navbar {
         background-color: $white;

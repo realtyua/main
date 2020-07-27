@@ -11,6 +11,13 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
     <ul class="navbar-nav nav nav-tabs border-0">
+      <li class="nav-item">
+        <a href="{{ page.url }}" class="nav-link border-0">
+          <span>
+            {{ page.title }} - {{ page.title | split: " " | slice: 2 | join: " " }}
+          </span>
+        </a>
+      </li>
       {%- for one in ones -%}
         {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
         {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
