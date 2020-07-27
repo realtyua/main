@@ -1,5 +1,31 @@
 ---
-layout: table
 title: Вся нерухо́мість у місті іва́но-франкі́вськ
 navtitle: Вся нерухо́мість
 ---
+
+{%- assign lists = site.pages | sort: 'path' | reverse -%}
+{%- for list in lists -%}
+  {%- if forloop.first -%}
+  <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2">
+  {%- endif -%}
+    {%- assign slug = list.url | split: "/" | last -%}
+    {%- assign current = list.url | remove: slug | remove: "//" | append: "/" -%}
+    {%- if page.dir == current and page.navhide != 1 -%}
+      <div class="col mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{{ list.url }}">
+                {%- if list.navtitle -%}{{ list.navtitle }}{%- else -%}{{ list.title }}{%- endif -%}
+              </a>
+            </h5>
+            <p class="card-text">
+              {%- include deputies-list-description.html slug=slug -%}
+            </p>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- if forloop.last -%}
+  </div>
+  {%- endif -%}
