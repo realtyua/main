@@ -3,7 +3,7 @@
 
 {%- assign section = '' | split:'' -%}
 {%- for i in site.pages -%}
-  {%- if i.url contains url -%}
+  {%- if i.url contains url and i.title != '' and i.navhide != 1 -%}
     {%- assign section = section | push: i -%}
   {%- endif -%}
 {%- endfor -%}
