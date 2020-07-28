@@ -3,7 +3,7 @@
 
 {%- assign section = '' | split:'' -%}
 {%- for i in site.pages -%}
-  {%- if i.url contains url and i.url == url -%}
+  {%- if i.url contains url -%}
     {%- assign section = section | push: i -%}
   {%- endif -%}
 {%- endfor -%}
