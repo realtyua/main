@@ -27,13 +27,14 @@
     {% endcomment %}
       <div class="col mb-4">
         <div class="card">
-          {% comment %}
-          {%- assign dir = three.dir | append: 'images/' -%}
+          {%- assign dir = 'assets/images/locations/' -%}
           {%- assign path = slug | prepend: dir | append: '.jpg' -%}
           {%- assign file = site.static_files | where: "path", path | first -%}
-          {%- if file -%}<img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="{{ slug }}">{%- endif -%}
-          {% endcomment %}
-          <img src="https://unsplash.it/400/200/?image=1{%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
+          {%- if file -%}
+            <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Image {{ slug }}">
+          {%- else -%}
+            <img src="https://unsplash.it/538/220/?image=1{%- increment counter -%}" class="card-img-top" alt="Image {{ slug }}">
+          {%- endif -%}
           <div class="card-body">
             <h5 class="card-title">
               <a href="{{ three.url }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
