@@ -1,5 +1,5 @@
 <header>
-  <div class="container bg-primary{% if page.url != '/' %} pb-3{% endif %}">
+  <div class="container bg-primary{% if page.url != '/' %}{% else %} pb-3{% endif %}">
     <div class="row">
       <div class="col-auto ml-auto mt-2">
         <a href="/add" data-toggle="tooltip" data-placement="bottom" title="{{ site.data.lang-uk.add_realestate_title }}" class="text-primary">

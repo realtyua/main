@@ -13,12 +13,12 @@
 {%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
   {%- for s in ss -%}
-    {%- capture slug -%}{{ s.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ s.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- assign slug = s.url | split: "/" | last -%}
+    {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if url == current and s.navhide != 1 and s.title != '' -%}
     <li class="mb-2">
       <a href="{{ s.url }}">
-        {%- if s.navtitle -%}{{ s.navtitle }}{%- else -%}{{ s.title }}{%- endif -%} - 3
+        {%- if s.navtitle -%}{{ s.navtitle }}{%- else -%}{{ s.title }}{%- endif -%}
       </a>
     </li>
     {%- endif -%}

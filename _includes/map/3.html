@@ -10,8 +10,8 @@
 {%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
   {%- for 4 in 4s -%}
-    {%- capture slug -%}{{ 4.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ 4.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- assign slug = 4.url | split: "/" | last -%}
+    {%- assign current = 4.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 4.navhide != 1 and 4.title != '' -%}
     <li class="mb-2">
       <a href="{{ 4.url }}">

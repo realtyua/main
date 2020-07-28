@@ -10,8 +10,8 @@
 {%- if isChildren == true -%}
 <ul class="list-unstyled">
   {%- for 2 in 2s -%}
-    {%- capture slug -%}{{ 2.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ 2.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- assign slug = 2.url | split: "/" | last -%}
+    {%- assign current = 2.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 2.navhide != 1 and 2.title != '' -%}
     <li class="mb-2">
       <a href="{{ 2.url }}">

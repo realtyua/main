@@ -2,8 +2,8 @@
 <div class="row mt-3">
   {%- assign 0s = site.pages | sort: 'path' | reverse -%}
   {%- for 0 in 0s -%}
-    {%- capture slug -%}{{ 0.url | split: "/" | last }}{%- endcapture -%}
-    {%- capture current -%}{{ 0.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- assign slug = 0.url | split: "/" | last -%}
+    {%- assign current = 0.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if "/" == current and 0.navhide != 1 -%}
       <div class="col-sm-6 col-md-3">
         <h6>
@@ -15,8 +15,8 @@
         {%- assign 1s = site.pages -%}
         {%- for 1 in 1s -%}
           {%- if 1 -%}
-            {%- capture slug -%}{{ 1.url | split: "/" | last }}{%- endcapture -%}
-            {%- capture current -%}{{ 1.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+            {%- assign slug = 1.url | split: "/" | last -%}
+            {%- assign current = 1.url | remove: slug | remove: "//" | append: "/" -%}
             {%- if 0.url == current and 1.url contains "city" or 1.url contains "town" -%}
             <div class="col-sm-6 col-md-3">
               <h6>
