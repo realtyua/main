@@ -21,6 +21,12 @@
         <a class="nav-link" id="{{ include.region }}-developers-tab" data-toggle="tab" href="#{{ include.region }}-developers" role="tab" aria-controls="{{ include.region }}-developers" aria-selected="false">{{ site.data.lang-uk.developers | capitalize }}</a>
       </li>
       {%- endif -%}
+      {%- include has-children.html where="realtor/" dir=include.url -%}
+      {%- if hasChildren == true -%}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="{{ include.region }}-realtors-tab" data-toggle="tab" href="#{{ include.region }}-realtors" role="tab" aria-controls="{{ include.region }}-realtors" aria-selected="false">{{ site.data.lang-uk.realtors | capitalize }}</a>
+      </li>
+      {%- endif -%}
     </ul>
   </nav>
   <div class="tab-content" id="{{ include.region }}-realestate-content">
@@ -43,6 +49,16 @@
     {%- include has-children.html where="developer/" dir=include.url -%}
     {%- if hasChildren == true -%}
     <div class="tab-pane pt-3 fade" id="{{ include.region }}-developers" role="tabpanel" aria-labelledby="{{ include.region }}-developers-tab">
+      ...
+      {% comment %}
+      {%- assign dir = include.url | append: 'developer' | append: '/' -%}
+      {%- include current-subpages.html dir=dir page="home" -%}
+      {% endcomment %}
+    </div>
+    {%- endif -%}
+    {%- include has-children.html where="realtor/" dir=include.url -%}
+    {%- if hasChildren == true -%}
+    <div class="tab-pane pt-3 fade" id="{{ include.region }}-realtors" role="tabpanel" aria-labelledby="{{ include.region }}-realtors-tab">
       ...
       {% comment %}
       {%- assign dir = include.url | append: 'developer' | append: '/' -%}
