@@ -2,32 +2,42 @@
 {%- include has-articles.html cat=include.region -%}
 
 <div class="card-text">
-  <nav>
-    <ul class="nav nav-tabs" id="{{ include.region }}-realestate-tab" role="tablist">
-      {%- if hasNews == true -%}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="{{ include.region }}-news-tab" data-toggle="tab" href="#{{ include.region }}-news" role="tab" aria-controls="{{ include.region }}-news" aria-selected="true">{{ site.data.lang-uk.news | capitalize }}</a>
-      </li>
-      {%- endif -%}
-      {%- if hasArticles == true -%}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="{{ include.region }}-articles-tab" data-toggle="tab" href="#{{ include.region }}-articles" role="tab" aria-controls="{{ include.region }}-articles" aria-selected="false">{{ site.data.lang-uk.articles | capitalize }}</a>
-      </li>
-      {%- endif -%}
-      {%- include has-children.html where='developer/' dir=include.url -%}
-      {%- if hasChildren == true -%}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="{{ include.region }}-developers-tab" data-toggle="tab" href="#{{ include.region }}-developers" role="tab" aria-controls="{{ include.region }}-developers" aria-selected="false">{{ site.data.lang-uk.developers | capitalize }}</a>
-      </li>
-      {%- endif -%}
-      {%- include has-children.html where='realtor/' dir=include.url -%}
-      {%- if hasChildren == true -%}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="{{ include.region }}-realtors-tab" data-toggle="tab" href="#{{ include.region }}-realtors" role="tab" aria-controls="{{ include.region }}-realtors" aria-selected="false">{{ site.data.lang-uk.realtors | capitalize }}</a>
-      </li>
-      {%- endif -%}
-    </ul>
+  <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+    <div class="navbar-brand d-md-none">
+      <span class="small">{{ site.data.lang-uk.brand_content }}</span>
+      <span class="ml-1 float-right align-middle text-primary">→</span>
+    </div>
+    <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#card-navbar-{{ include.region }}" aria-controls="card-navbar-{{ include.region }}" aria-expanded="false" aria-label="Toggle button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="card-navbar-{{ include.region }}">
+      <ul class="nav nav-tabs" id="{{ include.region }}-realestate-navigation" role="tablist">
+        {%- if hasNews == true -%}
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="{{ include.region }}-news-tab" data-toggle="tab" href="#{{ include.region }}-news" role="tab" aria-controls="{{ include.region }}-news" aria-selected="true">{{ site.data.lang-uk.news | capitalize }}</a>
+        </li>
+        {%- endif -%}
+        {%- if hasArticles == true -%}
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="{{ include.region }}-articles-tab" data-toggle="tab" href="#{{ include.region }}-articles" role="tab" aria-controls="{{ include.region }}-articles" aria-selected="false">{{ site.data.lang-uk.articles | capitalize }}</a>
+        </li>
+        {%- endif -%}
+        {%- include has-children.html where='developer/' dir=include.url -%}
+        {%- if hasChildren == true -%}
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="{{ include.region }}-developers-tab" data-toggle="tab" href="#{{ include.region }}-developers" role="tab" aria-controls="{{ include.region }}-developers" aria-selected="false">{{ site.data.lang-uk.developers | capitalize }}</a>
+        </li>
+        {%- endif -%}
+        {%- include has-children.html where='realtor/' dir=include.url -%}
+        {%- if hasChildren == true -%}
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="{{ include.region }}-realtors-tab" data-toggle="tab" href="#{{ include.region }}-realtors" role="tab" aria-controls="{{ include.region }}-realtors" aria-selected="false">{{ site.data.lang-uk.realtors | capitalize }}</a>
+        </li>
+        {%- endif -%}
+      </ul>
+    </div>
   </nav>
+  <hr class="mt-2 mt-md-0">
   <div class="tab-content" id="{{ include.region }}-realestate-content">
     {%- if hasNews == true -%}
     <div class="tab-pane pt-3 fade show active" id="{{ include.region }}-news" role="tabpanel" aria-labelledby="{{ include.region }}-news-tab">
