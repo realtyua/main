@@ -11,7 +11,7 @@
 <div class="row row-cols-1 row-cols-md-2">
   {%- for three in threes -%}
     {%- assign slug = three.url | split: "/" | last -%}
-    {%- assign slug = three.url | remove: slug | remove: "//" | append: "/" -%}
+    {%- assign current = three.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and three.navhide != 1 and three.title != '' -%}
     {% comment %}
       {%- if three.url contains "ivano-frankivska" -%}
