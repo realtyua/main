@@ -7,8 +7,7 @@
       <div class="col-12">
         {% if one.url contains "/region/" %}
           <h1 class="mb-4">
-            {% if one.url contains "/region/" %}{{ site.data.lang-uk.deck_region }} {% endif %}
-            <a href="{{ one.url }}">{%- if one.navtitle -%}{{ one.navtitle | downcase }}{%- else -%}{{ one.title | downcase }}{%- endif -%}</a>
+            <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
           </h1>
         {% else %}
           <h2 class="mb-4">
