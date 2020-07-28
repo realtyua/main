@@ -1,0 +1,45 @@
+{%- assign threes = site.pages | sort: "path" -%}
+
+{%- assign isChildren = false -%}
+{%- for three in threes -%}
+  {%- if three.url contains include.current and three.url != include.current and three.navhide != 1 -%}
+    {%- assign isChildren = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if isChildren == true -%}
+<div class="row row-cols-1 row-cols-md-2">
+  {%- for three in threes -%}
+    {%- assign slug = three.url | split: "/" | last -%}
+    {%- assign slug = three.url | remove: slug | remove: "//" | append: "/" -%}
+    {%- if include.current == current and three.navhide != 1 and three.title != '' -%}
+    {% comment %}
+      {%- if three.url contains "ivano-frankivska" -%}
+      <div class="col mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ site.data.lung-uk.recently_added }}</h5>
+            <div class="card-text">...</div>
+          </div>
+        </div>
+      </div>
+      {%- endif -%}
+    {% endcomment %}
+      <div class="col mb-4">
+        <div class="card">
+          {%- assign dir = three.dir | append: 'images/' -%}
+          {%- assign path = slug | prepend: dir | append: '.jpg' -%}
+          {%- assign file = site.static_files | where: "path", path | first -%}
+          {%- if file -%}<img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="{{ slug }}">{%- endif -%}
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{{ three.url }}">{%- if three.navtitle -%}{{ three.navtitle }}{%- else -%}{{ three.title }}{%- endif -%}</a>
+            </h5>
+            <div class="card-text">...</div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+{%- endif -%}
