@@ -1,6 +1,6 @@
 
 {%- assign url = include.url -%}
-
+{%- assign region = include.region -%}
 {%- assign ss = site.pages | sort: "path" -%}
 
 {%- assign isChildren = false -%}
@@ -11,17 +11,25 @@
 {%- endfor -%}
 
 {%- if isChildren == true -%}
-<ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
-  {%- for s in ss -%}
-    {%- assign slug = s.url | split: "/" | last -%}
-    {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
-    {%- if url == current and s.navhide != 1 and s.title != '' -%}
-    <li class="mb-2">
-      <a href="{{ s.url }}">
-        {%- if s.navtitle -%}{{ s.navtitle }}{%- else -%}{{ s.title }}{%- endif -%}
-      </a>
-    </li>
-    {%- endif -%}
-  {%- endfor -%}
-</ul>
+  <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+    <div class="navbar-brand d-md-none">
+      <span class="small">{{ site.data.lang-uk.brand_content }}</span>
+      <span class="ml-1 float-right align-middle text-primary">→</span>
+    </div>
+    <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-content" aria-controls="{{ region }}-realestate-content" aria-expanded="false" aria-label="Toggle button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="{{ region }}-realestate-content">
+      <ul class="navbar-nav nav nav-tabs border-0">
+        {%- for s in ss -%}
+          {%- assign slug = s.url | split: "/" | last -%}
+          {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
+          {%- if url == current and s.navhide != 1 and s.title != '' -%}
+            {%- include nav-item.html -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+  <hr class="mt-2 mt-md-0">
 {%- endif -%}
