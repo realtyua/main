@@ -25,7 +25,7 @@
           {%- assign slug = s.url | split: "/" | last -%}
           {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
           {%- if url == current and s.navhide != 1 and s.title != '' -%}
-            {%- include nav-item.html -%}
+            {%- include home/navitem.html -%}
           {%- endif -%}
         {%- endfor -%}
       </ul>

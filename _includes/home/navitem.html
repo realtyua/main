@@ -1,0 +1,24 @@
+{%- capture navlink -%}
+  {%- if slug == 'commercial' -%}
+    {{ site.data.lang-uk.title_tab_commercial }}
+  {%- else -%}
+    {%- if s.navtitle -%}
+      {{ s.navtitle }}
+    {%- elsif s.breadcrumb -%}
+      {{ s.breadcrumb }}
+    {%- else -%}
+      {{ s.title }}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+<li class="nav-item">
+  {%- if one.url == page.url -%}
+  <span class="nav-link border-0 active">
+    <span>{{ navlink }}</span>
+  </span>
+  {%- else -%}
+  <a href="{{ one.url }}" class="nav-link border-0">
+    <span>{{ navlink }}</span>
+  </a>
+  {%- endif -%}
+</li>
