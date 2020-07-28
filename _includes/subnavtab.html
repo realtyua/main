@@ -19,7 +19,7 @@
         {%- if forloop.first -%}
         {%- endif -%}
           {%- assign slug = tab.url | split: "/" | last -%}
-          {%- capture current -%}{{ tab.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+          {%- assign current = tab.url | remove: slug | remove: "//" | append: "/" -%}
           {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
             <li class="nav-item" role="presentation">
               <a class="nav-link border-0" href="#{{ slug }}" id="{{ slug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ slug }}" aria-selected="true">
@@ -83,7 +83,7 @@
     {%- if forloop.first -%}
     {%- endif -%}
       {%- assign slug = content.url | split: "/" | last -%}
-      {%- capture current -%}{{ content.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+      {%- assign current = content.url | remove: slug | remove: "//" | append: "/" -%}
       {%- capture title -%}{%- if content.navtitle -%}{{ content.navtitle }}{%- else -%}{{ content.title }}{%- endif -%}{%- endcapture -%}
       {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
         <div class="tab-pane fade" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
