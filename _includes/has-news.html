@@ -1,0 +1,6 @@
+{%- if isVillage == false -%}{%- assign news = '' | split:'' -%}{%- for i in site.categories[include.cat] -%}{%- unless i.url contains "village" or i.url contains "decisions" -%}{%- assign news = news | push:i -%}{%- endunless -%}{%- endfor -%}{% else %}{%- assign news = '' | split:'' -%}{%- for i in site.categories[include.cat] -%}{%- unless i.url contains "decisions" -%}{%- assign news = news | push:i -%}{%- endunless -%}{%- endfor -%}{%- endif -%}
+{%- for article in news -%}
+{%- assign hasNews = true -%}
+{%- else -%}
+{%- assign hasNews = false -%}
+{%- endfor -%}

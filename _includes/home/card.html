@@ -1,0 +1,59 @@
+{%- include has-news.html cat=include.region -%}
+{%- include has-articles.html cat=include.region -%}
+
+{% comment %}
+{%- if hasNews == true or hasArticles == true or hasChildren == true -%}
+{% endcomment %}
+<div class="card-text">
+  <nav>
+    <ul class="nav nav-tabs" id="{{ include.region }}-realestate-tab" role="tablist">
+      {%- if hasNews == true -%}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="{{ include.region }}-news-tab" data-toggle="tab" href="#{{ include.region }}-news" role="tab" aria-controls="{{ include.region }}-news" aria-selected="true">{{ site.data.lang-uk.news | capitalize }}</a>
+      </li>
+      {%- endif -%}
+      {%- if hasArticles == true -%}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="{{ include.region }}-articles-tab" data-toggle="tab" href="#{{ include.region }}-articles" role="tab" aria-controls="{{ include.region }}-articles" aria-selected="false">{{ site.data.lang-uk.articles | capitalize }}</a>
+      </li>
+      {%- endif -%}
+      {%- include has-children.html where="developer/" dir=include.url -%}
+      {%- if hasChildren == true -%}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="{{ include.region }}-developers-tab" data-toggle="tab" href="#{{ include.region }}-developers" role="tab" aria-controls="{{ include.region }}-developers" aria-selected="false">{{ site.data.lang-uk.developers | capitalize }}</a>
+      </li>
+      {%- endif -%}
+    </ul>
+  </nav>
+  <div class="tab-content" id="{{ include.region }}-realestate-content">
+    {%- if hasNews == true -%}
+    <div class="tab-pane pt-3 fade show active" id="{{ include.region }}-news" role="tabpanel" aria-labelledby="{{ include.region }}-news-tab">
+      ...
+      {% comment %}
+      {%- include home/news-last.html cat=include.region url=include.url num="3" -%}
+      {% endcomment %}
+    </div>
+    {%- endif -%}
+    {%- if hasArticles == true -%}
+    <div class="tab-pane pt-3 fade" id="{{ include.region }}-articles" role="tabpanel" aria-labelledby="{{ include.region }}-articles-tab">
+      ...
+      {% comment %}
+      {%- include home/articles-last.html cat=include.region url=include.url num="3" -%}
+      {% endcomment %}
+    </div>
+    {%- endif -%}
+    {%- include has-children.html where="developer/" dir=include.url -%}
+    {%- if hasChildren == true -%}
+    <div class="tab-pane pt-3 fade" id="{{ include.region }}-developers" role="tabpanel" aria-labelledby="{{ include.region }}-developers-tab">
+      ...
+      {% comment %}
+      {%- assign dir = include.url | append: 'developer' | append: '/' -%}
+      {%- include current-subpages.html dir=dir page="home" -%}
+      {% endcomment %}
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+{% comment %}
+{%- endif -%}
+{% endcomment %}
