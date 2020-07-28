@@ -1,5 +1,6 @@
 <footer>
   <div class="container border-top-4 border-primary">
+    {%- if page.url != '/' -%}
     <div class="row pt-4">
       <div class="col-12">
         <a id="mapsite" class="collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">
@@ -8,6 +9,7 @@
         <div class="collapse multi-collapse website-map" id="websitemap">{%- include map/0.html -%}</div>
       </div>
     </div>
+    {%- endif -%}
     <div class="row justify-content-md-center mt-4">
         <div class="col-md-6 col-lg-5">
           <div class="d-flex position-relative">
