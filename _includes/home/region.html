@@ -36,7 +36,7 @@
           <img src="https://unsplash.it/400/200/?image=1{%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
           <div class="card-body">
             <h5 class="card-title">
-              <a href="{{ three.url }}">{%- if three.navtitle -%}{{ three.navtitle }}{%- else -%}{{ three.title }}{%- endif -%}</a>
+              <a href="{{ three.url }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
             </h5>
              {%- include home/card.html region=slug url=three.url -%}
           </div>
