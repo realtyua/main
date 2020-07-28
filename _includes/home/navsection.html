@@ -1,15 +1,27 @@
 
 {%- assign url = include.url -%}
 
-{%- assign section = '' | split:'' -%}
-{%- for i in site.pages -%}
-  {%- if i.url contains url and i.title != '' and i.navhide != 1 -%}
-    {%- assign section = section | push: i -%}
+{%- assign ss = site.pages | sort: "path" -%}
+
+{%- assign isChildren = false -%}
+{%- for s in ss -%}
+  {%- if s.url contains url and s.url != url -%}
+    {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
 
-<ul>
-  {%- for item in section -%}
-    <li>{{ item.navtitle }}</li>
+{%- if isChildren == true -%}
+<ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
+  {%- for s in ss -%}
+    {%- capture slug -%}{{ s.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ s.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if url == current and s.navhide != 1 and s.title != '' -%}
+    <li class="mb-2">
+      <a href="{{ s.url }}">
+        {%- if s.navtitle -%}{{ s.navtitle }}{%- else -%}{{ s.title }}{%- endif -%} - 3
+      </a>
+    </li>
+    {%- endif -%}
   {%- endfor -%}
 </ul>
+{%- endif -%}

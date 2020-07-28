@@ -15,7 +15,7 @@
     {%- if include.current == current and 3.navhide != 1 and 3.title != '' -%}
     <li class="mb-2">
       <a href="{{ 3.url }}">
-        {%- if 3.navtitle -%}{{ 3.navtitle }}{%- else -%}{{ 3.title }}{%- endif -%}
+        {%- if 3.navtitle -%}{{ 3.navtitle }}{%- else -%}{{ 3.title }}{%- endif -%} - 3
       </a>
       {%- include map/3.html current=3.url -%}
     </li>
