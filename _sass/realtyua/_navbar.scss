@@ -13,7 +13,11 @@ $dropDown       : true;
 .dropdown-item:active {
     background-color: transparent;
 }
+
 .content {
+    .card-text .navbar .navbar-nav .nav-link {
+        padding: .55rem;
+    }
     .navbar {
         background-color: $white;
         .navbar-brand {
