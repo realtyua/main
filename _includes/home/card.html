@@ -1,9 +1,7 @@
 {%- include has-news.html cat=include.region -%}
 {%- include has-articles.html cat=include.region -%}
 
-{% comment %}
-{%- if hasNews == true or hasArticles == true or hasChildren == true -%}
-{% endcomment %}
+
 <div class="card-text">
   <nav>
     <ul class="nav nav-tabs" id="{{ include.region }}-realestate-tab" role="tablist">
@@ -54,6 +52,3 @@
     {%- endif -%}
   </div>
 </div>
-{% comment %}
-{%- endif -%}
-{% endcomment %}
