@@ -27,8 +27,8 @@
     {% endcomment %}
       <div class="col mb-4">
         <div class="card">
-          {%- assign dir = 'assets/images/locations/' -%}
-          {%- assign path = slug | prepend: dir | append: '.jpg' -%}
+          {%- assign dir = '/assets/images/locations/' -%}
+          {%- assign path = slug | prepend: dir | append: '.jpg' | relative_url -%}
           {%- assign file = site.static_files | where: "path", path | first -%}
           {%- if file -%}
             <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Image {{ slug }}">
@@ -37,6 +37,7 @@
           {%- endif -%}
           <div class="card-body">
             <h5 class="card-title">
+              {{ path }}<br>
               <a href="{{ three.url }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
             </h5>
              {%- include home/card.html region=slug url=three.url -%}
