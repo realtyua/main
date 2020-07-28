@@ -2,16 +2,14 @@
 {%- assign url = include.url -%}
 {%- assign region = include.region -%}
 {%- assign ss = site.pages | sort: "path" -%}
-
 {%- assign isChildren = false -%}
 {%- for s in ss -%}
   {%- if s.url contains url and s.url != url -%}
     {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
-
 {%- if isChildren == true -%}
-  <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+  <nav class="navbar navbar-expand-lx navbar-light bg-white p-0">
     <div class="navbar-brand d-md-none">
       <span class="small">{{ site.data.lang-uk.brand_content }}</span>
       <span class="ml-1 float-right align-middle text-primary">→</span>
@@ -31,5 +29,4 @@
       </ul>
     </div>
   </nav>
-  <hr class="mt-2 mt-md-0">
 {%- endif -%}

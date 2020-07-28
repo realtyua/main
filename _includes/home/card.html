@@ -1,10 +1,46 @@
 {%- include has-news.html cat=include.region -%}
 {%- include has-articles.html cat=include.region -%}
-
 <div class="card-text">
+  <nav>
+    <ul class="nav nav-tabs" id="{{ include.region }}-realestate-tab" role="tablist">
+      {%- if hasNews == true -%}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link border-0 active" id="{{ include.region }}-news-tab" data-toggle="tab" href="#{{ include.region }}-news" role="tab" aria-controls="{{ include.region }}-news" aria-selected="true">
+          <span>{{ site.data.lang-uk.news | capitalize }}</span>
+        </a>
+      </li>
+      {%- endif -%}
+      {%- if hasArticles == true -%}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link border-0" id="{{ include.region }}-articles-tab" data-toggle="tab" href="#{{ include.region }}-articles" role="tab" aria-controls="{{ include.region }}-articles" aria-selected="false">
+          <span>{{ site.data.lang-uk.articles | capitalize }}</span>
+        </a>
+      </li>
+      {%- endif -%}
+      <li class="nav-item last">
+        {%- include home/navsection.html region=include.region url=include.url -%}
+      </li>
+    </ul>
+  </nav>
+  <div class="tab-content" id="ivano-frankivsk-rada-content">
+    {%- if hasNews == true -%}
+    <div class="tab-pane pt-3 fade show active" id="{{ include.region }}-news" role="tabpanel" aria-labelledby="{{ include.region }}-news-tab">
+      ...
+      {% comment %}
+      {%- include home/news-last.html cat=include.region url=include.url num='3'-%}
+      {% endcomment %}
+    </div>
+    {%- endif -%}
+    {%- if hasArticles == true -%}
+    <div class="tab-pane pt-3 fade" id="{{ include.region }}-articles" role="tabpanel" aria-labelledby="{{ include.region }}-articles-tab">
+      ...
+      {% comment %}
+      {%- include home/articles-last.html cat=include.region url=include.url num='3' -%}
+      {% endcomment %}
+    </div>
+  </div>
+</div>
 
-
-  {%- include home/navsection.html region=include.region url=include.url -%}
 
   {% comment %}
   <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
@@ -90,4 +126,3 @@
     {%- endif -%}
   </div>
   {% endcomment %}
-</div>
