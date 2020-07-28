@@ -12,8 +12,8 @@
           </h1>
         {% else %}
           <h2 class="mb-4">
-            <a href="{{ one.url }}">{%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}</a>
-            {% if one.url contains "/district/" %} {{ site.data.labels.deck_region_in }}{% endif %}
+            <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
+            {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
           </h2>
         {% endif %}
       </div>
@@ -30,7 +30,7 @@
             <div class="col-12">
               <h2 class="mb-4">
                 <a href="{{ two.url }}">
-                  {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+                  {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
                 </a>
                 {% if two.url contains "/region/city/" or two.url contains "/district/town/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
               </h2>
