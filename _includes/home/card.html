@@ -7,7 +7,12 @@
         <ul class="nav nav-tabs" id="{{ include.region }}-realestate-tab" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link border-0 active" id="{{ include.region }}-recently-tab" data-toggle="tab" href="#{{ include.region }}-recently" role="tab" aria-controls="{{ include.region }}-recently" aria-selected="true">
-              <span>Нове</span>
+              <span>Новини</span>
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link border-0" id="{{ include.region }}-recently1-tab" data-toggle="tab" href="#{{ include.region }}-recently1" role="tab" aria-controls="{{ include.region }}-recently1" aria-selected="true">
+              <span>Статті</span>
             </a>
           </li>
           {%- if hasNews == true -%}
@@ -34,7 +39,10 @@
   <hr class="mt-2 mt-md-0">
   <div class="tab-content" id="{{ include.region }}-realestate-content">
     <div class="tab-pane pt-3 fade show active" id="{{ include.region }}-recently" role="tabpanel" aria-labelledby="{{ include.region }}-recently-tab">
-      Нещодавно додано
+      Нещодавно додані новини
+    </div>
+    <div class="tab-pane pt-3 fade show active" id="{{ include.region }}-recently1" role="tabpanel" aria-labelledby="{{ include.region }}-recently1-tab">
+      Нещодавно додані статті
     </div>
     {%- if hasNews == true -%}
     <div class="tab-pane pt-3 fade" id="{{ include.region }}-news" role="tabpanel" aria-labelledby="{{ include.region }}-news-tab">
