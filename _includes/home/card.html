@@ -6,25 +6,25 @@
       <nav>
         <ul class="nav nav-tabs border-0" id="{{ include.region }}-realestate-tab" role="tablist">
           <li class="nav-item" role="presentation">
-            <a class="nav-link border-0 active" id="{{ include.region }}-recently-tab" data-toggle="tab" href="#{{ include.region }}-recently" role="tab" aria-controls="{{ include.region }}-recently" aria-selected="true">
+            <a class="nav-link active" id="{{ include.region }}-recently-tab" data-toggle="tab" href="#{{ include.region }}-recently" role="tab" aria-controls="{{ include.region }}-recently" aria-selected="true">
               <span>Новини</span>
             </a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link border-0" id="{{ include.region }}-recently1-tab" data-toggle="tab" href="#{{ include.region }}-recently1" role="tab" aria-controls="{{ include.region }}-recently1" aria-selected="true">
+            <a class="nav-link" id="{{ include.region }}-recently1-tab" data-toggle="tab" href="#{{ include.region }}-recently1" role="tab" aria-controls="{{ include.region }}-recently1" aria-selected="true">
               <span>Статті</span>
             </a>
           </li>
           {%- if hasNews == true -%}
           <li class="nav-item" role="presentation">
-            <a class="nav-link border-0" id="{{ include.region }}-news-tab" data-toggle="tab" href="#{{ include.region }}-news" role="tab" aria-controls="{{ include.region }}-news" aria-selected="true">
+            <a class="nav-link" id="{{ include.region }}-news-tab" data-toggle="tab" href="#{{ include.region }}-news" role="tab" aria-controls="{{ include.region }}-news" aria-selected="true">
               <span>{{ site.data.lang-uk.news | capitalize }}</span>
             </a>
           </li>
           {%- endif -%}
           {%- if hasArticles == true -%}
           <li class="nav-item" role="presentation">
-            <a class="nav-link border-0" id="{{ include.region }}-articles-tab" data-toggle="tab" href="#{{ include.region }}-articles" role="tab" aria-controls="{{ include.region }}-articles" aria-selected="false">
+            <a class="nav-link" id="{{ include.region }}-articles-tab" data-toggle="tab" href="#{{ include.region }}-articles" role="tab" aria-controls="{{ include.region }}-articles" aria-selected="false">
               <span>{{ site.data.lang-uk.articles | capitalize }}</span>
             </a>
           </li>
