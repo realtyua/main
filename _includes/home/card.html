@@ -1,6 +1,15 @@
 {%- include has-news.html cat=include.region -%}
 {%- include has-articles.html cat=include.region -%}
 <div class="card-text">
+  <div class="d-flex justify-content-between">
+    <div class="tabs">Новини</div>
+    <div class="menu">Меню</div>
+  </div>
+</div>
+
+
+  {% comment %}
+
   <nav>
     <ul class="nav nav-tabs" id="{{ include.region }}-realestate-tab" role="tablist">
       <li class="nav-item" role="presentation">
@@ -48,10 +57,7 @@
     </div>
     {%- endif -%}
   </div>
-</div>
 
-
-  {% comment %}
   <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
     <div class="navbar-brand d-md-none">
       <span class="small">{{ site.data.lang-uk.brand_content }}</span>
