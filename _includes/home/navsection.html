@@ -13,7 +13,7 @@
     <button class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="section collapse navbar-collapse" id="{{ region }}-realestate-section">
+    <div class="section px-2 collapse navbar-collapse" id="{{ region }}-realestate-section">
       <ul class="navbar-nav nav">
         {%- for s in ss -%}
           {%- assign slug = s.url | split: "/" | last -%}
