@@ -10,9 +10,9 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 // })
 //
 
-$(document).on('click',function(){
-    $('.collapse').collapse('hide');
-})
+// $(document).on('click',function(){
+//     $('.collapse').collapse('hide');
+// })
 
 //
 // $(".navbar-nav li a:not('.dropdown-toggle')").on('click', function (){
