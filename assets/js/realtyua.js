@@ -4,21 +4,21 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
-//
+
 // $('.nav-tabs>li>a.nav-link').on('click', function(){
 //     $('.navbar-collapse').collapse('hide');
 // })
-//
+
 
 // $(document).on('click',function(){
 //     $('.collapse').collapse('hide');
 // })
 
-//
-// $(".navbar-nav li a:not('.dropdown-toggle')").on('click', function (){
-//   $('.navbar-collapse').collapse('hide');
-// })
-//
+
+$(".navbar-nav li a:not('.dropdown-toggle')").on('click', function (){
+  $('.navbar-collapse').collapse('hide');
+})
+
 
 
 
