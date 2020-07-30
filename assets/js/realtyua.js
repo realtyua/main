@@ -14,14 +14,14 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 //     $('.collapse').collapse('hide');
 // })
 
-
-$(".nav-tabs>li>a.nav-link:not('.dropdown-toggle')").on('click', function (){
-  $('.navbar-collapse').collapse('hide');
-})
-
-$(".card>div>a.navbar-toggler:not('.dropdown-toggle')").on('click', function (){
-  $('.navbar-collapse').collapse('hide');
-})
+// 
+// $(".nav-tabs>li>a.nav-link:not('.dropdown-toggle')").on('click', function (){
+//   $('.navbar-collapse').collapse('hide');
+// })
+//
+// $(".card>div>a.navbar-toggler:not('.dropdown-toggle')").on('click', function (){
+//   $('.multi-collapse').collapse('hide');
+// })
 
 //
 // $(".navbar-nav li a:not('.dropdown-toggle')").on('click', function (){
