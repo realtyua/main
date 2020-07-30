@@ -14,21 +14,28 @@ $dropDown       : true;
     background-color: transparent;
 }
 
-.section {
-    .navbar {
-        .nav-tabs {
-            .nav-link span:hover, .nav-link span:focus {
-                color: #000000;
-            }
-        }
-    }
-}
+// .navbar {
+//     .section {
+//         .navbar-nav {
+//             .nav-link:hover, .nav-link:focus {
+//                 color: #000000;
+//             }
+//         }
+//     }
+// }
 
 .content {
     .card-text .navbar .navbar-nav .nav-link {
         padding: .55rem;
     }
     .navbar {
+        .section {
+            .navbar-nav {
+                .nav-link:hover, .nav-link:focus {
+                    color: #000000;
+                }
+            }
+        }
         background-color: $white;
         .navbar-brand {
             color: $black;
