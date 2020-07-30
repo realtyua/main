@@ -19,6 +19,10 @@ $(".nav-tabs>li>a.nav-link:not('.dropdown-toggle')").on('click', function (){
   $('.navbar-collapse').collapse('hide');
 })
 
+$(".card>div>a.navbar-toggler:not('.dropdown-toggle')").on('click', function (){
+  $('.navbar-collapse').collapse('hide');
+})
+
 //
 // $(".navbar-nav li a:not('.dropdown-toggle')").on('click', function (){
 //   $('.navbar-collapse').collapse('hide');
