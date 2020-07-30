@@ -43,7 +43,7 @@
     <div class="tab-pane pt-3 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
       {%- assign all = include.url | append: 'all.html' -%}
-      {%- assign region = include.region -%}
+      {%- assign url = include.url -%}
       {%- assign ss = site.pages | sort: "path" -%}
       {%- assign isChildren = false -%}
       {%- for s in ss -%}
