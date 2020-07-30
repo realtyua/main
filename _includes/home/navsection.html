@@ -1,6 +1,6 @@
 
 {%- assign url = include.url -%}
-{%- assign all = include.url | append: '/all.html' -%}
+{%- assign all = include.url | append: 'all.html' -%}
 {%- assign region = include.region -%}
 {%- assign ss = site.pages | sort: "path" -%}
 {%- assign isChildren = false -%}
@@ -27,5 +27,5 @@
       </ul>
     </div>
   </nav>
-  {{all}}br
+  {{all}} - {{isAll}}<br>
 {%- endif -%}
