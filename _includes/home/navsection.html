@@ -19,7 +19,7 @@
         {%- for s in ss -%}
           {%- assign slug = s.url | split: "/" | last -%}
           {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
-          {%- if s.url contains all -%}{%- assign isAll = true -%}{%- endif -%}
+          {%- if s.url contains all -%}{%- assign isAll = true -%}{{s.url}}{%- endif -%}
           {%- if url == current and s.navhide != 1 and s.title != '' or s.url contains all -%}
             {%- include home/navitem.html -%}
           {%- endif -%}
@@ -27,5 +27,4 @@
       </ul>
     </div>
   </nav>
-  {{all}} - {{isAll}}<br>
 {%- endif -%}
