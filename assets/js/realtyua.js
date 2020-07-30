@@ -5,16 +5,16 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 })
 
 
-// $('.nav-tabs>li>a.nav-link').on('click', function(){
-//     $('.navbar-collapse').collapse('hide');
-// })
+$('.nav-tabs>li>a.nav-link').on('click', function(){
+    $('.navbar-collapse').collapse('hide');
+})
 
 
 // $(document).on('click',function(){
 //     $('.collapse').collapse('hide');
 // })
 
-// 
+//
 // $(".nav-tabs>li>a.nav-link:not('.dropdown-toggle')").on('click', function (){
 //   $('.navbar-collapse').collapse('hide');
 // })
