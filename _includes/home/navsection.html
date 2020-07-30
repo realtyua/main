@@ -1,6 +1,8 @@
 
 {%- assign url = include.url -%}
+
 {%- assign all = include.url | append: 'all.html' -%}
+
 {%- assign region = include.region -%}
 {%- assign ss = site.pages | sort: "path" -%}
 {%- assign isChildren = false -%}
@@ -19,7 +21,7 @@
         {%- for s in ss -%}
           {%- assign slug = s.url | split: "/" | last -%}
           {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
-          {%- if s.url contains all -%}{%- assign isAll = true -%}{{s.url}}{%- endif -%}
+          {%- if s.url contains all -%}{%- assign isAll = true -%}{%- endif -%}
           {%- if url == current and s.navhide != 1 and s.title != '' or s.url contains all -%}
             {%- include home/navitem.html -%}
           {%- endif -%}
