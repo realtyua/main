@@ -28,7 +28,11 @@
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
-        {% if page.layout == "post" %}
+        {%- if page.layout == "post" -%}
+          <li class="breadcrumb-item active" aria-current="page">
+              {{ page.title }}
+          </li>
+        {%- elsif page.url contains ".html" -%}
           <li class="breadcrumb-item active" aria-current="page">
               {{ page.title }}
           </li>
