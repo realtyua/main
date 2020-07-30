@@ -49,42 +49,11 @@
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-3 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
-{%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
+      {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
 
-{% capture included %}{%- include {{ data }} -%}{% endcapture %}
-{% unless included contains "Liquid error" %}
-  {%- include {{ data }} -%}
-{% endunless %}
-
-{%- for offer in offers limit:9 -%}
-  {%- if forloop.first -%}
-  <div class="row mx-n2">
-  {%- endif -%}
-    {%- assign index = forloop.index0 | modulo: 2 -%}
-    {%- assign cycle = forloop.index | modulo: 2 -%}
-    {%- if index == 0 -%}
-    <div class="col-md-4 px-2">
-    {%- endif -%}
-      <p>{{ offer.type }}</p>
-    {%- if cycle == 0 -%}
-    </div>
-    {%- else -%}
-    {%- if forloop.last -%}
-    </div>
-    {%- endif -%}
-    {%- endif -%}
-  {%- if forloop.last -%}
-  </div>
-  <div class="row">
-    <div class="col-auto ml-auto">
-      <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-        {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
-      </a>
-    </div>
-  </div>
-  {%- endif -%}
-{%- endfor -%}
-
+{% if file != nil %}
+      {{ data }}<br>
+{% endif %}
 
 
     </div>
