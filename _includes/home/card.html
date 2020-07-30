@@ -51,7 +51,7 @@
 
       {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
 
-{% if file != nil %}
+{% if isAll == true %}
       {{ data }}<br>
 {% endif %}
 
