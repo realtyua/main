@@ -51,7 +51,12 @@
 
       {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
 
-{% if data != nil %}
+{% capture the_snippet_content %}{%- include {{ data }} -%}{% endcapture %}
+{% unless the_snippet_content contains "Liquid error" %}
+  {%- include {{ data }} -%}
+{% endunless %}
+
+{% if file != nil %}
       {{ data }}<br>
 {% endif %}
 
