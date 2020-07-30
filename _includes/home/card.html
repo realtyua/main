@@ -2,6 +2,13 @@
 {%- include has-articles.html cat=region -%}
 {%- assign region = include.region -%}
 
+{%- capture file -%}data/{{ region }}/all.html{%- endcapture -%}
+{% for static_file in site.static_files %}
+    {% if static_file.path == file %}
+        {% assign isFile = true %}
+    {% endif %}
+{% endfor %}
+
 <div class="card-text">
   <div class="d-flex justify-content-between">
     <div class="tabs flex-fill">
@@ -44,8 +51,9 @@
 
       {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
 
+{% if isFile == true %}
       {{ data }}<br>
-
+{% endif %}
 
 
     </div>
