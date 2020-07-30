@@ -9,12 +9,21 @@ $('.nav-tabs>li>a.nav-link').on('click', function(){
     $('.navbar-collapse').collapse('hide');
 })
 
+document.getElementsByClassName('card').onclick = function(e) {
+  if(e.target != document.getElementsByClassName('card')) {
+      console.log('You clicked outside');
+  } else {
+      console.log('You clicked inside');
+  }
+}
+
 
 // $(document).on('click',function(){
-//     $('.collapse').collapse('hide');
+//     $('.tab-pane').find('.card>.show').collapse('hide');
+//     //$('.collapse').collapse('hide');
 // })
 
-//
+
 // $(".nav-tabs>li>a.nav-link:not('.dropdown-toggle')").on('click', function (){
 //   $('.navbar-collapse').collapse('hide');
 // })
