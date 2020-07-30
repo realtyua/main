@@ -4,23 +4,19 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
-
 $('.nav-tabs>li>a.nav-link').on('click', function(){
     $('.navbar-collapse').collapse('hide');
 })
 
-document.getElementsByClassName('card').onclick = function(e) {
-  if(e.target != document.getElementsByClassName('card')) {
-      console.log('You clicked outside');
-  } else {
-      console.log('You clicked inside');
-  }
-}
+$(document).on('click', function (e) {
+    if ($(e.target).closest(".card").length === 0) {
+        $('.collapse').collapse('hide');
+    }
+});
 
 
 // $(document).on('click',function(){
-//     $('.tab-pane').find('.card>.show').collapse('hide');
-//     //$('.collapse').collapse('hide');
+//     $('.collapse').collapse('hide');
 // })
 
 
