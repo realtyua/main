@@ -5,7 +5,7 @@
     <div class="main-breadcrumbs">
       <p class="visually-hidden" id="breadcrumb">{{ site.data.lang-uk.you_are_here }}:</p>
       <ol class="breadcrumb mb-0 px-0 py-4 bg-white">
-        <li class="breadcrumb-item"><a href="{{ site.baseurl }}/"><span>Головна</span></a></li>
+        <li class="breadcrumb-item"><a href="{{ site.baseurl }}/"><span>{{ site.data.lang-uk.home }}</span></a></li>
         {%- capture page_url_without_index_html -%}{{ page.url | remove: "/index.html" }}{%- endcapture -%}
         {%- assign splitted_url_parts = page_url_without_index_html | split: '/' -%}
         {%- capture forLoopMaxInt -%}{{ splitted_url_parts.size | minus:1 }}{%- endcapture -%}
