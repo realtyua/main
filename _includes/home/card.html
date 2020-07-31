@@ -45,7 +45,7 @@
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ss = site.pages | sort: "path" -%}
-      {%- assign isChildren = false -%}
+      {%- assign isAll = false -%}
       {%- for s in ss -%}
         {%- if s.url contains url and s.url == all and s.url != url -%}
           url: {{ s.url }}<br>
