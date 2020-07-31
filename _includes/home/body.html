@@ -1,0 +1,12 @@
+{% if offer.type %}{{ site.data.lang-uk.re_for_sale }} <strong class="text-lowercase">{{ offer.type }}</strong>, {% endif %}
+{% if offer.type == land %} {{ site.data.lang-uk.re_surface }} <strong>{{ offer.surface_land }}</strong>&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup>, {% else %}
+{% if offer.surface %}{{ site.data.lang-uk.re_surface }} <strong>{{ offer.surface }}</strong>&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup>, {% endif %}
+{% if offer.rooms %}{{ site.data.lang-uk.re_rooms }} <strong>{{ offer.rooms }}</strong>, {% endif %}
+{% endif %}
+{% if offer.location %}{{ site.data.lang-uk.re_location }} <strong>{{ offer.location }}</strong> {% endif %}
+{% if offer.address %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>, {% endif %}
+{% if offer.price %}{{ site.data.lang-uk.re_price }} <mark>{{ offer.price }}</mark>{% endif %}
+<details>
+  <summary>&phone;</summary>
+  <span>{%- include footer/phone.html legal=offer.phone type='text' -%}</span>
+</details>.
