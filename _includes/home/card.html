@@ -50,7 +50,7 @@
         {%- if s.url contains url and s.url == all -%}
           url: {{ s.url }}<br>
           {%- assign isAll = true -%}
-          {%- assign foo = page.title | split: "/" | slice: 5, 5 | join: "/" -%}
+          {%- assign foo = page.title | split: "/" | slice: 2, 5 | join: "/" -%}
         {%- endif -%}
       {%- endfor -%}
       <hr>
