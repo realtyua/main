@@ -56,19 +56,17 @@
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
               <div class="row mx-n2">
+                <div class="col-12 px-1">
               {%- endif -%}
 
-              <div class="col-12 px-1">
-              {%- endif -%}
                 <div class="card mb-2">
                   <div class="card-body p-2">
                     {% include card/body.html %}
                   </div>
                 </div>
-              {%- if cycle == 0 -%}
-              </div>
 
               {%- if forloop.last -%}
+                </div>
               </div>
               <div class="row">
                 <div class="col-auto ml-auto">
