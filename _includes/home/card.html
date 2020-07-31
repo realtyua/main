@@ -47,14 +47,15 @@
       {%- assign ss = site.pages | sort: "path" -%}
       {%- assign isAll = false -%}
       {%- for s in ss -%}
-        {%- if s.url contains url and s.url == all and s.url != url -%}
+        {%- if s.url contains url and s.url == all -%}
           url: {{ s.url }}<br>
           {%- assign isAll = true -%}
+          {%- assign foo = page.title | split: "/" | slice: 5, 5 | join: "/" -%}
         {%- endif -%}
       {%- endfor -%}
       <hr>
 
-{{isAll}}<br>
+{{foo}}<br>
 
       {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
 
