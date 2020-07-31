@@ -60,9 +60,13 @@
                 {%- assign index = forloop.index0 | modulo: 2 -%}
                 {%- assign cycle = forloop.index | modulo: 2 -%}
                 {%- if index == 0 -%}
-                <div class="col-md-4 px-2">
+                <div class="col-md-6 px-2">
                 {%- endif -%}
-                  <p>{{ offer.type }}</p>
+                  <div class="card">
+                    <div class="card-body">
+                      {% include card/body.html %}
+                    </div>
+                  </div>
                 {%- if cycle == 0 -%}
                 </div>
                 {%- else -%}
@@ -74,7 +78,7 @@
               </div>
               <div class="row">
                 <div class="col-auto ml-auto">
-                  <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
+                  <a class="btn btn-primary btn-sm" href="{{ d.url }}">
                     {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
                   </a>
                 </div>
@@ -110,207 +114,6 @@
   </div>
 </div>
 
+{% comment %}
 
-  {% comment %}
-
-
-  {%- if data -%}
-
-        {%- include {{ data }} -%}
-        {%- for offer in offers limit:9 -%}
-          {%- if forloop.first -%}
-          <div class="row mx-n2">
-          {%- endif -%}
-            {%- assign index = forloop.index0 | modulo: 2 -%}
-            {%- assign cycle = forloop.index | modulo: 2 -%}
-            {%- if index == 0 -%}
-            <div class="col-md-4 px-2">
-            {%- endif -%}
-              <p>{{ offer.type }}</p>
-            {%- if cycle == 0 -%}
-            </div>
-            {%- else -%}
-            {%- if forloop.last -%}
-            </div>
-            {%- endif -%}
-            {%- endif -%}
-          {%- if forloop.last -%}
-          </div>
-          <div class="row">
-            <div class="col-auto ml-auto">
-              <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-                {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
-              </a>
-            </div>
-          </div>
-          {%- endif -%}
-        {%- endfor -%}
-
-  {%- endif -%}
-
-
-  {%- capture data -%}data/{{ region }}/all.html {%- endcapture -%}
-  {%- include {{ data }} -%}
-  {%- for offer in offers limit:9 -%}
-    {%- if forloop.first -%}
-    <div class="row mx-n2">
-    {%- endif -%}
-      {%- assign index = forloop.index0 | modulo: 2 -%}
-      {%- assign cycle = forloop.index | modulo: 2 -%}
-      {%- if index == 0 -%}
-      <div class="col-md-4 px-2">
-      {%- endif -%}
-        <p>{{ offer.type }}</p>
-      {%- if cycle == 0 -%}
-      </div>
-      {%- else -%}
-      {%- if forloop.last -%}
-      </div>
-      {%- endif -%}
-      {%- endif -%}
-    {%- if forloop.last -%}
-    </div>
-    <div class="row">
-      <div class="col-auto ml-auto">
-        <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-          {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
-        </a>
-      </div>
-    </div>
-    {%- endif -%}
-  {%- endfor -%}
-
-
-
-
-  <nav>
-    <ul class="nav nav-tabs" id="{{ region }}-realestate-tab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a class="nav-link border-0 active" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
-          <span>{{ site.data.lang-uk.news | capitalize }}</span>
-        </a>
-      </li>
-      {%- if hasNews == true -%}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link border-0" id="{{ region }}-news-tab" data-toggle="tab" href="#{{ region }}-news" role="tab" aria-controls="{{ region }}-news" aria-selected="true">
-          <span>{{ site.data.lang-uk.news | capitalize }}</span>
-        </a>
-      </li>
-      {%- endif -%}
-      {%- if hasArticles == true -%}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link border-0" id="{{ region }}-articles-tab" data-toggle="tab" href="#{{ region }}-articles" role="tab" aria-controls="{{ region }}-articles" aria-selected="false">
-          <span>{{ site.data.lang-uk.articles | capitalize }}</span>
-        </a>
-      </li>
-      {%- endif -%}
-      <li class="nav-item last">
-        {%- include home/navsection.html region=region url=include.url -%}
-      </li>
-    </ul>
-  </nav>
-  <div class="tab-content" id="{{ region }}-realestate-content">
-    <div class="tab-pane pt-3 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
-      ...
-    </div>
-    {%- if hasNews == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
-      ...
-      {% comment %}
-      {%- include home/news-last.html cat=region url=include.url num='3'-%}
-      {% endcomment %}
-    </div>
-    {%- endif -%}
-    {%- if hasArticles == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-articles" role="tabpanel" aria-labelledby="{{ region }}-articles-tab">
-      ...
-      {% comment %}
-      {%- include home/articles-last.html cat=region url=include.url num='3' -%}
-      {% endcomment %}
-    </div>
-    {%- endif -%}
-  </div>
-
-  <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
-    <div class="navbar-brand d-md-none">
-      <span class="small">{{ site.data.lang-uk.brand_content }}</span>
-      <span class="ml-1 float-right align-middle text-primary">→</span>
-    </div>
-    <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#card-navbar-{{ region }}" aria-controls="card-navbar-{{ region }}" aria-expanded="false" aria-label="Toggle button">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="card-navbar-{{ region }}">
-      <ul class="navbar-nav nav nav-tabs border-0" id="{{ region }}-realestate-navigation" role="tablist">
-        {%- if hasNews == true -%}
-        <li class="nav-item" role="presentation">
-          <a class="nav-link border-0 active" id="{{ region }}-news-tab" data-toggle="tab" href="#{{ region }}-news" role="tab" aria-controls="{{ region }}-news" aria-selected="true">
-            <span>{{ site.data.lang-uk.news | capitalize }}</span>
-          </a>
-        </li>
-        {%- endif -%}
-        {%- if hasArticles == true -%}
-        <li class="nav-item" role="presentation">
-          <a class="nav-link border-0" id="{{ region }}-articles-tab" data-toggle="tab" href="#{{ region }}-articles" role="tab" aria-controls="{{ region }}-articles" aria-selected="false">
-            <span>{{ site.data.lang-uk.articles | capitalize }}</span>
-          </a>
-        </li>
-        {%- endif -%}
-        {%- include has-children.html where='developer/' dir=include.url -%}
-        {%- if hasChildren == true -%}
-        <li class="nav-item" role="presentation">
-          <a class="nav-link border-0" id="{{ region }}-developers-tab" data-toggle="tab" href="#{{ region }}-developers" role="tab" aria-controls="{{ region }}-developers" aria-selected="false">
-            <span>{{ site.data.lang-uk.developers | capitalize }}</span>
-          </a>
-        </li>
-        {%- endif -%}
-        {%- include has-children.html where='realtor/' dir=include.url -%}
-        {%- if hasChildren == true -%}
-        <li class="nav-item" role="presentation">
-          <a class="nav-link border-0" id="{{ region }}-realtors-tab" data-toggle="tab" href="#{{ region }}-realtors" role="tab" aria-controls="{{ region }}-realtors" aria-selected="false">
-            <span>{{ site.data.lang-uk.realtors | capitalize }}</span>
-          </a>
-        </li>
-        {%- endif -%}
-      </ul>
-    </div>
-  </nav>
-  <hr class="mt-2 mt-md-0">
-  <div class="tab-content" id="{{ region }}-realestate-content">
-    {%- if hasNews == true -%}
-    <div class="tab-pane pt-3 fade show active" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
-      ...
-      {% comment %}
-      {%- include home/news-last.html cat=region url=include.url num='3'-%}
-      {% endcomment %}
-    </div>
-    {%- endif -%}
-    {%- if hasArticles == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-articles" role="tabpanel" aria-labelledby="{{ region }}-articles-tab">
-      ...
-      {% comment %}
-      {%- include home/articles-last.html cat=region url=include.url num='3' -%}
-      {% endcomment %}
-    </div>
-    {%- endif -%}
-    {%- include has-children.html where='developer/' dir=include.url -%}
-    {%- if hasChildren == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-developers" role="tabpanel" aria-labelledby="{{ region }}-developers-tab">
-      ...
-      {% comment %}
-      {%- assign dir = include.url | append: 'developer' | append: '/' -%}
-      {%- include current-subpages.html dir=dir page="home" -%}
-      {% endcomment %}
-    </div>
-    {%- endif -%}
-    {%- include has-children.html where='realtor/' dir=include.url -%}
-    {%- if hasChildren == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-realtors" role="tabpanel" aria-labelledby="{{ region }}-realtors-tab">
-      ...
-      {% comment %}
-      {%- assign dir = include.url | append: 'developer' | append: '/' -%}
-      {%- include current-subpages.html dir=dir page='home' -%}
-      {% endcomment %}
-    </div>
-    {%- endif -%}
-  </div>
-  {% endcomment %}
+{% endcomment %}
