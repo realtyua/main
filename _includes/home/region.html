@@ -35,7 +35,7 @@
           {%- else -%}
             <img src="https://unsplash.it/538/220/?image=1{%- increment counter -%}" class="card-img-top" alt="Image {{ slug }}">
           {%- endif -%}
-          <div class="card-body">
+          <div class="card-body p-3">
             <h5 class="card-title">
               <a href="{{ three.url }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
             </h5>
