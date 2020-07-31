@@ -1,6 +1,7 @@
+{%- assign region = include.region -%}
 {%- include has-news.html cat=region -%}
 {%- include has-articles.html cat=region -%}
-{%- assign region = include.region -%}
+
 
 <div class="card-text">
   <div class="d-flex justify-content-between">
@@ -44,13 +45,11 @@
 
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
-      {%- assign ss = site.pages | sort: "path" -%}
-      {%- assign isAll = false -%}
-      {%- for s in ss -%}
-        {%- if s.url contains url and s.url == all -%}
-          url: {{ s.url }}<br>
-          {%- assign isAll = true -%}
-          {%- assign foo = page.title | split: "/" | slice: 2, 5 | join: "/" -%}
+      {%- assign ds = site.pages | sort: "path" -%}
+      {%- for d in ds -%}
+        {%- if d.url contains url and d.url == all -%}
+          url: {{ d.url }}<br>
+          {%- assign foo = d.url | split: "/" | slice: 2, 5 | join: "/" -%}
         {%- endif -%}
       {%- endfor -%}
       <hr>
