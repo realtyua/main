@@ -42,7 +42,6 @@
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-3 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
-      {%- assign all = include.url | append: 'all.html' -%}
       {%- assign url = include.url -%}
       {%- assign ss = site.pages | sort: "path" -%}
       {%- assign isChildren = false -%}
@@ -55,10 +54,10 @@
         {%- for s in ss -%}
           {%- assign slug = s.url | split: "/" | last -%}
           {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
-          {%- if s.url contains all -%}{%- endif -%}
-          {%- if url contains current and s.url contains 'all.html' and s.navhide != 1 and s.title != '' -%}
-            {%- assign isAll = true -%}
-            {{s.url}}<br>
+          slug: {{slug}}<br>
+          current: {{current}}<br>
+          {%- if url == current and s.navhide != 1 and s.title != '' -%}
+            {{ s.url }}<br>
           {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
