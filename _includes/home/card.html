@@ -47,14 +47,15 @@
       {%- assign isChildren = false -%}
       {%- for s in ss -%}
         {%- if s.url contains url and s.url != url -%}
+          url: {{ s.url }}<br>
           {%- assign isChildren = true -%}
         {%- endif -%}
       {%- endfor -%}
+      <hr>
       {%- if isChildren == true -%}
         {%- for s in ss -%}
           {%- assign slug = s.url | split: "/" | last -%}
           {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
-          slug: {{slug}}<br>
           current: {{current}}<br>
           {%- if url == current and s.navhide != 1 and s.title != '' -%}
             {{ s.url }}<br>
