@@ -41,7 +41,7 @@
   </div>
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
-    <div class="tab-pane pt-3 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
+    <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
@@ -55,16 +55,14 @@
             {%- include {{ data }} -%}
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
-              <div class="row mx-n2">
-                <div class="col-12 px-1">
+              <div class="row">
+                <div class="col-12">
               {%- endif -%}
-
                 <div class="card mb-2">
                   <div class="card-body p-2">
                     {% include card/body.html %}
                   </div>
                 </div>
-
               {%- if forloop.last -%}
                 </div>
               </div>
