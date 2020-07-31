@@ -43,26 +43,18 @@
     <div class="tab-pane pt-3 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
       {%- assign url = include.url -%}
+      {%- assign all = url | append: 'all.html' -%}
       {%- assign ss = site.pages | sort: "path" -%}
       {%- assign isChildren = false -%}
       {%- for s in ss -%}
-        {%- if s.url contains url and s.url != url -%}
+        {%- if s.url contains url and s.url == all and s.url != url -%}
           url: {{ s.url }}<br>
-          {%- assign isChildren = true -%}
+          {%- assign isAll = true -%}
         {%- endif -%}
       {%- endfor -%}
       <hr>
-      {%- if isChildren == true -%}
-        {%- for s in ss -%}
-          {%- assign slug = s.url | split: "/" | last -%}
-          {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
-          current: {{current}}<br>
-          {%- if url == current and s.navhide != 1 and s.title != '' -%}
-            {{ s.url }}<br>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
 
+{{isAll}}<br>
 
       {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
 
