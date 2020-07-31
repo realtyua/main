@@ -9,7 +9,7 @@
     // color: #33bbaa;
   }
 
-  summary {
+  details > summary {
     display: list-item;
     list-style-type: none;
     color: $primary;
@@ -17,17 +17,17 @@
     letter-spacing: 0.1em;
   }
 
-  summary:before {
+  details > summary:before {
     content: "☎";
   }
 
-  summary::-webkit-details-marker {
+  details > summary::-webkit-details-marker {
     background: none;
     color: transparent;
   }
 
-  summary:hover {
-    color: #cc4477;
+  details > summary:hover {
+    //color: #cc4477;
   }
 
   details[open] summary {
