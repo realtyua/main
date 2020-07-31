@@ -6,7 +6,4 @@
 {% if offer.location %}{{ site.data.lang-uk.re_location }} <strong>{{ offer.location }}</strong> {% endif %}
 {% if offer.address %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>, {% endif %}
 {% if offer.price %}{{ site.data.lang-uk.re_price }} <mark>{{ offer.price }}</mark>{% endif %}
-<details>
-  <summary>&phone;</summary>
-  <span>{%- include footer/phone.html legal=offer.phone type='text' -%}</span>
-</details>.
+{%- include footer/phone.html legal=offer.phone type='icon' -%}.
