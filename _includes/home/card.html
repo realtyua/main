@@ -48,15 +48,11 @@
       {%- assign ds = site.pages | sort: "path" -%}
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
-          url: {{ d.url }}<br>
-          {%- assign foo = d.url | split: "/" | slice: 2, 5 | join: "/" -%}
+          {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
         {%- endif -%}
       {%- endfor -%}
-      <hr>
 
-{{foo}}<br>
-
-      {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
+{{ data }}
 
 
 
