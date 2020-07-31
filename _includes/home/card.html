@@ -49,12 +49,43 @@
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
+
+          {%- if data -%}
+
+            {%- include {{ data }} -%}
+            {%- for offer in offers limit:4 -%}
+              {%- if forloop.first -%}
+              <div class="row mx-n2">
+              {%- endif -%}
+                {%- assign index = forloop.index0 | modulo: 2 -%}
+                {%- assign cycle = forloop.index | modulo: 2 -%}
+                {%- if index == 0 -%}
+                <div class="col-md-4 px-2">
+                {%- endif -%}
+                  <p>{{ offer.type }}</p>
+                {%- if cycle == 0 -%}
+                </div>
+                {%- else -%}
+                {%- if forloop.last -%}
+                </div>
+                {%- endif -%}
+                {%- endif -%}
+              {%- if forloop.last -%}
+              </div>
+              <div class="row">
+                <div class="col-auto ml-auto">
+                  <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
+                    {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
+                  </a>
+                </div>
+              </div>
+              {%- endif -%}
+            {%- endfor -%}
+
+          {%- endif -%}
+
         {%- endif -%}
       {%- endfor -%}
-
-{{ data }}
-
-
 
     </div>
     <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">
