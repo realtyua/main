@@ -21,15 +21,15 @@ layout: default
     {%- if data -%}
 
       {%- include {{ data }} -%}
-      {%- if offers.size == 10 -%}
+      {%- if offers.size > 10 -%}
+
+        {%- include table/js.html -%}
+
+      {%- else -%}
 
         {%- for offer in offers -%}
           {%- include table/html.html -%}
         {%- endfor -%}
-
-      {%- else -%}
-
-        {%- include table/js.html -%}
 
       {%- endif -%}
 
