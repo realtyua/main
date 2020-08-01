@@ -8,15 +8,18 @@ layout: default
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
     <p class="lead">{{ content }}...</p>
     {%- include nav-section.html -%}
-
+    {%- assign foo = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
     {%- else -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
     {%- endif -%}
 
-- {{data}}<br>
-- /region/city/ivano-frankivsk/data/all.json
+data - {{data}}<br>
+slug - {{slug}}<br>
+foo - {{foo}}<br>
+url - {{page.url}}<br>
+! - /region/city/ivano-frankivsk/data/all.json
 
     <hr>
 

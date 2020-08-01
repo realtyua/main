@@ -1,7 +1,7 @@
 @import "../../assets/css/bootstrap-table.min.css";
 
 .bootstrap-table {
-  .dropdown-menu a:hover {
+  .dropdown-menu a:active, .dropdown-menu a:hover {
     background-color: #2D5CA6;
   }
   .table .thead-rada th {
