@@ -6,6 +6,9 @@ encoding: UTF-8
 lang: uk_UA
 timezone: Europe/Kiev
 
+usd: 27.51
+eur: 32.26
+
 title: Мережа вебсайтів нерухомості
 description: Вся нерухомість в місті Івано-Франківської та області
 name: Регіональна нерухомість
