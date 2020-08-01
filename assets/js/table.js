@@ -32,10 +32,11 @@ function propertyDetailFormatter(value, row) {
         '</span>',
     ]
 
+
     if (images.length) {
-        html.push('<hr><span class="row mx-0">')
+        html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">')
         html.push(images.map(function (image) {
-            return '<span class="col-6 col-sm-6 col-md-3"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" data-lightbox-group="lightbox-group-' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" alt="realestate" class="img-fluid img-thumbnail"></a></span>'
+            return '<span class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" alt="realestate" class="img-fluid img-thumbnail"></a></span>'
         }).join(''))
         html.push('</span>')
     }
