@@ -1,4 +1,3 @@
-{%- assign land = site.data.lang-uk.re_land -%}
 {%- assign region = include.region -%}
 {%- include has-news.html cat=region -%}
 {%- include has-articles.html cat=region -%}
@@ -61,7 +60,7 @@
               {%- endif -%}
                 <div class="card mb-2">
                   <div class="card-body p-2">
-                    {% include home/body.html %}
+                    {% include card/body.html %}
                   </div>
                 </div>
               {%- if forloop.last -%}
