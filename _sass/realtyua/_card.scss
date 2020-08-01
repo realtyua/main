@@ -16,6 +16,10 @@
     letter-spacing: 0.1em;
   }
 
+  details > summary > a {
+  margin-left: 20px;
+  }
+
   details > summary:before {
     content:"\0260E";
   }
@@ -32,7 +36,7 @@
   details[open] summary {
     position: absolute;
     top: 1px;
-    left: 125px;
+    // left: 125px;
     font-size: 1em;
   }
 
