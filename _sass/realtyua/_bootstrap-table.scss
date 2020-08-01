@@ -1,1 +1,46 @@
 @import "../../assets/css/bootstrap-table.min.css";
+
+.bootstrap-table {
+  .table .thead-rada th {
+    color: #fff;
+    background-color: #2D5CA6;
+    border-color: #fff;
+  }
+  .fixed-table-container {
+    .table {
+      thead th .th-inner {
+        white-space: unset;
+      }
+      thead th {
+        vertical-align: top;
+      }
+    }
+  }
+  .detail-view {
+    border: 1px double #2D5CA6;
+    background-color: #f5f7fa;
+  }
+  .table .row span:first-child {
+    display: none;
+  }
+  .table-hover tbody tr.detail-view:hover {
+    color: #000;
+    border: 1px double #2D5CA6;
+    background-color: #f5f7fa;
+  }
+  .table-hover tbody tr:hover {
+      color: #2D5CA6;
+      border: 1px double #2D5CA6;
+      background-color: transparent;
+  }
+  .table .active {
+    color: #2D5CA6;
+    border: 1px double #2D5CA6;
+  }
+  .search .form-control {
+    border-radius: unset;
+  }
+  .page-list .btn {
+    border-radius: unset;
+  }
+}
