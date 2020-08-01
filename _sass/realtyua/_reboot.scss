@@ -20,3 +20,9 @@ main a, footer a {
     border-bottom: $border-width solid $white;
   }
 }
+
+.card {
+  span.mark {
+    cursor: pointer;
+  }  
+}
