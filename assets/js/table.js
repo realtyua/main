@@ -24,7 +24,7 @@ $(function() {
 })
 
 function propertyFormatter(value, row) {
-  return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м², кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+  return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
 }
 
 function propertyDetailFormatter(value, row) {
@@ -33,9 +33,9 @@ function propertyDetailFormatter(value, row) {
 
     let html = [
         '<span class="row mx-0">',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м²</span>',
+        '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
         '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість</strong>: ' + row.price_sqmt + ' за 1 м²</span>',
+        '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість</strong>: ' + row.price_sqmt + ' за 1 м<sup>2</sup></span>',
         '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
         '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
         '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
@@ -46,7 +46,7 @@ function propertyDetailFormatter(value, row) {
     if (images.length) {
         html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">')
         html.push(images.map(function (image) {
-            return '<span class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" alt="realestate" class="img-fluid img-thumbnail"></a></span>'
+            return '<span class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" alt="realestate" class="img-fluid img-thumbnail"></a></span>'
         }).join(''))
         html.push('</span>')
     }
