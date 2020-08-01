@@ -15,6 +15,11 @@ layout: default
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
     {%- endif -%}
 
+- {{data}}<br>
+- /region/city/ivano-frankivsk/data/all.json
+
+    <hr>
+
     {%- if data -%}
 
       {%- include {{ data }} -%}
