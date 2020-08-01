@@ -14,14 +14,6 @@
     color: $primary;
     font-size: 1em;
     letter-spacing: 0.1em;
-
-    a {
-      margin-left: 20px;
-    }
-  }
-
-  details > summary a {
-    margin-left: 20px;
   }
 
   details > summary:before {
@@ -40,12 +32,19 @@
   details[open] summary {
     position: absolute;
     top: 1px;
-    // left: 125px;
     font-size: 1em;
+    
+    a {
+      margin-left: 20px;
+    }
   }
 
   details[open] summary:before {
     content:"\02716";
+
+    a {
+      margin-left: 20px;
+    }
   }
 
   :focus {
