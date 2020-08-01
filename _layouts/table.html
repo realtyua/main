@@ -24,29 +24,48 @@ layout: default
       {%- for offer in offers -%}
         {%- if forloop.first -%}
         <table border="1">
-        <tbody>
+          <thead>
+            <tr>
+              <th data-field="id" data-title="id">id</th>
+              <th data-field="type" data-title="type">type</th>
+              <th data-field="rooms" data-title="rooms">rooms</th>
+              <th data-field="surface" data-title="ID">surface</th>
+              <th data-field="surface_land" data-title="surface_land">surface_land</th>
+              <th data-field="price" data-title="price">price</th>
+              <th data-field="price_sqmt" data-title="price_sqmt">price_sqmt</th>
+              <th data-field="floor" data-title="floor">floor</th>
+              <th data-field="floors" data-title="floors">floors</th>
+              <th data-field="parking" data-title="parking">parking</th>
+              <th data-field="region" data-title="region">region</th>
+              <th data-field="location" data-title="location">location</th>
+              <th data-field="address" data-title="address">address</th>
+              <th data-field="date" data-title="date">date</th>
+              <th data-field="seller" data-title="seller">seller</th>
+              <th data-field="phone" data-title="phone">phone</th>
+              <th data-field="images" data-title="images">images</th>
+            </tr>
+          </thead>
+          <tbody>
         {%- endif -%}
-<tr>
-  <td>{{ offer.id }}</td>
-  <td>{{ offer.type }}</td>
-  <td>{{ offer.rooms }}</td>
-  <td>{{ offer.surface }}</td>
-  <td>{{ offer.surface_land }}</td>
-  <td>{{ offer.price }}</td>
-  <td>{{ offer.price_sqmt }}</td>
-  <td>{{ offer.floor }}</td>
-  <td>{{ offer.floors }}</td>
-  <td>{{ offer.parking }}</td>
-  <td>{{ offer.region }}</td>
-  <td>{{ offer.location }}</td>
-  <td>{{ offer.address }}</td>
-  <td>{{ offer.date }}</td>
-  <td>{{ offer.seller }}</td>
-  <td>{{ offer.phone }}</td>
-  <td colspan="16">{{ offer.images }}</td>
-</tr>
-          {{ offer.type }}
-
+            <tr>
+              <td>{{ offer.id }}</td>
+              <td>{{ offer.type }}</td>
+              <td>{{ offer.rooms }}</td>
+              <td>{{ offer.surface }}</td>
+              <td>{{ offer.surface_land }}</td>
+              <td>{{ offer.price }}</td>
+              <td>{{ offer.price_sqmt }}</td>
+              <td>{{ offer.floor }}</td>
+              <td>{{ offer.floors }}</td>
+              <td>{{ offer.parking }}</td>
+              <td>{{ offer.region }}</td>
+              <td>{{ offer.location }}</td>
+              <td>{{ offer.address }}</td>
+              <td>{{ offer.date }}</td>
+              <td>{{ offer.seller }}</td>
+              <td>{{ offer.phone }}</td>
+              <td>{{ offer.images }}</td>
+            </tr>
         {%- if forloop.last -%}
           </tbody>
         </table>
