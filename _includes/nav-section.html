@@ -12,10 +12,15 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
     <ul class="navbar-nav nav nav-tabs border-0">
+
+      {%- comment -%}
+        - and one.url contains '.json' -
+      {%- endcomment -%}
+
       {%- for one in ones -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- if one.title != '' and one.navhide != 1 and one.url contains '.json' -%}
+        {%- if one.title != '' and one.navhide != 1 -%}
           {%- include nav-item.html -%}
         {%- endif -%}
       {%- endfor -%}
