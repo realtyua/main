@@ -17,24 +17,15 @@ layout: default
       {%- assign json = here | append: 'data/' | append: slug | append: '.json' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
     {%- endif -%}
-
     {%- if data -%}
-
       {%- include {{ data }} -%}
       {%- if offers.size > 10 -%}
-
         {%- include table/js.html -%}
-
       {%- else -%}
-
         {%- for offer in offers -%}
           {%- include table/html.html -%}
         {%- endfor -%}
-
       {%- endif -%}
-
     {%- endif -%}
-
-
   </div>
 </div>
