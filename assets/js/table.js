@@ -1,4 +1,18 @@
 
+$(function() {
+  var expandedRow = null;
+  $('table').on('expand-row.bs.table', function (event, index) {
+    if (expandedRow !== index) {
+     	$('table').bootstrapTable('collapseRow', expandedRow)
+    }
+    expandedRow = index;
+	});
+  $('table').on('click-row.bs.table', function (e, row, $element) {
+    $($element).siblings().removeClass('active');
+    $($element).addClass('active');
+  })
+})
+
 function propertyFormatter(value, row) {
   return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м², кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
 }
@@ -21,7 +35,7 @@ function propertyDetailFormatter(value, row) {
     if (images.length) {
         html.push('<hr><span class="row mx-0">')
         html.push(images.map(function (image) {
-            return '<span class="col-6 col-sm-6 col-md-3"><a href="images/' + row.phone + '/' + image + '" class="lightbox" rel="lightbox-group-' + row.phone + '"><img src="images/' + row.phone + '/' + image + '" alt="realestate" class="img-thumbnail"></a></span>'
+            return '<span class="col-6 col-sm-6 col-md-3"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" rel="lightbox-group-' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" alt="realestate" class="img-thumbnail"></a></span>'
         }).join(''))
         html.push('</span>')
     }
