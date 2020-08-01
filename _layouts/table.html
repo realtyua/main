@@ -6,12 +6,12 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
-    <p class="lead">...</p>
+    <p class="lead">{{ content }}...</p>
     {%- include nav-section.html -%}
-    {%- if isContent == '' -%}
-      {%- include info-visitors.html -%}
-    {%- else -%}
-      {{ content }}
-    {%- endif -%}
+
+    {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
+    <hr>
+    {{data}}
+
   </div>
 </div>
