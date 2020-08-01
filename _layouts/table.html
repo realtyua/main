@@ -11,14 +11,14 @@ layout: default
     {%- assign foo = page.url | split: "/" | last -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
-      {%- assign json = page.url | replace: '.html', '.json' -%}
+      {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
     {%- else -%}
       {%- assign json = here | append: 'data/' | append: slug | append: '.json' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
     {%- endif -%}
 
-{%- assign data2 = page.url | replace: '.html', '.json' -%}
+{%- assign data2 = page.url | replace: 'all.html', 'data/all.json' -%}
 {%- assign data1 = here | append: 'data/' | append: foo | append: '.json' -%}
 
 data - {{data}} = {{data1}} = {{data1}}<br>
