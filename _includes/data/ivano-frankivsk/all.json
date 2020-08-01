@@ -1,5 +1,0 @@
----
-layout: null
----
-{%- include data/all.html -%}
-{{ offers | jsonify }}
