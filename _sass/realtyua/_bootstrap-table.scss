@@ -1,6 +1,9 @@
 @import "../../assets/css/bootstrap-table.min.css";
 $primary: #2d5ca6 !default;
 .bootstrap-table {
+  table thead {
+    border: 2px double #2d5ca6;
+  }
   .dropdown-item:hover, .dropdown-item:focus {
       background-color: #f8f9fa;
       transition: none;
@@ -11,7 +14,7 @@ $primary: #2d5ca6 !default;
       transition: none;
       border-bottom: none;
   }
-  .table .thead-rada th {
+  .table .thead-re th {
     color: #fff;
     background-color: $primary;
     border-color: #fff;

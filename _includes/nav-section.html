@@ -15,12 +15,17 @@
 
       {%- comment -%}
         - and one.url contains '.json' -
+        {%- assign pjson = one.url contains '.json' -%}
       {%- endcomment -%}
 
       {%- for one in ones -%}
+        {%- assign isJson = false -%}
+        {%- if one.url contains '.json' -%}
+          {%- assign isJson = true -%}
+        {%- endif -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- if one.title != '' and one.navhide != 1 -%}
+        {%- if one.title != '' and one.navhide != 1 and isJson == false -%}
           {%- include nav-item.html -%}
         {%- endif -%}
       {%- endfor -%}
