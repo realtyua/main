@@ -9,9 +9,27 @@ layout: default
     <p class="lead">{{ content }}...</p>
     {%- include nav-section.html -%}
 
-    {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
-    <hr>
-    {{data}}
+    {%- if page.url contains 'all.html' -%}
+      {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
+    {%- else -%}
+      {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
+    {%- endif -%}
+
+    {%- if data -%}
+      {{ data }}
+
+      {%- include {{ data }} -%}
+      {%- for offer in offers -%}
+        {%- if forloop.first -%}
+        {%- endif -%}
+
+          {{ offer.type }}<br>
+
+        {%- if forloop.last -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+    {%- endif -%}
 
   </div>
 </div>
