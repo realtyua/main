@@ -6,7 +6,7 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
-{%- capture land -%}{{ site.data.lang-uk.re_land }}{%- endcapture -%}
+{%- assign land = site.data.lang-uk.re_land -%}
 <div class="card mb-3">
   <div class="card-body pb-0">
     <p class="card-text mb-1">{% include card/body.html %}</p>
