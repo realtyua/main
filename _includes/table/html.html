@@ -1,0 +1,60 @@
+
+  {%- if forloop.first -%}
+  <table
+      id="realestate"
+      data-locale="uk-UA"
+      data-toggle="table"
+      data-search="true"
+      data-detail-view="true"
+      data-pagination="true"
+      data-buttons-class="primary"
+      data-detail-view="true"
+      data-detail-view-icon="false"
+      data-detail-view-by-click="true"
+      data-detail-formatter="detailFormatter">
+    <thead class="thead-rada">
+      <tr>
+        <th data-field="id" data-visible="false">id</th>
+        <th data-field="type" data-title="Власність">type</th>
+        <th data-field="rooms" data-visible="false">rooms</th>
+        <th data-field="surface" data-visible="false">surface</th>
+        <th data-field="surface_land" data-visible="false">surface_land</th>
+        <th data-field="price" data-title="Ціна">Price</th>
+        <th data-field="price_sqmt" data-visible="false">price_sqmt</th>
+        <th data-field="floor" data-visible="false">floor</th>
+        <th data-field="floors" data-visible="false">floors</th>
+        <th data-field="parking" data-visible="false">parking</th>
+        <th data-field="region" data-visible="false">region</th>
+        <th data-field="location" data-visible="false">location</th>
+        <th data-field="address" data-visible="false">address</th>
+        <th data-field="date" data-visible="false">date</th>
+        <th data-field="seller" data-visible="false">seller</th>
+        <th data-field="phone" data-visible="false">phone</th>
+        <th data-field="images" data-visible="false">images</th>
+      </tr>
+    </thead>
+    <tbody>
+  {%- endif -%}
+      <tr>
+        <td>{{ offer.id }}</td>
+        <td>{{ offer.type }}</td>
+        <td>{{ offer.rooms }}</td>
+        <td>{{ offer.surface }}</td>
+        <td>{{ offer.surface_land }}</td>
+        <td>{{ offer.price }}</td>
+        <td>{{ offer.price_sqmt }}</td>
+        <td>{{ offer.floor }}</td>
+        <td>{{ offer.floors }}</td>
+        <td>{{ offer.parking }}</td>
+        <td>{{ offer.region }}</td>
+        <td>{{ offer.location }}</td>
+        <td>{{ offer.address }}</td>
+        <td>{{ offer.date }}</td>
+        <td>{{ offer.seller }}</td>
+        <td>{{ offer.phone }}</td>
+        <td>{{ offer.images }}</td>
+      </tr>
+  {%- if forloop.last -%}
+    </tbody>
+  </table>
+  {%- endif -%}
