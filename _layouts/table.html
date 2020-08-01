@@ -18,18 +18,38 @@ layout: default
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
     {%- endif -%}
 
-    <hr>
-
     {%- if data -%}
 
       {%- include {{ data }} -%}
       {%- for offer in offers -%}
         {%- if forloop.first -%}
+        <table border="1">
+        <tbody>
         {%- endif -%}
-
-          {{ offer.type }}<br>
+<tr>
+  <td>{{ offer.id }}</td>
+  <td>{{ offer.type }}</td>
+  <td>{{ offer.rooms }}</td>
+  <td>{{ offer.surface }}</td>
+  <td>{{ offer.surface_land }}</td>
+  <td>{{ offer.price }}</td>
+  <td>{{ offer.price_sqmt }}</td>
+  <td>{{ offer.floor }}</td>
+  <td>{{ offer.floors }}</td>
+  <td>{{ offer.parking }}</td>
+  <td>{{ offer.region }}</td>
+  <td>{{ offer.location }}</td>
+  <td>{{ offer.address }}</td>
+  <td>{{ offer.date }}</td>
+  <td>{{ offer.seller }}</td>
+  <td>{{ offer.phone }}</td>
+  <td colspan="16">{{ offer.images }}</td>
+</tr>
+          {{ offer.type }}
 
         {%- if forloop.last -%}
+          </tbody>
+        </table>
         {%- endif -%}
       {%- endfor -%}
 
