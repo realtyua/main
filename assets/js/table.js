@@ -35,7 +35,7 @@ function propertyDetailFormatter(value, row) {
     if (images.length) {
         html.push('<hr><span class="row mx-0">')
         html.push(images.map(function (image) {
-            return '<span class="col-6 col-sm-6 col-md-3"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" rel="lightbox-group-' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" alt="realestate" class="img-thumbnail"></a></span>'
+            return '<span class="col-6 col-sm-6 col-md-3"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" data-lightbox-group="lightbox-group-' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" alt="realestate" class="img-fluid img-thumbnail"></a></span>'
         }).join(''))
         html.push('</span>')
     }
