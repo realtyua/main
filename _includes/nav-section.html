@@ -15,7 +15,9 @@
       {%- for one in ones -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- include nav-item.html -%}
+        {%- if one.title != '' and one.navhide != 1 -%}
+          {%- include nav-item.html -%}
+        {%- endif -%}
       {%- endfor -%}
     </ul>
   </div>

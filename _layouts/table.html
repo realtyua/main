@@ -9,13 +9,19 @@ layout: default
     <p class="lead">{{ content }}...</p>
     {%- include nav-section.html -%}
     {%- assign foo = page.url | split: "/" | last -%}
+    {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
+      {%- assign json = page.url | replace: '.html', '.json' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
     {%- else -%}
+      {%- assign json = here | append: 'data/' | append: slug | append: '.json' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
     {%- endif -%}
 
-data - {{data}}<br>
+{%- assign data2 = page.url | replace: '.html', '.json' -%}
+{%- assign data1 = here | append: 'data/' | append: foo | append: '.json' -%}
+
+data - {{data}} = {{data1}} = {{data1}}<br>
 slug - {{slug}}<br>
 foo - {{foo}}<br>
 back - {{back}}<br>
@@ -57,7 +63,7 @@ url - {{ page.url }}<br>
   data-detail-formatter="propertyDetailFormatter"
   data-pagination="true"
   data-buttons-class="primary"
-  data-url="/region/city/ivano-frankivsk/data/all.json">
+  data-url="{{ json }}">
   <thead class="thead-rada">
     <tr>
       <th data-field="property" data-title="Власність" data-formatter="propertyFormatter">Property</th>
