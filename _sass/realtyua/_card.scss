@@ -14,10 +14,14 @@
     color: $primary;
     font-size: 1em;
     letter-spacing: 0.1em;
+
+    a {
+      margin-left: 20px;
+    }
   }
 
   details > summary a {
-  margin-left: 20px;
+    margin-left: 20px;
   }
 
   details > summary:before {
