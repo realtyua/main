@@ -1,3 +1,13 @@
+function detailFormatter(index, row) {
+  var html = []
+  $.each(row, function (key, value) {
+    if (!key.startsWith('_')) {
+      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    }
+  })
+  return html.join('')
+}
+
 
 $(function() {
   var expandedRow = null;
