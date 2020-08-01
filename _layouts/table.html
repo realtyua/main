@@ -1,5 +1,6 @@
 ---
 layout: default
+table: 1
 ---
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 1, 4 | join: ' ' -%}
@@ -18,10 +19,7 @@ layout: default
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
     {%- endif -%}
 
-{%- assign data2 = page.url | replace: 'all.html', 'data/all.json' -%}
-{%- assign data1 = here | append: 'data/' | append: foo | append: '.json' -%}
-
-data - {{data}} = {{data1}} = {{data1}}<br>
+data - {{data}} = {{json}}<br>
 slug - {{slug}}<br>
 foo - {{foo}}<br>
 back - {{back}}<br>
