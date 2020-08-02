@@ -18,7 +18,7 @@
       data-detail-view="true"
       data-detail-view-icon="false"
       data-detail-view-by-click="true"
-      data-detail-formatter="detailFormatter">
+      data-detail-formatter="propertyDetailFormatter">
     <thead class="thead-re">
       <tr>
         <th data-field="id" data-visible="false">id</th>
@@ -60,7 +60,7 @@
         <td>{{ offer.seller }}</td>
         <td>{{ offer.phone }}</td>
         {%- if isImage != "" -%}
-          <td class="row">
+          <td>
             {%- for file in site.static_files -%}
               {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
               <div class="col px-1">
