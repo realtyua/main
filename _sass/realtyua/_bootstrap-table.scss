@@ -33,9 +33,9 @@ $primary: #2d5ca6 !default;
     border: 1px double $primary;
     background-color: #f5f7fa;
   }
-  .table .row span:first-child {
-    display: none;
-  }
+  // .table .row span:first-child {
+  //   display: none;
+  // }
   .table-hover tbody tr.detail-view:hover {
     color: #000;
     border: 1px double $primary;
