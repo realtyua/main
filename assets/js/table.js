@@ -58,7 +58,7 @@ function htmlDetailFormatter(value, row) {
 
     // const images = Object.values(row.images || {})
 
-    if (Object.values(row.type == 'Земля')) {
+    if (row.type == 'Земля') {
       let html = [
           '<span class="row mx-0">',
           '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
