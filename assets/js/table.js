@@ -1,7 +1,7 @@
 function detailFormatter(index, row) {
   var html = []
   $.each(row, function (key, value) {
-    if (!key.startsWith('_')) {
+    if (!key.startsWith('_') && value !== '') {
       html.push('<p><b>' + key + ':</b> ' + value + '</p>')
     }
   })
