@@ -1,4 +1,10 @@
-
+{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+{%- capture files -%}
+  {%- for file in site.static_files -%}
+    {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign isImage = files | strip_newlines -%}
 
   {%- if forloop.first -%}
   <table
@@ -31,7 +37,7 @@
         <th data-field="date" data-visible="false">date</th>
         <th data-field="seller" data-visible="false">seller</th>
         <th data-field="phone" data-visible="false">phone</th>
-        <th data-field="images" data-visible="false">images</th>
+        {%- if isImage != "" -%}<th data-field="images" data-visible="false">images</th>{%- endif -%}
       </tr>
     </thead>
     <tbody>
@@ -53,7 +59,19 @@
         <td>{{ offer.date }}</td>
         <td>{{ offer.seller }}</td>
         <td>{{ offer.phone }}</td>
-        <td>{{ offer.images }}</td>
+        {%- if isImage != "" -%}
+          <td class="raw">
+            {%- for file in site.static_files -%}
+              {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+              <div class="col px-1">
+                <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="2{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
+                  <img src="{{ file.path | url_decode | relative_url }}" class="img-fluid img-thumbnail" title="Image Title" alt="Image Alt">
+                </a>
+              </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </td>
+        {%- endif -%}
       </tr>
   {%- if forloop.last -%}
     </tbody>
