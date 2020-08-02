@@ -37,7 +37,7 @@
         <th data-field="date" data-visible="false">date</th>
         <th data-field="seller" data-visible="false">seller</th>
         <th data-field="phone" data-visible="false">phone</th>
-        {%- if isImage != "" -%}<th data-field="images" data-visible="false">images</th>{%- endif -%}
+        <th data-field="images" data-visible="false">images</th>
       </tr>
     </thead>
     <tbody>
@@ -60,7 +60,7 @@
         <td>{{ offer.seller }}</td>
         <td>{{ offer.phone }}</td>
         {%- if isImage != "" -%}
-          <td class="raw">
+          <td class="row">
             {%- for file in site.static_files -%}
               {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
               <div class="col px-1">
@@ -71,6 +71,8 @@
               {%- endif -%}
             {%- endfor -%}
           </td>
+        {%- else -%}
+          <td>No image</td>
         {%- endif -%}
       </tr>
   {%- if forloop.last -%}
