@@ -62,7 +62,7 @@ function htmlDetailFormatter(value, row) {
 
     // const images = Object.values(row.images || {})
 
-    if (value.type === 'Земля') {
+    if (value === 'Земля') {
       let html = [
           '<span class="row mx-0">',
           '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
@@ -83,15 +83,6 @@ function htmlDetailFormatter(value, row) {
           '</span>',
       ]
     }
-
-
-    // if (images.length) {
-    //     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">')
-    //     html.push(images.map(function (image) {
-    //         return '<span class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></span>'
-    //     }).join(''))
-    //     html.push('</span>')
-    // }
 
     return html.join('')
 }
