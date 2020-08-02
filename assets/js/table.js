@@ -69,23 +69,14 @@ function propertyDetailFormatter(value, row) {
 function htmlDetailFormatter(value, row) {
 
   let html = [
-    if (value === 'Земля') {
-      '<span class="row mx-0">',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість</strong>: ' + row.price_sqmt + ' за 1 м<sup>2</sup></span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
-      '</span>',
-    } else {
-      '<span class="row mx-0">',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість</strong>: ' + row.price_sqmt + ' за 1 м<sup>2</sup></span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-      '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
-      '</span>',
-    }
+    '<span class="row mx-0">',
+    '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
+    '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
+    '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість</strong>: ' + row.price_sqmt + ' за 1 м<sup>2</sup></span>',
+    '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
+    '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
+    '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
+    '</span>',
   ]
 
   return html.join('')
