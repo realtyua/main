@@ -3,9 +3,9 @@ function detailFormatter(index, row) {
   $.each(row, function (key, value) {
     if (!key.startsWith('_') && value !== '') {
       if (key === 'images') {
-        html.push('<span class="row">' + value + '</span>')
+        html.push('<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">' + value + '</span>')
       } else {
-        html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+        html.push('<span class="col-12 col-sm-6 col-md-4"><b>' + key + ':</b> ' + value + '</span>')
       }
     }
   })
