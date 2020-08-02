@@ -74,7 +74,7 @@ function htmlDetailFormatter(value, row) {
 
   $.each(row, function (key, value) {
     if (!key.startsWith('_') && value !== '') {
-      let html = [
+      html = [
         '<span class="row mx-0">',
         '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
         '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
