@@ -27,11 +27,19 @@ $(function() {
 
     $.each(row, function (key, value) {
       if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
-        if (key === 'floor') {
-          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Поверх:</strong> ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>')
-        } else if (key === 'floor') {
-          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>')
-        } else {}
+        if (kay === 'surface_land' && row.surface_land !== '' && value === 'Земля' || value === 'земля') {
+          if (key === 'price_sqmt') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup>:</strong> ' + row.surface_land + '</span>')
+          } else if (key === 'surface_land') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: ' + row.seller + '</span>')
+          } else {}
+        } else {
+          if (key === 'floor' && row.floor !== '') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Поверх:</strong> ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>')
+          } else if (key === 'surface_land') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>')
+          } else {}
+        }
       }
     })
 
