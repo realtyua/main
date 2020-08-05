@@ -16,7 +16,7 @@ function detailFormatter(index, row) {
 $(function() {
   var expandedRow = null;
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
-
+    var items = []
     var html = []
     const images = Object.values(row.images || {})
 
