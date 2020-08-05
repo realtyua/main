@@ -36,16 +36,16 @@ $(function() {
     })
 
     if (images.length) {
-        html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1' + row.id + '">')
-        html.push(images.map(function (image) {
-          return '<span class="col px-1"><figure><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></figure></span>'
-        }).join(''))
-        html.push('</span>')
+      html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1' + row.id + '">')
+      html.push(images.map(function (image) {
+        return '<span class="col px-1"><figure><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></figure></span>'
+      }).join(''))
+      html.push('</span>')
     }
 
     $detail.html(html.join(''))
 
-    items[index] = []
+    items[index] = [];
 
     $detail.find('figure').each(function(){
       var $link = $(this).find('a')
@@ -56,26 +56,19 @@ $(function() {
       })
     })
 
-    console.log(container[index]);
-
 	});
 
   $('table').on('click', '.lightbox', function(event){
-      event.preventDefault();
-
-      var $pswp = $('.pswp')[0];
-
-      options = {
-        index: $(this).parent('figure').index(),
-        bgOpacity: 0.85,
-        showHideOpacity: true
-      };
-
-      var index = $(this).closest('.detail-view').prev().data('index');
-      console.log(container[index]);
-      var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
-      gallery.init();
-
+    event.preventDefault();
+    var $pswp = $('.pswp')[0];
+    options = {
+      index: $(this).parent('figure').index(),
+      bgOpacity: 0.85,
+      showHideOpacity: true
+    };
+    var index = $(this).closest('.detail-view').prev().data('index');
+    var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
+    gallery.init();
   });
 
   $('table').on('click-row.bs.table', function (e, row, $element) {
