@@ -1,3 +1,4 @@
+
 function detailFormatter(index, row) {
   var html = []
   $.each(row, function (key, value) {
