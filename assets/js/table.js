@@ -63,7 +63,7 @@ $(function() {
   $(document).on('click', '.lightbox', function(event){
       event.preventDefault();
 
-      var photoswipeContainer = document.querySelectorAll('.pswp')[0],
+      var $pswp = $('.pswp')[0],
 
       options = {
         index: $(this).parent('figure').index(),
@@ -72,7 +72,7 @@ $(function() {
       };
 
       var index = $(this).closest('.detail-view').prev().data('index')
-      var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options)
+      var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
       gallery.init();
 
   });
