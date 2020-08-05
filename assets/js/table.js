@@ -15,9 +15,8 @@ function detailFormatter(index, row) {
 
 $(function() {
   var expandedRow = null;
-  var container = {};
+  var items = {};
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
-    var items = []
     var html = []
     const images = Object.values(row.images || {})
 
@@ -46,11 +45,11 @@ $(function() {
 
     $detail.html(html.join(''))
 
-    container[index] = []
+    items[index] = []
 
     $detail.find('figure').each(function(){
       var $link = $(this).find('a')
-      container[index].push({
+      items[index].push({
         src: $link.attr('href'),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height')
@@ -74,7 +73,7 @@ $(function() {
 
       var index = $(this).closest('.detail-view').prev().data('index');
       console.log(container[index]);
-      var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, container[index], options);
+      var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
       gallery.init();
 
   });
