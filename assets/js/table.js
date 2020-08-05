@@ -17,25 +17,20 @@ $(function() {
   var expandedRow = null;
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
-    var html = [];
-    const images = Object.values(row.images || {})
-
     if (expandedRow !== index) {
      	$('table').bootstrapTable('collapseRow', expandedRow)
     }
     expandedRow = index;
 
+    var html = [];
+    const images = Object.values(row.images || {})
+
     $.each(row, function (key, value) {
       if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
         if (value === 'Земля' || value === 'земля') {
-          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup>:</strong> ' + row.surface_land + '</span>')
-          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: ' + row.seller + '</span>')
+
         } else {
-          if (key === 'floor') {
-            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Поверх:</strong> ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>')
-          } else if (key === 'surface_land') {
-            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>')
-          }
+
         }
       }
     })
