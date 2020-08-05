@@ -38,6 +38,7 @@ $(function () {
     $('body').append(photoswipeTemplate);
   }
 
+  var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   var container = [];
 
   // Loop over gallery items and push it to the array
@@ -68,7 +69,7 @@ $(function () {
         };
 
     // Initialize PhotoSwipe
-    var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, container, options);
+    var gallery = new PhotoSwipe($pswp, photoswipeContainer, PhotoSwipeUI_Default, container, options);
     gallery.init();
   });
 
