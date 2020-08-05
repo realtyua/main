@@ -72,7 +72,7 @@ $(function () {
     gallery.init();
   });
 
-}
+})
 
 
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
