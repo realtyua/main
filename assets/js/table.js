@@ -12,7 +12,6 @@ function detailFormatter(index, row) {
   return html.join('')
 }
 
-
 $(function() {
   var expandedRow = null;
   $('table').on('expand-row.bs.table', function (event, index) {
