@@ -26,12 +26,12 @@ $(function() {
     expandedRow = index;
 
     $.each(row, function (key, value) {
-      if (!key.startsWith('_') && key !== 'images' && value !== '') {
-        if (key === 'id') {
-          html.push('<p><b>' + key + ':</b> ' + '<a class="value" href="#" data-type="text">' + value + '</a>' + '</p>')
-        } else {
-          html.push('<p><b>' + key + ':</b> '  + value  + '</p>')
-        }
+      if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
+        if (key === 'floor') {
+          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Поверх:</strong> ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>')
+        } else if (key === 'floor') {
+          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>')
+        } else {}
       }
     })
 
