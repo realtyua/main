@@ -45,7 +45,7 @@ $(function() {
 
     $detail.html(html.join(''))
 
-    items[index] = [];
+    var items[index] = [];
 
     $detail.find('figure').each(function(){
       var $link = $(this).find('a')
