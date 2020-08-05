@@ -46,16 +46,18 @@ $(function() {
     $detail.html(html.join(''))
 
     var items[index] = [];
+    var itemsArray = [];
 
     $detail.find('figure').each(function(){
       var $link = $(this).find('a')
-      items[index].push({
+      itemsArray.push({
         src: $link.attr('href'),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height')
       })
     })
 
+    console.log(itemsArray);
 
 	});
 
@@ -71,7 +73,8 @@ $(function() {
       };
 
       var index = $(this).closest('.detail-view').prev().data('index');
-      var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
+      console.log(itemsArray);
+      var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, itemsArray, options);
       gallery.init();
 
   });
