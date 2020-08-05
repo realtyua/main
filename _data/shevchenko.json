@@ -15,24 +15,7 @@
         "address": "вул. Привітна",
         "date": "2020-06-06",
         "seller": "Агент нерухо́місті Шевченко",
-        "phone": "380007770077",
-        "images": [
-          {
-            "src":"image1.jpg",
-            "alt":"image1 alt",
-            "title":"image1 title"
-          },
-          {
-            "src":"image2.jpg",
-            "alt":"image2 alt",
-            "title":"image2 title"
-          },
-          {
-            "src":"image3.jpg",
-            "alt":"image3 alt",
-            "title":"image3 title"
-          }
-        ]
+        "phone": "380007770077"
     },
     {
         "id": "1",
@@ -50,19 +33,7 @@
         "address": "вул. Річкова",
         "date": "2020-06-29",
         "seller": "Агент нерухо́місті Шевченко",
-        "phone": "380007770077",
-        "images": [
-          {
-            "src":"image1.jpg",
-            "alt":"image1 alt",
-            "title":"image1 title"
-          },
-          {
-            "src":"image3.jpg",
-            "alt":"image3 alt",
-            "title":"image3 title"
-          }
-        ]
+        "phone": "380007770077"
     },
     {
         "id": "2",
@@ -80,14 +51,7 @@
         "address": "вул. Прибережна",
         "date": "2020-06-18",
         "seller": "Агент нерухо́місті Шевченко",
-        "phone": "380007770077",
-        "images": [
-          {
-            "src":"image3.jpg",
-            "alt":"image3 alt",
-            "title":"image3 title"
-          }
-        ]
+        "phone": "380007770077"
     },
     {
         "id": "3",
@@ -123,14 +87,7 @@
         "address": "вул. Дочірна",
         "date": "2020-05-25",
         "seller": "Агент нерухо́місті Шевченко",
-        "phone": "380007770077",
-        "images": [
-          {
-            "src":"image1.jpg",
-            "alt":"image1 alt",
-            "title":"image1 title"
-          }
-        ]
+        "phone": "380007770077"
     },
     {
         "id": "5",
@@ -148,14 +105,7 @@
         "address": "вул. Цікава",
         "date": "2020-03-24",
         "seller": "Агент нерухо́місті Шевченко",
-        "phone": "380007770077",
-        "images": [
-          {
-            "src":"image1.jpg",
-            "alt":"image1 alt",
-            "title":"image1 title"
-          }
-        ]
+        "phone": "380007770077"
     },
     {
         "id": "6",
@@ -173,24 +123,7 @@
         "address": "вул. Гірнича",
         "date": "2020-07-06",
         "seller": "Агент нерухо́місті Шевченко",
-        "phone": "380007770077",
-        "images": [
-          {
-            "src":"image1.jpg",
-            "alt":"image1 alt",
-            "title":"image1 title"
-          },
-          {
-            "src":"image2.jpg",
-            "alt":"image2 alt",
-            "title":"image2 title"
-          },
-          {
-            "src":"image3.jpg",
-            "alt":"image3 alt",
-            "title":"image3 title"
-          }
-        ]
+        "phone": "380007770077"
     },
     {
         "id": "7",
@@ -208,13 +141,6 @@
         "address": "вул. Земельна",
         "date": "2020-07-14",
         "seller": "Агент нерухо́місті Шевченко",
-        "phone": "380007770077",
-        "images": [
-          {
-            "src":"image1.jpg",
-            "alt":"image1 alt",
-            "title":"image1 title"
-          }
-        ]
+        "phone": "380007770077"
     }
 ]

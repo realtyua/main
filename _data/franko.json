@@ -148,13 +148,6 @@
         "address": "вул. Славетна",
         "date": "2020-07-10",
         "seller": "Агентство нерухо́місті Франко",
-        "phone": "380506660066",
-        "images": [
-          {
-            "src":"image3.jpg",
-            "alt":"image3 alt",
-            "title":"image3 title"
-          }
-        ]
+        "phone": "380506660066"
     }
 ]
