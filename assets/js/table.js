@@ -26,7 +26,7 @@ $(function() {
     expandedRow = index;
 
     $.each(row, function (key, value) {
-      if (value !== '') {
+      if (!key.startsWith('_') && key !== 'images' && value !== '') {
         if (key === 'id') {
           html.push('<p><b>' + key + ':</b> ' + '<a class="value" href="#" data-type="text">' + value + '</a>' + '</p>')
         } else {
@@ -45,7 +45,7 @@ $(function() {
 
     $detail.html(html.join(''))
 
-    items[index] = []
+    items[index] = [];
 
     $detail.find('figure').each(function(){
       var $link = $(this).find('a')
