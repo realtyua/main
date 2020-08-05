@@ -15,9 +15,9 @@ function detailFormatter(index, row) {
 
 $(function() {
   var expandedRow = null;
-  var items = {};
+  var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
-    var html = []
+    var html = [];
     const images = Object.values(row.images || {})
 
     if (expandedRow !== index) {
@@ -36,9 +36,9 @@ $(function() {
     })
 
     if (images.length) {
-      html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1' + row.id + '">')
+      html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">')
       html.push(images.map(function (image) {
-        return '<span class="col px-1"><figure><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></figure></span>'
+        return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></figure>'
       }).join(''))
       html.push('</span>')
     }
