@@ -1,7 +1,6 @@
 
 function detailFormatter(index, row) {
   var html = []
-  var items = {}
   $.each(row, function (key, value) {
     if (!key.startsWith('_') && value !== '') {
       if (key === 'images') {
@@ -19,7 +18,7 @@ $(function() {
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
 
     var html = []
-
+    var items = {}
     const images = Object.values(row.images || {})
 
     if (expandedRow !== index) {
@@ -47,7 +46,7 @@ $(function() {
 
     $detail.html(html.join(''))
 
-    items[index] = [];
+    items[index] = []
 
     $detail.find('figure').each(function(){
       var $link = $(this).find('a')
