@@ -72,7 +72,7 @@ $(function() {
       };
 
       var index = $(this).closest('.detail-view').prev().data('index')
-      var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
+      var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options)
       gallery.init();
 
   });
