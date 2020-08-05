@@ -1,6 +1,7 @@
 
 function detailFormatter(index, row) {
   var html = []
+  var items = {}
   $.each(row, function (key, value) {
     if (!key.startsWith('_') && value !== '') {
       if (key === 'images') {
