@@ -1,26 +1,6 @@
 <div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" id="photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
   <div class="pb-3 px-3">
     <hr class="mt-0">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1 gallery re-{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-      {%- for file in site.static_files -%}
-        {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-        <figure class="col px-1">
-          <a href="{{ file.path | url_decode | relative_url }}" data-size="1200x900">
-            <img src="{{ file.path | url_decode | relative_url }}" class="img-fluid img-thumbnail" title="Image Title" alt="Image Alt">
-          </a>
-        </figure>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-  </div>
-</div>
-
-
-
-{%- comment -%}
-<div class="collapse multi-collapse collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" id="photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-  <div class="pb-3 px-3">
-    <hr class="mt-0">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">
       {%- for file in site.static_files -%}
         {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
@@ -34,4 +14,3 @@
     </div>
   </div>
 </div>
-{%- endcomment -%}
