@@ -1,3 +1,6 @@
+---
+layout: null
+---
 
 function detailFormatter(index, row) {
   var html = []
@@ -91,17 +94,17 @@ function propertyFormatter(value, row) {
   }
 }
 
-function priceFormatter(value, row) {
-  var usd = 28.6;
-  var eur = 32.5;
+function priceFormatter(value) {
+  var usd = {{ site.usd }};
+  var eur = {{ site.eur }};
   if (value.startsWith('$') && value !== '') {
     var price = value.replace('$','') * usd;
-    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> гривень';
+    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value.startsWith('€') && value !== '') {
     var price = value.replace('€','') * eur;
-    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> гривень';
+    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else {
-    return value.toFixed(0) + ' гривень';
+    return value.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
 }
 
