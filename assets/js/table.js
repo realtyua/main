@@ -28,9 +28,14 @@ $(function() {
     $.each(row, function (key, value) {
       if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
         if (value === 'Земля' || value === 'земля') {
-
+          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup>:</strong> ' + row.surface_land + '</span>')
+          html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: ' + row.seller + '</span>')
         } else {
-
+          if (key === 'floor') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Поверх:</strong> ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>')
+          } else if (key === 'surface_land' && value !== '') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>')
+          }
         }
       }
     })
@@ -83,6 +88,20 @@ function propertyFormatter(value, row) {
     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else {
     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+  }
+}
+
+function priceFormatter(value, row) {
+  const usd = 28.5;
+  const eur = 32.5;
+  if (!value.startsWith('$') && value !== '') {
+    let price = row.price * usd;
+    return price;
+  } else if (!value.startsWith('€') && value !== '') {
+    let price = row.price * usd;
+    return price;
+  } else {
+    return row.price;
   }
 }
 
