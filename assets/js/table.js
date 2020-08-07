@@ -91,8 +91,6 @@ function propertyFormatter(value, row) {
   }
 }
 
-<span data-toggle="tooltip" title="">1925700.0</span>
-
 function priceFormatter(value, row) {
   var usd = 28.6;
   var eur = 32.5;
