@@ -95,13 +95,13 @@ function priceFormatter(value, row) {
   const usd = 28.5;
   const eur = 32.5;
   if (!value.startsWith('$') && value !== '') {
-    let price = row.price * usd;
+    let price = value * usd;
     return price;
   } else if (!value.startsWith('€') && value !== '') {
-    let price = row.price * usd;
+    let price = value * usd;
     return price;
   } else {
-    return row.price;
+    return value;
   }
 }
 
