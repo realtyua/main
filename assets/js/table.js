@@ -91,17 +91,19 @@ function propertyFormatter(value, row) {
   }
 }
 
+<span data-toggle="tooltip" title="">1925700.0</span>
+
 function priceFormatter(value, row) {
-  const usd = 28.5;
-  const eur = 32.5;
-  if (!value.startsWith('$') && value !== '') {
-    let price = value * usd;
-    return price;
-  } else if (!value.startsWith('€') && value !== '') {
-    let price = value * usd;
-    return price;
+  var usd = 28.6;
+  var eur = 32.5;
+  if (value.startsWith('$') && value !== '') {
+    var price = value.replace('$','') * usd;
+    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> гривень';
+  } else if (value.startsWith('€') && value !== '') {
+    var price = value.replace('€','') * eur;
+    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> гривень';
   } else {
-    return value;
+    return value.toFixed(0) + ' гривень';
   }
 }
 
