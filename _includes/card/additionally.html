@@ -18,7 +18,7 @@
 {%- endif -%}
 {%- if offer.price_sqmt -%}
 <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
-<dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd }}</span> гривень.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur }}</span> гривень.{% else %}{{ offer.price_sqmt }} гривень.{% endif %}</dd>
+<dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> гривень.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> гривень.{% else %}{{ offer.price_sqmt }} гривень.{% endif %}</dd>
 {%- endif -%}
 {%- if offer.seller -%}
 <dt>{{ site.data.lang-uk.re_seller }}</dt>
