@@ -17,6 +17,8 @@ function detailFormatter(index, row) {
 }
 
 $(function() {
+  var usd = {{ site.usd }};
+  var eur = {{ site.eur }};
   var expandedRow = null;
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
@@ -36,7 +38,7 @@ $(function() {
           html = [
             '<span class="row mx-0">',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість</strong>: ' + row.price_sqmt + ' за 1 м<sup>2</sup></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + row.price_sqmt * usd + '</span>',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
             '</span>',
