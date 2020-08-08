@@ -30,43 +30,33 @@ $(function() {
     var html = [];
     const images = Object.values(row.images || {});
 
-    const priceSqmt = Object.values(row.price_sqmt);
+    $.each(row, function (key, value) {
+      if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
 
-    if (priceSqmt.length) {
-      if (priceSqmt.startsWith('$') && priceSqmt !== '') {
-        html.push(priceSqmt) {
-          return '<span data-toggle="tooltip" title="' + value + '">' + (priceSqmt.replace('$','') * 30).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
-        }).join(''))
+        if (row.type.startsWith('Земля') || row.type.startsWith('земля')) {
+          html = [
+            '<span class="row mx-0">',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
+            '</span>',
+          ]
+        } else if (!row.type.startsWith('Земля') || !row.type.startsWith('земля')) {
+          html = [
+            '<span class="row mx-0">',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
+            '</span>',
+          ]
+        }
+
       }
-    }
-
-    // $.each(row, function (key, value) {
-    //   if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
-    //
-    //     if (value.startsWith('Земля') || value.startsWith('земля')) {
-    //       html = [
-    //         '<span class="row mx-0">',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '</span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
-    //         '</span>',
-    //       ]
-    //     } else if (!value.startsWith('Земля') || !value.startsWith('земля')) {
-    //       html = [
-    //         '<span class="row mx-0">',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '</span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-    //         '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
-    //         '</span>',
-    //       ]
-    //     }
-    //
-    //   }
-    // })
+    })
 
     if (images.length) {
       html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">')
