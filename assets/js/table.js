@@ -33,11 +33,9 @@ $(function() {
     const priceSqmt = Object.values(row.price_sqmt);
 
     if (priceSqmt.length) {
-      var usd = {{ site.usd }};
-      var eur = {{ site.eur }};
-      if (priceSqmt.startsWith('$')) {
+      if (priceSqmt.startsWith('$') && priceSqmt !== '') {
         html.push(priceSqmt) {
-          return '<span data-toggle="tooltip" title="' + value + '">' + (priceSqmt.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+          return '<span data-toggle="tooltip" title="' + value + '">' + (priceSqmt.replace('$','') * 30).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
         }).join(''))
       }
     }
