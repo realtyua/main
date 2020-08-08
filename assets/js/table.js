@@ -51,11 +51,16 @@ $(function() {
           if (row.surface_land !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>')
           }
-          if (row.floor !== '' || row.floors !== '') {
+          if (row.floor !== '' && row.floors !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Поверх</dt><dd>' + row.floor + ' у ' + row.floors + ' поверховому будинку</dd></dl></span>')
           }
-          if (row.price_sqmt !== '') {
+
+          if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+          } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('€','') * eur).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+          } else {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + row.price_sqmt.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
           }
 
           if (row.parking !== '') {
@@ -71,17 +76,6 @@ $(function() {
             html.push('</span>')
           }
 
-
-          // html = [
-          //   //'<span class="row mx-0">',
-          //   '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>',
-          //   '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Поверх</dt><dd>' + row.floor + ' у ' + row.floors + ' поверховому будинку</dd></dl></span>',
-          //   '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>',
-          //   '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>',
-          //   '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Доступна з</dt><dd>' + row.date + '</dd></dl></span>',
-          //   '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></dd></dl></span>',
-          //   //'</span>',
-          // ]
         }
 
       }
