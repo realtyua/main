@@ -30,7 +30,8 @@ $(function() {
 
     $.each(row, function (key, value) {
       if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
-        if (value === 'Земля' || value === 'земля') {
+
+        if (value.startsWith('Земля') || value.startsWith('земля')) {
 
           html = [
             '<span class="row mx-0">',
@@ -41,20 +42,8 @@ $(function() {
             '</span>',
           ]
 
-        } else {
-
-          html = [
-            '<span class="row mx-0">',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + row.price_sqmt + '</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
-            '</span>',
-          ]
-
         }
+
       }
     })
 
