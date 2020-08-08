@@ -40,7 +40,7 @@ $(function() {
             '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>',
             '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість землі за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>',
             '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Доступна з</dt><dd>' + row.date + '</dd></dl></span>',
-            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>',
             '</span>',
           ]
         } else {
