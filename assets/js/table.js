@@ -31,9 +31,9 @@ $(function() {
     const images = Object.values(row.images || {});
 
     $.each(row, function (key, value) {
-      if (!key.startsWith('_') && key !== 'images' || key !== 'id' && value !== '') {
+      if (!key.indexOf('_') && key !== 'images' || key !== 'id' && value !== '') {
 
-        if (row.type.startsWith('Земля') || row.type.startsWith('земля')) {
+        if (row.type.indexOf('Земля') || row.type.indexOf('земля')) {
           html = [
             '<span class="row mx-0">',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
@@ -42,7 +42,7 @@ $(function() {
             '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
             '</span>',
           ]
-        } else if (!row.type.startsWith('Земля') || !row.type.startsWith('земля')) {
+        } else if (!row.type.indexOf('Земля') || !row.type.indexOf('земля')) {
           html = [
             '<span class="row mx-0">',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
@@ -112,9 +112,9 @@ function propertyFormatter(value, row) {
 function priceFormatter(value) {
   var usd = {{ site.usd }};
   var eur = {{ site.eur }};
-  if (value.startsWith('$') && value !== '') {
+  if (value.indexOf('^$') && value !== '') {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
-  } else if (value.startsWith('€') && value !== '') {
+  } else if (value.indexOf('^€') && value !== '') {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else {
     return value.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
