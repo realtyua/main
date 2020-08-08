@@ -69,10 +69,7 @@ $(function() {
           }
 
           if (row.phone !== '') {
-            var number = (row.phone).replace(/[^\d]/g, "");
-            if (number.length !== 12) { return 'Error number'; }
-            var phone = "+" + number.substr(0, 2) + "&nbsp;" + number.substr(2, 3) + "&nbsp;" + number.substr(5, 3) + "&nbsp;" + number.substr(8, 2) "&nbsp;" + number.substr(10, 2);
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + phone + '</a></dd></dl></span>')
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>')
             html.push('</span>')
           }
 
