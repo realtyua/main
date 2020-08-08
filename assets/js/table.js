@@ -49,6 +49,7 @@ $(function() {
           html = []
 
           if (row.surface_land !== '') {
+            html.push('<span class="row mx-0">')
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>')
           }
           if (row.floor !== '' || row.floors !== '') {
@@ -57,6 +58,20 @@ $(function() {
           if (row.price_sqmt !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
           }
+
+          if (row.parking !== '') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>')
+          }
+
+          if (row.date !== '') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Доступна з</dt><dd>' + row.date + '</dd></dl></span>')
+          }
+
+          if (row.phone !== '') {
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></dd></dl></span>')
+            html.push('</span>')
+          }
+
 
           // html = [
           //   //'<span class="row mx-0">',
