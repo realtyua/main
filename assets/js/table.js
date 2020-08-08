@@ -30,9 +30,10 @@ $(function() {
     var html = [];
     const images = Object.values(row.images || {});
 
-    // var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    // var rowDate = row.date.toLocaleDateString("uk-UA", dateOptions);
-    // console.log(rowDate);
+    var rowDate = row.date;
+    var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var valueDate = rowDate.date.toLocaleDateString("uk-UA", dateOptions);
+    console.log(valueDate);
 
     // (if (row.price_sqmt.indexOf('$')) { (row.price_sqmt.replace('$','') * usd).toFixed(0) } else if (row.price_sqmt.indexOf('€')) { (row.price_sqmt.replace('€','') * eur).toFixed(0) } else { row.price_sqmt.toFixed(0) })
 
