@@ -30,10 +30,10 @@ $(function() {
     var html = [];
     const images = Object.values(row.images || {});
 
-    var rowDate = row.date;
-    var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    var valueDate = rowDate.date.toLocaleDateString("uk-UA", dateOptions);
-    console.log(valueDate);
+    // var rowDate = row.date;
+    // var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    // var valueDate = rowDate.date.toLocaleDateString("uk-UA", dateOptions);
+    // console.log(valueDate);
 
     // (if (row.price_sqmt.indexOf('$')) { (row.price_sqmt.replace('$','') * usd).toFixed(0) } else if (row.price_sqmt.indexOf('€')) { (row.price_sqmt.replace('€','') * eur).toFixed(0) } else { row.price_sqmt.toFixed(0) })
 
@@ -44,21 +44,21 @@ $(function() {
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
           html = [
             '<span class="row mx-0">',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '{{ site.data.lang-uk.re_uah }}</dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Доступна з</dt><dd>' + row.date + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></dd></dl></span>',
             '</span>',
           ]
         } else {
           html = [
             '<span class="row mx-0">',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Поверх</dt><dd>' + row.floor + ' у ' + row.floors + ' поверховому будинку</dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Доступна з</dt><dd>' + row.date + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></dd></dl></span>',
             '</span>',
           ]
         }
