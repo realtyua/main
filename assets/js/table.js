@@ -31,9 +31,9 @@ $(function() {
     const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
-      if (index.first()) {
-        html.push('<span class="row mx-0">')
-      }
+      // if (index.first()) {
+      //   html.push('<span class="row mx-0">')
+      // }
       if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
 
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
@@ -67,9 +67,9 @@ $(function() {
         }
 
       }
-      if (index.last()) {
-        html.push('</span>')
-      }
+      // if (index.last()) {
+      //   html.push('</span>')
+      // }
     })
 
     if (images.length) {
