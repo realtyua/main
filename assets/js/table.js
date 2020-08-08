@@ -36,7 +36,7 @@ $(function() {
 
     $.each(row, function (key, value) {
 
-      var rowDate = (row.date).toLocaleDateString("uk-UA", options);
+      var rowDate = (row.date).toLocaleDateString("uk-UA", dateOptions);
       console.log(rowDate);
 
       if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
