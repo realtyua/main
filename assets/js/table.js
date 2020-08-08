@@ -113,11 +113,9 @@ function priceFormatter(value) {
   var usd = {{ site.usd }};
   var eur = {{ site.eur }};
   if (value.startsWith('$') && value !== '') {
-    var price = value.replace('$','') * usd;
-    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+    return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value.startsWith('€') && value !== '') {
-    var price = value.replace('€','') * eur;
-    return '<span data-toggle="tooltip" title="' + value + '">' + price.toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+    return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else {
     return value.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
