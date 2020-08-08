@@ -36,7 +36,9 @@ $(function() {
       var usd = {{ site.usd }};
       var eur = {{ site.eur }};
       if (priceSqmt.startsWith('$')) {
-        return '<span data-toggle="tooltip" title="' + value + '">' + (priceSqmt.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+        html.push(priceSqmt) {
+          return '<span data-toggle="tooltip" title="' + value + '">' + (priceSqmt.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+        }).join(''))
       }
     }
 
