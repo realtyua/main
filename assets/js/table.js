@@ -35,10 +35,8 @@ $(function() {
     // var valueDate = rowDate.toLocaleDateString("uk-UA", dateOptions);
 
     var rowDate = row.date;
-    function pad(n) {return n < 10 ? "0"+n : n;}
-    var valueDate = pad(rowDate.getDate())+"/"+pad(rowDate.getMonth()+1)+"/"+rowDate.getFullYear();
-    console.log(rowDat);
-    console.log(valueDate);
+
+    console.log(rowDate);
 
     // (if (row.price_sqmt.indexOf('$')) { (row.price_sqmt.replace('$','') * usd).toFixed(0) } else if (row.price_sqmt.indexOf('€')) { (row.price_sqmt.replace('€','') * eur).toFixed(0) } else { row.price_sqmt.toFixed(0) })
 
