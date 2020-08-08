@@ -30,11 +30,14 @@ $(function() {
     var html = [];
     const images = Object.values(row.images || {});
 
+    var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
     // (if (row.price_sqmt.indexOf('$')) { (row.price_sqmt.replace('$','') * usd).toFixed(0) } else if (row.price_sqmt.indexOf('€')) { (row.price_sqmt.replace('€','') * eur).toFixed(0) } else { row.price_sqmt.toFixed(0) })
 
     $.each(row, function (key, value) {
-      var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      var rowDate  = row.date.toLocaleDateString("uk-UA", options);
+
+      var rowDate = (row.date).toLocaleDateString("uk-UA", options);
+      console.log(rowDate);
 
       if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
 
@@ -43,7 +46,7 @@ $(function() {
             '<span class="row mx-0">',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</span>',
-            '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + rowDate + '</span>',
+            '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '{%- include date.html date=row.date -%}</span>',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
             '</span>',
           ]
