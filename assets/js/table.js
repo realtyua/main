@@ -31,16 +31,15 @@ $(function() {
     const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
-
       if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
-
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
           html = [
             '<span class="row mx-0">',
             '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>',
             '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Вартість землі за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>',
-            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Доступна з</dt><dd>' + row.date + '</dd></dl></span>',
-            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + row.date + '</dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>',
+            '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Контакти продавця</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>',
             '</span>',
           ]
         } else {
@@ -63,20 +62,16 @@ $(function() {
           if (row.parking !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>')
           }
-
           if (row.date !== '') {
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Доступна з</dt><dd>' + row.date + '</dd></dl></span>')
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + row.date + '</dd></dl></span>')
           }
-
           if (row.phone !== '') {
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd><a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>')
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>')
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Контакти продавця</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>')
             html.push('</span>')
           }
-
         }
-
       }
-
     })
 
     if (images.length) {
