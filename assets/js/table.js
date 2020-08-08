@@ -31,9 +31,7 @@ $(function() {
     const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
-      // if (index.first()) {
-      //   html.push('<span class="row mx-0">')
-      // }
+
       if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
 
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
@@ -46,10 +44,11 @@ $(function() {
             '</span>',
           ]
         } else {
-          html = []
+          html = [
+            '<span class="row mx-0">',
+          ]
 
           if (row.surface_land !== '') {
-            html.push('<span class="row mx-0">')
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>')
           }
           if (row.floor !== '' || row.floors !== '') {
@@ -86,9 +85,7 @@ $(function() {
         }
 
       }
-      // if (index.last()) {
-      //   html.push('</span>')
-      // }
+
     })
 
     if (images.length) {
