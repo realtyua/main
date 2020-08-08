@@ -30,13 +30,12 @@ $(function() {
     var html = [];
     const images = Object.values(row.images || {});
 
-    // var rowDate = row.date;
-    // var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    // var valueDate = rowDate.toLocaleDateString("uk-UA", dateOptions);
+    var d = Object.values(row.date);
+    var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var date = d.getDate() + " " + month[d.getMonth()] + ", " + d.getFullYear();
+    var time = d.toLocaleTimeString().toLowerCase();
 
-    var rowDate = row.date;
-
-    console.log(rowDate);
+    console.log(date);
 
     // (if (row.price_sqmt.indexOf('$')) { (row.price_sqmt.replace('$','') * usd).toFixed(0) } else if (row.price_sqmt.indexOf('€')) { (row.price_sqmt.replace('€','') * eur).toFixed(0) } else { row.price_sqmt.toFixed(0) })
 
