@@ -42,7 +42,7 @@ $(function() {
             '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
             '</span>',
           ]
-        } else {
+        } else if (!value.startsWith('Земля') || !value.startsWith('земля')) {
           html = [
             '<span class="row mx-0">',
             '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
