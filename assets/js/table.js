@@ -66,14 +66,14 @@ $(function() {
 
             var m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             //var d = row.date;
-            function(row) {
+            function dateFormatter(row) {
                 var d = new Date(row.date);
                 var day = d.getDate();
                 var month = d.getMonth();
                 var year = d.getFullYear();
                 //return day + ' ' + m[month] + ' ' + year + ' року';
                 return '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + day + '' + m[month] + '' + year + ' року</dd></dl></span>';
-            };
+            }
 
             //var m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             //var d = row.date;
