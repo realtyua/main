@@ -20,6 +20,13 @@ $(function() {
   var usd = {{ site.usd }};
   var eur = {{ site.eur }};
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var rowDate = row.date;
+  var formatDate = function(rowDate) {
+      var day = rowDate.getDate();
+      var monthIndex = rowDate.getMonth();
+      var year = rowDate.getFullYear();
+      return day + ' ' + months[monthIndex] + ' ' + year;
+  };
   var expandedRow = null;
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
@@ -64,15 +71,7 @@ $(function() {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>')
           }
           if (row.date !== '') {
-            var rowDate = row.date;
-            var formatDate = function(rowDate) {
-                var day = rowDate.getDate();
-                var monthIndex = rowDate.getMonth();
-                var year = rowDate.getFullYear();
-                return day + ' ' + months[monthIndex] + ' ' + year;
-            };
-
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + formatDate(new Date()) + '' formatDate '</dd></dl></span>')
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + formatDate + '</dd></dl></span>')
           }
           if (row.phone !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>')
