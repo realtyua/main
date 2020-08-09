@@ -19,6 +19,7 @@ function detailFormatter(index, row) {
 $(function() {
   var usd = {{ site.usd }};
   var eur = {{ site.eur }};
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var expandedRow = null;
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
@@ -63,7 +64,15 @@ $(function() {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>')
           }
           if (row.date !== '') {
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + row.date + '</dd></dl></span>')
+            var date = row.date;
+            var formatDate = function(date) {
+                var day = date.getDate();
+                var monthIndex = date.getMonth();
+                var year = date.getFullYear();
+                return day + ' ' + months[monthIndex] + ' ' + year;
+            };
+
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + formatDate + '</dd></dl></span>')
           }
           if (row.phone !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>')
