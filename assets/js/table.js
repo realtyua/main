@@ -64,12 +64,18 @@ $(function() {
           }
           if (row.date !== '') {
 
-            function dateFormatter(date) {
-              if (!date) {
-                return null;
-              }
-              return date.toLocaleString('en', { year: 'numeric', month: 'short', day: 'numeric' });
-            }
+            var m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            //var d = row.date;
+            function dateFormatter() {
+                var r = row.date;
+                var d = new Date(r);
+                var day = d.getDate();
+                var month = d.getMonth();
+                var year = d.getFullYear();
+                html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + d.getDate() + ' ... ' + d.getFullYear() + ' року</dd></dl></span>')
+                //return day + ' ' + m[month] + ' ' + year + ' року';
+                //return '<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + day + '' + m[month] + '' + year + ' року</dd></dl></span>';
+            };
 
             //var m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             //var d = row.date;
