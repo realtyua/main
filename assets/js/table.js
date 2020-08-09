@@ -65,10 +65,10 @@ $(function() {
           if (row.date !== '') {
 
             var m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var date = row.date;
-            var i = date.getMonth();
+            var d = row.date;
+            //var i = d.getMonth();
 
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + date.getDate() + ' ' + m[i] + ' ' + date.getFullYear() + ' року</dd></dl></span>')
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + d.getDate() + ' ... ' + d.getFullYear() + ' року</dd></dl></span>')
           }
           if (row.phone !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>')
