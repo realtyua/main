@@ -72,7 +72,7 @@ $(function() {
                 return day + ' ' + months[monthIndex] + ' ' + year;
             };
 
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + formatDate + '</dd></dl></span>')
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + formatDate(new Date()) + '' formatDate '</dd></dl></span>')
           }
           if (row.phone !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>')
