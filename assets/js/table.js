@@ -63,7 +63,8 @@ $(function() {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>')
           }
           if (row.date !== '') {
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + row.date.getDate() + '' + row.date + ' ... ' + row.date.getFullYear() + ' року</dd></dl></span>')
+            var d = new Date(row.date);
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + d.getDate() + '' + row.date + ' ... ' + d.getFullYear() + ' року</dd></dl></span>')
           }
           if (row.phone !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>')
