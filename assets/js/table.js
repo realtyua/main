@@ -64,11 +64,11 @@ $(function() {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>')
           }
           if (row.date !== '') {
-            var date = row.date;
-            var formatDate = function(date) {
-                var day = date.getDate();
-                var monthIndex = date.getMonth();
-                var year = date.getFullYear();
+            var rowDate = row.date;
+            var formatDate = function(rowDate) {
+                var day = rowDate.getDate();
+                var monthIndex = rowDate.getMonth();
+                var year = rowDate.getFullYear();
                 return day + ' ' + months[monthIndex] + ' ' + year;
             };
 
