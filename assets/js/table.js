@@ -17,6 +17,7 @@ function detailFormatter(index, row) {
 }
 
 $(function() {
+  var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var usd = {{ site.usd }};
   var eur = {{ site.eur }};
   var expandedRow = null;
@@ -64,7 +65,8 @@ $(function() {
           }
           if (row.date !== '') {
             var d = new Date(row.date);
-            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + d.getDate() + '' + row.date + ' ... ' + d.getFullYear() + ' року</dd></dl></span>')
+            var n = d.getMonth();
+            html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Нерухомість доступна з</dt><dd>' + d.getDate() + '' + month[n] + '' + d.getFullYear() + ' року</dd></dl></span>')
           }
           if (row.phone !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>')
