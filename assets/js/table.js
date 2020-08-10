@@ -45,7 +45,7 @@ $(function() {
           ]
         } else {
           html = [
-            '<span class="row mx-0">',
+            '<span class="row">',
           ]
           if (row.surface_land !== '') {
             html.push('<span class="col-12 col-sm-6 col-md-4"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>')
