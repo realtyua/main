@@ -61,13 +61,11 @@
         <td>{{ offer.phone }}</td>
         {%- if isImage != "" -%}
           <td>
-            "images": [
+            "images":
               {%- for file in site.static_files -%}
                 {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
 
-                  {
-                    "src":"{{ file.name }}",
-                  }
+                  "src":"{{ file.name }}"
 
                 {%- comment -%}
                 <div class="col px-1">
@@ -79,9 +77,6 @@
 
                 {%- endif -%}
               {%- endfor -%}
-              {
-                "src":""
-              }
             ]
           </td>
         {%- else -%}
