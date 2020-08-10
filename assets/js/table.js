@@ -150,9 +150,9 @@ function htmlPropertyFormatter(value, row) {
 
 function htmlDetailFormatter(value, row) {
 
-  var html = []
+  var html = [];
   $.each(row, function (key, value) {
-    if (!key.startsWith('_')) {
+    if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
       html.push('<p><b>' + key + ':</b> ' + value + '</p>')
     }
   })
