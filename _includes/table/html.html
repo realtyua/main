@@ -66,8 +66,8 @@
                 {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
 
                   {
-                    "src":"{{ file.name }}"
-                  }{% if forloop.last %}{% else %},{% endif %}
+                    "src":"{{ file.name }}",
+                  }
 
                 {%- comment -%}
                 <div class="col px-1">
@@ -79,6 +79,9 @@
 
                 {%- endif -%}
               {%- endfor -%}
+              {
+                "src":""
+              }
             ]
           </td>
         {%- else -%}
