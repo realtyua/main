@@ -53,17 +53,6 @@ $(function() {
             html.push('<span class="col px-1"><dl><dt>Контакти продавця</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
             html.push('</span>')
           }
-
-{%- comment -%}
-          [
-            '<span class="col px-1"><dl><dt>Вартість землі за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>',
-            '<span class="col px-1"><dl><dt>Нерухомість доступна з</dt><dd>' + row.date + '</dd></dl></span>',
-            '<span class="col px-1"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>',
-            '<span class="col px-1"><dl><dt>Контакти продавця</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>',
-            '</span>',
-          ]
-{%- endcomment -%}
-
         } else {
           html = [
             '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
