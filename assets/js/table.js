@@ -150,6 +150,28 @@ function htmlPropertyFormatter(value, row) {
 
 function htmlDetailFormatter(value, row) {
 
+  var html = []
+  $.each(row, function (key, value) {
+    if (!key.startsWith('_')) {
+      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    }
+  })
+  return html.join('')
+
+}
+
+function priceSorter(a, b) {
+  var aa = a.replace('$', '')
+  var bb = b.replace('$', '')
+  return aa - bb
+}
+
+{%- comment -%}
+
+function htmlDetailFormatter(value, row) {
+
+  var html = [];
+
   $.each(row, function (key, value) {
     if (!key.indexOf('_') && value !== '') {
       html = [
@@ -169,18 +191,4 @@ function htmlDetailFormatter(value, row) {
 
 }
 
-function priceSorter(a, b) {
-  var aa = a.replace('$', '')
-  var bb = b.replace('$', '')
-  return aa - bb
-}
-
-
-// var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-// var rowDate = row.date;
-// var formatDate = function(rowDate) {
-//     var day = rowDate.getDate();
-//     var monthIndex = rowDate.getMonth();
-//     var year = rowDate.getFullYear();
-//     return day + ' ' + months[monthIndex] + ' ' + year;
-// };
+{%- endcomment -%}
