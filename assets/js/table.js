@@ -2,6 +2,18 @@
 layout: null
 ---
 
+function htmlDetailFormatter(value, row) {
+
+  var html = [];
+  $.each(row, function (key, value) {
+    if (key.indexOf('_')) {
+      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    }
+  })
+  return html.join('')
+
+}
+
 function detailFormatter(index, row) {
   var html = []
   $.each(row, function (key, value) {
