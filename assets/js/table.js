@@ -158,6 +158,16 @@ function htmlPropertyFormatter(value, row) {
   }
 }
 
+
+
+function priceSorter(a, b) {
+  var aa = a.replace('$', '')
+  var bb = b.replace('$', '')
+  return aa - bb
+}
+
+{%- comment -%}
+
 function htmlDetailFormatter(value, row) {
 
   var html = [];
@@ -170,13 +180,8 @@ function htmlDetailFormatter(value, row) {
 
 }
 
-function priceSorter(a, b) {
-  var aa = a.replace('$', '')
-  var bb = b.replace('$', '')
-  return aa - bb
-}
 
-{%- comment -%}
+data-detail-formatter="htmlDetailFormatter"
 
 function htmlDetailFormatter(value, row) {
 
