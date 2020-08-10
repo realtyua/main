@@ -2,18 +2,6 @@
 layout: null
 ---
 
-function htmlDetailFormatter(value, row) {
-
-  var html = [];
-  $.each(row, function (key, value) {
-    if (key.indexOf('_')) {
-      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-    }
-  })
-  return html.join('')
-
-}
-
 function detailFormatter(index, row) {
   var html = []
   $.each(row, function (key, value) {
@@ -28,7 +16,7 @@ function detailFormatter(index, row) {
   return html.join('')
 }
 
-function jsDetailFormatter(index, row) {
+$(function() {
   var month = ["{{ site.data.lang-uk.m_01 }}", "{{ site.data.lang-uk.m_02 }}", "{{ site.data.lang-uk.m_03 }}", "{{ site.data.lang-uk.m_04 }}", "{{ site.data.lang-uk.m_05 }}", "{{ site.data.lang-uk.m_06 }}", "{{ site.data.lang-uk.m_07 }}", "{{ site.data.lang-uk.m_08 }}", "{{ site.data.lang-uk.m_09 }}", "{{ site.data.lang-uk.m_10 }}", "{{ site.data.lang-uk.m_11 }}", "{{ site.data.lang-uk.m_12 }}"];
   var usd = {{ site.usd }};
   var eur = {{ site.eur }};
