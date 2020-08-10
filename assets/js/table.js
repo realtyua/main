@@ -32,7 +32,7 @@ $(function() {
     const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
-      if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
+      if (key.indexOf('_') && key !== 'images' || key !== 'id' && value !== '') {
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
           html = [
             '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
@@ -152,7 +152,7 @@ function htmlDetailFormatter(value, row) {
 
   var html = [];
   $.each(row, function (key, value) {
-    if (!key.indexOf('_') !== -1 && key !== 'images' || key !== 'id' && value !== '') {
+    if (key.indexOf('_') && key !== 'images' || key !== 'id' && value !== '') {
       html.push('<p><b>' + key + ':</b> ' + value + '</p>')
     }
   })
