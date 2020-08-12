@@ -2,64 +2,71 @@
 layout: null
 ---
 
-function htmlDetailFormatter(e, index, row, $detail) {
+var items = [];
 
-    var html = [];
-    var images = [];
-    var items = [];
+function htmlDetailFormatter(index, row, $element) {
 
-    $(row.images).find('.col a').each(function () {
-      images.push($(this).attr('href'))
-    })
+  "use strict";
 
-    $.each(row, function (index, key, value) {
-      if (key.indexOf('_') && value !== '') {
-        html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-      }
-    })
-
-    return html.join('')
-
-    if (images.length) {
-      html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'),
-      html.push(images.map(function (image) {
-        return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></figure>'
-      }).join('')),
-      html.push('</span>')
-    }
-
-    $detail.html(html.join(''))
-
-    items[index] = [];
-
-    $detail.find('figure').each(function(){
-      var $link = $(this).find('a')
-      items[index].push({
-        src: $link.attr('href'),
-        w: $link.data('lightbox-width'),
-        h: $link.data('lightbox-height')
-      })
-    })
-
-}
-
-function jsDetailFormatter(value, row) {
+  const images = Object.values(row.images || {});
 
   var html = [];
-  var images = [];
-  var items = [];
-
-  $(row.images).find('.col a').each(function () {
-    images.push($(this).attr('href'))
-  })
 
   $.each(row, function (index, key, value) {
-    if (key.indexOf('_') && value !== '') {
-      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    if (key !== 'images' || key !== 'id' && value !== '') {
+      if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
+        html = [
+          '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
+          '<span class="col px-1"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>',
+        ]
+        if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
+          html.push('<span class="col px-1"><dl><dt>Вартість землі за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
+          html.push('<span class="col px-1"><dl><dt>Вартість землі за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('€','') * eur).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        } else {
+          html.push('<span class="col px-1"><dl><dt>Вартість землі за 1 м<sup>2</sup></dt><dd>' + row.price_sqmt.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        }
+        if (row.date !== '') {
+          var d = new Date(row.date);
+          var n = d.getMonth();
+          html.push('<span class="col px-1"><dl><dt>Нерухомість доступна з</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>'),
+          html.push('<span class="col px-1"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>'),
+          html.push('<span class="col px-1"><dl><dt>Контакти продавця</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
+          html.push('</span>')
+        }
+      } else {
+        html = [
+          '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
+        ]
+        if (row.surface_land !== '') {
+          html.push('<span class="col px-1"><dl><dt>Площа землі</dt><dd>' + row.surface_land + ' м<sup>2</sup></dd></dl></span>')
+        }
+        if (row.floor !== '' && row.floors !== '') {
+          html.push('<span class="col px-1"><dl><dt>Поверх</dt><dd>' + row.floor + ' у ' + row.floors + ' поверховому будинку</dd></dl></span>')
+        }
+        if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
+          html.push('<span class="col px-1"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
+          html.push('<span class="col px-1"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('€','') * eur).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        } else {
+          html.push('<span class="col px-1"><dl><dt>Вартість нерухомості за 1 м<sup>2</sup></dt><dd>' + row.price_sqmt.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        }
+        if (row.parking !== '') {
+          html.push('<span class="col px-1"><dl><dt>Стоя́нка</dt><dd>' + row.parking + '</dd></dl></span>')
+        }
+        if (row.date !== '') {
+          var d = new Date(row.date);
+          var n = d.getMonth();
+          html.push('<span class="col px-1"><dl><dt>Нерухомість доступна з</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
+        }
+        if (row.phone !== '') {
+          html.push('<span class="col px-1"><dl><dt>Продавець</dt><dd>' + row.seller + '</dd></dl></span>'),
+          html.push('<span class="col px-1"><dl><dt>Контакти продавця</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
+          html.push('</span>')
+        }
+      }
     }
   })
-
-  return html.join('')
 
   if (images.length) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'),
@@ -69,22 +76,28 @@ function jsDetailFormatter(value, row) {
     html.push('</span>')
   }
 
-  $detail.html(html.join(''))
+  $element.html(html.join(''))
 
   items[index] = [];
 
-  $detail.find('figure').each(function(){
-    var $link = $(this).find('a')
+  $element.find('figure').each(function(){
+    var $link = $(this).find('a');
     items[index].push({
-      src: $link.attr('href'),
-      w: $link.data('lightbox-width'),
-      h: $link.data('lightbox-height')
+        src: $link.attr('href'),
+        w: $link.data('lightbox-width'),
+        h: $link.data('lightbox-height')
     })
   })
 
 }
 
-$('table').on('click', '.lightbox', function(event){
+function jsDetailFormatter(value, row) {
+
+
+}
+
+
+$(document).on('click', '.lightbox', function(event){
   event.preventDefault();
   var $pswp = $('.pswp')[0];
   options = {
