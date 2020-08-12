@@ -22,18 +22,19 @@ $(function() {
   var eur = {{ site.eur }};
   var expandedRow = null;
   var items = [];
-  $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
+  $('table').on('expand-row.bs.table', function (e, index, row, $detail) {
     if (expandedRow !== index) {
      	$('table').bootstrapTable('collapseRow', expandedRow)
     }
     expandedRow = index;
 
-    var html = [];
     var images = [];
+
     $(row.images).find('.col a').each(function () {
       images.push($(this).attr('href'))
     })
-    const images = Object.values(row.images || {});
+
+    var html = [];
 
     $.each(row, function (index, key, value) {
       if (key !== 'images' || key !== 'id' b) {
@@ -90,6 +91,8 @@ $(function() {
         }
       }
     })
+
+    const images = Object.values(row.images || {});
 
     if (images.length) {
       html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'),
@@ -153,16 +156,6 @@ function priceFormatter(value) {
     return value.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
 }
-
-function htmlPropertyFormatter(value, row) {
-  if (value === 'Земля') {
-    return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-  } else {
-    return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-  }
-}
-
-
 
 function priceSorter(a, b) {
   var aa = a.replace('$', '')
