@@ -24,17 +24,19 @@ $(function() {
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
 
+    // var images = [];
+    const images = Object.values(row.images || {});
+
+    $(row.images).find('.col a').each(function () {
+      images.push($(this).attr('href'))
+    })
+
     if (expandedRow !== index) {
      	$('table').bootstrapTable('collapseRow', expandedRow)
     }
     expandedRow = index;
 
     var html = [];
-    var images = [];
-
-    // $(row.images).find('.col a').each(function () {
-    //   images.push($(this).attr('href'))
-    // })
 
     $.each(row, function (index, key, value) {
       if (key !== 'images' || key !== 'id' && value !== '') {
