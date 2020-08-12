@@ -33,7 +33,7 @@ function jsDetailFormatter(index, row, $detail) {
 
   var html = [];
 
-  $.each(row, function (index, key, value) {
+  $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
       if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
         html = [
@@ -126,7 +126,7 @@ function htmlDetailFormatter(index, row, $detail) {
     images.push($(this).attr('href'))
   })
 
-  $.each(row, function (index, key, value) {
+  $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
       if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
         html = [
@@ -348,8 +348,6 @@ function propertyFormatter(value, row) {
 
 function priceFormatter(value) {
   "use strict";
-  var usd = {{ site.usd }};
-  var eur = {{ site.eur }};
   if (value.indexOf('$') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value.indexOf('€') !== -1) {
