@@ -2,18 +2,16 @@
 layout: null
 ---
 
-function detailFormatter(index, row) {
-  var html = []
+function htmlDetailFormatter(value, row) {
+
+  var html = [];
   $.each(row, function (key, value) {
-    if (!key.startsWith('_') && value !== '') {
-      if (key === 'images') {
-        html.push('<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">' + value + '</span>')
-      } else {
-        html.push('<span class="col-12 col-sm-6 col-md-4"><b>' + key + ':</b> ' + value + '</span>')
-      }
+    if (key.indexOf('_')) {
+      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
     }
   })
   return html.join('')
+
 }
 
 $(function() {
@@ -22,14 +20,7 @@ $(function() {
   var eur = {{ site.eur }};
   var expandedRow = null;
   var items = [];
-  $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
-
-    var images = [];
-    // const images = Object.values(row.images || {});
-
-    $(row.images).find('.col a').each(function () {
-      images.push($(this).attr('href'))
-    })
+  $('table').on('expand-row.bs.table', function (e, index, row, $detail) {
 
     if (expandedRow !== index) {
      	$('table').bootstrapTable('collapseRow', expandedRow)
@@ -93,6 +84,8 @@ $(function() {
         }
       }
     })
+
+    const images = Object.values(row.images || {});
 
     if (images.length) {
       html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'),
