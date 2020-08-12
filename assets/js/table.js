@@ -23,6 +23,13 @@ $(function() {
   var expandedRow = null;
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
+
+    var images = [];
+
+    $(row.images).find('.col a').each(function () {
+      images.push($(this).attr('href'))
+    })
+
     if (expandedRow !== index) {
      	$('table').bootstrapTable('collapseRow', expandedRow)
     }
@@ -32,7 +39,7 @@ $(function() {
     const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
-      if (key !== 'images' || key !== 'id' && value !== '') {
+      if (key.indexOf('_') && key !== 'images' || key !== 'id' && value !== '') {
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
           html = [
             '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
@@ -158,49 +165,8 @@ function htmlPropertyFormatter(value, row) {
   }
 }
 
-
-
 function priceSorter(a, b) {
   var aa = a.replace('$', '')
   var bb = b.replace('$', '')
   return aa - bb
 }
-
-{%- comment -%}
-
-function htmlDetailFormatter(value, row) {
-
-  var html = [];
-  $.each(row, function (key, value) {
-    if (key.indexOf('_')) {
-      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-    }
-  })
-  return html.join('')
-
-}
-
-function htmlDetailFormatter(value, row) {
-
-  var html = [];
-
-  $.each(row, function (key, value) {
-    if (!key.indexOf('_') && value !== '') {
-      html = [
-        '<span class="row mx-0">',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Площа землі</strong>: ' + row.surface_land + ' м<sup>2</sup></span>',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Поверх</strong>: ' + row.floor + ' у ' + row.floors + ' поверховому будинку</span>',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Вартість за 1 м<sup>2</sup></strong>: ' + row.price_sqmt + '</span>',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Стоя́нка</strong>: ' + row.parking + '</span>',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Доступна з</strong>: ' + row.date + '</span>',
-        '<span class="col-12 col-sm-6 col-md-4"><strong>Продавець</strong>: <a href="tel:+' + row.phone + '" class="phone" title="' + row.seller + '">' + row.phone + '</a></span>',
-        '</span>',
-      ]
-    }
-  })
-
-  return html.join('')
-
-}
-
-{%- endcomment -%}
