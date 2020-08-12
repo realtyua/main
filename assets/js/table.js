@@ -29,10 +29,14 @@ $(function() {
     expandedRow = index;
 
     var html = [];
+    var images = [];
+    $(row.images).find('.col a').each(function () {
+      images.push($(this).attr('href'))
+    })
     const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
-      if (key !== 'images' || key !== 'id' && value !== '') {
+      if (key !== 'images' || key !== 'id' b) {
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
           html = [
             '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',

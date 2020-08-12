@@ -60,6 +60,8 @@
         <td>{{ offer.phone }}</td>
         {%- if isImage != "" -%}
           <td>
+            <hr>
+            <span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">
             {%- for file in site.static_files -%}
               {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
               <div class="col px-1">
@@ -69,6 +71,7 @@
               </div>
               {%- endif -%}
             {%- endfor -%}
+            </span>
           </td>
         {%- else -%}
           <td></td>
