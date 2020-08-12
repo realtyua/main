@@ -4,7 +4,7 @@ layout: null
 
 var items = [];
 
-function htmlDetailFormatter(index, row, $element) {
+function jsDetailFormatter(index, row, $element) {
 
   "use strict";
 
@@ -41,8 +41,19 @@ function htmlDetailFormatter(index, row, $element) {
 
 }
 
-function jsDetailFormatter(value, row) {
+function htmlDetailFormatter(value, row) {
 
+  "use strict";
+
+  var html = [];
+
+  $.each(row, function (key, value) {
+    if (key.indexOf('_')) {
+      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    }
+  })
+
+  return html.join('')
 
 }
 
