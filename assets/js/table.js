@@ -28,13 +28,8 @@ $(function() {
     }
     expandedRow = index;
 
-    var images = [];
-
-    $(row.images).find('.col a').each(function () {
-      images.push($(this).attr('href'))
-    })
-
     var html = [];
+    const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
       if (key !== 'images' || key !== 'id' b) {
@@ -91,8 +86,6 @@ $(function() {
         }
       }
     })
-
-    const images = Object.values(row.images || {});
 
     if (images.length) {
       html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'),
