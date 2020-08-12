@@ -36,7 +36,7 @@ $(function() {
     expandedRow = index;
 
     var html = [];
-    const images = Object.values(row.images || {});
+    //const images = Object.values(row.images || {});
 
     $.each(row, function (index, key, value) {
       if (key.indexOf('_') && key !== 'images' || key !== 'id' && value !== '') {
