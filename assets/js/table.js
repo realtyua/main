@@ -2,29 +2,100 @@
 layout: null
 ---
 
-function htmlDetailFormatter(value, row) {
+function htmlDetailFormatter(e, index, row, $detail) {
 
-  var html = [];
-  $.each(row, function (key, value) {
-    if (key.indexOf('_')) {
-      html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+    var html = [];
+    var images = [];
+    var items = [];
+
+    $(row.images).find('.col a').each(function () {
+      images.push($(this).attr('href'))
+    })
+
+    $.each(row, function (index, key, value) {
+      if (key.indexOf('_') && value !== '') {
+        html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+      }
+    })
+
+    return html.join('')
+
+    if (images.length) {
+      html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'),
+      html.push(images.map(function (image) {
+        return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></figure>'
+      }).join('')),
+      html.push('</span>')
     }
-  })
-  return html.join('')
+
+    $detail.html(html.join(''))
+
+    items[index] = [];
+
+    $detail.find('figure').each(function(){
+      var $link = $(this).find('a')
+      items[index].push({
+        src: $link.attr('href'),
+        w: $link.data('lightbox-width'),
+        h: $link.data('lightbox-height')
+      })
+    })
 
 }
 
 function jsDetailFormatter(value, row) {
 
   var html = [];
-  $.each(row, function (key, value) {
-    if (key.indexOf('_')) {
+  var images = [];
+  var items = [];
+
+  $(row.images).find('.col a').each(function () {
+    images.push($(this).attr('href'))
+  })
+
+  $.each(row, function (index, key, value) {
+    if (key.indexOf('_') && value !== '') {
       html.push('<p><b>' + key + ':</b> ' + value + '</p>')
     }
   })
+
   return html.join('')
 
+  if (images.length) {
+    html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'),
+    html.push(images.map(function (image) {
+      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail"></a></figure>'
+    }).join('')),
+    html.push('</span>')
+  }
+
+  $detail.html(html.join(''))
+
+  items[index] = [];
+
+  $detail.find('figure').each(function(){
+    var $link = $(this).find('a')
+    items[index].push({
+      src: $link.attr('href'),
+      w: $link.data('lightbox-width'),
+      h: $link.data('lightbox-height')
+    })
+  })
+
 }
+
+$('table').on('click', '.lightbox', function(event){
+  event.preventDefault();
+  var $pswp = $('.pswp')[0];
+  options = {
+    index: $(this).parent('figure').index(),
+    bgOpacity: 0.85,
+    showHideOpacity: true
+  };
+  var index = $(this).closest('.detail-view').prev().data('index');
+  var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
+  gallery.init();
+});
 
 {%- comment -%}
 $(function() {
