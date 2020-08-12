@@ -170,7 +170,6 @@ function htmlDetailFormatter(value, row) {
 
 }
 
-
 data-detail-formatter="htmlDetailFormatter"
 
 function htmlDetailFormatter(value, row) {
