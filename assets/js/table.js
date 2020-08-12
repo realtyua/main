@@ -24,8 +24,8 @@ $(function() {
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
 
-    // var images = [];
-    const images = Object.values(row.images || {});
+    var images = [];
+    // const images = Object.values(row.images || {});
 
     $(row.images).find('.col a').each(function () {
       images.push($(this).attr('href'))
