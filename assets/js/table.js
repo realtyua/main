@@ -32,9 +32,9 @@ $(function() {
     var html = [];
     var images = [];
 
-    $(row.images).find('.col a').each(function () {
-      images.push($(this).attr('href'))
-    })
+    // $(row.images).find('.col a').each(function () {
+    //   images.push($(this).attr('href'))
+    // })
 
     $.each(row, function (index, key, value) {
       if (key !== 'images' || key !== 'id' && value !== '') {
