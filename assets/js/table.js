@@ -24,22 +24,20 @@ $(function() {
   var items = [];
   $('table').on('expand-row.bs.table', function (event, index, row, $detail) {
 
-    var images = [];
-
-    $(row.images).find('.col a').each(function () {
-      images.push($(this).attr('href'))
-    })
-
     if (expandedRow !== index) {
      	$('table').bootstrapTable('collapseRow', expandedRow)
     }
     expandedRow = index;
 
     var html = [];
-    //const images = Object.values(row.images || {});
+    var images = [];
+
+    $(row.images).find('.col a').each(function () {
+      images.push($(this).attr('href'))
+    })
 
     $.each(row, function (index, key, value) {
-      if (key.indexOf('_') && key !== 'images' || key !== 'id' && value !== '') {
+      if (key !== 'images' || key !== 'id' && value !== '') {
         if (row.type.indexOf('Земля') !== -1 || row.type.indexOf('земля') !== -1) {
           html = [
             '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
