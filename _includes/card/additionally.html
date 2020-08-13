@@ -17,7 +17,13 @@
   {%- endif -%}
 {%- endif -%}
 {%- if offer.price_sqmt -%}
+{% if offer.rent == '1' %}
+<dt>Вартість оренди за один день</dt>
+{%- elsif offer.type == land -%}
+<dt>Вартість землі&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
+{%- else -%}
 <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
+{%- endif -%}
 <dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> гривень.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> гривень.{% else %}{{ offer.price_sqmt }} гривень.{% endif %}</dd>
 {%- endif -%}
 {%- if offer.seller -%}
