@@ -19,8 +19,6 @@
 {%- if offer.price_sqmt -%}
 {% if offer.rent == '1' %}
 <dt>Вартість оренди за один день</dt>
-{%- elsif offer.type contains 'Земля' -%}
-<dt>Вартість землі&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup> {{land}}</dt>
 {%- else -%}
 <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
 {%- endif -%}
