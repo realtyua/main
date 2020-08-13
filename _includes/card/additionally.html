@@ -16,7 +16,7 @@
   <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
   {%- endif -%}
 {%- endif -%}
-{%- if ooffer.price_sqmt != '' and offer.rent == '1' -%}
+{%- if offer.price_sqmt != '' and offer.rent == '1' -%}
 <dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
 <dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> гривень.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> гривень.{% else %}{{ offer.price_sqmt }} гривень.{% endif %}</dd>
 {%- elsif offer.price_sqmt != '' and offer.type == 'Земля' or offer.type == 'земля' -%}
