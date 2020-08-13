@@ -16,14 +16,14 @@
   <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
   {%- endif -%}
 {%- endif -%}
-{%- if offer.price_sqmt != '' and offer.rent == '1' -%}
+{%- if offer.price_sqmt and offer.price_sqmt != '' and offer.rent == '1' -%}
 <dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
-<dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> гривень.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> гривень.{% else %}{{ offer.price_sqmt }} гривень.{% endif %}</dd>
-{%- elsif offer.price_sqmt != '' and offer.type == 'Земля' or offer.type == 'земля' -%}
+{%- elsif offer.price_sqmt and offer.price_sqmt != '' and offer.type == 'Земля' or offer.type == 'земля' -%}
 <dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
-<dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> гривень.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> гривень.{% else %}{{ offer.price_sqmt }} гривень.{% endif %}</dd>
 {%- else -%}
 <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
+{%- endif -%}
+{%- if offer.price_sqmt and offer.price_sqmt != '' -%}
 <dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> гривень.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> гривень.{% else %}{{ offer.price_sqmt }} гривень.{% endif %}</dd>
 {%- endif -%}
 {%- if offer.seller -%}
