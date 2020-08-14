@@ -166,11 +166,6 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-      } else if (row.rent && row.rent !== '' && row.rent === '1') {
-        html = [
-          '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">...',
-          '</span>'
-        ]
       } else {
         html = [
           '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
@@ -245,6 +240,8 @@ function propertyFormatter(value, row) {
   "use strict";
   if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+  } else if (row.rent && row.rent !== '' && row.rent === '1') {
+    return 'Здається в оренду <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else {
     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   }
@@ -261,14 +258,16 @@ function priceFormatter(value) {
   }
 }
 
-function htmlPropertyFormatter(value, row) {
-  "use strict";
-  if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
-    return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-  } else {
-    return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-  }
-}
+// function htmlPropertyFormatter(value, row) {
+//   "use strict";
+//   if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
+//     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+//   } else if (row.rent && row.rent !== '' && row.rent === '1') {
+//     return 'Здається в оренду <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+//   } else {
+//     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+//   }
+// }
 
 function priceSorter(a, b) {
   "use strict";
