@@ -28,11 +28,14 @@ layout: compress
     </div>
     {%- include scroll-top.html -%}
     {%- if page.table == 1 -%}
-    {%- include photoswipe.html -%}
+      {%- include photoswipe.html -%}
     {%- elsif page.table == 2 -%}
-    {%- include photoswipe.html -%}
+      {%- include photoswipe.html -%}
     {%- endif -%}
-    {%- include java-script.html -%}
+    {%- comment -%}
+      {%- include java-script.html -%}
+    {%- endcomment -%}
+    {%- include js.html -%}
     {% include modals/net-realestate-modal.html %}
   </body>
 </html>
