@@ -265,6 +265,7 @@ function priceFormatter(value) {
 
 function htmlPropertyFormatter(value, row) {
   "use strict";
+  console.log(value);
   if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else if (row.rent && row.rent !== '' && row.rent === '1') {
