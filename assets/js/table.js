@@ -55,7 +55,7 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') || row.type.indexOf('Будинок')) {
+      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') !== -1 || row.type.indexOf('Будинок') !== -1) {
         html = [
           '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'
         ]
@@ -166,11 +166,24 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') || row.type.indexOf('Будинок')) {
+      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') !== -1 || row.type.indexOf('Будинок') !== -1) {
         html = [
-          '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">...',
-          '</span">'
+          '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'
         ]
+        if (row.floor !== '' && row.floors !== '') {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floor + ' {{ site.data.lang-uk.re_at }} ' + row.floors + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
+        }
+        if (row.parking !== '') {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
+        }
+        if (row.date !== '') {
+          var d = new Date(row.date);
+          var n = d.getMonth();
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_dater }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>'),
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_sellerr }}</dt><dd>' + row.seller + '</dd></dl></span>'),
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phoner }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
+          html.push('</span>')
+        }
       } else {
         html = [
           '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
