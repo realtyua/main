@@ -55,10 +55,10 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') {
+      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') || row.type.indexOf('Будинок')) {
         html = [
           '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">...',
-          '</span>',
+          '</span">'
         ]
       } else {
         html = [
@@ -153,10 +153,10 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') {
+      } else if (row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('Квартира') || row.type.indexOf('Будинок')) {
         html = [
           '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">...',
-          '</span>',
+          '</span">'
         ]
       } else {
         html = [
