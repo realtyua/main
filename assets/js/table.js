@@ -319,6 +319,7 @@ function priceSorter(a, b) {
   if (a.indexOf('$') !== -1 && b.indexOf('$') !== -1) {
     var aa = a.replace('$', '');
     var bb = b.replace('$', '');
+    console.log(aa);
     return aa - bb
   } else if (a.indexOf('€') !== -1 && b.indexOf('€') !== -1) {
     var aa = a.replace('€', '');
