@@ -5,7 +5,6 @@ layout: null
 $(function () {
   "use strict";
   var expandedRow = null;
-
   if ($('table#property').length > 0) {
       var photoswipeTemplate = '\
           <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\
@@ -44,7 +43,6 @@ $(function () {
           </div>';
       $('body').append(photoswipeTemplate);
   }
-
   $('table').on('expand-row.bs.table', function (event, index) {
     if (expandedRow !== index) {
       $('table').bootstrapTable('collapseRow', expandedRow);
@@ -280,7 +278,6 @@ function htmlDetailFormatter(index, row, $detail) {
 
 $(document).on('click', '.lightbox', function(event){
   event.preventDefault();
-  // var $pswp = $('.pswp')[0];
   var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
     index: $(this).parent('figure').index(),
@@ -288,7 +285,6 @@ $(document).on('click', '.lightbox', function(event){
     showHideOpacity: true
   };
   var index = $(this).closest('.detail-view').prev().data('index');
-  // var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
   if(items.length > 0) {
     var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
     gallery.init();
