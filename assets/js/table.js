@@ -314,20 +314,9 @@ function priceFormatter(value) {
 }
 
 function priceSorter(a, b) {
-  "use strict";
-  if (a.indexOf('$') !== -1 && b.indexOf('$') !== -1) {
-    var aa = a.replace('$', '');
-    var bb = b.replace('$', '');
-    return aa - bb
-  } else if (a.indexOf('€') !== -1 && b.indexOf('€') !== -1) {
-    var aa = a.replace('€', '');
-    var bb = b.replace('€', '');
-    return aa - bb
-  } else {
-    var aa = a;
-    var bb = b;
-    return aa - bb
-  }
+  var aa = if (a.indexOf('$') !== -1) { a.replace('$', ''); } else if (a.indexOf('€') !== -1) { a.replace('€', ''); } else { a; }
+  var bb = if (b.indexOf('$') !== -1) { b.replace('$', ''); } else if (b.indexOf('€') !== -1) { b.replace('€', ''); } else { b; }
+  return aa - bb
 }
 
 // function priceSorter(a, b) {
