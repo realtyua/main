@@ -26,6 +26,7 @@ var month = ["{{ site.data.lang-uk.m_01 }}", "{{ site.data.lang-uk.m_02 }}", "{{
 var usd = {{ site.usd }};
 var eur = {{ site.eur }};
 var items = [];
+var html = [];
 
 function jsDetailFormatter(index, row, $detail) {
 
@@ -136,8 +137,6 @@ function jsDetailFormatter(index, row, $detail) {
 function htmlDetailFormatter(index, row, $detail) {
 
   "use strict";
-
-  var html = [];
 
   var images = [];
 
