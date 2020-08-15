@@ -240,15 +240,19 @@ function htmlDetailFormatter(index, row, $detail) {
 
 $(document).on('click', '.lightbox', function(event){
   event.preventDefault();
-  var $pswp = $('.pswp')[0];
+  // var $pswp = $('.pswp')[0];
+  var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
     index: $(this).parent('figure').index(),
     bgOpacity: 0.85,
     showHideOpacity: true
   };
   var index = $(this).closest('.detail-view').prev().data('index');
-  var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
-  gallery.init();
+  // var gallery = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items[index], options);
+  if(items.length > 0) {
+    var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
+    gallery.init();
+  }
 });
 
 function propertyFormatter(value, row) {
