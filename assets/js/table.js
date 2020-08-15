@@ -314,9 +314,18 @@ function priceFormatter(value) {
 }
 
 function priceSorter(a, b) {
-  console.log(a);
   "use strict";
-  var aa = a.replace('$', '')
-  var bb = b.replace('$', '')
-  return aa - bb
+  if (a.indexOf('$') !== -1 && b.indexOf('$') !== -1) {
+    var aa = a.replace('$', '');
+    var bb = b.replace('$', '');
+    return aa - bb
+  } else if (a.indexOf('€') !== -1 && b.indexOf('€') !== -1) {
+    var aa = a.replace('€', '');
+    var bb = b.replace('€', '');
+    return aa - bb
+  } else {
+    var aa = a;
+    var bb = b;
+    return aa - bb
+  }
 }
