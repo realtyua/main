@@ -314,6 +314,7 @@ function priceFormatter(value) {
 }
 
 function priceSorter(a, b) {
+  console.log(a);
   "use strict";
   var aa = a.replace('$', '')
   var bb = b.replace('$', '')
