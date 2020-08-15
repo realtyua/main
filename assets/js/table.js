@@ -319,22 +319,3 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
-
-// function priceSorter(a, b) {
-//   "use strict";
-//   if (a.indexOf('$') !== -1 && b.indexOf('$') !== -1) {
-//     var aa = a.replace('$', '');
-//     var bb = b.replace('$', '');
-//     console.log(aa);
-//     return aa - bb
-//   } else if (a.indexOf('€') !== -1 && b.indexOf('€') !== -1) {
-//     var aa = a.replace('€', '');
-//     var bb = b.replace('€', '');
-//     console.log(aa);
-//     return aa - bb
-//   } else {
-//     var aa = a;
-//     var bb = b;
-//     return aa - bb
-//   }
-// }
