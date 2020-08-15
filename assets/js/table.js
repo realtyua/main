@@ -314,8 +314,8 @@ function priceFormatter(value) {
 }
 
 function priceSorter(a, b) {
-  var aa = if (a.indexOf('$') !== -1) { a.replace('$', ''); } else if (a.indexOf('€') !== -1) { a.replace('€', ''); } else { a; }
-  var bb = if (b.indexOf('$') !== -1) { b.replace('$', ''); } else if (b.indexOf('€') !== -1) { b.replace('€', ''); } else { b; }
+  var aa = (if (a.indexOf('$') !== -1) { a.replace('$', '') } else if (a.indexOf('€') !== -1) { a.replace('€', '') } else { a });
+  var bb = (if (b.indexOf('$') !== -1) { b.replace('$', '') } else if (b.indexOf('€') !== -1) { b.replace('€', '') } else { b });
   return aa - bb
 }
 
