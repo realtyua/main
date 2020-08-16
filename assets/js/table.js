@@ -291,23 +291,35 @@ $(document).on('click', '.lightbox', function(event){
   }
 });
 
-function propertyFormatter(value, row) {
+function propertyFormatter(row, value) {
   "use strict";
   if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
     return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else if (row.rent && row.rent !== '' && row.rent === '1') {
-    return 'Здається в оренду <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+    return 'Здається в оренду <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+  } else if (row.rent && row.rent !== '' && row.rent === '1' && row.price !== '') {
+    return 'Здається в оренду на короткий термін <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else {
-    return 'Продається <span class="text-lowercase"><strong>' + row.type + '</strong></span>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+    return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   }
 }
 
-function priceFormatter(value) {
+function priceFormatter(row, value) {
   "use strict";
   if (value !== '' && value.indexOf('$') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value !== '' && value.indexOf('€') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+  } else if (value === '' && row.price_sqmt !== '') {
+
+    if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
+      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+    } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
+      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
+    } else if (row.price_sqmt !== '') {
+      return (row.price_sqmt*1).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
+    }
+
   } else if (value !== '') {
     return (value*1).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
