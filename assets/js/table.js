@@ -88,8 +88,8 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('</span>')
         }
         if (row.description !== '') {
-          html.push('<span class="row">'),
-          html.push('<span class="col-12"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
+          html.push('<span class="row mx-n1">'),
+          html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
         }
       } else if (row.rent && row.rent !== '' && row.rent === '1') {
@@ -116,8 +116,8 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('</span>')
         }
         if (row.description !== '') {
-          html.push('<span class="row">'),
-          html.push('<span class="col-12"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
+          html.push('<span class="row mx-n1">'),
+          html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
         }
       } else {
@@ -149,8 +149,8 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('</span>')
         }
         if (row.description !== '') {
-          html.push('<span class="row">'),
-          html.push('<span class="col-12"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
+          html.push('<span class="row mx-n1">'),
+          html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
         }
       }
@@ -214,8 +214,8 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('</span>')
         }
         if (row.description !== '') {
-          html.push('<span class="row">'),
-          html.push('<span class="col-12"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
+          html.push('<span class="row mx-n1">'),
+          html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
         }
       } else if (row.rent && row.rent !== '' && row.rent === '1') {
@@ -242,8 +242,8 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('</span>')
         }
         if (row.description !== '') {
-          html.push('<span class="row">'),
-          html.push('<span class="col-12"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
+          html.push('<span class="row mx-n1">'),
+          html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
         }
       } else {
@@ -275,8 +275,8 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('</span>')
         }
         if (row.description !== '') {
-          html.push('<span class="row">'),
-          html.push('<span class="col-12"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
+          html.push('<span class="row mx-n1">'),
+          html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
         }
       }
