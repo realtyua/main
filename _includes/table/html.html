@@ -37,6 +37,7 @@
         <th data-field="seller" data-visible="false">seller</th>
         <th data-field="phone" data-visible="false">phone</th>
         <th data-field="images" data-visible="false">images</th>
+        <th data-field="description" data-visible="false">description</th>
       </tr>
     </thead>
     <tbody>
@@ -77,6 +78,7 @@
         {%- else -%}
           <td></td>
         {%- endif -%}
+        <td>{{ offer.description }}</td>
       </tr>
   {%- if forloop.last -%}
     </tbody>
