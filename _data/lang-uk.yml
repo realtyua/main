@@ -14,6 +14,7 @@ realtors: Агенти
 #
 re_for_sale: Продається
 re_for_rent: Здається в оренду
+re_for_rentd: Здається в оренду на короткий термін
 re_surface: площею
 re_rooms: кімнат
 re_floor: Поверх
