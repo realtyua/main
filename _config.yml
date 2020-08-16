@@ -6,8 +6,8 @@ encoding: UTF-8
 lang: uk_UA
 timezone: Europe/Kiev
 
-usd: 27.60
-eur: 32.60
+usd: 27.50
+eur: 32.50
 
 title: Мережа вебсайтів нерухомості
 description: Вся нерухомість в місті Івано-Франківської та області
@@ -27,10 +27,10 @@ developer:
 contact:
   name: Мережа вебсайтів нерухомості в України
   address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: (067) 433 00 66
-  phone_hot:  (067) 433 00 66
-  phone_fax:  (067) 433 00 66
-  phone_sms:  (067) 433 00 66
+  phone_main: 380674330066
+  phone_hot:  380674330066
+  phone_fax:  380674330066
+  phone_sms:  380674330066
   email: info@realestate.if.ua
   www: https://www.realestate.if.ua/
 
