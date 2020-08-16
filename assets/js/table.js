@@ -309,7 +309,7 @@ function priceFormatter(value) {
   } else if (value !== '' && value.indexOf('€') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value !== '') {
-    return value.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
+    return (value).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
 }
 
