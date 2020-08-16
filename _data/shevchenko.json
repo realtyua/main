@@ -20,6 +20,7 @@
     {
         "id": "1",
         "type": "Квартира",
+        "rent": "",
         "rooms": "4",
         "surface": "60",
         "surface_land": "",
@@ -128,6 +129,7 @@
     {
         "id": "7",
         "type": "Земля",
+        "rent": "",
         "rooms": "",
         "surface": "",
         "surface_land": "150",
@@ -146,7 +148,7 @@
     {
         "id": "8",
         "type": "Будинок",
-        "rent": "1"
+        "rent": "1",
         "rooms": "4",
         "surface": "90",
         "surface_land": "",
