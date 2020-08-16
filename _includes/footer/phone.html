@@ -3,7 +3,7 @@
 {%- assign tt = contact[include.legal] -%}
 {%- capture nn -%}+{{ tt | slice:0,2 }}&nbsp;{{ tt | slice:2,3 }}&nbsp;{{ tt | slice:5,3 }}&nbsp;{{ tt | slice:8,2 }}&nbsp;{{ tt | slice:10,12 }}{%- endcapture -%}
 {%- if tt -%}
-  <a href="tel:+{{ tt }}">{{ nn }}</a>
+  <a href="tel:+{{ tt }}">{{ nn }} - 0</a>
 {%- elsif include.legal and include.type == 'icon' -%}
   <a href="tel:+{{ t }}" class="card-link">
     <span class="align-middle" data-toggle="tooltip" data-placement="left" title="{{ site.data.lang-uk.re_seller }} {{ n }}" style="font-size:large;">&phone;</span>
