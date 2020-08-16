@@ -304,11 +304,11 @@ function propertyFormatter(value, row) {
 
 function priceFormatter(value) {
   "use strict";
-  if (value.indexOf('$') !== -1) {
+  if (value !== '' && value.indexOf('$') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
-  } else if (value.indexOf('€') !== -1) {
+  } else if (value !== '' && value.indexOf('€') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
-  } else {
+  } else if (value !== '') {
     return value.toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
 }
