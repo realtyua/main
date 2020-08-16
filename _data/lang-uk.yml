@@ -32,7 +32,7 @@ re_surface_land: Площа землі
 re_land: Земля
 re_price_sqmt: Вартість нерухомості за 1
 re_price_sqmtl: Вартість землі за 1
-re_price_sqmtr: Вартість оренди за 1 день
+re_price_sqmtr: Вартість оренди за 24 години
 re_seller: Продавець
 re_sellerr: Орендодавець
 re_phone: Контакти продавця
