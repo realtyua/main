@@ -1,7 +1,7 @@
 {%- if include.legal contains "phone" -%}
-  <a href="tel:+38{{ site.contact[include.legal] | strip | remove: '(' | remove: ')' | remove: ' ' }}">
-    {{ site.contact[include.legal] | replace: " ", "&nbsp;" }}
-  </a>
+  {%- assign t = site.contact[include.legal] -%}
+  {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
+  <a href="tel:+{{ t }}">{{ n }}</a>
 {%- elsif include.legal == "email" -%}
   <a href="mailto:{{ site.contact[include.legal] }}">{{ site.contact[include.legal] }}</a>
 {%- else -%}
