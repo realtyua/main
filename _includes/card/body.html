@@ -7,8 +7,7 @@
 {% if offer.location %}{{ site.data.lang-uk.re_location }} <strong>{{ offer.location }}</strong> {% endif %}
 {% if offer.address %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>, {% endif %}
 {% if offer.price %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_pricer }} {% elsif offer.rent == '1' and offer.price == '' and offer.price_sqmt != '' %}{{ site.data.lang-uk.re_price_sqmtr }} {% elsif offer.type == 'Земля' or offer.type == 'земля' %}{{ site.data.lang-uk.re_pricel }} {% else %}{{ site.data.lang-uk.re_price }} {% endif %}
-
-{% if offer.price != '' %}
+{%- if offer.price != '' -%}
   {% if offer.price contains '$' %}
     <span class="mark" data-toggle="tooltip" title="{{ offer.price }}">{{ offer.price | remove: '$' | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
   {% elsif offer.price contains '€' %}
@@ -16,7 +15,7 @@
   {% else %}
     <mark>{{ offer.price }}</mark> {{ site.data.lang-uk.re_uah }}.
   {% endif %}
-{% elsif offer.price == '' and offer.price_sqmt != '' %}
+{%- elsif offer.price == '' and offer.price_sqmt != '' -%}
   {% if offer.price_sqmt contains '$' %}
     <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
   {% elsif offer.price_sqmt contains '€' %}
@@ -24,6 +23,5 @@
   {% else %}
     <mark>{{ offer.price_sqmt }}</mark> {{ site.data.lang-uk.re_uah }}.
   {% endif %}
-{% endif %}
-
+{%- endif -%}
 {% endif %}{% if page.url == '/' %} <span class="phone"><details><summary></summary>{%- include footer/phone.html legal=offer.phone type='text' -%}.</details></span>{% endif %}
