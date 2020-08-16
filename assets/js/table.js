@@ -304,13 +304,15 @@ function propertyFormatter(value, row) {
   }
 }
 
-function priceFormatter(value) {
+function priceFormatter(value, row) {
   "use strict";
   if (value !== '' && value.indexOf('$') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value !== '' && value.indexOf('€') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
-  } else if (value !== '') {
+  } else if (value === '') {
+    return '0 {{ site.data.lang-uk.re_uah }}';
+  } else {
     return (value*1).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
 }
