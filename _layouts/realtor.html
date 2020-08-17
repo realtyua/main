@@ -68,7 +68,7 @@ layout: default
   </div>
   <div class="col-12">
 
-    {% assign sortedPages = site.pages | sort:'order' | where_exp: "i", "i.url contains 'realtor'" %}
+    {% assign sortedPages = site.pages | sort:'order' | where_exp: "i", "i.url contains '/realtor/'" %}
 
     {% for p in sortedPages %}
         {% if p.url == page.url %}
