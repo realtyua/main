@@ -1,5 +1,6 @@
 ---
 layout: null
+sitemap: false
 ---
 {%- include data/ivano-frankivsk/all.html -%}
 {{ offers | jsonify }}

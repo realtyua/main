@@ -1,0 +1,10 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:1 -%}
+{%- assign pass = back | slice: 0, size | join: "/" -%}
+{%- assign cat = pass | split: "/" | last -%}
+{%- assign realtor = cat -%}
+{{ site.data[realtor] | jsonify }}

@@ -12,7 +12,7 @@ table: 1
   <div class="col-12">
 
     <h1>{{ page.title }}</h1>
-    <p class="lead">...</p>
+    <p class="lead">Короткий вислів, що, як правило або Стисле формулювання провідної ідеї, програми дій. Правило, заповідь або вираз, який характеризує певні почуття або кодекс поведінки.</p>
 
     <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
       <a class="navbar-brand d-md-none" href="#">
@@ -43,7 +43,20 @@ table: 1
         <div class="row">
           <div class="col-12">
             <h2>{{ page.title }} пропонує таку нерухомість</h2>
-            {%- assign json = slug | append: '.json' -%}
+<p>
+{%- assign back = page.dir | split: "/" -%}
+back: {{ back }}<br>
+{%- assign size = back | size | minus:1 -%}
+back: {{ back }}<br>
+{%- assign pass = back | slice: 0, size | join: "/" -%}
+pass: {{ pass }}<br>
+{%- assign cat = pass | split: "/" | last -%}
+cat: {{ cat }}<br>
+{%- assign realtor = cat -%}
+realtor: {{ realtor }}<br>
+</p>
+            {%- assign json = page.dir | append: 'data/realtor.json' -%}
+            json: {{ json }}<br>
             {%- include table/js.html -%}
           </div>
         </div>
