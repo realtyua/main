@@ -6,3 +6,10 @@ subtitle:
 breadcrumb:
 description:
 ---
+
+<div class="row">
+  <div class="col-12">
+    {%- assign dir = page.dir | append: '/' -%}
+    {%- include subpages.html dir=dir -%}
+  </div>
+</div>
