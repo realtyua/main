@@ -5,6 +5,7 @@ navhide: 1
 subtitle:
 breadcrumb: Франко
 description:
+table: 1
 ---
 {%- assign slug = page.url | split: "/" | last -%}
 <div class="row">
@@ -42,7 +43,7 @@ description:
         <div class="row">
           <div class="col-12">
             <h2>{{ page.title }} пропонує таку нерухомість</h2>
-            {%- assign json = slug | prepend: '.json' -%}
+            {%- assign json = slug | append: '.json' -%}
             {%- include table/js.html -%}
           </div>
         </div>
