@@ -364,3 +364,8 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
+
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+});
