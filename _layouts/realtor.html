@@ -7,13 +7,14 @@ layout: default
 {%- assign size = back | size | minus:2 -%}
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
 {%- assign json = pass | append: slug | append: '.json' -%}
-{%- assign isJson = false -%}
+{%- assign isJson = site.data[slug] -%}
+{% comment %}
 {%- for file in site.static_files -%}
   {%- if file.path contains json -%}
     {%- assign isJson = true -%}
   {%- endif -%}
 {%- endfor -%}
-
+{% endcomment %}
 <div class="row">
   <div class="col-12">
     json: {{ json }} - isJson: {{ isJson }}
@@ -28,7 +29,7 @@ layout: default
       <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slug | capitalize }}" aria-controls="navbar{{ slug | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slug | capitalize }}">
         <ul class="navbar-nav nav nav-tabs border-0" id="{{ slug }}-nav">
-          {%- if isJson == true -%}
+          {%- if isJson -%}
             <li class="nav-item" role="presentation">
               <a class="nav-link border-0 active" href="#offer" id="offer-tab" data-toggle="tab" role="tab" aria-controls="offer" aria-selected="true">
                 <span>Наші пропозиції</span>
@@ -36,7 +37,7 @@ layout: default
             </li>
           {%- endif -%}
           <li class="nav-item" role="presentation">
-            <a class="nav-link border-0{% if isJson == false %} active{% endif %}" href="#about" id="about-tab" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+            <a class="nav-link border-0{% if isJson %}{% else %} active{% endif %}" href="#about" id="about-tab" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
               <span>Про ангенцію</span>
             </a>
           </li>
@@ -52,7 +53,7 @@ layout: default
     <hr class="mt-2 mt-md-0">
 
     <div class="tab-content" id="{{ slug }}-content">
-      {%- if isJson == true -%}
+      {%- if isJson -%}
         <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
           <div class="row">
             <div class="col-12">
@@ -62,7 +63,7 @@ layout: default
           </div>
         </div>
       {%- endif -%}
-      <div class="tab-pane fade show{% if isJson == false %} active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
+      <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
         <p>Про ангенцію...</p>
       </div>
       <div class="tab-pane fade show" id="services" role="tabpanel" aria-labelledby="services-tab">
