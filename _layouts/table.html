@@ -8,7 +8,6 @@ layout: default
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
     <p class="lead">{{ content }}...</p>
     {%- include nav-section.html -%}
-    {%- assign foo = page.url | split: "/" | last -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
       {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
