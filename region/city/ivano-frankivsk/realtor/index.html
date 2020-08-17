@@ -11,10 +11,9 @@ description:
   <div class="col-12">
     {%- assign slug = page.url | split: "/" | last -%}
     {%- assign dir = page.dir | append: slug | append: '/' -%}
-    dir : {{ dir }}<br>
-    {%- include subpages.html dir=dir page=slug -%}
+    {%- include subpages.html dir=dir page=slug title=title -%}
     <br>
     <hr>
-    {%- include subpages.html -%}
+    {%- include subpages.html dir=page.dir -%}
   </div>
 </div>
