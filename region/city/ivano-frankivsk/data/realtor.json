@@ -3,8 +3,13 @@ layout: null
 sitemap: false
 ---
 {%- assign back = page.dir | split: "/" -%}
+back: {{ back }}<br>
 {%- assign size = back | size | minus:1 -%}
+size: {{ size }}<br>
 {%- assign pass = back | slice: 0, size | join: "/" -%}
+pass: {{ pass }}<br>
 {%- assign cat = pass | split: "/" | last -%}
+cat: {{ cat }}<br>
 {%- assign realtor = cat -%}
+realtor: {{ back }}<br>
 {{ site.data[realtor] | jsonify }}

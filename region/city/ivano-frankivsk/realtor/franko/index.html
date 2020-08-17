@@ -46,7 +46,7 @@ table: 1
 <p>
 {%- assign back = page.dir | split: "/" -%}
 back: {{ back }}<br>
-{%- assign size = back | size | minus:1 -%}
+{%- assign size = back | size | minus:2 -%}
 back: {{ back }}<br>
 {%- assign pass = back | slice: 0, size | join: "/" -%}
 pass: {{ pass }}<br>
@@ -55,6 +55,7 @@ cat: {{ cat }}<br>
 {%- assign realtor = cat -%}
 realtor: {{ realtor }}<br>
 </p>
+
             {%- assign json = page.dir | append: 'data/realtor.json' -%}
             json: {{ json }}<br>
             {%- include table/js.html -%}
