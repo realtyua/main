@@ -7,16 +7,16 @@ layout: default
 {%- assign size = back | size | minus:2 -%}
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
 {%- assign json = pass | append: slug | append: '.json' -%}
-{% assign isJson = false %}
+{%- assign isJson = false -%}
 {%- for file in site.static_files -%}
-  {%- if file.path contains json and file.extname == '.json' or file.extname == '.JSON' -%}
-    {% assign isJson = true %}
+  {%- if file.path contains json -%}
+    {%- assign isJson = true -%}
   {%- endif -%}
 {%- endfor -%}
 
 <div class="row">
   <div class="col-12">
-
+    json: {{ json }} - isJson: {{ isJson }}
     <h1>{{ page.title }}</h1>
     <p class="lead">Короткий вислів, що, як правило або cтисле формулювання провідної ідеї, програми дій, правило, заповідь або вираз, який характеризує певні почуття або кодекс поведінки агента чи агенції.</p>
 
