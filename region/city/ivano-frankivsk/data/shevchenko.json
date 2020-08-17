@@ -3,4 +3,5 @@ layout: null
 sitemap: false
 ---
 {%- assign name = page.name | remove: '.json' -%}
-{{ site.data[name] | jsonify }}
+{%- assign offers = site.data[name] | sort: 'date' | reverse -%}
+{{ offers | jsonify }}

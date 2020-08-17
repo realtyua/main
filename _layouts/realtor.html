@@ -8,13 +8,7 @@ layout: default
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
 {%- assign json = pass | append: slug | append: '.json' -%}
 {%- assign isJson = site.data[slug] -%}
-{% comment %}
-{%- for file in site.static_files -%}
-  {%- if file.path contains json -%}
-    {%- assign isJson = true -%}
-  {%- endif -%}
-{%- endfor -%}
-{% endcomment %}
+
 <div class="row">
   <div class="col-12">
 
