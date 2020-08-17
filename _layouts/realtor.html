@@ -71,7 +71,7 @@ layout: default
     {%- assign size = back | size | minus:1 -%}
     {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 dir: {{ dir }}
-    {%- assign sortedPages = site.pages | sort:'order' | where_exp: "i", "i.url contains dir" -%}
+    {%- assign sortedPages = site.pages | sort:'order' | where_exp: "i", "i.url contains dir and i.url contains 'index.html'" -%}
 
     {%- for p in sortedPages -%}
       {%- if p.url == page.url -%}
