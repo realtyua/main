@@ -70,23 +70,23 @@ layout: default
 
     {%- assign size = back | size | minus:1 -%}
     {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-    {%- assign sortedPages = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir" -%}
+    {%- assign ps = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir" -%}
     <div class="row justify-content-between">
-    {%- for p in sortedPages -%}
+    {%- for p in ps -%}
       {%- if p.url == page.url -%}
         {%- if forloop.first == false -%}
-        {%- assign prevIndex = forloop.index0 | minus: 1 -%}
+        {%- assign prev = forloop.index0 | minus:1 -%}
         <div class="col-4">
-          <a href="{{ site.baseurl }}{{ sortedPages[prevIndex].url }}">
-            < {{ sortedPages[prevIndex].title }}
+          <a href="{{ ps[prev].url }}">
+            < {{ ps[prev].title }}
           </a>
         </div>
         {%- endif -%}
         {%- if forloop.last == false -%}
-        {%- assign nextIndex = forloop.index0 | plus: 1 -%}
+        {%- assign next = forloop.index0 | plus:1 -%}
         <div class="col-4">
-          <a href="{{ site.baseurl }}{{ sortedPages[nextIndex].url }}">
-            {{ sortedPages[nextIndex].title }} >
+          <a href="{{ ps[next].url }}">
+            {{ ps[next].title }} >
           </a>
         </div>
         {%- endif -%}
