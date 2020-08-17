@@ -1,0 +1,6 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign name = page.name | remove: '.json' -%}
+{{ site.data[name] | jsonify }}

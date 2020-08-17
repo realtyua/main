@@ -48,14 +48,12 @@ table: 1
 back: {{ back }}<br>
 {%- assign size = back | size | minus:2 -%}
 size: {{ size }}<br>
-{%- assign pass = back | slice: 0, size | join: "/" -%}
+{%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
 pass: {{ pass }}<br>
-{%- assign foo = pass | append: 'data/realtor.json' -%}
-foo: {{ foo }}<br>
+{%- assign json = pass | append: slug | append: '.json' -%}
+json: {{ json }}<br>
 </p>
 
-            {%- assign json = page.dir | append: 'data/realtor.json' -%}
-            json: {{ json }}<br>
             {%- include table/js.html -%}
           </div>
         </div>
