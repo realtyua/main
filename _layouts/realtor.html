@@ -68,24 +68,27 @@ layout: default
   </div>
   <div class="col-12">
 
-    {% assign sortedPages = site.pages | sort:'order' | where_exp: "i", "i.url contains '/realtor/'" %}
+    {%- assign size = back | size | minus:1 -%}
+    {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 
-    {% for p in sortedPages %}
-        {% if p.url == page.url %}
-            {% if forloop.first == false %}
-                {% assign prevIndex = forloop.index0 | minus: 1 %}
-                <a href="{{site.baseurl}}{{sortedPages[prevIndex].url}}">
-                    previous : {{sortedPages[prevIndex].title}}
+    {%- assign sortedPages = site.pages | sort:'order' | where_exp: "i", "i.url contains dir" -%}
+
+    {%- for p in sortedPages -%}
+        {%- if p.url == page.url -%}
+            {%- if forloop.first == false -%}
+                {%- assign prevIndex = forloop.index0 | minus: 1 -%}
+                <a href="{{ site.baseurl }}{{ sortedPages[prevIndex].url }}">
+                    previous : {{ sortedPages[prevIndex].title }}
                 </a>
-            {% endif %}
-            {% if forloop.last == false %}
-                {% assign nextIndex = forloop.index0 | plus: 1 %}
-                <a href="{{site.baseurl}}{{sortedPages[nextIndex].url}}">
-                    next : {{sortedPages[nextIndex].title}}
+            {%- endif -%}
+            {%- if forloop.last == false -%}
+                {%- assign nextIndex = forloop.index0 | plus: 1 -%}
+                <a href="{{ site.baseurl }}{{ sortedPages[nextIndex].url }}">
+                    next : {{ sortedPages[nextIndex].title }}
                 </a>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
 
   </div>
 </div>
