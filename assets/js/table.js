@@ -347,14 +347,14 @@ function priceFormatter(value, row) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
   } else if (value === '' && row.price_sqmt !== '') {
     if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
-      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+      return '<span data-toggle="tooltip" title="' + row.price_sqmt + '">' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
     } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
-      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+      return '<span data-toggle="tooltip" title="' + row.price_sqmt + '">' + (row.price_sqmt.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
     } else if (row.price_sqmt !== '') {
-      return (row.price_sqmt*1).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
+      return '<span data-toggle="tooltip" title="' + row.price_sqmt + '">' + (row.price_sqmt*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
     }
   } else {
-    return (value*1).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
+    return '<span data-toggle="tooltip" title="' + value + '">' + (value*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
   }
 }
 

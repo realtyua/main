@@ -14,7 +14,7 @@ description:
       {%- assign items = '' | split:'' -%}
       {%- assign pages = site.pages | sort: 'path' | reverse -%}
       {%- for p in pages -%}
-        {%- if p.dir contains include.dir and p.dir != include.dir -%}
+        {%- if p.dir contains page.dir and p.dir != page.dir -%}
           {%- assign items = items | push: p -%}
         {%- endif -%}
       {%- endfor -%}
