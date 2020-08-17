@@ -1,20 +1,31 @@
 ---
-layout: default
 title: Помилка 404 - Такої сторінки не знайдено :(
 ---
-
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h1 class="mb-4">{{ page.title | split: "-" | first }} <span class="small text-muted">{{ page.title | split: "-" | last }}</span></h1>
-      <div class="card bg-dark text-white">
-        {%- assign file = "assets/images/404.jpg" -%}
-        <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file | url_decode | relative_url }}&w=1100&h=619&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="404 error">
-        <div class="card-img-overlay">
-          <h5 class="card-title">Довелося довго шукали, але нажаль не вдалося знайти запитувану сторінку.</h5>
-          <p class="card-text">Спробуйте зазирнути у <a class="text-white" href="#mapsite"><u>мапу сайту</u></a> або розпочніть перегляд з <a class="text-white" href="{{ site.url }}" title="Головна сторінка сайту"><u>головної сторінки</u></a>.</p>
+<!doctype html>
+<html dir="ltr" lang="uk-UA">
+  <head>
+    {%- include head.html -%}
+  </head>
+  <body>
+    <div class="main">
+      <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="mb-4">{{ page.title | split: "-" | first }} <span class="small text-muted">{{ page.title | split: "-" | last }}</span></h1>
+              <div class="card bg-dark text-white">
+                {%- assign file = "assets/images/404.jpg" -%}
+                <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file | url_decode | relative_url }}&w=1100&h=619&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="404 error">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Довелося довго шукали, але нажаль не вдалося знайти запитувану сторінку.</h5>
+                  <p class="card-text">Спробуйте зазирнути у <a class="text-white" href="#mapsite"><u>мапу сайту</u></a> або розпочніть перегляд з <a class="text-white" href="{{ site.url }}" title="Головна сторінка сайту"><u>головної сторінки</u></a>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
-  </div>
-</div>
+  {%- include java-script.html -%}
+  </body>
+</html>

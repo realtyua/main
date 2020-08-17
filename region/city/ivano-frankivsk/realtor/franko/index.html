@@ -43,17 +43,10 @@ table: 1
         <div class="row">
           <div class="col-12">
             <h2>{{ page.title }} пропонує таку нерухомість</h2>
-<p>
-{%- assign back = page.dir | split: "/" -%}
-back: {{ back }}<br>
-{%- assign size = back | size | minus:2 -%}
-size: {{ size }}<br>
-{%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
-pass: {{ pass }}<br>
-{%- assign json = pass | append: slug | append: '.json' -%}
-json: {{ json }}<br>
-</p>
-
+            {%- assign back = page.dir | split: "/" -%}
+            {%- assign size = back | size | minus:2 -%}
+            {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
+            {%- assign json = pass | append: slug | append: '.json' -%}
             {%- include table/js.html -%}
           </div>
         </div>
