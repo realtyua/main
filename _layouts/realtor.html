@@ -65,5 +65,26 @@ layout: default
       </div>
     </div>
 
+    <hr>
+
+    {% assign sortedPages = site.pages | sort:'order' %}
+
+{% for p in sortedPages %}
+    {% if p.url == page.url %}
+        {% if forloop.first == false %}
+            {% assign prevIndex = forloop.index0 | minus: 1 %}
+            <a href="{{site.baseurl}}{{sortedPages[prevIndex].url}}">
+                previous : {{sortedPages[prevIndex].title}}
+            </a>
+        {% endif %}
+        {% if forloop.last == false %}
+            {% assign nextIndex = forloop.index0 | plus: 1 %}
+            <a href="{{site.baseurl}}{{sortedPages[nextIndex].url}}">
+                next : {{sortedPages[nextIndex].title}}
+            </a>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
   </div>
 </div>
