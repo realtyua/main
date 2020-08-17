@@ -1,5 +1,5 @@
 {%- if include.dir != page.dir and include.dir contains page.dir -%}
-  {%- assign items = include.page -%}
+  {%- comment -%}{%- assign items = include.page -%}{%- endcomment -%}
   {%- assign items = '' | split:'' -%}
   {%- assign pages = site.pages | sort: 'path' | reverse -%}
   {%- for p in pages -%}
