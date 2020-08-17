@@ -9,7 +9,8 @@ description:
 
 <div class="row">
   <div class="col-12">
-    {%- assign dir = page.dir | append: '/' -%}
-    {%- include subpages.html dir=dir -%}
+    {%- assign slug = page.url | split: "/" | last -%}
+    {%- assign dir = page.dir | append: slug | append: '/' -%}
+    {%- include subpages.html dir=dir page=slug title=title -%}
   </div>
 </div>

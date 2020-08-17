@@ -39,7 +39,7 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-                    {%- assign records = site.data[section] -%}
+                    {%- assign records = site.data[section] | where: 'location', 'м. Івано-Франківськ' -%}
                     {%- if records -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
                       {%- for offer in offers limit: 1 -%}
