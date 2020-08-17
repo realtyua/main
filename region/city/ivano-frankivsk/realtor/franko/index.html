@@ -47,7 +47,7 @@ table: 1
 {%- assign back = page.dir | split: "/" -%}
 back: {{ back }}<br>
 {%- assign size = back | size | minus:2 -%}
-back: {{ back }}<br>
+size: {{ size }}<br>
 {%- assign pass = back | slice: 0, size | join: "/" -%}
 pass: {{ pass }}<br>
 {%- assign cat = pass | split: "/" | last -%}
