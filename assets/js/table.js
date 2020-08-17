@@ -341,24 +341,20 @@ function propertyFormatter(value, row) {
 
 function priceFormatter(value, row) {
   "use strict";
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  });
   if (value !== '' && value.indexOf('$') !== -1) {
-    return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+    return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value !== '' && value.indexOf('€') !== -1) {
-    return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+    return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
   } else if (value === '' && row.price_sqmt !== '') {
     if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
-      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
     } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
-      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+      return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '</span> {{ site.data.lang-uk.re_uah }}';
     } else if (row.price_sqmt !== '') {
-      return '<span data-toggle="tooltip" title="' + (row.price_sqmt*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+      return (row.price_sqmt*1).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
     }
   } else {
-    return '<span data-toggle="tooltip" title="' + (value*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+    return (value*1).toFixed(0) + ' {{ site.data.lang-uk.re_uah }}';
   }
 }
 
