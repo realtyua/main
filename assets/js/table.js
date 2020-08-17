@@ -341,6 +341,10 @@ function propertyFormatter(value, row) {
 
 function priceFormatter(value, row) {
   "use strict";
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  });
   if (value !== '' && value.indexOf('$') !== -1) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
   } else if (value !== '' && value.indexOf('€') !== -1) {

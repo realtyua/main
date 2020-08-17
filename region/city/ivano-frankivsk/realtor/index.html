@@ -14,6 +14,7 @@ description:
     {%- include subpages.html dir=dir page=slug title=title -%}
     <br>
     <hr>
-    {%- include subpages.html dir=page.dir -%}
+    {%- assign dir = page.dir | append: '/' -%}
+    {%- include subpages.html dir=dir -%}
   </div>
 </div>
