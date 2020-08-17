@@ -2,6 +2,7 @@
 layout: null
 sitemap: false
 ---
-{%- assign name = page.name | remove: '.json' -%}
-{%- assign offers = site.data[name] | sort: 'date' | reverse -%}
+{%- assign realtor = page.name | remove: '.json' -%}
+{%- assign data = site.data[realtor] | where: 'location', 'м. Івано-Франківськ' -%}
+{%- assign offers = data | sort: 'date' | reverse -%}
 {{ offers | jsonify }}
