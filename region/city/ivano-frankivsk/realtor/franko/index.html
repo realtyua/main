@@ -6,7 +6,7 @@ subtitle:
 breadcrumb: Франко
 description:
 ---
-
+{%- assign slug = page.url | split: "/" | last -%}
 <div class="row">
   <div class="col-12">
 
@@ -18,9 +18,9 @@ description:
         <span class="small">Оберіть розділ</span>
         <span class="ml-1 float-right align-middle text-primary">→</span>
       </a>
-      <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarRealtor" aria-controls="navbarRealtor" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarRealtor">
-        <ul class="navbar-nav nav nav-tabs border-0" id="realtor-nav">
+      <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slug | capitalize }}" aria-controls="navbar{{ slug | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slug | capitalize }}">
+        <ul class="navbar-nav nav nav-tabs border-0" id="{{ slug }}-nav">
           <li class="nav-item" role="presentation">
             <a class="nav-link border-0 active" href="#offer" id="offer-tab" data-toggle="tab" role="tab" aria-controls="offer" aria-selected="true">
               <span>Наші пропозиції</span>
@@ -37,9 +37,15 @@ description:
 
     <hr class="mt-2 mt-md-0">
 
-    <div class="tab-content" id="realtor-content">
+    <div class="tab-content" id="{{ slug }}-content">
       <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
-        <p>Пропозиції...{{ slug }}</p>
+        <div class="row">
+          <div class="col-12">
+            <h2>{{ page.title }} пропонує таку нерухомість</h2>
+            {%- assign json = slug | prepend: '.json' -%}
+            {%- include table/js.html -%}
+          </div>
+        </div>
       </div>
       <div class="tab-pane fade show" id="about" role="tabpanel" aria-labelledby="about-tab">
         <p>Про ангенцію...</p>
