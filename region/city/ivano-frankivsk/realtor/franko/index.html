@@ -50,10 +50,8 @@ back: {{ back }}<br>
 size: {{ size }}<br>
 {%- assign pass = back | slice: 0, size | join: "/" -%}
 pass: {{ pass }}<br>
-{%- assign cat = pass | split: "/" | last -%}
-cat: {{ cat }}<br>
-{%- assign realtor = cat -%}
-realtor: {{ realtor }}<br>
+{%- assign foo = pass | append: 'data/realtor.json' -%}
+foo: {{ foo }}<br>
 </p>
 
             {%- assign json = page.dir | append: 'data/realtor.json' -%}

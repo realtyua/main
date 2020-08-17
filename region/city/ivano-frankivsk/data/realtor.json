@@ -4,7 +4,7 @@ sitemap: false
 ---
 {%- assign back = page.dir | split: "/" -%}
 back: {{ back }} |
-{%- assign size = back | size | minus:1 -%}
+{%- assign size = back | size | minus:0 -%}
 size: {{ size }} |
 {%- assign pass = back | slice: 0, size | join: "/" -%}
 pass: {{ pass }} |
