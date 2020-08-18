@@ -3,7 +3,11 @@
 {%- include location.html -%}
 {%- endcomment -%}
 
-{%- assign location = 'Івано-Франківськ' -%}
+{%- if page.url == "/" -%}
+{%- assign location = include.location -%}
+{%- else -%}
+{%- include location.html -%}
+{%- endif -%}
 
 {%- include data/owner.html -%}
 
