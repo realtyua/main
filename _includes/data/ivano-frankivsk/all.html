@@ -2,7 +2,7 @@
 
 {%- include location.html -%}
 
-{%- assign location = include.include -%}
+{%- assign location = include.location -%}
 
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
