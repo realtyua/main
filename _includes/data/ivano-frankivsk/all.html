@@ -2,7 +2,7 @@
 
 {%- capture include -%}{%- include location.html -%}{%- endcapture -%}
 
-{%- if include -%}
+{%- if include != '' -%}
   {%- include location.html -%}
 {%- else -%}
   {%- assign location = include.location -%}

@@ -52,6 +52,7 @@
 
           {%- if data -%}
             l: {{include.breadcrumb}}<br>
+            {%- assign location = include.breadcrumb -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
