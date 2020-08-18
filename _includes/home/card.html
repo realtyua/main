@@ -51,7 +51,10 @@
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
           data: {{ data }}<br>
           {%- if data -%}
-            {%- assign location = d.breadcrumb -%}
+            {%- assign location = 'Івано-Франківськ' -%}
+            title: {{ d.title }}<br>
+            url: {{ d.url }}<br>
+            breadcrumb: {{ d.breadcrumb }}<br>
             location: {{ location }}<br>
             {%- include {{ data }} -%}
             {%- for offer in offers limit:4 -%}
