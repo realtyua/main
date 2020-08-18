@@ -1,6 +1,14 @@
 {%- include data/owner.html -%}
+
+{%- comment -%}
 {%- assign franko = site.data.franko | where: "location", "м. Івано-Франківськ" -%}
 {%- assign shevchenko = site.data.shevchenko | where: "location", "м. Івано-Франківськ" -%}
 {%- assign owners = owners | where: "location", "м. Івано-Франківськ" -%}
+{%- endcomment -%}
+
+{%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
+{%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
+{%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
+
 {%- assign records = owners | concat: shevchenko | concat: franko -%}
 {%- assign offers = records | sort: "date" | reverse -%}

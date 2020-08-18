@@ -77,17 +77,13 @@ layout: default
         {%- if forloop.first == false -%}
         {%- assign prev = forloop.index0 | minus:1 -%}
         <div class="col-sm-12 col-md-4">
-          <a href="{{ ps[prev].url }}">
-            &larr; {{ ps[prev].title }}
-          </a>
+          &larr; <a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a>
         </div>
         {%- endif -%}
         {%- if forloop.last == false -%}
         {%- assign next = forloop.index0 | plus:1 -%}
         <div class="col-sm-12 col-md-4">
-          <a href="{{ ps[next].url }}">
-            {{ ps[next].title }} &rarr;
-          </a>
+          <a href="{{ ps[next].url }}">{{ ps[next].title }}</a> &rarr;
         </div>
         {%- endif -%}
       {%- endif -%}
