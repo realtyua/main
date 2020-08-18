@@ -1,8 +1,8 @@
 {%- assign back = page.dir | split: "/" -%}
 {%- if back.size == 4 -%}
-  {%- assign size = back | size | minus:0 -%}
+{%- assign size = back | size | minus:0 -%}
 {%- elsif back.size == 5 -%}
-  {%- assign size = back | size | minus:1 -%}
+{%- assign size = back | size | minus:1 -%}
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
