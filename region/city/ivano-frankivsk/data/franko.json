@@ -3,7 +3,7 @@ layout: null
 sitemap: false
 ---
 {%- assign back = page.dir | split: "/" -%}
-{%- if back.size == 1 -%}
+{%- if back.size == 0 -%}
 {%- assign location = include.location -%}
 {%- else -%}
 {%- include location.html -%}
