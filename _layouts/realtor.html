@@ -6,18 +6,12 @@ layout: default
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:2 -%}
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
-
-{%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
-{%- for p in ps -%}{%- assign location = p.breadcrumb -%}{%- endfor -%}
-
 {%- assign json = pass | append: slug | append: '.json' -%}
-
 {%- assign isJson = site.data[slug] -%}
 
 <div class="row">
   <div class="col-12">
-    location : {{location}}
+
     <h1>{{ page.title }}</h1>
     <p class="lead">Короткий вислів, що, як правило або cтисле формулювання провідної ідеї, програми дій, правило, заповідь або вираз, який характеризує певні почуття або кодекс поведінки агента чи агенції.</p>
 
@@ -54,7 +48,6 @@ layout: default
 
     <div class="tab-content" id="{{ slug }}-content">
       {%- if isJson -%}
-
         <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
           <div class="row">
             <div class="col-12">
@@ -73,7 +66,7 @@ layout: default
     </div>
 
   </div>
-  <div class="col-12">
+  <div class="col-12 mt-4">
 
     {%- assign size = back | size | minus:1 -%}
     {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
@@ -83,17 +76,17 @@ layout: default
       {%- if p.url == page.url -%}
         {%- if forloop.first == false -%}
         {%- assign prev = forloop.index0 | minus:1 -%}
-        <div class="col-4">
+        <div class="col-sm-12 col-md-4">
           <a href="{{ ps[prev].url }}">
-            < {{ ps[prev].title }}
+            &larr; {{ ps[prev].title }}
           </a>
         </div>
         {%- endif -%}
         {%- if forloop.last == false -%}
         {%- assign next = forloop.index0 | plus:1 -%}
-        <div class="col-4">
+        <div class="col-sm-12 col-md-4">
           <a href="{{ ps[next].url }}">
-            {{ ps[next].title }} >
+            {{ ps[next].title }} &rarr;
           </a>
         </div>
         {%- endif -%}
