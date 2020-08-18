@@ -36,8 +36,8 @@
         <th data-field="date" data-visible="false">date</th>
         <th data-field="seller" data-visible="false">seller</th>
         <th data-field="phone" data-visible="false">phone</th>
-        <th data-field="images" data-visible="false">images</th>
         <th data-field="description" data-visible="false">description</th>
+        <th data-field="images" data-visible="false">images</th>
       </tr>
     </thead>
     <tbody>
@@ -60,6 +60,7 @@
         <td>{{ offer.date }}</td>
         <td>{{ offer.seller }}</td>
         <td>{{ offer.phone }}</td>
+        <td>{{ offer.description }}</td>
         {%- if isImage != "" -%}
           <td>
             <hr>
@@ -78,7 +79,6 @@
         {%- else -%}
           <td></td>
         {%- endif -%}
-        <td>{{ offer.description }}</td>
       </tr>
   {%- if forloop.last -%}
     </tbody>
