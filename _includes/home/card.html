@@ -43,9 +43,6 @@
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
-      {%- capture include -%}{%- include location.html -%}{%- endcapture -%}
-
-      {{include}}<br>
 
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
@@ -55,8 +52,7 @@
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
 
           {%- if data -%}
-
-            {%- assign location = include.breadcrumb -%}
+          
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
