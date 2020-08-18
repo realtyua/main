@@ -4,14 +4,7 @@ layout: default
 
 
 {%- assign back = page.dir | split: "/" -%}
-number: {{ back.size }}
-
-{%- back.size == 4 -%}
-  {%- assign size = back | size | minus:0 -%}
-{%- else -%}
-  {%- assign size = back | size | minus:1 -%}
-{%- endif -%}
-
+{%- assign size = back | size | minus:0 -%}
 {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
 {%- for p in ps -%}{%- assign location = p.breadcrumb -%}{%- endfor -%}
