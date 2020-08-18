@@ -49,9 +49,10 @@
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
-
+          data: {{ data }}<br>
           {%- if data -%}
-
+            {%- assign location = d.breadcrumb -%}
+            location: {{ location }}<br>
             {%- include {{ data }} -%}
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
