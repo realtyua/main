@@ -51,7 +51,11 @@
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
 
           {%- if data -%}
-            l: {{include.breadcrumb}}<br>
+
+          {%- capture include -%}{%- include location.html -%}{%- endcapture -%}
+
+          {{include}}<br>
+
             {%- assign location = include.breadcrumb -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:4 -%}

@@ -1,6 +1,12 @@
 {%- include data/owner.html -%}
 
-{%- assign location = include.location -%}
+{%- capture include -%}{%- include location.html -%}{%- endcapture -%}
+
+{%- if include != '' -%}
+  {%- include location.html -%}
+{%- else -%}
+  {%- assign location = include.location -%}
+{%- endif -%}
 
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
