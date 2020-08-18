@@ -2,11 +2,14 @@
 layout: null
 sitemap: false
 ---
+{%- comment -%}
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
 {%- for p in ps -%}{%- assign location = p.breadcrumb -%}{%- endfor -%}
+{%- endcomment -%}
+
 {%- assign realtor = page.name | remove: '.json' -%}
 {%- assign data = site.data[realtor] | where_exp: 'i', 'i.location contains location' -%}
 {%- assign offers = data | sort: 'date' | reverse -%}

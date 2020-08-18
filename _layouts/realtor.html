@@ -48,9 +48,15 @@ layout: default
 
     <div class="tab-content" id="{{ slug }}-content">
       {%- if isJson -%}
+
+      {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
+      {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
+      {%- for p in ps -%}{%- assign location = p.breadcrumb -%}{%- endfor -%}
+
         <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
           <div class="row">
             <div class="col-12">
+              location : {{location}}
               <h2>{{ page.title }} пропонує нерухомість</h2>
               {%- include table/js.html -%}
             </div>
