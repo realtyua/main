@@ -1,19 +1,11 @@
-{%- comment -%}
-{%- assign location = include.location -%}
-{%- include location.html -%}
-{%- endcomment -%}
-
 {%- if page.url == "/" -%}
 {%- assign location = include.location -%}
 {%- else -%}
 {%- include location.html -%}
 {%- endif -%}
-
 {%- include data/owner.html -%}
-
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
-
 {%- assign records = owners | concat: shevchenko | concat: franko -%}
 {%- assign offers = records | sort: "date" | reverse -%}

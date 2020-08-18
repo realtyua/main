@@ -2,7 +2,6 @@
 {%- include has-news.html cat=region -%}
 {%- include has-articles.html cat=region -%}
 
-
 <div class="card-text">
   <div class="d-flex justify-content-between">
     <div class="tabs flex-fill">
@@ -43,16 +42,13 @@
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
-
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: "path" -%}
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
-
           {%- if data -%}
-          
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
@@ -76,9 +72,7 @@
               </div>
               {%- endif -%}
             {%- endfor -%}
-
           {%- endif -%}
-
         {%- endif -%}
       {%- endfor -%}
 
@@ -104,43 +98,3 @@
     {%- endif -%}
   </div>
 </div>
-
-{% comment %}
-
-
-
-{%- include {{ data }} -%}
-{%- for offer in offers limit:4 -%}
-  {%- if forloop.first -%}
-  <div class="row mx-n2">
-  {%- endif -%}
-    {%- assign index = forloop.index0 | modulo: 2 -%}
-    {%- assign cycle = forloop.index | modulo: 2 -%}
-    {%- if index == 0 -%}
-    <div class="col-md-6 px-1">
-    {%- endif -%}
-      <div class="card mb-2">
-        <div class="card-body p-2">
-          {% include card/body.html %}
-        </div>
-      </div>
-    {%- if cycle == 0 -%}
-    </div>
-    {%- else -%}
-    {%- if forloop.last -%}
-    </div>
-    {%- endif -%}
-    {%- endif -%}
-  {%- if forloop.last -%}
-  </div>
-  <div class="row">
-    <div class="col-auto ml-auto">
-      <a class="btn btn-primary btn-sm" href="{{ d.url }}">
-        {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
-      </a>
-    </div>
-  </div>
-  {%- endif -%}
-{%- endfor -%}
-
-{% endcomment %}
