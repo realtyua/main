@@ -4,13 +4,13 @@ layout: default
 
 
 {%- assign back = page.dir | split: "/" -%}
-{%- assign number = back | size -%}
-number: {{number}}
+{%- assign n = back | size -%}
+number: {{ n }}
 
-{%- number > 4 -%}
-{%- assign size = back | size | minus:1 -%}
+{%- n == 4 -%}
+  {%- assign size = back | size | minus:0 -%}
 {%- else -%}
-{%- assign size = back | size | minus:0 -%}
+  {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
 
 {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
