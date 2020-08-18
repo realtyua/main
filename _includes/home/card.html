@@ -42,6 +42,7 @@
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
+
       {%- assign location = 'Івано-Франківськ' -%}
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
@@ -49,12 +50,9 @@
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
-          data: {{ data }}<br>
+
           {%- if data -%}
-            title: {{ d.title }}<br>
-            url: {{ d.url }}<br>
-            breadcrumb: {{ d.breadcrumb }}<br>
-            location: {{ location }}<br>
+
             {%- include {{ data }} -%}
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
