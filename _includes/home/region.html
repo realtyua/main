@@ -37,9 +37,10 @@
           {%- endif -%}
           <div class="card-body p-3">
             <h5 class="card-title">
+              l: {{three.breadcrumb }}
               <a href="{{ three.url }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
             </h5>
-            {%- include home/card.html region=slug url=three.url breadcrumb=three.breadcrumb -%}
+            {%- include home/card.html region=slug url=three.url -%}
           </div>
         </div>
       </div>
