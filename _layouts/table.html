@@ -1,6 +1,13 @@
 ---
 layout: default
 ---
+
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:0 -%}
+{%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
+{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
+{%- for p in ps -%}{%- assign location = p.breadcrumb -%}{%- endfor -%}
+location: {{location}}<br>
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 1, 4 | join: ' ' -%}
 <div class="row">
