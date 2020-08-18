@@ -41,6 +41,8 @@
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
+      {%- assign back = page.dir | split: "/" -%}
+      level: {{back.size}}
 
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
