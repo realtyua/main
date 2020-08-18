@@ -6,12 +6,18 @@ layout: default
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:2 -%}
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
+
+{%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
+{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
+{%- for p in ps -%}{%- assign location = p.breadcrumb -%}{%- endfor -%}
+
 {%- assign json = pass | append: slug | append: '.json' -%}
+
 {%- assign isJson = site.data[slug] -%}
 
 <div class="row">
   <div class="col-12">
-
+    location : {{location}}
     <h1>{{ page.title }}</h1>
     <p class="lead">Короткий вислів, що, як правило або cтисле формулювання провідної ідеї, програми дій, правило, заповідь або вираз, який характеризує певні почуття або кодекс поведінки агента чи агенції.</p>
 
@@ -49,15 +55,10 @@ layout: default
     <div class="tab-content" id="{{ slug }}-content">
       {%- if isJson -%}
 
-      {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
-      {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
-      {%- for p in ps -%}{%- assign location = p.breadcrumb -%}{%- endfor -%}
-
         <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
           <div class="row">
             <div class="col-12">
-              location : {{location}}
-              <h2>{{ page.title }} пропонує нерухомість</h2>
+              <h2>{{ page.title }} пропонує</h2>
               {%- include table/js.html -%}
             </div>
           </div>
