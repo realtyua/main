@@ -1,10 +1,8 @@
 {%- include data/owner.html -%}
 
-{%- capture include -%}{%- include location.html -%}{%- endcapture -%}
+{%- include location.html -%}
 
-{%- if include != '' -%}
-  {%- include location.html -%}
-{%- else -%}
+{%- if location == '' -%}
   {%- assign location = include.location -%}
 {%- endif -%}
 
