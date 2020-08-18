@@ -4,10 +4,9 @@ layout: default
 
 
 {%- assign back = page.dir | split: "/" -%}
-{%- assign n = back | size -%}
-number: {{ n }}
+number: {{ back.size }}
 
-{%- n == 4 -%}
+{%- back.size == 4 -%}
   {%- assign size = back | size | minus:0 -%}
 {%- else -%}
   {%- assign size = back | size | minus:1 -%}
