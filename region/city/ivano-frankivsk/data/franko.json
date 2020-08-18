@@ -2,8 +2,8 @@
 layout: null
 sitemap: false
 ---
-{%- assign back = page.dir | split: "/" -%}
-{%- if back.size == 0 -%}
+{%- assign level = page.dir | split: "/" -%}
+{%- if level.size == 0 -%}
 {%- assign location = include.location -%}
 {%- else -%}
 {%- include location.html -%}
