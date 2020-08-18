@@ -47,13 +47,12 @@
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: "path" -%}
       {%- for d in ds -%}
-        breadcrumb 0 : {{ d.breadcrumb }}<br>
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
 
           {%- if data -%}
 
-            {%- include {{ data }} -%}
+            {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
               <div class="row">
@@ -70,8 +69,6 @@
               <div class="row">
                 <div class="col-auto ml-auto">
                   <a class="btn btn-primary btn-sm" href="{{ d.url }}">
-                    ur: {{ d.url }}<br>
-                    breadcrumb : {{ d.breadcrumb }}<br>
                     {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
                   </a>
                 </div>
