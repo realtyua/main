@@ -42,7 +42,7 @@
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
-
+      {%- assign location = 'Івано-Франківськ' -%}
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: "path" -%}
@@ -51,7 +51,6 @@
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
           data: {{ data }}<br>
           {%- if data -%}
-            {%- assign location = 'Івано-Франківськ' -%}
             title: {{ d.title }}<br>
             url: {{ d.url }}<br>
             breadcrumb: {{ d.breadcrumb }}<br>
