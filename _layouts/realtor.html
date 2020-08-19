@@ -48,16 +48,13 @@ layout: default
     <div class="tab-content" id="{{ slug }}-content">
       {%- if isJson -%}
         <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
-          <div class="row">
-            <div class="col-12">
-              <h2>{{ page.title }} пропонує</h2>
-              {%- include table/js.html -%}
-            </div>
-          </div>
+          <h2>{{ page.title }} пропонує</h2>
+          {%- include table/js.html -%}
         </div>
       {%- endif -%}
       {%- for ct in contents -%}
-        <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="{{ tab }}" role="tabpanel" aria-labelledby="{{ tab }}-tab">
+        {%- assign pane = ct.url | split: "/" | slice: 2 -%}
+        <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="{{ pane }}" role="tabpanel" aria-labelledby="{{ pane }}-tab">
           {{ ct.content }}
         </div>
       {%- endfor -%}
