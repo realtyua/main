@@ -31,28 +31,14 @@ layout: default
               </a>
             </li>
           {%- endif -%}
-
-          {% for c in contents %}
-            {%- assign tab = c.url | split: "/" | slice: 2 -%}
+          {%- for ct in contents -%}
+            {%- assign tab = ct.url | split: "/" | slice: 2 -%}
             <li class="nav-item" role="presentation">
               <a class="nav-link border-0{% if isJson %}{% else %} active{% endif %}" href="#{{ tab }}" id="{{ tab }}-tab" data-toggle="tab" role="tab" aria-controls="{{ tab }}" aria-selected="true">
-                <span>{{ c.title }}</span>
+                <span>{{ ct.title }}</span>
               </a>
             </li>
-          {% endfor %}
-
-          {%- comment -%}
-          <li class="nav-item" role="presentation">
-            <a class="nav-link border-0{% if isJson %}{% else %} active{% endif %}" href="#about" id="about-tab" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
-              <span>Про ангенцію</span>
-            </a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link border-0" href="#services" id="services-tab" data-toggle="tab" role="tab" aria-controls="services" aria-selected="true">
-              <span>Послуги ангенції</span>
-            </a>
-          </li>
-          {%- endcomment -%}
+          {%- endfor -%}
         </ul>
       </div>
     </nav>
@@ -70,22 +56,11 @@ layout: default
           </div>
         </div>
       {%- endif -%}
-
-      {% for c in contents %}
-        {%- assign pane = c.url | split: "/" | slice: 2 -%}
-        <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="{{ pane }}" role="tabpanel" aria-labelledby="{{ pane }}-tab">
-          tab: {{ tab }} {{ c.content }}
+      {%- for ct in contents -%}
+        <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="{{ tab }}" role="tabpanel" aria-labelledby="{{ tab }}-tab">
+          {{ ct.content }}
         </div>
-      {% endfor %}
-
-      {%- comment -%}
-      <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
-        <p>Про ангенцію...</p>
-      </div>
-      <div class="tab-pane fade show" id="services" role="tabpanel" aria-labelledby="services-tab">
-        <p>Послуги ангенції...</p>
-      </div>
-      {%- endcomment -%}
+      {%- endfor -%}
     </div>
 
   </div>
