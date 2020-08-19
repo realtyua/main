@@ -32,7 +32,7 @@ layout: default
             </li>
           {%- endif -%}
           {% for c in contents %}
-            url: {{ c.url }} <br> relative: {{ c.relative_path }} <br> path: {{ c.path }} <br>{{ c.content }} <br> {{ c.title }}
+
           {% endfor %}
 
           {%- comment -%}
@@ -70,7 +70,7 @@ layout: default
         foo:{{foo}}<br>
         {%- assign cback = c.path | split: "/" -%}
         {%- assign csize = cback | size | minus:1 -%}
-        {%- assign cpass = cback | slice: 0, size | last -%}
+        {%- assign cpass = cback | slice: 0, 1 | last -%}
         cback: {{cback}}<br>
         csize: {{csize}}<br>
         cpass: {{cpass}}<br>
