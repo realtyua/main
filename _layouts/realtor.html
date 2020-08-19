@@ -66,6 +66,8 @@ layout: default
       {%- endif -%}
 
       {% for c in contents %}
+        {%- assign foo = c.url | split: "/" | slice: 0, 1 -%}
+        foo:{{foo}}<br>
         {%- assign cback = c.path | split: "/" -%}
         {%- assign csize = cback | size | minus:1 -%}
         {%- assign cpass = cback | slice: 0, size | last -%}
