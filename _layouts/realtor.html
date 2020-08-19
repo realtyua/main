@@ -60,13 +60,10 @@ layout: default
       <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
         <p>Про ангенцію...</p>
 
-        <p>content/about-{{ slug }}.md</p>
+        <hr>
 
-        {%- include content/about-franko.md -%}
-
-<br><var></var><hr>
-
-        {% for c in site.contents %}
+        {%- assign contents = site.contents | where_exp: 'i', 'i.path contains slug' -%}
+        {% for c in contents %}
 
           {{ c }}
 
