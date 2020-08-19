@@ -1,2 +1,7 @@
 User-agent: *
+Allow: /
+Disallow: /*/data/*
+Disallow: /*/data/
+Disallow: /*/data/*.json
+Disallow: *.json
 Sitemap: https://www.realestate.if.ua/sitemap.xml
