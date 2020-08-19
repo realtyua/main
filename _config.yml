@@ -34,6 +34,8 @@ contact:
   email: info@realestate.if.ua
   www: https://www.realestate.if.ua/
 
+markdown: kramdown
+
 collections:
   content:
     output: true
