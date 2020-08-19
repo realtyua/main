@@ -58,18 +58,10 @@ layout: default
         </div>
       {%- endif -%}
       <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
-        <p>Про ангенцію...</p>
-
-        <hr>
-
         {%- assign contents = site.contents | where_exp: 'i', 'i.path contains slug' -%}
         {% for c in contents %}
-
-          {{ c }}
-
+          {{ c.name }} <br> {{ c.title }} <br> {{ c.content }}
         {% endfor %}
-
-
       </div>
       <div class="tab-pane fade show" id="services" role="tabpanel" aria-labelledby="services-tab">
         <p>Послуги ангенції...</p>
