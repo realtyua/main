@@ -1,9 +1,9 @@
-{%- capture ta -%}{%- for t in site.data.owners -%}{{ t.phone }}|{%- endfor -%}{%- endcapture -%}
+{%- capture oa -%}{%- for ot in site.data.owners -%}{{ ot.phone }}|{%- endfor -%}{%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
-{%- for t in site.data.owners -%}
-  {%- assign f = t.phone | append: '|' -%}
-  {%- if ta contains f -%}
-    {%- assign owners = owners | push: t -%}
+{%- for ot in site.data.owners -%}
+  {%- assign of = ot.phone | append: '|' -%}
+  {%- if oa contains of -%}
+    {%- assign owners = owners | push: ot -%}
   {%- endif -%}
-  {%- assign ta = ta | remove: f -%}
+  {%- assign oa = oa | remove: of -%}
 {%- endfor -%}

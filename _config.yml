@@ -34,10 +34,15 @@ contact:
   email: info@realestate.if.ua
   www: https://www.realestate.if.ua/
 
+collections:
+  content:
+    output: true
+
 defaults:
   - scope:
       path: /*/data/*.json
     values:
+      layout: "null"
       sitemap: false
   - scope:
       path: ""

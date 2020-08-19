@@ -33,6 +33,9 @@ layout: default
           <li class="nav-item" role="presentation">
             <a class="nav-link border-0{% if isJson %}{% else %} active{% endif %}" href="#about" id="about-tab" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
               <span>Про ангенцію</span>
+              <p>content/about-{{ slug }}.md</p>
+
+              {%- include content/about-{{ slug }}.md -%}
             </a>
           </li>
           <li class="nav-item" role="presentation">
