@@ -6,7 +6,9 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
-    <p class="lead">{{ content }}...</p>
+    {%- if content -%}
+    <p class="lead">{{ content }}</p>
+    {%- endif -%}
     {%- include nav-section.html -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
