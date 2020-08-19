@@ -63,7 +63,16 @@ layout: default
         <p>content/about-{{ slug }}.md</p>
 
         {%- include content/about-franko.md -%}
-        
+
+<br><var></var><hr>
+
+        {% for c in site.contents %}
+
+          {{ c }}
+
+        {% endfor %}
+
+
       </div>
       <div class="tab-pane fade show" id="services" role="tabpanel" aria-labelledby="services-tab">
         <p>Послуги ангенції...</p>
