@@ -59,9 +59,14 @@ layout: default
       {%- endif -%}
       <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
         {%- assign contents = site.contents | where_exp: 'i', 'i.path contains slug' -%}
+
+
         {% for c in contents %}
-          {{ c.name }} <br> {{ c.title }} <br> {{ c.content }}
+          {{ c.label }} <br> {{ c.docs }} <br> {{ c.files }} <br> {{ c.relative_directory }} <br> {{ c.directory }} <br> {{ c.output }} <br>
+          <hr>
+          {{ c.date }} <br> {{ c.collection }} <br> {{ c.url }} <br> {{ c.relative_path }} <br> {{ c.path }} <br> {{ c.output }} <br>{{ c.content }} <br> {{ c.title }}
         {% endfor %}
+
       </div>
       <div class="tab-pane fade show" id="services" role="tabpanel" aria-labelledby="services-tab">
         <p>Послуги ангенції...</p>
