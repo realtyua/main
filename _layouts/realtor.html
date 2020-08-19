@@ -8,6 +8,7 @@ layout: default
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
 {%- assign json = pass | append: slug | append: '.json' -%}
 {%- assign isJson = site.data[slug] -%}
+{%- assign contents = site.contents | where_exp: 'i', 'i.path contains slug' -%}
 
 <div class="row">
   <div class="col-12">
@@ -30,6 +31,11 @@ layout: default
               </a>
             </li>
           {%- endif -%}
+          {% for c in contents %}
+            url: {{ c.url }} <br> relative: {{ c.relative_path }} <br> path: {{ c.path }} <br>{{ c.content }} <br> {{ c.title }}
+          {% endfor %}
+
+          {%- comment -%}
           <li class="nav-item" role="presentation">
             <a class="nav-link border-0{% if isJson %}{% else %} active{% endif %}" href="#about" id="about-tab" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
               <span>Про ангенцію</span>
@@ -40,6 +46,7 @@ layout: default
               <span>Послуги ангенції</span>
             </a>
           </li>
+          {%- endcomment -%}
         </ul>
       </div>
     </nav>
@@ -57,20 +64,22 @@ layout: default
           </div>
         </div>
       {%- endif -%}
+
+      {% for c in contents %}
+        {%- assign foo = c.path | split: "/" | last -%}
+        foo: {{foo}}<br>
+        <hr>
+        url: {{ c.url }} <br> relative: {{ c.relative_path }} <br> path: {{ c.path }} <br>{{ c.content }} <br> {{ c.title }}
+      {% endfor %}
+
+      {%- comment -%}
       <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="about" role="tabpanel" aria-labelledby="about-tab">
-        {%- assign contents = site.contents | where_exp: 'i', 'i.path contains slug' -%}
-
-
-        {% for c in contents %}
-          {{ c.label }} <br> {{ c.docs }} <br> {{ c.files }} <br> {{ c.relative_directory }} <br> {{ c.directory }} <br> {{ c.output }} <br>
-          <hr>
-          {{ c.date }} <br> {{ c.collection }} <br> {{ c.url }} <br> {{ c.relative_path }} <br> {{ c.path }} <br> {{ c.output }} <br>{{ c.content }} <br> {{ c.title }}
-        {% endfor %}
-
+        <p>Про ангенцію...</p>
       </div>
       <div class="tab-pane fade show" id="services" role="tabpanel" aria-labelledby="services-tab">
         <p>Послуги ангенції...</p>
       </div>
+      {%- endcomment -%}
     </div>
 
   </div>
