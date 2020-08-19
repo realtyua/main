@@ -1,9 +1,9 @@
-{%- capture f_phone_array -%}{%- for tel in site.data.owners -%}{{ tel.phone }}|{%- endfor -%}{%- endcapture -%}
+{%- capture ta -%}{%- for t in site.data.owners -%}{{ t.phone }}|{%- endfor -%}{%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
-{%- for tel in site.data.owners -%}
-  {%- assign f_phone = tel.phone | append: '|' -%}
-  {%- if f_phone_array contains f_phone -%}
-      {%- assign owners = owners | push: tel -%}
+{%- for t in site.data.owners -%}
+  {%- assign f = t.phone | append: '|' -%}
+  {%- if ta contains f -%}
+    {%- assign owners = owners | push: t -%}
   {%- endif -%}
-  {%- assign f_phone_array = f_phone_array | remove: f_phone -%}
+  {%- assign ta = ta | remove: f -%}
 {%- endfor -%}
