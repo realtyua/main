@@ -96,9 +96,6 @@
                 {%- include subpages.html dir=dir page=slug title=title -%}
               {%- else -%}
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
-                {% comment %}
-                {%- assign data = slug | prepend: 'data/' | append: '.html' -%}
-                {% endcomment %}
                 {%- capture data -%}data/{{ region }}/{{ slug }}.html {%- endcapture -%}
                 {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
                 {%- include {{ data }} -%}
@@ -133,15 +130,6 @@
               {%- endif -%}
             </div>
           </div>
-          {% comment %}
-          <div class="row">
-            <div class="col-auto ml-auto">
-              <a class="btn btn-primary" href="{{ content.url }}">
-                {{ site.data.lang-uk.to_section }} <strong>{%- if content.navtitle -%}{{ content.navtitle }}{%- else -%}{{ content.title }}{%- endif -%}</strong>
-              </a>
-            </div>
-          </div>
-          {% endcomment %}
         </div>
       {%- endif -%}
     {%- if forloop.last -%}
