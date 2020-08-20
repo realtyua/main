@@ -6,6 +6,13 @@ subtitle:
 breadcrumb:
 description:
 ---
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:1 -%}
+{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+{%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
+
+{{ index[0].title | downcase }}<br>
+
 <div class="row">
   <div class="col-12">
 
