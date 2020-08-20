@@ -46,7 +46,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | downcase }}</h2>
-        {%- capture data -%}data/{{ region }}/all.html {%- endcapture -%}
+        {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
         {%- include {{ data }} -%}
         {%- for offer in offers limit:9 -%}
           {%- if forloop.first -%}
@@ -96,7 +96,7 @@
                 {%- include subpages.html dir=dir page=slug title=title -%}
               {%- else -%}
                 <h2 class="mb-3">{{ title }} {{ addtitle }}</h2>
-                {%- capture data -%}data/{{ region }}/{{ slug }}.html {%- endcapture -%}
+                {%- capture data -%}data/{{ region }}/{{ slug }}.html{%- endcapture -%}
                 {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
                 {%- include {{ data }} -%}
                 {%- for offer in offers limit: 9 -%}
