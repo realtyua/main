@@ -16,13 +16,7 @@
       <div class="col-sm-12 col-md-5 text-left">&nbsp;</div>
       {%- endif -%}
       <div class="col-sm-12 col-md-2 text-center">
-        0: {{ p[0].title }} | {{ ps[0].title }} | {{ site.pages[0].title }}<br>
-        1: {{ p[1].title }} | {{ ps[1].title }} | {{ site.pages[1].title }}<br>
-        2: {{ p[2].title }} | {{ ps[2].title }} | {{ site.pages[2].title }}<br>
-        3: {{ p[3].title }} | {{ ps[3].title }} | {{ site.pages[3].title }}<br>
-        4: {{ p[4].title }} | {{ ps[4].title }} | {{ site.pages[4].title }}<br>
-        5: {{ p[5].title }} | {{ ps[5].title }} | {{ site.pages[5].title }}<br>
-        <a href="{{ dir }}">{{ site.data.lang-uk.others }} {{ site.pages[4].title | downcase }}</a>
+        <a href="{{ dir }}">{{ site.data.lang-uk.others }} {{ foo.title | downcase }}</a>
       </div>
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}
