@@ -1,5 +1,5 @@
 ---
-title: Агенти
+title: Агенції та Агенти
 navtitle:
 navhide:
 subtitle:
@@ -7,10 +7,16 @@ breadcrumb:
 description:
 ---
 
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:1 -%}
+{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+{%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
+{%- assign addtitle = index[0].title | split: " " | slice: 2, 4 | join: " " -%}
+
 <div class="row">
   <div class="col-12">
 
-    <h1>Агенції та Агенти нерухомості у місті Івано-Франківськ</h1>
+    <h1>{{ page.title }} {{ addtitle }}</h1>
     <p>...</p>
     {%- include elements/list-pages.html -%}
 
