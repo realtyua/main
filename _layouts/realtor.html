@@ -14,10 +14,10 @@ layout: default
       <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slug | capitalize }}" aria-controls="navbar{{ slug | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slug | capitalize }}">
         <ul class="navbar-nav nav nav-tabs border-0" id="{{ slug }}-nav">
-          {%- if isJson -%}
+          {%- if isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
-          {%- if contents -%}
+          {%- if tabs.size > 0 -%}
             {%- include elements/others-tab.html -%}
           {%- endif -%}
         </ul>
@@ -25,10 +25,10 @@ layout: default
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="{{ slug }}-content">
-      {%- if isJson -%}
+      {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
-      {%- if contents -%}
+      {%- if tabs.size > 0 -%}
         {%- include elements/others-pane.html -%}
       {%- endif -%}
     </div>
