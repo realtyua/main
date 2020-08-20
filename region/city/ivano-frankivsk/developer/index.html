@@ -6,17 +6,23 @@ subtitle:
 breadcrumb:
 description:
 ---
+
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
+{%- assign addtitle1 = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
+{{ addtitle1 }}<br>
+<hr>
+{%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
+{%- assign addtitle = name | split: ' ' | slice: 1, 4 | join: ' ' -%}
 
-{{ index[0].title | downcase }}<br>
+{{ addtitle }}<br>
 
 <div class="row">
   <div class="col-12">
 
-    <h1>Забудовники нерухомості у місті Івано-Франківськ</h1>
+    <h1>Забудовники нерухомості {{ addtitle }}</h1>
     <p>...</p>
     {%- include elements/list-pages.html -%}
 
