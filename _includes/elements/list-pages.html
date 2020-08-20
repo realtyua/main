@@ -1,0 +1,14 @@
+{%- assign items = '' | split:'' -%}
+{%- assign pages = site.pages | sort: 'path' | reverse -%}
+{%- for p in pages -%}
+  {%- if p.dir contains page.dir and p.dir != page.dir -%}
+    {%- assign items = items | push: p -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if items -%}
+  {%- for item in items limit:6 -%}
+    {%- assign section = item.url | split: "/" | last -%}
+    {%- include elements/items-pages.html -%}
+  {%- else -%}
+  {%- endfor -%}
+{%- endif -%}
