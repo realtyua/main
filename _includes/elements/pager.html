@@ -8,7 +8,7 @@
       {%- if forloop.first == false -%}
       {%- assign prev = forloop.index0 | minus:1 -%}
       <div class="col-sm-12 col-md-5 text-left">
-        &larr; <a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a>
+        &larr; {{prev}} <a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a>
       </div>
       {%- else -%}
       <div class="col-sm-12 col-md-5 text-left">&nbsp;</div>
@@ -19,7 +19,7 @@
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}
       <div class="col-sm-12 col-md-5 text-right">
-        <a href="{{ ps[next].url }}">{{ ps[next].title }}</a> &rarr;
+        <a href="{{ ps[next].url }}">{{ ps[next].title }}</a> {{next}} &rarr;
       </div>
       {%- else -%}
       <div class="col-sm-12 col-md-5 text-right">&nbsp;</div>
