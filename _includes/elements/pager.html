@@ -14,7 +14,7 @@
       <div class="col-sm-12 col-md-5 text-left">&nbsp;</div>
       {%- endif -%}
       <div class="col-sm-12 col-md-2 text-center">
-        <a href="{{ dir }}">Всі агнети</a>
+        <a href="{{ dir }}">Всі агнети | 0: {{ ps[0].title }} | 1: {{ ps[1].title }} | 2: {{ ps[2].title }} | 3: {{ ps[3].title }}</a>
       </div>
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}
