@@ -1,8 +1,8 @@
+{%- assign size = back | size | minus:1 -%}
+{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+{%- assign ps = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir" -%}
+{%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
 <div class="col-12 mt-4">
-  {%- assign size = back | size | minus:1 -%}
-  {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-  {%- assign ps = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir" -%}
-  {%- assign foo = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
   <div class="row">
   {%- for p in ps -%}
     {%- if p.url == page.url -%}
@@ -15,7 +15,7 @@
       <div class="col-sm-12 col-md-5 text-left">&nbsp;</div>
       {%- endif -%}
       <div class="col-sm-12 col-md-2 text-center">
-        <a href="{{ dir }}">{{ site.data.lang-uk.others }} {{ foo[0].title | downcase }}</a>
+        <a href="{{ index[0].url }}">{{ site.data.lang-uk.others }} {{ index[0].title | downcase }}</a>
       </div>
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}

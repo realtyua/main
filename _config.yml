@@ -37,7 +37,7 @@ contact:
 markdown: kramdown
 
 collections:
-  contents:
+  tabs:
     output: true
 
 defaults:

@@ -1,8 +1,8 @@
 {%- assign items = '' | split:'' -%}
 {%- assign pages = site.pages | sort: 'path' | reverse -%}
-{%- for p in pages -%}
-  {%- if p.dir contains page.dir and p.dir != page.dir -%}
-    {%- assign items = items | push: p -%}
+{%- for lp in pages -%}
+  {%- if lp.dir contains page.dir and lp.dir != page.dir -%}
+    {%- assign items = items | push: lp -%}
   {%- endif -%}
 {%- endfor -%}
 {%- if items -%}
