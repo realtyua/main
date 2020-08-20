@@ -8,18 +8,18 @@
       {%- if forloop.first == false -%}
       {%- assign prev = forloop.index0 | minus:1 -%}
       <div class="col-sm-12 col-md-5 text-left">
-        &larr; {{prev}} <a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a>
+        &larr; <a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a>
       </div>
       {%- else -%}
       <div class="col-sm-12 col-md-5 text-left">&nbsp;</div>
       {%- endif -%}
       <div class="col-sm-12 col-md-2 text-center">
-        <a href="{{ dir }}">Всі агнети | 0: {{ ps[0].title }} | 1: {{ ps[1].title }} | 2: {{ ps[2].title }} | 3: {{ ps[3].title }}</a>
+        <a href="{{ dir }}">{{ data.lang-uk.others }} {{ ps[1].title | downcase }}</a>
       </div>
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}
       <div class="col-sm-12 col-md-5 text-right">
-        <a href="{{ ps[next].url }}">{{ ps[next].title }}</a> {{next}} &rarr;
+        <a href="{{ ps[next].url }}">{{ ps[next].title }}</a> &rarr;
       </div>
       {%- else -%}
       <div class="col-sm-12 col-md-5 text-right">&nbsp;</div>
