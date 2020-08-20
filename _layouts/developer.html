@@ -5,7 +5,9 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }}</h1>
-    <p>Короткий вислів, що, як правило або cтисле формулювання провідної ідеї, програми дій, правило, заповідь або вираз, який характеризує певні почуття або кодекс поведінки агента чи агенції.</p>
+    <p>Короткий вислів (Гасло), що, як правило або cтисле формулювання провідної ідеї, програми дій, правило, заповідь або вираз, який характеризує певні почуття або кодекс поведінки агента чи агенції.</p>
+    {{ content }}
+    {%- if isJson.size > 0 or tabs.size > 0 -%}
     <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
       <a class="navbar-brand d-md-none" href="#">
         <span class="small">Оберіть розділ</span>
@@ -32,6 +34,7 @@ layout: default
         {%- include elements/others-pane.html -%}
       {%- endif -%}
     </div>
+    {%- endif -%}
   </div>
   {%- include elements/pager.html -%}
 </div>
