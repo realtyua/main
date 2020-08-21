@@ -1,7 +1,11 @@
 {%- assign back = page.dir | split: "/" -%}
-{%- if back.size == 4 -%}
+{%- if back.size == 4 and page.dir contains 'city' or page.dir contains 'town' -%}
 {%- assign size = back | size | minus:0 -%}
-{%- elsif back.size == 5 -%}
+{%- elsif back.size == 5 and page.dir contains 'city' or page.dir contains 'town' -%}
+{%- assign size = back | size | minus:1 -%}
+{%- if back.size == 3 -%}
+{%- assign size = back | size | minus:0 -%}
+{%- elsif back.size == 4 -%}
 {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
