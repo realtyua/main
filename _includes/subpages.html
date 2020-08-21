@@ -38,9 +38,10 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-                    {%- include location.html -%}
+
                     {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
                     {%- comment -%}
+                      {%- include location.html -%}
                       {%- assign records = site.data[section] | where: 'location', 'м. Івано-Франківськ' -%}
                     {%- endcomment -%}
                     {%- if records -%}
