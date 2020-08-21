@@ -13,7 +13,9 @@
 <meta name="description" content="{{ page.description | default: site.description | smartify }}">
 <meta name="country" content="{{ site.country }}">
 <meta name="region" content="{{ site.region }}">
-{%- if location -%}
+{%- if location and page.dir contains 'city' or page.dir contains 'town' -%}
+<meta name="locality" content="місто {{ location }}">
+{%- else -%}
 <meta name="locality" content="{{ location }}">
 {%- endif -%}
 <meta name="author" content="{{ site.developer.name }}">
