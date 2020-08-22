@@ -1,7 +1,6 @@
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-{%- assign l = i.url | split: "/" -%}
-{%- assign ps = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir and l.size == 6" -%}
+{%- assign ps = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir" -%}
 {%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
 {%- assign l = page.url | split: "/" -%}
 <div class="col-12 mt-4">
