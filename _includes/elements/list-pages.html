@@ -2,11 +2,12 @@
 {%- assign items = '' | split:'' -%}
 {%- assign pages = site.pages | sort: 'path' | reverse -%}
 {%- for lp in pages -%}
-  {%- if lp.dir contains page.dir and lp.dir != page.dir -%}
+  {%- assign l = p.dir | split: '/' -%}
+  {%- if lp.dir contains page.dir and lp.dir != page.dir and l.size == 6 -%}
     {%- assign items = items | push: lp -%}
   {%- endif -%}
 {%- endfor -%}
-{%- if items -%}
+{%- if items.size > 0 -%}
   {%- for item in items limit:6 -%}
     {%- assign section = item.url | split: "/" | last -%}
     {%- include elements/items-pages.html -%}
