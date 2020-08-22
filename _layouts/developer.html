@@ -33,7 +33,7 @@ layout: default
     {%- assign pages = site.pages | sort: 'dir' | reverse -%}
     {%- for i in pages -%}
       {%- assign l = i.dir | split: '/' -%}
-      {%- if i.url contains dir and i.url != dir and l.size == 7 -%}
+      {%- if i.url contains dir and i.url != dir and l.size == 8 -%}
         {%- assign pp = pp | push: i -%}
       {%- endif -%}
     {%- endfor -%}
