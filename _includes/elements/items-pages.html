@@ -1,5 +1,5 @@
 
-
+{%- assign back = page.dir | split: '/' -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign region = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
