@@ -1,30 +1,9 @@
-{%- comment -%}
-{%- assign back = page.dir | split: '/' -%}
-{%- assign size = back | size | minus:1 -%}
-{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-{%- assign region = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
-{%- endcomment -%}
-
-{%- assign region = 'ivano-frankivsk' -%}
-
-{%- assign folder = section | prepend: '/assets/images/logo/' | append: '.png' -%}
-{%- capture logo -%}
-  {%- for file in site.static_files -%}
-    {%- if file.path contains folder and file.extname == '.png' or file.extname == '.PNG' -%}{{ file.path }}{%- endif -%}
-  {%- endfor -%}
-{%- endcapture -%}
-{%- assign isLogo = logo | strip_newlines -%}
-
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
   <div class="col px-2 mb-3">
     <div class="card h-100">
-      {%- if isLogo -%}
-        <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }} YES">
-      {%- else -%}
-        <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
-      {%- endif -%}
+      <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
       <div class="card-body">
         <h5 class="card-title">
           <a href="{{ item.url }}">
@@ -52,7 +31,7 @@
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
                 {%- for offer in offers limit: 1 -%}
-                  {%- include card.html offer=offer region=region aid='1' -%}
+                  {%- include card.html offer=offer aid='1' -%}
                 {%- endfor -%}
                 <div class="card border-0 text-center">
                   <a href="{{ item.url }}" class="btn btn-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
