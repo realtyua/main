@@ -1,0 +1,14 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign level = page.dir | split: "/" -%}
+{%- if level.size == 0 -%}
+{%- assign location = include.location -%}
+{%- else -%}
+{%- include location.html -%}
+{%- endif -%}
+{%- assign realtor = page.name | remove: '.json' -%}
+{%- assign data = site.data[realtor] | where_exp: 'i', 'i.location contains location' -%}
+{%- assign offers = data | sort: 'date' | reverse -%}
+{{ offers | jsonify }}
