@@ -1,12 +1,11 @@
 {%- assign back = page.dir | split: '/' -%}
-back: {{back}}<br>
 {%- assign size = back | size | minus:1 -%}
-size: {{size}}<br>
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-dir: {{dir}}<br>
-{%- assign pr = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
-###{{ pr }}###<br>
-###{{ pr.name }}###<br>
+{%- assign foo = dir | split: '/' | last -%}
+
+### {{ foo }} ###
+<br>
+{%- assign region = foo -%}
 <hr>
 <br><br>
 {%- if forloop.first -%}
