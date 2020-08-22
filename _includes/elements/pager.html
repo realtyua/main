@@ -1,7 +1,7 @@
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign ps = '' | split:'' -%}
-{%- assign pages = site.pages | sort: 'path' | reverse -%}
+{%- assign pages = site.pages | sort: 'dir' | reverse -%}
 {%- for i in pages -%}
   {%- assign l = i.dir | split: '/' -%}
   {%- if i.url contains dir and i.url != dir and l.size == 6 -%}

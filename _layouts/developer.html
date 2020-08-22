@@ -26,6 +26,22 @@ layout: default
       </div>
     </nav>
     <hr class="mt-2 mt-md-0">
+
+    {%- assign size = back | size | plus:1 -%}
+    {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+    {%- assign pp = '' | split:'' -%}
+    {%- assign pages = site.pages | sort: 'dir' | reverse -%}
+    {%- for i in pages -%}
+      {%- assign l = i.dir | split: '/' -%}
+      {%- if i.url contains dir and i.url != dir and l.size == 7 -%}
+        {%- assign pp = pp | push: i -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- for pr in pp -%}
+      {{pr.title}}<br>
+    {%- endfor -%}
+
     <div class="tab-content" id="{{ slug }}-content">
       {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
