@@ -39,7 +39,7 @@ layout: default
     {%- endfor -%}
     {%- assign size = back | size | plus:2 -%}
     {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-    {%- assign ipp = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
+    {%- assign ipp = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir" -%}
 
     {%- if pp.size > 0 -%}
       ipp0: {{ ipp[0].title }}<br>
