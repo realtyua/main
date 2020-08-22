@@ -79,7 +79,8 @@
 {%- endfor -%}
 
 {%- for contact in developer -%}
-  {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
+  {%- assign slug = contact.url | split: "/" | last -%}
+  {%- if page.url and page.url contains contact.type and page.url contains contact.item and slug == contact.item -%}
     {%- if include.legal contains "phone" -%}
       {%- include footer/phone.html legal=include.legal -%}
     {%- elsif include.legal == "email" -%}

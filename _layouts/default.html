@@ -1,7 +1,7 @@
 ---
 layout: compress
 ---
-{%- capture name -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
+{%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 <!doctype html>
