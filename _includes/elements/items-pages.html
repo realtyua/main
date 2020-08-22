@@ -1,13 +1,7 @@
 {%- assign back = page.dir | split: '/' -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-{%- assign foo = dir | split: '/' | last -%}
-
-### {{ foo }} ###
-<br>
-{%- assign region = foo -%}
-<hr>
-<br><br>
+{%- assign region = dir | split: '/' | last -%}
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
