@@ -1,9 +1,10 @@
+{%- assign back = page.dir | split: '/' -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign pr = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
-{{ pr }}<br>
-{{ pr.name }}<br>
-
+###{{ pr }}###<br>
+###{{ pr.name }}###<br>
+<hr>
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
