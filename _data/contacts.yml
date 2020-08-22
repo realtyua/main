@@ -38,14 +38,14 @@
   www: https://bud.realestate.if.ua
 
 - type: developer
-  item: sum
-  name: Нерухо́мість від Компанії САМ
-  address: 76000, м. Івано-Франківськ, вул.&nbsp;Самостійна,&nbsp;0
-  phone_main: 380342000044
-  phone_hot:  380342000044
-  phone_fax:  380342000044
-  email: sum@realestate.if.ua
-  www: https://sum.realestate.if.ua
+  item: vambud
+  name: Будівельна компанія "Вамбуд"
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Вовчинецька,&nbsp;121
+  phone_main: 380342000022
+  phone_hot:  380342000022
+  phone_fax:  380342727200
+  email: office@vambud.com
+  www: http://www.vambud.com.ua
 
 #
 # Realtor / Agent
