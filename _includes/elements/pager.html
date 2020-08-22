@@ -6,7 +6,7 @@
 {%- endcomment -%}
 
 {%- assign items = '' | split:'' -%}
-{%- assign pages = site.pages | sort: 'path' | reverse -%}
+{%- assign pages = site.pages | sort: 'dir' | reverse -%}
 {%- for i in pages -%}
   {%- assign l = i.dir | split: '/' -%}
   {%- if i.url contains dir and i.url != dir and l.size == 6 -%}
@@ -23,7 +23,7 @@
       {%- if forloop.first == false -%}
       {%- assign prev = forloop.index0 | minus:1 -%}
       <div class="col-sm-12 col-md-5 text-left">
-        &larr; <a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a>
+        &larr; <a href="{{ items[prev].url }}">{{ items[prev].title }}</a>
       </div>
       {%- else -%}
       <div class="col-sm-12 col-md-5 text-left">&nbsp;</div>
@@ -34,7 +34,7 @@
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}
       <div class="col-sm-12 col-md-5 text-right">
-        <a href="{{ ps[next].url }}">{{ ps[next].title }}</a> &rarr;
+        <a href="{{ items[next].url }}">{{ items[next].title }}</a> &rarr;
       </div>
       {%- else -%}
       <div class="col-sm-12 col-md-5 text-right">&nbsp;</div>
