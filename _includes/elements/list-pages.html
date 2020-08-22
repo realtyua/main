@@ -2,7 +2,7 @@
 {%- assign items = '' | split:'' -%}
 {%- assign pages = site.pages | sort: 'path' | reverse -%}
 {%- for lp in pages -%}
-  {%- assign l = p.dir | split: '/' -%}
+  {%- assign l = lp.dir | split: '/' -%}
   {%- if lp.dir contains page.dir and lp.dir != page.dir and l.size == 6 -%}
     {%- assign items = items | push: lp -%}
   {%- endif -%}
