@@ -1,5 +1,4 @@
 {%- assign offer = include.offer -%}
-{%- assign region = include.region -%}
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
 {%- capture files -%}
   {%- for file in site.static_files -%}
