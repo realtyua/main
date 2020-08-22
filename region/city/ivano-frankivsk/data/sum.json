@@ -9,7 +9,7 @@ sitemap: false
 {%- include location.html -%}
 {%- endif -%}
 {%- assign location = 'Івано-Франківськ' -%}
-{%- assign realtor = page.name | remove: '.json' -%}
+{%- assign developer = page.name | remove: '.json' -%}
 {%- assign data = site.data[developer] | where_exp: 'i', 'i.location contains location' -%}
 {%- assign offers = data | sort: 'date' | reverse -%}
 {{ offers | jsonify }}
