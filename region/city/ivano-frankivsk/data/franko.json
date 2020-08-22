@@ -8,7 +8,7 @@ sitemap: false
 {%- else -%}
 {%- include location.html -%}
 {%- endif -%}
-{%- assign realtor = page.name | remove: '.json' -%}
-{%- assign data = site.data[realtor] | where_exp: 'i', 'i.location contains location' -%}
+{%- assign name = page.name | remove: '.json' -%}
+{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
 {%- assign offers = data | sort: 'date' | reverse -%}
 {{ offers | jsonify }}
