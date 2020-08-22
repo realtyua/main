@@ -1,12 +1,25 @@
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+
+{%- comment -%}
 {%- assign ps = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url != dir" -%}
+{%- endcomment -%}
+
+{%- assign items = '' | split:'' -%}
+{%- assign pages = site.pages | sort: 'path' | reverse -%}
+{%- for i in pages -%}
+  {%- assign l = i.dir | split: '/' -%}
+  {%- if i.url contains dir and i.url != dir and l.size == 6 -%}
+    {%- assign items = items | push: i -%}
+  {%- endif -%}
+{%- endfor -%}
+
 {%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
-{%- assign l = page.url | split: "/" -%}
+
 <div class="col-12 mt-4">
   <div class="row">
-  {%- for p in ps -%}
-    {%- if p.url == page.url and l.size == 6 -%}
+  {%- for p in items -%}
+    {%- if p.url == page.url -%}
       {%- if forloop.first == false -%}
       {%- assign prev = forloop.index0 | minus:1 -%}
       <div class="col-sm-12 col-md-5 text-left">
