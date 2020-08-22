@@ -20,6 +20,7 @@
 {%- elsif location and back.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}
 {%- endif -%}
 <meta name="author" content="{{ site.developer.name }}">
+<meta name="format-detection" content="telephone=no">
 <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | relative_url }}">
 <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
 {%- if page.table == 1 or page.table == 2 -%}
