@@ -31,6 +31,7 @@ layout: default
     {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
     {%- assign pp = '' | split:'' -%}
     {%- assign pages = site.pages | sort: 'dir' | reverse -%}
+    {%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
     {%- for i in pages -%}
       {%- assign l = i.dir | split: '/' -%}
       {%- if i.url contains dir and i.url != dir and l.size == 8 -%}
@@ -38,9 +39,12 @@ layout: default
       {%- endif -%}
     {%- endfor -%}
 
-    {%- for pr in pp -%}
-      {{pr.title}}<br>
-    {%- endfor -%}
+    {%- if pr.size > 0 -%}
+      {{ index[0].title }}<br>
+      {%- for pr in pp -%}
+        {{pr.title}}<br>
+      {%- endfor -%}
+    {%- endif -%}
 
     <div class="tab-content" id="{{ slug }}-content">
       {%- if isJson.size > 0 -%}
