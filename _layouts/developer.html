@@ -27,7 +27,7 @@ layout: default
     </nav>
     <hr class="mt-2 mt-md-0">
 
-    {%- assign size = back | size | plus:1 -%}
+    {%- assign size = back | size | plus:2 -%}
     {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
     {%- assign pp = '' | split:'' -%}
     {%- assign pages = site.pages | sort: 'dir' | reverse -%}
