@@ -1,7 +1,7 @@
 {%- include data/owner.html -%}
-{%- assign sum = site.data.sum | where_exp: 'i', 'i.location contains location' -%}
+{%- assign vambud = site.data.vambud | where_exp: 'i', 'i.location contains location' -%}
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
-{%- assign records = owners | concat: shevchenko | concat: franko | concat: sum -%}
+{%- assign records = owners | concat: shevchenko | concat: franko | concat: vambud -%}
 {%- assign offers = records | sort: "date" | reverse -%}
