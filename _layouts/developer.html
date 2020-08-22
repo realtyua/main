@@ -37,12 +37,12 @@ layout: default
         {%- assign pp = pp | push: i -%}
       {%- endif -%}
     {%- endfor -%}
-    {%- assign size = back | size | plus:3 -%}
-    {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
     {%- assign ipp = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
 
     {%- if pp.size > 0 -%}
-      ipp: {{ ipp[0].title }}<br>
+      ipp0: {{ ipp[0].title }}<br>
+      ipp1: {{ ipp[1].title }}<br>
+      ipp2: {{ ipp[2].title }}<br>
       {%- for pr in pp -%}
         {{pr.title  }}<br>
       {%- endfor -%}
