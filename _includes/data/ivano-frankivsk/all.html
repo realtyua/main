@@ -1,11 +1,7 @@
-{%- if page.url == "/" -%}
-{%- assign location = include.location -%}
-{%- else -%}
-{%- include location.html -%}
-{%- endif -%}
 {%- include data/owner.html -%}
+{%- assign sum = site.data.sum | where_exp: 'i', 'i.location contains location' -%}
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
-{%- assign records = owners | concat: shevchenko | concat: franko -%}
+{%- assign records = owners | concat: shevchenko | concat: franko | concat: sum -%}
 {%- assign offers = records | sort: "date" | reverse -%}
