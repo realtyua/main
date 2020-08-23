@@ -6,6 +6,7 @@
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign region = dir | split: '/' | last -%}
+{%- assign section = back | last -%}
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
@@ -13,7 +14,7 @@
     <div class="card h-100">
       <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
       <div class="card-body">
-        <h5 class="card-title">size: {{back.size}} - dir: {{dir}} - 
+        <h5 class="card-title">size: {{back.size}} - dir: {{dir}} -
           <a href="{{ item.url }}">
             {%- if item.title -%}{{ item.title }}{%- else -%}{{ item.navtitle }}{%- endif -%}
           </a>
