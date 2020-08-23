@@ -4,12 +4,12 @@
 {%- elsif back.size == 6 -%}
 {%- assign size = back | size | minus:2 -%}
 {%- assign section = back | last -%}
+{%- assign object = item.dir | split: '/' | last -%}
 {%- else -%}
 {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign region = dir | split: '/' | last -%}
-{%- assign object = item.dir | split: '/' | last -%}
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
@@ -57,7 +57,14 @@
               {%- endif -%}
             </div>
             <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions-tab">
-              ...Акції
+              ###{{ section }}###<br><br>
+              {%- assign records = site.data.vambud | where_exp: 'i', 'i.location contains location' -%}
+              {%- if records.size > 0 -%}
+                {%- assign offers = records | sort: 'date' | reverse -%}
+                {%- for offer in offers limit: 1 -%}
+                  {%- include card.html offer=offer aid='1' -%}
+                {%- endfor -%}
+              {%- else -%}
             </div>
           </div>
         </div>
