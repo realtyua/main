@@ -1,5 +1,9 @@
 {%- assign back = page.dir | split: '/' -%}
+{%- if back.size == 6 -%}
+{%- assign size = back | size | minus:2 -%}
+{%- else -%}
 {%- assign size = back | size | minus:1 -%}
+{%- endif -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign region = dir | split: '/' | last -%}
 {%- if forloop.first -%}
