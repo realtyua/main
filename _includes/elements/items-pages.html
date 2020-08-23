@@ -47,7 +47,7 @@
               {%- if back.size >= 6 -%}
                 {%- assign split = item.title | split: ' ' -%}
                 {%- assign count = split | size -%}
-                {% assign complex = split | slice: 2, too %}
+                {% assign complex = split | slice: 2, count %}
                 ### rс: {{ complex }} ###
                 {%- assign records = site.data.vambud | where_exp: "i", "i.location contains location and i.object contains complex" -%}
               {%- else -%}
