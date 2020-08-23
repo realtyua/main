@@ -57,7 +57,7 @@
               {%- endif -%}
             </div>
             <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions-tab">
-              ###{{ section }}###<br><br>
+              ###{{ section }}### and ###{{location}}###<br><br>
               {%- assign records = site.data.vambud | where_exp: 'i', 'i.location contains location' -%}
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
