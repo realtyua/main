@@ -107,7 +107,7 @@ function jsDetailFormatter(index, row, $detail) {
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
         }
-        if (row.object !== '') {
+        if (row.object && row.object !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
         }
         if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
@@ -148,7 +148,7 @@ function jsDetailFormatter(index, row, $detail) {
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
         }
-        if (row.object !== '') {
+        if (row.object && row.object !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
         }
         if (row.date !== '') {
@@ -239,7 +239,7 @@ function htmlDetailFormatter(index, row, $detail) {
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
         }
-        if (row.object !== '') {
+        if (row.object && row.object !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
         }
         if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
@@ -273,7 +273,7 @@ function htmlDetailFormatter(index, row, $detail) {
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
         }
-        if (row.object !== '') {
+        if (row.object && row.object !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
         }
         if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
