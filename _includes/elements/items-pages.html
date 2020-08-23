@@ -43,9 +43,9 @@
           <div class="tab-content" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-content">
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
 
-              {%- assign rс = item.title | split: ' ' | slice: 2 -%}
+              {%- assign foo = item.title | split: ' ' | slice: 2 -%}
 
-              ### rс: {rс}} ###
+              ### rс: {{foo}} ###
 
               {%- if back.size >= 6 -%}
                 {%- assign records = site.data.vambud | where_exp: "i", "i.location contains location and i.object contains 'Бульвар Європейський'" -%}
