@@ -79,7 +79,17 @@
 {%- endfor -%}
 
 {%- for contact in developer -%}
+
   {%- assign slug = page.url | split: "/" | last -%}
+  {%- assign back = contact.dir | split: '/' -%}
+  {%- if back.size == 7 -%}
+  {%- assign size = back | size | minus:1 -%}
+  {%- elsif back.size == 8 -%}
+  {%- assign size = back | size | minus:1 -%}
+  {%- endif -%}
+  {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+  {%- assign slug = dir | split: '/' | last -%}
+
   {%- if page.url and page.url contains contact.type and page.url contains contact.item and slug == contact.item -%}
     {%- if include.legal contains "phone" -%}
       {%- include footer/phone.html legal=include.legal -%}
