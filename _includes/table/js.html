@@ -1,4 +1,4 @@
-<table
+<table<!--googleoff: all-->
   id="property"
   data-locale="uk-UA"
   data-toggle="table"
@@ -11,11 +11,13 @@
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
   data-buttons-class="primary"
-  data-url="{{ json | prepend: site.url }}">
+  data-url="{{ json | prepend: site.url }}"<!--googleon: all-->>
   <thead class="thead-re">
     <tr>
+      <!--googleoff: all-->
       <th data-field="type" data-title="Власність" data-formatter="propertyFormatter">Property</th>
       <th data-field="price" data-title="Ціна" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Price</th>
+      <!--googleon: all-->
     </tr>
   </thead>
 </table>
