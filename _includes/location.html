@@ -5,6 +5,10 @@
 {%- assign size = back | size | minus:1 -%}
 {%- elsif back.size == 6 and page.dir contains 'city' or page.dir contains 'town' -%}
 {%- assign size = back | size | minus:2 -%}
+{%- elsif back.size == 7 and page.dir contains 'city' or page.dir contains 'town' -%}
+{%- assign size = back | size | minus:3 -%}
+{%- elsif back.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
+{%- assign size = back | size | minus:4 -%}
 {%- elsif back.size == 3 -%}
 {%- assign size = back | size | plus:1 -%}
 {%- elsif back.size == 4 -%}
