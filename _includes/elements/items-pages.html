@@ -12,12 +12,8 @@
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign region = dir | split: '/' | last -%}
-
-
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
 {%- for lo in ps limit:1 -%}{%- if lo.breadcrumb -%}{%- assign location = lo.breadcrumb -%}{%- else -%}{%- assign location = lo.navtitle -%}{%- endif -%}{%- endfor -%}
-
-
 
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
@@ -48,7 +44,17 @@
           </nav>
           <div class="tab-content" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-content">
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
-              {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
+
+              {%- assign rс = item.title | split: ' ' | slice: 2 -%}
+
+              ### rс: {rс}} ###
+
+              {%- if back.size >= 6 -%}
+                {%- assign records = site.data.vambud | where_exp: "i", "i.location contains location and i.object contains 'Бульвар Європейський'" -%}
+              {%- else -%}
+                {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
+              {%- endif -%}
+
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
                 {%- for offer in offers limit: 1 -%}
@@ -66,14 +72,7 @@
               {%- endif -%}
             </div>
             <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions-tab">
-              ### s: {{ section }}### and ### l: {{location}}###<br><br>
-              {%- assign records = site.data.vambud | where_exp: "i", "i.location contains 'Івано-Франківськ' and i.object contains 'Бульвар Європейський'" -%}
-              {%- if records.size > 0 -%}
-                {%- assign offers = records | sort: 'date' | reverse -%}
-                {%- for offer in offers limit: 1 -%}
-                  {%- include card.html offer=offer aid='1' -%}
-                {%- endfor -%}
-              {%- endif -%}
+              <p>Акційні пропозиції від...</p>
             </div>
           </div>
         </div>
