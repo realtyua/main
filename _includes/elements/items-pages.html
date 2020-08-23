@@ -13,7 +13,7 @@
     <div class="card h-100">
       <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
       <div class="card-body">
-        <h5 class="card-title">
+        <h5 class="card-title">size: {{back.size}} - dir: {{dir}} - 
           <a href="{{ item.url }}">
             {%- if item.title -%}{{ item.title }}{%- else -%}{{ item.navtitle }}{%- endif -%}
           </a>
