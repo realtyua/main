@@ -58,7 +58,7 @@
             </div>
             <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions-tab">
               ###{{ section }}### and ###{{location}}###<br><br>
-              {%- assign records = site.data[section] | where: "location", "Івано-Франківськ" | where_exp: "i", "i.object contains 'Бульвар Європейський'" -%}
+              {%- assign records = site.data.vambud | where: "location", "Івано-Франківськ" | where_exp: "i", "i.object contains 'Бульвар Європейський'" -%}
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
                 {%- for offer in offers limit: 1 -%}
