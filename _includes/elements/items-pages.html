@@ -5,6 +5,7 @@
 {%- assign size = back | size | minus:2 -%}
 {%- assign section = back | last -%}
 {%- assign object = item.dir | split: '/' | last -%}
+{%- assign location = include.location -%}
 {%- else -%}
 {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
