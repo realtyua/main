@@ -12,6 +12,7 @@
 {%- assign region = dir | split: '/' | last -%}
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
 {%- for lo in ps limit:1 -%}{%- if lo.breadcrumb -%}{%- assign location = lo.breadcrumb -%}{%- else -%}{%- assign location = lo.navtitle -%}{%- endif -%}{%- endfor -%}
+{%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
 
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
@@ -43,14 +44,12 @@
           <div class="tab-content" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-content">
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
 
-              {%- assign foo = item.title | split: ' ' -%}
-              {%- assign too = foo | size -%}
-              {%- assign roo = foo  | slice: 2, too -%}
-
-              ### rс: {{roo}} ###
-
               {%- if back.size >= 6 -%}
-                {%- assign records = site.data.vambud | where_exp: "i", "i.location contains location and i.object contains 'Бульвар Європейський'" -%}
+                {%- assign split = item.title | split: ' ' -%}
+                {%- assign count = split | size -%}
+                {% assign complex = split | slice: 2, too %}
+                ### rс: {{ complex }} ###
+                {%- assign records = site.data.vambud | where_exp: "i", "i.location contains location and i.object contains complex" -%}
               {%- else -%}
                 {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
               {%- endif -%}
@@ -58,7 +57,7 @@
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
                 {%- for offer in offers limit: 1 -%}
-                  {%- include card.html offer=offer aid='1' -%}
+                  {%- include card.html offer=offer aid=aid -%}
                 {%- endfor -%}
                 <div class="card border-0 text-center">
                   <a href="{{ item.url }}" class="btn btn-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
