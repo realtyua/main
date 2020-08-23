@@ -13,7 +13,6 @@
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
 {%- for lo in ps limit:1 -%}{%- if lo.breadcrumb -%}{%- assign location = lo.breadcrumb -%}{%- else -%}{%- assign location = lo.navtitle -%}{%- endif -%}{%- endfor -%}
 {%- capture aid -%}6{%- increment counter -%}{%- endcapture -%}
-
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
@@ -43,17 +42,14 @@
           </nav>
           <div class="tab-content" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-content">
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
-
               {% if back.size >= 6 %}
                 {%- assign split = item.title | split: ' ' -%}
                 {%- assign count = split | size -%}
                 {%- assign complex = split | slice: 2, count | join: ' ' -%}
-                ### rс: {{ complex }} ###
                 {%- assign records = site.data.vambud | where_exp: "i", "i.location contains location and i.object contains complex" -%}
               {% else %}
                 {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
               {% endif %}
-
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
                 {%- for offer in offers limit: 1 -%}
