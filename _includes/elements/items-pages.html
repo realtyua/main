@@ -12,6 +12,13 @@
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign region = dir | split: '/' | last -%}
+
+
+{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
+{%- for lo in ps limit:1 -%}{%- if lo.breadcrumb -%}{%- assign location = lo.breadcrumb -%}{%- else -%}{%- assign location = lo.navtitle -%}{%- endif -%}{%- endfor -%}
+
+
+
 {%- if forloop.first -%}
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
