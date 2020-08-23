@@ -84,13 +84,13 @@
 {%- if back.size == 7 -%}
 {%- assign size = back | size | minus:1 -%}
 {%- elsif back.size == 8 -%}
-{%- assign size = back | size | minus:1 -%}
+{%- assign size = back | size | minus:2 -%}
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign dev = dir | split: '/' | last -%}
 
 {%- for contact in developer -%}
-  {%- if page.url and page.url contains contact.type and page.url contains contact.item and slug == contact.item -%}
+  {%- if page.url and page.url contains contact.type and page.url contains contact.item and dev == contact.item -%}
     {%- if include.legal contains "phone" -%}
       {%- include footer/phone.html legal=include.legal -%}
     {%- elsif include.legal == "email" -%}
