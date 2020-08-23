@@ -107,6 +107,9 @@ function jsDetailFormatter(index, row, $detail) {
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
         }
+        if (row.object !== '') {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
+        }
         if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
         } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
@@ -144,6 +147,9 @@ function jsDetailFormatter(index, row, $detail) {
         }
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
+        }
+        if (row.object !== '') {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
         }
         if (row.date !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
@@ -233,6 +239,9 @@ function htmlDetailFormatter(index, row, $detail) {
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
         }
+        if (row.object !== '') {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
+        }
         if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
         } else if (row.price_sqmt !== '' && row.price_sqmt.indexOf('€') !== -1) {
@@ -263,6 +272,9 @@ function htmlDetailFormatter(index, row, $detail) {
         }
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
+        }
+        if (row.object !== '') {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
         }
         if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmt }} {{ site.data.lang-uk.re_m }}<sup>2</sup></dt><dd>' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
