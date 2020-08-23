@@ -92,7 +92,7 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-        if (row.description !== '') {
+        if (row.description && row.description !== '') {
           html.push('<span class="row mx-n1">'),
           html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
@@ -123,7 +123,7 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phoner }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-        if (row.description !== '') {
+        if (row.description && row.description !== '') {
           html.push('<span class="row mx-n1">'),
           html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
@@ -159,7 +159,7 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-        if (row.description !== '') {
+        if (row.description && row.description !== '') {
           html.push('<span class="row mx-n1">'),
           html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
@@ -224,7 +224,7 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-        if (row.description !== '') {
+        if (row.description && row.description !== '') {
           html.push('<span class="row mx-n1">'),
           html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
@@ -255,7 +255,7 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phoner }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-        if (row.description !== '') {
+        if (row.description && row.description !== '') {
           html.push('<span class="row mx-n1">'),
           html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
@@ -291,7 +291,7 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
           html.push('</span>')
         }
-        if (row.description !== '') {
+        if (row.description && row.description !== '') {
           html.push('<span class="row mx-n1">'),
           html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'),
           html.push('</span>')
