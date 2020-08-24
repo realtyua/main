@@ -345,7 +345,21 @@ function propertyFormatter(value, row) {
       html = ['Продається <strong class="text-lowercase">' + row.type + '</strong>, ']
       if (row.surface_land && row.surface_land !== '') {
         html.push('площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, '),
-        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.location + '</strong>.')
+        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
+      }
+    } else if (row.rent !== '' && row.rent === '1' && row.price !== '') {
+      html = ['Здається в оренду <strong class="text-lowercase">' + row.type + '</strong>, ']
+      if (row.surface && row.surface !== '') {
+        html.push('площею <strong>' + row.surface + '</strong> м<sup>2</sup>, ')
+      }
+      if (row.rooms && row.rooms !== '') {
+        html.push('кімнат <strong>' + row.rooms + '</strong>, ')
+      }
+      if (row.floor && row.floor !== '') {
+        html.push('на <strong>' + row.floor + '</strong>-му поверсі')
+      }
+      if (row.location && row.location !== '') {
+        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
       }
     } else {
       html = ['...']
