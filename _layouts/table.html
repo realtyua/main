@@ -6,9 +6,7 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
-    {%- if content != '' -%}
-    <p>{{ content }}</p>
-    {%- endif -%}
+    {{ content }}
     {%- include nav-section.html -%}
     {%- if page.url contains 'rent' -%}
       <h2>Передаються для оренди або здаються в оренду об'єкти нерухомості</h2>
