@@ -6,17 +6,21 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
-    {%- if content -%}
+    {%- if content != '' -%}
     <p>{{ content }}</p>
     {%- endif -%}
     {%- include nav-section.html -%}
-    <h2>
-      {%- if page.url contains 'rent' -%}
-        Здається в оренду нерухомість в місті Івано-Франківськ
-      {%- elsif page.url contains 'land' -%}
-        Продається земля в місті Івано-Франківськ
-      {%- endif -%}
-    </h2>
+    {%- if page.url contains 'rent' -%}
+      <h2>Здається в оренду нерухомість в місті {{ location }}</h2>
+      <p>Список</p>
+    {%- elsif page.url contains 'land' -%}
+      <h2>Продається земля в місті {{ location }}</h2>
+    {%- elsif page.url contains 'garage' -%}
+      <h2>Продається гараж в місті {{ location }}</h2>
+    {%- elsif page.url contains 'commercial' -%}
+      <h2>Продається нежитлове приміщення комерційного призначення в місті Івано-Франківськ</h2>
+      <p>{{ page.description }}</p>
+    {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
       {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
