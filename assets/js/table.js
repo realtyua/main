@@ -338,7 +338,25 @@ $(document).on('click', '.lightbox', function(event){
   }
 });
 
-function propertyFormatter(value, row) {
+function propertyFormatter(index, row) {
+  "use strict";
+  if (key !== 'images' || key !== 'id' && value !== '') {
+    if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
+      html = [
+        'Продається <strong class="text-lowercase">' + row.type + '</strong>, '
+      ]
+      if (row.surface_land && row.surface_land !== '') {
+        html.push('площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, '),
+        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.location + '</strong>.')
+      }
+    } else {
+      ...
+    }
+  }
+  return html.join('')
+}
+
+function _propertyFormatter(value, row) {
   "use strict";
   if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
     return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
