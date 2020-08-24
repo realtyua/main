@@ -343,11 +343,11 @@ function propertyFormatter(value, row) {
   if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
     return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else if (row.rent !== '' && row.rent === '1' && row.price !== '') {
-    return 'Здається в оренду <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+    return 'Здається в оренду <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else if (row.rent !== '' && row.rent === '1' && row.price === '' && row.price_sqmt !== '') {
-    return 'Здається в оренду на короткий термін <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+    return 'Здається в оренду на короткий термін <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else {
-    return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+    return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   }
 }
 

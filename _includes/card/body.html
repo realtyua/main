@@ -2,7 +2,7 @@
 {% if offer.type %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_for_rent }}{% elsif offer.rent == '1' and offer.price == '' %}{{ site.data.lang-uk.re_for_rentd }}{% else %}{{ site.data.lang-uk.re_for_sale }}{% endif %} <strong class="text-lowercase">{{ offer.type }}</strong>, {% endif %}
 {% if offer.type == land %} {{ site.data.lang-uk.re_surface }} <strong>{{ offer.surface_land }}</strong>&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup>, {% else %}
 {% if offer.surface %}{{ site.data.lang-uk.re_surface }} <strong>{{ offer.surface }}</strong>&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup>, {% endif %}
-{% if offer.rooms %}{{ site.data.lang-uk.re_rooms }} <strong>{{ offer.rooms }}</strong>, {% endif %}{% if offer.floor and offer.floor != '' %}{{ site.data.lang-uk.re_na }} <strong>{{ offer.floor }}</strong> {{ site.data.lang-uk.re_floor }}, {% endif %}
+{% if offer.rooms %}{{ site.data.lang-uk.re_rooms }} <strong>{{ offer.rooms }}</strong>, {% endif %}{% if offer.floor and offer.floor != '' %}{{ site.data.lang-uk.re_na }} <strong>{{ offer.floor }}</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floor }}, {% endif %}
 {% endif %}
 {% if offer.location %}{{ site.data.lang-uk.re_location }} <strong>{{ offer.location }}</strong> {% endif %}
 {% if offer.address %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>, {% endif %}
@@ -24,4 +24,4 @@
     <mark>{{ offer.price_sqmt }}</mark> {{ site.data.lang-uk.re_uah }}.
   {% endif %}
 {%- endif -%}
-{% endif %}{% if page.url == '/' %} <span class="phone"><details><summary></summary>{%- include footer/phone.html legal=offer.phone type='text' -%}.</details></span>{% endif %}
+{% endif %}{% if page.url == '/' %} <span class="phone" data-toggle="tooltip" title="{{ site.data.lang-uk.re_seller }} {{ offer.seller }}"><details><summary></summary>{%- include footer/phone.html legal=offer.phone type='text' -%}.</details></span>{% endif %}
