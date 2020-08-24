@@ -10,6 +10,13 @@ layout: default
     <p>{{ content }}</p>
     {%- endif -%}
     {%- include nav-section.html -%}
+    <h2>
+      {%- if page.url contains 'rent' -%}
+        Здається в оренду нерухомість в місті Івано-Франківськ
+      {%- elsif page.url contains 'land' -%}
+        Продається земля в місті Івано-Франківськ
+      {%- endif -%}
+    </h2>
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
       {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
