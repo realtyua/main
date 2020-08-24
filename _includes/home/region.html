@@ -1,19 +1,8 @@
-{%- comment -%}
-{%- assign threes = site.pages | sort: "path" -%}
-{%- assign isChildren = false -%}
-{%- for three in threes -%}
-  {%- if three.url contains include.current and three.url != include.current and three.navhide != 1 -%}
-    {%- assign isChildren = true -%}
-  {%- endif -%}
-{%- endfor -%}
-{%- endcomment -%}
-
 {%- assign threes = site.pages | sort:"path" | where_exp: "i", "i.url contains include.current and i.url != include.current and i.navhide != 1" -%}
 {%- assign isChildren = false -%}
 {%- if threes.size > 0 -%}
   {%- assign isChildren = true -%}
 {%- endif -%}
-
 {%- if isChildren == true -%}
 <div class="row row-cols-1 row-cols-md-2">
   {%- for three in threes -%}
