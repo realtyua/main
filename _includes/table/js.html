@@ -12,7 +12,7 @@
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
   data-buttons-class="primary"
-  data-url="{{ json | prepend: site.url }}">
+  data-url="{{ json | absolute_url }}">
   <thead class="thead-re">
     <tr>
       <th data-field="type" data-title="Власність" data-formatter="propertyFormatter">Property</th>

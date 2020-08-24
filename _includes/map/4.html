@@ -11,7 +11,7 @@
     {%- assign current = 5.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 5.navhide != 1 and 5.title != '' -%}
     <li class="mb-2">
-      <a href="{{ 5.url }}">
+      <a href="{{ 5.url | absolute_url }}">
         {%- if 5.navtitle -%}{{ 5.navtitle }}{%- else -%}{{ 5.title }}{%- endif -%}
       </a>
       {%- include map/5.html current=5.url -%}

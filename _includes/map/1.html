@@ -4,17 +4,6 @@
   {%- assign isChildren = true -%}
 {%- endif -%}
 
-
-{%- comment -%}
-{%- assign 2s = site.pages | sort: "path" -%}
-{%- assign isChildren = false -%}
-{%- for 2 in 2s -%}
-  {%- if 2.url contains include.current and 2.url != include.current -%}
-    {%- assign isChildren = true -%}
-  {%- endif -%}
-{%- endfor -%}
-{%- endcomment -%}
-
 {%- if isChildren == true -%}
 <ul class="list-unstyled">
   {%- for 2 in 2s -%}
@@ -22,7 +11,7 @@
     {%- assign current = 2.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 2.navhide != 1 and 2.title != '' -%}
     <li class="mb-2">
-      <a href="{{ 2.url }}">
+      <a href="{{ 2.url | absolute_url }}">
         {%- if 2.navtitle -%}{{ 2.navtitle }}{%- else -%}{{ 2.title }}{%- endif -%}
       </a>
       {%- include map/2.html current=2.url -%}
