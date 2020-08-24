@@ -14,14 +14,14 @@ layout: default
       <h2>Передаються для оренди або здаються в оренду об'єкти нерухомості</h2>
     {%- elsif page.url contains 'land' -%}
       <h2>Продаються землі та земельні ділянки різного призначення</h2>
-    {%- elsif page.url contains 'apartment' -%}
-      <h2>Продаються будинки різноманітного планування</h2>
+    {%- elsif page.url contains 'house' -%}
+      <h2>Продаються будинки</h2>
     {%- elsif page.url contains 'garage' -%}
       <h2>Продаються гаражі</h2>
     {%- elsif page.url contains 'commercial' -%}
-      <h2>Продаються нежитлові приміщення комерційного призначення з різним плануванням</h2>
+      <h2>Продаються нежитлові приміщення комерційного призначення</h2>
     {%- elsif page.url contains 'apartment' -%}
-      <h2>Продаються квартири різноманітного планування</h2>
+      <h2>Продаються квартири</h2>
     {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
