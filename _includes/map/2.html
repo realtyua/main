@@ -1,11 +1,8 @@
-{%- assign 3s = site.pages | sort: "path" -%}
-
+{%- assign 3s = site.pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
 {%- assign isChildren = false -%}
-{%- for 3 in 3s -%}
-  {%- if 3.url contains include.current and 3.url != include.current -%}
-    {%- assign isChildren = true -%}
-  {%- endif -%}
-{%- endfor -%}
+{%- if 3s.size > 0 -%}
+  {%- assign isChildren = true -%}
+{%- endif -%}
 
 {%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">

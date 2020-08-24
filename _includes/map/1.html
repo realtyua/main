@@ -1,7 +1,6 @@
-{%- assign n = 2 -%}
-{%- assign [n]s = site.pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
+{%- assign 2s = site.pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
 {%- assign isChildren = false -%}
-{%- if [n]s.size > 0 -%}
+{%- if 2s.size > 0 -%}
   {%- assign isChildren = true -%}
 {%- endif -%}
 
