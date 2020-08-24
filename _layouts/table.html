@@ -11,15 +11,17 @@ layout: default
     {%- endif -%}
     {%- include nav-section.html -%}
     {%- if page.url contains 'rent' -%}
-      <h2>Здається в оренду нерухомість в місті {{ location }}</h2>
-      <p>Список</p>
+      <h2>Передаються для оренди або здаються в оренду об'єкти нерухомості</h2>
     {%- elsif page.url contains 'land' -%}
-      <h2>Продається земля в місті {{ location }}</h2>
+      <h2>Продаються землі та земельні ділянки різного призначення</h2>
+    {%- elsif page.url contains 'apartment' -%}
+      <h2>Продаються будинки різноманітного планування</h2>
     {%- elsif page.url contains 'garage' -%}
-      <h2>Продається гараж в місті {{ location }}</h2>
+      <h2>Продаються гаражі</h2>
     {%- elsif page.url contains 'commercial' -%}
-      <h2>Продається нежитлове приміщення комерційного призначення в місті Івано-Франківськ</h2>
-      <p>{{ page.description }}</p>
+      <h2>Продаються нежитлові приміщення комерційного призначення з різним плануванням</h2>
+    {%- elsif page.url contains 'apartment' -%}
+      <h2>Продаються квартири різноманітного планування</h2>
     {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
