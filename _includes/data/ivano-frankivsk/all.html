@@ -3,5 +3,5 @@
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
-{%- assign records = owners | concat: shevchenko | concat: franko | concat: vambud -%}
+{%- include data/ivano-frankivsk/records.html -%}
 {%- assign offers = records | sort: "date" | reverse -%}
