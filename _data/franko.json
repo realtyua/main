@@ -99,7 +99,7 @@
         "id": "3",
         "type": "Гараж",
         "rent": "",
-        "rooms": "1",
+        "rooms": "",
         "surface": "80",
         "surface_land": "20",
         "price": "$9000",
