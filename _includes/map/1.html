@@ -1,11 +1,19 @@
-{%- assign 2s = site.pages | sort: "path" -%}
+{%- assign 2s = site.pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
+{%- assign isChildren = false -%}
+{%- if 2s.size > 0 -%}
+  {%- assign isChildren = true -%}
+{%- endif -%}
 
+
+{%- comment -%}
+{%- assign 2s = site.pages | sort: "path" -%}
 {%- assign isChildren = false -%}
 {%- for 2 in 2s -%}
   {%- if 2.url contains include.current and 2.url != include.current -%}
     {%- assign isChildren = true -%}
   {%- endif -%}
 {%- endfor -%}
+{%- endcomment -%}
 
 {%- if isChildren == true -%}
 <ul class="list-unstyled">

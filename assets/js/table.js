@@ -371,7 +371,7 @@ function priceFormatter(value, row) {
 }
 
 function priceSorter(a, b) {
-  let s = /[$€]/g;
+  let s = /[$€₴]/g;
   var aa = a.replace(s, '');
   var bb = b.replace(s, '');
   return aa - bb
