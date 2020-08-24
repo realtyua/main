@@ -2,10 +2,6 @@
 layout: null
 ---
 
-// function dummy () {
-//   alert('dummy');
-// }
-
 $(function () {
   "use strict";
   var expandedRow = null;
@@ -342,72 +338,57 @@ function propertyFormatter(value, row) {
   "use strict";
   if (value !== '') {
     if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
-      html = ['Продається <strong class="text-lowercase">' + row.type + '</strong>, ']
+      html = ['{{ site.data.lang-uk.re_for_sale }} <strong class="text-lowercase">' + row.type + '</strong>, ']
       if (row.surface_land && row.surface_land !== '') {
-        html.push('площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, '),
-        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
+        html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface_land + '</strong> {{ site.data.lang-uk.re_m }}<sup>2</sup>, '),
+        html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
       }
     } else if (row.rent !== '' && row.rent === '1' && row.price !== '') {
-      html = ['Здається в оренду <strong class="text-lowercase">' + row.type + '</strong>, ']
+      html = ['{{ site.data.lang-uk.re_for_rent }} <strong class="text-lowercase">' + row.type + '</strong>, ']
       if (row.surface && row.surface !== '') {
-        html.push('площею <strong>' + row.surface + '</strong> м<sup>2</sup>, ')
+        html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + '</strong> {{ site.data.lang-uk.re_m }}<sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
-        html.push('кімнат <strong>' + row.rooms + '</strong>, ')
+        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ')
       }
       if (row.floor && row.floor !== '') {
-        html.push('на <strong>' + row.floor + '</strong>-му поверсі, ')
+        html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
       if (row.location && row.location !== '') {
-        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
+        html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
       }
     } else if (row.rent !== '' && row.rent === '1' && row.price === '' && row.price_sqmt !== '') {
-      html = ['Здається в оренду на короткий термін <strong class="text-lowercase">' + row.type + '</strong>, ']
+      html = ['{{ site.data.lang-uk.re_for_rentd }} <strong class="text-lowercase">' + row.type + '</strong>, ']
       if (row.surface && row.surface !== '') {
-        html.push('площею <strong>' + row.surface + '</strong> м<sup>2</sup>, ')
+        html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + '</strong> {{ site.data.lang-uk.re_m }}<sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
-        html.push('кімнат <strong>' + row.rooms + '</strong>, ')
+        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ')
       }
       if (row.floor && row.floor !== '') {
-        html.push('на <strong>' + row.floor + '</strong>-му поверсі, ')
+        html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
       if (row.location && row.location !== '') {
-        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
+        html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
       }
     } else {
-      html = ['Продається <strong class="text-lowercase">' + row.type + '</strong>, ']
+      html = ['{{ site.data.lang-uk.re_for_sale }} <strong class="text-lowercase">' + row.type + '</strong>, ']
       if (row.surface && row.surface !== '') {
-        html.push('площею <strong>' + row.surface + '</strong> м<sup>2</sup>, ')
+        html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + '</strong> {{ site.data.lang-uk.re_m }}<sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
-        html.push('кімнат <strong>' + row.rooms + '</strong>, ')
+        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ')
       }
       if (row.floor && row.floor !== '') {
-        html.push('на <strong>' + row.floor + '</strong>-му поверсі, ')
+        html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
       if (row.location && row.location !== '') {
-        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
+        html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
       }
     }
   }
   return html.join('')
 }
-
-// function _propertyFormatter(value, row) {
-//   "use strict";
-//   if (value === '{{ site.data.lang-uk.re_land }}' || value === '{{ site.data.lang-uk.re_land | downcase }}') {
-//     return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface_land + '</strong> м<sup>2</sup>, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-//   } else if (row.rent !== '' && row.rent === '1' && row.price !== '') {
-//     return 'Здається в оренду <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-//   } else if (row.rent !== '' && row.rent === '1' && row.price === '' && row.price_sqmt !== '') {
-//     return 'Здається в оренду на короткий термін <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-//   } else if (value === 'Магазин' || value === 'Нежитлове приміщення') {
-//     return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-//   } else {
-//     return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
-//   }
-// }
 
 function priceFormatter(value, row) {
   "use strict";
