@@ -346,6 +346,8 @@ function propertyFormatter(value, row) {
     return 'Здається в оренду <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else if (row.rent !== '' && row.rent === '1' && row.price === '' && row.price_sqmt !== '') {
     return 'Здається в оренду на короткий термін <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
+  } else if (value === 'Магазин' && value === 'Нежитлове приміщення') {
+    return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   } else {
     return 'Продається <strong class="text-lowercase">' + row.type + '</strong>, площею <strong>' + row.surface + '</strong> м<sup>2</sup>, кімнат <strong>' + row.rooms + '</strong>, на <strong>' + row.floor + '</strong>-му поверсі, знаходиться у <strong>' + row.location + '</strong> за адресою <strong>' + row.address + '</strong>.';
   }
