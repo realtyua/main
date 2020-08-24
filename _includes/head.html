@@ -10,7 +10,7 @@
     {{ site.title | smartify }} · {{ site.name | smartify }}
   {%- endif -%}
 </title>
-<link rel="canonical" href="{{ site.url | append: page.url }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
 <meta name="keywords" content="{{ page.keywords | default: site.keywords | smartify }}">
 <meta name="description" content="{{ page.description | default: site.description | smartify }}">
 <meta name="country" content="{{ site.country }}">
