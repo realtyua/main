@@ -356,13 +356,39 @@ function propertyFormatter(value, row) {
         html.push('кімнат <strong>' + row.rooms + '</strong>, ')
       }
       if (row.floor && row.floor !== '') {
-        html.push('на <strong>' + row.floor + '</strong>-му поверсі')
+        html.push('на <strong>' + row.floor + '</strong>-му поверсі, ')
+      }
+      if (row.location && row.location !== '') {
+        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
+      }
+    } else if (row.rent !== '' && row.rent === '1' && row.price === '' && row.price_sqmt !== '') {
+      html = ['Здається в оренду на короткий термін <strong class="text-lowercase">' + row.type + '</strong>, ']
+      if (row.surface && row.surface !== '') {
+        html.push('площею <strong>' + row.surface + '</strong> м<sup>2</sup>, ')
+      }
+      if (row.rooms && row.rooms !== '') {
+        html.push('кімнат <strong>' + row.rooms + '</strong>, ')
+      }
+      if (row.floor && row.floor !== '') {
+        html.push('на <strong>' + row.floor + '</strong>-му поверсі, ')
       }
       if (row.location && row.location !== '') {
         html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
       }
     } else {
-      html = ['...']
+      html = ['Продається <strong class="text-lowercase">' + row.type + '</strong>, ']
+      if (row.surface && row.surface !== '') {
+        html.push('площею <strong>' + row.surface + '</strong> м<sup>2</sup>, ')
+      }
+      if (row.rooms && row.rooms !== '') {
+        html.push('кімнат <strong>' + row.rooms + '</strong>, ')
+      }
+      if (row.floor && row.floor !== '') {
+        html.push('на <strong>' + row.floor + '</strong>-му поверсі, ')
+      }
+      if (row.location && row.location !== '') {
+        html.push('знаходиться <strong>' + row.location + '</strong>, за адресою <strong>' + row.address + '</strong>.')
+      }
     }
   }
   return html.join('')
