@@ -11,6 +11,10 @@
   <dt>{{ site.data.lang-uk.re_parking }}</dt>
   <dd>{{ offer.parking }}</dd>
   {%- endif -%}
+  {%- if offer.object and offer.object != '' -%}
+  <dt>{{ site.data.lang-uk.re_object }}</dt>
+  <dd>{{ offer.object }}</dd>
+  {%- endif -%}
   {%- if offer.surface_land != '' and offer.surface_land != '0' -%}
   <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
   <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
