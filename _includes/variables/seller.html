@@ -1,14 +1,7 @@
 {%- assign slug = page.url | split: "/" | last -%}
-slug: {{slug}}<br>
 {%- assign back = page.dir | split: "/" -%}
-back: {{back}}<br>
 {%- assign size = back | size | minus:2 -%}
-size: {{size}}<br>
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
-pass: {{pass}}<br>
 {%- assign json = pass | append: slug | append: '.json' -%}
-json: {{json}}<br>
 {%- assign isJson = site.data[slug] -%}
-isJson: {{isJson}}<br>
 {%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slug' -%}
-otabs: {{otabs}}<br>
