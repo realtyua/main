@@ -5,10 +5,19 @@ sitemap: false
 {%- assign level = page.dir | split: "/" -%}
 {%- if level.size == 0 -%}
 {%- assign location = include.location -%}
+{%- elsif level.size == 8 -%}
+{%- include variables/complex.html title=page.title slice=2 -%}
 {%- else -%}
 {%- include location.html -%}
 {%- endif -%}
 {%- assign name = page.name | remove: '.json' -%}
+
+{%- if level.size == 0 -%}
 {%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
+{%- elsif level.size == 8 -%}
+{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location and i.object contains complex' -%}
+{%- else -%}
+{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
+{%- endif -%}
 {%- assign offers = data | sort: 'date' | reverse -%}
 {{ offers | jsonify }}
