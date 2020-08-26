@@ -2,7 +2,7 @@
 slug: {{slug}}<br>
 {%- assign back = page.dir | split: "/" -%}
 back: {{back}}<br>
-{%- assign size = back | size | minus:2 -%}
+{%- assign size = back | size | minus:4 -%}
 size: {{size}}<br>
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
 pass: {{pass}}<br>
