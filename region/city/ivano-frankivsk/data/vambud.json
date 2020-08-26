@@ -10,7 +10,7 @@ sitemap: false
 {%- endif -%}
 
 {%- assign back = page.dir | split: '/' -%}
-{%- assign size = back | size -%}
+{%- assign size = back | size | plus:3 -%}
 {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
 {%- for po in ps limit:1 -%}{%- assign complex = po.title -%}{%- endfor -%}
