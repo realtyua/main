@@ -6,8 +6,8 @@ table: 1
 
 {%- include variables/object.html -%}
 {%- include variables/complex.html title=item.title slice=2 -%}
-
-<h1>{{ page.title }} - {{complex}} - {{location}}</h1>
+{%- assign level = page.dir | split: "/" -%}
+<h1>{{ page.title }} - {{level.size}}</h1>
 
 <div class="row">
   <div class="col-5">
