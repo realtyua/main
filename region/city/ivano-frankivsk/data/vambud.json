@@ -2,15 +2,17 @@
 layout: null
 sitemap: false
 ---
-title: {{title}}
-complex: {{complex}}
-location: {{location}}
 {%- assign level = page.dir | split: "/" -%}
 {%- if level.size == 0 -%}
 {%- assign location = include.location -%}
 {%- else -%}
 {%- include location.html -%}
 {%- endif -%}
+
+title: {{title}}
+complex: {{complex}}
+location: {{location}}
+
 {%- assign name = page.name | remove: '.json' -%}
 {%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
 {%- assign offers = data | sort: 'date' | reverse -%}
