@@ -34,7 +34,6 @@ breadcrumb: Бульвар Європейський
           {%- if isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
-          {%- endif -%}
           {%- if otabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=otabs -%}
           {%- endif -%}
@@ -47,8 +46,6 @@ breadcrumb: Бульвар Європейський
     <div class="tab-content" id="vambud-content">
       {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
-      {%- endif -%}
-      {%- if pp.size > 0 -%}
       {%- endif -%}
       {%- if otabs.size > 0 -%}
         {%- include elements/others-pane.html tabs=otabs -%}
