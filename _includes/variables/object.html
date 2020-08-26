@@ -1,5 +1,10 @@
-{%- assign slug = page.url | split: "/" | last -%}
+
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:3 -%}
+{%- assign pass = back | slice: 0, size | join: "/" -%}
+{%- assign slug = pass | split: "/" | last -%}
 slug: {{slug}}<br>
+
 {%- assign back = page.dir | split: "/" -%}
 back: {{back}}<br>
 {%- assign size = back | size | minus:4 -%}
