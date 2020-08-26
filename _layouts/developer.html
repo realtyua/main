@@ -28,7 +28,7 @@ layout: default
           </li>
           {%- endif -%}
           {%- if stabs.size > 0 -%}
-            {%- include elements/others-tab.html -%}
+            {%- include elements/others-tab.html tabs=stabs -%}
           {%- endif -%}
         </ul>
       </div>
@@ -46,7 +46,7 @@ layout: default
       </div>
       {%- endif -%}
       {%- if stabs.size > 0 -%}
-        {%- include elements/others-pane.html -%}
+        {%- include elements/others-pane.html tabs=stabs -%}
       {%- endif -%}
     </div>
     {%- endif -%}
