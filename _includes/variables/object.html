@@ -1,5 +1,4 @@
-
-{%- include variables/slug.html minus=minus -%}
+{%- include variables/slug.html minus=2 -%}
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:4 -%}
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
