@@ -4,7 +4,7 @@ sitemap: false
 ---
 title: {{title}}
 complex: {{complex}}
-
+location: {{location}}
 {%- assign level = page.dir | split: "/" -%}
 {%- if level.size == 0 -%}
 {%- assign location = include.location -%}
