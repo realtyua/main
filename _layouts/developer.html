@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-{%- include variables/realtor.html -%}
+{%- include variables/seller.html -%}
 {%- include variables/rcs.html -%}
 <div class="row">
   <div class="col-12">
@@ -27,7 +27,7 @@ layout: default
             </a>
           </li>
           {%- endif -%}
-          {%- if tabs.size > 0 -%}
+          {%- if stabs.size > 0 -%}
             {%- include elements/others-tab.html -%}
           {%- endif -%}
         </ul>
@@ -45,7 +45,7 @@ layout: default
         {%- endfor -%}
       </div>
       {%- endif -%}
-      {%- if tabs.size > 0 -%}
+      {%- if stabs.size > 0 -%}
         {%- include elements/others-pane.html -%}
       {%- endif -%}
     </div>

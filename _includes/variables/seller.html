@@ -4,4 +4,4 @@
 {%- assign pass = back | slice: 0, size | join: "/" | append: '/data/'-%}
 {%- assign json = pass | append: slug | append: '.json' -%}
 {%- assign isJson = site.data[slug] -%}
-{%- assign tabs = site.tabs | where_exp: 'i', 'i.path contains slug' -%}
+{%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slug' -%}

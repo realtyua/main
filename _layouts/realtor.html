@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-{%- include variables/realtor.html -%}
+{%- include variables/seller.html -%}
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }}</h1>
@@ -19,7 +19,7 @@ layout: default
           {%- if isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
-          {%- if tabs.size > 0 -%}
+          {%- if stabs.size > 0 -%}
             {%- include elements/others-tab.html -%}
           {%- endif -%}
         </ul>
@@ -30,7 +30,7 @@ layout: default
       {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
-      {%- if tabs.size > 0 -%}
+      {%- if stabs.size > 0 -%}
         {%- include elements/others-pane.html -%}
       {%- endif -%}
     </div>
