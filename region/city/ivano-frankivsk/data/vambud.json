@@ -9,6 +9,16 @@ sitemap: false
 {%- include location.html -%}
 {%- endif -%}
 
+{%- assign name = page.name | remove: '.json' -%}
+{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
+{%- assign offers = data | sort: 'date' | reverse -%}
+{{ offers | jsonify }}
+
+{%- comment -%}
+{% assign subpage = site.pages | where: 'section', 'about' %}
+{{ subpage[0].title }}
+
+
 {%- assign back = page.dir | split: '/' -%}
 {%- if back.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
   {%- assign size = back | size | plus:2 -%}
@@ -19,12 +29,4 @@ sitemap: false
 
 complex: {{complex}}
 
-{%- assign name = page.name | remove: '.json' -%}
-{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
-{%- assign offers = data | sort: 'date' | reverse -%}
-{{ offers | jsonify }}
-
-{%- comment -%}
-{% assign subpage = site.pages | where: 'section', 'about' %}
-{{ subpage[0].title }}
 {%- andcomment -%}
