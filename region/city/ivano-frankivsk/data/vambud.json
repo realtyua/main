@@ -12,7 +12,7 @@ sitemap: false
 {%- include variables/pass.html -%}
 {%- assign title = include.title -%}
 
--{{ title }}-
+{{ title }}
 
 {%- assign name = page.name | remove: '.json' -%}
 
