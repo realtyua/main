@@ -10,6 +10,7 @@ sitemap: false
 {%- endif -%}
 
 {%- include variables/pass.html -%}
+{%- assign title = include.title -%}
 
 -{{ title }}-
 
