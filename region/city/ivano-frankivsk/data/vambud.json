@@ -11,11 +11,10 @@ sitemap: false
 
 {%- include variables/pass.html -%}
 
-{% assign subpage = site.pages | where: 'url', name %}
-{{ subpage[0].breadcrumb }}
-
-{{ title }}
-{{ titlen }}
+{% assign subpage = site.pages | where_exp: "i", "i.url contains name and i.url contains 'object'" %}
+subpage: {{ subpage[0].breadcrumb }}
+title: {{ title }}
+t: {{ t }}
 
 {%- assign name = page.name | remove: '.json' -%}
 
