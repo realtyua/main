@@ -4,40 +4,18 @@ sitemap: false
 ---
 {%- assign level = page.dir | split: "/" -%}
 {%- if level.size == 0 -%}
-{%- assign location = include.location -%}
+  {%- assign location = include.location -%}
 {%- else -%}
-{%- include location.html -%}
+  {%- include location.html -%}
 {%- endif -%}
-
-{%- include variables/pass.html -%}
-
 {%- assign name = page.name | remove: '.json' -%}
-
-{% assign on = site.pages | where_exp: "i", "i.url contains name and i.url contains 'object'" %}
-={{ on[0].breadcrumb }}=
-
+{%- assign on = site.pages | where_exp: "i", "i.url contains name and i.url contains 'object'" -%}
+{%- assign object = on[0].breadcrumb -%}
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains name' -%}
-
-{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
+{%- if object -%}
+  {%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location and i.location contains object' -%}
+{%- else -%}
+  {%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
+{%- endif -%}
 {%- assign offers = data | sort: 'date' | reverse -%}
 {{ offers | jsonify }}
-
-
-
-{%- comment -%}
-
-{% assign subpage = site.pages | where: 'url', name %}
-{{ subpage[0].breadcrumb }}
-
-
-{%- assign back = page.dir | split: '/' -%}
-{%- if back.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
-  {%- assign size = back | size | plus:2 -%}
-{%- endif -%}
-{%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
-{%- for po in ps limit:1 -%}{%- assign complex = po.title -%}{%- endfor -%}
-
-complex: {{complex}}
-
-{%- endcomment -%}
