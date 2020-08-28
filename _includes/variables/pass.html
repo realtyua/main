@@ -1,1 +1,9 @@
 {%- assign title = include.title -%}
+
+{%- if back.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
+  {%- assign back = page.dir | split: '/' -%}
+  {%- assign size = back | size | minus:0 -%}
+  {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
+  {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
+  {%- for pt in ps limit:1 -%}{%- assign title = pt.title -%}{%- endfor -%}
+{%- endif -%}
