@@ -2,7 +2,7 @@
 layout: null
 sitemap: false
 ---
-{%- assign level = page.dir | split: "/" -%}
+{%- assign level = page.dir | split: '/' -%}
 {%- if level.size == 0 -%}
   {%- assign location = include.location -%}
 {%- else -%}
@@ -11,7 +11,6 @@ sitemap: false
 {%- assign name = page.name | remove: '.json' -%}
 {%- assign on = site.pages | where_exp: "i", "i.url contains name and i.url contains 'object'" -%}
 {%- assign object = on[0].breadcrumb -%}
-{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains name' -%}
 {%- if object -%}
   {%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location and i.object contains object' -%}
 {%- else -%}
