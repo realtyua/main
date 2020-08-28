@@ -11,6 +11,9 @@ sitemap: false
 
 {%- include variables/pass.html -%}
 
+{% assign subpage = site.pages | where: 'url', name %}
+{{ subpage[0].breadcrumb }}
+
 {{ title }}
 {{ titlen }}
 
@@ -24,8 +27,8 @@ sitemap: false
 
 {%- comment -%}
 
-{% assign subpage = site.pages | where: 'section', 'about' %}
-{{ subpage[0].title }}
+{% assign subpage = site.pages | where: 'url', name %}
+{{ subpage[0].breadcrumb }}
 
 
 {%- assign back = page.dir | split: '/' -%}
