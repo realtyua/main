@@ -11,11 +11,12 @@ sitemap: false
 
 {%- assign on = site.pages | where_exp: "i", "i.url contains name and i.url contains 'object'" -%}
 {%- assign object = on[0].breadcrumb -%}
-{{ object }}
+={{ object }}=
+
 {%- assign name = page.name | remove: '.json' -%}
 
-{%- if level.size == 0 -%}
-{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location and i.breadcrumb == object' -%}
+{%- if object -%}
+{%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location and i.object == object' -%}
 {%- else -%}
 {%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
 {%- endif -%}
