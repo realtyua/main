@@ -20,10 +20,10 @@
   </thead>
 </table>
 
-<script type="text/javascript">
-  var $table = $('#realestate')
+<script>
+  var $table = $('#realestate');
   $(function() {
-    var data = {{ include.data }}
+    var data = {{ include.data | jsonify }}
     $table.bootstrapTable({data: data})
   })
 </script>
