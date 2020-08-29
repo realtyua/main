@@ -10,6 +10,11 @@ sitemap: false
 {%- endif -%}
 
 {%- assign name = page.name | remove: '.json' -%}
+
+{%- assign foo = page.url -%}
+
+={{foo}}=
+
 {%- assign on = site.pages | where_exp: "i", "i.url contains name and i.url contains 'object'" -%}
 {%- assign object = on[0].breadcrumb -%}
 
