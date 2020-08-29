@@ -44,7 +44,7 @@
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
               {% if back.size >= 6 %}
                 {%- include variables/complex.html title=item.title slice=2 -%}
-                {%- assign records = site.data[section] | where_exp: "i", "i.location contains location and i.object contains complex" -%}
+                {%- assign records = site.data.vambud | where_exp: "i", "i.location contains location and i.object contains complex" -%}
               {% else %}
                 {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
               {% endif %}
