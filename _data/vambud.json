@@ -1,11 +1,9 @@
 ---
-layout: null
-sitemap: false
 ---
-{%- assign european-boulevard = site.data.european-boulevard -%}
-{%- assign club-town-12 = site.data.club-town-12 -%}
+{%- assign european_boulevard = site.data.european_boulevard -%}
+{%- assign club_town_12 = site.data.club_town_12 -%}
 {%-
-  assign vambud = european-boulevard
-  | concat: club-town-12
+  assign vambud = european_boulevard
+  | concat: club_town_12
 -%}
 {{ vambud | jsonify }}
