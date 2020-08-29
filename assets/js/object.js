@@ -1,5 +1,4 @@
 ---
-layout: blank
 ---
 
 title: {{ page.title }}
