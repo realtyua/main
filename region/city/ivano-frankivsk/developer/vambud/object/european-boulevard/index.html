@@ -5,7 +5,10 @@ table: 1
 ---
 
 {%- include variables/object.html -%}
+
+{%- comment -%}
 {%- include variables/complex.html title=item.title slice=2 -%}
+{%- endcomment -%}
 
 <h1>{{ page.title }}</h1>
 
@@ -22,7 +25,7 @@ table: 1
 
 <div class="row">
   <div class="col-12">
-    {%- if isJson.size > 0 or otabs.size > 0 -%}
+    {%- if isJson.size > 0 or otabs.size > 0 or data.size > 0 -%}
     <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
       <div class="navbar-brand d-md-none">
         <span class="small">Про житловий комплекс</span>
@@ -39,9 +42,17 @@ table: 1
 
           data: {{ data }}
 
+          {%- if data.size > 0 -%}
+            {%- include elements/offer-tab.html -%}
+          {%- endif -%}
+
+{%- comment -%}
           {%- if isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
+{%- endcomment -%}
+
+
           {%- if otabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=otabs -%}
           {%- endif -%}
@@ -50,9 +61,17 @@ table: 1
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="vambud-content">
+
+      {%- if data.size > 0 -%}
+        {%- include elements/offer-pane.html data=data -%}
+      {%- endif -%}
+
+{%- comment -%}
       {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
+{%- endcomment -%}
+
       {%- if otabs.size > 0 -%}
         {%- include elements/others-pane.html tabs=otabs -%}
       {%- endif -%}
