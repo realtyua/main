@@ -1,5 +1,3 @@
-data: {{ data }}<br>
-<hr>
 <table
   id="realestate"
   data-locale="uk-UA"
@@ -25,7 +23,7 @@ data: {{ data }}<br>
 <script>
   var $table = $('#realestate');
   $(function() {
-    var data = {{ include.data | jsonify }}
+    var data = {{ data | jsonify }}
     $table.bootstrapTable({data: data})
   })
 </script>
