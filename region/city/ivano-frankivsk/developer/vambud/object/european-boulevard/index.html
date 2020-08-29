@@ -36,21 +36,13 @@ table: 1
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
-
-
           {%- assign data = site.data[slug] | where_exp: 'i', 'i.object contains page.breadcrumb' -%}
-
-          {%- if data.size > 0 -%}
+          {%- if data.size > 0 and back.size == 8 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
-
-{%- comment -%}
-          {%- if isJson.size > 0 -%}
+          {%- if isJson.size > 0 and back.size != 8 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
-{%- endcomment -%}
-
-
           {%- if otabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=otabs -%}
           {%- endif -%}
@@ -59,17 +51,12 @@ table: 1
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="vambud-content">
-
-      {%- if data.size > 0 -%}
-        {%- include elements/offer-pane.html data=data -%}
-      {%- endif -%}
-
-{%- comment -%}
-      {%- if isJson.size > 0 -%}
+      {%- if data.size > 0 and back.size == 8 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
-{%- endcomment -%}
-
+      {%- if isJson.size > 0 and back.size != 8 -%}
+        {%- include elements/offer-pane.html -%}
+      {%- endif -%}
       {%- if otabs.size > 0 -%}
         {%- include elements/others-pane.html tabs=otabs -%}
       {%- endif -%}

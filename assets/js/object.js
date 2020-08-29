@@ -1,8 +1,10 @@
 ---
 layout: null
 ---
-var $table = $('#realestate')
+
+var $table = $('#realestate');
+
 $(function() {
-  var data = {{ data | jsonify }}
+  var data = {{ data | jsonify }};
   $table.bootstrapTable({data: data})
 })
