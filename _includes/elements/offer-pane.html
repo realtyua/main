@@ -1,6 +1,4 @@
 <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
   <h2>{{ page.title }} пропонує</h2>
-  {%- assign object = page.title -%}
-  <p>{{ object }}</p>
-  {%- include table/js.html object=object -%}
+  {%- include table/js.html object=page.breadcrumb -%}
 </div>

@@ -1,4 +1,4 @@
-{%- assign object = include.object -%}
+{%- capture object -%}?object={{ include.object }}{%- endcapture -%}
 <table
   id="property"
   data-locale="uk-UA"
@@ -13,7 +13,7 @@
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
   data-buttons-class="primary"
-  data-url="{{ json | absolute_url }}={{ object }}">
+  data-url="{{ json | absolute_url }}{{ object | uri_escape }}">
   <thead class="thead-re">
     <tr>
       <th data-field="type" data-title="Власність" data-formatter="propertyFormatter">Property</th>
