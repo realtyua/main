@@ -1,0 +1,24 @@
+[
+    {
+        "id": "3",
+        "type": "Квартира",
+        "rent": "",
+        "rooms": "1",
+        "surface": "80",
+        "surface_land": "",
+        "price": "$9000",
+        "price_sqmt": "$350",
+        "floor": "1",
+        "floors": "1",
+        "parking": "Гараж",
+        "region": "",
+        "location": "м. Івано-Франківськ",
+        "address": "вул. Вовчинецька",
+        "object": "Клубне містечко 12",
+        "date": "2020-08-15",
+        "seller": "Будівельна компанія 'Вамбуд'",
+        "phone": "380504337722",
+        "description": "",
+        "images": "",
+    }
+]
