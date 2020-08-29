@@ -2,6 +2,8 @@
 layout: null
 ---
 
+data: {{ data }}
+
 var $table = $('#realestate');
 
 $(function() {

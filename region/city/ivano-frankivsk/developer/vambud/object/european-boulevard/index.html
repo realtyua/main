@@ -65,3 +65,11 @@ table: 1
   </div>
   {%- include elements/pager.html -%}
 </div>
+
+<script>
+  var $table = $('#realestate');
+  $(function() {
+    var data = {{ data | jsonify }}
+    $table.bootstrapTable({data: data})
+  })
+</script>

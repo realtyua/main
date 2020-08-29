@@ -19,11 +19,3 @@
     </tr>
   </thead>
 </table>
-
-<script>
-  var $table = $('#realestate');
-  $(function() {
-    var data = {{ data | jsonify }}
-    $table.bootstrapTable({data: data})
-  })
-</script>
