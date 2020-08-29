@@ -1,6 +1,7 @@
 ---
-layout: null
+layout: blank
 ---
+
 title: {{ page.title }}
 data: {{ data }}
 
