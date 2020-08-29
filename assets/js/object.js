@@ -1,3 +1,6 @@
+---
+layout: null
+---
 var $table = $('#realestate')
 $(function() {
   var data = {{ isJson | jsonify }}
