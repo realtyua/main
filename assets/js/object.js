@@ -1,8 +1,11 @@
 ---
+layout: null
 ---
 
-title: {{ page.title }}
-data: {{ data }}
+{{ page.title }}
+
+
+{{ data }}
 
 var $table = $('#realestate');
 
