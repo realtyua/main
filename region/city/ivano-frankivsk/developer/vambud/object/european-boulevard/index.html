@@ -40,8 +40,6 @@ table: 1
 
           {%- assign data = site.data[slug] | where_exp: 'i', 'i.object contains page.breadcrumb' -%}
 
-          data: {{ data }}
-
           {%- if data.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
