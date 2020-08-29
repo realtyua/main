@@ -1,4 +1,5 @@
 ---
+layout: null
 ---
 {%- assign european_boulevard = site.data.european_boulevard -%}
 {%- assign club_town_12 = site.data.club_town_12 -%}
