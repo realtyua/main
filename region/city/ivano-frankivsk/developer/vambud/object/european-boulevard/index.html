@@ -34,10 +34,12 @@ table: 1
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
 
+slug: {{ slug }}<br><br><br>
+
           {%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location' -%}<br><br><br><br><br>
 
-          --- {{ data }} --- <br><br><br>
-          === {{ isJson }} === <br><br><br><br>
+          data: {{ data }} <br><br><br>
+          isJson: {{ isJson }} <br><br><br><br>
 
           {%- if isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
