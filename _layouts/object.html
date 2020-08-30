@@ -30,7 +30,6 @@ layout: default
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
-
           {%- if data.size > 0 and slash.size == 8 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
@@ -40,7 +39,6 @@ layout: default
           {%- if otabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=otabs -%}
           {%- endif -%}
-
         </ul>
       </div>
     </nav>
@@ -58,9 +56,7 @@ layout: default
     </div>
     {%- endif -%}
   </div>
-
   {%- include elements/pager.html l=8 -%}
-
 </div>
 
 {%- comment -%}

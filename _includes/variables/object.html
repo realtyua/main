@@ -14,7 +14,9 @@
 {%- endif -%}
 {%- assign dir = slash | slice: 0, gauge | join: '/' | append: '/' -%}
 {%- assign cities = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
-{%- for city in cities limit:1 -%}{%- assign location = city.breadcrumb -%}{%- endfor -%}
+{%- for city in cities limit:1 -%}
+  {%- assign location = city.breadcrumb -%}
+{%- endfor -%}
 {%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
 
 {%- assign object = page.dir | split: "/" | last -%}
