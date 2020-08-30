@@ -1,5 +1,6 @@
-{%- assign size = back | size | minus:1 -%}
-{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+{%- assign slash = page.dir | split: "/" -%}
+{%- assign gauge = slash | size | minus:1 -%}
+{%- assign dir = slash | slice: 0, gauge | join: "/" | append: '/' -%}
 {%- assign ps = '' | split:'' -%}
 {%- assign pages = site.pages | sort: 'dir' | reverse -%}
 {%- for i in pages -%}
