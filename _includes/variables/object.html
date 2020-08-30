@@ -21,11 +21,9 @@ slug: {{slug}}
 
 {%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
 
-{%- assign gauge = slash | size | minus:3 -%}
-{%- assign piece = slash | slice: 0, gauge | join: "/" -%}
-{%- assign developer = piece | split: "/" | last -%}
-developer: {{developer}}
-{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains developer' -%}
+{%- assign object = page.dir | split: "/" | last -%}
+object: {{object}}
+{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains object' -%}
 
 
 {%- comment -%}
