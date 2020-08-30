@@ -3,8 +3,27 @@ title: Житловий комплекс Бульвар Європейський
 breadcrumb: Бульвар Європейський
 table: 1
 ---
+{%- comment -%}
+{%- assign slash = page.dir | split: "/" -%}
+
+{%- assign gauge = slash | size | minus:2 -%}
+{%- assign piece = slash | slice: 0, gauge | join: "/" -%}
+
+{%- assign slug = piece | split: "/" | last -%}
+
+{%- assign gauge = slash | size | minus:4 -%}
+{%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
+{%- assign json = piece | append: slug | append: '.json' -%}
+
+{%- assign isJson = site.data[slug] -%}
+{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains slug' -%}
+{%- endcomment -%}
+
+
+
 
 {%- include variables/object.html -%}
+
 
 <h1>{{ page.title }}</h1>
 
@@ -33,8 +52,7 @@ table: 1
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
           {%- include location.html -%}
-          === {{ location }} ===<br>
-          {%- assign data = site.data[slug] | where_exp: 'i', 'i.object contains page.breadcrumb' -%}
+          {%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
           {%- if data.size > 0 and back.size == 8 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}

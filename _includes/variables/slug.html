@@ -1,4 +1,4 @@
-{%- assign back = page.dir | split: "/" -%}
-{%- assign size = back | size | minus:include.minus -%}
-{%- assign pass = back | slice: 0, size | join: "/" -%}
-{%- assign slug = pass | split: "/" | last -%}
+{%- assign slash = page.dir | split: "/" -%}
+{%- assign gauge = slash | size | minus:include.minus -%}
+{%- assign piece = slash | slice: 0, gauge | join: "/" -%}
+{%- assign slug = piece | split: "/" | last -%}
