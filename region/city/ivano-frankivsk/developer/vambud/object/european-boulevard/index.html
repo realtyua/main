@@ -3,7 +3,7 @@ title: Житловий комплекс Бульвар Європейський
 breadcrumb: Бульвар Європейський
 table: 1
 ---
-{%- comment -%}
+
 {%- assign slash = page.dir | split: "/" -%}
 
 {%- assign gauge = slash | size | minus:2 -%}
@@ -17,13 +17,13 @@ table: 1
 
 {%- assign isJson = site.data[slug] -%}
 {%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains slug' -%}
-{%- endcomment -%}
 
 
 
 
+{%- comment -%}
 {%- include variables/object.html -%}
-
+{%- endcomment -%}
 
 <h1>{{ page.title }}</h1>
 
