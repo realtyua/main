@@ -83,44 +83,7 @@ table: 1
     {%- endif -%}
   </div>
 
-  {%- assign gauge = slash | size | minus:1 -%}
-  {%- assign dir = slash | slice: 0, gauge | join: "/" | append: '/' -%}
-  {%- assign ps = '' | split:'' -%}
-  {%- assign pages = site.pages | sort: 'dir' | reverse -%}
-  {%- for i in pages -%}
-    {%- assign l = i.dir | split: '/' -%}
-    {%- if i.url contains dir and i.url != dir and l.size == 8 -%}
-      {%- assign ps = ps | push: i -%}
-    {%- endif -%}
-  {%- endfor -%}
-  {%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
-  <div class="col-12 mt-4">
-    <div class="row">
-    {%- for p in ps -%}
-      {%- if p.url == page.url -%}
-        {%- if forloop.first == false -%}
-        {%- assign prev = forloop.index0 | minus:1 -%}
-        <div class="col-sm-12 col-md-5 text-left">
-          &larr; <a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a>
-        </div>
-        {%- else -%}
-        <div class="col-sm-12 col-md-5 text-left">&nbsp;</div>
-        {%- endif -%}
-        <div class="col-sm-12 col-md-2 text-center">
-          <a href="{{ index[0].url }}">{{ site.data.lang-uk.others }} {{ index[0].title | downcase }}</a>
-        </div>
-        {%- if forloop.last == false -%}
-        {%- assign next = forloop.index0 | plus:1 -%}
-        <div class="col-sm-12 col-md-5 text-right">
-          <a href="{{ ps[next].url }}">{{ ps[next].title }}</a> &rarr;
-        </div>
-        {%- else -%}
-        <div class="col-sm-12 col-md-5 text-right">&nbsp;</div>
-        {%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
-    </div>
-  </div>
+  {%- include elements/pager.html l=8 -%}
 
 
 </div>
