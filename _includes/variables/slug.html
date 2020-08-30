@@ -1,4 +1,0 @@
-{%- assign slash = page.dir | split: "/" -%}
-{%- assign gauge = slash | size | minus:include.minus -%}
-{%- assign piece = slash | slice: 0, gauge | join: "/" -%}
-{%- assign slug = piece | split: "/" | last -%}
