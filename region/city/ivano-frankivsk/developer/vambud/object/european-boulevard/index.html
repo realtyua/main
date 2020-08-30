@@ -25,6 +25,7 @@ table: 1
 {%- assign cities = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
 {%- for city in cities limit:1 -%}{%- assign location = city.breadcrumb -%}{%- endfor -%}
 
+{%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
 
 
 
@@ -60,11 +61,10 @@ table: 1
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
 
-          {%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
-          {%- if data.size > 0 and back.size == 8 -%}
+          {%- if data.size > 0 and slash.size == 8 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
-          {%- if isJson.size > 0 and back.size != 8 -%}
+          {%- if isJson.size > 0 and slash.size != 8 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
           {%- if otabs.size > 0 -%}
@@ -76,10 +76,10 @@ table: 1
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="vambud-content">
-      {%- if data.size > 0 and back.size == 8 -%}
+      {%- if data.size > 0 and slash.size == 8 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
-      {%- if isJson.size > 0 and back.size != 8 -%}
+      {%- if isJson.size > 0 and slash.size != 8 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
       {%- if otabs.size > 0 -%}
