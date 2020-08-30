@@ -32,6 +32,8 @@ table: 1
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
+          {%- include location.html -%}
+          === {{ location }} ===<br>
           {%- assign data = site.data[slug] | where_exp: 'i', 'i.object contains page.breadcrumb' -%}
           {%- if data.size > 0 and back.size == 8 -%}
             {%- include elements/offer-tab.html -%}
