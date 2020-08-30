@@ -18,11 +18,19 @@ table: 1
 {%- assign isJson = site.data[slug] -%}
 {%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains slug' -%}
 
+{%- if slash.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
+  {%- assign gauge = slash | size | minus:4 -%}
+{%- endif -%}
+{%- assign dir = slash | slice: 0, gauge | join: '/' | append: '/' -%}
+{%- assign cities = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
+{%- for city in cities limit:1 -%}{%- assign location = city.breadcrumb -%}{%- endfor -%}
+
 
 
 
 {%- comment -%}
-{%- include variables/object.html -%}
+  {%- include variables/object.html -%}
+  {%- include location.html -%}
 {%- endcomment -%}
 
 <h1>{{ page.title }}</h1>
@@ -51,7 +59,7 @@ table: 1
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
-          {%- include location.html -%}
+
           {%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
           {%- if data.size > 0 and back.size == 8 -%}
             {%- include elements/offer-tab.html -%}
@@ -62,6 +70,7 @@ table: 1
           {%- if otabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=otabs -%}
           {%- endif -%}
+
         </ul>
       </div>
     </nav>
