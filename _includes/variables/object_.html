@@ -1,7 +1,0 @@
-{%- include variables/slug.html minus=2 -%}
-
-{%- assign gauge = slash | size | minus:4 -%}
-{%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
-{%- assign json = piece | append: slug | append: '.json' -%}
-{%- assign isJson = site.data[slug] -%}
-{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains slug' -%}
