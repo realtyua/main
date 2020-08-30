@@ -5,7 +5,7 @@
 {%- assign pages = site.pages | sort: 'dir' | reverse -%}
 {%- for i in pages -%}
   {%- assign l = i.dir | split: '/' -%}
-  {%- if i.url contains dir and i.url != dir and l.size == 6 -%}
+  {%- if i.url contains dir and i.url != dir and l.size == include.l -%}
     {%- assign ps = ps | push: i -%}
   {%- endif -%}
 {%- endfor -%}
