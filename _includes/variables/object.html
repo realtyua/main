@@ -3,18 +3,14 @@
 
 {%- assign gauge = slash | size | minus:2 -%}
 {%- assign piece = slash | slice: 0, gauge | join: "/" -%}
-
 {%- assign slug = piece | split: "/" | last -%}
+
+slug: {{slug}}
 
 {%- assign gauge = slash | size | minus:4 -%}
 {%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
 {%- assign json = piece | append: slug | append: '.json' -%}
 {%- assign isJson = site.data[slug] -%}
-
-{%- assign gauge = slash | size | minus:3 -%}
-{%- assign piece = slash | slice: 0, gauge | join: "/" -%}
-{%- assign developer = piece | split: "/" | last -%}
-{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains developer' -%}
 
 {%- if slash.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
   {%- assign gauge = slash | size | minus:4 -%}
@@ -25,14 +21,18 @@
 
 {%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
 
+{%- assign gauge = slash | size | minus:3 -%}
+{%- assign piece = slash | slice: 0, gauge | join: "/" -%}
+{%- assign developer = piece | split: "/" | last -%}
+developer: {{developer}}
+{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains developer' -%}
+
 
 {%- comment -%}
-
-{%- include variables/slug.html minus=2 -%}
-{%- assign gauge = slash | size | minus:4 -%}
-{%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
-{%- assign json = piece | append: slug | append: '.json' -%}
-{%- assign isJson = site.data[slug] -%}
-{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains slug' -%}
-
+  {%- include variables/slug.html minus=2 -%}
+  {%- assign gauge = slash | size | minus:4 -%}
+  {%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
+  {%- assign json = piece | append: slug | append: '.json' -%}
+  {%- assign isJson = site.data[slug] -%}
+  {%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains slug' -%}
 {%- endcomment -%}
