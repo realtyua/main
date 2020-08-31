@@ -15,9 +15,9 @@ layout: default
 
     {%- assign slash1 = page.dir | split: "/" -%}
     slash1: {{slash1}}<br>
-    {%- assign gauge1 = slash1 | size | minus:6 -%}
+    {%- assign gauge1 = slash1 | size %}
     gauge1: {{gauge1}}<br>
-    {%- assign piece1 = slash1 | slice: gauge1, 2 | join: "/" -%}
+    {%- assign piece1 = slash1 | slice: 2, gauge1 | join: "/" -%}
     piece1: {{ piece1 }}<br>
     {%- assign folder = piece1 | prepend: '/assets/images/' -%}
     folder: {{folder}}<br>
