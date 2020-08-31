@@ -12,22 +12,7 @@ layout: default
 
 <div class="row mb-3">
   <div class="col-md-5">
-
-    {%- assign slash1 = page.dir | split: "/" -%}
-    slash1: {{slash1}}<br>
-    {%- assign gauge1 = slash1 | size %}
-    gauge1: {{gauge1}}<br>
-    {%- assign piece1 = slash1 | slice: 6, gauge1 | join: "/" -%}
-    piece1: {{ piece1 }}<br>
-    {%- assign folder = piece1 | prepend: '/assets/images/' | append: '/' -%}
-    folder: {{folder}}<br>
-    {%- assign default = folder | prepend: default.png -%}
-    default: {{default}}<br>
-
-    {%- comment -%}
-    {%- include image-slider.html folder=folder group="main" width="480" height="250" -%}
-    {%- endcomment -%}
-
+    {%- include image-slider.html folder=folder group='main' width='480' height='250' -%}
   </div>
   <div class="col-md-7">
     {%- assign isContent = content | strip_newlines -%}

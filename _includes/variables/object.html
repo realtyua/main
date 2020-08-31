@@ -1,5 +1,10 @@
 
 {%- assign slash = page.dir | split: "/" -%}
+
+{%- assign gauge = slash | size %}
+{%- assign piece = slash | slice: 6, gauge | join: "/" -%}
+{%- assign folder = piece | prepend: '/assets/images/' | append: '/' -%}
+
 {%- assign gauge = slash | size | minus:2 -%}
 {%- assign piece = slash | slice: 0, gauge | join: "/" -%}
 {%- assign slug = piece | split: "/" | last -%}
