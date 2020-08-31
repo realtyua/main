@@ -327,11 +327,11 @@ $(document).on('click', '.lightbox', function(event){
     bgOpacity: 0.85,
     showHideOpacity: true
   };
-  var index = $(this).closest('.detail-view').prev().data('index');
-  //if(items.length > 0) {
+  if(items.length > 0) {
+    var index = $(this).closest('.detail-view').prev().data('index');
     var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
     gallery.init();
-  //}
+  }
 });
 
 function propertyFormatter(value, row) {
