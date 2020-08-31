@@ -37,10 +37,7 @@ layout: default
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
         <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
-          {%- if data.size > 0 and slash.size == 8 -%}
-            {%- include elements/offer-tab.html -%}
-          {%- endif -%}
-          {%- if isJson.size > 0 and slash.size != 8 -%}
+          {%- if isJson.size > 0 or data.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
           {%- if otabs.size > 0 -%}
@@ -51,10 +48,7 @@ layout: default
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="vambud-content">
-      {%- if data.size > 0 and slash.size == 8 -%}
-        {%- include elements/offer-pane.html -%}
-      {%- endif -%}
-      {%- if isJson.size > 0 and slash.size != 8 -%}
+      {%- if isJson.size > 0 or data.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
       {%- if otabs.size > 0 -%}
