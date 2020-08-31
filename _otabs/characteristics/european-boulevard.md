@@ -3,7 +3,7 @@ title: Характеристики
 sitemap: false
 ---
 
-## {{ page.title }} {{ title }} житлового коплексу
+## {{ page.title }} житлового коплексу “Бульвар Європейський”
 
 <dl class="row">
 
