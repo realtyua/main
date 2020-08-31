@@ -1,4 +1,7 @@
 {%- capture default -%}/assets/images/default-{{ include.group }}.png{%- endcapture -%}
+
+{%- assign default = include.folder | append: default.png -%}
+
 {%- assign files = '' | split:'' -%}
 {%- for i in site.static_files -%}
   {%- if i.path contains include.folder -%}

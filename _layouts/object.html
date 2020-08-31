@@ -14,13 +14,16 @@ layout: default
   <div class="col-md-5">
 
     {%- assign slash1 = page.dir | split: "/" -%}
+    slash1: {{slash1}}<br>
     {%- assign gauge1 = slash1 | size | minus:6 -%}
-    {%- assign piece1 = slash1 | slice: gauge1 | join: "/" -%}
-    piece1: {{ piece1 }}
+    gauge1: {{gauge1}}
+    {%- assign piece1 = slash1 | slice: 0, gauge1 | join: "/" -%}
+    piece1: {{ piece1 }}<br>
     {%- assign folder = piece1 | prepend: '/assets/images' -%}
-    folder: {{folder}}
+    folder: {{folder}}<br>
+    {%- assign default = folder | prepend: default.png -%}
     {%- comment -%}
-    {%- include image-slider.html folder=folder group="object" width="480" height="250" -%}
+    {%- include image-slider.html folder=folder group="main" width="480" height="250" -%}
     {%- endcomment -%}
   </div>
   <div class="col-md-7">
