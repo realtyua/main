@@ -328,10 +328,10 @@ $(document).on('click', '.lightbox', function(event){
     showHideOpacity: true
   };
   var index = $(this).closest('.detail-view').prev().data('index');
-  if(items.length > 0) {
+  //if(items.length > 0) {
     var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
     gallery.init();
-  }
+  //}
 });
 
 function propertyFormatter(value, row) {
