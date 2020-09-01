@@ -29,11 +29,6 @@
       {%- else -%}
       <div class="d-none d-md-block col-md-6">&nbsp;</div>
       {%- endif -%}
-      {%- comment -%}
-        <div class="col-sm-12 col-md-2 text-center">
-          <a href="{{ index[0].url }}">{{ site.data.lang-uk.others }} {{ index[0].title | downcase }}</a>
-        </div>
-      {%- endcomment -%}
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}
       <div class="col-10 col-md-5 text-right"><a href="{{ ps[next].url }}">{{ ps[next].title }}</a></div>
