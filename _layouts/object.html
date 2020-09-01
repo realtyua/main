@@ -1,11 +1,9 @@
 ---
 layout: compress
 ---
-
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
-
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
@@ -15,19 +13,15 @@ layout: compress
     <div id="top"></div>
     <div class="main">
       {%- include header.html -%}
-      <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
+      <main class="content mb-4">
         <div class="container">
-
           {%- include breadcrumb.html -%}
-
           {%- include variables/object.html -%}
-
           <div class="row mb-3">
             <div class="col-12">
               <h1>{{ page.title }}</h1>
             </div>
           </div>
-
           <div class="row mb-3">
             <div class="col-md-5">
               {%- include image-slider.html folder=folder group='main' width='480' height='260' -%}
@@ -41,7 +35,6 @@ layout: compress
               {%- endif -%}
             </div>
           </div>
-
           <div class="row mb-3">
             <div class="col-12">
               {%- if isJson.size > 0 or otabs.size > 0 or data.size > 0 -%}
@@ -77,22 +70,17 @@ layout: compress
             </div>
             {%- include elements/pager.html l=8 -%}
           </div>
-
         </div>
       </main>
-
-        {%- include footer.html -%}
-
+      {%- include footer.html -%}
     </div>
-
     {%- include scroll-top.html -%}
-
     {%- assign level = page.dir | split: '/' -%}
     {%- include object/js-top.html -%}
-    {%- include object/js-middle.html -%}
+    {%- if data.size > 10 -%}
+      {%- include object/js-middle.html -%}
+    {%- endif -%}
     {%- include object/js-bottom.html -%}
-
     {% include modals/net-realestate-modal.html %}
-
   </body>
 </html>

@@ -1,6 +1,6 @@
 {%- if page.table == 1 -%}
   <script type="text/javascript">
-    var $table = $('#table');
+    var $table = $('#property');
     $(function() {
       var data = {{ data | jsonify }};
       $table.bootstrapTable({data: data})
@@ -8,7 +8,7 @@
   </script>
 {%- elsif page.table == 2 -%}
   <script type="text/javascript">
-    var $table = $('#table');
+    var $table = $('#property');
     $(function() {
       var data = {{ data | jsonify }};
       $table.bootstrapTable({data: data})
