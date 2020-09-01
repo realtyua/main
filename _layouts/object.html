@@ -30,7 +30,7 @@ layout: compress
 
           <div class="row mb-3">
             <div class="col-md-5">
-              {%- include image-slider.html folder=folder group='main' width='480' height='250' -%}
+              {%- include image-slider.html folder=folder group='main' width='480' height='260' -%}
             </div>
             <div class="col-md-7">
               {%- assign isContent = content | strip_newlines -%}
@@ -99,10 +99,10 @@ layout: compress
       <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
       <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
       {%- if level.size == 8 -%}
-
+        <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
 
         {%- comment -%}
-        <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
+
         <script type="text/javascript">
           var $table = $('#realestate');
           $(function() {
