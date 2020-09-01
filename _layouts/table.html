@@ -20,6 +20,8 @@ layout: default
       <h2>Продаються нежитлові приміщення комерційного призначення</h2>
     {%- elsif page.url contains 'apartment' -%}
       <h2>Продаються квартири</h2>
+    {%- elsif page.url contains 'apartment' -%}
+      <h2>Пропозиції нерухомісті у місті Івано-Франківськ</h2>
     {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
