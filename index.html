@@ -6,6 +6,15 @@ description:
 
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+
+<div class="row">
+  <div class="col-12">
+    <div class="alert alert-danger" role="alert">
+      <b>УВАГА!</b> Вебсайт про нерухомість ще тільки будується, вміст сайту часткового вигаданий...
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-12">{% include home/deck.html %}</div>
 </div>
