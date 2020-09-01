@@ -40,6 +40,7 @@ layout: default
       {%- endif -%}
       {%- if pp.size > 0 -%}
       <div class="tab-pane fade show" id="{{ index }}" role="tabpanel" aria-labelledby="{{ index }}-tab">
+        <h2>Новобудови від забудовника {{ page.title }}</h2>
         {%- for item in pp -%}
           {%- include elements/items-pages.html -%}
         {%- endfor -%}
