@@ -62,3 +62,8 @@
     overflow: hidden;
     position: relative;
 }
+
+.breadcrumb-item.active a:last-child {
+    color: #6c757d;
+    font-weight: 400 !important;
+}
