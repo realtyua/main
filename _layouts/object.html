@@ -99,16 +99,17 @@ layout: compress
       <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
       <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
       {%- if level.size == 8 -%}
+
+        <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
         {%- comment -%}
-          <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
-        {%- endcomment -%}
         <script type="text/javascript">
           var $table = $('#realestate');
           $(function() {
-            var data = {{ data | jsonify }}
+            var data = {{ data | jsonify }};
             $table.bootstrapTable({data: data})
           })
         </script>
+        {%- endcomment -%}
       {%- endif -%}
       <script src="{{ "/assets/js/table.js" | relative_url }}"></script>
     {%- elsif page.table == 2 -%}
@@ -119,6 +120,6 @@ layout: compress
     <script src="{{ "/assets/js/realtyua.js" | relative_url }}"></script>
 
     {% include modals/net-realestate-modal.html %}
-    
+
   </body>
 </html>
