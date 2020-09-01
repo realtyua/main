@@ -2,6 +2,8 @@
 layout: null
 ---
 
+{{ data | jsonify }}
+
 var $table = $('#table');
 
 $(function() {

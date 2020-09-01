@@ -99,17 +99,23 @@ layout: compress
       <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
       <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
       {%- if level.size == 8 -%}
-        <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
-
-        {%- comment -%}
-
         <script type="text/javascript">
-          var $table = $('#realestate');
+          var $table = $('#table');
           $(function() {
             var data = {{ data | jsonify }};
             $table.bootstrapTable({data: data})
-          })
+          });
         </script>
+
+        {%- comment -%}
+          <script type="text/javascript">
+            var $table = $('#table');
+            $(function() {
+              var data = {{ data | jsonify }};
+              $table.bootstrapTable({data: data})
+            });
+          </script>
+          <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
         {%- endcomment -%}
       {%- endif -%}
       <script src="{{ "/assets/js/table.js" | relative_url }}"></script>
