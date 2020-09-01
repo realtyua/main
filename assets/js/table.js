@@ -2,6 +2,8 @@
 layout: null
 ---
 
+{%- comment -%}
+
 $(function () {
   "use strict";
   var expandedRow = null;
@@ -415,3 +417,5 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
+
+{%- endcomment -%}
