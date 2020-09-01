@@ -6,14 +6,10 @@ status:
 table: 1
 ---
 
-<div class="alert alert-primary" role="alert">
-
-  <p>Знаходиться по <strong>вулиці Ленкавського</strong>, поруч з <strong>Міським озером</strong></p>
-
-  <p>Перша черга будівництва, *вартість квадратного метра від 16 000 гривень*</p>
-
-  <p>Готовність об’єкту будівництва на *дев'яносто відсотків*</p>
-
-  <p>*Шістдесят відсотків* проданих квартир</p>
-
-</div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Знаходиться по <b>вулиці Ленкавського</b>, поруч з <strong>Міським озером</strong></li>
+  <li class="list-group-item">Перша черга будівництва</li>
+  <li class="list-group-item">Готовність об’єкту будівництва на <b>дев'яносто відсотків</b></li>
+  <li class="list-group-item"><b>Шістдесят відсотків</b> проданих квартир</li>
+  <li class="list-group-item"><b>Вартість квадратного метра від 16 000 гривень</b></li>
+</ul>
