@@ -1,9 +1,11 @@
 ---
 layout: compress
 ---
+
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
@@ -16,110 +18,107 @@ layout: compress
       <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
         <div class="container">
 
+          {%- include breadcrumb.html -%}
 
-              {%- include variables/object.html -%}
+          {%- include variables/object.html -%}
 
-              <div class="row mb-3">
-                <div class="col-12">
-                  <h1>{{ page.title }}</h1>
+          <div class="row mb-3">
+            <div class="col-12">
+              <h1>{{ page.title }}</h1>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-5">
+              {%- include image-slider.html folder=folder group='main' width='480' height='250' -%}
+            </div>
+            <div class="col-md-7">
+              {%- assign isContent = content | strip_newlines -%}
+              {%- if isContent == '' -%}
+                {%- include info-visitors.html -%}
+              {%- else -%}
+                {{ content }}
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              {%- if isJson.size > 0 or otabs.size > 0 or data.size > 0 -%}
+              <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+                <div class="navbar-brand d-md-none">
+                  <span class="small">Про житловий комплекс</span>
+                  <span class="ml-1 float-right align-middle text-primary">→</span>
                 </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-5">
-                  {%- include image-slider.html folder=folder group='main' width='480' height='250' -%}
-                </div>
-                <div class="col-md-7">
-                  {%- assign isContent = content | strip_newlines -%}
-                  {%- if isContent == '' -%}
-                    {%- include info-visitors.html -%}
-                  {%- else -%}
-                    {{ content }}
-                  {%- endif -%}
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-12">
-                  {%- if isJson.size > 0 or otabs.size > 0 or data.size > 0 -%}
-                  <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
-                    <div class="navbar-brand d-md-none">
-                      <span class="small">Про житловий комплекс</span>
-                      <span class="ml-1 float-right align-middle text-primary">→</span>
-                    </div>
-                    <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarVambud" aria-controls="navbarVambud" aria-expanded="false" aria-label="Toggle button">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
-                      <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
-                        {%- if isJson.size > 0 or data.size > 0 -%}
-                          {%- include elements/offer-tab.html -%}
-                        {%- endif -%}
-                        {%- if otabs.size > 0 -%}
-                          {%- include elements/others-tab.html tabs=otabs -%}
-                        {%- endif -%}
-                      </ul>
-                    </div>
-                  </nav>
-                  <hr class="mt-2 mt-md-0">
-                  <div class="tab-content" id="vambud-content">
+                <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarVambud" aria-controls="navbarVambud" aria-expanded="false" aria-label="Toggle button">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
+                  <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
                     {%- if isJson.size > 0 or data.size > 0 -%}
-                      {%- include elements/offer-pane.html -%}
+                      {%- include elements/offer-tab.html -%}
                     {%- endif -%}
                     {%- if otabs.size > 0 -%}
-                      {%- include elements/others-pane.html tabs=otabs -%}
+                      {%- include elements/others-tab.html tabs=otabs -%}
                     {%- endif -%}
-                  </div>
-                  {%- endif -%}
+                  </ul>
                 </div>
-                {%- include elements/pager.html l=8 -%}
+              </nav>
+              <hr class="mt-2 mt-md-0">
+              <div class="tab-content" id="vambud-content">
+                {%- if isJson.size > 0 or data.size > 0 -%}
+                  {%- include elements/offer-pane.html -%}
+                {%- endif -%}
+                {%- if otabs.size > 0 -%}
+                  {%- include elements/others-pane.html tabs=otabs -%}
+                {%- endif -%}
               </div>
-
-              {%- comment -%}
-              <script>
-                var $table = $('#realestate');
-                $(function() {
-                  var data = {{ data | jsonify }}
-                  $table.bootstrapTable({data: data})
-                })
-              </script>
-              {%- endcomment -%}
-
+              {%- endif -%}
+            </div>
+            {%- include elements/pager.html l=8 -%}
           </div>
-        </main>
+
+        </div>
+      </main>
+
         {%- include footer.html -%}
-      </div>
-      {%- include scroll-top.html -%}
 
-      {%- assign level = page.dir | split: '/' -%}
-      <script src="{{ "/assets/js/jquery.min.js" | relative_url }}"></script>
-      <script src="{{ "/assets/js/popper.min.js" | relative_url }}"></script>
-      <script src="{{ "/assets/js/bootstrap.min.js" | relative_url }}"></script>
-      <script src="{{ "/assets/js/photoswipe.min.js" | relative_url }}"></script>
-      <script src="{{ "/assets/js/photoswipe-ui-default.min.js" | relative_url }}"></script>
-      <script src="{{ "/assets/js/bootstrap.lightbox.min.js" | relative_url }}"></script>
-      <script src="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}"></script>
-      {%- if page.table == 1 -%}
-        <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
-        <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
-        {%- if level.size == 8 -%}
+    </div>
+
+    {%- include scroll-top.html -%}
+
+    {%- assign level = page.dir | split: '/' -%}
+    <script src="{{ "/assets/js/jquery.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/popper.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/bootstrap.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/photoswipe.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/photoswipe-ui-default.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/bootstrap.lightbox.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}"></script>
+    {%- if page.table == 1 -%}
+      <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
+      <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
+      {%- if level.size == 8 -%}
+        {%- comment -%}
           <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
-          <script type="text/javascript">
-            var $table = $('#realestate');
-            $(function() {
-              var data = {{ data | jsonify }}
-              $table.bootstrapTable({data: data})
-            })
-          </script>
-        {%- endif -%}
-        <script src="{{ "/assets/js/table.js" | relative_url }}"></script>
-      {%- elsif page.table == 2 -%}
-        <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
-        <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
-        <script src="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}"></script>
+        {%- endcomment -%}
+        <script type="text/javascript">
+          var $table = $('#realestate');
+          $(function() {
+            var data = {{ data | jsonify }}
+            $table.bootstrapTable({data: data})
+          })
+        </script>
       {%- endif -%}
-      <script src="{{ "/assets/js/realtyua.js" | relative_url }}"></script>
+      <script src="{{ "/assets/js/table.js" | relative_url }}"></script>
+    {%- elsif page.table == 2 -%}
+      <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
+      <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
+      <script src="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}"></script>
+    {%- endif -%}
+    <script src="{{ "/assets/js/realtyua.js" | relative_url }}"></script>
 
-      {% include modals/net-realestate-modal.html %}
+    {% include modals/net-realestate-modal.html %}
+    
   </body>
 </html>
