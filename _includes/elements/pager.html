@@ -24,8 +24,8 @@
     {%- if p.url == page.url -%}
       {%- if forloop.first == false -%}
       {%- assign prev = forloop.index0 | minus:1 -%}
-      <div class="col-2 col-md-1 mb-3 mb-md-0 text-right align-top">&larr;</div>
-      <div class="col-10 col-md-5 mb-3 mb-md-0 text-left"><a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a></div>
+      <div class="col-2 col-md-1 text-right align-top">&larr;</div>
+      <div class="col-10 col-md-5 text-left"><a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a></div>
       {%- else -%}
       <div class="d-none d-md-block col-md-6">&nbsp;</div>
       {%- endif -%}
