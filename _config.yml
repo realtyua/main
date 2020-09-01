@@ -38,6 +38,8 @@ contact:
   www: https://www.realestate.if.ua/
 
 markdown: kramdown
+kramdown:
+  auto_ids: false
 
 collections:
   stabs:

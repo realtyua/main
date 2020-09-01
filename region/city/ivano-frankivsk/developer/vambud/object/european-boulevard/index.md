@@ -11,5 +11,5 @@ table: 1
   <li class="list-group-item">Перша черга будівництва</li>
   <li class="list-group-item">Готовність об’єкту будівництва на <b>дев'яносто відсотків</b></li>
   <li class="list-group-item"><b>Шістдесят відсотків</b> проданих квартир</li>
-  <li class="list-group-item"><b>Вартість квадратного метра від 16 000 гривень</b></li>
+  <li class="list-group-item"><b>Вартість</b> квадратного метра від <b>16 000 гривень</b></li>
 </ul>

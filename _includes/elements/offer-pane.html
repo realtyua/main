@@ -1,15 +1,14 @@
 <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
   <h2>{{ page.title }} пропонує</h2>
-  
-  {%- include table/data.html -%}
-
-  {%- comment -%}
   {%- if slash.size == 8 -%}
-    {%- for offer in data -%}
-      {%- include table/html.html -%}
-    {%- endfor -%}
+    {%- if data.size > 10 -%}
+      {%- include table/data.html -%}
+    {%- else -%}
+      {%- for offer in data -%}
+        {%- include table/html.html -%}
+      {%- endfor -%}
+    {%- endif -%}
   {%- else -%}
     {%- include table/js.html -%}
   {%- endif -%}
-  {%- endcomment -%}
 </div>
