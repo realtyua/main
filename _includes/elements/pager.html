@@ -24,8 +24,8 @@
     {%- if p.url == page.url -%}
       {%- if forloop.first == false -%}
       {%- assign prev = forloop.index0 | minus:1 -%}
-      <div class="col-sm-1 col-md-1 align-top">&larr;</div>
-      <div class="col-sm-11 col-md-5 text-left"><a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a></div>
+      <div class="col-1 col-md-1 align-top">&larr;</div>
+      <div class="col-11 col-md-5 text-left"><a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a></div>
       {%- else -%}
       <div class="col-sm-12 col-md-6 text-left">&nbsp;</div>
       {%- endif -%}
@@ -36,8 +36,8 @@
       {%- endcomment -%}
       {%- if forloop.last == false -%}
       {%- assign next = forloop.index0 | plus:1 -%}
-      <div class="col-sm-11 col-md-5 text-right"><a href="{{ ps[next].url }}">{{ ps[next].title }}</a></div>
-      <div class="col-sm-1 col-md-1 align-top">&rarr;</div>
+      <div class="col-11 col-md-5 text-right"><a href="{{ ps[next].url }}">{{ ps[next].title }}</a></div>
+      <div class="col-1 col-md-1 text-left align-top">&rarr;</div>
       {%- else -%}
       <div class="col-sm-12 col-md-6 text-right">&nbsp;</div>
       {%- endif -%}
