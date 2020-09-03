@@ -6,7 +6,7 @@
   {%- assign section = back | last -%}
   {%- assign object = item.dir | split: '/' | last -%}
 {%- elsif back.size == 7 -%}
-  {%- assign size = back | size | minus:4 -%}
+  {%- assign size = back | size | minus:2 -%}
   {%- assign section = back | last -%}
   {%- assign object = item.dir | split: '/' | last -%}
 {%- else -%}
