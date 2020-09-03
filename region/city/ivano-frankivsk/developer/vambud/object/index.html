@@ -2,3 +2,18 @@
 title: Житлові комплекси
 breadcrumb: Об'єкт
 ---
+
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:1 -%}
+{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+{%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
+{%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
+
+<div class="row">
+  <div class="col-12">
+    <h1>{{ page.title }} {{ addtitle }}</h1>
+    {%- include nav-section.html -%}
+    <h2 class="md-3">Новобудови від забудовників</h2>
+    {%- include elements/list-pages.html -%}
+  </div>
+</div>
