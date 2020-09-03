@@ -1,6 +1,7 @@
 {%- assign back = page.dir | split: '/' -%}
 {%- if back.size == 5 -%}
   {%- assign section = item.dir | split: '/' | last -%}
+  {%- assign logo = '/assets/images/logo/' | append: section | append: '.png' -%}
 {%- elsif back.size == 6 -%}
   {%- assign size = back | size | minus:2 -%}
   {%- assign section = back | last -%}
@@ -24,10 +25,12 @@
 {%- endif -%}
   <div class="col px-2 mb-3">
     <div class="card h-100">
-      <img src="/assets/images/logo/{{ section }}.png" class="card-img-top" alt="Image {{ item.title }}">
-      {%- comment -%}
-      <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
-      {%- endcomment -%}
+      {%- include static-file.html file=logo -%}
+      {%- if file == true -%}
+        <img src="/assets/images/logo/{{ section }}.png" class="card-img-top" alt="Image {{ item.title }}">
+      {%- else -%}
+        <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
+      {%- endif -%}
       <div class="card-body">
         <h5 class="card-title">
           <a href="{{ item.url }}">
