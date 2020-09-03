@@ -11,7 +11,7 @@
 
   {%- assign gauge = back | size | minus:4 -%}
   gauge: {{gauge}}<br>
-  {%- assign piece = slash | slice: 0, gauge | join: "/" -%}
+  {%- assign piece = back | slice: 0, gauge | join: "/" -%}
   piece: {{piece}}<br>
   {%- assign section = piece | split: "/" | last -%}
 
