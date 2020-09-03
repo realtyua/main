@@ -17,7 +17,6 @@
           <div class="card h-100">
             {%- assign logos = '/assets/images/logo/' -%}
             {%- assign logo = logos | append: section | append: '.png' -%}
-            logo: {{logo}}<br>
             {%- include static-file.html file=logo -%}
             {%- if file == true -%}
               <img src="{{ logo }}" class="card-img-top" alt="Image {{ item.title }}">
