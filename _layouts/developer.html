@@ -19,7 +19,7 @@ layout: default
       <div class="col-md-8">
         {%- assign isContent = content | strip_newlines -%}
         {%- if isContent == '' -%}
-          {%- include info-visitors.html -%}
+          <p>{{ page.title }} це...</p>
         {%- else -%}
           {{ content }}
         {%- endif -%}
