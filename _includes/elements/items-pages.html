@@ -9,7 +9,7 @@
 
   {%- assign size = back | size | minus:3 -%}
 
-  {%- assign gauge = back | size | minus:4 -%}
+  {%- assign gauge = back | size | minus:1 -%}
   gauge: {{gauge}}<br>
   {%- assign piece = back | slice: 0, gauge | join: "/" -%}
   piece: {{piece}}<br>
