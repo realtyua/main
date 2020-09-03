@@ -5,6 +5,10 @@
   {%- assign size = back | size | minus:2 -%}
   {%- assign section = back | last -%}
   {%- assign object = item.dir | split: '/' | last -%}
+{%- elsif back.size == 7 -%}
+  {%- assign size = back | size | minus:3 -%}
+  {%- assign section = back | last -%}
+  {%- assign object = item.dir | split: '/' | last -%}
 {%- else -%}
   {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
