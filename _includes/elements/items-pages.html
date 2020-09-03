@@ -6,17 +6,11 @@
   {%- assign section = back | last -%}
   {%- assign object = item.dir | split: '/' | last -%}
 {%- elsif back.size == 7 -%}
-
   {%- assign size = back | size | minus:3 -%}
-
   {%- assign gauge = back | size | minus:1 -%}
-  gauge: {{gauge}}<br>
   {%- assign piece = back | slice: 0, gauge | join: "/" -%}
-  piece: {{piece}}<br>
   {%- assign section = piece | split: "/" | last -%}
-
   {%- assign object = item.dir | split: '/' | last -%}
-
 {%- else -%}
   {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
