@@ -3,7 +3,7 @@
   {%- assign section = item.dir | split: '/' | last -%}
 {%- elsif back.size == 6 -%}
   {%- assign size = back | size | minus:2 -%}
-{%- assign section = back | last -%}
+  {%- assign section = back | last -%}
   {%- assign object = item.dir | split: '/' | last -%}
 {%- else -%}
   {%- assign size = back | size | minus:1 -%}
@@ -40,8 +40,12 @@
               </li>
             </ul>
           </nav>
+          region: {{ region }}<br>
+          section: {{ section }}<br>
+          object: {{ object }}<br>
           <div class="tab-content" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-content">
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
+              {%- assign location = 'Івано-Франківськ' -%}
               {% if back.size >= 6 %}
                 {%- include variables/complex.html title=item.title slice=2 -%}
                 {%- assign records = site.data[section] | where_exp: "i", "i.location contains location and i.object contains item.breadcrumb" -%}
