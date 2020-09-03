@@ -32,7 +32,7 @@
     <div class="card h-100">
       {%- include static-file.html file=logo -%}
       {%- if file == true -%}
-        <img src="/assets/images/logo/{{ section }}.png" class="card-img-top" alt="Image {{ item.title }}">
+        <img src="{{ logo }}" class="card-img-top" alt="Image {{ item.title }}">
       {%- else -%}
         <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
       {%- endif -%}
