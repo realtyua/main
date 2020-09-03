@@ -24,7 +24,10 @@
 {%- endif -%}
   <div class="col px-2 mb-3">
     <div class="card h-100">
+      <img src="/assets/images/logo/{{ section }}.png" class="card-img-top" alt="Image {{ item.title }}">
+      {%- comment -%}
       <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
+      {%- endcomment -%}
       <div class="card-body">
         <h5 class="card-title">
           <a href="{{ item.url }}">
