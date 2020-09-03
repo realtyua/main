@@ -13,22 +13,7 @@ breadcrumb: Об'єкт
   <div class="col-12">
     <h1>{{ page.title }} компанії {{ addtitle }}</h1>
 
-    {%- include location.html -%}
-    {%- assign items = '' | split:'' -%}
-    {%- assign pages = site.pages | sort: 'path' | reverse -%}
-    {%- for lp in pages -%}
-      {%- assign l = lp.dir | split: '/' -%}
-      {%- if lp.dir contains page.dir and lp.dir != page.dir and l.size == 8 -%}
-        {%- assign items = items | push: lp -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- if items.size > 0 -%}
-      {%- for item in items limit:6 -%}
-        {%- assign section = item.url | split: "/" | last -%}
-        {%- include elements/items-pages.html -%}
-      {%- else -%}
-      {%- endfor -%}
-    {%- endif -%}
+    {%- include elements/list-pages.html l=8 -%}
 
 
   </div>
