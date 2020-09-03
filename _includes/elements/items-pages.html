@@ -31,9 +31,9 @@
     <div class="card h-100">
       {%- include static-file.html file=logo -%}
       {%- if file == true -%}
-        <img src="{{ logo }}" class="card-img-top" alt="Image {{ item.title }}">
+        <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ item.title }}">
       {%- else -%}
-        <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
+        <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Логотип {{ item.title }}">
       {%- endif -%}
       <div class="card-body">
         <h5 class="card-title">
