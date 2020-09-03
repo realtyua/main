@@ -15,7 +15,15 @@
       {%- endif -%}
         <div class="col px-2 mb-3">
           <div class="card h-100">
-            <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
+            {%- assign logos = '/assets/images/logo/' -%}
+            {%- assign logo = logos | append: section | append: '.png' -%}
+            logo: {{logo}}<br>
+            {%- include static-file.html file=logo -%}
+            {%- if file == true -%}
+              <img src="{{ logo }}" class="card-img-top" alt="Image {{ item.title }}">
+            {%- else -%}
+              <img src="https://unsplash.it/400/200/?image={%- increment counter -%}" class="card-img-top" alt="Image {{ item.title }}">
+            {%- endif -%}
             <div class="card-body">
               <h5 class="card-title">
                 <a href="{{ item.url }}">
