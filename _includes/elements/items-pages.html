@@ -44,15 +44,23 @@
               </li>
             </ul>
           </nav>
+          befor IF:<br>
           region: {{ region }}<br>
           section: {{ section }}<br>
           object: {{ object }}<br>
           item.breadcrumb: {{item.breadcrumb}}<br>
-          item.title: {{item.title}}<br>
           location: {{location}}<br>
           <div class="tab-content" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-content">
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
               {% if back.size >= 6 %}
+                <br>
+                befor IF:<br>
+                region: {{ region }}<br>
+                section: {{ section }}<br>
+                object: {{ object }}<br>
+                item.breadcrumb: {{item.breadcrumb}}<br>
+                location: {{location}}<br>
+                <br>
                 {%- include variables/complex.html title=item.title slice=2 -%}
                 {%- assign records = site.data[section] | where_exp: "i", "i.location contains location and i.object contains item.breadcrumb" -%}
               {% else %}
