@@ -43,8 +43,6 @@
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
 
-      {%- assign split = page.dir | split: "/" -%}
-      split.size: {{split.size}}<br>
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: "path" -%}
