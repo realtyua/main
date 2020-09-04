@@ -44,7 +44,7 @@
 
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
-      {%- assign ds = site.pages | sort: "path" -%}
+      {%- assign ds = site.pages | sort: 'path' -%}
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
