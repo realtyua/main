@@ -1,4 +1,5 @@
-{%- if page.url == "/" -%}
+{%- assign split = page.dir | split: "/" -%}
+{%- if split.size == 0 or split.size == 2 or split.size == 3 -%}
   {%- assign location = include.location -%}
 {%- else -%}
   {%- include location.html -%}

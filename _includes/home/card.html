@@ -1,10 +1,8 @@
 
-
 {%- assign region = include.region -%}
 {%- include has-news.html cat=region -%}
 {%- include has-articles.html cat=region -%}
 
-include.breadcrumb: {{include.breadcrumb}}<br>
 <div class="card-text">
   <div class="d-flex justify-content-between">
     <div class="tabs flex-fill">
@@ -51,12 +49,8 @@ include.breadcrumb: {{include.breadcrumb}}<br>
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
-          data: {{data}}<br>
-          include.breadcrumb: {{include.breadcrumb}}<br>
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
-            {%- include data/ivano-frankivsk/all.html location='Івано-Франківськ' -%}
-            offers: {{offers.size}}<br>
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
               <div class="row">
