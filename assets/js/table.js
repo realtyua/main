@@ -371,6 +371,9 @@ function propertyFormatter(value, row) {
       if (row.floor && row.floor !== '') {
         html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
+      if (row.floor && row.floor === '' && row.floors && row.floors !== '') {
+        html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
+      }
       if (row.location && row.location !== '') {
         html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
       }
@@ -384,6 +387,9 @@ function propertyFormatter(value, row) {
       }
       if (row.floor && row.floor !== '') {
         html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
+      }
+      if (row.floor && row.floor === '' && row.floors && row.floors !== '') {
+        html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
       }
       if (row.location && row.location !== '') {
         html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
