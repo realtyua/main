@@ -1,4 +1,3 @@
-
 {%- assign region = include.region -%}
 {%- include has-news.html cat=region -%}
 {%- include has-articles.html cat=region -%}
@@ -48,7 +47,7 @@
       {%- assign ds = site.pages | sort: "path" -%}
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
-          {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
+          {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:4 -%}
