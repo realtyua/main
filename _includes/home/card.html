@@ -1,7 +1,10 @@
+
+{%- include location.html -%}
 {%- assign region = include.region -%}
 {%- include has-news.html cat=region -%}
 {%- include has-articles.html cat=region -%}
-
+location: {{location}}<br>
+include.breadcrumb: {{include.breadcrumb}}<br>
 <div class="card-text">
   <div class="d-flex justify-content-between">
     <div class="tabs flex-fill">
