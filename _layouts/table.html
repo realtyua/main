@@ -21,7 +21,7 @@ layout: default
     {%- elsif page.url contains 'apartment' -%}
       <h2>Продаються квартири</h2>
     {%- elsif page.url contains 'all' -%}
-      <h2>Всі пропозиції нерухомісті у місті {{ location }}</h2>  
+      <h2>Всі пропозиції нерухомісті {{ addtitle }}</h2>  
     {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
