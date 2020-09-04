@@ -1,5 +1,10 @@
 {%- assign location = include.location -%}
 {%- include data/owner.html -%}
+{%- if page.url == "/" -%}
+  {%- assign location = include.location -%}
+{%- else -%}
+  {%- include location.html -%}
+{%- endif -%}
 {%- assign vambud = site.data.vambud | where_exp: 'i', 'i.location contains location' -%}
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
