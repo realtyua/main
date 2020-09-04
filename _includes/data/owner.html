@@ -1,3 +1,8 @@
+{%- if page.url == "/" -%}
+  {%- assign location = include.location -%}
+{%- else -%}
+  {%- include location.html -%}
+{%- endif -%}
 {%- capture oa -%}{%- for ot in site.data.owners -%}{{ ot.phone }}|{%- endfor -%}{%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
 {%- for ot in site.data.owners -%}
