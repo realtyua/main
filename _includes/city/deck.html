@@ -1,0 +1,16 @@
+<div class="row">
+  {%- assign ones = site.pages | sort: 'path' | reverse -%}
+  {%- for one in ones -%}
+    {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if include.dir == current and one.url contains include.current -%}
+      <div class="col-12">
+        <h1 class="mb-4">
+          {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+          {% if one.url contains "/region/city/" or one.url contains "/district/town/" %} {{ site.data.labels.deck_region_in }}{% endif %}
+        </h1>
+      </div>
+      <div class="col-12">{%- include home/region.html current=one.url -%}</div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
