@@ -52,6 +52,7 @@ include.breadcrumb: {{include.breadcrumb}}<br>
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
           data: {{data}}<br>
+          include.breadcrumb: {{include.breadcrumb}}<br>
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             offers: {{offers.size}}<br>
