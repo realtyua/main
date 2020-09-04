@@ -1,3 +1,4 @@
+{%- assign location = include.location -%}
 {%- include data/owner.html -%}
 {%- assign vambud = site.data.vambud | where_exp: 'i', 'i.location contains location' -%}
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}

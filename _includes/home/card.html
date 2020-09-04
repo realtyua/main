@@ -55,6 +55,7 @@ include.breadcrumb: {{include.breadcrumb}}<br>
           include.breadcrumb: {{include.breadcrumb}}<br>
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
+            {%- include data/ivano-frankivsk/all.html location='Івано-Франківськ' -%}
             offers: {{offers.size}}<br>
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
