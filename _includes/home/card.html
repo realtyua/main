@@ -54,6 +54,7 @@ include.breadcrumb: {{include.breadcrumb}}<br>
           data: {{data}}<br>
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
+            offer: {{offer.size}}<br>
             {%- for offer in offers limit:4 -%}
               {%- if forloop.first -%}
               <div class="row">
