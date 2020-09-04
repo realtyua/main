@@ -349,12 +349,12 @@ function propertyFormatter(value, row) {
         html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + '</strong> {{ site.data.lang-uk.re_m }}<sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
-        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ...3')
+        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ')
       }
       if (row.floor && row.floor !== '') {
         html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
-      if (row.floor && row.floor === '' && row.floors && row.floors !== '') {
+      if (row.floor === '' && row.floors !== '') {
         html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
       }
       if (row.location && row.location !== '') {
@@ -366,12 +366,12 @@ function propertyFormatter(value, row) {
         html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + '</strong> {{ site.data.lang-uk.re_m }}<sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
-        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ...2')
+        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ')
       }
       if (row.floor && row.floor !== '') {
         html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
-      if (row.floor && row.floor === '' && row.floors && row.floors !== '') {
+      if (row.floor === '' && row.floors !== '') {
         html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
       }
       if (row.location && row.location !== '') {
@@ -383,10 +383,10 @@ function propertyFormatter(value, row) {
         html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + '</strong> {{ site.data.lang-uk.re_m }}<sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
-        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ...1')
+        html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ')
       }
-      if (row.floor && row.floor !== '') {
-        html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
+      if (row.floor === '' && row.floors !== '') {
+        html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
       }
       if (row.floor && row.floor === '' && row.floors && row.floors !== '') {
         html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
