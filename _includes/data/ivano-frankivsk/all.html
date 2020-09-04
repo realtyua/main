@@ -1,5 +1,5 @@
 {%- include data/owner.html -%}
-{%- assign location = 'Івано-Франківськ' -%}
+{%- assign location = include.location -%}
 {%- assign vambud = site.data.vambud | where_exp: 'i', 'i.location contains location' -%}
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
