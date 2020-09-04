@@ -1,0 +1,41 @@
+<div class="row">
+  {%- assign ones = site.pages | sort: 'path' | reverse -%}
+  {%- for one in ones -%}
+    {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
+    {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+    {%- if "/" == current and one.url contains include.current and one.navhide != 1 -%}
+      <div class="col-12">
+        <h1 class="mb-4">
+          {% if one.url contains "/region/" %}{{ site.data.labels.deck_region }} {% endif %}
+          {%- if one.url contains "/region/" -%}
+            {%- if one.navtitle -%}{{ one.navtitle | downcase }}{%- else -%}{{ one.title | downcase }}{%- endif -%}
+          {%- else -%}
+            {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+          {%- endif -%}
+          {% if one.url contains "/district/" %} {{ site.data.labels.deck_region_in }}{% endif %}
+        </h1>
+      </div>
+      <div class="col-12">{%- include home/region.html current=one.url -%}</div>
+      {%- if one.url -%}
+        {%- assign twos = site.pages -%}
+        {%- for two in twos -%}
+          {%- if two -%}
+            {%- capture slug -%}{{ two.url | split: "/" | last }}{%- endcapture -%}
+            {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+            {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
+            <div class="col-12">
+              <h2 class="mb-4">
+                <a href="{{ two.url }}">
+                  {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+                </a>
+                {% if two.url contains "/region/city/" or two.url contains "/district/town/" %} {{ site.data.labels.deck_region_in }}{% endif %}
+              </h2>
+            </div>
+            <div class="col-12">{%- include home/region.html current=two.url -%}</div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>
