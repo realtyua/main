@@ -1,10 +1,8 @@
 <div class="row">
   {%- assign ones = site.pages | sort: 'path' | reverse -%}
   {%- for one in ones -%}
-
     {%- assign slug = one.url | split: "/" | last -%}
     {%- assign current = one.url | remove: slug | remove: "//" | append: "/" -%}
-
     {%- if include.dir == current and one.url contains include.current -%}
       <div class="col-12">
         <h1 class="mb-4">
@@ -14,6 +12,5 @@
       </div>
       <div class="col-12">{%- include home/region.html current=one.url -%}</div>
     {%- endif -%}
-
   {%- endfor -%}
 </div>
