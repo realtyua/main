@@ -1,0 +1,5 @@
+{%- include data/owner.html -%}
+{%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
+{%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
+{%- include data/tysmienica/records.html -%}
+{%- assign offers = records | sort: "date" | reverse -%}
