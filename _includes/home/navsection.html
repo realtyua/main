@@ -3,9 +3,7 @@
 {%- assign region = include.region -%}
 {%- assign ss = site.pages | sort: "path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1" -%}
 {%- assign all = site.pages | sort: "path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1 and i.url contains '/all.html'" -%}
-ss: {{ss}}<br>
-all: {{all}}<br>
-{%- if ss -%}
+{%- if ss == '' -%}
   <nav class="navbar p-0">
     <button class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
       <span class="navbar-toggler-icon"></span>
