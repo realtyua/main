@@ -27,9 +27,9 @@
           {%- assign path = slug | prepend: dir | append: '.jpg' | relative_url -%}
           {%- assign file = site.static_files | where: "path", path | first -%}
           {%- if file -%}
-            <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Image {{ slug }}">
+            <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Real Estate {{ slug | capitalize }}">
           {%- else -%}
-            <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Image {{ slug }}">
+            <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Real Estate {{ slug | capitalize }}">
           {%- endif -%}
           <div class="card-body p-3">
             <h5 class="card-title">
