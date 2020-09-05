@@ -1,7 +1,7 @@
 
 {%- assign url = include.url -%}
 {%- assign region = include.region -%}
-{%- assign ss = site.pages | sort: "path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1" -%}
+{%- assign ss = site.pages | sort: 'path' | where_exp: 'i', "i.url contains url and i.url != url and i.title != '' and i.navhide != 1" -%}
 {%- if ss.size > 0 -%}
   <nav class="navbar p-0">
     <button class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
@@ -10,8 +10,8 @@
     <div class="section px-2 collapse navbar-collapse" id="{{ region }}-realestate-section">
       <ul class="navbar-nav">
         {%- for s in ss -%}
-          {%- assign slug = s.url | split: "/" | last -%}
-          {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
+          {%- assign slug = s.url | split: '/' | last -%}
+          {%- assign current = s.url | remove: slug | remove: '//' | append: '/' -%}
           {%- if url == current and s.navhide != 1 and s.title != '' -%}
             {%- include home/navitem.html -%}
           {%- endif -%}
