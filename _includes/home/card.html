@@ -12,11 +12,13 @@
               <span>Нещодавно додано</span>
             </a>
           </li>
+          {% comment %}
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="{{ region }}-recently1-tab" data-toggle="tab" href="#{{ region }}-recently1" role="tab" aria-controls="{{ region }}-recently1" aria-selected="true">
               <span>Статті</span>
             </a>
           </li>
+          {% endcomment %}
           {%- if hasNews == true -%}
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="{{ region }}-news-tab" data-toggle="tab" href="#{{ region }}-news" role="tab" aria-controls="{{ region }}-news" aria-selected="true">
@@ -34,9 +36,7 @@
         </ul>
       </nav>
     </div>
-    <div class="menu pt-1">
-      {%- include home/navsection.html region=region url=include.url -%}
-    </div>
+    {%- include home/navsection.html region=region url=include.url -%}
   </div>
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
@@ -77,23 +77,19 @@
       {%- endfor -%}
 
     </div>
+    {% comment %}
     <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">
       Нещодавно додані статті
     </div>
+    {% endcomment %}
     {%- if hasNews == true -%}
     <div class="tab-pane pt-3 fade" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
-      ...
-      {% comment %}
       {%- include home/news-last.html cat=region url=include.url num='3'-%}
-      {% endcomment %}
     </div>
     {%- endif -%}
     {%- if hasArticles == true -%}
     <div class="tab-pane pt-3 fade" id="{{ region }}-articles" role="tabpanel" aria-labelledby="{{ region }}-articles-tab">
-      ...
-      {% comment %}
       {%- include home/articles-last.html cat=region url=include.url num='3' -%}
-      {% endcomment %}
     </div>
     {%- endif -%}
   </div>
