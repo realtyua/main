@@ -3,7 +3,7 @@
 {%- assign region = include.region -%}
 {%- assign ss = site.pages | sort:"path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1" -%}
 ss.size: {{ss.size}}<br>
-{%- if ss.size > 0 -%}
+{%- if ss.size <= 1 -%}
   <nav class="navbar p-0">
     <button class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
       <span class="navbar-toggler-icon"></span>
@@ -11,6 +11,7 @@ ss.size: {{ss.size}}<br>
     <div class="section px-2 collapse navbar-collapse" id="{{ region }}-realestate-section">
       <ul class="navbar-nav">
         {%- for s in ss -%}
+          s.url: {{s.url}}<br>
           {%- assign slug = s.url | split: "/" | last -%}
           {%- assign current = s.url | remove: slug | remove: "//" | append: "/" -%}
           {%- if url == current and s.navhide != 1 and s.title != '' -%}
