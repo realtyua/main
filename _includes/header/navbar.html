@@ -15,8 +15,8 @@
             {%- assign path = one.url | split: '/' -%}
             {%- assign part = path | size -%}
             {%- assign slug = one.url | split: '/' | last -%}
-            {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-            {%- if "/" == current and one.navhide != 1 -%}
+            {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+            {%- if '/' == current and one.navhide != 1 -%}
               <li class="nav-item position-static{% if part >= 2 %} dropdown{% endif %}">
                 <a class="nav-link{% if part >= 2 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if part >= 2 -%}#{%- else -%}{{ one.url }}{%- endif -%}"{% if part >= 2 %} id="navDropRealEstate{{ slug | capitalize }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
                   {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
@@ -31,8 +31,8 @@
                   {%- assign path = two.url | split: '/' -%}
                   {%- assign part = path | size -%}
                   {%- assign slug = two.url | split: '/' | last -%}
-                  {%- capture current -%}{{ two.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
-                  {%- if one.url == current and two.url contains "city" or two.url contains "town" -%}
+                  {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
+                  {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
                   <li class="nav-item position-static{% if part >= 3 %} dropdown{%- endif -%}">
                     <a class="nav-link{% if part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if part >= 3 -%}#{%- else -%}{{ two.url }}{%- endif -%}"{% if part >= 3 %} id="navDropRealEstate{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
                       {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
