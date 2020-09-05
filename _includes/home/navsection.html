@@ -1,8 +1,8 @@
 
 {%- assign url = include.url -%}
 {%- assign region = include.region -%}
-{%- assign ss = site.pages | sort:"path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1" -%}
-{%- assign all = ss | sort:"path" | where_exp: "i", "i.url contains '/all.html' -%}
+{%- assign ss = site.pages | sort: "path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1" -%}
+{%- assign all = site.pages | sort: "path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1 and i.url contains '/all.html' -%}
 all: {{all}}<br>
 {%- if ss.size > 0 -%}
   <nav class="navbar p-0">
