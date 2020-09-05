@@ -6,7 +6,7 @@
     {%- assign current = three.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and three.navhide != 1 and three.title != '' -%}
     {% comment %}
-      {%- if three.url contains "ivano-frankivska" -%}
+      {%- if three.url contains 'ivano-frankivska' -%}
       <div class="col mb-4">
         <div class="card">
           <div class="card-body p-3">
