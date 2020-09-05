@@ -3,6 +3,8 @@
 {%- assign region = include.region -%}
 {%- assign ss = site.pages | sort: "path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1" -%}
 {%- assign all = site.pages | sort: "path" | where_exp: "i", "i.url contains url and i.url != url and i.title != '' and i.navhide != 1 and i.url contains '/all.html'" -%}
+ss.size {{ss.size}}<br>
+all.size {{all.size}}<br>
 {%- if ss.size > 0 and all.size != 0 -%}
   <nav class="navbar p-0">
     <button class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
