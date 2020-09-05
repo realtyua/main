@@ -50,7 +50,7 @@
           {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
-            {%- for offer in offers limit:4 -%}
+            {%- for offer in offers limit:3 -%}
               {%- if forloop.first -%}
               <div class="row">
                 <div class="col-12">
