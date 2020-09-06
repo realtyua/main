@@ -2,10 +2,7 @@
 {%- if back.size == 5 -%}
   {%- assign here = include.root -%}
 {%- elsif back.size == 4 -%}
-  {%- assign size = back | size -%}
-  {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- elsif back.size == 4 and page.url contains 'all.html' -%}
-  {%- assign here = page.url | remove: 'all.html' -%}
+  {%- assign here = back | slice: 0, back.size | join: '/' | append: '/' -%}
 {%- endif -%}
 
 {%- assign ones = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.url contains here and i.url != here and i.title != ''" -%}
