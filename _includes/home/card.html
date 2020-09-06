@@ -41,13 +41,16 @@
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
-{%- comment -%}
+
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: 'path' -%}
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+          
+data: {{data}}<br>
+{%- comment -%}
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:3 -%}
@@ -73,9 +76,11 @@
               {%- endif -%}
             {%- endfor -%}
           {%- endif -%}
+{%- endcomment -%}
+
         {%- endif -%}
       {%- endfor -%}
-{%- endcomment -%}
+
     </div>
     {% comment %}
     <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">
