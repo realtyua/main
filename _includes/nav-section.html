@@ -1,7 +1,9 @@
 {%- assign back = page.dir | split: '/' -%}
-{%- assign size = back | size | minus:1 -%}
+{%- assign size = back | size | minus: 1 -%}
 {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
+{%- assign iterator = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.url contains here and i.url != here and i.title != '' and i.navhide != 1" -%}
+iterator: {{iterator.size}}<br>
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
