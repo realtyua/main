@@ -25,6 +25,9 @@ layout: default
       <h2>Всі пропозиції нерухомісті</h2>
     {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
+
+{%- comment -%}
+
     {%- if page.url contains 'all.html' -%}
       {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
@@ -42,5 +45,8 @@ layout: default
         {%- endfor -%}
       {%- endif -%}
     {%- endif -%}
+
+{%- endcomment -%}
+
   </div>
 </div>
