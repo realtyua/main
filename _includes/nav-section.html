@@ -1,6 +1,6 @@
 {%- assign back = page.dir | split: '/' -%}
-{%- assign size = back | size | minus: 1 -%}
-{%- assign here = back | slice: 0, size | join: '//' | append: '/' -%}
+{%- assign size = back | size | minus:1 -%}
+{%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">
