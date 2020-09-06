@@ -1,25 +1,7 @@
-{%- assign back = page.dir | split: '/' -%}
-{%- if back.size == 5 -%}
-  {%- assign here = include.root -%}
-{%- elsif back.size == 4 -%}
-  {%- assign here = back | slice: 0, back.size | join: '/' | append: '/' -%}
-{%- endif -%}
-
-{%- assign ns = '' | split:'' -%}
-{%- assign pages = site.pages | sort: 'path' | reverse -%}
-{%- for ps in pages -%}
-  {%- assign l = ps.dir | split: '/' -%}
-  {%- if ps.dir contains page.dir and ps.dir != page.dir and l.size == 5 -%}
-    {%- assign ns = ns | push: ps -%}
-  {%- endif -%}
-{%- endfor -%}
-
-{%- for s in ns -%}
-s.url: {{s.url}}<br>
-{%- endfor -%}
-
-{%- assign ones = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.url contains here and i.url != here and i.title != ''" -%}
-
+{%- assign back = page.dir | split: "/" -%}
+{%- assign size = back | size | minus:1 -%}
+{%- assign here = back | slice: 0, size | join: "/" | append: "/" -%}
+{%- assign ones = site.pages | sort: 'dir' | reverse -%}
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
@@ -30,13 +12,9 @@ s.url: {{s.url}}<br>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
     <ul class="navbar-nav nav nav-tabs border-0">
-      <li class="nav-item">
-        <a href="/region/city/ivano-frankivsk/all" class="nav-link border-0">
-          <span>Вся нерухомість</span>
-        </a>
-      </li>
       {%- for one in ones -%}
-        {%- assign isJson = false -%}{%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+        {%- assign isJson = false -%}
+        {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
         {%- if one.title != '' and one.navhide != 1 and isJson == false -%}
