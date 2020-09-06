@@ -8,7 +8,7 @@ here: {{here}}<br>
 {%- assign iterator = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.url contains here and i.url != here and i.title != '' and i.navhide != 1" -%}
 
 {%- for iter in iterator -%}
-  i: {{iter.url}}
+  i: {{iter.url}}<br>
 {%- endfor -%}
 
 iterator: {{iterator.size}}<br>
@@ -23,9 +23,13 @@ iterator: {{iterator.size}}<br>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
     <ul class="navbar-nav nav nav-tabs border-0">
+      <li class="nav-item">
+        <a href="/region/city/ivano-frankivsk/all" class="nav-link border-0">
+          <span>Вся нерухомість</span>
+        </a>
+      </li>
       {%- for one in ones -%}
-        {%- assign isJson = false -%}
-        {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+        {%- assign isJson = false -%}{%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
         {%- if one.title != '' and one.navhide != 1 and isJson == false -%}
