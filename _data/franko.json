@@ -184,5 +184,26 @@
         "phone": "380506660066",
         "description": "",
         "images": ""
+    },
+    {
+        "id": "7",
+        "type": "Будинок",
+        "rent": "",
+        "rooms": "2",
+        "surface": "60",
+        "surface_land": "",
+        "price": "$18000",
+        "price_sqmt": "$600",
+        "floor": "",
+        "floors": "1",
+        "parking": "Власний гараж",
+        "region": "Івано-Франківський район",
+        "location": "",
+        "address": "вул. Шевченка, с. Клузів",
+        "date": "2020-08-29",
+        "seller": "Агентство нерухо́місті Франко",
+        "phone": "380506660066",
+        "description": "",
+        "images": ""
     }
 ]
