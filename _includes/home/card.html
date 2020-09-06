@@ -46,12 +46,19 @@
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: 'path' -%}
       {%- for d in ds -%}
+        {%- assign l = d.url | split: '/' -%}
         {%- if d.url contains url and d.url == all -%}
-          {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+          {%- if l.size == 4 -%}
+            {%- assign data = d.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+          {%- elsif l.size == 5 -%}
+            {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+          {%- endif -%}
 
 d.url: {{d.url}}<br>
 data: {{data}}<br>
+
 {%- comment -%}
+
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit:3 -%}
