@@ -28,6 +28,8 @@ layout: default
 
 {%- comment -%}
 
+{%- endcomment -%}
+
     {%- if page.url contains 'all.html' -%}
       {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
       {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
@@ -46,7 +48,6 @@ layout: default
       {%- endif -%}
     {%- endif -%}
 
-{%- endcomment -%}
 
   </div>
 </div>

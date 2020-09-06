@@ -41,7 +41,7 @@
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
-
+{%- comment -%}
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: 'path' -%}
@@ -75,7 +75,7 @@
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
-
+{%- endcomment -%}
     </div>
     {% comment %}
     <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">
