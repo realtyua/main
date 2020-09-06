@@ -17,7 +17,7 @@
         {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
         {%- assign slug = one.url | split: '/' | last -%}
         {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- if one.title != '' and one.navhide != 0 and isJson == false -%}
+        {%- if one.title != '' and isJson == false -%}
           {%- include nav-item.html -%}
         {%- endif -%}
       {%- endfor -%}
