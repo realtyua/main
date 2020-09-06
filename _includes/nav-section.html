@@ -3,6 +3,7 @@
 {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
 
+root: {{include.root}}<br>
 back: {{back.size}}<br>
 here: {{here}}<br>
 

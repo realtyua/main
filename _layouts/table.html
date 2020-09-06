@@ -3,11 +3,18 @@ layout: default
 ---
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 1, 4 | join: ' ' -%}
+
+{%- assign slash = page.dir | split: "/" -%}
+{%- assign gauge = slash | size | minus:1 -%}
+{%- assign root = slash | slice: 0, gauge | join: "/" | append: '/' -%}
+
+root: {{root}}<br>
+
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
     {{ content }}
-    {%- include nav-section.html -%}
+    {%- include nav-section.html root=root -%}
     {%- if page.url contains 'rent' -%}
       <h2>Передаються для оренди або здаються в оренду об'єкти нерухомості</h2>
     {%- elsif page.url contains 'land' -%}
@@ -21,7 +28,7 @@ layout: default
     {%- elsif page.url contains 'apartment' -%}
       <h2>Продаються квартири</h2>
     {%- elsif page.url contains 'all' -%}
-      <h2>Всі пропозиції нерухомісті</h2> 
+      <h2>Всі пропозиції нерухомісті</h2>
     {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
     {%- if page.url contains 'all.html' -%}
