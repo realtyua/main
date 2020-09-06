@@ -1,6 +1,6 @@
 {%- assign back = page.dir | split: '/' -%}
 {%- if back.size == 5 -%
-  {%- assign size = back | size | minus: 1 -%}
+  {%- assign size = back | size | minus: 2 -%}
   {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- elsif back.size == 4 -%}
   {%- assign size = back | size | minus: 0 -%}
