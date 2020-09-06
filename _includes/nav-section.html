@@ -6,9 +6,9 @@
 {%- assign ns = '' | split:'' -%}
 {%- assign pages = site.pages | sort: 'path' | reverse -%}
 {%- for ps in pages -%}
-  {%- assign l = ps.url | split: '/' -%}
-  {%- assign isJson = false -%}{%- if ps.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-  {%- if ps.url contains page.url and ps.url != page.url and isJson == false -%}
+  {%- assign l = ps.dir | split: '/' -%}
+  {%- assign isJson = false -%}{%- if ps.dir contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+  {%- if ps.dir contains page.dir and ps.dir != page.dir and isJson == false -%}
     {%- assign ns = ns | push: ps -%}
   {%- endif -%}
 {%- endfor -%}
