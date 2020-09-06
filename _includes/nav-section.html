@@ -1,7 +1,8 @@
-{%- assign back = page.dir | split: "/" -%}
-{%- assign size = back | size | minus:1 -%}
-{%- assign here = back | slice: 0, size | join: "/" | append: "/" -%}
+{%- assign back = page.dir | split: '/' -%}
+{%- assign size = back | size | minus: 1 -%}
+{%- assign here = back | slice: 0, size | join: '//' | append: '/' -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
+{%- if ones.size > 0 -%}
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
@@ -24,4 +25,5 @@
     </ul>
   </div>
 </nav>
+{%- endif -%}
 <hr class="mt-2 mt-md-0">
