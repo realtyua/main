@@ -1,7 +1,6 @@
 {%- assign region = include.region -%}
 {%- include has-news.html cat=region -%}
 {%- include has-articles.html cat=region -%}
-
 <div class="card-text">
   <div class="d-flex justify-content-between">
     <div class="tabs flex-fill">
@@ -41,7 +40,6 @@
   <hr class="m-0">
   <div class="tab-content" id="{{ region }}-realestate-content">
     <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
-
       {%- assign url = include.url -%}
       {%- assign all = url | append: 'all.html' -%}
       {%- assign ds = site.pages | sort: 'path' -%}
@@ -80,7 +78,6 @@
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
-
     </div>
     {% comment %}
     <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">

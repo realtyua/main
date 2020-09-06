@@ -25,17 +25,22 @@ layout: default
       <h2>Всі пропозиції нерухомісті</h2>
     {%- endif -%}
     {%- assign slug = page.url | split: "/" | last -%}
-
-{%- comment -%}
-
-{%- endcomment -%}
+    {%- assign l = page.url | split: '/' -%}
 
     {%- if page.url contains 'all.html' -%}
       {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
-      {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' -%}
+      {%- if l.size == 4 -%}
+        {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+      {%- elsif l.size == 5 -%}
+        {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- endif -%}
     {%- else -%}
       {%- assign json = here | append: 'data/' | append: slug | append: '.json' -%}
-      {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
+      {%- if l.size == 4 -%}
+        {%- assign data = page.url | split: "/" | slice: 2, 4 | join: "/" | prepend: 'data/' | append: '.html' -%}
+      {%- elsif l.size == 5 -%}
+        {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
+      {%- endif -%}
     {%- endif -%}
     {%- if data -%}
       {%- include {{ data }} -%}
@@ -47,7 +52,6 @@ layout: default
         {%- endfor -%}
       {%- endif -%}
     {%- endif -%}
-
 
   </div>
 </div>
