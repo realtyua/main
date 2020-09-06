@@ -48,7 +48,8 @@
       {%- for d in ds -%}
         {%- if d.url contains url and d.url == all -%}
           {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
-          
+
+d.url: {{d.url}}<br>
 data: {{data}}<br>
 {%- comment -%}
           {%- if data -%}
