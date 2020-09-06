@@ -3,7 +3,10 @@
   {%- assign size = back | size | minus: 1 -%}
   {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- elsif back.size == 4 -%}
-  {%- assign here = back | remove: 'all.html' -%}
+  {%- assign size = back | size | minus: 0 -%}
+  {%- assign here = back | slice: 0, size | join: '/' -%}
+{%- elsif back.size == 4 and page.url contains 'all.html' -%}
+  {%- assign here = page.url | remove: 'all.html' -%}
 {%- endif -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
 
