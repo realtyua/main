@@ -3,5 +3,5 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-{%- include data/ivano-frankivskyy/apartment.html -%}
+{%- include data/ivano-frankivskyy/house.html -%}
 {{ offers | jsonify }}
