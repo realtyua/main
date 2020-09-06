@@ -1,10 +1,9 @@
 {%- assign back = page.dir | split: '/' -%}
 {%- if back.size == 5 -%
-  {%- assign size = back | size | minus: 2 -%}
-  {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
+  {%- assign here = include.root -%}
 {%- elsif back.size == 4 -%}
   {%- assign size = back | size | minus: 0 -%}
-  {%- assign here = back | slice: 0, size | join: '/' -%}
+  {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- elsif back.size == 4 and page.url contains 'all.html' -%}
   {%- assign here = page.url | remove: 'all.html' -%}
 {%- endif -%}
