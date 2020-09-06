@@ -1,0 +1,7 @@
+---
+layout: null
+sitemap: false
+navhide: 1
+---
+{%- include data/ivano-frankivskyy/apartment.html -%}
+{{ offers | jsonify }}
