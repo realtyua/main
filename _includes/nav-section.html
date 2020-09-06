@@ -1,12 +1,20 @@
 {%- assign back = page.dir | split: '/' -%}
 {%- assign size = back | size | minus: 1 -%}
 {%- assign here = back | slice: 0, size | join: '//' | append: '/' -%}
+
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
-{%- assign iterator = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.title != '' and i.navhide != 1" -%}
+
+page.dir: {{page.dir}}<br>
+page.url: {{page.url}}<br>
+back: {{back}}<br>
+
+{%- assign iterator = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.url contains here and i.url != here and i.title != '' and i.navhide != 1" -%}
+
 {%- for iter in iterator -%}
-iter.url: {{iter.url}}<br>
+  iter.url: {{iter.url}}<br>
 {%- endfor -%}
 ones.size: {{ones.size}}<br>
+
 {%- if ones.size > 0 -%}
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">
