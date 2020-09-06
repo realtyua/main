@@ -1,6 +1,7 @@
 ---
 layout: null
 sitemap: false
+navhide: 1
 ---
 {%- include data/ivano-frankivsk/apartment.html -%}
 {{ offers | jsonify }}

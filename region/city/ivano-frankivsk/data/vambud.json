@@ -1,6 +1,7 @@
 ---
 layout: null
 sitemap: false
+navhide: 1
 ---
 {%- assign level = page.dir | split: '/' -%}
 {%- if level.size == 0 -%}
