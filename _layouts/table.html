@@ -4,15 +4,11 @@ layout: default
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 1, 4 | join: ' ' -%}
 
-{%- assign slash = page.dir | split: "/" -%}
-{%- assign gauge = slash | size | minus:1 -%}
-{%- assign root = slash | slice: 0, gauge | join: "/" | append: '/' -%}
-
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
     {{ content }}
-    {%- include nav-section.html root=root -%}
+    {%- include nav-section.html -%}
     {%- if page.url contains 'rent' -%}
       <h2>Передаються для оренди або здаються в оренду об'єкти нерухомості</h2>
     {%- elsif page.url contains 'land' -%}
