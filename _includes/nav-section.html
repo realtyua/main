@@ -8,7 +8,7 @@
   {%- assign here = page.url | remove: 'all.html' -%}
 {%- endif -%}
 
-{%- assign ones = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.url contains here and i.url != here and i.title != '' and i.navhide != 0" -%}
+{%- assign ones = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.url contains here and i.url != here and i.title != ''" -%}
 
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">

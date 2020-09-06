@@ -8,8 +8,6 @@ layout: default
 {%- assign gauge = slash | size | minus:1 -%}
 {%- assign root = slash | slice: 0, gauge | join: "/" | append: '/' -%}
 
-root: {{root}}<br>
-
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
