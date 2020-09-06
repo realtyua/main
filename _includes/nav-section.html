@@ -2,21 +2,6 @@
 {%- assign size = back | size | minus: 1 -%}
 {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
-
-{%- assign ns = '' | split:'' -%}
-{%- assign pages = site.pages | sort: 'path' | reverse -%}
-{%- for ps in pages -%}
-  {%- assign l = ps.dir | split: '/' -%}
-  {%- assign isJson = false -%}{%- if ps.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-  {%- if ps.dir contains page.dir and ps.dir != page.dir and isJson == false and l.size == 5 or l.size == 4 -%}
-    {%- assign ns = ns | push: ps -%}
-  {%- endif -%}
-{%- endfor -%}
-
-{%- for s in ns -%}
-s.url: {{s.url}}<br>
-{%- endfor -%}
-
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
   <div class="navbar-brand d-md-none">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
