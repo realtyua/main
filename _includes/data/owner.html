@@ -1,7 +1,7 @@
 {%- assign split = page.dir | split: "/" -%}
 {%- if split.size <= 3 and page.dir contains 'city' or page.dir contains 'town' -%}
   {%- assign location = include.location -%}
-{%- if split.size == 3 and page.dir contains 'district' -%}
+{%- elsif split.size == 3 and page.dir contains 'district' -%}
   {%- include location.html -%}
 {%- else -%}
   {%- include location.html -%}
