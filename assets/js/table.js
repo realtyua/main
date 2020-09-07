@@ -2,6 +2,8 @@
 layout: null
 ---
 
+{%- if page.url contains ".js" -%}
+
 $(function () {
   "use strict";
   var expandedRow = null;
@@ -431,6 +433,8 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
+
+{%- endif -%}
 
 {%- comment -%}
 {%- endcomment -%}
