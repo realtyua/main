@@ -4,6 +4,10 @@ layout: null
 
 {%- assign slash = page.dir | split: "/" -%}
 
+var 1 = {{ page.dir }};
+var 2 = {{ page.url }};
+var 3 = {{ slash }};
+
 $(function () {
   "use strict";
   var expandedRow = null;
@@ -397,15 +401,15 @@ function propertyFormatter(value, row) {
         }
       }
 
-      {% if slash.size >= 4 and page.dir contains "city" or page.dir contains "town" %}
+      {%- if slash.size >= 4 and page.dir contains "city" or page.dir contains "town" -%}
         if (row.location && row.location !== '') {
           html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
         }
-      {% else %}
+      {%- else -%}
         if (row.region && row.region !== '') {
           html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + ', ' + row.region + '</strong>.')
         }
-      {% endif %}
+      {%- endif -%}
 
     }
   }
