@@ -385,18 +385,24 @@ function propertyFormatter(value, row) {
       if (row.rooms && row.rooms !== '') {
         html.push('{{ site.data.lang-uk.re_rooms }} <strong>' + row.rooms + '</strong>, ')
       }
-      if (row.type.indexOf('Будинок') !== -1) {
+      if (row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1) {
         if (row.floors && row.floors !== '') {
-          html.push('поверхів <strong>' + row.floors + '</strong>, ')
+          html.push('{{ site.data.lang-uk.re_floorss }} <strong>' + row.floors + '</strong>, ')
         }
       } else {
         if (row.floor && row.floor !== '') {
           html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
         }
       }
-      if (row.location && row.location !== '') {
-        html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
-      }
+      {% if page.dir contains 'city' or page.dir contains 'town' %}
+        if (row.location && row.location !== '') {
+          html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
+        }
+      {% else %}
+        if (row.region && row.region !== '') {
+          html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + ', ' + row.region + '</strong>.')
+        }
+      {% endif %}
     }
   }
   return html.join('')
