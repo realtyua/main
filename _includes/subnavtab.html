@@ -48,11 +48,7 @@
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title }}</h2>
         {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
         {%- assign foo = page.url | split: "/" -%}
-        location: {{location}}<br>
-        foo: {{foo.size}}<br>
-        data: {{data}}<br>
         {%- include {{ data }} -%}
-        offers: {{offers.size}}<br>
         {%- for offer in offers limit:9 -%}
           {%- if forloop.first -%}
           <div class="row mx-n2">

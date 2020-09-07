@@ -51,7 +51,6 @@
           {%- elsif l.size == 5 -%}
             {%- assign data = d.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
           {%- endif -%}
-          data: {{data}}<br>
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit: 3 -%}
