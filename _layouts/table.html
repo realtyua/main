@@ -42,7 +42,6 @@ layout: default
         {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
       {%- endif -%}
     {%- endif -%}
-    data: {{data}}<br>
     {%- if data -%}
       {%- include {{ data }} -%}
       {%- if offers.size > 10 -%}
