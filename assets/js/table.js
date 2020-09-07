@@ -394,10 +394,8 @@ function propertyFormatter(value, row) {
           html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
         }
       }
-      if (row.type.indexOf('район') !== -1) {
-        if (row.region && row.region !== '') {
-          html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + ', ' + row.region + '</strong>.')
-        }
+      if (row.region && row.region !== '' && row.region.indexOf('район') !== -1) {
+        html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + ', ' + row.region + '</strong>.')
       } else {
         if (row.location && row.location !== '') {
           html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
