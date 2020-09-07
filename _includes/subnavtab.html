@@ -49,6 +49,7 @@
         {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
         data: {{data}}<br>
         {%- include {{ data }} -%}
+        offers: {{offers.size}}<br>
         {%- for offer in offers limit:9 -%}
           {%- if forloop.first -%}
           <div class="row mx-n2">
