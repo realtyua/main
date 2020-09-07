@@ -2,9 +2,6 @@
 layout: null
 ---
 
-var 1 = "{{ page.dir }}";
-var 2 = "{{ page.url }}";
-
 {%- if page.url contains ".js" -%}
 
 $(function () {
