@@ -11,8 +11,6 @@
   {%- assign size = back | size | minus:4 -%}
 {%- elsif back.size == 3 and page.dir contains 'district' -%}
   {%- assign size = back | size -%}
-{%- elsif back.size == 3 -%}
-  {%- assign location = 'Івано-Франківський' -%}
 {%- elsif back.size == 4 -%}
   {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
