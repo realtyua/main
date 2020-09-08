@@ -59,15 +59,23 @@ title: Додати нерухомість
 
           <p>За результатами прочитаного у вас має зявитися щось на зразок цього:</p>
 
-          <p>
-            <kbd>t:Власність,sf:50,r:2,f:3,fs:6,l:мУкраїна,a:вУкраїнська,p:$15000,s:ТарГриШевченко,t:380674330066</kbd>
-          </p>
+
+          <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-body">
+              <p class="card-text">
+                t:Власність,sf:50,r:2,f:3,fs:6,<br>l:мУкраїна,a:вУкраїнська,p:$15000,<br>s:ТарГриШевченко,t:380674330066
+              </p>
+            </div>
+          </div>
 
           <p>Якщо для вас це все дуже складно, тоді у такому випадку переходіть до другого кроку.</p>
 
           <hr>
+
           <p class="mb-0">
-            <a href="/add.html#step-two">Наступний крок</a>
+            <a class="nav-link" id="step-two-tab" data-toggle="tab" href="#step-two" role="tab" aria-controls="step-two" aria-selected="false">
+              Наступний крок
+            </a>
           </p>
         </div>
       </div>
@@ -80,9 +88,13 @@ title: Додати нерухомість
           <h4 class="alert-heading">Крок другий</h4>
           <p>Якщо ви все прочитали і вірно зрозуміли, то у Вас за результатами першого кроку має зявитися щось схоже на це.</p>
           <hr>
-          <p>
-            <kbd>t:Власність,sf:50,r:2,f:3,fs:6,l:мУкраїна,a:вУкраїнська,p:$15000,s:ТарГриШевченко,t:380674330066</kbd>
-          </p>
+          <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-body">
+              <p class="card-text">
+                t:Власність,sf:50,r:2,f:3,fs:6,<br>l:мУкраїна,a:вУкраїнська,p:$15000,<br>s:ТарГриШевченко,t:380674330066
+              </p>
+            </div>
+          </div>
           <p>Що у свою чергу перетвориться у такий формат оголошення і буде опубліковано на цьому вебсайті</p>
           <hr>
           {% for offer in site.data.example limit:1 %}
