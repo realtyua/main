@@ -191,7 +191,7 @@
         "rent": "",
         "rooms": "2",
         "surface": "60",
-        "surface_land": "",
+        "surface_land": "2000",
         "price": "$18000",
         "price_sqmt": "$600",
         "floor": "",
