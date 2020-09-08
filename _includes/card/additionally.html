@@ -1,11 +1,13 @@
 {%- if offer.type == land -%}
 {%- else -%}
-  {%- if offer.floor and offer.floors -%}
-  <dt>{{ site.data.lang-uk.re_floor }}</dt>
-  <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
-  {% elsif offer.floor and offer.floor != '' %}
-  <dt>{{ site.data.lang-uk.re_floor }}</dt>
-  <dd>{{ offer.floor }}</dd>
+  {%- if offer.type != site.data.lang-uk.re_house -%}
+    {%- if offer.floor and offer.floors and offer.type != site.data.lang-uk.re_house -%}
+    <dt>{{ site.data.lang-uk.re_floor }}</dt>
+    <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
+    {% elsif offer.floor and offer.floor != '' %}
+    <dt>{{ site.data.lang-uk.re_floor }}</dt>
+    <dd>{{ offer.floor }}</dd>
+    {%- endif -%}
   {%- endif -%}
   {%- if offer.parking and offer.parking != '' -%}
   <dt>{{ site.data.lang-uk.re_parking }}</dt>
