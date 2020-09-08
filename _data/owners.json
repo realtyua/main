@@ -236,7 +236,7 @@
       "rent": "",
       "rooms": "3",
       "surface": "80",
-      "surface_land": "",
+      "surface_land": "2000",
       "price": "$17500",
       "price_sqmt": "$680",
       "floor": "",
@@ -248,6 +248,28 @@
       "date": "2020-08-29",
       "seller": "Федір Панасович Курлик",
       "phone": "380008990179",
+      "description": "",
+      "images": ""
+  }
+  ,
+  {
+      "id": "12",
+      "type": "Будинок",
+      "rent": "",
+      "rooms": "2",
+      "surface": "65",
+      "surface_land": "1000",
+      "price": "$12500",
+      "price_sqmt": "$480",
+      "floor": "",
+      "floors": "1",
+      "parking": "Власне подвірья",
+      "region": "Коломийський район",
+      "location": "",
+      "address": "площа Героїв, с. Торговиця",
+      "date": "2020-08-29",
+      "seller": "Панас Ігорович Полонник",
+      "phone": "380008988178",
       "description": "",
       "images": ""
   }
