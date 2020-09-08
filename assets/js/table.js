@@ -266,6 +266,9 @@ function htmlDetailFormatter(index, row, $detail) {
         if (row.floor !== '' && row.floors !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floor + ' {{ site.data.lang-uk.re_at }} ' + row.floors + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
         }
+        if (row.floors && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1) {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '</dd></dl></span>')
+        }
         if (row.parking !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
         }
