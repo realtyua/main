@@ -74,11 +74,11 @@
                 </div>
               </div>
               {%- endif -%}
-            {%- else -%}
-              <p>Інформаці про title {{include.title}} breadcrumb {{include.breadcrumb}} </p>
             {%- endfor -%}
           {%- endif -%}
         {%- endif -%}
+      {%- else -%}
+        <p>Інформаці про title {{include.title}} breadcrumb {{include.breadcrumb}}</p>
       {%- endfor -%}
     </div>
     {% comment %}
