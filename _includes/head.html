@@ -18,7 +18,7 @@
 {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
 <meta name="locality" content="{{ site.data.lang-uk.city }} {{ location }}">
 {%- elsif location and back.size >= 3 and page.dir contains 'district' -%}
-<meta name="locality" content="{{ location }}">
+<meta name="locality" content="{{ location }} {{ site.data.lang-uk.district }}">
 {%- elsif location and back.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}
 {%- endif -%}
 <meta name="author" content="{{ site.developer.name }}">
