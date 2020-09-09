@@ -78,7 +78,11 @@
             {%- endif -%}
           {%- endfor -%}
         {%- else -%}
-          {%- include none-advertisement.html title=page.title -%}
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            {%- include none-advertisement.html title=page.title -%}
+          </div>
+        </div>
         {%- endif -%}
       </div>
     </div>
