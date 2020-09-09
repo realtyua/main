@@ -47,7 +47,6 @@
       <div class="col-12">
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | replace_first: 'Н', 'н' }}</h2>
         {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
-        {%- assign foo = page.url | split: "/" -%}
         {%- include {{ data }} -%}
         {%- for offer in offers limit:9 -%}
           {%- if forloop.first -%}
@@ -75,7 +74,9 @@
               </a>
             </div>
           </div>
-          {%- endif -%}
+          {%- endif
+        {%- else -%}
+          {%- include none-advertisement.html title=page.title -%}
         {%- endfor -%}
       </div>
     </div>
