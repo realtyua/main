@@ -54,24 +54,22 @@
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit: 3 -%}
-              {%- if offer.size > 0 -%}
-                <div class="card mb-2">
-                  <div class="card-body p-2">{% include card/body.html %}</div>
+              <div class="card mb-2">
+                <div class="card-body p-2">{% include card/body.html %}</div>
+              </div>
+              {%- if forloop.last -%}
+              <div class="row">
+                <div class="col-auto ml-auto">
+                  <a class="btn btn-primary btn-sm" href="{{ d.url }}">
+                    {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
+                  </a>
                 </div>
-                {%- if forloop.last -%}
-                <div class="row">
-                  <div class="col-auto ml-auto">
-                    <a class="btn btn-primary btn-sm" href="{{ d.url }}">
-                      {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
-                    </a>
-                  </div>
-                </div>
-                {%- endif -%}
-              {%- else -%}
-                <p>.... 0</p>
+              </div>
               {%- endif -%}
             {%- else -%}
-              <p>.... 1</p>
+              <div class="alert alert-success" role="alert">
+                Оголошення про {{ include.title | replace_first: 'Н', 'н' }} покищо відсутні, але ви можете бути одним із перших додавши своє оголошення про продаж чи оренду власної {{ include.title | replace_first: 'Н', 'н' | replace: 'ість', 'ості' }}.
+              </div>
             {%- endfor -%}
           {%- endif -%}
         {%- endif -%}
