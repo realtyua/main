@@ -14,15 +14,15 @@
 #
 # District
 #
-- type: district
-  item: ivano-frankivskyy
-  name: Нерухомість у Івано-Франківському районі
-  address: 76000, м. Івано-Франківськ, вул.&nbsp;Районна,&nbsp;0
-  phone_main: 380508457030
-  phone_hot:  380508457030
-  phone_fax:  380508457030
-  email: district@realestate.if.ua
-  www: https://www.realestate.if.ua
+# - type: district
+#   item: ivano-frankivskyy
+#   name: Нерухомість у Івано-Франківському районі
+#   address: 76000, м. Івано-Франківськ, вул.&nbsp;Районна,&nbsp;0
+#   phone_main: 380508457030
+#   phone_hot:  380508457030
+#   phone_fax:  380508457030
+#   email: district@realestate.if.ua
+#   www: https://www.realestate.if.ua
 
 #
 # Region / City
