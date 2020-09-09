@@ -48,11 +48,8 @@
         <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | replace_first: 'Н', 'н' }}</h2>
         {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
         {%- include {{ data }} -%}
-        offers: {{offers.size}}<br>
-        {%- for offer in offers limit:9 -%}
-
-          {%- if offer.size > 0 -%}
-
+        {%- if offers.size > 0 -%}
+          {%- for offer in offers limit:9 -%}
             {%- if forloop.first -%}
             <div class="row mx-n2">
             {%- endif -%}
@@ -79,12 +76,10 @@
               </div>
             </div>
             {%- endif -%}
-
-          {%- else -%}
-            {%- include none-advertisement.html title=page.title -%}
-          {%- endif -%}
-
-        {%- endfor -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- include none-advertisement.html title=page.title -%}
+        {%- endif -%}
       </div>
     </div>
   </div>
