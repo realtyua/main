@@ -54,25 +54,21 @@
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             {%- for offer in offers limit: 3 -%}
-              {%- if forloop.first -%}
-              <div class="row">
-                <div class="col-12">
-              {%- endif -%}
+              {%- if offer.size > 0 -%}
                 <div class="card mb-2">
-                  <div class="card-body p-2">
-                    {% include card/body.html %}
+                  <div class="card-body p-2">{% include card/body.html %}</div>
+                </div>
+                {%- if forloop.last -%}
+                <div class="row">
+                  <div class="col-auto ml-auto">
+                    <a class="btn btn-primary btn-sm" href="{{ d.url }}">
+                      {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
+                    </a>
                   </div>
                 </div>
-              {%- if forloop.last -%}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-auto ml-auto">
-                  <a class="btn btn-primary btn-sm" href="{{ d.url }}">
-                    {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
-                  </a>
-                </div>
-              </div>
+                {%- endif -%}
+              {%- else -%}
+                <p>.... 0</p>
               {%- endif -%}
             {%- endfor -%}
           {%- endif -%}
