@@ -17,9 +17,9 @@
 <meta name="region" content="{{ site.region }}">
 {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
 <meta name="locality" content="{{ site.data.lang-uk.city }} {{ location }}">
-{%- elsif back.size >= 3 and page.dir contains 'district' -%}
+{%- elsif back.size == 3 and page.dir contains 'district' or back.size >= 4 and page.dir contains 'district' -%}
 <meta name="locality" content="{{ location }} {{ site.data.lang-uk.district }}">
-{%- elsif page.dir == '/district/city/' or page.dir == '/district/town/' -%}
+{%- elsif page.url == '/district/town/' -%}
 {%- endif -%}
 <meta name="author" content="{{ site.developer.name }}">
 <meta name="format-detection" content="telephone=no">
