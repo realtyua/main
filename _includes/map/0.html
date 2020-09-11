@@ -1,6 +1,6 @@
 <hr>
 <div class="row mt-3">
-  {%- assign 0s = site.pages | sort: 'path' | reverse -%}
+  {%- assign 0s = site.html_pages | sort: 'path' | reverse -%}
   {%- for 0 in 0s -%}
     {%- assign slug = 0.url | split: "/" | last -%}
     {%- assign current = 0.url | remove: slug | remove: "//" | append: "/" -%}
@@ -12,7 +12,7 @@
         {%- include map/1.html current=0.url -%}
       </div>
       {%- if 0.url -%}
-        {%- assign 1s = site.pages -%}
+        {%- assign 1s = site.html_pages -%}
         {%- for 1 in 1s -%}
           {%- if 1 -%}
             {%- assign slug = 1.url | split: "/" | last -%}

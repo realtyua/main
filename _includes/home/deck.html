@@ -1,5 +1,5 @@
 <div class="row">
-  {%- assign ones = site.pages | sort: 'path' | reverse -%}
+  {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
   {%- for one in ones -%}
     {%- assign slug = one.url | split: '/' | last -%}
     {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
@@ -20,7 +20,7 @@
         {%- include home/region.html current=one.url -%}
       </div>
       {%- if one.url -%}
-        {%- assign twos = site.pages -%}
+        {%- assign twos = site.html_pages -%}
         {%- for two in twos -%}
           {%- if two -%}
             {%- assign slug = two.url | split: '/' | last -%}

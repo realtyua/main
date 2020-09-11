@@ -1,4 +1,4 @@
-{%- assign 5s = site.pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
+{%- assign 5s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
 {%- assign isChildren = false -%}
 {%- if 5s.size > 0 -%}
   {%- assign isChildren = true -%}

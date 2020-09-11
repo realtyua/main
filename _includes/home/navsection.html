@@ -2,11 +2,10 @@
 {%- assign url = include.url -%}
 {%- assign region = include.region -%}
 {%- assign ss = '' | split:'' -%}
-{%- assign ps = site.pages | sort: 'path' | reverse -%}
+{%- assign ps = site.html_pages | sort: 'path' | reverse -%}
 {%- for i in ps -%}
   {%- assign l = i.dir | split: '/' -%}
-  {%- assign isJson = false -%}{%- if i.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-  {%- if i.dir contains url and i.dir != url and i.title != '' and isJson == false and l.size == 4 or l.size == 5 -%}
+  {%- if i.dir contains url and i.dir != url and i.title != '' and l.size == 4 or l.size == 5 -%}
     {%- assign ss = ss | push: i -%}
   {%- endif -%}
 {%- endfor -%}
