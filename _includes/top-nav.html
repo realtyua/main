@@ -1,7 +1,7 @@
-{%- assign tns = site.pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.navhide != 1 and i.title != ''" -%}
+{%- assign tns = html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.navhide != 1 and i.title != ''" -%}
 <nav class="nav nav-masthead justify-content-center">
 {%- for tn in tns -%}
-  <a href="{{ tn.url }}">
+  <a href="{{ tn.url }}" class="nav-link">
     {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
   </a>
 {%- endfor -%}
