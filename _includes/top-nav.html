@@ -1,0 +1,8 @@
+{%- assign tns = site.pages | sort:"path" | where_exp: "i", "i.url == '/' and i.navhide != 1 and i.title != ''" -%}
+<nav class="nav nav-masthead justify-content-center">
+{%- for tn in tns -%}
+  <a href="{{ tn.url }}">
+    {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+  </a>
+{%- endfor -%}
+</nav>
