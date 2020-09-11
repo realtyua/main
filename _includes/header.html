@@ -1,10 +1,10 @@
 <header>
   <div class="container bg-primary{% if page.url != '/' %}{% else %} pb-3{% endif %}">
-    <div class="row">
-      <div class="col">
+    <div class="row justify-content-end">
+      <div class="col-4">
         {%- include top-nav.html -%}
       </div>
-      <div class="col-auto ml-auto mt-2">
+      <div class="col-4">
         <a href="#" class="btn btn-add btn-sm">
           {{ site.data.lang-uk.add_realestate }}
         </a>
