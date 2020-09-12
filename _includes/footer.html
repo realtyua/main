@@ -40,19 +40,19 @@
         <div class="d-flex position-relative">
             {%- include icons/beta.svg width="50" height="25" class="flex-shrink-0 mt-1 mr-3" -%}
             <div>
-                <p>Вебсайт працює в тестовому режимі. Якщо ви маєте зауваження або пропозиції, будь ласка, напишіть нам:</p>
+                <p>{{ site.data.lang-uk.footer_text_trial }} <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></p>
             </div>
         </div>
         <div class="d-flex position-relative">
             {%- include icons/cc.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3" -%}
             <div>
-                <p>Увесь вміст доступний за ліцензією Creative Commons Attribution 4.0 International license, якщо не зазначено інше</p>
+                <p>{{ site.data.lang-uk.footer_text_cc_1 }} <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/deed.uk" class="font-weight-bold" rel="nofollow">{{ site.data.labels.footer_text_cc_2 }}</a>, {{ site.data.labels.footer_text_cc_3 }}</p>
             </div>
         </div>
         <div class="d-flex position-relative">
             {%- include icons/dev.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3 text-white" -%}
             <div>
-                <p><a href="http://www.vasyl.net">vasyl.net</a> - розробник</p>
+                <p><a href="{{ site.developer.website }}" target="_blank" rel="nofollow">{{ site.developer.name }}</a> {{ site.data.labels.footer_developer }}</p>
             </div>
         </div>
       </div>
