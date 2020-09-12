@@ -75,7 +75,6 @@ defaults:
 
 plugins:
   - jekyll-sitemap
-  - jekyll-timeago
   - jekyll-paginate-v2
 
 sass:
