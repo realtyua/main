@@ -7,28 +7,27 @@
     <nav class="nav nav-masthead justify-content-end">
   {%- endif -%}
 
-    {%- if tn.url != '/add.html' -%}
+  {%- if tn.url != '/add.html' -%}
 
-      <a href="{{ tn.url }}" class="nav-link">
+    <a href="{{ tn.url }}" class="nav-link">
+      {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+    </a>
+
+  {%- else -%}
+
+      </nav>
+    </div>
+    <div class="col-md-2 order-1 order-md-2 text-right">
+      <a href="{{ tn.url }}" class="btn btn-add btn-sm">
         {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
       </a>
+    </div>
 
-    {%- else -%}
-
-        </nav>
-      </div>
-      <div class="col-md-2 order-1 order-md-2 text-right">
-        <a href="{{ tn.url }}" class="btn btn-add btn-sm">
-          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-        </a>
-      </div>
-
-    {%- endif -%}
-
-  {%- if forloop.last -%}
   {%- endif -%}
 
 {%- endfor -%}
+
+
 
 {% comment %}
 
