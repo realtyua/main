@@ -1,48 +1,33 @@
 {%- assign tns = site.html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.navhide != 1 and i.title != ''" -%}
 
 {%- for tn in tns -%}
-
-  {%- if forloop.first -%}
-  <div class="col-md-4 order-2 order-md-1 mt-3 mt-md-0 mb-3 mb-md-0 pr-md-0">
-    <nav class="nav nav-masthead justify-content-end">
-  {%- endif -%}
-
   {%- if tn.url != '/add.html' -%}
-
-    <a href="{{ tn.url }}" class="nav-link">
-      {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-    </a>
-
+    {%- if forloop.first -%}
+    <div class="col-md-4 order-2 order-md-1 mt-3 mt-md-0 mb-3 mb-md-0 pr-md-0">
+      <nav class="nav nav-masthead justify-content-end">
+    {%- endif -%}
+      {%- if tn.url == page.url -%}
+        <span class="nav-link{% if tn.url == page.url %} active{% endif %}">
+          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+        </span>
+      {%- else -%}
+        <a href="{{ tn.url }}" class="nav-link">
+          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+        </a>
+      {%- endif -%}
   {%- endif -%}
-
-  {%- if tn.url == '/add.html' -%}
-
-      </nav>
-    </div>
-    <div class="col-md-2 order-1 order-md-2 text-right">
-      <a href="{{ tn.url }}" class="btn btn-add btn-sm">
-        {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-      </a>
-    </div>
-
-  {%- endif -%}
-
 {%- endfor -%}
 
-
-
-{% comment %}
-
-{%- if tn.url == page.url -%}
-  <span class="nav-link{% if tn.url == page.url %} active{% endif %}">
-    {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-  </span>
-{%- else -%}
-  <a href="{{ tn.url }}" class="nav-link">
-    {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-  </a>
-{%- endif -%}
-
-{{ site.data.lang-uk.add_realestate }}
-
-{% endcomment %}
+{%- for tn in tns -%}
+  {%- if tn.url == '/add.html' -%}
+      </nav>
+    </div>
+    {%- if tn.url != page.url -%}
+      <div class="col-md-2 order-1 order-md-2 text-right">
+        <a href="{{ tn.url }}" class="btn btn-add btn-sm">
+          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+        </a>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
