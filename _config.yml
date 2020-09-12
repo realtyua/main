@@ -46,6 +46,8 @@ collections:
     output: true
   otabs:
     output: true
+  owners:
+    output: true
 
 defaults:
   - scope:
