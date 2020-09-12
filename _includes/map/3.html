@@ -1,19 +1,16 @@
 {%- assign 4s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
-{%- assign isChildren = false -%}
 {%- if 4s.size > 0 -%}
-  {%- assign isChildren = true -%}
-{%- endif -%}
-
-{%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
   {%- for 4 in 4s -%}
     {%- assign slug = 4.url | split: "/" | last -%}
     {%- assign current = 4.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 4.navhide != 1 and 4.title != '' -%}
     <li class="mb-2">
-      <a href="{{ 4.url }}">
-        {%- if 4.navtitle -%}{{ 4.navtitle }}{%- else -%}{{ 4.title }}{%- endif -%}
-      </a>
+      {%- if 4.url == page.url -%}
+        <span>{%- if 4.navtitle -%}{{ 4.navtitle }}{%- else -%}{{ 4.title }}{%- endif -%}</span>
+      {%- else -%}
+        <a href="{{ 4.url }}">{%- if 4.navtitle -%}{{ 4.navtitle }}{%- else -%}{{ 4.title }}{%- endif -%}</a>
+      {%- endif -%}
       {%- include map/4.html current=4.url -%}
     </li>
     {%- endif -%}

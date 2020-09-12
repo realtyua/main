@@ -6,9 +6,15 @@
     {%- assign current = second.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and second.navhide != 1 -%}
     <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-      <a href="{{ second.url }}" class="dropdown-item{% if page.url == second.url %} active{% endif %}">
-        {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
-      </a>
+      {%- if page.url == second.url -%}
+        <span class="dropdown-item active">
+          {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+        </span>
+      {%- else -%}
+        <a href="{{ second.url }}" class="dropdown-item">
+          {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+        </a>
+      {%- endif -%}
     </div>
     {%- endif -%}
   {%- endfor -%}

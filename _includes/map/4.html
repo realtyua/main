@@ -1,19 +1,16 @@
 {%- assign 5s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
-{%- assign isChildren = false -%}
 {%- if 5s.size > 0 -%}
-  {%- assign isChildren = true -%}
-{%- endif -%}
-
-{%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
   {%- for 5 in 5s -%}
     {%- assign slug = 5.url | split: "/" | last -%}
     {%- assign current = 5.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 5.navhide != 1 and 5.title != '' -%}
     <li class="mb-2">
-      <a href="{{ 5.url }}">
-        {%- if 5.navtitle -%}{{ 5.navtitle }}{%- else -%}{{ 5.title }}{%- endif -%}
-      </a>
+      {%- if 5.url == page.url -%}
+        <span>{%- if 5.navtitle -%}{{ 5.navtitle }}{%- else -%}{{ 5.title }}{%- endif -%}</span>
+      {%- else -%}
+        <a href="{{ 5.url }}">{%- if 5.navtitle -%}{{ 5.navtitle }}{%- else -%}{{ 5.title }}{%- endif -%}</a>
+      {%- endif -%}
       {%- include map/5.html current=5.url -%}
     </li>
     {%- endif -%}

@@ -1,19 +1,16 @@
 {%- assign 6s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
-{%- assign isChildren = false -%}
 {%- if 6s.size > 0 -%}
-  {%- assign isChildren = true -%}
-{%- endif -%}
-
-{%- if isChildren == true -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
   {%- for 6 in 6s -%}
     {%- assign slug = 6.url | split: "/" | last -%}
     {%- assign current = 6.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 6.navhide != 1 and 6.title != '' -%}
     <li class="mb-2">
-      <a href="{{ 6.url }}">
-        {%- if 6.navtitle -%}{{ 6.navtitle }}{%- else -%}{{ 6.title }}{%- endif -%}
-      </a>
+      {%- if 6.url == page.url -%}
+        <span>{%- if 6.navtitle -%}{{ 6.navtitle }}{%- else -%}{{ 6.title }}{%- endif -%}</span>
+      {%- else -%}
+        <a href="{{ 6.url }}">{%- if 6.navtitle -%}{{ 6.navtitle }}{%- else -%}{{ 6.title }}{%- endif -%}</a>
+      {%- endif -%}
     </li>
     {%- endif -%}
   {%- endfor -%}
