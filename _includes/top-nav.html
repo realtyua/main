@@ -1,29 +1,7 @@
 {%- assign tns = site.html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.navhide != 1 and i.title != ''" -%}
 
 {%- for tn in tns -%}
-  {%- if forloop.first -%}
-  <div class="col-md-4 order-2 order-md-1 mt-3 mt-md-0 mb-3 mb-md-0 pr-md-0">
-    <nav class="nav nav-masthead justify-content-end">
-  {%- else -%}
-  {%- if tn.url != '/add.html' -%}
-    {%- if tn.url == page.url -%}
-      <span class="nav-link{% if tn.url == page.url %} active{% endif %}">
-        {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-      </span>
-    {%- else -%}
-      <a href="{{ tn.url }}" class="nav-link">
-        {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-      </a>
-    {%- endif -%}
-  {%- else -%}
-      </nav>
-    </div>
-    <div class="col-md-2 order-1 order-md-2 text-right">
-      <a href="#" class="btn btn-add btn-sm">
-        {{ site.data.lang-uk.add_realestate }}
-      </a>
-    </div>
-  {%- endif -%}
-  {%- if forloop.last -%}
-  {%- else -%}
+
+  
+
 {%- endfor -%}
