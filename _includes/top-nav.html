@@ -16,13 +16,16 @@
       </a>
     {%- endif -%}
   {%- endif -%}
-{%- endfor -%}
-
-{%- for tn in tns -%}
   {%- if tn.url == '/add.html' -%}
       </nav>
     </div>
-    {%- if tn.url != page.url -%}
+    {%- if tn.url == page.url -%}
+      <div class="col-md-2 order-1 order-md-2 text-right">
+        <span class="btn btn-add btn-sm">
+          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+        </span>
+      </div>
+    {%- else -%}
       <div class="col-md-2 order-1 order-md-2 text-right">
         <a href="{{ tn.url }}" class="btn btn-add btn-sm">
           {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
