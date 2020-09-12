@@ -9,23 +9,17 @@
 
     {%- if tn.url != '/add.html' -%}
 
-      {%- if tn.url == page.url -%}
-        <span class="nav-link{% if tn.url == page.url %} active{% endif %}">
-          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-        </span>
-      {%- else -%}
-        <a href="{{ tn.url }}" class="nav-link">
-          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-        </a>
-      {%- endif -%}
+      <a href="{{ tn.url }}" class="nav-link">
+        {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+      </a>
 
     {%- else -%}
 
         </nav>
       </div>
       <div class="col-md-2 order-1 order-md-2 text-right">
-        <a href="#" class="btn btn-add btn-sm">
-          {{ site.data.lang-uk.add_realestate }}
+        <a href="{{ tn.url }}" class="btn btn-add btn-sm">
+          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
         </a>
       </div>
 
@@ -35,3 +29,19 @@
   {%- endif -%}
 
 {%- endfor -%}
+
+{% comment %}
+
+{%- if tn.url == page.url -%}
+  <span class="nav-link{% if tn.url == page.url %} active{% endif %}">
+    {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+  </span>
+{%- else -%}
+  <a href="{{ tn.url }}" class="nav-link">
+    {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+  </a>
+{%- endif -%}
+
+{{ site.data.lang-uk.add_realestate }}
+
+{% endcomment %}
