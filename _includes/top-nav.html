@@ -13,7 +13,9 @@
       {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
     </a>
 
-  {%- else -%}
+  {%- endif -%}
+
+  {%- if tn.url == '/add.html' -%}
 
       </nav>
     </div>
