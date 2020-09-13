@@ -2,7 +2,7 @@
 layout: compress
 ---
 
-{%- assign owner = page.dir | split: "/" | last -%}
+{%- assign owner = page.dir | split: '/' | last -%}
 {%- assign owners = site.owners | where_exp: 'i', 'i.path contains owner' -%}
 
 <!doctype html>
