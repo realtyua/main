@@ -12,17 +12,13 @@ layout: compress
   </head>
   <body>
     <div id="top"></div>
-
     {{ content }}
-
     {%- if owners.size > 0 -%}
       {%- include owner/navbar.html owners=owners -%}
     {%- endif -%}
-
     {%- if owners.size > 0 -%}
       {%- include owner/section.html owners=owners -%}
     {%- endif -%}
-
     {%- include scroll-top.html -%}
     {%- include owner/java-script.html -%}
   </body>
