@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark flex-column flex-md-row bg-primary">
+
+  <div class="container">
+
+    <span class="navbar-brand">+38 050 845 70 30</span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOwner" aria-controls="navbarOwner" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarOwner">
+      <ul class="navbar-nav mr-auto">
+
+        {%- for nb in include.owners -%}
+          {%- assign navitem = nb.url | split: "/" | slice: 2 -%}
+          <li class="nav-item">
+            <a class="nav-link" href="#price">
+              <span>{{ nb.title }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+
+      </ul>
+    </div>
+
+  </div>
+
+</nav>

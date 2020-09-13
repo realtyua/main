@@ -1,0 +1,8 @@
+{%- for sn in include.owners -%}
+  {%- assign section = sn.url | split: "/" | slice: 2 -%}
+  <section class="" id="{{ section }}">
+    <div class="container">
+      {{ sn.content }}
+    </div>
+  </section>
+{%- endfor -%}

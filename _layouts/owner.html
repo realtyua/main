@@ -7,9 +7,17 @@ layout: compress
     {%- include owner/head.html -%}
   </head>
   <body>
-    <div id="top"></div>
+    <div id="top"></div
+
+    {%- if owners.size > 0 -%}
+      {%- include owner/navbar.html owners=owners -%}
+    {%- endif -%}
 
     {{ content }}
+
+    {%- if owners.size > 0 -%}
+      {%- include owner/section.html owners=owners -%}
+    {%- endif -%}
 
     {%- include scroll-top.html -%}
     {%- include owner/java-script.html -%}
