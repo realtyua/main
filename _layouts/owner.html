@@ -1,10 +1,8 @@
 ---
 layout: compress
 ---
-
 {%- assign owner = page.dir | split: '/' | last -%}
 {%- assign owners = site.owners | where_exp: 'i', 'i.path contains owner' -%}
-
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
@@ -12,22 +10,18 @@ layout: compress
   </head>
   <body>
     <div id="top"></div>
-    <header>
-      {%- if owners.size > 0 -%}
-        {%- include owner/navbar.html owners=owners -%}
-      {%- endif -%}
-    </header>
-    <main role="main">
-      {{ content }}
-      {%- if owners.size > 0 -%}
-        {%- include owner/section.html owners=owners -%}
-      {%- endif -%}
-      <footer class="bg-light py-5">
-        <div class="container">
-          <div class="small text-center text-muted">Copyright © 2020 - ...</div>
-        </div>
-      </footer>
-    </main>
+    {%- if owners.size > 0 -%}
+      {%- include owner/navbar.html owners=owners -%}
+    {%- endif -%}
+    {{ content }}
+    {%- if owners.size > 0 -%}
+      {%- include owner/section.html owners=owners -%}
+    {%- endif -%}
+    <footer class="bg-light py-5">
+      <div class="container">
+        <div class="small text-center text-muted">Copyright © 2020 - ...</div>
+      </div>
+    </footer>
     {%- include scroll-top.html -%}
     {%- include owner/java-script.html -%}
   </body>
