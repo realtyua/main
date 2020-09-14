@@ -1,0 +1,25 @@
+.masthead {
+  position: relative;
+  padding: 3rem ($grid-gutter-width / 2);
+
+  h1 {
+    @include font-size(4rem);
+    line-height: 1;
+  }
+
+  .lead {
+    @include font-size(1.5rem);
+    font-weight: 400;
+    color: $gray-700;
+  }
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+  }
+
+  @include media-breakpoint-up(md) {
+
+  }
+}
