@@ -1,0 +1,49 @@
+// White links against a dark background
+.navbar-primary {
+  .navbar-brand {
+    color: $navbar-primary-brand-color;
+
+    &:hover,
+    &:focus {
+      color: $navbar-primary-brand-hover-color;
+    }
+  }
+
+  .navbar-nav {
+    .nav-link {
+      color: $navbar-primary-color;
+
+      &:hover,
+      &:focus {
+        color: $navbar-primary-hover-color;
+      }
+
+      &.disabled {
+        color: $navbar-primary-disabled-color;
+      }
+    }
+
+    .show > .nav-link,
+    .nav-link.active {
+      color: $navbar-primary-active-color;
+    }
+  }
+
+  .navbar-toggler {
+    color: $navbar-primary-color;
+    border-color: $navbar-primary-toggler-border-color;
+  }
+
+  .navbar-toggler-icon {
+    background-image: escape-svg($navbar-primary-toggler-icon-bg);
+  }
+
+  .navbar-text {
+    color: $navbar-primary-color;
+    a,
+    a:hover,
+    a:focus {
+      color: $navbar-primary-active-color;
+    }
+  }
+}
