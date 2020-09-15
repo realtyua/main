@@ -7,8 +7,8 @@ $enable-gradients: true !default;
 
 $blue: #2d5ca6 !default;
 
-$navbar-primary-color:                 rgba($white, .55) !default;
-$navbar-primary-hover-color:           rgba($white, .75) !default;
+$navbar-primary-color:                 rgba($white, 255) !default;
+$navbar-primary-hover-color:           rgba($yellow, .75) !default;
 $navbar-primary-active-color:          $white !default;
 $navbar-primary-disabled-color:        rgba($white, .25) !default;
 $navbar-primary-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
