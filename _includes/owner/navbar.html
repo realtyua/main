@@ -1,7 +1,7 @@
 {%- assign t = owner -%}
 {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
 {%- if include.owners.size > 0 -%}
-<header class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary shadow">
+<header class="navbar navbar-expand-lg fixed-top navbar-primary shadow">
   <div class="container">
     <span class="navbar-brand">{{ n }}</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOwner" aria-controls="navbarOwner" aria-expanded="false" aria-label="Toggle navigation">
