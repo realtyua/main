@@ -16,4 +16,5 @@ $(document).on('click', function (e) {
 
 $(document).ready(function(){
   $('.toast').toast('show');
+  $('.alert').alert();
 });
