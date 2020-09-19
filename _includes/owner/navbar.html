@@ -15,7 +15,7 @@
           {%- assign href = navitem | slice: 3, sizename -%}
           <li class="nav-item">
             <a class="nav-link" href="#{{ href }}">
-              <span>{{ nb.title }} - href: {{ href }} - sizename: {{ sizename }} / {{ navitem | size }} - navitem: {{ navitem }}</span>
+              <span>{{ nb.title }} - nb.url: {{ nb.url }} - href: {{ href }} - sizename: {{ sizename }} / {{ navitem | size }} - navitem: {{ navitem }}</span>
             </a>
           </li>
         {%- endfor -%}
