@@ -10,13 +10,13 @@
     <nav class="collapse navbar-collapse" id="navbarOwner">
       <ul class="navbar-nav ml-auto">
         {%- for nb in include.owners -%}
-          {%- assign navitem = nb.url | split: '/' | slice: 2 -%}
+          {%- assign navitem = nb.url | split: '/' | slice: 2 | join: '/' -%}
           {%- assign item = navitem -%}
           {%- capture sizename %}{{ navitem | size }}{% endcapture -%}
           {%- assign href = navitem | slice: 3, sizename -%}
           <li class="nav-item">
             <a class="nav-link" href="#{{ href }}">
-              <span>{{ nb.title }} - item: {{ item | size }} - nb.url: {{nb.url}} / {{ nb.url | size }} - href: {{ href }} - sizename: {{ sizename }} / {{ navitem | size }} - navitem: {{ navitem }}</span>
+              <span>{{ nb.title }} - navitem: {{ navitem }} - nb.url: {{nb.url}} / {{ nb.url | size }}</span>
             </a>
           </li>
         {%- endfor -%}
