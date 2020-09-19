@@ -11,7 +11,7 @@
       <ul class="navbar-nav ml-auto">
         {%- for nb in include.owners -%}
           {%- assign navitem = nb.url | split: '/' | slice: 2 -%}
-          {%- assign sizename = navitem.size -%}
+          {%- capture sizename %}{{ navitem | size }}{% endcapture -%}
           {%- assign href = navitem | slice: 3, navitem.size -%}
           <li class="nav-item">
             <a class="nav-link" href="#{{ href }}">
