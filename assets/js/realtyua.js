@@ -13,3 +13,5 @@ $(document).on('click', function (e) {
         $('.collapse').collapse('hide');
     }
 });
+
+$('.toast').toast(option);
