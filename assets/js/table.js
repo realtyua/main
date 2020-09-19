@@ -395,14 +395,19 @@ function propertyFormatter(value, row) {
         }
       }
       if (row.region && row.region !== '' && row.region.indexOf('район') !== -1) {
-        html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + ', ' + row.region + '</strong>.')
+        if (row.region && row.region !== '') {
+          html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + ', ' + row.region + '</strong>.')
+        }
+        if (row.page && row.page === '1') {
+          html.push('<a href=/"' + row.phone + '">Сторінка оголошення'</a>.')
+        }
       } else {
         if (row.location && row.location !== '') {
           html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
         }
-      }
-      if (row.page && row.page === '1') {
-        html.push('<a href=/"' + row.phone + '">Сторінка оголошення'</a>.')
+        if (row.page && row.page === '1') {
+          html.push('<a href=/"' + row.phone + '">Сторінка оголошення'</a>.')
+        }
       }
     }
   }
