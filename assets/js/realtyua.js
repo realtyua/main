@@ -14,4 +14,6 @@ $(document).on('click', function (e) {
     }
 });
 
-$('.toast').toast();
+$(document).ready(function(){
+  $('.toast').toast('show');
+});
