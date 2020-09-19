@@ -10,7 +10,7 @@
     <nav class="collapse navbar-collapse" id="navbarOwner">
       <ul class="navbar-nav ml-auto">
         {%- for nb in include.owners -%}
-          {%- assign navitem = nb.url | split: '/' | slice: 2 | join: '/' | last -%}
+          {%- assign navitem = nb.url | split: '/' | slice: 2 | last -%}
           {%- assign sizename = navitem | size -%}
           {%- assign href = navitem | slice: 3, sizename -%}
           <li class="nav-item">
