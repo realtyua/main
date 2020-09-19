@@ -12,7 +12,9 @@
         {%- for nb in include.owners -%}
           {%- assign navitem = nb.url | split: '/' | slice: 2 -%}
           <li class="nav-item">
-            <a class="nav-link" href="#{{ navitem }}">
+            {%- assign sizename = navitem | size -%}
+            {%- assign href = navitem | slice: 3, sizename -%}
+            <a class="nav-link" href="#{{ href }}">
               <span>{{ nb.title }}</span>
             </a>
           </li>
