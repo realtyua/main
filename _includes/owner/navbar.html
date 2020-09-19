@@ -11,12 +11,11 @@
       <ul class="navbar-nav ml-auto">
         {%- for nb in include.owners -%}
           {%- assign navitem = nb.url | split: '/' | slice: 2 | last -%}
-          {%- assign foo = nb.url | split: '/' -%}
           {%- assign sizename = navitem | size -%}
           {%- assign href = navitem | slice: 3, sizename -%}
           <li class="nav-item">
             <a class="nav-link" href="#{{ href }}">
-              <span>{{ nb.title }} - href: {{href}} - sizename: {{ sizename }} - navitem: {{ navitem }} - foo: {{ foo[0] }} / {{ foo[1] }} / {{ foo[2] }}</span>
+              <span>{{ nb.title }}</span>
             </a>
           </li>
         {%- endfor -%}
