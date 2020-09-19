@@ -1,7 +1,7 @@
 {%- assign t = owner -%}
 {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
 {%- if include.owners.size > 0 -%}
-<header class="navbar navbar-expand-lg navbar-default-transition fixed-top navbar-primary bg-primary shadow">
+<header class="navbar navbar-expand-lg fixed-top navbar-primary shadow">
   <div class="container">
     <span class="navbar-brand">{{ n }}</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOwner" aria-controls="navbarOwner" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,13 +10,12 @@
     <nav class="collapse navbar-collapse" id="navbarOwner">
       <ul class="navbar-nav ml-auto">
         {%- for nb in include.owners -%}
-          {%- assign navitem = nb.url | split: '/' | slice: 2 | join: '/' -%}
-          {%- assign item = navitem -%}
-          {%- capture sizename %}{{ navitem | size }}{% endcapture -%}
+          {%- assign navitem = nb.url | split: '/' | slice: 2 | join: '/' | last -%}
+          {%- assign sizename = navitem | size -%}
           {%- assign href = navitem | slice: 3, sizename -%}
           <li class="nav-item">
             <a class="nav-link" href="#{{ href }}">
-              <span>{{ nb.title }} - navitem: {{ navitem }} - nb.url: {{nb.url}} / {{ nb.url | size }}</span>
+              <span>{{ nb.title }} - href: {{href}} - sizename: {{ sizename }} - navitem: {{ navitem }}</span>
             </a>
           </li>
         {%- endfor -%}
