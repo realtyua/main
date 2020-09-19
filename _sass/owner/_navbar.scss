@@ -1,3 +1,48 @@
+//
+// Transision
+//
+.navbar-default-transition,
+.navbar-default-transition.navbar-transition {
+    @extend .navbar-default;
+}
+.navbar-inverse-transition,
+.navbar-inverse-transition.navbar-transition {
+    @extend .navbar-inverse;
+}
+.navbar-transition {
+    .navbar-brand {
+        height: map-get($navbar-heights, xs);
+    }
+    .navbar-brand-image img {
+        max-height: map-get($navbar-heights, xs) - 30;
+    }
+}
+@media (min-width: $grid-float-breakpoint) {
+    .navbar {
+        transition: all .27s cubic-bezier(0, 0, .58, 1) 0s;
+    }
+    .navbar-default-transition:not(.navbar-transition),
+    .navbar-inverse-transition:not(.navbar-transition) {
+        background: transparent !important;
+        box-shadow: none;
+        .navbar-nav > li {
+            > .nav-link,
+            > .nav-link:hover,
+            > .nav-link:focus {
+                color: #ffffff !important;
+            }
+        }
+        .navbar-brand {
+            > .navbar-brand-logo-normal {
+                display: none;
+            }
+            > .navbar-brand-logo-inverted {
+                display: block;
+            }
+        }
+    }
+}
+
 // White links against a dark background
 .navbar-primary {
   .navbar-brand {
