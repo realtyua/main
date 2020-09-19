@@ -4,6 +4,16 @@ title: Нерухомість в Івано-Франківській облас�
 description:
 ---
 
+<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="true">
+  <div class="toast-header">
+    <strong class="mr-auto">Привіт, Відвідувачу!</strong>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">Ми раді бачити вас тут.</div>
+</div>
+
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 
