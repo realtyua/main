@@ -1,7 +1,9 @@
 {%- if include.owners.size > 0 -%}
   {%- for sn in include.owners -%}
-    {%- assign section = sn.url | split: '/' | slice: 2 -%}
-    <section id="{{ section }}"{% if sn.class and sn.class != '' %} class="{{ sn.class }}"{% endif %}>
+    {%- assign section = sn.url | split: '/' | slice: 2 | last -%}
+    {%- assign sizename = section | size -%}
+    {%- assign id = section | slice: 3, sizename -%}
+    <section id="{{ id }}"{% if sn.class and sn.class != '' %} class="{{ sn.class }}"{% endif %}>
       {{ sn.content }}
     </section>
   {%- endfor -%}
