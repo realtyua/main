@@ -250,8 +250,7 @@
       "phone": "380008990179",
       "description": "",
       "images": ""
-  }
-  ,
+  },
   {
       "id": "12",
       "type": "Будинок",
@@ -270,6 +269,28 @@
       "date": "2020-08-29",
       "seller": "Панас Ігорович Полонник",
       "phone": "380008988178",
+      "description": "",
+      "images": ""
+  },
+  {
+      "id": "13",
+      "type": "Квартира",
+      "page": "1",
+      "rent": "",
+      "rooms": "1",
+      "surface": "39",
+      "surface_land": "",
+      "price": "$18000",
+      "price_sqmt": "$460",
+      "floor": "6",
+      "floors": "8",
+      "parking": "",
+      "region": "",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Володимира Івасюка",
+      "date": "2020-09-20",
+      "seller": "Василь Іванович Мосейчук",
+      "phone": "380508457030",
       "description": "",
       "images": ""
   }
