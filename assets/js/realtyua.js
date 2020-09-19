@@ -14,4 +14,4 @@ $(document).on('click', function (e) {
     }
 });
 
-$('.toast').toast(option);
+$('.toast').toast();
