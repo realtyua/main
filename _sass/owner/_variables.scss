@@ -15,6 +15,21 @@ $navbar-primary-active-color:          $white !default;
 $navbar-primary-disabled-color:        rgba($white, .25) !default;
 $navbar-primary-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-primary-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 $navbar-primary-toggler-border-color:  rgba($white, .1) !default;
+//
+// Breakpoints
+//
+$grid-float-breakpoint:        992px !default;
+//
+// Navbar
+//
+$navbar-nav-link-padding-x:    1rem !default;
+$navbar-heights: (
+    xs: 70px,
+    sm: 70px,
+    md: 100px,
+    lg: 130px,
+    xl: 130px
+) !default;
 
 $navbar-primary-brand-color:           $navbar-primary-active-color !default;
 $navbar-primary-brand-hover-color:     $navbar-primary-active-color !default;
