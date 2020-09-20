@@ -68,6 +68,7 @@
     }
   }
 }
+
 .navbar-toggler {
     padding: 0;
     height: 34px;
@@ -89,7 +90,7 @@
     display: inline-block;
     width: 22px;
     height: 2px;
-    background-color: $white;
+    background-color: currentColor;
     transition: all .3s ease-in;
 }
 .navbar-toggler-icon {
