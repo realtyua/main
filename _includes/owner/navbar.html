@@ -11,9 +11,11 @@
           {%- assign navitem = nb.url | split: '/' | slice: 2 | last -%}
           {%- assign sizename = navitem | size -%}
           {%- assign anchor = navitem | slice: 3, sizename -%}
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#{{ anchor }}">{{ nb.title }}</a>
-          </li>
+          {%- if nb.navhide != 1 -%}
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#{{ anchor }}">{{ nb.title }}</a>
+            </li>
+          {%- endif -%}
         {%- endfor -%}
       </ul>
     </div>
