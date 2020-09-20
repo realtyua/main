@@ -4,7 +4,7 @@
 <header class="navbar navbar-expand-lg fixed-top navbar-primary shadow">
   <div class="container">
     <span class="navbar-brand">{{ n }}</span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOwner" aria-controls="navbarOwner" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarOwner" aria-controls="navbarOwner" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <nav class="collapse navbar-collapse" id="navbarOwner">
@@ -12,9 +12,9 @@
         {%- for nb in include.owners -%}
           {%- assign navitem = nb.url | split: '/' | slice: 2 | last -%}
           {%- assign sizename = navitem | size -%}
-          {%- assign href = navitem | slice: 3, sizename -%}
+          {%- assign anchor = navitem | slice: 3, sizename -%}
           <li class="nav-item">
-            <a class="nav-link" href="#{{ href }}">
+            <a class="nav-link" href="#{{ anchor }}">
               <span>{{ nb.title }}</span>
             </a>
           </li>
