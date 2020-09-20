@@ -10,7 +10,7 @@ header.masthead {
             #{fade-out($brown, 0.2)} 0%,
             #{fade-out($brown, 0.2)} 100%
         ),
-        url("../assets/img/bg-masthead.jpg");
+        url("/assets/images/bg-masthead.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
