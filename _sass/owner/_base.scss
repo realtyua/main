@@ -8,9 +8,11 @@
 //
 // Components
 //
-@import "masthead";
-@import "navbar";
 @import "scroll-top";
+@import "global.scss";
+@import "navbar";
+@import "masthead";
+@import "utilities.scss";
 //
 // Helpers
 //
