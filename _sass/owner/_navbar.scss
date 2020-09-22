@@ -35,16 +35,28 @@
     .navbar-nav {
       .nav-item {
         .nav-link {
-          color: fade-out($white, 0.3);
+          // color: fade-out($white, 0.3);
           padding: 0 1rem;
-          &:hover {
-            color: $white;
-          }
+          // &:hover {
+          //   color: $white;
+          // }
         }
         &:last-child {
           .nav-link {
             padding-right: 0;
           }
+        }
+      }
+      .nav-link {
+        padding: .05rem 0;
+        color: $white;
+        background-color: transparent;
+        border-bottom: .25rem solid transparent;
+        &:hover {
+          border-bottom-color: #ffe358;
+        }
+        &:hover {
+          border-bottom-color: #ffe358;
         }
       }
     }
