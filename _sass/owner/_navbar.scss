@@ -34,19 +34,22 @@
     }
     .navbar-nav {
       .nav-item {
-        .nav-link {
-          color: fade-out($white, 0.3);
           padding: 0 1rem;
-          &:hover {
-            color: $white;
-          }
-        }
-        &:last-child {
-          .nav-link {
-            padding-right: 0;
-          }
+      }
+      &:last-child {
+        .nav-item {
+          padding-right: 0;
         }
       }
+      .nav-link {
+        color: #fff;
+        padding: .05rem 0;
+        background-color: transparent;
+        border-bottom: .25rem solid transparent;
+        &:hover,
+        &:focus {
+          border-bottom-color: #ffe358;
+        }
     }
     &.navbar-scrolled {
       box-shadow: $box-shadow;
