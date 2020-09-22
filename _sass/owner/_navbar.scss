@@ -34,21 +34,17 @@
     }
     .navbar-nav {
       .nav-item {
+        .nav-link {
+          color: fade-out($white, 0.3);
           padding: 0 1rem;
-      }
-      &:last-child {
-        .nav-item {
-          padding-right: 0;
+          &:hover {
+            color: $white;
+          }
         }
-      }
-      .nav-link {
-        color: #fff;
-        padding: .05rem 0;
-        background-color: transparent;
-        border-bottom: .25rem solid transparent;
-        &:hover,
-        &:focus {
-          border-bottom-color: #ffe358;
+        &:last-child {
+          .nav-link {
+            padding-right: 0;
+          }
         }
       }
     }
