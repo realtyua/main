@@ -5,7 +5,6 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
-
 {%- if forloop.first -%}
   <table
       data-locale="uk-UA"
@@ -23,6 +22,7 @@
         <th data-field="id" data-visible="false">id</th>
         <th data-field="type" data-title="Власність" data-formatter="propertyFormatter">type</th>
         <th data-field="rent" data-visible="false">rent</th>
+        <th data-field="page" data-visible="false">page</th>
         <th data-field="rooms" data-visible="false">rooms</th>
         <th data-field="surface" data-visible="false">surface</th>
         <th data-field="surface_land" data-visible="false">surface_land</th>
@@ -47,6 +47,7 @@
         <td>{{ offer.id }}</td>
         <td>{{ offer.type }}</td>
         <td>{{ offer.rent }}</td>
+        <td>{{ offer.page }}</td>
         <td>{{ offer.rooms }}</td>
         <td>{{ offer.surface }}</td>
         <td>{{ offer.surface_land }}</td>
@@ -62,7 +63,7 @@
         <td>{{ offer.seller }}</td>
         <td>{{ offer.phone }}</td>
         <td>{{ offer.description }}</td>
-        {%- if isImage != "" -%}
+        {%- if isImage != '' -%}
           <td>
             <hr>
             <span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">
