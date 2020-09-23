@@ -21,10 +21,10 @@ layout: compress
       <div class="container">
         <div class="row">
           <div class="col-md-4 d-flex align-items-center">
-            <h5 class="m-0">Нерухомість від власника</h5>
+            <h5 class="md-3 mb-md-0">Нерухомість від власника</h5>
           </div>
           <div class="col-md-8">
-            <ul class="list-group list-group-horizontal justify-content-end">
+            <ul class="list-group list-group-horizontal-md justify-content-end">
               {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
               {%- for one in ones -%}
                 {%- assign path = one.url | split: '/' -%}
@@ -32,7 +32,7 @@ layout: compress
                 {%- assign slug = one.url | split: '/' | last -%}
                 {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
                 {%- if '/' == current and one.navhide != 1 -%}
-                  <li class="list-group-item border-0">
+                  <li class="pl-0 px-md-3 list-group-item border-0">
                     <a class="text-info" href="{{ one.url }}">
                       {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
                     </a>
@@ -45,7 +45,7 @@ layout: compress
                       {%- assign slug = two.url | split: '/' | last -%}
                       {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
                       {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
-                      <li class="list-group-item border-0">
+                      <li class="pl-0 px-md-3 list-group-item border-0">
                         <a class="text-info" href="{{ two.url }}">
                           {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                         </a>
