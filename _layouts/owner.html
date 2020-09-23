@@ -33,7 +33,7 @@ layout: compress
                 {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
                 {%- if '/' == current and one.navhide != 1 -%}
                   <li class="list-group-item border-0">
-                    <a class="text-primary" href="{{ one.url }}">
+                    <a class="text-info" href="{{ one.url }}">
                       {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
                     </a>
                   </li>
@@ -46,7 +46,7 @@ layout: compress
                       {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
                       {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
                       <li class="list-group-item border-0">
-                        <a class="text-primary" href="{{ two.url }}">
+                        <a class="text-info" href="{{ two.url }}">
                           {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                         </a>
                       </li>
