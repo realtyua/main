@@ -3,13 +3,13 @@
     <div class="row h-100 align-items-center justify-content-center text-center">
       {%- if include.h1 -%}
       <div class="col-lg-10 align-self-end">
-        <h1 class="bg-dark p-4 text-uppercase text-white font-weight-bold">{{ include.h1 }}</h1>
+        <h1 class="bg-dark p-4 text-uppercase text-white display-4">{{ include.h1 }}</h1>
         <hr class="divider my-4"/>
       </div>
       {%- endif -%}
       <div class="col-lg-8 align-self-baseline">
         {%- if include.p -%}
-        <p class="bg-dark p-4 text-white font-weight-light mb-5">{{ include.p }}</p>
+        <p class="bg-dark p-4 text-white lead mb-5">{{ include.p }}</p>
         {%- endif -%}
         <a class="btn btn-success btn-lg js-scroll-trigger" href="#contact">Контакти власника</a>
       </div>
