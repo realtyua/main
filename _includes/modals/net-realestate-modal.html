@@ -8,11 +8,14 @@
       </div>
       <div class="modal-body pt-0 pb-4 px-4">
         <ul class="list-unstyled mb-0 row row-cols-1 row-cols-sm-2 g-3">
-          {% for item in site.data.realestate %}
+          {%- assign sites = site.data.realestate | sort: 'title' -%}
+          {%- for site in sites -%}
+          {%- if site.url != site.url -%}
           <li class="col mb-1">
-            <a rel="noopener noreferrer" href="{{ item.url }}" target="_blank" class="link-light">{{ item.title }}</a>
+            <a rel="noopener noreferrer" href="{{ site.url }}" target="_blank" class="link-light">{{ site.title }}</a>
           </li>
-          {% endfor %}
+          {%- endif -%}
+          {%- endfor -%}
         </ul>
       </div>
     </div>
