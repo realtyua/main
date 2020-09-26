@@ -9,6 +9,17 @@ main a, footer a {
   }
 }
 
+footer .social-link a {
+  background-color: transparent;
+  border-bottom: 0;
+  transition: none;
+
+  &:hover {
+    transition: none;
+    border-bottom: 0;
+  }
+}
+
 .net-realestate a {
   color: $white;
   background-color: transparent;
@@ -24,5 +35,5 @@ main a, footer a {
 .card {
   span.mark {
     cursor: pointer;
-  }  
+  }
 }
