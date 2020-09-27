@@ -166,7 +166,6 @@ title: Додати нерухомість
           {%- include social-media.html twitter=1 facebook=1 skype=1 whatsapp=1 viber=1 -%}
           <hr>
           <p>Отримавши від вас інформацію про вашу нерухомість ми відразу опублікоємо ваше оголошення на цьому вебсайті у такому ворфматі.</p>
-          <hr>
           {% for offer in site.data.example limit:1 %}
             {%- include card.html offer=offer aid='101' -%}
           {% endfor %}
