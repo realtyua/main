@@ -9,11 +9,10 @@ main a, footer a {
   }
 }
 
-footer .social-link a {
+.social-link a {
   background-color: transparent;
   border-bottom: 0;
   transition: none;
-
   &:hover {
     transition: none;
     border-bottom: 0;
