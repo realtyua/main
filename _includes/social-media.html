@@ -1,27 +1,37 @@
 <ul class="list-inline social-link">
+  {%- if include.twitter == 1 -%}
   <li class="list-inline-item">
     <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="GitHub">
       <span>{%- include icons/twitter.svg width="24" height="24" -%}</span>
     </a>
   </li>
+  {%- endif -%}
+  {%- if include.facebook == 1 -%}
   <li class="list-inline-item">
     <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
       <span>{%- include icons/facebook.svg width="23" height="23" -%}</span>
     </a>
   </li>
+  {%- endif -%}
+  {%- if include.skype == 1 -%}
   <li class="list-inline-item">
     <a href="https://skype.com" target="_blank" rel="noopener" aria-label="Skype">
       <span>{%- include icons/skype.svg width="24" height="24" -%}</span>
     </a>
   </li>
+  {%- endif -%}
+  {%- if include.whatsapp == 1 -%}
   <li class="list-inline-item">
     <a href="https://whatsapp.com" target="_blank" rel="noopener" aria-label="WhatsApp">
       <span>{%- include icons/whatsapp.svg width="28" height="28" -%}</span>
     </a>
   </li>
+  {%- endif -%}
+  {%- if include.viber == 1 -%}
   <li class="list-inline-item">
     <a href="https://viber.com" target="_blank" rel="noopener" aria-label="Viber">
       <span>{%- include icons/viber.svg width="24" height="24" -%}</span>
     </a>
   </li>
+  {%- endif -%}
 </ul>
