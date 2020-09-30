@@ -1,5 +1,6 @@
 # Site settings
 baseurl: ''
+domain: realestate.if.ua
 url: 'https://www.realestate.if.ua'
 
 encoding: UTF-8
