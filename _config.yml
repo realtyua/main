@@ -1,7 +1,6 @@
 # Site settings
 baseurl: ''
 url: 'https://www.realestate.if.ua'
-dimain: realestate.if.ua
 
 encoding: UTF-8
 lang: uk_UA
