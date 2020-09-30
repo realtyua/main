@@ -4,10 +4,10 @@
       <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarRealEstate" aria-controls="navbarRealEstate" aria-expanded="false" aria-label="Toggle button">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand d-md-none" href="{{ page.url }}">
+      <div class="navbar-brand d-md-none">
         <span class="float-left align-middle text-white mr-1">←</span>
         <span class="small">{{ site.data.lang-uk.brand_header }}</span>
-      </a>
+      </div>
       <div class="collapse navbar-collapse" id="navbarRealEstate">
         <ul class="navbar-nav">
           {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
