@@ -33,18 +33,22 @@
 <dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% else %}{{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}.{% endif %}</dd>
 {%- endif -%}
 {%- if offer.seller -%}
-{%- if offer.rent == '1' -%}
-<dt>{{ site.data.lang-uk.re_sellerr }}</dt>
-{%- else -%}
-<dt>{{ site.data.lang-uk.re_seller }}</dt>
-{%- endif -%}
-<dd>{{ offer.seller }}</dd>
+  {%- if offer.rent == '1' -%}
+    <dt>{{ site.data.lang-uk.re_sellerr }}</dt>
+  {%- else -%}
+    <dt>{{ site.data.lang-uk.re_seller }}</dt>
+  {%- endif -%}
+  <dd>{{ offer.seller }}</dd>
 {%- endif -%}
 {%- if offer.phone -%}
-{%- if offer.rent == '1' -%}
-<dt>{{ site.data.lang-uk.re_phoner }}</dt>
-{%- else -%}
-<dt>{{ site.data.lang-uk.re_phone }}</dt>
+  {%- if offer.rent == '1' -%}
+    <dt>{{ site.data.lang-uk.re_phoner }}</dt>
+  {%- else -%}
+    <dt>{{ site.data.lang-uk.re_phone }}</dt>
+  {%- endif -%}
+  <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
 {%- endif -%}
-<dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
+{%- if offer.page and offer.page == 1 -%}
+<dt>{{ site.data.lang-uk.re_page }}</dt>
+<dd><a a href="{{ site.url }}{{ offer.phone }}" target="_blank">{{ site.url }}{{ offer.phone }}</a></dd>
 {%- endif -%}
