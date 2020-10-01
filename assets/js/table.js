@@ -406,7 +406,7 @@ function propertyFormatter(value, row) {
           html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
         }
         if (row.page && row.page === '1') {
-          html.push(' <a href=/' + row.phone + '>Сторінка оголошення</a>.')
+          html.push(' <a href="{{ site.url }}/' + row.phone + '" target="_blank">Сторінка оголошення</a>.')
         }
       }
     }
