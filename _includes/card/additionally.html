@@ -48,7 +48,7 @@
   {%- endif -%}
   <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
 {%- endif -%}
-{%- if offer.page and offer.page == 1 -%}
+{%- if offer.page == '1' -%}
 <dt>{{ site.data.lang-uk.re_page }}</dt>
 <dd><a a href="{{ site.url }}{{ offer.phone }}" target="_blank">{{ site.url }}{{ offer.phone }}</a></dd>
 {%- endif -%}
