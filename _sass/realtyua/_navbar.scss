@@ -125,6 +125,7 @@ $dropDown       : true;
             padding: .5rem;
             &:not(.disabled) {
                 &:hover,
+                &:active,
                 &:focus {
                     color: $colHighlight;
                 }
