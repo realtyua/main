@@ -1,6 +1,5 @@
 <div class="dropdown-menu mt-0 w-100 border-top-0 rounded-0" aria-labelledby="navDropRealEstate{{ slug | capitalize }}">
   <div class="row w-100 mt-mx-2 mt-md-3 mx-0 px-0">
-
     {%- assign regs = site.data.realestate | sort: 'title' -%}
     {%- for reg in regs -%}
     {%- if reg.url != site.url -%}
@@ -36,7 +35,7 @@
   </div>
   <div class="row w-100 mx-0 px-0">
     <div class="col-auto ml-auto">
-      <a href="{{ include.current }}">
+      <a href="http://www.realestate.in.ua/" title="Українська нерухомість">
         <span class="text-white font-weight-bold">...</span>
       </a>
     </div>
