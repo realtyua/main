@@ -48,9 +48,10 @@
           {%- endfor -%}
         </ul>
         <ul class="navbar-nav ml-md-auto">
-          <li class="nav-item position-static">
-            <a class="nav-link{% if page.url == one.url %} active{% endif %}" href="http://www.realestate.in.ua/" target="_blank">
+          <li class="nav-item position-static dropdown">
+            <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" id="navDropRealEstateRegions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Нерухомість в Україні
+              {%- include header/regions.html -%}
             </a>
           </li>
         </ul>

@@ -1,56 +1,99 @@
 - title: Нерухомість в Запорозькій області
+  navtitle: місто Запоріжжя
+  subtitle: Нерухомість в Запоріжжі
   url: http://www.realestate.zp.ua
 
 - title: Нерухомість в Житомирській області
+  navtitle: місто Житомир
+  subtitle: Нерухомість в Житомирі
   url: http://www.realestate.zt.ua
 
 - title: Нерухомість в Полтавській області
+  navtitle: місто Полтава
+  subtitle: Нерухомість в Полтаві
   url: http://www.realestate.pl.ua
 
 - title: Нерухомість в Закарпатській області
+  navtitle: місто Ужгород
+  subtitle: Нерухомість в Ужгороді
   url: http://www.realestate.uz.ua
 
 - title: Нерухомість в Вінницької області
+  navtitle: місто Вінниця
+  subtitle: Нерухомість в Вінниці
   url: http://www.realestate.vn.ua
 
-- title: Нерухомість в Рівенській області
+- title: Нерухомість в Рівненській області
+  navtitle: місто Рівне
+  subtitle: Нерухомість в Рівному
   url: http://www.realestate.rv.ua
 
 - title: Нерухомість в Чернівецькій області
+  navtitle: місто Чернівці
+  subtitle: Нерухомість в Чернівцях
   url: http://www.realestate.cv.ua
 
 - title: Нерухомість в Тернопільській області
+  navtitle: місто Тернопіль
+  subtitle: Нерухомість в Тернополі
   url: http://www.realestate.te.ua
 
 - title: Нерухомість в Харківської області
+  navtitle: місто Харків
+  subtitle: Нерухомість в Харкові
   url: http://www.realestate.kh.ua
 
 - title: Нерухомість в Кіровоградській області
+  navtitle: місто Кропивницький
+  subtitle: Нерухомість в Кіровограді
   url: http://www.realestate.kr.ua
 
 - title: Нерухомість в Луганської області
+  navtitle: місто Луганськ
+  subtitle: Нерухомість в Луганську
   url: http://www.realestate.lg.ua
 
 - title: Нерухомість в Івано-Франківській області
+  navtitle: місто Івано-Франківськ
+  subtitle: Нерухомість в Івано-Франківсьу
   url: https://www.realestate.if.ua
 
 - title: Нерухомість в Чернігівській області
+  navtitle: місто Чернігів
+  subtitle: Нерухомість в Чернігові
   url: http://www.realestate.cn.ua
 
 - title: Нерухомість в Хмельницькій області
+  navtitle: місто Хмельницький
+  subtitle: Нерухомість в Хмельницьку
   url: http://www.realestate.km.ua
 
 - title: Нерухомість в Черкаській області
+  navtitle: місто Черкаси
+  subtitle: Нерухомість в Черкасах
   url: http://www.realestate.ck.ua
 
 - title: Нерухомість в Волинській області
+  navtitle: місто Луцьк
+  subtitle: Нерухомість в Луцьку
   url: http://www.realestate.lt.ua
 
 - title: Нерухомість в Миколаївській області
+  navtitle: місто Миколаїв
+  subtitle: Нерухомість в Миколаєві
   url: http://www.realestate.mk.ua
 
 - title: Нерухомість в Одеській області
+  navtitle: місто Одеса
+  subtitle: Нерухомість в Одесі
   url: http://www.realestate.od.ua
 
 - title: Нерухомість в Київській області
+  navtitle: місто Київ
+  subtitle: Нерухомість в Києві
   url: http://www.realestate.kyiv.ua
+
+- title: Нерухомість в Сумській області
+  navtitle: місто Суми
+  subtitle: Нерухомість в Сумах
+  url: http://www.realestate.sm.ua
