@@ -17,7 +17,7 @@
             {%- assign slug = one.url | split: '/' | last -%}
             {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
             {%- if '/' == current and one.navhide != 1 -%}
-              {%- if one.url == '/region/ivano-frankivska/' -%}
+              {%- if one.url == '/region/' -%}
                 <li class="nav-item position-static">
                   <a class="nav-link{% if page.url == one.url %} active{% endif %}" href="{{ one.url }}">
                     {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
