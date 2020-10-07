@@ -6,6 +6,7 @@ title: Нерухомість в інших регіонах України
 <div class="row row-cols-1 row-cols-md-2">
   {%- for r in rs -%}
     {%- assign title = r.title | split: " " | slice: 1, 4 | join: " " -%}
+    {%- assign image = r.url | split: "." | slice: 2, 4 | join: "." | replace: '.', '-' | prepend: '.jpg' -%}
     {%- if r.url != site.url -%}
     <div class="col mb-4">
       <div class="card">
@@ -16,7 +17,7 @@ title: Нерухомість в інших регіонах України
             </a>
           </h5>
           <div class="card-text">
-            {{ r.description }}
+            {{ r.description }} - {{ image }}
           </div>
         </div>
       </div>
