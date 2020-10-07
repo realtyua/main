@@ -16,7 +16,7 @@ navhide: 1
             <a href="{{ r.url }}">{{ r.subtitle }} та {{ title }}</a>
           </h5>
           <div class="card-text">
-            {{ site.data.lang-uk.www }} {{ site.data.lang-uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} та {{ title }}
+            {{ site.data.lang-uk.www }} {{ r.url | remove: 'http://' | remove: 'https://' }} {{ site.data.lang-uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} та {{ title }}
           </div>
         </div>
       </div>
