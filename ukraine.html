@@ -11,12 +11,16 @@ navhide: 1
     {%- if r.url != site.url -%}
     <div class="col mb-4">
       <div class="card">
+        <img src="{{ '/assets/images/locations/{{ image }}' | url_decode | relative_url }}" class="card-img-top" alt="Нерухомість {{ r.navtitle | replace_first: 'о', 'і' }}">
+        {% comment %}
+        <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ '/assets/images/locations/{{ image }}' | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Нерухомість {{ r.navtitle | replace_first: 'о', 'і' }}">
+        {% endcomment %}
         <div class="card-body p-3">
           <h5 class="card-title">
             <a href="{{ r.url }}">{{ r.subtitle }} та {{ title }}</a>
           </h5>
           <div class="card-text">
-            {{ site.data.lang-uk.www }} {{ r.url | remove: 'http://' | remove: 'https://' }} {{ site.data.lang-uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} та {{ title }}
+            {{ site.data.lang-uk.www }} <strong>{{ r.url | remove: 'http://' | remove: 'https://' }}</strong> {{ site.data.lang-uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} та {{ title }}
           </div>
         </div>
       </div>
