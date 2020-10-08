@@ -1,21 +1,21 @@
 {%- assign level = page.dir | split: '/' -%}
-<script src="{{ "/assets/js/jquery.min.js" | relative_url }}"></script>
-<script src="{{ "/assets/js/popper.min.js" | relative_url }}"></script>
-<script src="{{ "/assets/js/bootstrap.min.js" | relative_url }}"></script>
-<script src="{{ "/assets/js/photoswipe.min.js" | relative_url }}"></script>
-<script src="{{ "/assets/js/photoswipe-ui-default.min.js" | relative_url }}"></script>
-<script src="{{ "/assets/js/bootstrap.lightbox.min.js" | relative_url }}"></script>
-<script src="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/jquery.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ "/assets/js/popper.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ "/assets/js/bootstrap.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ "/assets/js/photoswipe.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ "/assets/js/photoswipe-ui-default.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ "/assets/js/bootstrap.lightbox.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- if page.table == 1 -%}
-  <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
-  <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   {%- if level.size == 8 -%}
-    <script src="{{ "/assets/js/object.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/object.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   {%- endif -%}
-  <script src="{{ "/assets/js/table.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/table.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- elsif page.table == 2 -%}
-  <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
-  <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
-  <script src="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- endif -%}
-<script src="{{ "/assets/js/realtyua.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/realtyua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
