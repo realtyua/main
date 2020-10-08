@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>
   {%- if page.title -%}
-    {{ page.title | smartify }}{% if location %} · {{ location }}{% endif %} · {{ site.title | smartify }}
+    {{ page.title | smartify }} · {{ site.title | smartify }}
   {%- else -%}
-    {{ site.title | smartify }}{% if location %} · {{ location }}{% endif %} · {{ site.name | smartify }}
+    {{ site.title | smartify }} · {{ site.name | smartify }}
   {%- endif -%}
 </title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
@@ -17,7 +17,7 @@
 <meta name="region" content="{{ site.region }}">
 {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
 <meta name="locality" content="{{ site.data.lang-uk.city }} {{ location }}">
-{%- elsif back.size == 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
+{%- elsif back.size >= 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
 <meta name="locality" content="{{ location }} {{ site.data.lang-uk.district }}">
 {%- elsif page.url == '/district/town/' -%}
 {%- endif -%}
