@@ -17,7 +17,7 @@ navhide: 1
         <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ '/assets/images/locations/{{ image }}' | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Нерухомість {{ r.navtitle | replace_first: 'о', 'і' }}">
         {% endcomment %}
         <div class="card-body p-3">
-          <h2 class="card-title">
+          <h2 class="card-title h5">
             <a href="{{ r.url }}">{{ r.subtitle }} {{ site.data.lang-uk.ta }} {{ title }}</a>
           </h2>
           <div class="card-text">
