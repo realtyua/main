@@ -1,9 +1,5 @@
 {%- include location.html -%}
-<meta charset="utf-8">
-<meta name="robots" content="index, follow">
-<meta name="language" content="Українська">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{%- capture title_location -%}
+{%- capture tlocation -%}
   {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
     {% unless back.size <= 4 or page.url contains 'all.html' %}
       {{ site.data.lang-uk.city }} {{ location }}
@@ -15,11 +11,15 @@
   {%- elsif page.url == '/district/town/' -%}
   {%- endif -%}
 {%- endcapture -%}
+<meta charset="utf-8">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Українська">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>
   {%- if page.title -%}
-    {{ page.title | smartify }}{% if title_location != '' %} · {{ title_location }}{% endif %} · {{ site.title | smartify }}
+    {{ page.title | smartify }}{% if tlocation != '' %} · {{ tlocation }}{% endif %} · {{ site.title | smartify }}
   {%- else -%}
-    {{ site.title | smartify }}{% if title_location != '' %} · {{ title_location }}{% endif %} · {{ site.name | smartify }}
+    {{ site.title | smartify }}{% if tlocation != '' %} · {{ tlocation }}{% endif %} · {{ site.name | smartify }}
   {%- endif -%}
 </title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
