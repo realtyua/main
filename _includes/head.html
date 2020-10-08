@@ -17,9 +17,9 @@
 {%- endcapture -%}
 <title>
   {%- if page.title -%}
-    {{ page.title | smartify }}{% if title_location != '' %} · {{ title_location }}{% endif %} · {{ site.title | smartify }} - {{back.size}}
+    {{ page.title | smartify }}{% if title_location != '' %} · {{ title_location }}{% endif %} · {{ site.title | smartify }}
   {%- else -%}
-    {{ site.title | smartify }}{% if title_location != '' %} · {{ title_location }}{% endif %} · {{ site.name | smartify }} - {{back.size}}
+    {{ site.title | smartify }}{% if title_location != '' %} · {{ title_location }}{% endif %} · {{ site.name | smartify }}
   {%- endif -%}
 </title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
