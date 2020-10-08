@@ -18,9 +18,4 @@
 <meta name="author" content="{{ site.developer.name }}">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | relative_url }}">
-{%- comment -%}
-<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
-{%- endcomment -%}
-<link rel="stylesheet" href="{{ "/assets/css/owner.css" | relative_url }}">
+<link rel="stylesheet" href="{{ "/assets/css/owner.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
