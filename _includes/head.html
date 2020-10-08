@@ -3,11 +3,25 @@
 <meta name="robots" content="index, follow">
 <meta name="language" content="Українська">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+{%- capture title_location -%}
+  {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
+    {% unless page.url contains 'all.html' %}
+      {{ site.data.lang-uk.city }} {{ location }}
+    {% endunless %}
+  {%- elsif back.size >= 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
+    {% unless page.url contains 'all.html' %}
+      {{ location }} {{ site.data.lang-uk.district }}
+    {% endunless %}
+  {%- elsif page.url == '/district/town/' -%}
+  {%- endif -%}
+{%- endcapture -%}
+
 <title>
   {%- if page.title -%}
-    {{ page.title | smartify }} · {{ site.title | smartify }}
+    {{ page.title | smartify }}{%- iftitle_location -%} · title_location{%- endif -%} · {{ site.title | smartify }}
   {%- else -%}
-    {{ site.title | smartify }} · {{ site.name | smartify }}
+    {{ site.title | smartify }}{%- iftitle_location -%} · title_location{%- endif -%} · {{ site.name | smartify }}
   {%- endif -%}
 </title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
