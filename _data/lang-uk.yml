@@ -30,6 +30,7 @@ re_m: м
 re_na: на
 re_mu: -му
 re_rc: ЖК
+re_ta: та
 re_floorss: поверхів
 re_floorci: поверсі
 re_floors: поверховому будинку
