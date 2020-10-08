@@ -1,7 +1,7 @@
 section.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - #{$navbar-height});
-  background: linear-gradient(to bottom, #{fade-out($brown, 0.2)} 0%, #{fade-out($brown, 0.2)} 100%);
+  background: linear-gradient(to bottom, #{fade-out($yellow, 0.2)} 0%, #{fade-out($yellow, 0.2)} 100%);
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
