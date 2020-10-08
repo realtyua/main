@@ -1,20 +1,6 @@
-// Variables
-
-//- Override and add to color system
-
-// $bgHighlight    : #2d5ca6;
-// $colHighlight   : #ffe358;
-
-// $orange: #f4623a;
-// $brown: #5c4d42;
-
-$orange: #ffc107;
-$brown: #2d5ca6;
-
-$primary: $orange;
-
+$blue: #2d5ca6 !default;
+$primary: $blue;
 $navbar-height: 4.5rem;
-
 $enable-responsive-font-sizes:  true !default;
 $enable-negative-margins: true !default;
 $enable-gradients: true !default;
