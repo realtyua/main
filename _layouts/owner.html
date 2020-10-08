@@ -21,7 +21,7 @@ layout: compress
       <div class="container">
         <div class="row">
           <div class="col-md-4 d-flex align-items-center">
-            <h5 class="md-3 mb-md-0">Нерухомість від власника</h5>
+            <h5 class="md-3 mb-md-0">{{ site.data.lang-uk.re_owner }}</h5>
           </div>
           <div class="col-md-8">
             <ul class="list-group list-group-horizontal-md justify-content-end">
@@ -55,12 +55,12 @@ layout: compress
                   {%- endif -%}
                 {%- endif -%}
               {%- endfor -%}
+              <li class="pl-0 px-md-3 list-group-item border-0">
+                <a class="text-success" href="http://www.realestate.in.ua/" title="{{ site.data.lang-uk.ukr }}">
+                  {{ site.data.lang-uk.ua }}
+                </a>
+              </li>
             </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <p class="text-center mb-0"><a href="https://www.realestate.in.ua/" title="Українська нерухомість">Нерухомість в Україні</a></p>
           </div>
         </div>
       </div>

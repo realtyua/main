@@ -1,5 +1,7 @@
 domain: realestate.if.ua
 home: Головна
+ua: Нерухо́мість в Україні
+ukr: Українська нерухомість
 
 deck_region_in:  Івано-Франківської області
 deck_region: Івано-Франківська
@@ -57,6 +59,7 @@ re_uah: ₴
 re_about_object: Про житловий комплекс
 re_select_section: Оберіть розділ
 re_page: Персональна сторінка нерухомості
+re_owner: Нерухомість від власника
 #
 # Site
 #
