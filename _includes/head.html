@@ -17,9 +17,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>
   {%- if page.title -%}
-    {{ page.title | smartify }}{% if tlocation != '' %} · {{ tlocation }}{% endif %} · {{ site.title | smartify }}
+    {{ page.title | smartify }}{% if tlocation != '' %} · {{ tlocation }}{% endif %} · {{ site.title | smartify }} - {{ back.size }}
   {%- else -%}
-    {{ site.title | smartify }}{% if tlocation != '' %} · {{ tlocation }}{% endif %} · {{ site.name | smartify }}
+    {{ site.title | smartify }}{% if tlocation != '' %} · {{ tlocation }}{% endif %} · {{ site.name | smartify }} - {{ back.size }}
   {%- endif -%}
 </title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
