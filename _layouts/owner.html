@@ -31,7 +31,7 @@ layout: compress
                 {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
                 {%- if '/' == current and one.navhide != 1 -%}
                   <li class="pl-0 px-md-3 list-group-item border-0">
-                    <a class="text-info" href="{{ one.url }}">
+                    <a href="{{ one.url }}">
                       {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
                     </a>
                   </li>
