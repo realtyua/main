@@ -6,7 +6,7 @@
       {%- assign alt = file.basename | slice: 2, sizename -%}
       {%- assign title = alt | replace: '-', ' ' | capitalize -%}
       <div class="col px-0">
-        <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=1024&h=768&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ title }}" data-lightbox-width="1024" data-lightbox-height="768" rel="lightbox-group-{{ include.group }}">
+        <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=1024&h=768&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ title }}" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="lightbox-group-{{ include.group }}">
           <img class="card-img-top" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=300&h=300&fit=cover&a=attention&output=jpg&q=50&t=square" alt="image-{{ alt }}" intrinsicsize="1100x800" />
         </a>
       </div>
