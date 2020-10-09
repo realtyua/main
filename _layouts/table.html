@@ -2,10 +2,10 @@
 layout: default
 ---
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
-{%- assign addtitle = name | split: ' ' | slice: 1, 4 | join: ' ' -%}
+{%- assign addtitle = name | split: ' ' | slice: 2, 4 | join: ' ' -%}
 <div class="row">
   <div class="col-12">
-    <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ addtitle }}{% endif %}</h1>
+    <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}</h1>
     {{ content }}
     {%- include nav-section.html -%}
     {%- if page.url contains 'rent' -%}
