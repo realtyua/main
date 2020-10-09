@@ -4,5 +4,6 @@ class: py-5
 ---
 
 <div class="container-fluid">
+  {%- capture gallery -%}{{page.dir}}images/gallery/home/{%- endcapture -%}
   {%- include owner/image-gallery.html folder=gallery cols='4' group='home' -%}
 </div>
