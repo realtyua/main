@@ -5,9 +5,7 @@ layout: compress
 {%- assign owners = site.owners | where_exp: 'i', 'i.path contains owner' -%}
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
-  <head>
-    {%- include owner/head.html -%}
-  </head>
+  <head>{%- include owner/head.html -%}</head>
   <body>
     <div id="top"></div>
     {%- if owners.size > 0 -%}
@@ -46,7 +44,7 @@ layout: compress
                       {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
                       {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
                       <li class="pl-0 px-md-3 list-group-item border-0">
-                        <a class="text-info" href="{{ two.url }}">
+                        <a href="{{ two.url }}">
                           {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                         </a>
                       </li>
@@ -56,7 +54,7 @@ layout: compress
                 {%- endif -%}
               {%- endfor -%}
               <li class="pl-0 px-md-3 list-group-item border-0">
-                <a class="text-success" href="http://www.realestate.in.ua/" title="{{ site.data.lang-uk.ukr }}">
+                <a href="http://www.realestate.in.ua/" title="{{ site.data.lang-uk.ukr }}">
                   {{ site.data.lang-uk.ua }}
                 </a>
               </li>
