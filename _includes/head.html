@@ -6,7 +6,7 @@
     {% endunless %}
   {%- elsif back.size > 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
     {% unless back.size < 3 or page.url contains 'all.html' %}
-      {% unless back.size == 4 and page.url == '/district/town/' %}
+      {% unless back.size == 4 and page.url contains '/district/town/' %}
         {{ location }} {{ site.data.lang-uk.district }}
       {% endunless %}
     {% endunless %}
