@@ -3,6 +3,12 @@ title: Фото
 ---
 
 <div class="container-fluid">
+  <div class="row my-3">
+    <div class="col-12 text-center">
+        <h2>Фотогалерея однокімнатної квартири</h2>
+        <p class="lead">Розділ містить фотозображення приміщень які належать цій квартирі та знаходяться в межах цієї квартири</p>
+    </div>
+  </div>
   {%- capture gallery -%}{{page.dir}}images/gallery/home/{%- endcapture -%}
   {%- include owner/image-gallery.html folder=gallery cols='4' group='home' -%}
 </div>
