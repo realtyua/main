@@ -1,6 +1,7 @@
 $blue: #2d5ca6 !default;
 
 $gray-300: #dee2e6 !default;
+$gray-700: #495057 !default;
 $black: #000000 !default;
 
 $grays: () !default;
@@ -26,3 +27,6 @@ $card-spacer-y: .75rem !default;
 $card-spacer-x: 1.25rem !default;
 $card-border-width: $border-width !default;
 $card-border-color:  rgba($black, .125) !default;
+
+$grid-gutter-width: 30px !default;
+$zindex-sticky: 1020 !default;
