@@ -4,3 +4,13 @@ $navbar-height: 4.5rem;
 $enable-responsive-font-sizes:  true !default;
 $enable-negative-margins: true !default;
 $enable-gradients: true !default;
+
+$font-size-base: 1rem !default;
+
+$border-width: 1px !default;
+$border-color: $gray-300 !default;
+
+$card-spacer-y: .75rem !default;
+$card-spacer-x: 1.25rem !default;
+$card-border-width: $border-width !default;
+$card-border-color:  rgba($black, .125) !default;
