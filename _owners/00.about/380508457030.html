@@ -17,25 +17,15 @@ class: py-3 py-md-5
 
 <hr>
 
-<div class="accordion" id="accordion-301">
+<div class="accordion" id="accordion-owner">
 
-  <div class="accordion-item card">
-    <div class="accordion-header card-header" id="accordion-heading-301-6">
-      <h4 class="accordion-title">
-        <a href="#accordion-301-6" class="accordion-title-link collapsed" data-toggle="collapse" data-parent="#accordion-301" aria-expanded="false" aria-controls="accordion-301-6"><span class="accordion-title-link-text">No Media</span><span class="accordion-title-link-state"></span></a>
-      </h4>
-    </div>
-    <div id="accordion-301-6" class="accordion-collapse collapse" aria-labelledby="accordion-heading-301-6" data-parent="#accordion-301">
-      <div class="accordion-body card-body">
-        <div class="accordion-content accordion-content-left">
-          <div class="accordion-content-item accordion-content-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus lorem ut efficitur ultrices. Aliquam efficitur ante non molestie sodales. Nunc ullamcorper tempus diam, ac pretium urna vestibulum sed.</p>
-            <p>Donec lacinia pretium enim, non tristique urna dignissim non. Fusce volutpat, arcu et iaculis lobortis, erat neque rutrum mauris, eu cursus nulla ante in ipsum. Vestibulum sagittis dictum turpis in placerat. Sed mollis finibus nulla sit amet dapibus</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  {%- include owner/accordion-item.html
+    id='owner'
+    i='1'
+    title='Властивості однокімнатної квартири'
+    p1='Простора однокімнатна квартира в обжитому районі міста Івано-Франківськ'
+    p2='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+  -%}
 
 </div>
 
