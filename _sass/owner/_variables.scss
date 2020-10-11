@@ -1,4 +1,16 @@
 $blue: #2d5ca6 !default;
+
+$gray-300: #dee2e6 !default;
+$black: #000000 !default;
+
+$grays: () !default;
+$grays: map-merge(
+  (
+    "300": $gray-300
+  ),
+  $grays
+);
+
 $primary: $blue;
 $navbar-height: 4.5rem;
 $enable-responsive-font-sizes:  true !default;

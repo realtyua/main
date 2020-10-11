@@ -16,4 +16,36 @@ section.masthead {
   @include media-breakpoint-up(xl) {
 
   }
+
+  .btn-scroll {
+    transition: 0.4s;
+    color: rgba(255, 255, 255, 0.6);
+    animation: up-down 1s ease-in-out infinite alternate-reverse both;
+  }
+
+  .btn-scroll i {
+    font-size: 48px;
+  }
+
+  .btn-scroll:hover {
+    color: #ffb727;
+  }
+
+  .bx-chevron-down:before {
+    content: "\ea17";
+  }
+
+  .bx {
+     font-family: 'boxicons' !important;
+     font-weight: normal;
+     font-style: normal;
+     font-variant: normal;
+     line-height: 1;
+     display: inline-block;
+     text-transform: none;
+     speak: none;
+     -webkit-font-smoothing:antialiased;
+     -moz-osx-font-smoothing:grayscale
+  }
+
 }
