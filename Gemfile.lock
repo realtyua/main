@@ -9,3 +9,6 @@ DEPENDENCIES
   jekyll-sitemap
   jekyll-timeago
   jekyll-paginate-v2
+
+BUNDLED WITH
+   2.1.4
