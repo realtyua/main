@@ -1,1 +1,11 @@
+GEM
+  remote: https://rubygems.org/
+  
+PLATFORMS
+  ruby
 
+DEPENDENCIES
+  jekyll (~> 4)
+  jekyll-sitemap
+  jekyll-timeago
+  jekyll-paginate-v2
