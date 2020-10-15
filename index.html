@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Нерухомість в Івано-Франківській області
-description:
 ---
 
+{% comment %}
 <div role="alert" aria-live="assertive" aria-atomic="true" class="toast fade" data-animation="true" data-autohide="true" data-delay="2000">
   <div class="toast-header">
     <strong class="mr-auto">Привіт, Відвідувачу!</strong>
@@ -13,6 +13,7 @@ description:
   </div>
   <div class="toast-body">Ми раді бачити вас тут.</div>
 </div>
+{% endcomment %}
 
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
