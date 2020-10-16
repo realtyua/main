@@ -28,7 +28,7 @@ function generateRandomRe() {
         var number = 3;
         var div = $("#ads");
 
-        div.append('<h4>Зверніть увагу</h4>');
+        div.append();
 
         while (counter < number) {
 
@@ -38,7 +38,7 @@ function generateRandomRe() {
 
                 if (counter == (number - 1)) {
                   if (data[i].type === 'Квартира') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + '</p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + ' загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   } else if (data[i].type === 'Частина будинку') {
                     div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку, ' + data[i].id + '</p></div></div>');
                   } else {
@@ -46,7 +46,7 @@ function generateRandomRe() {
                   }
                 } else {
                   if (data[i].type === 'Квартира') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + '</p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + ' загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   } else if (data[i].type === 'Частина будинку') {
                     div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку, ' + data[i].id + '</p></div></div>');
                   } else {
