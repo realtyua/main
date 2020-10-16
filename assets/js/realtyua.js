@@ -38,19 +38,19 @@ function generateRandomRe() {
 
                 if (counter == (number - 1)) {
                   if (data[i].type === 'Квартира') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + ' загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   } else if (data[i].type === 'Частина будинку') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку, ' + data[i].id + '</p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   } else {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ', ' + data[i].id + '</p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   }
                 } else {
                   if (data[i].type === 'Квартира') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + ' загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   } else if (data[i].type === 'Частина будинку') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку, ' + data[i].id + '</p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   } else {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ', ' + data[i].id + '</p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + ' м<sup>2</sup></p></div></div>');
                   }
                 }
 
