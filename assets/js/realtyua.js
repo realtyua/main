@@ -24,35 +24,33 @@ function generateRandomRe()
       $.getJSON("https://www.realestate.if.ua/region/city/ivano-frankivsk/data/all.json", function(data) {
           // console.log("[search.json loaded for random posts]");
 
-          var reCount = data.length;
+          var count = data.length;
 
-          var randomIndexUsed = [];
+          var random = [];
           var counter = 0;
-          var numberOfRe = 3;
+          var number = 3;
 
-          var divRandomRe = $("#random_re");
+          var div = $("#random_re");
 
-          divRandomRe.append('<h4>Зверність увагу</h4><hr/>');
+          div.append('<h4>Зверність увагу</h4><hr/>');
 
-          while (counter < numberOfRe)
-          {
-              var randomIndex = Math.floor(Math.random() * reCount);
+          while (counter < number) {
 
-              if (randomIndexUsed.indexOf(randomIndex) == "-1")
-              {
+              var i = Math.floor(Math.random() * count);
+
+              if (random.indexOf(i) == "-1") {
                   //var postHREF = posts[randomIndex].href;
                   //var reType = re[randomIndex].type;
 
-                  if (counter == (numberOfRe - 1))
-                  {
+                  if (counter == (number - 1)) {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p>');
-                      divRandomRe.append('<p><a href="#">Продаю ' + data.type + ', ' + data.id + '</a></p>');
+                      div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p>');
                   } else {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
-                      divRandomRe.append('<p><a href="#">Продаю ' + data.type + ', ' + data.id + '</a></p><hr />');
+                      div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p><hr />');
                   }
 
-                  randomIndexUsed.push(randomIndex);
+                  random.push(i);
 
                   counter++;
               }
