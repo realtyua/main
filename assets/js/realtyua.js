@@ -41,15 +41,15 @@ function generateRandomRe()
               if (randomIndexUsed.indexOf(randomIndex) == "-1")
               {
                   //var postHREF = posts[randomIndex].href;
-                  var reType = re[randomIndex].type;
+                  //var reType = re[randomIndex].type;
 
                   if (counter == (numberOfRe - 1))
                   {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p>');
-                      divRandomRe.append('<p><a href="#">Продаю ' + reType + ', ' + data.id + '</a></p>');
+                      divRandomRe.append('<p><a href="#">Продаю ' + data.type + ', ' + data.id + '</a></p>');
                   } else {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
-                      divRandomRe.append('<p><a href="#">Продаю ' + reType + ', ' + data.id + '</a></p><hr />');
+                      divRandomRe.append('<p><a href="#">Продаю ' + data.type + ', ' + data.id + '</a></p><hr />');
                   }
 
                   randomIndexUsed.push(randomIndex);
