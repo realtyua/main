@@ -29,11 +29,11 @@ function generateRandomPosts()
 
           var randomIndexUsed = [];
           var counter = 0;
-          var numberOfPosts = 5;
+          var numberOfPosts = 3;
 
           var divRandomPosts = $("#random_posts");
 
-          divRandomPosts.append('<h2>other posts</h2><hr />');
+          divRandomPosts.append('<h2>Нещодавно</h2><hr />');
 
           while (counter < numberOfPosts)
           {
@@ -41,16 +41,18 @@ function generateRandomPosts()
 
               if (randomIndexUsed.indexOf(randomIndex) == "-1")
               {
-                  var postHREF = posts[randomIndex].href;
-                  var postTitle = posts[randomIndex].title;
+                  //var postHREF = posts[randomIndex].href;
+                  var postTitle = posts[randomIndex].type;
 
                   if (counter == (numberOfPosts - 1))
                   {
-                      divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p>');
+                      //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p>');
+                      divRandomPosts.append('<p><a href="#">' + postTitle + '</a></p>');
                   }
                   else
                   {
-                      divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
+                      //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
+                      divRandomPosts.append('<p><a href="#">' + postTitle + '</a></p><hr />');
                   }
 
                   randomIndexUsed.push(randomIndex);
