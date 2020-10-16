@@ -22,12 +22,9 @@ $(document).ready(function(){
 function generateRandomRe()
   {
       $.getJSON("https://www.realestate.if.ua/region/city/ivano-frankivsk/data/all.json", function(data) {
-          console.log("[search.json loaded for random posts]");
+          // console.log("[search.json loaded for random posts]");
 
           var reCount = data.length;
-          var re = data;
-
-          console.log(re);
 
           var randomIndexUsed = [];
           var counter = 0;
@@ -45,15 +42,14 @@ function generateRandomRe()
               {
                   //var postHREF = posts[randomIndex].href;
                   var reType = re[randomIndex].type;
-                  var re = re[randomIndex];
 
                   if (counter == (numberOfRe - 1))
                   {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p>');
-                      divRandomRe.append('<p><a href="#">' + reType + ', ' + re.id + '</a></p>');
+                      divRandomRe.append('<p><a href="#">Продаю ' + reType + ', ' + data.id + '</a></p>');
                   } else {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
-                      divRandomRe.append('<p><a href="#">' + reType + ', ' + re.id + '</a></p><hr />');
+                      divRandomRe.append('<p><a href="#">Продаю ' + reType + ', ' + data.id + '</a></p><hr />');
                   }
 
                   randomIndexUsed.push(randomIndex);
