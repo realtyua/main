@@ -29,7 +29,7 @@ function generateRandomRe()
           var number = 3;
           var div = $("#ads");
 
-          div.append('<h4>Зверніть увагу</h4><hr/>');
+          div.append('<h4>Зверніть увагу</h4>');
 
           while (counter < number) {
 
@@ -38,9 +38,13 @@ function generateRandomRe()
               if (random.indexOf(i) == "-1") {
 
                   if (counter == (number - 1)) {
+                    if (data[i].type === 'Квартира') {
+                      div.append('<p><a href="#">Продаю Квартиру' + data[i].id + '</a></p>');
+                    } else {
                       div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p>');
+                    }
                   } else {
-                      div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p><hr />');
+                      div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p>');
                   }
 
                   random.push(i);
