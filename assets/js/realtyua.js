@@ -27,6 +27,8 @@ function generateRandomRe()
           var reCount = data.length;
           var re = data;
 
+          console.log(re);
+
           var randomIndexUsed = [];
           var counter = 0;
           var numberOfRe = 3;
@@ -43,14 +45,13 @@ function generateRandomRe()
               {
                   //var postHREF = posts[randomIndex].href;
                   var reType = re[randomIndex].type;
+                  var re = re[i];
 
                   if (counter == (numberOfRe - 1))
                   {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p>');
-                      divRandomRe.append('<p><a href="#">' + reType + '</a></p>');
-                  }
-                  else
-                  {
+                      divRandomRe.append('<p><a href="#">' + reType + ', ' + re.id + '</a></p>');
+                  } else {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
                       divRandomRe.append('<p><a href="#">' + reType + '</a></p><hr />');
                   }
