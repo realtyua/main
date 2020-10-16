@@ -42,7 +42,7 @@ function generateRandomRe() {
                   } else if (data[i].type === 'Частина будинку') {
                     div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup></p></div></div>');
                   } else if (data[i].type === 'Земля') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю ' загальною площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup></p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup></p></div></div>');
                   } else {
                     div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup></p></div></div>');
                   }
@@ -52,7 +52,7 @@ function generateRandomRe() {
                   } else if (data[i].type === 'Частина будинку') {
                     div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup></p></div></div>');
                   } else if (data[i].type === 'Земля') {
-                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю ' загальною площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup></p></div></div>');
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup></p></div></div>');
                   } else {
                     div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup></p></div></div>');
                   }
