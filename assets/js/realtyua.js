@@ -39,7 +39,9 @@ function generateRandomRe()
 
                   if (counter == (number - 1)) {
                     if (data[i].type === 'Квартира') {
-                      div.append('<p><a href="#">Продаю Квартиру' + data[i].id + '</a></p>');
+                      div.append('<p><a href="#">Продаю Квартиру ' + data[i].id + '</a></p>');
+                    } else if (data[i].type === 'Частина будинку') {
+                      div.append('<p><a href="#">Продаю частину будинку, ' + data[i].id + '</a></p>');
                     } else {
                       div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p>');
                     }
