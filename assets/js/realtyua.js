@@ -33,7 +33,7 @@ function generateRandomRe()
 
           var divRandomRe = $("#random_re");
 
-          divRandomRe.append('<h3>Зверність увагу</h3><hr />');
+          divRandomRe.append('<h4>Зверність увагу</h4><hr/>');
 
           while (counter < numberOfRe)
           {
@@ -42,7 +42,7 @@ function generateRandomRe()
               if (randomIndexUsed.indexOf(randomIndex) == "-1")
               {
                   //var postHREF = posts[randomIndex].href;
-                  var reTitle = re[randomIndex].type;
+                  var reType = re[randomIndex].type;
 
                   if (counter == (numberOfRe - 1))
                   {
