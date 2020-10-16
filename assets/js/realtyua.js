@@ -28,7 +28,7 @@ function generateRandomRe() {
         var number = 3;
         var div = $("#ads");
 
-        div.append('<h4>Зверніть увагу</h4><div class="card-deck">');
+        div.append('<h4>Зверніть увагу</h4>');
 
         while (counter < number) {
 
@@ -59,7 +59,6 @@ function generateRandomRe() {
             }
         }
 
-        div.append('</div>');
 
     });
 }
