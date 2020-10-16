@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 function generateRandomPosts()
   {
-      $.getJSON("/search.json", function(data) {
+      $.getJSON("https://www.realestate.if.ua/region/city/ivano-frankivsk/data/all.json", function(data) {
           console.log("[search.json loaded for random posts]");
 
           var postsCount = data.length;
