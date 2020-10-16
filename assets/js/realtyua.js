@@ -53,7 +53,7 @@ function generateRandomRe()
                       divRandomRe.append('<p><a href="#">' + reType + ', ' + re.id + '</a></p>');
                   } else {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
-                      divRandomRe.append('<p><a href="#">' + reType + '</a></p><hr />');
+                      divRandomRe.append('<p><a href="#">' + reType + ', ' + re.id + '</a></p><hr />');
                   }
 
                   randomIndexUsed.push(randomIndex);
