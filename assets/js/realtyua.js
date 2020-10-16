@@ -19,50 +19,51 @@ $(document).ready(function(){
   $('.alert').alert();
 });
 
-function generateRandomRe()
-  {
-      $.getJSON("https://www.realestate.if.ua/region/city/ivano-frankivsk/data/all.json", function(data) {
+function generateRandomRe() {
+    $.getJSON("https://www.realestate.if.ua/region/city/ivano-frankivsk/data/all.json", function(data) {
 
-          var count = data.length;
-          var random = [];
-          var counter = 0;
-          var number = 3;
-          var div = $("#ads");
+        var count = data.length;
+        var random = [];
+        var counter = 0;
+        var number = 3;
+        var div = $("#ads");
 
-          div.append('<h4>Зверніть увагу</h4>');
+        div.append('<h4>Зверніть увагу</h4><div class="card-deck">');
 
-          while (counter < number) {
+        while (counter < number) {
 
-              var i = Math.floor(Math.random() * count);
+            var i = Math.floor(Math.random() * count);
 
-              if (random.indexOf(i) == "-1") {
+            if (random.indexOf(i) == "-1") {
 
-                  if (counter == (number - 1)) {
-                    if (data[i].type === 'Квартира') {
-                      div.append('<p><a href="#">Продаю Квартиру ' + data[i].id + '</a></p>');
-                    } else if (data[i].type === 'Частина будинку') {
-                      div.append('<p><a href="#">Продаю частину будинку, ' + data[i].id + '</a></p>');
-                    } else {
-                      div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p>');
-                    }
+                if (counter == (number - 1)) {
+                  if (data[i].type === 'Квартира') {
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + '</p></div></div>');
+                  } else if (data[i].type === 'Частина будинку') {
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку, ' + data[i].id + '</p></div></div>');
                   } else {
-                    if (data[i].type === 'Квартира') {
-                      div.append('<p><a href="#">Продаю Квартиру ' + data[i].id + '</a></p>');
-                    } else if (data[i].type === 'Частина будинку') {
-                      div.append('<p><a href="#">Продаю частину будинку, ' + data[i].id + '</a></p>');
-                    } else {
-                      div.append('<p><a href="#">Продаю ' + data[i].type + ', ' + data[i].id + '</a></p>');
-                    }
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ', ' + data[i].id + '</p></div></div>');
                   }
+                } else {
+                  if (data[i].type === 'Квартира') {
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю Квартиру ' + data[i].id + '</p></div></div>');
+                  } else if (data[i].type === 'Частина будинку') {
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку, ' + data[i].id + '</p></div></div>');
+                  } else {
+                    div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ', ' + data[i].id + '</p></div></div>');
+                  }
+                }
 
-                  random.push(i);
+                random.push(i);
+                counter++;
+            }
+        }
 
-                  counter++;
-              }
-          }
-      });
-  }
+        div.append('</div>');
 
-  $(document).ready(function() {
-      generateRandomRe();
-  });
+    });
+}
+
+$(document).ready(function() {
+    generateRandomRe();
+});
