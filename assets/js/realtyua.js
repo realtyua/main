@@ -19,40 +19,40 @@ $(document).ready(function(){
   $('.alert').alert();
 });
 
-function generateRandomPosts()
+function generateRandomRe()
   {
       $.getJSON("https://www.realestate.if.ua/region/city/ivano-frankivsk/data/all.json", function(data) {
           console.log("[search.json loaded for random posts]");
 
-          var postsCount = data.length;
-          var posts = data;
+          var reCount = data.length;
+          var re = data;
 
           var randomIndexUsed = [];
           var counter = 0;
-          var numberOfPosts = 3;
+          var numberOfRe = 3;
 
-          var divRandomPosts = $("#random_posts");
+          var divRandomRe = $("#random_re");
 
-          divRandomPosts.append('<h2>Нещодавно</h2><hr />');
+          divRandomRe.append('<h3>Зверність увагу</h3><hr />');
 
-          while (counter < numberOfPosts)
+          while (counter < numberOfRe)
           {
-              var randomIndex = Math.floor(Math.random() * postsCount);
+              var randomIndex = Math.floor(Math.random() * reCount);
 
               if (randomIndexUsed.indexOf(randomIndex) == "-1")
               {
                   //var postHREF = posts[randomIndex].href;
-                  var postTitle = posts[randomIndex].type;
+                  var reTitle = re[randomIndex].type;
 
-                  if (counter == (numberOfPosts - 1))
+                  if (counter == (numberOfRe - 1))
                   {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p>');
-                      divRandomPosts.append('<p><a href="#">' + postTitle + '</a></p>');
+                      divRandomRe.append('<p><a href="#">' + reType + '</a></p>');
                   }
                   else
                   {
                       //divRandomPosts.append('<p><a href="' + postHREF + '">' + postTitle + '</a></p><hr />');
-                      divRandomPosts.append('<p><a href="#">' + postTitle + '</a></p><hr />');
+                      divRandomRe.append('<p><a href="#">' + reType + '</a></p><hr />');
                   }
 
                   randomIndexUsed.push(randomIndex);
@@ -64,5 +64,5 @@ function generateRandomPosts()
   }
 
   $(document).ready(function() {
-      generateRandomPosts();
+      generateRandomRe();
   });
