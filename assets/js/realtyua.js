@@ -45,7 +45,7 @@ function generateRandomRe()
               {
                   //var postHREF = posts[randomIndex].href;
                   var reType = re[randomIndex].type;
-                  var re = re[i];
+                  var re = re[randomIndex];
 
                   if (counter == (numberOfRe - 1))
                   {
