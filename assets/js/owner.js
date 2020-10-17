@@ -54,7 +54,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   zoomOffset: -1
 }).addTo(mymap);
 
-L.marker([51.5, -0.09]).addTo(mymap)
+L.marker([48.9185356, 24.709326]).addTo(mymap)
   .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
 
 
