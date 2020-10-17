@@ -2,14 +2,7 @@
 layout: null
 ---
 
-{%- assign owner = page.dir | split: '/' | last -%}
-{%- assign foo = page.url | split: '/' | last -%}
-// 1
-{{ owner }}
-// 2
-{{ foo }}
-// 3
-{{ too }}
+{%- assign owner = page.url | split: '/' | last -%}
 
 (function($) {
   "use strict"; // Start of use strict
@@ -56,17 +49,17 @@ layout: null
 
 // var = [48.9185356, 24.709326];
 
-var {{ owner }} = L.map('location').setView([48.9185356, 24.709326], 17);
+var {{ page.name }} = L.map('location').setView([48.9185356, 24.709326], 17);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 17,
   attribution: 'Квартира, Івано-Франківськ',
   tileSize: 512,
   zoomOffset: -1
-}).addTo({{ owner }});
+}).addTo({{ page.name }});
 
-{{ owner }}.attributionControl.setPrefix('');
+{{ page.name }}.attributionControl.setPrefix('');
 
-L.marker([48.9185356, 24.709326]).addTo({{ owner }})
+L.marker([48.9185356, 24.709326]).addTo({{ page.name }})
   .bindPopup("<b>Однокімнатна квартира!</b><br/>по вулиці Січових Стрільців")
   .openPopup();
