@@ -41,4 +41,30 @@
 
 })(jQuery);
 
-///  = [48.9185356, 24.709326];
+// var = [48.9185356, 24.709326];
+
+var mymap = L.map('map').setView([48.9185356, 24.709326], 13);
+
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: 'Map data, ' +
+    '---, ' +
+    '+++',
+  tileSize: 512,
+  zoomOffset: -1
+}).addTo(mymap);
+
+L.marker([51.5, -0.09]).addTo(mymap)
+  .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+
+var popup = L.popup();
+
+function onMapClick(e) {
+  popup
+    .setLatLng(e.latlng)
+    .setContent("You clicked the map at " + e.latlng.toString())
+    .openOn(mymap);
+}
+
+mymap.on('click', onMapClick);
