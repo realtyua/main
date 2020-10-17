@@ -1,10 +1,10 @@
----
-layout: null
----
-
-{%- assign owner = one.url | split: '/' | last -%}
-
-var foo = {{ owner }};
+// ---
+// layout: null
+// ---
+//
+// // {%- assign owner = one.url | split: '/' | last -%}
+// //
+// // var foo = {{ owner }};
 
 (function($) {
   "use strict"; // Start of use strict
