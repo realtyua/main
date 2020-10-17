@@ -41,22 +41,27 @@
 
 })(jQuery);
 
-var map = L.map('map').setView([48.9185356, 24.709326], 18);
+// var = [48.9185356, 24.709326];
+
+var mymap = L.map('map').setView([48.9185356, 24.709326], 18);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   attribution: 'Квартира, Івано-Франківськ',
-  tileSize: 1024,
+  tileSize: 512,
   zoomOffset: -1
-}).addTo(map);
+}).addTo(mymap);
 
-L.marker([48.9185356, 24.709326])
-  .addTo(map)
-  .bindPopup("<b>Однокімнатна квартира!</b><br />по вулиці Січових Стрільців")
-  .openPopup();
+L.marker([48.9185356, 24.709326]).addTo(mymap)
+  .bindPopup("<b>Однокімнатна квартира!</b><br />по вулиці Січових Стрільців").openPopup();
 
-leafletData.getMap().then(function(map) {
-  return map.attributionControl.setPrefix('');
-});
+var popup = L.popup();
 
-// map.attributionControl.setPrefix('');
+function onMapClick(e) {
+  popup
+    .setLatLng(e.latlng)
+    .setContent("You clicked the map at " + e.latlng.toString())
+    .openOn(mymap);
+}
+
+mymap.on('click', onMapClick);
