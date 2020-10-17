@@ -2,7 +2,7 @@
 layout: null
 ---
 
-{%- assign foo = page.url | split: '/' | last -%}
+{%- assign owner = page.url | split: '/' | last -%}
 
 
 (function($) {
