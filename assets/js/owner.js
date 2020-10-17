@@ -52,16 +52,18 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   zoomOffset: -1
 }).addTo(mymap);
 
+map.attributionControl.setPrefix('');
+
 L.marker([48.9185356, 24.709326]).addTo(mymap)
-  .bindPopup("<b>Однокімнатна квартира!</b><br />по вулиці Січових Стрільців").openPopup();
+.bindPopup("<b>Однокімнатна квартира!</b><br />по вулиці Січових Стрільців").openPopup();
 
 var popup = L.popup();
 
 function onMapClick(e) {
   popup
-    .setLatLng(e.latlng)
-    .setContent("You clicked the map at " + e.latlng.toString())
-    .openOn(mymap);
+  .setLatLng(e.latlng)
+  .setContent("You clicked the map at " + e.latlng.toString())
+  .openOn(mymap);
 }
 
 mymap.on('click', onMapClick);
