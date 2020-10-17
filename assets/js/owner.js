@@ -4,11 +4,11 @@ layout: null
 
 {%- assign owner = page.dir | split: '/' | last -%}
 {%- assign foo = page.url | split: '/' | last -%}
-//
+// 1
 {{ owner }}
-//
+// 2
 {{ foo }}
-//
+// 3
 {{ too }}
 
 (function($) {
