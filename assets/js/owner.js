@@ -2,8 +2,14 @@
 layout: null
 ---
 
-{%- assign owner = page.url | split: '/' | last -%}
-
+{%- assign owner = page.dir | split: '/' | last -%}
+{%- assign foo = page.url | split: '/' | last -%}
+//
+{{ owner }}
+//
+{{ foo }}
+//
+{{ too }}
 
 (function($) {
   "use strict"; // Start of use strict
