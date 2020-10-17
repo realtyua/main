@@ -15,8 +15,15 @@
 {%- endcomment -%}
 
 <script>
-  // 1
- {{ page.title }}
- // 2
- {{ page.layout }}
+ var {{ page.layout }} = L.map('location').setView([{{ page.latitude }}, {{ page.longitude }}], 17);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   maxZoom: 17,
+   attribution: 'Квартира, {{ page.breadcrumb }}',
+   tileSize: 512,
+   zoomOffset: -1
+ }).addTo({{ page.layout }});
+ {{ page.layout }}.attributionControl.setPrefix('');
+ L.marker([{{ page.latitude }}, {{ page.longitude }}]).addTo({{ page.layout }})
+   .bindPopup("{{ page.location }}")
+   .openPopup();
 </script>
