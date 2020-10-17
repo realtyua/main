@@ -41,18 +41,16 @@
 
 })(jQuery);
 
-// var = [48.9185356, 24.709326];
-
-var map = L.map('map').setView([48.9185356, 24.709326], 14);
+var map = L.map('map').setView([48.9185356, 24.709326], 16);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 14,
+  maxZoom: 16,
   attribution: 'Квартира, Івано-Франківськ',
-  //tileSize: 512,
+  tileSize: 1024,
   zoomOffset: -1
 }).addTo(map);
 
 L.marker([48.9185356, 24.709326])
   .addTo(map)
-  .bindPopup('<b>Однокімнатна квартира!</b><br />по вулиці Січових Стрільців')
+  .bindPopup("<b>Однокімнатна квартира!</b><br />по вулиці Січових Стрільців")
   .openPopup();
