@@ -45,7 +45,7 @@
 
 var mymap = L.map('map').setView([48.9185356, 24.709326], 13);
 
-L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   attribution: 'Map data, ' +
     '---, ' +
