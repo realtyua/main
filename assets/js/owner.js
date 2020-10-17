@@ -41,20 +41,4 @@
 
 })(jQuery);
 
-var fenway = [48.9185356, 24.709326];
-$('#map')
-.gmap3({
-  center:fenway,
-  zoom:13
-})
-.streetviewpanorama(
-  '#panorama',
-  {
-    position: fenway,
-    pov: {
-      heading: 34,
-      pitch: 10,
-      zoom: 1
-    }
-  }
-);
+///  = [48.9185356, 24.709326];
