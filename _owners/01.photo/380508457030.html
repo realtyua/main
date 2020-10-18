@@ -10,8 +10,9 @@ class: pt-3
         <p class="lead">Розділ містить фотозображення приміщень які належать цій квартирі та знаходяться в межах цієї квартири</p>
     </div>
   </div>
-  {%- capture gallery -%}{{page.dir}}images/gallery/home/{%- endcapture -%}
-  {%- include owner/image-gallery.html folder=gallery cols='4' group='home' -%}
+
+  {%- include owner/image-gallery.html folder='home' size='300x300' cols='4' -%}
+
 </div>
 
 <div id="location" style="height:480px;"></div>
