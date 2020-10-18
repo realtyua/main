@@ -29,16 +29,23 @@ class: py-3 py-md-5
   </div>
 
   <div class="row">
-    <div class="col-md-6 align-self-center order-2 order-md-2 py-3">
+    <div class="col-md-8 align-self-center order-2 order-md-2 py-3">
 
       <h2>Будинок у якому знаходиться квартира</h2>
       <p>Квартира знаходиться на третьому поверсі у новозбудованому восьми поверховому будинку житлового комплексу "Світлий". Будинок розташований по вулиця Яблучна, місто Івано-Франківськ.</p>
       <p>Житловий комплекс "Світлий" це серія будинків побудованих з використанням найсучасніших техтологій. У житловому комплексі пристуні зона для паркування автомобілів, великий дитячий майданчик</p>
 
     </div>
-    <div class="col-md-6 order-1 order-md-1 pr-md-5">
+    <div class="col-md-4 order-1 order-md-1 text-left">
 
-      <a href="//images.weserv.nl/?url=www.realestate.if.ua/380508457030/images/gallery/home/4-building.png&amp;w=1024&amp;h=768&amp;fit=cover&amp;a=attention&amp;output=jpg&amp;q=50&amp;t=square" class="lightbox" title="Building" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="lightbox-group-home"> <img class="card-img-top" loading="lazy" src="//images.weserv.nl/?url=www.realestate.if.ua/380508457030/images/gallery/home/4-building.png&amp;w=300&amp;h=300&amp;fit=cover&amp;a=attention&amp;output=jpg&amp;q=50&amp;t=square" alt="image-building" intrinsicsize="1100x800"> </a>
+      {%- include owner/image.html
+        image='building.png'
+        size='350x350'
+        isize='1024x768'
+        class='img-fluid'
+        group='apartment'
+        title='Квартира - Багато квартирний будинок'
+      -%}
 
     </div>
   </div>
