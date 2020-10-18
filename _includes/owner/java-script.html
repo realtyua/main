@@ -9,25 +9,16 @@
 <script src="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script src="{{ "/assets/js/jarallax.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script src="{{ "/assets/js/owner.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-
-{%- comment -%}
-<script src="{{ "/assets/js/bootstrap.stickyheader.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-{%- endcomment -%}
-
-{%- assign v = page.dir | split: '/' | last -%}
-
-<p>{{ owner }}</p>
-
 <script>
- var t{{ v }} = L.map('location').setView([{{ page.lat }}, {{ page.lon }}], 17);
+ var t{{ owner }} = L.map('location').setView([{{ page.lat }}, {{ page.lon }}], 17);
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
    maxZoom: 17,
    attribution: '{{ site.name }}, {{ page.breadcrumb }}',
    tileSize: 512,
    zoomOffset: -1
- }).addTo(t{{ v }});
- t{{ v }}.attributionControl.setPrefix('');
- L.marker([{{ page.lat }}, {{ page.lon }}]).addTo(t{{ v }})
+ }).addTo(t{{ owner }});
+ t{{ owner }}.attributionControl.setPrefix('');
+ L.marker([{{ page.lat }}, {{ page.lon }}]).addTo(t{{ owner }})
    .bindPopup("{{ page.marker }}")
    .openPopup();
 </script>
