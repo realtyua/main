@@ -14,16 +14,18 @@
 <script src="{{ "/assets/js/bootstrap.stickyheader.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- endcomment -%}
 
+{%- assign v = page.dir | split: '/' | last -%}
+
 <script>
- var {{ page.layout }} = L.map('location').setView([{{ page.latitude }}, {{ page.longitude }}], 17);
+ var {{ v }} = L.map('location').setView([{{ page.lat }}, {{ page.lon }}], 17);
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
    maxZoom: 17,
    attribution: '{{ site.name }}, {{ page.breadcrumb }}',
    tileSize: 512,
    zoomOffset: -1
- }).addTo({{ page.layout }});
- {{ page.layout }}.attributionControl.setPrefix('');
- L.marker([{{ page.latitude }}, {{ page.longitude }}]).addTo({{ page.layout }})
+ }).addTo({{ v }});
+ {{ v }}.attributionControl.setPrefix('');
+ L.marker([{{ page.lat }}, {{ page.lon }}]).addTo({{ v }})
    .bindPopup("{{ page.marker }}")
    .openPopup();
 </script>

@@ -1,16 +1,19 @@
 ---
 title: Фото
-class: container-fluid pt-3
+class: pt-3
 ---
 
+<div class="container-fluid">
 
-<div class="row my-md-3">
-  <div class="col-12 text-center">
-      <h2>Фотогалерея однокімнатної квартири</h2>
-      <p class="lead">Розділ містить фотозображення приміщень які належать цій квартирі та знаходяться в межах цієї квартири</p>
+  <div class="row my-md-3">
+    <div class="col-12 text-center">
+        <h2>Фотогалерея однокімнатної квартири</h2>
+        <p class="lead">Розділ містить фотозображення приміщень які належать цій квартирі та знаходяться в межах цієї квартири</p>
+    </div>
   </div>
-</div>
 
-{%- include owner/image-gallery.html folder='home' size='300x300' cols='4' -%}
+  {%- include owner/image-gallery.html folder='home' size='300x300' cols='4' -%}
+
+</div>
 
 <div id="location" style="height:480px;"></div>
