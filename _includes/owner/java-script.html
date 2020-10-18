@@ -16,6 +16,8 @@
 
 {%- assign v = page.dir | split: '/' | last -%}
 
+<p>{{ owner }}</p>
+
 <script>
  var t{{ v }} = L.map('location').setView([{{ page.lat }}, {{ page.lon }}], 17);
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
