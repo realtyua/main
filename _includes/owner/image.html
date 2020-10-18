@@ -1,13 +1,17 @@
 {%- assign folder = page.dir | append: 'images/' -%}
 {%- assign image = include.image | prepend: folder -%}
+{%- assign w = include.size | split: 'x' | first -%}
+{%- assign h = include.size | split: 'x' | last -%}
+{%- assign iw = include.isize | split: 'x' | first -%}
+{%- assign ih = include.isize | split: 'x' | last -%}
 {%- for file in site.static_files -%}
   {%- if file.path contains image -%}
     {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
       {%- assign sizename = file.basename | size -%}
       {%- assign alt = file.basename | slice: 2, sizename -%}
       {%- assign title = alt | replace: '-', ' ' | capitalize -%}
-      <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=1024&h=768&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ title }}" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="lightbox-group-{{ include.group }}">
-        <img class="card-img-top" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=300&h=300&fit=cover&a=attention&output=jpg&q=50&t=square" alt="image-{{ alt }}" intrinsicsize="1100x800" />
+      <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=1024&h=768&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ title }}" data-lightbox-width="{{ iw }}" data-lightbox-height="{{ ih }}" data-lightbox-group="lightbox-group-{{ include.group }}">
+        <img class="card-img-top" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w={{ w }}&h={{ h }}&fit=cover&a=attention&output=jpg&q=50&t=square" alt="image-{{ alt }}" intrinsicsize="{{ include.isize }}"/>
       </a>
     {%- endif -%}
   {%- endif -%}
