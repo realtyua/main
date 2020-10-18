@@ -10,8 +10,8 @@
       {%- assign sizename = file.basename | size -%}
       {%- assign alt = file.basename | slice: 2, sizename -%}
       {%- assign title = alt | replace: '-', ' ' | capitalize -%}
-      <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=1024&h=768&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ title }}" data-lightbox-width="{{ iw }}" data-lightbox-height="{{ ih }}" data-lightbox-group="lightbox-group-{{ include.group }}">
-        <img class="{{ include.class }}" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w={{ w }}&h={{ h }}&fit=cover&a=attention&output=jpg&q=50&t=square" alt="image-{{ alt }}" intrinsicsize="{{ include.isize }}"/>
+      <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=1024&h=768&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{% if include.title %}{{ include.title }}{% else %}{{ title }}{% endif %}" data-lightbox-width="{{ iw }}" data-lightbox-height="{{ ih }}" data-lightbox-group="lightbox-group-{{ include.group }}">
+        <img class="{{ include.class }}" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w={{ w }}&h={{ h }}&fit=cover&a=attention&output=jpg&q=50&t=square" alt="{% if include.alt %}{{ include.alt }}{% else %}image-{{ alt }}{% endif %}" intrinsicsize="{{ include.isize }}"/>
       </a>
     {%- endif -%}
   {%- endif -%}
