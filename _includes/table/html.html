@@ -71,7 +71,7 @@
               {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
               <figure class="col px-1">
                 <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="2{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-                  <img src="{{ file.path | url_decode | relative_url }}" class="img-fluid img-thumbnail" title="Image Title" alt="Image Alt">
+                  <img src="{{ file.path | url_decode | relative_url }}" loading="lazy" class="img-fluid img-thumbnail" title="Image Title" alt="Image Alt" intrinsicsize="1024x768">
                 </a>
               </figure>
               {%- endif -%}
