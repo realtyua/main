@@ -15,8 +15,7 @@
    maxZoom: 17,
    attribution: '{{ site.name }}, {{ page.breadcrumb }}',
    tileSize: 512,
-   zoomOffset: -1,
-   scrollWheelZoom: false
+   zoomOffset: -1
  }).addTo(t{{ owner }});
  t{{ owner }}.attributionControl.setPrefix('');
  L.marker([{{ page.lat }}, {{ page.lon }}]).addTo(t{{ owner }})

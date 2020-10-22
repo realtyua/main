@@ -38,6 +38,31 @@
 <meta name="author" content="{{ site.developer.name }}">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | relative_url }}">
+<link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+{%- if page.table == 1 or page.table == 2 -%}
+<link rel="preload" href="{{ "/assets/css/table.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+{%- endif -%}
+{%- assign level = page.dir | split: '/' -%}
+<link rel="preload" src="{{ "/assets/js/jquery.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+<link rel="preload" src="{{ "/assets/js/popper.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+<link rel="preload" src="{{ "/assets/js/bootstrap.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+<link rel="preload" src="{{ "/assets/js/photoswipe.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+<link rel="preload" src="{{ "/assets/js/photoswipe-ui-default.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+<link rel="preload" src="{{ "/assets/js/bootstrap.lightbox.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+<link rel="preload" src="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+{%- if page.table == 1 -%}
+  <link rel="preload" src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  <link rel="preload" src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  {%- if level.size == 8 -%}
+    <link rel="preload" src="{{ "/assets/js/object.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  {%- endif -%}
+  <link rel="preload" src="{{ "/assets/js/table.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+{%- elsif page.table == 2 -%}
+  <link rel="preload" src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  <link rel="preload" src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  <link rel="preload" src="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+{%- endif -%}
+<link rel="preload" src="{{ "/assets/js/realtyua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 {%- if page.table == 1 or page.table == 2 -%}
 <link rel="stylesheet" href="{{ "/assets/css/table.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
