@@ -62,6 +62,9 @@
   <link rel="preload" href="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   <link rel="preload" href="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 {%- endif -%}
+{%- if page.dir == '/' -%}
+<link rel="preload" href="{{ "/assets/js/ads.home.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+{%- endif -%}
 <link rel="preload" href="{{ "/assets/js/realtyua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 {%- if page.table == 1 or page.table == 2 -%}
