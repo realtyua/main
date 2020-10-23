@@ -29,20 +29,24 @@ function generateRandomRe() {
     var counter = 0;
     var number = 3;
     var div = $("#ads");
+    var usd = {{ site.usd }};
+    var eur = {{ site.eur }};
+
+    var tel = '<a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a>';
 
     function reAdsType() {
       if (data[i].type === 'Квартира') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, телефон ' + tel + '</p></div></div>');
       } else if (data[i].type === 'Частина будинку') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, телефон ' + tel + '</p></div></div>');
       } else if (data[i].type === 'Земля') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, телефон ' + tel + '</p></div></div>');
       } else if (data[i].type === 'Гараж' || data[i].type === 'Магазин') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' площею ' + data[i].surface + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' площею ' + data[i].surface + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, телефон ' + tel + '</p></div></div>');
       } else if (data[i].type === 'Нежитлове приміщення') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, телефон ' + tel + '</p></div></div>');
       } else {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', поверхів ' + data[i].floors + ' за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', поверхів ' + data[i].floors + ' за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, телефон ' + tel + '</p></div></div>');
       }
     }
 
