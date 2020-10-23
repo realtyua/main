@@ -8,13 +8,13 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 });
 
 $('.nav-tabs>li>a.nav-link').on('click', function(){
-    $('.navbar-collapse').collapse('hide');
+  $('.navbar-collapse').collapse('hide');
 })
 
 $(document).on('click', function (e) {
-    if ($(e.target).closest(".card").length === 0) {
-        $('.collapse').collapse('hide');
-    }
+  if ($(e.target).closest(".card").length === 0) {
+    $('.collapse').collapse('hide');
+  }
 });
 
 $(document).ready(function(){
@@ -33,17 +33,17 @@ function generateRandomRe() {
     var eur = {{ site.eur }};
 
     function reAdsPrice() {
-      if (data[i].price_sqmt !== '' && data[i].price_sqmt.indexOf('$') !== -1) {
-        return 'ціна ' + (data[i].price_sqmt.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}';
-      } else if (data[i].price_sqmt !== '' && data[i].price_sqmt.indexOf('€') !== -1) {
-        return 'ціна ' + (data[i].price_sqmt.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}';
-      } else if (data[i].price_sqmt !== '') {
-        return 'ціна ' + (data[i].price_sqmt * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}';
+      if (data[i].price !== '' && data[i].price.indexOf('$') !== -1) {
+        return '{{ site.data.lang-uk.re_cost }} ' + (data[i].price.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}';
+      } else if (data[i].price !== '' && data[i].price.indexOf('€') !== -1) {
+        return '{{ site.data.lang-uk.re_cost }} ' + (data[i].price.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}';
+      } else if (data[i].price !== '') {
+        return '{{ site.data.lang-uk.re_cost }} ' + (data[i].price * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}';
       }
     }
 
     function reAdsTel() {
-      return 'телефон <a href="tel:+' + data[i].phone + '">+' + data[i].phone.substr(0, 2) + '&nbsp;' + data[i].phone.substr(2, 3) + '&nbsp;' + data[i].phone.substr(5, 3) + '&nbsp;' + data[i].phone.substr(8, 2) + '&nbsp;' + data[i].phone.substr(10, 2) + '</a>';
+      return '{{ site.data.lang-uk.re_tel }} <a href="tel:+' + data[i].phone + '">+' + data[i].phone.substr(0, 2) + '&nbsp;' + data[i].phone.substr(2, 3) + '&nbsp;' + data[i].phone.substr(5, 3) + '&nbsp;' + data[i].phone.substr(8, 2) + '&nbsp;' + data[i].phone.substr(10, 2) + '</a>';
     }
 
     function reAdsType() {

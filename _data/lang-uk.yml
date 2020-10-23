@@ -32,6 +32,7 @@ re_na: на
 re_mu: -му
 re_rc: ЖК
 re_ta: та
+re_tel: телефон
 re_floorss: поверхів
 re_floorci: поверсі
 re_floors: поверховому будинку
@@ -45,6 +46,7 @@ re_dater: Оренда нерухомісті доступна з
 re_parking: Паркування
 re_surface_land: Площа землі
 re_land: Земля
+re_cost: ціна
 re_price_sqmt: Вартість нерухомості за 1
 re_price_sqmtl: Вартість землі за 1
 re_price_sqmtr: Вартість оренди за 24 години
