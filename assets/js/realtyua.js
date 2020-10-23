@@ -1,3 +1,6 @@
+---
+layout: null
+---
 
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -29,22 +32,22 @@ function generateRandomRe() {
 
     function reAdsType() {
       if (data[i].type === 'Квартира') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі, </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
       } else if (data[i].type === 'Частина будинку') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі, </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
       } else if (data[i].type === 'Земля') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup></p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
       } else if (data[i].type === 'Гараж' || data[i].type === 'Магазин') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' площею ' + data[i].surface + '&nbsp;м<sup>2</sup></p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' площею ' + data[i].surface + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
       } else if (data[i].type === 'Нежитлове приміщення') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі, </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
       } else {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', поверхів ' + data[i].floors + ', </p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', поверхів ' + data[i].floors + ' за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна </p></div></div>');
       }
     }
 
     div.append();
-    
+
     while (counter < number) {
       var i = Math.floor(Math.random() * count);
       if (random.indexOf(i) == "-1") {
