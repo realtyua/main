@@ -32,7 +32,7 @@ function generateRandomRe() {
     var usd = {{ site.usd }};
     var eur = {{ site.eur }};
 
-    var price = function() {
+    function reAdsPrice() {
       if (data[i].price_sqmt !== '' && data[i].price_sqmt.indexOf('$') !== -1) {
         return '' + (data[i].price_sqmt.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}';
       } else if (data[i].price_sqmt !== '' && data[i].price_sqmt.indexOf('€') !== -1) {
@@ -42,7 +42,7 @@ function generateRandomRe() {
       }
     }
 
-    var tel = function() {
+    function reAdsTel() {
       return 'телефон <a href="tel:+' + data[i].phone + '">+' + data[i].phone.substr(0, 2) + '&nbsp;' + data[i].phone.substr(2, 3) + '&nbsp;' + data[i].phone.substr(5, 3) + '&nbsp;' + data[i].phone.substr(8, 2) + '&nbsp;' + data[i].phone.substr(10, 2) + '</a>';
     }
 
@@ -52,7 +52,7 @@ function generateRandomRe() {
       } else if (data[i].type === 'Частина будинку') {
         div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю частину будинку загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, </p></div></div>');
       } else if (data[i].type === 'Земля') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна ' + price + ', ' + tel + '</p></div></div>');
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю землю площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна ' + reAdsPrice() + ', ' + reAdsTel() + '</p></div></div>');
       } else if (data[i].type === 'Гараж' || data[i].type === 'Магазин') {
         div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю ' + data[i].type + ' площею ' + data[i].surface + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ціна, </p></div></div>');
       } else if (data[i].type === 'Нежитлове приміщення') {
