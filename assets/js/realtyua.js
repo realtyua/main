@@ -50,7 +50,7 @@ function generateRandomRe() {
     });
 }
 
-function reAdsType() {
+function reAdsType(data) {
   if (data[i].type === 'Квартира') {
     div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].floor + ', на ' + data[i].floors + '-му поверсі, </p></div></div>');
   } else if (data[i].type === 'Частина будинку') {
