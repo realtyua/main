@@ -49,8 +49,10 @@ function generateRandomRe() {
     function reAdsType() {
       if (data[i].type === 'Квартира') {
         div.append('<div class="card"><div class="card-body"><p class="card-text">Продаю квартиру загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].rooms + ', на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</p></div></div>');
-      } else if (data[i].rent === '1' && data[i].price !== '') {
-        div.append('<div class="card"><div class="card-body"><p class="card-text">Здається в оренду ' + data[i].type +  ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].rooms + ', на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</p></div></div>');
+      } else if (data[i].rent === '1' && data[i].price !== '' && data[i].type === 'Магазин') {
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Здається в оренду ' + data[i].type +  ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].rooms + ', на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ' за місяць, ' + reAdsTel() + '</p></div></div>');
+      } else if (data[i].rent === '1' && data[i].price !== '' && data[i].type !== 'Магазин') {
+        div.append('<div class="card"><div class="card-body"><p class="card-text">Здається в оренду ' + data[i].type +  ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</p></div></div>');
       } else if (data[i].rent === '1' && data[i].price === '' && data[i].price_sqmt !== '') {
         div.append('<div class="card"><div class="card-body"><p class="card-text">Здається в оренду на не тривалий термін ' + data[i].type +  ' загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].rooms + ', на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPriceSqmt() + ', ' + reAdsTel() + '</p></div></div>');
       } else if (data[i].type === 'Частина будинку') {
