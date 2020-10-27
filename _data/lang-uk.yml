@@ -78,12 +78,18 @@ map_site: Мапа вебсайту
 no_email: немає пошти
 no_number: немає номера
 no_data: немає даних
-phone_main: Додати оголошення
-sent_ads: Надіслати оголошення через
-phone_fax: Підтримка
-phone_hot: Купити нерухомість
+
+phone_main: Купити нерухомість
+phone_fax: Довідка
+phone_hot: Огляд нерухомісті
 email: Електронна пошта
 www: Вебсайт
+
+sent_ads: Надіслати оголошення через
+phone_support: Підтримка
+phone_buy: Купити нерухомість
+phone_sell: Продати нерухомість
+phone_add_ads: Додати оголошення
 
 flag_ua_city: Івано-Франківськ
 flag_ua_net: Мережа сайтів нерухомості
