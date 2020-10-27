@@ -11,55 +11,77 @@
     </div>
     {%- endif -%}
     <div class="row justify-content-md-center mt-4">
-        <div class="col-md-6 col-lg-5">
-          <div class="d-flex position-relative">
-              <a href="https://www.realestate.if.ua/ukraine" class="text-decoration-none border-0">
-                {%- include icons/trezub.svg width="27" height="45" class="flex-shrink-0 mr-3" -%}
-              </a>
-              <div>
-                  <h5 class="my-0">{{ fname }}</h5>
-                  <address>{%- include footer/contact.html legal="address" -%}</address>
-              </div>
+      <div class="col-md-6 col-lg-5">
+        <div class="d-flex position-relative">
+          <a href="https://www.realestate.if.ua/ukraine" class="text-decoration-none border-0">
+            {%- include icons/trezub.svg width="27" height="45" class="flex-shrink-0 mr-3" -%}
+          </a>
+          <div>
+            <h5 class="my-0">{{ fname }}</h5>
+            <address>{%- include footer/contact.html legal="address" -%}</address>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <h6 class="mt-1">{{ site.data.lang-uk.phone_main }}</h6>
-          <p class="mb-0">{%- include footer/contact.html legal="phone_main" -%}</p>
-          <p>{{ site.data.lang-uk.phone_fax }}:&nbsp;{%- include footer/contact.html legal="phone_fax" -%}</p>
-        </div>
-        <div class="col-md-6 col-lg-2">
-          <h6 class="mt-1">{{ site.data.lang-uk.phone_hot }}</h6>
-          <p>{%- include footer/contact.html legal="phone_hot" -%}</p>
-        </div>
-        <div class="col-md-6 col-lg-2">
-          <h6 class="mt-1">{{ site.data.lang-uk.email }}</h6>
-          <p>{%- include footer/contact.html legal="email" -%}</p>
-        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <h6 class="mt-1">{{ site.data.lang-uk.phone_main }}</h6>
+        <p class="mb-0">{%- include footer/contact.html legal="phone_main" -%}</p>
+        <p>{{ site.data.lang-uk.phone_fax }}:&nbsp;{%- include footer/contact.html legal="phone_fax" -%}</p>
+      </div>
+      <div class="col-md-6 col-lg-2">
+        <h6 class="mt-1">{{ site.data.lang-uk.phone_hot }}</h6>
+        <p>{%- include footer/contact.html legal="phone_hot" -%}</p>
+      </div>
+      <div class="col-md-6 col-lg-2">
+        <h6 class="mt-1">{{ site.data.lang-uk.email }}</h6>
+        <p>{%- include footer/contact.html legal="email" -%}</p>
+      </div>
     </div>
     <hr class="mt-4 mb-4">
     <div class="row">
       <div class="col-md-5 order-2 order-md-1">
         <div class="d-flex position-relative">
-            {%- include icons/beta.svg width="50" height="25" class="flex-shrink-0 mt-1 mr-3" -%}
-            <div>
-                <p>{{ site.data.lang-uk.footer_text_trial }} <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></p>
-            </div>
+          {%- include icons/beta.svg width="50" height="25" class="flex-shrink-0 mt-1 mr-3" -%}
+          <div>
+            <p>{{ site.data.lang-uk.footer_text_trial }} <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></p>
+          </div>
         </div>
         <div class="d-flex position-relative">
-            {%- include icons/cc.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3" -%}
-            <div>
-                <p>{{ site.data.lang-uk.footer_text_cc_1 }} <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/deed.uk" class="font-weight-bold" rel="nofollow">{{ site.data.lang-uk.footer_text_cc_2 }}</a>, {{ site.data.lang-uk.footer_text_cc_3 }}</p>
-            </div>
+          {%- include icons/cc.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3" -%}
+          <div>
+            <p>{{ site.data.lang-uk.footer_text_cc_1 }} <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/deed.uk" class="font-weight-bold" rel="nofollow">{{ site.data.lang-uk.footer_text_cc_2 }}</a>, {{ site.data.lang-uk.footer_text_cc_3 }}</p>
+          </div>
         </div>
         <div class="d-flex position-relative">
-            {%- include icons/dev.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3 text-white" -%}
-            <div>
-                <p><a href="{{ site.developer.website }}" target="_blank" rel="nofollow">{{ site.developer.name }}</a> {{ site.data.lang-uk.footer_developer }}</p>
-            </div>
+          {%- include icons/dev.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3 text-white" -%}
+          <div>
+            <p><a href="{{ site.developer.website }}" target="_blank" rel="nofollow">{{ site.developer.name }}</a> {{ site.data.lang-uk.footer_developer }}</p>
+          </div>
         </div>
       </div>
       <div class="col-md-7 order-1 order-md-2">
-        {%- include social-media.html twitter=1 facebook=1 skype=1 whatsapp=1 viber=1 -%}
+        <div class="row">
+          <div class="cal-md-6">
+            {%- include social-media.html twitter=1 facebook=1 skype=1 whatsapp=1 viber=1 -%}
+          </div>
+          <div class="cal-md-6">
+            <div class="row">
+              <div class="cal-md-6">
+                <h6 class="mt-1">Продати житло</h6>
+              </div>
+              <div class="cal-md-6">
+                <a href="tel:+380504949649">+38&nbsp;050&nbsp;49&nbsp;49&nbsp;6&nbsp;49</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="cal-md-6">
+                <h6 class="mt-1">Купити житло</h6>
+              </div>
+              <div class="cal-md-6">
+                <a href="tel:+380974949649">+38&nbsp;097&nbsp;49&nbsp;49&nbsp;6&nbsp;49</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
