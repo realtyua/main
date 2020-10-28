@@ -1,5 +1,20 @@
-
 <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+
+<div class="modal fade realestate" id="reMap" tabindex="-1" role="dialog" aria-labelledby="reMap" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content net-realestate">
+      <div class="modal-header border-0">
+        <h5 class="modal-title pl-2 text-white">Місцезнаходження об'єкта нерухомості на мапі</h5>
+        <button type="button" class="close py-1 px-2" data-dismiss="modal" aria-label="Close" title="Закрити">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pt-0 pb-4 px-4">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -25,19 +40,3 @@
   });
 
 </script>
-
-<div class="modal fade realestate" id="reMap" tabindex="-1" role="dialog" aria-labelledby="reMap" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content net-realestate">
-      <div class="modal-header border-0">
-        <h5 class="modal-title pl-2 text-white">Місцезнаходження об'єкта нерухомості на мапі</h5>
-        <button type="button" class="close py-1 px-2" data-dismiss="modal" aria-label="Close" title="Закрити">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body pt-0 pb-4 px-4">
-        <div id="map"></div>
-      </div>
-    </div>
-  </div>
-</div>
