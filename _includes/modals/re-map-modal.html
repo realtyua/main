@@ -18,10 +18,12 @@
 
 <script>
 
-  $('#reMap').on('shown.bs.modal', function(){
-    setTimeout(function() {
-      map.invalidateSize();
-    }, 10);
+  $('#reMap').on('shown.bs.modal', function(e){
+    onMapReady(map: L.Map) {
+     setTimeout(() => {
+       map.invalidateSize();
+     }, 0);
+    }
   });
 
   var map = L.map('map').setView([48.9228, 24.7106], 14);
