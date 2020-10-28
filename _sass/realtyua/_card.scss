@@ -51,6 +51,10 @@
     -moz-appearance: none !important;
   }
 }
+.card-footer a:hover,  {
+  transition: unset;
+  border-bottom: unset;
+}
 //
 // Custom Card
 //
