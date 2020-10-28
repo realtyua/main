@@ -18,10 +18,10 @@
 
 <script>
 
-  $('#reMap').on('shown.bs.tab', function (e) {
-    clearMap();
-    map.invalidateSize(true);
-    loadMap();
+  $('#reMap').on('shown.bs.modal', function(){
+    setTimeout(function() {
+      map.invalidateSize(true);
+    }, 10);
   });
 
   var map = L.map('map').setView([48.9228, 24.7106], 17);
@@ -35,7 +35,6 @@
 
   jQuery(document).on("click", "a", function (event) {
     coordinates = jQuery(this).attr('data-coordinates') || '';
-    console.log(coordinates);
     L.marker(eval(coordinates)).addTo(map);
   });
 
