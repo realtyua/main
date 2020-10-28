@@ -17,14 +17,9 @@
     zoomOffset: -1
   }).addTo(map);
 
-  map.attributionControl.setPrefix('');
-
   jQuery(document).on("click", "a", function (event) {
     id = jQuery(this).attr('data-loc') || '';
-    //console.log(id);
-    L.marker(eval(id)).addTo(map)
-      .bindPopup("Продаю житло")
-      .openPopup();
+    L.marker(eval(id)).addTo(map);
   });
 
 </script>
