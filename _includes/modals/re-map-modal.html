@@ -34,7 +34,7 @@
   }).addTo(map);
 
   jQuery(document).on("click", "a", function (event) {
-    id = jQuery(this).attr('data-loc') || '';
+    id = jQuery(this).attr('id') || '';
     console.log(id);
     L.marker(eval(id)).addTo(map);
   });
