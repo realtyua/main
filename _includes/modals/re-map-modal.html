@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content net-realestate">
       <div class="modal-header border-0">
-        <h5 class="modal-title pl-2 text-white">Нерухомості на мапі</h5>
+        <h5 class="modal-title pl-2 text-white">Нерухомість на мапі</h5>
         <button type="button" class="close py-1 px-2" data-dismiss="modal" aria-label="Close" title="Закрити">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,13 +18,15 @@
 
 <script>
 
-  var map = L.map('map').setView([48.9185356, 24.709326], 14);
 
   jQuery(document).on('click', 'a', function (event) {
     var coordinates = jQuery(this).attr('data-coordinates') || '';
     console.log(coordinates);
-    L.marker(eval(coordinates)).addTo(map);
   });
+
+  var map = L.map('map').setView([coordinates], 14);
+
+  L.marker(eval(coordinates)).addTo(map);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
