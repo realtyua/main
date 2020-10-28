@@ -22,7 +22,9 @@
   jQuery(document).on("click", "a", function (event) {
     id = jQuery(this).attr('data-loc') || '';
     //console.log(id);
-    L.marker(eval(id)).addTo(map).bindPopup("Продаю Житло").openPopup();
+    L.marker(eval(id)).addTo(map)
+      .bindPopup("Продаю житло")
+      .openPopup();
   });
 
 </script>
