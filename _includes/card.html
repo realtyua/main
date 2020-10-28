@@ -16,6 +16,11 @@
   <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
     <div class="row row-cols-auto justify-content-end">
       <div class="col-auto pr-0">{%- include footer/phone.html legal=offer.phone type='icon' -%}</div>
+      {%- if offer.coordinates and offer.coordinates != '' -%}
+      <div class="col-auto pr-0">
+        <a href="#" data-loc="{{ offer.coordinates }}" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Map</a>
+      </div>
+      {%- endif -%}
       <div class="col-auto">
         <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" href="#more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
           <span data-toggle="tooltip" data-placement="left" title="{{ site.data.lang-uk.re_more }}" class="navbar-toggler-icon"></span>
