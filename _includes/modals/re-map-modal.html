@@ -30,11 +30,12 @@
   map.attributionControl.setPrefix('');
 
   jQuery(document).on('click', 'a', function (event) {
-    coordinates = jQuery(this).attr('data-coordinates') || '';
+    var coordinates = jQuery(this).attr('data-coordinates') || '';
+    console.log(coordinates);
     L.marker(eval(coordinates)).addTo(map);
   });
 
-  $('#reMap').on('shown.bs.modal', function(e){
+  $('#reMap').on('shown.bs.modal', function(event){
     setTimeout(function() {
       map.invalidateSize(true);
     }, 0);
