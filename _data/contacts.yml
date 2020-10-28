@@ -4,12 +4,12 @@
 - type: region
   item: ivano-frankivska
   name: Нерухомість у Івано-Франківській о́бласті
-  # address: 76000, м. Івано-Франківськ, вул.&nbsp;Обласна,&nbsp;0
-  # phone_main: 380342000066
-  # phone_hot:  380342000066
-  # phone_fax:  380342000066
-  # email: region@realestate.if.ua
-  # www: https://www.realestate.if.ua
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380974949649
+  phone_hot: 380974949649
+  phone_fax: 380974949649
+  email: info@realestate.if.ua
+  www: https://www.realestate.if.ua/
 
 #
 # District
@@ -17,12 +17,12 @@
 - type: district
   item: ivano-frankivskyy
   name: Нерухомість у Івано-Франківському районі
-  # address: 76000, м. Івано-Франківськ, вул.&nbsp;Районна,&nbsp;0
-  # phone_main: 380508457030
-  # phone_hot:  380508457030
-  # phone_fax:  380508457030
-  # email: district@realestate.if.ua
-  # www: https://www.realestate.if.ua
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380974949649
+  phone_hot: 380974949649
+  phone_fax: 380974949649
+  email: info@realestate.if.ua
+  www: https://www.realestate.if.ua/
 
 #
 # District / Town
@@ -30,12 +30,12 @@
 - type: town
   item: tysmenytsya
   name: Нерухомість у місті Тисмениця
-  # address: 76000, м. Тисмениця, вул.&nbsp;Місто,&nbsp;0
-  # phone_main: 380508457030
-  # phone_hot:  380508457030
-  # phone_fax:  380508457030
-  # email: townt@realestate.if.ua
-  # www: https://www.realestate.if.ua
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380974949649
+  phone_hot: 380974949649
+  phone_fax: 380974949649
+  email: info@realestate.if.ua
+  www: https://www.realestate.if.ua/
 
 #
 # Region / City
@@ -43,12 +43,12 @@
 - type: city
   item: ivano-frankivsk
   name: Нерухомість у місті Івано-Франківськ
-  # address: 76000, м. Івано-Франківськ, вул.&nbsp;Міська,&nbsp;0
-  # phone_main: 380342000055
-  # phone_hot:  380342000055
-  # phone_fax:  380342000055
-  # email: city@realestate.if.ua
-  # www: https://www.realestate.if.ua
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380974949649
+  phone_hot: 380974949649
+  phone_fax: 380974949649
+  email: info@realestate.if.ua
+  www: https://www.realestate.if.ua/
 
 #
 # Developers / Company
