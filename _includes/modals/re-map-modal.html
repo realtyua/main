@@ -21,12 +21,10 @@
 
   jQuery(document).on('click', 'a', function (event) {
     var coordinates = jQuery(this).attr('data-coordinates') || '';
-    console.log(coordinates);
+    var map = L.map('map').setView([coordinates], 14);
+    L.marker(eval(coordinates)).addTo(map);
   });
 
-  var map = L.map('map').setView([coordinates], 14);
-
-  L.marker(eval(coordinates)).addTo(map);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
