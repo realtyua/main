@@ -24,6 +24,15 @@
   //   }, 10);
   // });
 
+  $('#reMap').on('shown.bs.tab', function (e) {
+    //call the clear map event first
+    clearMap();
+    //resize the map - this is the important part for you
+    map.invalidateSize(true);
+    //load the map once all layers cleared
+    loadMap();
+  });
+
   var map = L.map('map').setView([48.9185356, 24.709326], 17);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -37,15 +46,6 @@
     id = jQuery(this).attr('id') || '';
     console.log(id);
     L.marker(eval(id)).addTo(map);
-  });
-
-  $('#reMap').on('shown.bs.tab', function (e) {
-    //call the clear map event first
-    clearMap();
-    //resize the map - this is the important part for you
-    map.invalidateSize(true);
-    //load the map once all layers cleared
-    loadMap();
   });
 
 </script>
