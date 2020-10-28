@@ -1,29 +1,3 @@
-<script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-
-<script>
-
-  $('#reMap').on('shown.bs.modal', function(){
-    setTimeout(function() {
-      map.invalidateSize();
-    }, 10);
-  });
-
-  var map = L.map('map').setView([48.9185356, 24.709326], 17);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 17,
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    tileSize: 512,
-    zoomOffset: -1
-  }).addTo(map);
-
-  jQuery(document).on("click", "a", function (event) {
-    id = jQuery(this).attr('data-loc') || '';
-    L.marker(eval(id)).addTo(map);
-  });
-
-</script>
-
 <div class="modal fade realestate" id="reMap" tabindex="-1" role="dialog" aria-labelledby="reMap" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content net-realestate">
@@ -39,3 +13,27 @@
     </div>
   </div>
 </div>
+
+<script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+
+<script>
+
+  $('#reMap').on('shown.bs.modal', function(){
+    setTimeout(function() {
+      map.invalidateSize();
+    }, 10);
+  });
+
+  var map = L.map('map').setView([48.9185356, 24.709326], 17);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  jQuery(document).on("click", "a", function (event) {
+    id = jQuery(this).attr('data-loc') || '';
+    console.log(id);
+    L.marker(eval(id)).addTo(map);
+  });
+
+</script>
