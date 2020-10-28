@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="modal-body pt-0 pb-4 px-4">
-        <div id="map"></div>
+        <div id="map" style="height:480px;"></div>
       </div>
     </div>
   </div>
@@ -18,20 +18,23 @@
 
 <script>
 
-  var map = L.map('map').setView([48.9228, 24.7106], 14);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 17,
-    attribution: '{{ site.title }} - {{ site.region }}',
-    tileSize: 512,
-    zoomOffset: -1
-  }).addTo(map);
-
-  map.attributionControl.setPrefix('');
-
   jQuery(document).on('click', 'a', function (event) {
+
     coordinates = jQuery(this).attr('data-coordinates') || '';
+
+    var map = L.map('map').setView(coordinates, 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 17,
+      attribution: '{{ site.title }} - {{ site.region }}',
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(map);
+
+    map.attributionControl.setPrefix('');
+
     L.marker(eval(coordinates)).addTo(map);
+
   });
 
   $('#reMap').on('shown.bs.modal', function(e){
