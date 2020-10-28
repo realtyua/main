@@ -1,9 +1,10 @@
 {%- if include.legal contains "phone" -%}
   {%- assign t = site.contact[include.legal] -%}
-  {% comment %}
-  {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
-  {% endcomment %}
-  {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,2 }}&nbsp;{{ t | slice:7,2 }}&nbsp;{{ t | slice:9,1 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
+  {%- if t == site.contact.phone_sms or t == site.contact.phone_hot -%}
+    {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,2 }}&nbsp;{{ t | slice:7,2 }}&nbsp;{{ t | slice:9,1 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
+  {%- else -%}
+    {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
+  {%- endif -%}
   <a href="tel:+{{ t }}">{{ n }}</a>
 {%- elsif include.legal == "email" -%}
   <a href="mailto:{{ site.contact[include.legal] }}">{{ site.contact[include.legal] }}</a>

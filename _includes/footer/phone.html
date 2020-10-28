@@ -1,7 +1,15 @@
 {%- assign t = include.legal -%}
-{%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
+{%- if t == site.contact.phone_sms or t == site.contact.phone_hot -%}
+  {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,2 }}&nbsp;{{ t | slice:7,2 }}&nbsp;{{ t | slice:9,1 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
+{%- else -%}
+  {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
+{%- endif -%}
 {%- assign tt = contact[include.legal] -%}
-{%- capture nn -%}+{{ tt | slice:0,2 }}&nbsp;{{ tt | slice:2,3 }}&nbsp;{{ tt | slice:5,3 }}&nbsp;{{ tt | slice:8,2 }}&nbsp;{{ tt | slice:10,12 }}{%- endcapture -%}
+{%- if tt == site.contact.phone_sms or tt == site.contact.phone_hot -%}
+  {%- capture nn -%}+{{ tt | slice:0,2 }}&nbsp;{{ tt | slice:2,3 }}&nbsp;{{ tt | slice:5,2 }}&nbsp;{{ tt | slice:7,2 }}&nbsp;{{ tt | slice:9,1 }}&nbsp;{{ tt | slice:10,12 }}{%- endcapture -%}
+{%- else -%}
+  {%- capture nn -%}+{{ tt | slice:0,2 }}&nbsp;{{ tt | slice:2,3 }}&nbsp;{{ tt | slice:5,3 }}&nbsp;{{ tt | slice:8,2 }}&nbsp;{{ tt | slice:10,12 }}{%- endcapture -%}
+{%- endif -%}
 {%- if tt -%}
   <a href="tel:+{{ tt }}">{{ nn }}</a>
 {%- elsif include.legal and include.type == 'icon' -%}
