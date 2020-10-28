@@ -18,10 +18,11 @@
 
 <script>
 
+  var map = L.map('map').setView([48.9185356, 24.709326], 14);
+
   jQuery(document).on('click', 'a', function (event) {
     var coordinates = jQuery(this).attr('data-coordinates') || '';
     console.log(coordinates);
-    var map = L.map('map').setView(coordinates, 14);
     L.marker(eval(coordinates)).addTo(map);
   });
 
