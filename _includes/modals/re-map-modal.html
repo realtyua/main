@@ -19,9 +19,11 @@
 <script>
 
   $('#reMap').on('shown.bs.modal', function(){
+    clearMap();
     setTimeout(function() {
       map.invalidateSize(true);
     }, 10);
+    loadMap();
   });
 
   var map = L.map('map').setView([48.9228, 24.7106], 14);
