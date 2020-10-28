@@ -18,7 +18,12 @@
 
 <script>
 
-  var map = L.map('map').setView([48.9228, 24.7106], 14);
+  jQuery(document).on('click', 'a', function (event) {
+    var coordinates = jQuery(this).attr('data-coordinates') || '';
+    console.log(coordinates);
+    var map = L.map('map').setView(coordinates, 14);
+    L.marker(eval(coordinates)).addTo(map);
+  });
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
@@ -28,12 +33,6 @@
   }).addTo(map);
 
   map.attributionControl.setPrefix('');
-
-  jQuery(document).on('click', 'a', function (event) {
-    var coordinates = jQuery(this).attr('data-coordinates') || '';
-    console.log(coordinates);
-    L.marker(eval(coordinates)).addTo(map);
-  });
 
   $('#reMap').on('shown.bs.modal', function(event){
     setTimeout(function() {
