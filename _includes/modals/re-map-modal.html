@@ -25,7 +25,7 @@
     var map = L.map('map').setView([48.92276, 24.71038], 14);
 
     $('.marker').on('click', 'a', function(){
-      var coordinates = $('a').attr('data-coordinates') || '';
+      var coordinates = $(obj).attr('data-coordinates') || '';
       console.log(coordinates);
       L.marker(eval(coordinates)).addTo(map);
     });
@@ -38,10 +38,7 @@
     }).addTo(map);
 
     map.attributionControl.setPrefix('');
-
-    $('#reMap').on('shown.bs.modal', function(){
-      map.invalidateSize();
-    });
+    $('#reMap').on('shown.bs.modal', function(){ map.invalidateSize(); });
 
   })
 
