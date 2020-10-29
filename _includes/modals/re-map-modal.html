@@ -35,10 +35,8 @@
 
   map.attributionControl.setPrefix('');
 
-  $('#reMap').on('shown.bs.modal', function(event){
-    setTimeout(function() {
-      map.invalidateSize(true);
-    }, 0);
+  $('#reMap').on('shown.bs.modal', function(){
+    map.invalidateSize(true);
   });
 
 </script>
