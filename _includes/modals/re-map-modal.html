@@ -24,12 +24,10 @@
 
     var map = L.map('map').setView([48.92276, 24.71038], 14);
 
-    jQuery(document).on('click', 'a', function (event) {
-      var coordinates = jQuery(this).attr('data-coordinates') || '';
+    $(.marker).on('click', 'a', function (event) {
+      var coordinates = $(this).attr('data-coordinates') || '';
       L.marker(eval(coordinates)).addTo(map);
     });
-
-    console.log(coordinates);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 17,
