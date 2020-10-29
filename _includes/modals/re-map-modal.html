@@ -24,7 +24,7 @@
 
     var map = L.map('map').setView([48.92276, 24.71038], 14);
 
-    $(.marker).on('click', 'a', function (event) {
+    $('.marker').on('click', 'a', function (event) {
       var coordinates = $(this).attr('data-coordinates') || '';
       L.marker(eval(coordinates)).addTo(map);
     });
