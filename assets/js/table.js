@@ -156,7 +156,12 @@ function jsDetailFormatter(index, row, $detail) {
         }
         if (row.phone !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_seller }}</dt><dd>' + row.seller + '</dd></dl></span>'),
-          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>'),
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a></dd></dl></span>')
+        }
+        if (row.coordinates && row.coordinates !== '') {
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' на мапі</dt><dd><a class="marker" data-coordinates="[' + row.coordinates + ']" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Показати мапу</a></dd></dl></span>'),
+          html.push('</span>')
+        } else {
           html.push('</span>')
         }
         if (row.description && row.description !== '') {
