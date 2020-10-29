@@ -22,11 +22,10 @@
 
   $(document).ready(function() {
 
-    var map = L.map('map').setView([48.92276, 24.71038], 14);
-
     jQuery(document).on('click', 'a', function (event) {
       var coordinates = jQuery(this).attr('data-coordinates') || '';
       console.log(coordinates);
+      var map = L.map('map').setView(coordinates, 14);
       L.marker(eval(coordinates)).addTo(map);
     });
 
