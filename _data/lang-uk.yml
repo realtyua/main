@@ -85,11 +85,13 @@ phone_hot: Огляд нерухомісті
 email: Електронна пошта
 www: Вебсайт
 
-sent_ads: Надіслати оголошення через
+sent_ads: Надіслати&nbsp;оголошення&nbsp;через
 phone_support: Підтримка
-phone_buy: Купити нерухомість
-phone_sell: Продати нерухомість
-phone_add_ads: Додати оголошення
+phone_buy: Купити&nbsp;нерухомість
+phone_sell: Продати&nbsp;нерухомість
+phone_buy_sell: Купити&nbsp;або&nbsp;продати&nbsp;житло:
+phone_add_ads: Додати&nbsp;оголошення
+phone_submit_ads: Продати&nbsp;оголошення:
 
 flag_ua_city: Івано-Франківськ
 flag_ua_net: Мережа сайтів нерухомості
