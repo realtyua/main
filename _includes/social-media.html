@@ -35,4 +35,11 @@
     </a>
   </li>
   {%- endif -%}
+  {%- if include.telegram == 1 -%}
+  <li class="list-inline-item">
+    <a href="https://t.me" target="_blank" rel="noopener" aria-label="Telegram">
+      <span>{%- include icons/telegram.svg width="24" height="24" -%}</span>
+    </a>
+  </li>
+  {%- endif -%}
 </ul>
