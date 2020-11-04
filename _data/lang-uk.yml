@@ -61,7 +61,7 @@ re_collapse: Згорнути
 re_more: Детальніше про нерухомість
 re_uah: ₴
 re_about_object: Про житловий комплекс
-re_select_section: Оберіть розділ
+re_select_section: Виберіть розділ
 re_page: Персональна сторінка нерухомості
 re_owner: Нерухомість від власника
 re_rent_h2: Передаються для оренди або здаються в оренду об'єкти нерухомості
@@ -96,8 +96,8 @@ phone_submit_ads: Подати&nbsp;оголошення
 flag_ua_city: Івано-Франківськ
 flag_ua_net: Мережа сайтів нерухомості
 
-brand_header: Оберіть регіон з нерухомістю
-brand_content: Оберіть розділ з нерухомістю
+brand_header: Виберіть регіон з нерухомістю
+brand_content: Виберіть розділ з нерухомістю
 newly_realestate: Нещодавно додано
 vsya: Вся
 nerukhomisti: нерухо́місті
