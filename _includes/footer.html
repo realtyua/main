@@ -1,4 +1,4 @@
-<footer>
+<footer id="contacts">
   <div class="container border-top-4 border-primary">
     {%- if page.url != '/' -%}
     <div class="row pt-4">
@@ -78,6 +78,14 @@
               </div>
               <div class="col-md-5">
                 {%- include phone-brand.html n=site.contact.phone_buy_sell -%}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-7 pr-md-0 text-md-right">
+                <h6 class="mt-1">{{ site.data.lang-uk.phone_advert }}:</h6>
+              </div>
+              <div class="col-md-5">
+                {%- include phone-brand.html n=site.contact.phone_advert -%}
               </div>
             </div>
           </div>
