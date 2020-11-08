@@ -13,9 +13,7 @@ description:
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 2, 4 | join: ' ' -%}
 
-    {{ page.title }} {% if page.url contains '/map.html' %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}
-
-    {{ content }}
+    {{ page.title }} {% if page.url contains 'map.html' %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}
 
     <div id="map" style="height:100%;"></div>
 
