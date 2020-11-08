@@ -100,7 +100,7 @@ description:
 
 <br/>
 
-{{ site.data.lang-uk.re_tel | capitalize }}: {{ offer.phon }}
+{{ site.data.lang-uk.re_tel | capitalize }}: {{ offer.phone }}
 
       "){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
@@ -114,7 +114,7 @@ description:
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
-    attribution: '{{ site.title }} - {{ page.breadcrumb }}',
+    attribution: '<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',
     tileSize: 512,
     zoomOffset: -1
   }).addTo(map);
