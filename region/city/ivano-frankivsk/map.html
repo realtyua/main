@@ -1,4 +1,5 @@
 ---
+layout: map
 title: Мапа нерухомість у місті Івано-Франківськ
 navtitle:
 navhide:
@@ -8,7 +9,6 @@ keywords:
 description:
 ---
 
-{% comment %}
 
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 2, 4 | join: ' ' -%}
@@ -38,11 +38,13 @@ description:
         {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
       {%- endif -%}
     {%- endif -%}
+
     {%- if data -%}
       {%- include {{ data }} -%}
 
       {%- if offers.size > 0 -%}
 
+      {%- include java-script.html -%}
       <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 
       <script>
@@ -69,5 +71,3 @@ description:
       {%- endif -%}
 
     {%- endif -%}
-
-  {% endcomment %}

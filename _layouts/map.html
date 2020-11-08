@@ -1,0 +1,20 @@
+---
+layout: compress
+---
+{%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
+{%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
+{%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+<!doctype html>
+<html dir="ltr" lang="uk-UA">
+  <head>
+    {%- include head.html -%}
+  </head>
+  <body>
+    {%- assign isContent = content | strip_newlines -%}
+    {%- if isContent == '' -%}
+      {%- include info-visitors.html -%}
+    {%- else -%}
+      {{ content }}
+    {%- endif -%}
+  </body>
+</html>

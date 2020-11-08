@@ -29,6 +29,9 @@ layout: compress
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
     {% include modals/net-realestate-modal.html %}
+{%- if page.url contains 'map.html' -%}
+{%- else -%}
     {% include modals/re-map-modal.html %}
+{%- endif -%}
   </body>
 </html>
