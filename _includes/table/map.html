@@ -1,0 +1,39 @@
+{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+{%- capture files -%}
+  {%- for file in site.static_files -%}
+    {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign isImage = files | strip_newlines -%}
+
+{%- if forloop.first -%}
+{%- endif -%}
+
+  L.marker([{{ offer.coordinates }}]){%- if forloop.last -%}{%- else -%},{%- endif -%}
+
+
+
+
+{% comment %}
+
+
+    L.marker([48.84, 2.34]),
+    L.marker([48.85, 2.35]),
+    L.marker([48.86, 2.36])
+
+
+  {%- if isImage != '' -%}
+      <span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">
+      {%- for file in site.static_files -%}
+        {%- if file.path contains folder and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+        <figure class="col px-1">
+          <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="Image Title" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="2{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
+            <img src="{{ file.path | url_decode | relative_url }}" loading="lazy" class="img-fluid img-thumbnail" title="Image Title" alt="Image Alt" intrinsicsize="1024x768">
+          </a>
+        </figure>
+        {%- endif -%}
+      {%- endfor -%}
+      </span>
+  {%- else -%}
+  {%- endif -%}
+{% endcomment %}

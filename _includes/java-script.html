@@ -21,4 +21,7 @@
 {%- if page.dir == '/' -%}
 <script src="{{ "/assets/js/ads.home.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- endif -%}
+{%- if page.url contains 'map.html' -%}
+<script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+{%- endif -%}
 <script src="{{ "/assets/js/realtyua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
