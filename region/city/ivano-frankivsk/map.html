@@ -49,7 +49,7 @@ description:
 
 <script>
 
-  var map = L.map("map").setView([48.92276, 24.71038], 11);
+  var map = L.map("map").setView([48.92276, 24.71038], 10);
   var markers = [
     {%- for offer in offers -%}
       L.marker([{{ offer.coordinates }}],{title: '{{ offer.type }}<br/>Кімнат: {{ offer.rooms }}<br/>Ціна: {{ offer.price }}'}){%- if forloop.last -%}{%- else -%},{%- endif -%}
@@ -58,9 +58,13 @@ description:
 
   var group = L.featureGroup(markers).addTo(map);
 
+  map.on('mouseover',function(ev) {
+    ev.layer.openPopup()
+  })
+
   setTimeout(function () {
     map.fitBounds(group.getBounds());
-  }, 1000);
+  }, {{ offers.size }});
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
