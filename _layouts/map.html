@@ -10,13 +10,11 @@ layout: compress
     <title>Home</title>
     <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
     <style>
-      html, body {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-      }
-      #map {
-        height: 100%;
+      html, body, #map {
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          margin: 0;
       }
     </style>
     <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
