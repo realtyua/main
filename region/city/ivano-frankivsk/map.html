@@ -81,9 +81,11 @@ description:
 <br/>
 
 {%- if offer.price contains '$' and offer.price != '' -%}
-  {{ offer.price | remove: '$' | times: site.usd }} {{ site.data.lang-uk.re_uah }}
+  {{ site.data.lang-uk.re_cost }} {{ offer.price | remove: '$' | times: site.usd }} {{ site.data.lang-uk.re_uah }}
 {%- elsif offer.price contains '€' and offer.price != '' -%}
-  {{ offer.price | remove: '€' | times: site.eur }} {{ site.data.lang-uk.re_uah }}
+  {{ site.data.lang-uk.re_cost }} {{ offer.price | remove: '€' | times: site.eur }} {{ site.data.lang-uk.re_uah }}
+{%- else -%}
+  {{ site.data.lang-uk.re_cost }} {{ offer.price }} {{ site.data.lang-uk.re_uah }}
 {%- endif -%}
 
       "){%- if forloop.last -%}{%- else -%},{%- endif -%}
