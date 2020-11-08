@@ -70,7 +70,7 @@ description:
   {{ site.data.lang-uk.re_for_sale }} {{ offer.type | downcase }}
 {%- endif -%}
 
-      '}).bindPopup("
+      '}).bindPopup('
 
 {%- if offer.rent and offer.rent == '1' -%}
   {{ site.data.lang-uk.re_for_rent }} <b>{{ offer.type | downcase }}</b>
@@ -100,9 +100,9 @@ description:
 
 <br/>
 
-{{ site.data.lang-uk.re_tel | capitalize }}: {{ offer.phone }} <a href=\"{{ offer.phone }}\">+380 67 433 00 66</a>
+{{ site.data.lang-uk.re_tel | capitalize }}: {%- include footer/phone.html legal=offer.phone type='text' -%}
 
-      "){%- if forloop.last -%}{%- else -%},{%- endif -%}
+      '){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
   ];
 
