@@ -100,7 +100,7 @@ description:
 
 <br/>
 
-{{ site.data.lang-uk.re_tel | capitalize }}: {{ offer.phone }} <a href="{{ offer.phone }}">+380 67 433 00 66</a>
+{{ site.data.lang-uk.re_tel | capitalize }}: {{ offer.phone }} <a href=\"{{ offer.phone }}\">+380 67 433 00 66</a>
 
       "){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
