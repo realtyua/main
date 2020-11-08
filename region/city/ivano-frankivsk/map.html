@@ -65,38 +65,42 @@ description:
       L.marker([{{ offer.coordinates }}],{title: '
 
 {%- if offer.rent and offer.rent == '1' -%}
-  {{ site.data.lang-uk.re_for_rent }}  {{ offer.type | downcase }}
+  {{ site.data.lang-uk.re_for_rent }} {{ offer.type | downcase }}
 {%- else -%}
-  {{ site.data.lang-uk.re_for_sale }}  {{ offer.type | downcase }}
+  {{ site.data.lang-uk.re_for_sale }} {{ offer.type | downcase }}
 {%- endif -%}
 
       '}).bindPopup("
 
 {%- if offer.rent and offer.rent == '1' -%}
-  {{ site.data.lang-uk.re_for_rent }}  <b>{{ offer.type | downcase }}</b>
+  {{ site.data.lang-uk.re_for_rent }} <b>{{ offer.type | downcase }}</b>
 {%- else -%}
-  {{ site.data.lang-uk.re_for_sale }}  <b>{{ offer.type | downcase }}</b>
+  {{ site.data.lang-uk.re_for_sale }} <b>{{ offer.type | downcase }}</b>
 {%- endif -%}
 
 <br/>
 
-{%- if offer.type contains 'Земля' and offer.price_sqmt != '' -%}
+{%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}
   {%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}
-    {{ site.data.lang-uk.re_cost }} {{ offer.price_sqmt | remove: '$' | times: site.usd }} {{ site.data.lang-uk.re_uah }}
+    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
   {%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}
-    {{ site.data.lang-uk.re_cost }} {{ offer.price_sqmt | remove: '€' | times: site.eur }} {{ site.data.lang-uk.re_uah }}
+    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
   {%- else -%}
-    {{ site.data.lang-uk.re_cost }} {{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}
+    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}
   {%- endif -%}
 {%- else -%}
   {%- if offer.price contains '$' and offer.price != '' -%}
-    {{ site.data.lang-uk.re_cost }} {{ offer.price | remove: '$' | times: site.usd }} {{ site.data.lang-uk.re_uah }}
+    {{ site.data.lang-uk.re_cost | capitalize  }} {{ offer.price | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
   {%- elsif offer.price contains '€' and offer.price != '' -%}
-    {{ site.data.lang-uk.re_cost }} {{ offer.price | remove: '€' | times: site.eur }} {{ site.data.lang-uk.re_uah }}
+    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
   {%- else -%}
-    {{ site.data.lang-uk.re_cost }} {{ offer.price }} {{ site.data.lang-uk.re_uah }}
+    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price }} {{ site.data.lang-uk.re_uah }}
   {%- endif -%}
 {%- endif -%}
+
+<br/>
+
+{{ site.data.lang-uk.re_tel | capitalize }}: {{ offer.phon }}
 
       "){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
