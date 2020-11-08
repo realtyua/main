@@ -10,7 +10,7 @@ description:
 ---
 
 
-{%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
+    {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 
 
     <div id="map" style="height:100%;"></div>
@@ -41,29 +41,30 @@ description:
       {%- if offers.size > 0 -%}
 
 
-      <script>
-        var map = L.map("map").setView([48.92276, 24.71038], 10);
-        var markers = [
+<script>
 
-          {%- for offer in offers -%}
-            {%- if offer.coordinates and offer.coordinates != '' -%}
-              L.marker([{{ offer.coordinates }}])
-            {%- endif -%}
-            {%- if forloop.last -%}{%- else -%},{%- endif -%}
-          {%- endfor -%}
+$(document).ready(function() {
+  var map = L.map("map").setView([48.92276, 24.71038], 10);
+  var markers = [
 
-        ];
+    {%- for offer in offers -%}
+      L.marker([{{ offer.coordinates }}]){%- if forloop.last -%}{%- else -%},{%- endif -%}
+    {%- endfor -%}
 
-        var group = L.featureGroup(markers).addTo(map);
+  ];
 
-        setTimeout(function () {
-          map.fitBounds(group.getBounds());
-        }, 1000);
+  var group = L.featureGroup(markers).addTo(map);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-      </script>
+  setTimeout(function () {
+    map.fitBounds(group.getBounds());
+  }, 1000);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+}
+
+</script>
 
       {%- endif -%}
 

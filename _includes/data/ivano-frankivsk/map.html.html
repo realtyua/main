@@ -4,4 +4,4 @@
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
 {%- include data/ivano-frankivsk/records.html -%}
-{%- assign offers = records | sort: "date" | reverse -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.coordinates and i.coordinates != ''" -%}
