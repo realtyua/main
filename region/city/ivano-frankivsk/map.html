@@ -100,7 +100,7 @@ description:
 
 <br/>
 
-{{ site.data.lang-uk.re_tel | capitalize }}: {{ offer.phone }}
+{{ site.data.lang-uk.re_tel | capitalize }}: {%- include footer/phone.html legal=offer.phone type='text' -%}
 
       "){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
