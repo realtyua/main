@@ -9,6 +9,7 @@ layout: compress
   <head>
     <title>Home</title>
     <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+    <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   </head>
   <body>
     {%- assign isContent = content | strip_newlines -%}

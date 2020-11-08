@@ -40,7 +40,6 @@ description:
 
       {%- if offers.size > 0 -%}
 
-      <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 
       <script>
         var map = L.map("map").setView([48.92276, 24.71038], 10);
@@ -48,8 +47,9 @@ description:
 
           {%- for offer in offers -%}
             {%- if offer.coordinates and offer.coordinates != '' -%}
-              L.marker([{{ offer.coordinates }}]){%- if forloop.last -%}{%- else -%},{%- endif -%}
+              L.marker([{{ offer.coordinates }}])
             {%- endif -%}
+            {%- if forloop.last -%}{%- else -%},{%- endif -%}
           {%- endfor -%}
 
         ];
