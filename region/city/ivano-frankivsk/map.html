@@ -49,10 +49,34 @@ description:
 
 <script>
 
+  L.Map = L.Map.extend({
+      openPopup: function(popup) {
+          this.closePopup();
+          this._popup = popup;
+          return this.addLayer(popup).fire('popupopen', {
+              popup: this._popup
+          });
+      }
+  });
+
   var map = L.map("map").setView([48.92276, 24.71038], 10);
   var markers = [
     {%- for offer in offers -%}
-      L.marker([{{ offer.coordinates }}],{title: '{{ offer.type }} - {{ offer.price }}'}).bindPopup("<b>{{ offer.type }}</b><br />{{ offer.price }}"){%- if forloop.last -%}{%- else -%},{%- endif -%}
+      L.marker([{{ offer.coordinates }}],{title: '
+
+        {{ offer.type }}
+
+      '}).bindPopup("
+
+        <b>{{ offer.type }}</b><br/>
+
+{%- if offer.price contains '$' and offer.price != '' -%}
+  {{ offer.price | times: site.usd }}
+{%- elsif offer.price contains '€' and offer.price != '' -%}
+  {{ offer.price | times: site.eur }}
+{%- endif -%}
+
+      "){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
   ];
 
