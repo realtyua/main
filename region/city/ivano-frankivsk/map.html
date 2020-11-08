@@ -11,9 +11,7 @@ description:
 
 
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
-{%- assign addtitle = name | split: ' ' | slice: 2, 4 | join: ' ' -%}
 
-    {{ page.title }} {% if page.url contains 'map.html' %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}
 
     <div id="map" style="height:100%;"></div>
 
@@ -49,7 +47,9 @@ description:
         var markers = [
 
           {%- for offer in offers -%}
-            {%- include table/map.html -%}
+            {%- if offer.coordinates and offer.coordinates != '' -%}
+              L.marker([{{ offer.coordinates }}]){%- if forloop.last -%}{%- else -%},{%- endif -%}
+            {%- endif -%}
           {%- endfor -%}
 
         ];
