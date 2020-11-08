@@ -67,11 +67,7 @@
 {%- endif -%}
 <link rel="preload" href="{{ "/assets/js/realtyua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-{% comment %}
-  {%- if page.url contains 'map.html' -%}
-  <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-  {%- endif -%}
-{% endcomment %}
+<link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 {%- if page.table == 1 or page.table == 2 -%}
 <link rel="stylesheet" href="{{ "/assets/css/table.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 {%- endif -%}
