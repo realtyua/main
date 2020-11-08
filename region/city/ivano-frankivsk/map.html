@@ -52,11 +52,9 @@ description:
   var map = L.map("map").setView([48.92276, 24.71038], 10);
   var markers = [
     {%- for offer in offers -%}
-      L.marker([{{ offer.coordinates }}],{title: '{{ offer.type }} - {{ offer.price }}'}){%- if forloop.last -%}{%- else -%},{%- endif -%}
+      L.marker([{{ offer.coordinates }}],{title: '{{ offer.type }} - {{ offer.price }}'}).bindPopup("<b>{{ offer.type }}</b><br />{{ offer.price }}"){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
   ];
-
-  markers.eachLayer(marker => marker.openPopup());
 
   var group = L.featureGroup(markers).addTo(map);
 
