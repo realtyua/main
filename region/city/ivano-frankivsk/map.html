@@ -64,16 +64,26 @@ description:
     {%- for offer in offers -%}
       L.marker([{{ offer.coordinates }}],{title: '
 
-        {{ offer.type }}
+{%- if offer.rent contains '$' and offer.rent == '1' -%}
+  {{ site.data.lang-uk.re_for_rent }}  {{ offer.type | downcase }}
+{%- else -%}
+  {{ site.data.lang-uk.re_for_sale }}  {{ offer.type | downcase }}
+{%- endif -%}
 
       '}).bindPopup("
 
-        <b>{{ offer.type }}</b><br/>
+{%- if offer.rent contains '$' and offer.rent == '1' -%}
+  {{ site.data.lang-uk.re_for_rent }}  <b>{{ offer.type | downcase }}</b>
+{%- else -%}
+  {{ site.data.lang-uk.re_for_sale }}  <b>{{ offer.type | downcase }}</b>
+{%- endif -%}
+
+<br/>
 
 {%- if offer.price contains '$' and offer.price != '' -%}
-  {{ offer.price | times: site.usd }}
+  {{ offer.price | remove: '$' | times: site.usd }} {{ site.data.lang-uk.re_uah }}
 {%- elsif offer.price contains '€' and offer.price != '' -%}
-  {{ offer.price | times: site.eur }}
+  {{ offer.price | remove: '€' | times: site.eur }} {{ site.data.lang-uk.re_uah }}
 {%- endif -%}
 
       "){%- if forloop.last -%}{%- else -%},{%- endif -%}
