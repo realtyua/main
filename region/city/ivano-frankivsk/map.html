@@ -8,6 +8,8 @@ keywords:
 description:
 ---
 
+{% comment %}
+
 {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 2, 4 | join: ' ' -%}
 
@@ -67,3 +69,5 @@ description:
       {%- endif -%}
 
     {%- endif -%}
+
+  {% endcomment %}
