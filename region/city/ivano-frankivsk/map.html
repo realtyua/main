@@ -26,6 +26,13 @@ description:
       {%- elsif l.size == 5 -%}
         {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
       {%- endif -%}
+    {%- elsif page.url contains 'map.html' -%}
+      {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
+      {%- if l.size == 4 -%}
+        {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+      {%- elsif l.size == 5 -%}
+        {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- endif -%}
     {%- else -%}
       {%- assign json = here | append: 'data/' | append: slug | append: '.json' -%}
       {%- if l.size == 4 -%}
@@ -44,6 +51,7 @@ description:
 <script>
 
 $(document).ready(function() {
+  
   var map = L.map("map").setView([48.92276, 24.71038], 10);
   var markers = [
 
@@ -62,7 +70,8 @@ $(document).ready(function() {
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
-}
+
+)};
 
 </script>
 
