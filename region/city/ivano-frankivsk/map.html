@@ -49,24 +49,21 @@ description:
 
 <script>
 
-  var map = L.map("map").setView([48.92276, 24.71038], 10);
+  var map = L.map("map").setView([48.92276, 24.71038], 11);
   var markers = [
     {%- for offer in offers -%}
-      L.marker([{{ offer.coordinates }}]).bindPopup('{{ offer.type }}<br/>Кімнат: {{ offer.rooms }}'){%- if forloop.last -%}{%- else -%},{%- endif -%}
+      L.marker([{{ offer.coordinates }}],{title: '{{ offer.type }}<br/>Кімнат: {{ offer.rooms }}<br/>Ціна: {{ offer.price }}'}){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
   ];
 
   var group = L.featureGroup(markers).addTo(map);
-
-  const popup = L.popup();
-  markers.bindPopup(popup);
 
   setTimeout(function () {
     map.fitBounds(group.getBounds());
   }, 1000);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 16,
+    maxZoom: 18,
     attribution: '{{ site.title }} - {{ page.breadcrumb }}',
     tileSize: 512,
     zoomOffset: -1
