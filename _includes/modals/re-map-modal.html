@@ -1,5 +1,4 @@
 <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-
 <div class="modal fade realestate" id="reMap" tabindex="-1" role="dialog" aria-labelledby="reMap" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content net-realestate">
@@ -15,7 +14,6 @@
     </div>
   </div>
 </div>
-
 <script>
   var modal = $('#reMap');
   var map = null;
@@ -23,7 +21,7 @@
       var coord = $(this).attr('data-coord') || '';
       var tmp = coord.split(',');
       var loc = [parseFloat(tmp[0]),parseFloat(tmp[1])];
-      map = L.map('map').setView(loc,14);
+      map = L.map('map').setView(loc,16);
       if (map) {
           L.marker(eval(loc)).addTo(map);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
