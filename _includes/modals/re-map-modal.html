@@ -17,24 +17,23 @@
 </div>
 
 <script>
-
   var modal = $('#reMap');
-  var map = L.map('map').setView([48.92276, 24.71038], 14);
-
+  var map = null;
   $(document).on('click', 'a.marker', function () {
-    var coordinates = $(this).attr('data-coordinates') || '';
-    L.marker(eval(coordinates)).addTo(map);
+      var coord = $(this).attr('data-coord') || '';
+      var tmp = coord.split(',');
+      var loc = [parseFloat(tmp[0]),parseFloat(tmp[1])];
+      map = L.map('map').setView(loc,14);
+      if (map) {
+          L.marker(eval(loc)).addTo(map);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '<a href="{{ site.url }}">{{ site.title }} - {{ site.region }}',
+            tileSize: 512,
+            zoomOffset: -1
+          }).addTo(map);
+          map.attributionControl.setPrefix('');
+          modal.on('shown.bs.modal', function(){ map.invalidateSize(); });
+      }
   });
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 17,
-    attribution: '{{ site.title }} - {{ site.region }}',
-    tileSize: 512,
-    zoomOffset: -1
-  }).addTo(map);
-
-  map.attributionControl.setPrefix('');
-
-  modal.on('shown.bs.modal', function(){ map.invalidateSize(); });
-
 </script>

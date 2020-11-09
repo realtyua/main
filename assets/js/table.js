@@ -155,7 +155,7 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
         }
         if (row.coordinates && row.coordinates !== '') {
-          html.push('<span class="col px-1"><dl><dt>' + row.type + ' на мапі</dt><dd><a class="marker" data-coordinates="[' + row.coordinates + ']" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Показати мапу</a></dd></dl></span>')
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' на мапі</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Показати мапу</a></dd></dl></span>')
         }
         if (row.phone !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_seller }}</dt><dd>' + row.seller + '</dd></dl></span>'),
@@ -290,7 +290,7 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
         }
         if (row.coordinates && row.coordinates !== '') {
-          html.push('<span class="col px-1"><dl><dt>' + row.type + ' на мапі</dt><dd><a class="marker" data-coordinates="[' + row.coordinates + ']" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Показати мапу</a></dd></dl></span>')
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' на мапі</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Показати мапу</a></dd></dl></span>')
         }
         if (row.phone !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_seller }}</dt><dd>' + row.seller + '</dd></dl></span>'),
