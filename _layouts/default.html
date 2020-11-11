@@ -16,13 +16,13 @@ layout: compress
       <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
         {% if page.url == "/" %}
           <div class="mx-3 mx-md-5 pb-1">
-            <a class="mx-md-5" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea">
-              Виберіть місцевіть</a> в Івано-Франківській області де б ви хотіли жити або продати чи купити житло
+            <a class="ml-md-5" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea">
+              <<strong>Виберіть місцевіть</strong></a> в Івано-Франківській області де б ви хотіли жити або <strong>продати чи купити житло</strong>
           </div>
           <div class="bg-light px-3 px-md-5 mb-3">
             <div class="px-md-5 collapse" id="collapseArea">
               <div class="bg-light px-0 border-0 card card-body">
-                Міста та райони в Івано-Франківській області...
+                {%- include home/anchor-link.html -%}
               </div>
             </div>
           </div>
