@@ -14,6 +14,18 @@ layout: compress
     <div class="main">
       {%- include header.html -%}
       <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
+        <div class="container-fluid">
+          <p>
+            <a class="btn btn-link" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea">
+              Виберіть місцевіть в Івано-Франківській області деб ви хотіли жити
+            </a>
+          </p>
+          <div class="collapse" id="collapseArea">
+            <div class="card card-body">
+              Міста та райони в Івано-Франківській області...
+            </div>
+          </div>
+        </div>
         <div class="container">
           {%- include breadcrumb.html -%}
           {%- assign isContent = content | strip_newlines -%}
