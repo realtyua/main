@@ -86,6 +86,9 @@ function jsDetailFormatter(index, row, $detail) {
         } else if (row.price_sqmt !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.re_m }}<sup>2</sup></dt><dd>' + (row.price_sqmt * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
         }
+        if (row.coordinates && row.coordinates !== '') {
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
+        }
         if (row.date !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>'),
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_seller }}</dt><dd>' + row.seller + '</dd></dl></span>'),
@@ -116,6 +119,9 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt><dd>' + (row.price_sqmt.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
         } else if (row.price_sqmt !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt><dd>' + (row.price_sqmt * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        }
+        if (row.coordinates && row.coordinates !== '') {
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
         }
         if (row.date !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_dater }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>'),
@@ -155,7 +161,7 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
         }
         if (row.coordinates && row.coordinates !== '') {
-          html.push('<span class="col px-1"><dl><dt>' + row.type + ' на мапі</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Показати мапу</a></dd></dl></span>')
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
         }
         if (row.phone !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_seller }}</dt><dd>' + row.seller + '</dd></dl></span>'),
@@ -221,6 +227,9 @@ function htmlDetailFormatter(index, row, $detail) {
         } else if (row.price_sqmt !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.re_m }}<sup>2</sup></dt><dd>' + (row.price_sqmt * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
         }
+        if (row.coordinates && row.coordinates !== '') {
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
+        }
         if (row.date !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>'),
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_seller }}</dt><dd>' + row.seller + '</dd></dl></span>'),
@@ -251,6 +260,9 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt><dd>' + (row.price_sqmt.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
         } else if (row.price_sqmt !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt><dd>' + (row.price_sqmt * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+        }
+        if (row.coordinates && row.coordinates !== '') {
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
         }
         if (row.date !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_dater }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>'),
@@ -290,7 +302,7 @@ function htmlDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
         }
         if (row.coordinates && row.coordinates !== '') {
-          html.push('<span class="col px-1"><dl><dt>' + row.type + ' на мапі</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">Показати мапу</a></dd></dl></span>')
+          html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
         }
         if (row.phone !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_seller }}</dt><dd>' + row.seller + '</dd></dl></span>'),
