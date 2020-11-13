@@ -192,7 +192,7 @@ function jsDetailFormatter(index, row, $detail) {
   items[index] = [];
 
   $detail.find('figure').each(function(){
-    var $link = $(this).find('a');
+    var $link = $(this).find('a.lightbox');
     items[index].push({
         src: $link.attr('href'),
         w: $link.data('lightbox-width'),
@@ -331,7 +331,7 @@ function htmlDetailFormatter(index, row, $detail) {
   items[index] = [];
 
   $detail.find('figure').each(function(){
-    var $link = $(this).find('a');
+    var $link = $(this).find('a.lightbox');
     items[index].push({
         src: $link.attr('href'),
         w: $link.data('lightbox-width'),
@@ -461,21 +461,3 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
-
-// function buttons () {
-//   return {
-//     btnUsersAdd: {
-//       text: 'Нерухомість на мапі',
-//       icon: 'fa-users',
-//       event: function () {
-//         alert('Do some stuff to e.g. search all users which has logged in the last week')
-//       },
-//       attributes: {
-//         title: "Розташування об'єктів нерухомісті на мапі",
-//         formaction: "https://www.realestate.if.ua/",
-//         formtarget: "_blank",
-//         type: "submit"
-//       }
-//     }
-//   }
-// }
