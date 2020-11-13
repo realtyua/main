@@ -468,11 +468,12 @@ function buttons () {
       text: 'Нерухомість на мапі',
       icon: 'fa-users',
       event: function () {
-        'click a': "https://www.realestate.if.ua/"
+        // 'click a': "https://www.realestate.if.ua/"
         // alert('Do some stuff to e.g. search all users which has logged in the last week')
       },
       attributes: {
-        title: "Розташування об'єктів нерухомісті на мапі"
+        title: "Розташування об'єктів нерухомісті на мапі",
+        formaction: "https://www.realestate.if.ua/"
       }
     }
   }
