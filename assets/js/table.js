@@ -461,3 +461,18 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
+
+function buttons () {
+  return {
+    btnUsersAdd: {
+      text: 'Highlight Users',
+      icon: 'fa-users',
+      event: function () {
+        alert('Do some stuff to e.g. search all users which has logged in the last week')
+      },
+      attributes: {
+        title: 'Search all users which has logged in the last week'
+      }
+    }
+  }
+}
