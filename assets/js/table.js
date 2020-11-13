@@ -462,20 +462,20 @@ function priceSorter(a, b) {
   return aa - bb
 }
 
-function buttons () {
-  return {
-    btnUsersAdd: {
-      text: 'Нерухомість на мапі',
-      icon: 'fa-users',
-      event: function () {
-        alert('Do some stuff to e.g. search all users which has logged in the last week')
-      },
-      attributes: {
-        title: "Розташування об'єктів нерухомісті на мапі",
-        formaction: "https://www.realestate.if.ua/",
-        formtarget: "_blank",
-        type: "submit"
-      }
-    }
-  }
-}
+// function buttons () {
+//   return {
+//     btnUsersAdd: {
+//       text: 'Нерухомість на мапі',
+//       icon: 'fa-users',
+//       event: function () {
+//         alert('Do some stuff to e.g. search all users which has logged in the last week')
+//       },
+//       attributes: {
+//         title: "Розташування об'єктів нерухомісті на мапі",
+//         formaction: "https://www.realestate.if.ua/",
+//         formtarget: "_blank",
+//         type: "submit"
+//       }
+//     }
+//   }
+// }
