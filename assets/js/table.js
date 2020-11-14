@@ -468,10 +468,10 @@ function buttons () {
       text: 'Highlight Users',
       icon: 're-map',
       event: function () {
-        // alert('...')
+        alert('...')
       },
       attributes: {
-        onClick: 'parent.location="{{ page.url }}"',
+        onClick: 'parent.open("{{ page.url }}")',
         title: 'Нерухомість на мапі'
       }
     }
