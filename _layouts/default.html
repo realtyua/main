@@ -49,8 +49,9 @@ layout: compress
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
     {% include modals/net-realestate-modal.html %}
+{%- assign slash = page.dir | split: '/' -%}
 {%- if page.url contains 'map.html' -%}
-{%- else -%}
+{%- elsif slash,size >= 3 -%}
     {% include modals/re-map-modal.html %}
 {%- endif -%}
   </body>
