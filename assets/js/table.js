@@ -464,14 +464,14 @@ function priceSorter(a, b) {
 
 function buttons () {
   return {
-    btnUsersAdd: {
+    openMap: {
       text: 'Highlight Users',
       icon: 're-map',
       event: function () {
-        alert('Do some stuff to e.g. search all users which has logged in the last week')
+        alert('...')
       },
       attributes: {
-        title: 'Search all users which has logged in the last week'
+        title: 'Нерухомість на мапі'
       }
     }
   }
