@@ -54,9 +54,11 @@
 {%- if page.table == 1 -%}
   <link rel="preload" href="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   <link rel="preload" href="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  {% comment %}
   {%- if level.size == 8 -%}
     <link rel="preload" href="{{ "/assets/js/object.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   {%- endif -%}
+  {% endcomment %}
   <link rel="preload" href="{{ "/assets/js/table.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 {%- elsif page.table == 2 -%}
   <link rel="preload" href="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">

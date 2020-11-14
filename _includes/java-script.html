@@ -9,9 +9,11 @@
 {%- if page.table == 1 -%}
   <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  {% comment %}
   {%- if level.size == 8 -%}
     <script src="{{ "/assets/js/object.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   {%- endif -%}
+  {% endcomment %}
   <script src="{{ "/assets/js/table.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- elsif page.table == 2 -%}
   <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
