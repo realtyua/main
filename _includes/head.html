@@ -38,10 +38,11 @@
 {%- endif -%}
 
 <meta property="og:url" content="{{ page.url | absolute_url }}" />
-<meta property="og:title" content="{{ title }}" />
+<meta property="og:title" content="{{ title | remove: ' · {{ site.title }}' }}" />
 <meta property="og:description" content="{{ page.description | default: site.description | smartify }}" />
+{%- assign edge = page.url | split: '/' | last -%}
 {%- assign dir = '/assets/images/locations/' -%}
-{%- assign path = slug | prepend: dir | append: '.jpg' | relative_url -%}
+{%- assign path = edge | prepend: dir | append: '.jpg' | relative_url -%}
 {%- assign file = site.static_files | where: "path", path | first -%}
 {%- if file -%}
 <meta property="og:image" content="{{ file.path | url_decode | relative_url }}" />
