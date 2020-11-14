@@ -466,7 +466,7 @@ function buttons () {
   return {
     btnUsersAdd: {
       text: 'Highlight Users',
-      icon: 'fa-users',
+      icon: 're-map',
       event: function () {
         alert('Do some stuff to e.g. search all users which has logged in the last week')
       },
