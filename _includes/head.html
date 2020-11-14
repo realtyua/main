@@ -13,30 +13,44 @@
   {%- elsif page.url == '/district/town/' -%}
   {%- endif -%}
 {%- endcapture -%}
-<meta charset="utf-8">
-<meta name="robots" content="index, follow">
-<meta name="language" content="Українська">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>
+<meta charset="utf-8" />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="Українська" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+{%- capture title -%}
   {%- if page.title -%}
     {{ page.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.title | smartify }}
   {%- else -%}
     {{ site.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.name | smartify }}
   {%- endif -%}
-</title>
-<link rel="canonical" href="{{ page.url | absolute_url }}">
-<meta name="keywords" content="{{ page.keywords | default: site.keywords | smartify }}">
-<meta name="description" content="{{ page.description | default: site.description | smartify }}">
-<meta name="country" content="{{ site.country }}">
-<meta name="region" content="{{ site.region }}">
+{%- endcapture -%}
+<title>{{ title }}</title>
+<link rel="canonical" href="{{ page.url | absolute_url }}" />
+<meta name="keywords" content="{{ page.keywords | default: site.keywords | smartify }}" />
+<meta name="description" content="{{ page.description | default: site.description | smartify }}" />
+<meta name="country" content="{{ site.country }}" />
+<meta name="region" content="{{ site.region }}" />
 {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
-<meta name="locality" content="{{ site.data.lang-uk.city }} {{ location }}">
+<meta name="locality" content="{{ site.data.lang-uk.city }} {{ location }}" />
 {%- elsif back.size >= 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
-<meta name="locality" content="{{ location }} {{ site.data.lang-uk.district }}">
+<meta name="locality" content="{{ location }} {{ site.data.lang-uk.district }}" />
 {%- elsif page.url == '/district/town/' -%}
 {%- endif -%}
-<meta name="author" content="{{ site.developer.name }}">
-<meta name="format-detection" content="telephone=no">
+
+<meta property="og:url" content="{{ page.url | absolute_url }}" />
+<meta property="og:title" content="{{ title }}" />
+<meta property="og:description" content="{{ page.description | default: site.description | smartify }}" />
+{%- assign dir = '/assets/images/locations/' -%}
+{%- assign path = slug | prepend: dir | append: '.jpg' | relative_url -%}
+{%- assign file = site.static_files | where: "path", path | first -%}
+{%- if file -%}
+<meta property="og:image" content="{{ file.path | url_decode | relative_url }}" />
+{%- else -%}
+<meta property="og:image" content="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" />
+{%- endif -%}
+
+<meta name="author" content="{{ site.developer.name }}" />
+<meta name="format-detection" content="telephone=no" />
 <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | relative_url }}">
 <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
 <link rel="preload" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
