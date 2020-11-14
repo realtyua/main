@@ -35,7 +35,11 @@
 <title>{{ title }}</title>
 <link rel="shortlink" href="{{ site.url }}" />
 <link rel="canonical" href="{{ page.url | absolute_url }}" />
+{%- if file -%}
 <link rel="image_src" href="{{ file.path | url_decode | relative_url }}" />
+{%- else -%}
+<link rel="image_src" href="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" />
+{%- endif -%}
 <meta name="keywords" content="{{ page.keywords | default: site.keywords | smartify }}" />
 <meta name="description" content="{{ page.description | default: site.description | smartify }}" />
 <meta name="country" content="{{ site.country }}" />
