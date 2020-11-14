@@ -50,14 +50,15 @@
   padding: .25rem 0.75rem;
 }
 
-.bootstrap-table .btn {
+.fixed-table-toolbar .btn {
   border-radius: unset;
+  padding: 5px 6px 4px 6px;
 }
 
 .fa {
   display: inline-block;
-  width: 22px;
-  height: 18px;
+  width: 24px;
+  height: 21px;
 }
 
 .re-map {
