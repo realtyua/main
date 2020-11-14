@@ -51,7 +51,7 @@ layout: compress
     {% include modals/net-realestate-modal.html %}
 {%- assign slash = page.dir | split: '/' -%}
 {%- if page.url contains 'map.html' -%}
-{%- elsif slash,size >= 3 -%}
+{%- elsif slash.size >= 3 -%}
     {% include modals/re-map-modal.html %}
 {%- endif -%}
   </body>
