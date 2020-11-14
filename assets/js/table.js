@@ -471,7 +471,6 @@ function buttons () {
         alert('...')
       },
       attributes: {
-        onClick: 'parent.open("{{ page.url }}")',
         title: 'Нерухомість на мапі'
       }
     }
