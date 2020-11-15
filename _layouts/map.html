@@ -4,11 +4,24 @@ layout: compress
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+
+{%- capture title -%}
+  {%- if page.title -%}
+    {{ page.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.title | smartify }}
+  {%- else -%}
+    {{ site.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.name | smartify }}
+  {%- endif -%}
+{%- endcapture -%}
+
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
     <meta charset="utf-8" />
-    <title>Home</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Українська" />
+    <title>{{ title }}</title>
+    <link rel="shortlink" href="{{ site.url }}" />
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="preload" href="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
     <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
