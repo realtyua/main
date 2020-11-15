@@ -460,20 +460,3 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
-
-// function buttons () {
-//   return {
-//     openMap: {
-//       text: 'Real Estate Map',
-//       icon: 're-map',
-//       event: {
-//         'click': () => {
-//           window.open('https://www.realestate.if.ua/', '_blank');
-//         }
-//       },
-//       attributes: {
-//         title: 'Нерухомість на мапі'
-//       }
-//     }
-//   }
-// }

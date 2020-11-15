@@ -11,7 +11,7 @@
   data-detail-view-by-click="true"
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
-  data-buttons="buttons"
+  {%- if page.url contains '/all' -%}data-buttons="buttons"{%- endif -%}
   data-buttons-class="primary"
   data-buttons-align="left"
   data-url="{{ json | absolute_url }}">
