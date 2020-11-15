@@ -471,7 +471,7 @@ function buttons () {
         'click': () => {
           window.open('https://www.realestate.if.ua/', '_blank');
         }
-      }
+      },
       // event: function () {
       //   location.href = 'https://www.realestate.if.ua/';
       // },
