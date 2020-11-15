@@ -53,7 +53,6 @@ $(function () {
     $($element).siblings().removeClass('active');
     $($element).addClass('active');
   });
-  //dummy ();
 });
 
 var month = ["{{ site.data.lang-uk.m_01 }}","{{ site.data.lang-uk.m_02 }}","{{ site.data.lang-uk.m_03 }}","{{ site.data.lang-uk.m_04 }}","{{ site.data.lang-uk.m_05 }}","{{ site.data.lang-uk.m_06 }}","{{ site.data.lang-uk.m_07 }}","{{ site.data.lang-uk.m_08 }}","{{ site.data.lang-uk.m_09 }}","{{ site.data.lang-uk.m_10 }}","{{ site.data.lang-uk.m_11 }}","{{ site.data.lang-uk.m_12 }}"];
@@ -462,22 +461,19 @@ function priceSorter(a, b) {
   return aa - bb
 }
 
-function buttons () {
-  return {
-    openMap: {
-      text: 'Real Estate Map',
-      icon: 're-map',
-      event: {
-        'click': () => {
-          window.open('https://www.realestate.if.ua/', '_blank');
-        }
-      },
-      // event: function () {
-      //   location.href = 'https://www.realestate.if.ua/';
-      // },
-      attributes: {
-        title: 'Нерухомість на мапі'
-      }
-    }
-  }
-}
+// function buttons () {
+//   return {
+//     openMap: {
+//       text: 'Real Estate Map',
+//       icon: 're-map',
+//       event: {
+//         'click': () => {
+//           window.open('https://www.realestate.if.ua/', '_blank');
+//         }
+//       },
+//       attributes: {
+//         title: 'Нерухомість на мапі'
+//       }
+//     }
+//   }
+// }

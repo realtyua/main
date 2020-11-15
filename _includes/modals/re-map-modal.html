@@ -38,4 +38,32 @@
       map.off();
       map.remove();
   });
+
+{%- capture url -%}
+  {%- if page.url contains '/all' -%}
+    {{ page.url | replace: '/all', '/map' }}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if page.url contains '/all' -%}
+  $(function () {
+    function buttons () {
+      return {
+        openMap: {
+          text: 'Map',
+          icon: 're-map',
+          event: {
+            'click': () => {
+              window.open('{{ url }}', '_blank');
+            }
+          },
+          attributes: {
+            title: 'Нерухомість на мапі'
+          }
+        }
+      }
+    }
+  });
+{%- endif -%}
+
 </script>
