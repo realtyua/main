@@ -465,10 +465,10 @@ function priceSorter(a, b) {
 function buttons () {
   return {
     openMap: {
-      text: 'Highlight Users',
+      text: 'Real Estate Map',
       icon: 're-map',
       event: function () {
-        alert('...')
+        location.href = 'https://www.realestate.if.ua/';
       },
       attributes: {
         title: 'Нерухомість на мапі'
