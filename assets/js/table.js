@@ -467,9 +467,14 @@ function buttons () {
     openMap: {
       text: 'Real Estate Map',
       icon: 're-map',
-      event: function () {
-        location.href = 'https://www.realestate.if.ua/';
-      },
+      event: {
+        'click': () => {
+          window.open('https://www.realestate.if.ua/', '_blank');
+        }
+      }
+      // event: function () {
+      //   location.href = 'https://www.realestate.if.ua/';
+      // },
       attributes: {
         title: 'Нерухомість на мапі'
       }
