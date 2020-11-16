@@ -3,28 +3,7 @@
 {%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
 {%- assign slug = page.url | split: "/" | last -%}
 {%- assign json = piece | append: slug | append: '.json' -%}
-
-{% capture fJson %}{% file_exists {{ json }} %}{% endcapture %}
-
-{% comment %}
-
-{% iffileexists json %}
-  {%- assign fJson = true -%}
-{% else %}
-  {%- assign fJson = false -%}
-{% endiffileexists %}
-
-  {%- if json contains slug and json contains '.json' -%}
-  {%- assign fJson = true -%}
-  {%- endif -%}
-
-  {%- assign fJson = false -%}
-  {%- for fj in site.static_files -%}
-    {%- if fj.path == json -%}
-      {%- assign fJson = true -%}
-    {%- endif -%}
-  {%- endfor -%}
-{% endcomment %}
-
+{%- assign jsonFile = json | remove_first: '/' -%}
+{% capture fJson %}{% file_exists {{ jsonFile }} %}{% endcapture %}
 {%- assign isJson = site.data[slug] -%}
 {%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slug' -%}
