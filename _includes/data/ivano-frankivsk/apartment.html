@@ -1,9 +1,8 @@
 {%- include data/owner.html -%}
-{%- assign owners = owners | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
-{%- assign vambud = site.data.vambud | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
-{%- assign franko = site.data.franko | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
-{%- assign shevchenko = site.data.shevchenko | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
-{%- assign mykhalchuk = site.data.mykhalchuk | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
-{%- assign mosiychuk = site.data.mosiychuk | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
-{%- include data/ivano-frankivsk/records.html -%}
-{%- assign offers = records | sort: "date" | reverse -%}
+{%- assign owners = owners -%}
+{%- assign vambud = site.data.vambud -%}
+{%- assign franko = site.data.franko -%}
+{%- assign shevchenko = site.data.shevchenko -%}
+{%- assign mosiychuk = site.data.mosiychuk -%}
+{%- include data/ivano-frankivsk/records-apartment.html -%}
+{%- assign offers = records | sort: "date" | reverse  | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
