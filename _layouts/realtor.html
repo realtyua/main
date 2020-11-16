@@ -18,6 +18,7 @@ layout: default
       <div class="col-md-8">
         {%- assign isContent = content | strip_newlines -%}
         {%- if isContent == '' -%}
+          # {{ json }} #
           <p>{{ page.title }} це...</p>
         {%- else -%}
           {{ content }}
@@ -35,6 +36,8 @@ layout: default
         <ul class="navbar-nav nav nav-tabs border-0" id="{{ slug }}-nav">
           {%- if fJson == true and isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
+          {%- else -%}
+            <li>&nbsp;<li>
           {%- endif -%}
           {%- if stabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=stabs -%}
