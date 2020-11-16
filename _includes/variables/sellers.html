@@ -4,13 +4,16 @@
 {%- assign slug = page.url | split: "/" | last -%}
 {%- assign json = piece | append: slug | append: '.json' -%}
 
+{% capture fJson %}{% file_exists {{ json }} %}{% endcapture %}
+
+{% comment %}
+
 {% iffileexists json %}
   {%- assign fJson = true -%}
 {% else %}
   {%- assign fJson = false -%}
 {% endiffileexists %}
 
-{% comment %}
   {%- if json contains slug and json contains '.json' -%}
   {%- assign fJson = true -%}
   {%- endif -%}
