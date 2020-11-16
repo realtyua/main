@@ -44,7 +44,7 @@ layout: default
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="{{ slug }}-content">
-      {%- if json and isJson.size > 0 -%}
+      {%- if fJson == true and isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
       {%- if stabs.size > 0 -%}
