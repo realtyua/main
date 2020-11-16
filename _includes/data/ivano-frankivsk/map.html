@@ -2,6 +2,8 @@
 {%- assign vambud = site.data.vambud | where_exp: 'i', 'i.location contains location' -%}
 {%- assign franko = site.data.franko | where_exp: 'i', 'i.location contains location' -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: 'i', 'i.location contains location' -%}
+{%- assign mosiychuk = site.data.mosiychuk | where_exp: 'i', 'i.location contains location' -%}
+{%- assign mykhalchuk = site.data.mykhalchuk | where_exp: 'i', 'i.location contains location' -%}
 {%- assign owners = owners | where_exp: 'i', 'i.location contains location' -%}
 {%- include data/ivano-frankivsk/records.html -%}
 {%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.coordinates and i.coordinates != ''" -%}
