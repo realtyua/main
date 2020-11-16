@@ -11,9 +11,9 @@ layout: default
         {%- assign logo = '/assets/images/logo/' | append: slug | append: '.png' -%}
         {%- include static-file.html file=logo -%}
         {%- if file == true -%}
-          <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ page.title }}">
+          <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ page.title | replace: '&nbsp;', ' ' }}">
         {%- else -%}
-          <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="Логотип {{ page.title }}">
+          <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="Логотип {{ page.title | replace: '&nbsp;', ' ' }}">
         {%- endif -%}
       </div>
       <div class="col-md-8">

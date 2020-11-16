@@ -1,4 +1,4 @@
----
+| replace: '&nbsp;', ' '---
 layout: default
 ---
 {%- include variables/sellers.html -%}
@@ -10,9 +10,9 @@ layout: default
         {%- assign logo = '/assets/images/logo/' | append: slug | append: '.png' -%}
         {%- include static-file.html file=logo -%}
         {%- if file == true -%}
-          <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ page.title }}">
+          <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ page.title | replace: '&nbsp;', ' ' }}">
         {%- else -%}
-          <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="Логотип {{ page.title }}">
+          <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="Логотип {{ page.title | replace: '&nbsp;', ' ' }}">
         {%- endif -%}
       </div>
       <div class="col-md-8">
@@ -33,7 +33,7 @@ layout: default
       <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slug | capitalize }}" aria-controls="navbar{{ slug | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slug | capitalize }}">
         <ul class="navbar-nav nav nav-tabs border-0" id="{{ slug }}-nav">
-          {%- if isJson.size > 0 -%}
+          {%- if json and isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
           {%- if stabs.size > 0 -%}
@@ -44,7 +44,7 @@ layout: default
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="{{ slug }}-content">
-      {%- if isJson.size > 0 -%}
+      {%- if json and isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
       {%- if stabs.size > 0 -%}
