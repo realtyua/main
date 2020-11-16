@@ -4,9 +4,26 @@ layout: default
 {%- include variables/sellers.html -%}
 <div class="row">
   <div class="col-12">
-    <h1>{{ page.title }}</h1>
-    <p>Короткий вислів (Гасло), що, як правило або cтисле формулювання провідної ідеї, програми дій, правило, заповідь або вираз, який характеризує певні почуття або кодекс поведінки агента чи агенції.</p>
-    {{ content }}
+    <h1 class="mb-3">{{ page.title }}</h1>
+    <div class="row">
+      <div class="col-md-4">
+        {%- assign logo = '/assets/images/logo/' | append: slug | append: '.png' -%}
+        {%- include static-file.html file=logo -%}
+        {%- if file == true -%}
+          <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ page.title }}">
+        {%- else -%}
+          <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="Логотип {{ page.title }}">
+        {%- endif -%}
+      </div>
+      <div class="col-md-8">
+        {%- assign isContent = content | strip_newlines -%}
+        {%- if isContent == '' -%}
+          <p>{{ page.title }} це...</p>
+        {%- else -%}
+          {{ content }}
+        {%- endif -%}
+      </div>
+    </div>
     {%- if isJson.size > 0 or stabs.size > 0 -%}
     <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
       <a class="navbar-brand d-md-none" href="#">
