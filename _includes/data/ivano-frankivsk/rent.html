@@ -1,9 +1,9 @@
 {%- include data/owner.html -%}
-{%- assign owners = owners | where_exp: "i", "i.location contains location and i.rent == '1'" -%}
-{%- assign vambud = site.data.vambud | where_exp: "i", "i.location contains location and i.rent == '1'" -%}
-{%- assign mosiychuk = site.data.mosiychuk | where_exp: "i", "i.location contains location and i.rent == '1'" -%}
-{%- assign mykhalchuk = site.data.mykhalchuk | where_exp: "i", "i.location contains location and i.rent == '1'" -%}
-{%- assign franko = site.data.franko | where_exp: "i", "i.location contains location and i.rent == '1'" -%}
-{%- assign shevchenko = site.data.shevchenko | where_exp: "i", "i.location contains location and i.rent == '1'" -%}
-{%- include data/ivano-frankivsk/records-rent.html -%}
-{%- assign offers = records | sort: "date" | reverse -%}
+{%- assign owners = owners -%}
+{%- assign vambud = site.data.vambud -%}
+{%- assign mosiychuk = site.data.mosiychuk -%}
+{%- assign mykhalchuk = site.data.mykhalchuk -%}
+{%- assign franko = site.data.franko -%}
+{%- assign shevchenko = site.data.shevchenko -%}
+{%- include data/ivano-frankivsk/i-rent.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.rent == '1'" -%}

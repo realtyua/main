@@ -1,7 +1,7 @@
 {%- include data/owner.html -%}
-{%- assign owners = owners | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Магазин' or i.type == 'Нежитлове приміщення'" -%}
-{%- assign vambud = site.data.vambud | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Магазин' or i.type == 'Нежитлове приміщення'" -%}
-{%- assign franko = site.data.franko | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Магазин' or i.type == 'Нежитлове приміщення'" -%}
-{%- assign shevchenko = site.data.shevchenko | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Магазин' or i.type == 'Нежитлове приміщення'" -%}
-{%- include data/ivano-frankivsk/records-commercial.html -%}
-{%- assign offers = records | sort: "date" | reverse -%}
+{%- assign owners = owners -%}
+{%- assign vambud = site.data.vambud -%}
+{%- assign franko = site.data.franko -%}
+{%- assign shevchenko = site.data.shevchenko -%}
+{%- include data/ivano-frankivsk/i-commercial.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Магазин' or i.type == 'Нежитлове приміщення'" -%}

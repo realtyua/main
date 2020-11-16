@@ -5,5 +5,5 @@
 {%- assign mosiychuk = site.data.mosiychuk -%}
 {%- assign mykhalchuk = site.data.mykhalchuk -%}
 {%- assign owners = owners -%}
-{%- include data/ivano-frankivsk/records-map.html -%}
+{%- include data/ivano-frankivsk/i-map.html -%}
 {%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.coordinates and i.coordinates != ''" -%}
