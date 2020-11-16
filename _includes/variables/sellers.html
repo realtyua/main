@@ -4,6 +4,6 @@
 {%- assign slug = page.url | split: "/" | last -%}
 {%- assign json = piece | append: slug | append: '.json' -%}
 {%- assign jsonFile = json | remove_first: '/' -%}
-{%- capture fJson -%}{% file_exists {{ jsonFile }} %}{%- endcapture -%}
+{%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
 {%- assign isJson = site.data[slug] -%}
 {%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slug' -%}
