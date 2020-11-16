@@ -31,9 +31,9 @@
     <div class="card h-100">
       {%- include static-file.html file=logo -%}
       {%- if file == true -%}
-        <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ item.title }}">
+        <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ item.title | replace: '&nbsp;', ' ' }}">
       {%- else -%}
-        <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="Логотип {{ item.title }}">
+        <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="Логотип {{ item.title | replace: '&nbsp;', ' ' }}">
       {%- endif -%}
       <div class="card-body">
         <h5 class="card-title">
