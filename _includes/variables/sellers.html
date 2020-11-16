@@ -3,5 +3,11 @@
 {%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
 {%- assign slug = page.url | split: "/" | last -%}
 {%- assign json = piece | append: slug | append: '.json' -%}
+{%- assign fJson = false -%}
+{%- for fj in site.static_files -%}
+  {%- if fj.path == json -%}
+    {%- assign fJson = true -%}
+  {%- endif -%}
+{%- endfor -%}
 {%- assign isJson = site.data[slug] -%}
 {%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slug' -%}
