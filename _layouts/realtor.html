@@ -18,14 +18,13 @@ layout: default
       <div class="col-md-8">
         {%- assign isContent = content | strip_newlines -%}
         {%- if isContent == '' -%}
-          # {{ json }} #
           <p>{{ page.title }} це...</p>
         {%- else -%}
           {{ content }}
         {%- endif -%}
       </div>
     </div>
-    {%- if fJson == true and isJson.size > 0 or stabs.size > 0 -%}
+    {%- if isJson.size > 0 or stabs.size > 0 -%}
     <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
       <a class="navbar-brand d-md-none" href="#">
         <span class="small">Оберіть розділ</span>
@@ -34,7 +33,7 @@ layout: default
       <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slug | capitalize }}" aria-controls="navbar{{ slug | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slug | capitalize }}">
         <ul class="navbar-nav nav nav-tabs border-0" id="{{ slug }}-nav">
-          {%- if fJson == true and isJson.size > 0 -%}
+          {%- if isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- else -%}
             <li>&nbsp;<li>
@@ -47,8 +46,10 @@ layout: default
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="{{ slug }}-content">
-      {%- if fJson == true and isJson.size > 0 -%}
+      {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
+      {%- else -%}
+        <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">&nbsp;</div>
       {%- endif -%}
       {%- if stabs.size > 0 -%}
         {%- include elements/others-pane.html tabs=stabs -%}
