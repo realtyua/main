@@ -3,11 +3,12 @@
 {%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
 {%- assign slug = page.url | split: "/" | last -%}
 {%- assign json = piece | append: slug | append: '.json' -%}
-{%- iffileexists json -%}
+
+{% iffileexists json %}
   {%- assign fJson = true -%}
-{%- else -%}
+{% else %}
   {%- assign fJson = false -%}
-{%- endiffileexists -%}
+{% endiffileexists %}
 
 {% comment %}
   {%- if json contains slug and json contains '.json' -%}
