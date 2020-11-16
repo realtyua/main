@@ -4,5 +4,5 @@
 {%- assign franko = site.data.franko | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Будинок' or i.type == 'Частина будинку'" -%}
 {%- assign mykhalchuk = site.data.mykhalchuk | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Будинок' or i.type == 'Частина будинку'" -%}
 {%- assign shevchenko = site.data.shevchenko | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Будинок' or i.type == 'Частина будинку'" -%}
-{%- include data/ivano-frankivsk/records.html -%}
+{%- include data/ivano-frankivsk/records-house.html -%}
 {%- assign offers = records | sort: "date" | reverse -%}
