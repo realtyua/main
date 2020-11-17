@@ -1,3 +1,6 @@
+{%- assign jsonFile = json | remove_first: '/' -%}
+{%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
+{%- if fJson == 'true' -%}
 <table
   id="property"
   data-locale="uk-UA"
@@ -22,3 +25,6 @@
     </tr>
   </thead>
 </table>
+{%- else -%}
+<p>&nbsp;...<p>
+{%- endif -%}
