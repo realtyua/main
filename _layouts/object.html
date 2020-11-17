@@ -43,11 +43,11 @@ layout: compress
                   <span class="small">{{ site.data.lang-uk.re_about_object }}</span>
                   <span class="ml-1 float-right align-middle text-primary">→</span>
                 </div>
-                <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarVambud" aria-controls="navbarVambud" aria-expanded="false" aria-label="Toggle button">
+                <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarObject" aria-controls="navbarObject" aria-expanded="false" aria-label="Toggle button">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarVambud">
-                  <ul class="navbar-nav nav nav-tabs border-0" id="vambud-nav">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarObject">
+                  <ul class="navbar-nav nav nav-tabs border-0" id="object-nav">
                     {%- if isJson.size > 0 or data.size > 0 -%}
                       {%- include elements/offer-tab.html -%}
                     {%- endif -%}
@@ -58,7 +58,7 @@ layout: compress
                 </div>
               </nav>
               <hr class="mt-2 mt-md-0">
-              <div class="tab-content" id="vambud-content">
+              <div class="tab-content" id="object-content">
                 {%- if isJson.size > 0 or data.size > 0 -%}
                   {%- include elements/offer-pane.html -%}
                 {%- endif -%}
