@@ -37,7 +37,7 @@ layout: compress
           </div>
           <div class="row mb-3">
             <div class="col-12">
-              {%- if isJson.size > 0 or otabs.size > 0 or data.size > 0 -%}
+              {%- if fJson == 'true' or otabs.size > 0 or data.size > 0 -%}
               <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
                 <div class="navbar-brand d-md-none">
                   <span class="small">{{ site.data.lang-uk.re_about_object }}</span>
@@ -48,7 +48,7 @@ layout: compress
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarObject">
                   <ul class="navbar-nav nav nav-tabs border-0" id="object-nav">
-                    {%- if isJson.size > 0 or data.size > 0 -%}
+                    {%- if fJson == 'true' and isJson.size > 0 or data.size > 0 -%}
                       {%- include elements/offer-tab.html -%}
                     {%- endif -%}
                     {%- if otabs.size > 0 -%}
@@ -59,7 +59,7 @@ layout: compress
               </nav>
               <hr class="mt-2 mt-md-0">
               <div class="tab-content" id="object-content">
-                {%- if isJson.size > 0 or data.size > 0 -%}
+                {%- if fJson == 'true' and isJson.size > 0 or data.size > 0 -%}
                   {%- include elements/offer-pane.html -%}
                 {%- endif -%}
                 {%- if otabs.size > 0 -%}

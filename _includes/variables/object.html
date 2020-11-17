@@ -12,6 +12,8 @@
 {%- assign gauge = slash | size | minus:4 -%}
 {%- assign piece = slash | slice: 0, gauge | join: "/" | append: '/data/'-%}
 {%- assign json = piece | append: slug | append: '.json' -%}
+{%- assign jsonFile = json | remove_first: '/' -%}
+{%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
 {%- assign isJson = site.data[slug] -%}
 
 {%- if slash.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
