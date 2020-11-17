@@ -3,7 +3,7 @@
 {%- if fJson == 'true' -%}
 <table
   id="property"
-  data-locale="uk-UA"
+  data-locale="{{ site.lang | replace: '_', '-' }}"
   data-toggle="table"
   data-search="true"
   data-show-print="true"
@@ -14,14 +14,13 @@
   data-detail-view-by-click="true"
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
-  {%- if page.url contains '/all' -%}data-buttons="buttons"{%- endif -%}
+  {% if page.url contains '/all' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
   data-buttons-class="primary"
-  data-buttons-align="left"
   data-url="{{ json | absolute_url }}">
   <thead class="thead-re">
     <tr>
-      <th data-field="type" data-title="Власність" data-formatter="propertyFormatter">Property</th>
-      <th data-field="price" data-title="Ціна" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Price</th>
+      <th data-field="type" data-title="{{ site.data.lang-uk.re_offer }}" data-formatter="propertyFormatter">Property</th>
+      <th data-field="price" data-title="{{ site.data.lang-uk.re_cost | capitalize }}" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Price</th>
     </tr>
   </thead>
 </table>

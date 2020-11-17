@@ -49,6 +49,7 @@ re_on_map: на мапі
 re_show_map: Показати мапу
 re_land: Земля
 re_cost: ціна
+re_offer: Власність
 re_price_sqmt: Вартість нерухомості за 1
 re_price_sqmtl: Вартість землі за 1
 re_price_sqmtr: Вартість оренди за 24 години

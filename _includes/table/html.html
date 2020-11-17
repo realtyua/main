@@ -7,7 +7,7 @@
 {%- assign isImage = files | strip_newlines -%}
 {%- if forloop.first -%}
   <table
-      data-locale="uk-UA"
+      data-locale="{{ site.lang | replace: '_', '-' }}"
       data-toggle="table"
       data-search="true"
       data-show-print="true"
@@ -16,19 +16,18 @@
       data-detail-view="true"
       data-detail-view-icon="false"
       data-detail-view-by-click="true"
-      {%- if page.url contains '/all' -%}data-buttons="buttons"{%- endif -%}
-      data-buttons-align="left"
+      {% if page.url contains '/all' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
       data-detail-formatter="htmlDetailFormatter">
     <thead class="thead-re">
       <tr>
         <th data-field="id" data-visible="false">id</th>
-        <th data-field="type" data-title="Власність" data-formatter="propertyFormatter">type</th>
+        <th data-field="type" data-title="{{ site.data.lang-uk.re_offer }}" data-formatter="propertyFormatter">Property</th>
         <th data-field="rent" data-visible="false">rent</th>
         <th data-field="page" data-visible="false">page</th>
         <th data-field="rooms" data-visible="false">rooms</th>
         <th data-field="surface" data-visible="false">surface</th>
         <th data-field="surface_land" data-visible="false">surface_land</th>
-        <th data-field="price" data-formatter="priceFormatter" data-title="Ціна" data-sortable="true" data-sorter="priceSorter">Price</th>
+        <th data-field="price" data-formatter="priceFormatter" data-title="{{ site.data.lang-uk.re_cost | capitalize }}" data-sortable="true" data-sorter="priceSorter">Price</th>
         <th data-field="price_sqmt" data-visible="false">price_sqmt</th>
         <th data-field="floor" data-visible="false">floor</th>
         <th data-field="floors" data-visible="false">floors</th>
