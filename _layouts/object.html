@@ -26,7 +26,7 @@ layout: compress
             <div class="col-md-5">
               {%- include image-slider.html folder=folder group='main' width='480' height='260' -%}
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 mt-3 mt-md-0">
               {%- assign isContent = content | strip_newlines -%}
               {%- if isContent == '' -%}
                 {%- include info-visitors.html -%}
