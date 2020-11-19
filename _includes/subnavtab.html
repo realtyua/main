@@ -8,16 +8,16 @@
   <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarTwoRealEstate" aria-controls="navbarTwoRealEstate" aria-expanded="false" aria-label="Toggle button">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarTwoRealEstate">
+  <div class="collapse navbar-collapse justify-content-between" id="navbarTwoRealEstate">
     <ul class="navbar-nav nav nav-tabs border-0" id="realestate-type">
       <li class="nav-item" role="presentation">
         <a class="nav-link border-0 active" href="#newly" id="newly-tab" data-toggle="tab" role="tab" aria-controls="newly" aria-selected="true">
           <span>{{ site.data.lang-uk.newly_realestate }}</span>
         </a>
       </li>
-      {%- for tt in lists -%}
-        {%- assign slug = tt.url | split: "/" | last -%}
-        {%- assign current = tt.url | remove: slug | remove: "//" | append: "/" -%}
+      {%- for tab in lists -%}
+        {%- assign slug = tab.url | split: "/" | last -%}
+        {%- assign current = tab.url | remove: slug | remove: "//" | append: "/" -%}
         {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
           {%- unless slug == 'realtor' or slug == 'developer' -%}
             <li class="nav-item" role="presentation">
@@ -26,7 +26,7 @@
                   {%- if slug == 'commercial' -%}
                     {{ site.data.lang-uk.title_tab_commercial }}
                   {%- else -%}
-                    {%- if tt.navtitle -%}{{ tt.navtitle }}{%- else -%}{{ tt.title }}{%- endif -%}
+                    {%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}
                   {%- endif -%}
                 </span>
               </a>
@@ -37,9 +37,9 @@
       {%- endfor -%}
     </ul>
     <ul class="navbar-nav nav nav-tabs border-0" id="realestate-seller">
-      {%- for ts in lists -%}
-        {%- assign slug = ts.url | split: "/" | last -%}
-        {%- assign current = ts.url | remove: slug | remove: "//" | append: "/" -%}
+      {%- for tab in lists -%}
+        {%- assign slug = tab.url | split: "/" | last -%}
+        {%- assign current = tab.url | remove: slug | remove: "//" | append: "/" -%}
         {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
           {%- if slug == 'realtor' or slug == 'developer' -%}
             <li class="nav-item" role="presentation">
@@ -48,7 +48,7 @@
                   {%- if slug == 'commercial' -%}
                     {{ site.data.lang-uk.title_tab_commercial }}
                   {%- else -%}
-                    {%- if ts.navtitle -%}{{ ts.navtitle }}{%- else -%}{{ ts.title }}{%- endif -%}
+                    {%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}
                   {%- endif -%}
                 </span>
               </a>
