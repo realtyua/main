@@ -62,11 +62,11 @@ layout: compress
               showPrevious: false,
               showNext: false,
               callback: function(data, pagination) {
-                  // template method of yourself
                   var html = template(data);
                   $('#data-container').html(html);
               }
           })
+          {% comment %}
           function template(data) {
               var html = '<ul>';
               $.each(data, function(index, item){
@@ -75,6 +75,7 @@ layout: compress
               html += '</ul>';
               return html;
           }
+          {% endcomment %}
         });
       </script>
     {%- endif -%}
