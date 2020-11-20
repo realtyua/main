@@ -54,12 +54,15 @@ layout: compress
       <script>
         $('#pagination-container').pagination({
             dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
+            pageSize: 2,
+            showPrevious: false,
+            showNext: false,
             callback: function(data, pagination) {
                 // template method of yourself
                 var html = template(data);
                 $('#data-container').html(html);
             }
-        });
+        })
         function template(data) {
             var html = '<ul>';
             $.each(data, function(index, item){
@@ -67,7 +70,7 @@ layout: compress
             });
             html += '</ul>';
             return html;
-        };
+        }
       </script>
     {%- endif -%}
 
