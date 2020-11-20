@@ -41,9 +41,6 @@ layout: compress
             {%- include info-visitors.html -%}
           {%- else -%}
             {{ content }}
-            <hr>
-            <div id="data-container"></div>
-            <div id="pagination-container"></div>
           {%- endif -%}
         </div>
       </main>
@@ -51,12 +48,14 @@ layout: compress
     </div>
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
-
+{% comment %}
+<hr>
+<div id="data-container"></div>
+<div id="pagination-container"></div>
     {%- if page.url contains 'realtor' or page.url contains 'developer' -%}
       <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       <script>
         $(document).ready(function(){
-          {% comment %}
           $('#pagination-container').pagination({
               dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
               pageSize: 2,
@@ -75,11 +74,10 @@ layout: compress
               html += '</ul>';
               return html;
           }
-          {% endcomment %}
         });
       </script>
     {%- endif -%}
-
+{% endcomment %}
     {% include modals/net-realestate-modal.html %}
 {%- assign slash = page.dir | split: '/' -%}
 {%- if page.url contains 'map.html' -%}
