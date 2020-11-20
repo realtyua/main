@@ -52,25 +52,27 @@ layout: compress
     {%- if page.url contains 'realtor' or page.url contains 'developer' -%}
       <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       <script>
-        $('#pagination-container').pagination({
-            dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
-            pageSize: 2,
-            showPrevious: false,
-            showNext: false,
-            callback: function(data, pagination) {
-                // template method of yourself
-                var html = template(data);
-                $('#data-container').html(html);
-            }
-        })
-        function template(data) {
-            var html = '<ul>';
-            $.each(data, function(index, item){
-                html += '<li>'+ item +'</li>';
-            });
-            html += '</ul>';
-            return html;
-        }
+        $(document).ready(function(){
+          $('#pagination-container').pagination({
+              dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
+              pageSize: 2,
+              showPrevious: false,
+              showNext: false,
+              callback: function(data, pagination) {
+                  // template method of yourself
+                  var html = template(data);
+                  $('#data-container').html(html);
+              }
+          })
+          function template(data) {
+              var html = '<ul>';
+              $.each(data, function(index, item){
+                  html += '<li>'+ item +'</li>';
+              });
+              html += '</ul>';
+              return html;
+          }
+        });
       </script>
     {%- endif -%}
 
