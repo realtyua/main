@@ -1,7 +1,8 @@
 domain: realestate.if.ua
 home: Головна
-ua: Нерухо́мість в Україні
+ua: Нерухомість в Україні
 ukr: Українська нерухомість
+realestate: Нерухомість
 
 deck_region_in:  Івано-Франківської області
 deck_region: Івано-Франківська
@@ -106,6 +107,7 @@ newly_realestate: Нещодавно
 vsya: Вся
 nerukhomisti: нерухо́місті
 to_section: До розділу
+sections: Розділи
 others: Інші
 others_offers: пропозиції нерухомості
 others_section: пропозиції у розділі

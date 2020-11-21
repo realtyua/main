@@ -9,17 +9,17 @@
     {%- assign ss = ss | push: i -%}
   {%- endif -%}
 {%- endfor -%}
+{%- assign mapPage = include.url | append: 'map.html' | remove_first: '/' -%}
+{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
 {%- if ss.size > 0 -%}
 <div class="menu pt-1">
   <nav class="navbar p-0">
-    <a class="marker mr-2" href="{{ url }}map" target="_blank" title="Нерухомість на мапі міста {{ site.data.lang-uk[region] }}">
+    {%- if isMap == 'true' -%}
+    <a class="marker mr-2" href="{{ url }}map" target="_blank" title="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_on_map }} - {{ site.data.lang-uk[region] }}">
       {%- include icons/marker.svg width="12" height="18" -%}
     </a>
-    {% comment %}
-    <span class="small">Розділи</span>
-    <span class="mx-1 float-right align-middle text-primary">→</span>
-    {% endcomment %}
-    <button class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
+    {%- endif -%}
+    <button title="{{ site.data.lang-uk.sections }}" class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="section px-2 collapse navbar-collapse" id="{{ region }}-realestate-section">
