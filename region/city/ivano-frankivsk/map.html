@@ -121,10 +121,11 @@ description:
 
   map.attributionControl.setPrefix('');
 
-  var left  = '<h1>Slide Left Menu</h1>';
+  var header  = '<h1>Slide Left Menu</h1>';
   var contents = '<hr>';
+  var options = {width: '28%'};
 
-  L.control.slideMenu(left + contents).addTo(map);
+  L.control.slideMenu(header + contents, options).addTo(map);
 
 </script>
 
