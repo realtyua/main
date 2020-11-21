@@ -64,43 +64,43 @@ description:
     {%- for offer in offers -%}
       L.marker([{{ offer.coordinates }}],{title: '
 
-{%- if offer.rent and offer.rent == '1' -%}
-  {{ site.data.lang-uk.re_for_rent }} {{ offer.type | downcase }}
-{%- else -%}
-  {{ site.data.lang-uk.re_for_sale }} {{ offer.type | downcase }}
-{%- endif -%}
+      {%- if offer.rent and offer.rent == '1' -%}
+        {{ site.data.lang-uk.re_for_rent }} {{ offer.type | downcase }}
+      {%- else -%}
+        {{ site.data.lang-uk.re_for_sale }} {{ offer.type | downcase }}
+      {%- endif -%}
 
       '}).bindPopup('
 
-{%- if offer.rent and offer.rent == '1' -%}
-  {{ site.data.lang-uk.re_for_rent }} <b>{{ offer.type | downcase }}</b>
-{%- else -%}
-  {{ site.data.lang-uk.re_for_sale }} <b>{{ offer.type | downcase }}</b>
-{%- endif -%}
+      {%- if offer.rent and offer.rent == '1' -%}
+        {{ site.data.lang-uk.re_for_rent }} <b>{{ offer.type | downcase }}</b>
+      {%- else -%}
+        {{ site.data.lang-uk.re_for_sale }} <b>{{ offer.type | downcase }}</b>
+      {%- endif -%}
 
-<br/>
+      <br/>
 
-{%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}
-  {%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}
-    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
-  {%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}
-    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
-  {%- else -%}
-    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}
-  {%- endif -%}
-{%- else -%}
-  {%- if offer.price contains '$' and offer.price != '' -%}
-    {{ site.data.lang-uk.re_cost | capitalize  }} {{ offer.price | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
-  {%- elsif offer.price contains '€' and offer.price != '' -%}
-    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
-  {%- else -%}
-    {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price }} {{ site.data.lang-uk.re_uah }}
-  {%- endif -%}
-{%- endif -%}
+      {%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}
+        {%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}
+          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
+        {%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}
+          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
+        {%- else -%}
+          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}
+        {%- endif -%}
+      {%- else -%}
+        {%- if offer.price contains '$' and offer.price != '' -%}
+          {{ site.data.lang-uk.re_cost | capitalize  }} {{ offer.price | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
+        {%- elsif offer.price contains '€' and offer.price != '' -%}
+          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
+        {%- else -%}
+          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price }} {{ site.data.lang-uk.re_uah }}
+        {%- endif -%}
+      {%- endif -%}
 
-<br/>
+      <br/>
 
-{{ site.data.lang-uk.re_tel | capitalize }}: {%- include footer/phone.html legal=offer.phone type='text' -%}
+      {{ site.data.lang-uk.re_tel | capitalize }}: {%- include footer/phone.html legal=offer.phone type='text' -%}
 
       '){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
@@ -120,6 +120,11 @@ description:
   }).addTo(map);
 
   map.attributionControl.setPrefix('');
+
+  var left  = '<h1>Slide Left Menu</h1>';
+  var contents = '<hr>';
+
+  L.control.slideMenu(left + contents).addTo(map);
 
 </script>
 

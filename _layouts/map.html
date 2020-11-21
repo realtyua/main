@@ -25,11 +25,13 @@ layout: compress
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="preload" href="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
     <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+    <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
     <style>
       body { padding: 0; margin: 0; }
       html, body, #map { height: 100%; width: 100vw; }
     </style>
     <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    <script src="{{ "/assets/js/L.Control.SlideMenu.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   </head>
   <body>
     {%- assign isContent = content | strip_newlines -%}
