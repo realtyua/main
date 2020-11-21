@@ -113,9 +113,12 @@ layout: compress
 
       {%- if offer.rooms and offer.rooms != '' -%}
         {{ site.data.lang-uk.re_rooms }} <b>{{ offer.rooms }}</b>
+      {%- endif -%},
+      {%- if offer.floor and offer.floor != '' -%}
+        {{ site.data.lang-uk.re_floor }} <b>{{ offer.floor }}</b>
       {%- endif -%}
 
-        -
+      <br/>
 
       {%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}
         {%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}
