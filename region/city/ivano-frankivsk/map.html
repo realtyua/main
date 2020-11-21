@@ -123,8 +123,8 @@ description:
 
   var left  = '<h1>Slide Left Menu</h1>';
   var contents = '<hr>';
-
-  L.control.slideMenu(left + contents, {width: '28%'}).addTo(map);
+  var slideMenu = L.control.slideMenu('', {width: '28%'}).addTo(map);
+  slideMenu.setContents(right + contents);
 
 </script>
 
