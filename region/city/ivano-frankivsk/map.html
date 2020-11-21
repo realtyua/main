@@ -80,6 +80,12 @@ description:
 
       <br/>
 
+      {%- if offer.rooms and offer.rooms != '' -%}
+        {{ site.data.lang-uk.re_rooms }} <b>{{ offer.rooms }}</b>
+      {%- endif -%}
+
+        -
+
       {%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}
         {%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}
           {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
@@ -121,7 +127,7 @@ description:
 
   map.attributionControl.setPrefix('');
 
-  var header  = '<h1>Нерухомість на мапі</h1>';
+  var header  = '<h1><a href="{{ site.url }}">Нерухомість</a> на мапі</h1>';
   var contents = '{%- include map/left-navbar.html -%}';
   var options = {width: '280px'};
 
