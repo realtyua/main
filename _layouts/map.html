@@ -26,16 +26,12 @@ layout: compress
     <link rel="preload" href="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
     <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
     <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-    <style>
-      body { padding: 0; margin: 0; }
-      html, body, #map { height: 100%; width: 100vw; }
-    </style>
     <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     <script src="{{ "/assets/js/L.Control.SlideMenu.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   </head>
   <body>
 
-  {%- comment -%}  
+  {%- comment -%}
     {%- assign isContent = content | strip_newlines -%}
     {%- if isContent == '' -%}
       {%- include info-visitors.html -%}
@@ -94,7 +90,7 @@ layout: compress
       }
   });
 
-  var map = L.map("map").setView([48.92276, 24.71038], 10);
+  var map = L.map("map").setView([{{ page.coordinates }}], 10);
   var markers = [
     {%- for offer in offers -%}
       L.marker([{{ offer.coordinates }}],{title: '
