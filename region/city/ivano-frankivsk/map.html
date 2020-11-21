@@ -122,7 +122,7 @@ description:
   map.attributionControl.setPrefix('');
 
   var header  = '<h1>Нерухомість на мапі</h1>';
-  var contents = '<hr>';
+  var contents = '{%- include header/navbar.html -%}';
   var options = {width: '280px'};
 
   L.control.slideMenu(header + contents, options).addTo(map);
