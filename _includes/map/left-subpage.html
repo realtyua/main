@@ -3,10 +3,10 @@
 {%- for second in seconds -%}
   {%- assign slug = second.url | split: '/' | last -%}
   {%- assign current = second.url | remove: slug | remove: '//' | append: '/' -%}
-  {%- assign mapPage = second.url | append: 'map.html' | remove_first: '/' -%}
-  {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
+  {%- assign mapPage = second.url | append: 'map.html' -%}
+  {%- capture isMap -%}{%- file_exists {{ mapPage | remove_first: '/' }} -%}{%- endcapture -%}
   {%- if isMap == 'true' -%}
-    {%- if include.current == current and second.navhide != 1 and page.url != '{{ second.url }}map' -%}
+    {%- if include.current == current and second.navhide != 1 and page.url != mapPage -%}
       <li>
         {%- if page.url == second.url -%}
           <span>
