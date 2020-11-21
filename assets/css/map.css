@@ -43,5 +43,9 @@
 }
 
 .fa-bars:before {
-    content: "\2261";
+    content: "\2630";
+}
+
+.fa-chevron-left:before {
+    content: "\2039";
 }
