@@ -1,0 +1,9 @@
+{%- include data/owner.html -%}
+{%- assign owners = owners -%}
+{%- assign vambud = site.data.vambud -%}
+{%- assign franko = site.data.franko -%}
+{%- assign shevchenko = site.data.shevchenko -%}
+{%- assign mosiychuk = site.data.mosiychuk -%}
+{%- assign mykhalchuk = site.data.mykhalchuk -%}
+{%- include data/kolomyia/i-map.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.coordinates and i.coordinates != ''" -%}
