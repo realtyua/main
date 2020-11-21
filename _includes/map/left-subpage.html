@@ -1,0 +1,22 @@
+{%- assign seconds = site.html_pages | sort: 'path' -%}
+<nav>
+  <ul>
+  {%- for second in seconds -%}
+    {%- assign slug = second.url | split: '/' | last -%}
+    {%- assign current = second.url | remove: slug | remove: '//' | append: '/' -%}
+    {%- if include.current == current and second.navhide != 1 -%}
+    <li>
+      {%- if page.url == second.url -%}
+        <span>
+          {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+        </span>
+      {%- else -%}
+        <a href="{{ second.url }}">
+          {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
+        </a>
+      {%- endif -%}
+    </li>
+    {%- endif -%}
+  {%- endfor -%}
+  </ul>
+</nav>
