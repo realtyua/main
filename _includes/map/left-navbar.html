@@ -8,12 +8,8 @@
     {%- if one.url == '/region/' -%}
     {%- else -%}
     <details>
-      <summary>
-        {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
-      </summary>
-      {% if part >= 2 %}
-        {%- include map/left-subpage.html current=one.url title=one.title -%}
-      {%- endif -%}
+      <summary>{%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}</summary>
+      {% if part >= 2 %}{%- include map/left-subpage.html current=one.url title=one.title -%}{%- endif -%}
     </details>
     {%- endif -%}
     {%- if one.url -%}
@@ -25,12 +21,8 @@
         {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
         {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
         <details>
-          <summary>
-            {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
-          </summary>
-          {% if part >= 3 %}
-            {%- include map/left-subpage.html current=two.url title=two.title -%}
-          {%- endif -%}
+          <summary>{%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}</summary>
+          {% if part >= 3 %}{%- include map/left-subpage.html current=two.url title=two.title -%}{%- endif -%}
         </details>
         {%- endif -%}
       {%- endfor -%}

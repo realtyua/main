@@ -1,0 +1,11 @@
+<details>
+  <summary>{{ site.data.lang-uk.ua }}</summary>
+  <ul class="list-unstyled">
+    {%- assign regs = site.data.realestate | sort: 'navtitle' -%}
+    {%- for reg in regs -%}
+    {%- if reg.url != site.url -%}
+    <li><a href="{{ reg.url }}">{{ reg.navtitle }}</a></li>
+    {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</details>

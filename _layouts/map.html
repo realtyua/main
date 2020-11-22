@@ -112,9 +112,9 @@ layout: compress
       <br/>
 
       {%- if offer.surface and offer.surface != '' -%}
-        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface }}</b>,&nbsp;м<sup>2</sup>&nbsp;
+        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface }}</b>&nbsp;м<sup>2</sup>&nbsp;,
       {%- else -%}
-        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>,&nbsp;м<sup>2</sup>&nbsp;
+        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>&nbsp;м<sup>2</sup>&nbsp;,
       {%- endif -%}
 
       {%- if offer.rooms and offer.rooms != '' -%}
@@ -167,12 +167,14 @@ layout: compress
 
   map.attributionControl.setPrefix('');
 
-  var header  = '<h1><a href="{{ site.url }}">Нерухомість</a> на мапі</h1>';
-  var subheader  = '<h2>{{ site.region }}</h2>';
+  var header = '<h1><a href="{{ site.url }}">{{ site.data.lang-uk.realestate }}</a> {{ site.data.lang-uk.re_on_map }}</h1>';
+  var subheader = '<h2>- {{ site.region }}</h2>';
   var contents = '{%- include map/left-navbar.html -%}';
-  var options = {width: '280px'};
+  var ukraine = '<h2>- {{ site.data.lang-uk.other_regions }}</h2>';
+  var regions = '{%- include map/left-regions.html -%}';
+  var options = {width:'280px'};
 
-  L.control.slideMenu(header + subheader + contents, options).addTo(map);
+  L.control.slideMenu(header + subheader + contents + ukraine + regions, options).addTo(map);
 
 </script>
 
