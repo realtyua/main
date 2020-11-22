@@ -111,11 +111,17 @@ layout: compress
 
       <br/>
 
+      {%- if offer.surface and offer.surface != '' -%}
+        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface }}</b>,
+      {%- else -%}
+        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>,
+      {%- endif -%}
+
       {%- if offer.rooms and offer.rooms != '' -%}
-        {{ site.data.lang-uk.re_rooms }} <b>{{ offer.rooms }}</b>
-      {%- endif -%},
+        {{ site.data.lang-uk.re_rooms }} <b>{{ offer.rooms }}</b>,
+      {%- endif -%}
       {%- if offer.floor and offer.floor != '' -%}
-        {{ site.data.lang-uk.re_floor }} <b>{{ offer.floor }}</b>
+        {{ site.data.lang-uk.re_na }} <b>{{ offer.floor }}</b>{{ site.data.lang-uk.re_re_mu }} {{ site.data.lang-uk.re_floorci }}
       {%- endif -%}
 
       <br/>

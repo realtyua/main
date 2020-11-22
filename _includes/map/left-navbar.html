@@ -7,14 +7,18 @@
   {%- if '/' == current and one.navhide != 1 -%}
     {%- if one.url == '/region/' -%}
     {%- else -%}
-      <h3>
-        <a href="{{ one.url }}">
-          {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
-        </a>
-      </h3>
+    <details>
+      <summary>
+        <h3>
+          <a href="{{ one.url }}">
+            {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+          </a>
+        </h3>
+      </summary>
       {% if part >= 2 %}
         {%- include map/left-subpage.html current=one.url title=one.title -%}
       {%- endif -%}
+    </details>
     {%- endif -%}
     {%- if one.url -%}
       {%- assign twos = site.html_pages -%}
@@ -24,14 +28,18 @@
         {%- assign slug = two.url | split: '/' | last -%}
         {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
         {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
-          <h3>
-            <a href="{{ two.url }}">
-              {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
-            </a>
-          </h3>
+        <details>
+          <summary>
+            <h3>
+              <a href="{{ two.url }}">
+                {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+              </a>
+            </h3>
+          </summary>
           {% if part >= 3 %}
             {%- include map/left-subpage.html current=two.url title=two.title -%}
           {%- endif -%}
+        </details>
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
