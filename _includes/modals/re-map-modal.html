@@ -39,8 +39,7 @@
     map.remove();
   });
 
-{%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
-{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
+{%- include map/page-exists.html -%}
 
 {%- capture url -%}
   {%- if page.url contains '/all' -%}

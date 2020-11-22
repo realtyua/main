@@ -1,7 +1,6 @@
 {%- assign jsonFile = json | remove_first: '/' -%}
 {%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
-{%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
-{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
+{%- include map/page-exists.html -%}
 {%- if fJson == 'true' -%}
 <table
   id="property"
