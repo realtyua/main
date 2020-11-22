@@ -69,9 +69,7 @@ layout: compress
 
 
 <script>
-
   L.Map = L.Map.extend({ openPopup: function(popup) { this.closePopup(); this._popup = popup; return this.addLayer(popup).fire('popupopen', { popup: this._popup }); } });
-
   var map = L.map("map").setView([{{ page.coordinates }}], 10);
   var markers = [
     {%- for offer in offers -%}
@@ -133,31 +131,18 @@ layout: compress
       '){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
   ];
-
   var group = L.featureGroup(markers).addTo(map);
-
   setTimeout(function () {
     map.fitBounds(group.getBounds());
   }, {{ offers.size }});
-
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',
     tileSize: 512,
     zoomOffset: -1
   }).addTo(map);
-
   map.attributionControl.setPrefix('');
-
-  var header = '<h1><a href="{{ site.url }}">{{ site.data.lang-uk.realestate }}</a> {{ site.data.lang-uk.re_on_map }}</h1>';
-  var subheader = '<h2>- {{ site.region }}</h2>';
-  var contents = '{%- include map/left-navbar.html -%}';
-  var ukraine = '<h2>- {{ site.data.lang-uk.other_regions }}</h2>';
-  var regions = '{%- include map/left-regions.html -%}';
-  var options = {width:'280px'};
-
-  L.control.slideMenu(header + subheader + contents + ukraine + regions, options).addTo(map);
-
+  {%- include map/left-menu-map.html -%}
 </script>
 
       {%- else -%}
@@ -170,15 +155,14 @@ layout: compress
     tileSize: 512,
     zoomOffset: -1
   }).addTo(map);
+  map.attributionControl.setPrefix('');
   L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('{{ page.breadcrumb }}').openPopup();
+  {%- include map/left-menu-map.html -%}
 </script>
 
       {%- endif -%}
 
     {%- endif -%}
-
-
-
 
   </body>
 </html>

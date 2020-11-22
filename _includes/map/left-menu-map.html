@@ -1,0 +1,7 @@
+var header = '<h1><a href="{{ site.url }}">{{ site.data.lang-uk.realestate }}</a> {{ site.data.lang-uk.re_on_map }}</h1>';
+var subheader = '<h2>- {{ site.region }}</h2>';
+var contents = '{%- include map/left-navbar.html -%}';
+var ukraine = '<h2>- {{ site.data.lang-uk.other_regions }}</h2>';
+var regions = '{%- include map/left-regions.html -%}';
+var options = {width:'280px'};
+L.control.slideMenu(header + subheader + contents + ukraine + regions, options).addTo(map);
