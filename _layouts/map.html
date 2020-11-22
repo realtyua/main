@@ -112,13 +112,13 @@ layout: compress
       <br/>
 
       {%- if offer.surface and offer.surface != '' -%}
-        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface }}</b>,
+        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface }}</b>,&nbsp;м<sup>2</sup>&nbsp;
       {%- else -%}
-        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>,
+        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>,&nbsp;м<sup>2</sup>&nbsp;
       {%- endif -%}
 
       {%- if offer.rooms and offer.rooms != '' -%}
-        {{ site.data.lang-uk.re_rooms }} <b>{{ offer.rooms }}</b>,
+        {{ site.data.lang-uk.re_rooms }} <b>{{ offer.rooms }}</b>,&nbsp;
       {%- endif -%}
       {%- if offer.floor and offer.floor != '' -%}
         {{ site.data.lang-uk.re_na }} <b>{{ offer.floor }}</b>{{ site.data.lang-uk.re_re_mu }} {{ site.data.lang-uk.re_floorci }}
@@ -146,7 +146,7 @@ layout: compress
 
       <br/>
 
-      {{ site.data.lang-uk.re_tel | capitalize }}: {%- include footer/phone.html legal=offer.phone type='text' -%}
+      {{ site.data.lang-uk.re_tel | capitalize }}:&nbsp;{%- include footer/phone.html legal=offer.phone type='text' -%}
 
       '){%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}

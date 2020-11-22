@@ -8,7 +8,7 @@ body { padding: 0; margin: 0; } html, body, #map { height: 100%; width: 100vw; }
 .leaflet-menu-contents { padding-left: 10px; padding-right: 10px; }
 .leaflet-menu-contents h1 { font-size: 1.25rem; margin-bottom: 0; }
 .leaflet-menu-contents h2 { font-size: 1rem; margin-top: 0; margin-bottom: 8px; }
-.list-unstyled { margin: 0; padding-left: 0; list-style: none; }
+.list-unstyled { margin: 0; padding-left: 16px; }
 .fa { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; display: inline-block; font: 16px/1 sans-serif; font-style: normal; font-variant: normal; text-rendering: auto; line-height: 1; }
 .fa-bars:before { content: "\2630"; }
 .fa-chevron-left:before { content: "\2716"; }
