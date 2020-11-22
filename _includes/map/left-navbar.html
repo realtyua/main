@@ -9,11 +9,11 @@
     {%- else -%}
     <details>
       <summary>
-        <h3>
+
           <a href="{{ one.url }}">
             {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
           </a>
-        </h3>
+
       </summary>
       {% if part >= 2 %}
         {%- include map/left-subpage.html current=one.url title=one.title -%}
@@ -30,11 +30,11 @@
         {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
         <details>
           <summary>
-            <h3>
+
               <a href="{{ two.url }}">
                 {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
               </a>
-            </h3>
+
           </summary>
           {% if part >= 3 %}
             {%- include map/left-subpage.html current=two.url title=two.title -%}
