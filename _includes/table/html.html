@@ -9,17 +9,18 @@
 {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
 {%- if forloop.first -%}
   <table
-      data-locale="{{ site.lang | replace: '_', '-' }}"
-      data-toggle="table"
-      data-search="true"
-      data-show-print="true"
-      data-pagination="true"
-      data-buttons-class="primary"
-      data-detail-view="true"
-      data-detail-view-icon="false"
-      data-detail-view-by-click="true"
-      {% if page.url contains '/all' and isMap == 'true' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
-      data-detail-formatter="htmlDetailFormatter">
+    id="property"
+    data-locale="{{ site.lang | replace: '_', '-' }}"
+    data-toggle="table"
+    data-search="true"
+    data-show-print="true"
+    data-pagination="true"
+    data-buttons-class="primary"
+    data-detail-view="true"
+    data-detail-view-icon="false"
+    data-detail-view-by-click="true"
+    {% if page.url contains '/all' and isMap == 'true' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
+    data-detail-formatter="htmlDetailFormatter">
     <thead class="thead-re">
       <tr>
         <th data-field="id" data-visible="false">id</th>

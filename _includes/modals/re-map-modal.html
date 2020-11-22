@@ -3,8 +3,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content net-realestate">
       <div class="modal-header border-0">
-        <h5 class="modal-title pl-2 text-white">Нерухомість на мапі</h5>
-        <button type="button" class="close py-1 px-2" data-dismiss="modal" aria-label="Close" title="Закрити">
+        <h5 class="modal-title pl-2 text-white">{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_on_map }}</h5>
+        <button type="button" class="close py-1 px-2" data-dismiss="modal" aria-label="Close" title="{{ site.data.lang-uk.close }}">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -35,9 +35,12 @@
       }
   });
   modal.on('hidden.bs.modal', function (e) {
-      map.off();
-      map.remove();
+    map.off();
+    map.remove();
   });
+
+{%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
+{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
 
 {%- capture url -%}
   {%- if page.url contains '/all' -%}
@@ -45,23 +48,23 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- if page.url contains '/all' -%}
-    function buttons () {
-      return {
-        openMap: {
-          text: 'Map',
-          icon: 're-map',
-          event: {
-            'click': () => {
-              window.open('{{ url }}', '_blank');
-            }
-          },
-          attributes: {
-            title: 'Нерухомість на мапі'
+{%- if page.url contains '/all' and isMap == 'true' -%}
+  function buttons () {
+    return {
+      openMap: {
+        text: 'Map',
+        icon: 're-map',
+        event: {
+          'click': () => {
+            window.open('{{ url }}', '_blank');
           }
+        },
+        attributes: {
+          title: '{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_on_map }}'
         }
       }
     }
+  }
 {%- endif -%}
 
 </script>
