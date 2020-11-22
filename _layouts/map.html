@@ -168,10 +168,11 @@ layout: compress
   map.attributionControl.setPrefix('');
 
   var header  = '<h1><a href="{{ site.url }}">Нерухомість</a> на мапі</h1>';
+  var subheader  = '<h2>{{ site.region }}</h2>';
   var contents = '{%- include map/left-navbar.html -%}';
   var options = {width: '280px'};
 
-  L.control.slideMenu(header + contents, options).addTo(map);
+  L.control.slideMenu(header + subheader + contents, options).addTo(map);
 
 </script>
 

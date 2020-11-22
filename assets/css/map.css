@@ -10,7 +10,11 @@ body { padding: 0; margin: 0; } html, body, #map { height: 100%; width: 100vw; }
 .fa { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; display: inline-block; font: 16px/1 sans-serif; font-style: normal; font-variant: normal; text-rendering: auto; line-height: 1; }
 .fa-bars:before { content: "\2630"; }
 .fa-chevron-left:before { content: "\2716"; }
-
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 details {
     font-size: initial;
     border: 1px solid #aaa;
