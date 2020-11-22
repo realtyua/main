@@ -1,5 +1,7 @@
 {%- assign jsonFile = json | remove_first: '/' -%}
 {%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
+{%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
+{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
 {%- if fJson == 'true' -%}
 <table
   id="property"
@@ -13,7 +15,7 @@
   data-detail-view-by-click="true"
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
-  {% if page.url contains '/all' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
+  {% if page.url contains '/all' and isMap == 'true' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
   data-buttons-class="primary"
   data-url="{{ json | absolute_url }}">
   <thead class="thead-re">

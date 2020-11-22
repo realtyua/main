@@ -5,6 +5,8 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
+{%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
+{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
 {%- if forloop.first -%}
   <table
       data-locale="{{ site.lang | replace: '_', '-' }}"
@@ -16,7 +18,7 @@
       data-detail-view="true"
       data-detail-view-icon="false"
       data-detail-view-by-click="true"
-      {% if page.url contains '/all' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
+      {% if page.url contains '/all' and isMap == 'true' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
       data-detail-formatter="htmlDetailFormatter">
     <thead class="thead-re">
       <tr>

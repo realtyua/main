@@ -1,3 +1,5 @@
+{%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
+{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
 <table
   id="property"
   data-locale="{{ site.lang | replace: '_', '-' }}"
@@ -10,7 +12,7 @@
   data-detail-view-by-click="true"
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
-  {% if page.url contains '/all' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
+  {% if page.url contains '/all' and isMap == 'true' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
   data-buttons-class="primary">
   <thead class="thead-re">
     <tr>

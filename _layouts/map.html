@@ -36,7 +36,6 @@ layout: compress
     <div id="map"></div>
 
     {%- assign slug = page.url | split: "/" | last -%}
-
     {%- assign l = page.url | split: '/' -%}
 
     {%- if page.url contains 'all.html' -%}
@@ -64,9 +63,7 @@ layout: compress
 
     {%- if data -%}
       {%- include {{ data }} -%}
-
       {%- if offers.size > 0 -%}
-
 
 <script>
   L.Map = L.Map.extend({ openPopup: function(popup) { this.closePopup(); this._popup = popup; return this.addLayer(popup).fire('popupopen', { popup: this._popup }); } });
@@ -132,17 +129,8 @@ layout: compress
     {%- endfor -%}
   ];
   var group = L.featureGroup(markers).addTo(map);
-  setTimeout(function () {
-    map.fitBounds(group.getBounds());
-  }, {{ offers.size }});
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: '<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',
-    tileSize: 512,
-    zoomOffset: -1
-  }).addTo(map);
-  map.attributionControl.setPrefix('');
-  {%- include map/left-menu-map.html -%}
+  setTimeout(function () { map.fitBounds(group.getBounds()); }, {{ offers.size }});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}', tileSize: 512, zoomOffset: -1 }).addTo(map); map.attributionControl.setPrefix(''); {%- include map/left-menu-map.html -%}
 </script>
 
       {%- else -%}
