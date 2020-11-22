@@ -146,20 +146,7 @@ layout: compress
 </script>
 
       {%- else -%}
-
-<script>
-  var map = L.map('map').setView([{{ page.coordinates }}],10);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom: 18,
-    attribution: '<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',
-    tileSize: 512,
-    zoomOffset: -1
-  }).addTo(map);
-  map.attributionControl.setPrefix('');
-  L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('{{ page.breadcrumb }}').openPopup();
-  {%- include map/left-menu-map.html -%}
-</script>
-
+        <script>var map = L.map('map').setView([{{ page.coordinates }}],10); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{ maxZoom: 18, attribution: '<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}', tileSize: 512, zoomOffset: -1 }).addTo(map); map.attributionControl.setPrefix(''); L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ page.breadcrumb }}<b>').openPopup(); {%- include map/left-menu-map.html -%} </script>
       {%- endif -%}
 
     {%- endif -%}
