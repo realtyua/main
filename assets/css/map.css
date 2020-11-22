@@ -3,10 +3,10 @@ body { padding: 0; margin: 0; } html, body, #map { height: 100%; width: 100vw; }
 .leaflet-menu { position: absolute; background-color: rgba(255, 255, 255, 255); overflow: auto; cursor: default; z-index: 9999; }
 .leaflet-menu::-webkit-scrollbar { width: 7px; height: 7px; background: #f2f2f2; }
 .leaflet-menu::-webkit-scrollbar-thumb { border-radius: 2px; background: #777; }
-.leaflet-menu-close-button{ background-color: transparent; border: none; font-size: 14pt; color: #777; cursor: pointer; }
+.leaflet-menu-close-button{ margin-top: 4px; background-color: transparent; border: none; font-size: 14pt; color: #777; cursor: pointer; }
 .leaflet-menu-close-button:hover { color: #4285F4; }
 .leaflet-menu-contents { padding-left: 10px; padding-right: 10px; }
-.leaflet-menu-contents h1 { font-size: 1.25rem; margin-bottom: 0; }
+.leaflet-menu-contents h1 { font-size: 1.25rem; margin: 0; }
 .leaflet-menu-contents h2 { font-size: 1rem; margin-top: 0; margin-bottom: 8px; }
 .list-unstyled { margin: 0; padding-left: 16px; }
 .fa { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; display: inline-block; font: 16px/1 sans-serif; font-style: normal; font-variant: normal; text-rendering: auto; line-height: 1; }
