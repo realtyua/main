@@ -23,20 +23,13 @@
           {%- assign path = slug | prepend: dir | append: '.jpg' | relative_url -%}
           {%- assign file = site.static_files | where: "path", path | first -%}
           {%- if file -%}
-            <img src="{{ file.path | url_decode | relative_url }}" class="card-img-top" alt="Real Estate {{ slug | capitalize }}">
+            <img src="{{ file.path | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lung-uk.realestate }} {{ site.data.lung-uk[slug] }}">
           {%- else -%}
-            <img src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" class="card-img-top" alt="Real Estate {{ slug | capitalize }}">
+            <img src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lung-uk.realestate }} {{ site.data.lung-uk[slug] }}">
           {%- endif -%}
-        {% comment %}
-          {%- if file -%}
-            <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Real Estate {{ slug | capitalize }}">
-          {%- else -%}
-            <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}&w=538&h=220&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="Real Estate {{ slug | capitalize }}">
-          {%- endif -%}
-        {% endcomment %}
           <div class="card-body p-3">
             <h5 class="card-title">
-              <a href="{{ three.url }}" title="{{ three.title | replace: 'Нерухомість у', 'Квартири, будинки в' }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
+              <a href="{{ three.url }}" title="{{ three.title | replace: '{{ site.data.lung-uk.realestate }} {{ site.data.lung-uk.re_at }}', '{{ site.data.lung-uk.apartment_house }} {{ site.data.lung-uk.re_in }}' }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
             </h5>
             {%- include home/card.html region=slug url=three.url title=three.title breadcrumb=three.breadcrumb -%}
           </div>
