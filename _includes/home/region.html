@@ -29,7 +29,7 @@
           {%- endif -%}
           <div class="card-body p-3">
             <h5 class="card-title">
-              <a href="{{ three.url }}" title="{{ three.title | replace: '{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_at }}', '{{ site.data.lang-uk.apartment_house }} {{ site.data.lang-uk.re_in }}' }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
+              <a href="{{ three.url }}" title="{{ three.title | replace: '{{ site.data.lang-uk.realestate_at }}', '{{ site.data.lang-uk.apartment_house_in }}' }}">{%- if three.title -%}{{ three.title }}{%- else -%}{{ three.navtitle }}{%- endif -%}</a>
             </h5>
             {%- include home/card.html region=slug url=three.url title=three.title breadcrumb=three.breadcrumb -%}
           </div>
