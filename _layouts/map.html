@@ -4,7 +4,6 @@ layout: compress
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
-
 {%- capture title -%}
   {%- if page.title -%}
     {{ page.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.title | smartify }}
@@ -12,7 +11,6 @@ layout: compress
     {{ site.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.name | smartify }}
   {%- endif -%}
 {%- endcapture -%}
-
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
@@ -31,14 +29,10 @@ layout: compress
     <script src="{{ "/assets/js/L.Control.SlideMenu.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   </head>
   <body>
-
     {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
-
     <div id="map"></div>
-
     {%- assign slug = page.url | split: "/" | last -%}
     {%- assign l = page.url | split: '/' -%}
-
     {%- if page.url contains 'all.html' -%}
       {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
       {%- if l.size == 4 -%}
@@ -61,107 +55,30 @@ layout: compress
         {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
       {%- endif -%}
     {%- endif -%}
-
     {%- if data -%}
       {%- include {{ data }} -%}
       {%- if offers.size > 0 -%}
-
-<script>
-var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:11,zoom:10}).setView([{{ page.coordinates }}],10);
-var markers = [{%- for offer in offers -%}[{{ offer.coordinates | split: ',' | first }},{{ offer.coordinates | split: ',' | last }},'{%- if offer.rent and offer.rent == "1" -%}{{ site.data.lang-uk.re_for_rent }}{%- else -%}{{ site.data.lang-uk.re_for_sale }}{%- endif -%}','{{ offer.type | downcase }}',{%- if offer.surface and offer.surface != '' -%}{{ offer.surface }}{%- else -%}{{ offer.surface_land }}{%- endif -%},{{ offer.rooms | default: '0' }},{{ offer.floor }},{%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}{%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price_sqmt }}{%- endif -%}{%- else -%}{%- if offer.price contains '$' and offer.price != '' -%}{{ offer.price | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price contains '€' and offer.price != '' -%}{{ offer.price | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price }}{%- endif -%}{%- endif -%},'{%- include footer/phone.html legal=offer.phone type="text" -%}']{%- if forloop.last -%}{%- else -%},{%- endif -%}{%- endfor -%}];
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'<a href="https://www.realestate.if.ua" target="_blank">Мережа вебсайтів нерухомості</a> - Івано-Франківськ',tileSize:512,zoomOffset:-1,subdomains:['a','b','c']}).addTo(map);
-map.attributionControl.setPrefix('');
-{%- include map/left-menu-map.html -%}
-var markersClusters = L.markerClusterGroup();
-for (var i = 0; i < markers.length; i++) {
-  var re = markers[i];
-  var title = re[2] + ' ' + re[3];
-  var rooms = (re[5] == 0) ? '' : ', {{ site.data.lang-uk.re_rooms }} ' + re[5];
-  var description = ',<br/>{{ site.data.lang-uk.re_surface }} ' + re[4] + ' м<sup>2</sup>' + rooms + ',<br/>{{ site.data.lang-uk.re_na }} ' + re[6] + '{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }},<br/>{{ site.data.lang-uk.re_cost }} ' + re[7] + ' {{ site.data.lang-uk.re_uah }},<br/>{{ site.data.lang-uk.re_tel }} ' + re[8];
-  var marker = L.marker(new L.LatLng(re[0],re[1]),{title:title});
-  marker.bindPopup(title + description);
-  markersClusters.addLayer(marker);
-}
-map.addLayer(markersClusters);
-setTimeout(function(){map.fitBounds(markersClusters.getBounds());},5);
-</script>
-
-{%- comment -%}
-<script>
-
-  L.Map = L.Map.extend({ openPopup: function(popup) { this.closePopup(); this._popup = popup; return this.addLayer(popup).fire('popupopen', { popup: this._popup }); } });
-  var map = L.map("map").setView([{{ page.coordinates }}], 10);
-  var markers = [
-    {%- for offer in offers -%}
-      L.marker([{{ offer.coordinates }}],{title: '
-
-      {%- if offer.rent and offer.rent == '1' -%}
-        {{ site.data.lang-uk.re_for_rent }} {{ offer.type | downcase }}
-      {%- else -%}
-        {{ site.data.lang-uk.re_for_sale }} {{ offer.type | downcase }}
-      {%- endif -%}
-
-      '}).bindPopup('
-
-      {%- if offer.rent and offer.rent == '1' -%}
-        {{ site.data.lang-uk.re_for_rent }} <b>{{ offer.type | downcase }}</b>
-      {%- else -%}
-        {{ site.data.lang-uk.re_for_sale }} <b>{{ offer.type | downcase }}</b>
-      {%- endif -%}
-
-      <br/>
-
-      {%- if offer.surface and offer.surface != '' -%}
-        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface }}</b>&nbsp;м<sup>2</sup>,&nbsp;
-      {%- else -%}
-        {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>&nbsp;м<sup>2</sup>,&nbsp;
-      {%- endif -%}
-
-      {%- if offer.rooms and offer.rooms != '' -%}
-        {{ site.data.lang-uk.re_rooms }} <b>{{ offer.rooms }}</b>,&nbsp;
-      {%- endif -%}
-      {%- if offer.floor and offer.floor != '' -%}
-        {{ site.data.lang-uk.re_na }} <b>{{ offer.floor }}</b>{{ site.data.lang-uk.re_mu }}&nbsp;{{ site.data.lang-uk.re_floorci }}
-      {%- endif -%}
-
-      <br/>
-
-      {%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}
-        {%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}
-          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
-        {%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}
-          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
-        {%- else -%}
-          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}
-        {%- endif -%}
-      {%- else -%}
-        {%- if offer.price contains '$' and offer.price != '' -%}
-          {{ site.data.lang-uk.re_cost | capitalize  }} {{ offer.price | remove: '$' | times: site.usd | ceil }} {{ site.data.lang-uk.re_uah }}
-        {%- elsif offer.price contains '€' and offer.price != '' -%}
-          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price | remove: '€' | times: site.eur | ceil }} {{ site.data.lang-uk.re_uah }}
-        {%- else -%}
-          {{ site.data.lang-uk.re_cost | capitalize }} {{ offer.price }} {{ site.data.lang-uk.re_uah }}
-        {%- endif -%}
-      {%- endif -%}
-
-      <br/>
-
-      {{ site.data.lang-uk.re_tel | capitalize }}:&nbsp;{%- include footer/phone.html legal=offer.phone type='text' -%}
-
-      '){%- if forloop.last -%}{%- else -%},{%- endif -%}
-    {%- endfor -%}
-  ];
-  var group = L.featureGroup(markers).addTo(map);
-  setTimeout(function () { map.fitBounds(group.getBounds()); }, {{ offers.size }});
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}', tileSize: 512, zoomOffset: -1 }).addTo(map); map.attributionControl.setPrefix(''); {%- include map/left-menu-map.html -%}
-</script>
-{%- endcomment -%}
-
+        <script>
+        var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:11,zoom:10}).setView([{{ page.coordinates }}],10);
+        var markers = [{%- for offer in offers -%}[{{ offer.coordinates | split: ',' | first }},{{ offer.coordinates | split: ',' | last }},'{%- if offer.rent and offer.rent == "1" -%}{{ site.data.lang-uk.re_for_rent }}{%- else -%}{{ site.data.lang-uk.re_for_sale }}{%- endif -%}','{{ offer.type | downcase }}',{%- if offer.surface and offer.surface != '' -%}{{ offer.surface }}{%- else -%}{{ offer.surface_land }}{%- endif -%},{{ offer.rooms | default: '0' }},{{ offer.floor }},{%- if offer.type contains '{{ site.data.lang-uk.re_land }}' and offer.price_sqmt != '' -%}{%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price_sqmt }}{%- endif -%}{%- else -%}{%- if offer.price contains '$' and offer.price != '' -%}{{ offer.price | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price contains '€' and offer.price != '' -%}{{ offer.price | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price }}{%- endif -%}{%- endif -%},'{%- include footer/phone.html legal=offer.phone type="text" -%}']{%- if forloop.last -%}{%- else -%},{%- endif -%}{%- endfor -%}];
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'<a href="https://www.realestate.if.ua" target="_blank">Мережа вебсайтів нерухомості</a> - Івано-Франківськ',tileSize:512,zoomOffset:-1,subdomains:['a','b','c']}).addTo(map);
+        map.attributionControl.setPrefix('');
+        {%- include map/left-menu-map.html -%}
+        var markersClusters = L.markerClusterGroup();
+        for (var i = 0; i < markers.length; i++) {
+          var re = markers[i];
+          var title = re[2] + ' ' + re[3];
+          var rooms = (re[5] == 0) ? '' : ', {{ site.data.lang-uk.re_rooms }} ' + re[5];
+          var description = ',<br/>{{ site.data.lang-uk.re_surface }} ' + re[4] + ' м<sup>2</sup>' + rooms + ',<br/>{{ site.data.lang-uk.re_na }} ' + re[6] + '{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }},<br/>{{ site.data.lang-uk.re_cost }} ' + re[7] + ' {{ site.data.lang-uk.re_uah }},<br/>{{ site.data.lang-uk.re_tel }} ' + re[8];
+          var marker = L.marker(new L.LatLng(re[0],re[1]),{title:title});
+          marker.bindPopup(title + description);
+          markersClusters.addLayer(marker);
+        }
+        map.addLayer(markersClusters);setTimeout(function(){map.fitBounds(markersClusters.getBounds());},5);
+        </script>
       {%- else -%}
         <script>var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:11,zoom:10}).setView([{{ page.coordinates }}],10); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',tileSize:512,zoomOffset:-1}).addTo(map); map.attributionControl.setPrefix(''); L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ page.breadcrumb }}<b>').openPopup(); {%- include map/left-menu-map.html -%}</script>
       {%- endif -%}
-
     {%- endif -%}
-
   </body>
 </html>
