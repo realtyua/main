@@ -72,10 +72,10 @@ layout: compress
   var markers = [
     {%- for offer in offers -%}
       [
-        {{ offer.coordinates | first }},
-        {{ offer.coordinates | last }},
-        "{%- if offer.rent and offer.rent == '1' -%}{{ site.data.lang-uk.re_for_rent }}{%- else -%}{{ site.data.lang-uk.re_for_sale }}{%- endif -%}",
-        "{{ offer.type | downcase }}",
+        {{ offer.coordinates | split: ',' | first }},
+        {{ offer.coordinates | split: ',' | last }},
+        '{%- if offer.rent and offer.rent == "1" -%}{{ site.data.lang-uk.re_for_rent }}{%- else -%}{{ site.data.lang-uk.re_for_sale }}{%- endif -%}',
+        '{{ offer.type | downcase }}',
         {%- if offer.surface and offer.surface != '' -%}{{ offer.surface }}{%- else -%}{{ offer.surface_land }}{%- endif -%},
         {{ offer.rooms | default: '0' }},
         {{ offer.floor }},
@@ -84,7 +84,7 @@ layout: compress
         {%- else -%}
           {%- if offer.price contains '$' and offer.price != '' -%}{{ offer.price | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price contains '€' and offer.price != '' -%}{{ offer.price | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price }}{%- endif -%}
         {%- endif -%},
-        "{%- include footer/phone.html legal=offer.phone type='text' -%}"
+        '{%- include footer/phone.html legal=offer.phone type="text" -%}'
       ]{%- if forloop.last -%}{%- else -%},{%- endif -%}
     {%- endfor -%}
   ];
