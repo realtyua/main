@@ -1,8 +1,7 @@
 ---
-layout: compress
+layout: null
 sitemap: false
 ---
-
 {%- include js/leaflet.js -%}
 {%- include js/leaflet.markercluster.js -%}
 {%- include js/L.Control.SlideMenu.js -%}
