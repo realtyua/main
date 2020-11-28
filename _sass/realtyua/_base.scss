@@ -22,7 +22,7 @@
 @import "buttons";
 @import "text";
 @import "carousel";
-// @import "bootstrap-table";
+@import "re-table";
 @import "border-width";
 @import "misc";
 
@@ -34,3 +34,5 @@
 // Plugins
 //
 @import "photoswipe";
+@import "bootstrap-table";
+@import "leaflet";
