@@ -70,12 +70,10 @@
 <meta name="author" content="{{ site.developer.name }}" />
 <meta name="format-detection" content="telephone=no" />
 <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | relative_url }}">
-
-{% comment %}
-<link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-<link rel="preload" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
 {%- if page.table == 1 or page.table == 2 -%}
-<link rel="preload" href="{{ "/assets/css/table.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+<link rel="preload" href="{{ "/assets/css/main.12.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+{%- else -%}
+<link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
 {%- endif -%}
 
 {%- assign level = page.dir | split: '/' -%}
@@ -111,7 +109,3 @@
 {%- else -%}
 <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
 {%- endif -%}
-
-{% comment %}
-<link href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
-{% endcomment %}
