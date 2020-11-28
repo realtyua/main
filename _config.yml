@@ -83,6 +83,9 @@ defaults:
     values:
       layout: "default"
 
+includes:
+  - assets/js
+
 plugins:
   - jekyll-sitemap
   - jekyll-paginate-v2
