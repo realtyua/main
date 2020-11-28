@@ -84,7 +84,7 @@ defaults:
       layout: "default"
 
 includes:
-  - assets/js
+  - js
 
 plugins:
   - jekyll-sitemap
