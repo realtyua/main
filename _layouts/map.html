@@ -27,7 +27,7 @@ layout: compress
     <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     <script src="{{ "/assets/js/leaflet.markercluster.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     <script src="{{ "/assets/js/L.Control.SlideMenu.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    <script>{% include js/L.Control.SlideMenu.js %}</script>
+    <script>{% flexible_include assets/js/L.Control.SlideMenu.js %}</script>
   </head>
   <body>
     {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
