@@ -71,7 +71,7 @@
 <meta name="format-detection" content="telephone=no" />
 <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | relative_url }}">
 {%- if page.table == 1 or page.table == 2 -%}
-<link rel="preload" href="{{ "/assets/css/main.12.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+<link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
 {%- else -%}
 <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
 {%- endif -%}
@@ -106,7 +106,7 @@
 {% endcomment %}
 
 {%- if page.table == 1 or page.table == 2 -%}
-<link href="{{ "/assets/css/main.12.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+<link href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
 {%- else -%}
 <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
 {%- endif -%}
