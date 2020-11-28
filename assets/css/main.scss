@@ -1,4 +1,11 @@
 ---
+layout: compress
+sitemap: false
 ---
+
 @charset 'utf-8';
 @import "realtyua/base";
+
+{%- include css/leaflet.css -%}
+{%- include css/bootstrap-table.min.css -%}
+{%- include css/table.css -%}
