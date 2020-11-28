@@ -21,12 +21,11 @@ layout: compress
     <link rel="shortlink" href="{{ site.url }}" />
     <link rel="canonical" href="{{ page.url | absolute_url }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-    <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-    <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
     <script src="{{ "/assets/js/map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 
   {% comment %}
+    <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
     <link rel="preload" href="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
     <link rel="stylesheet" href="{{ "/assets/css/leaflet.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
     <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
