@@ -17,11 +17,7 @@ layout: compress
         <div class="container">
           {%- include breadcrumb.html -%}
           {%- include variables/object.html -%}
-          <div class="row mb-3">
-            <div class="col-12">
-              <h1>{{ page.title }}</h1>
-            </div>
-          </div>
+          <div class="row mb-3"><div class="col-12"><h1>{{ page.title }}</h1></div></div>
           <div class="row mb-3">
             <div class="col-md-5">
               {%- include image-slider.html folder=folder group='main' width='480' height='260' -%}
@@ -75,7 +71,8 @@ layout: compress
       {%- include footer.html -%}
     </div>
     {%- include scroll-top.html -%}
-    {%- if data.size > 3 -%}
+
+    {%- if data.size > 10 -%}
       {%- if page.table == 1 -%}
         <script src="{{ "/assets/js/main.tod.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- elsif page.table == 2 -%}
@@ -89,14 +86,7 @@ layout: compress
         <script src="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- endif -%}
     {%- endif -%}
-    {%- comment -%}
-      {%- assign level = page.dir | split: '/' -%}
-      {%- include object/js-top.html -%}
-      {%- if data.size > 10 -%}
-        {%- include object/js-middle.html -%}
-      {%- endif -%}
-      {%- include object/js-bottom.html -%}
-    {%- endcomment -%}
+
     {% include modals/net-realestate-modal.html %}
   </body>
 </html>
