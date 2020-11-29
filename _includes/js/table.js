@@ -1,7 +1,3 @@
----
-layout: null
-sitemap: false
----
 
 $(function () {
   "use strict";
