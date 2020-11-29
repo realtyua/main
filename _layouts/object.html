@@ -76,12 +76,12 @@ layout: compress
     </div>
     {%- include scroll-top.html -%}
     {%- if data.size > 3 -%}
-      {%- include object/js-middle.html -%}
       {%- if page.table == 1 -%}
         <script src="{{ "/assets/js/main.tod.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- elsif page.table == 2 -%}
         <script src="{{ "/assets/js/main.tmod.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- endif -%}
+      {%- include object/js-middle.html -%}
     {%- else -%}
       {%- if page.table == 1 -%}
         <script src="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
