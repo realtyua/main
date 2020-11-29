@@ -10,3 +10,4 @@ sitemap: false
 {%- include js/bootstrap.lightbox.min.js -%}
 {%- include js/bootstrap.smoothscroll.min.js -%}
 {%- include js/ads.home.js -%}
+{%- include js/realtyua.js -%}
