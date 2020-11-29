@@ -76,11 +76,13 @@ layout: compress
     </div>
     {%- include scroll-top.html -%}
     {%- assign level = page.dir | split: '/' -%}
+    
     {%- include object/js-top.html -%}
     {%- if data.size > 10 -%}
       {%- include object/js-middle.html -%}
     {%- endif -%}
     {%- include object/js-bottom.html -%}
+
     {% include modals/net-realestate-modal.html %}
   </body>
 </html>

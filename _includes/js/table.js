@@ -2,7 +2,7 @@
 $(function () {
   "use strict";
   var expandedRow = null;
-  if (($(this).hasClass('pswp') !== false && $('table').length > 0) || $('table').length > 0) {
+  if ($(this).hasClass('pswp') !== false && $('table#property').length > 0) {
       var photoswipeTemplate = '\
           <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\
               <div class="pswp__bg"></div>\
@@ -63,10 +63,6 @@ function jsDetailFormatter(index, row, $detail) {
   "use strict";
   var d = new Date(row.date);
   var n = d.getMonth();
-
-  // function rePriceSqmt () {
-  //
-  // }
 
   $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
