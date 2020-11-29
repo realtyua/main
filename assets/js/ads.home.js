@@ -1,8 +1,3 @@
----
-layout: null
-sitemap: false
----
-
 function generateRandomRe() {
   $.getJSON("https://www.realestate.if.ua/region/city/ivano-frankivsk/data/all.json", function(data) {
     var count = data.length; var random = []; var counter = 0; var number = 3; var div = $("#ads"); var usd = {{ site.usd }}; var eur = {{ site.eur }};
