@@ -2,7 +2,7 @@
 $(function () {
   "use strict";
   var expandedRow = null;
-  if ($(this).hasClass('pswp') !== false && $('table#property').length > 0) {
+  if ($(this).hasClass('pswp') !== true && $('table#property').length > 0) {
       var photoswipeTemplate = '\
           <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\
               <div class="pswp__bg"></div>\
