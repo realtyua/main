@@ -1,18 +1,17 @@
-{%- assign level = page.dir | split: '/' -%}
-
 {%- if page.dir == '/' -%}
-<script src="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  <script src="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- else -%}
-<script src="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-{%- endif -%}
-
-{%- if page.table == 1 -%}
-<script src="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-{%- elsif page.table == 2 -%}
-<script src="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  {%- if page.table == 1 -%}
+    <script src="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  {%- elsif page.table == 2 -%}
+    <script src="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  {%- else -%}
+    <script src="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  {%- endif -%}
 {%- endif -%}
 
 {% comment %}
+{%- assign level = page.dir | split: '/' -%}
 <script src="{{ "/assets/js/jquery.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script src="{{ "/assets/js/popper.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script src="{{ "/assets/js/bootstrap.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
