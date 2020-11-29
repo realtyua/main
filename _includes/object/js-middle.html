@@ -1,4 +1,19 @@
 {%- if page.table == 1 -%}
+  var $table = $('#property');
+  $(function() {
+    var data = {{ data | jsonify }};
+    $table.bootstrapTable({data: data})
+  });
+{%- elsif page.table == 2 -%}
+  var $table = $('#property');
+  $(function() {
+    var data = {{ data | jsonify }};
+    $table.bootstrapTable({data: data})
+  });
+{%- endif -%}
+
+{%- comment -%}
+{%- if page.table == 1 -%}
   <script type="text/javascript">
     var $table = $('#property');
     $(function() {
@@ -15,3 +30,4 @@
     });
   </script>
 {%- endif -%}
+{%- endcomment -%}
