@@ -89,14 +89,6 @@
   {%- endif -%}
 {%- endif -%}
 
-{% comment %}
-{%- if page.table == 1 or page.table == 2 -%}
-<link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-{%- else -%}
-<link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-{%- endif -%}
-{% endcomment %}
-
 {%- if page.dir == '/' -%}
   <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 {%- else -%}
@@ -124,49 +116,6 @@
   {%- endif -%}
 {%- endif -%}
 
-{% comment %}
-{%- if page.dir == '/' -%}
-  <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{%- else -%}
-  {%- if page.table == 1 -%}
-    <link rel="preload" href="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  {%- elsif page.table == 2 -%}
-    <link rel="preload" href="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  {%- else -%}
-    <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  {%- endif -%}
-{%- endif -%}
-{% endcomment %}
-
-{% comment %}
-{%- assign level = page.dir | split: '/' -%}
-<link rel="preload" href="{{ "/assets/js/jquery.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-<link rel="preload" href="{{ "/assets/js/popper.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-<link rel="preload" href="{{ "/assets/js/bootstrap.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-<link rel="preload" href="{{ "/assets/js/photoswipe.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-<link rel="preload" href="{{ "/assets/js/photoswipe-ui-default.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-<link rel="preload" href="{{ "/assets/js/bootstrap.lightbox.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-<link rel="preload" href="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{%- if page.table == 1 -%}
-  <link rel="preload" href="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  <link rel="preload" href="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  {% comment %}
-  {%- if level.size == 8 -%}
-    <link rel="preload" href="{{ "/assets/js/object.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  {%- endif -%}
-  {% endcomment %}
-  <link rel="preload" href="{{ "/assets/js/table.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{%- elsif page.table == 2 -%}
-  <link rel="preload" href="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  <link rel="preload" href="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  <link rel="preload" href="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{%- endif -%}
-{%- if page.dir == '/' -%}
-<link rel="preload" href="{{ "/assets/js/ads.home.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{%- endif -%}
-<link rel="preload" href="{{ "/assets/js/realtyua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{% endcomment %}
-
 {%- if page.table == 1 or page.table == 2 -%}
   {%- if page.url contains 'map.html' -%}
   {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
@@ -182,10 +131,3 @@
     <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
   {%- endif -%}
 {%- endif -%}
-
-{% comment %}
-{%- if page.url contains 'map.html' -%}
-{%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-    {% include modals/re-map-modal.html %}
-{%- endif -%}
-{% endcomment %}
