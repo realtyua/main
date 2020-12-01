@@ -1,4 +1,7 @@
+{% comment %}
 <script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+{% endcomment %}
+
 <div class="modal fade realestate" id="reMap" tabindex="-1" role="dialog" aria-labelledby="reMap" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content net-realestate">
@@ -14,7 +17,9 @@
     </div>
   </div>
 </div>
+
 <script>
+
   var modal = $('#reMap');
   var map = null;
   $(document).on('click', 'a.marker', function () {
