@@ -92,7 +92,7 @@
 {%- if page.dir == '/' -%}
   <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 {%- elsif page.url contains '/object/' -%}
-  {%- if data.size > 10 -%}
+  {%- if data.size > 3 -%}
     {%- if page.table == 1 -%}
       <script src="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- elsif page.table == 2 -%}

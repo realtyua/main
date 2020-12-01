@@ -14,3 +14,4 @@ sitemap: false
 {%- include object/js-middle.html -%}
 {%- include js/table.js -%}
 {%- include js/realtyua.js -%}
+{%- include js/leaflet.js -%}

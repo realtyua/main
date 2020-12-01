@@ -72,8 +72,7 @@ layout: compress
     </div>
     {%- include scroll-top.html -%}
 
-
-    {%- if data.size > 10 -%}
+    {%- if data.size > 3 -%}
       {%- if page.table == 1 -%}
         <script src="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- elsif page.table == 2 -%}
