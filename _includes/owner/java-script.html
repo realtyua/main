@@ -1,14 +1,12 @@
 <script src="{{ "/assets/js/main.owner.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script>
- var t{{ owner }} = L.map('location').setView([{{ page.lat }}, {{ page.lon }}], 17);
+ var t{{ owner }} = L.map('location').setView([{{ page.coordinates }}], 17);
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
    maxZoom: 17,
-   attribution: '{{ site.name }}, {{ page.breadcrumb }}',
+   attribution: '<a href="{{ site.url }}">{{ site.name }}</a>, {{ page.breadcrumb }}',
    tileSize: 512,
    zoomOffset: -1
  }).addTo(t{{ owner }});
  t{{ owner }}.attributionControl.setPrefix('');
- L.marker([{{ page.lat }}, {{ page.lon }}]).addTo(t{{ owner }})
-   .bindPopup("{{ page.marker }}")
-   .openPopup();
+ L.marker([{{ page.coordinates }}]).addTo(t{{ owner }}).bindPopup("{{ page.marker }}").openPopup();
 </script>
