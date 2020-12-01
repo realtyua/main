@@ -58,7 +58,7 @@ layout: compress
       {%- endif -%}
     {%- endif -%}
 
-    {%- if data.size > 3 -%}
+    {%- if data.size > 10 -%}
       {%- if page.table == 1 -%}
         <link rel="preload" href="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- elsif page.table == 2 -%}
@@ -151,7 +151,7 @@ layout: compress
     </div>
     {%- include scroll-top.html -%}
 
-    {%- if data.size > 3 -%}
+    {%- if data.size > 10 -%}
       {%- if page.table == 1 -%}
         <script src="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- elsif page.table == 2 -%}
