@@ -91,21 +91,6 @@
 
 {%- if page.dir == '/' -%}
   <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{%- elsif page.url contains '/object/' -%}
-  {%- if data.size > 3 -%}
-    {%- if page.table == 1 -%}
-      <script src="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- elsif page.table == 2 -%}
-      <script src="{{ "/assets/js/main.tmodl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- endif -%}
-    {%- include object/js-middle.html -%}
-  {%- else -%}
-    {%- if page.table == 1 -%}
-      <script src="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- elsif page.table == 2 -%}
-      <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- endif -%}
-  {%- endif -%}
 {%- else -%}
   {%- if page.table == 1 -%}
     {%- if page.url contains 'map.html' -%}
