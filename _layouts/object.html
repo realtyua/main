@@ -106,7 +106,6 @@ layout: compress
       {%- elsif page.table == 2 -%}
         <link rel="preload" href="{{ "/assets/js/main.tmodl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- endif -%}
-      {%- include object/js-middle.html -%}
     {%- else -%}
       {%- if page.table == 1 -%}
         <link rel="preload" href="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
