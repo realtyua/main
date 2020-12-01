@@ -4,6 +4,7 @@ layout: compress
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+{%- include variables/object.html -%}
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
@@ -16,7 +17,6 @@ layout: compress
       <main class="content mb-4">
         <div class="container">
           {%- include breadcrumb.html -%}
-          {%- include variables/object.html -%}
           <div class="row mb-3"><div class="col-12"><h1>{{ page.title }}</h1></div></div>
           <div class="row mb-3">
             <div class="col-md-5">
@@ -72,18 +72,19 @@ layout: compress
     </div>
     {%- include scroll-top.html -%}
 
+
     {%- if data.size > 10 -%}
       {%- if page.table == 1 -%}
-        <script src="{{ "/assets/js/main.tod.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+        <script src="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- elsif page.table == 2 -%}
-        <script src="{{ "/assets/js/main.tmod.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+        <script src="{{ "/assets/js/main.tmodl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- endif -%}
       {%- include object/js-middle.html -%}
     {%- else -%}
       {%- if page.table == 1 -%}
-        <script src="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+        <script src="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- elsif page.table == 2 -%}
-        <script src="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+        <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       {%- endif -%}
     {%- endif -%}
 
