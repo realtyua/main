@@ -75,6 +75,36 @@
 {%- else -%}
 <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
 {%- endif -%}
+
+{%- assign slash = page.dir | split: '/' -%}
+{%- if page.dir == '/' -%}
+  <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+{%- else -%}
+  {%- if page.table == 1 -%}
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      <link rel="preload" href="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+    {%- else -%}
+      <link rel="preload" href="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+    {%- endif -%}
+  {%- elsif page.table == 2 -%}
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+    {%- else -%}
+      <link rel="preload" href="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+    {%- endif -%}
+  {%- else -%}
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+    {%- else -%}
+      <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+{% comment %}
 {%- if page.dir == '/' -%}
   <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
 {%- else -%}
@@ -86,6 +116,7 @@
     <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   {%- endif -%}
 {%- endif -%}
+{% endcomment %}
 
 {% comment %}
 {%- assign level = page.dir | split: '/' -%}
