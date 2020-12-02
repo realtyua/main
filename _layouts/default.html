@@ -76,6 +76,14 @@ layout: compress
               items.hide().slice(showFrom, showTo).show();
             }
         });
+        function template(data) {
+            var html = '<ul>';
+            $.each(data, function(index, item){
+                html += '<li>'+ item +'</li>';
+            });
+            html += '</ul>';
+            return html;
+        }
       </script>
     {%- endif -%}
 
