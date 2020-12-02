@@ -61,40 +61,20 @@ layout: compress
     {%- if page.url contains '/realtor/' or page.url contains '/developer/' -%}
       <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       <script>
-
         var items = $(".col-12 > row > col");
         var numItems = items.length;
         var perPage = 2;
-
         items.slice(perPage).hide();
-
-        $(document).ready(function(){
-          $('#pagination-container').pagination({
-              // dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
-              items: numItems,
-              itemsOnPage: perPage,
-              onPageClick: function (pageNumber) {
-                var showFrom = perPage * (pageNumber - 1);
-                var showTo = showFrom + perPage;
-                items.hide().slice(showFrom, showTo).show();
-              }
-
-              // pageSize: 2,
-              //showPrevious: false,
-              //showNext: false,
-              //callback: function(data, pagination) {
-              //    var html = template(data);
-              //    $('#data-container').html(html);
-              //}
-          })
-          // function template(data) {
-          //     var html = '<ul>';
-          //     $.each(data, function(index, item){
-          //         html += '<li>'+ item +'</li>';
-          //     });
-          //     html += '</ul>';
-          //     return html;
-          // }
+        $('#pagination-container').pagination({
+            items: numItems,
+            itemsOnPage: perPage,
+            prevText: "&laquo;",
+            nextText: "&raquo;",
+            onPageClick: function (pageNumber) {
+              var showFrom = perPage * (pageNumber - 1);
+              var showTo = showFrom + perPage;
+              items.hide().slice(showFrom, showTo).show();
+            }
         });
       </script>
     {%- endif -%}
