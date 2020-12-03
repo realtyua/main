@@ -8,6 +8,7 @@ layout: compress
 <html dir="ltr" lang="uk-UA">
   <head>
     {%- include head.html -%}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/paginationjs@2.1.5/dist/pagination.css" integrity="sha256-fFqxRJ9q487bQTOBfn4T8jkJt8IGlrVzTeauNnuRHVA=" crossorigin="anonymous">
   </head>
   <body>
     <div id="top"></div>
@@ -58,7 +59,7 @@ layout: compress
   <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   <script>
      $(function() {
-          let rows = []
+          let rows = [];
           $('.list-seller > .row > .col').each(function(i, row) {
               return rows.push(row);
           });
