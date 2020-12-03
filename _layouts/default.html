@@ -54,20 +54,27 @@ layout: compress
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
 
-<hr>
-<div id="data-container"></div>
-<div id="pagination-container"></div>
-
-{%- if page.url contains '/realtor/' or page.url contains '/developer/' -%}
+{% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %}
   <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   <script>
-    $('#pagination-container').pagination({
-      dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
-      callback: function(data, pagination) {
-        var html = template(data);
-        $('#data-container').html(html);
-      }
-    })
+     $(function() {
+          let rows = []
+          $('.list-seller > .row > .col').each(function(i, row) {
+              return rows.push(row);
+          });
+
+          $('#pagination').pagination({
+              dataSource: rows,
+              pageSize: 3,
+              autoHidePrevious: true,
+              autoHideNext: true,
+              showNavigator: true,
+              formatNavigator: 'Показано сторінку <%= currentPage %></span>, всього сторінок <%= totalPage %>, всього <%= totalNumber %> записів',
+              callback: function(data, pagination) {
+                  $('.row').html(data);
+              }
+          })
+     });
   </script>
 {%- endif -%}
 

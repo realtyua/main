@@ -14,10 +14,13 @@ description:
 {%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
 
 <div class="row">
-  <div class="col-12">
+  <div class="col-12{% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %} list-seller{% endif %}">
     <h1>Агенції та Агенти {{ addtitle }}</h1>
     {%- include nav-section.html -%}
     <h2 class="md-3">Агенти та Агенції, що професійно замаються операціями з нерухомостю</h2>
     {%- include elements/list-pages.html l=6 -%}
   </div>
+  {% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %}
+  <div id="pagination-container"></div>
+  {% endif %}
 </div>
