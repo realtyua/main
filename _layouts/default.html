@@ -60,21 +60,15 @@ layout: compress
   <script>
      $(function() {
           let rows = [];
-
-          $('#list-seller > .col').each(function(i,row) {
-              return rows.push(row);
-          });
-
+          $('#list-seller>.col').each(function(i,row){return rows.push(row);});
           $('#pagination').pagination({
-              dataSource: rows,
-              pageSize: 3,
-              autoHidePrevious: true,
-              autoHideNext: true,
-              showNavigator: true,
+              dataSource:rows,
+              pageSize:3,
+              autoHidePrevious:true,
+              autoHideNext:true,
+              showNavigator:true,
               formatNavigator: 'Показано сторінку <%= currentPage %></span>, всього сторінок <%= totalPage %>, всього <%= totalNumber %> записів',
-              callback: function(data,pagination) {
-                  $('#list-seller').html(data);
-              }
+              callback:function(data,pagination){$('#list-seller').html(data);}
           })
      });
   </script>

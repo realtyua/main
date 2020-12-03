@@ -90,4 +90,7 @@
   </div>
 {%- if forloop.last -%}
 </div>
+{%- if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 -%}
+<div id="pagination" class="row"></div>
+{%- endif -%}
 {%- endif -%}
