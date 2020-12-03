@@ -70,6 +70,7 @@ layout: compress
                   autoHideNext:true,
                   showNavigator:true,
                   formatNavigator: 'Всього сторінок <%= totalPage %>, записів <%= totalNumber %>',
+                  hideWhenLessThanOnePage:true,
                   callback:function(data,pagination){$('#list-seller').html(data);}
               })
          });
