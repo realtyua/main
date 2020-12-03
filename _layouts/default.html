@@ -61,19 +61,19 @@ layout: compress
      $(function() {
           let rows = [];
 
-          $('#data-container > .col').each(function(i,row) {
+          $('#list-seller > .col').each(function(i,row) {
               return rows.push(row);
           });
 
           $('#pagination').pagination({
               dataSource: rows,
-              pageSize: 6,
+              pageSize: 3,
               autoHidePrevious: true,
               autoHideNext: true,
               showNavigator: true,
               formatNavigator: 'Показано сторінку <%= currentPage %></span>, всього сторінок <%= totalPage %>, всього <%= totalNumber %> записів',
               callback: function(data,pagination) {
-                  $('#data-container').html(data);
+                  $('#list-seller').html(data);
               }
           })
      });
