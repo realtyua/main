@@ -21,9 +21,11 @@ description:
 
     {%- include elements/list-pages.html l=6 -%}
 
-    {% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %}
+    {%- if page.url contains '/realtor/' and back.size == 4 or back.size == 5 -%}
     <div id="pagination"></div>
-    {% endif %}
+    {%- elsif page.url contains '/developer/' and back.size == 4 or back.size == 5 -%}
+    <div id="pagination"></div>
+    {%- endif -%}
 
   </div>
 </div>
