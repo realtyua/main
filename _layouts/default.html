@@ -12,6 +12,7 @@ layout: compress
   </head>
   <body>
     <div id="top"></div>
+
     <div class="main">
       {%- include header.html -%}
       <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
@@ -52,33 +53,36 @@ layout: compress
       </main>
       {%- include footer.html -%}
     </div>
+
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
 
-{% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %}
-  <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-  <script>
-     $(function() {
-          let rows = [];
-          $('#list-seller>.col').each(function(i,row){return rows.push(row);});
-          $('#pagination').pagination({
-              dataSource:rows,
-              pageSize:3,
-              autoHidePrevious:true,
-              autoHideNext:true,
-              showNavigator:true,
-              formatNavigator: 'Показано сторінку <%= currentPage %></span>, всього сторінок <%= totalPage %>, всього <%= totalNumber %> записів',
-              callback:function(data,pagination){$('#list-seller').html(data);}
-          })
-     });
-  </script>
-{%- endif -%}
+    {% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %}
+      <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+      <script>
+         $(function() {
+              let rows = [];
+              $('#list-seller>.col').each(function(i,row){return rows.push(row);});
+              $('#pagination').pagination({
+                  dataSource:rows,
+                  pageSize:3,
+                  autoHidePrevious:true,
+                  autoHideNext:true,
+                  showNavigator:true,
+                  formatNavigator: 'Всього сторінок <%= totalPage %> та <%= totalNumber %> записів',
+                  callback:function(data,pagination){$('#list-seller').html(data);}
+              })
+         });
+      </script>
+    {%- endif -%}
 
     {% include modals/net-realestate-modal.html %}
-{%- assign slash = page.dir | split: '/' -%}
-{%- if page.url contains 'map.html' -%}
-{%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-  {% include modals/re-map-modal.html %}
-{%- endif -%}
+
+    {%- assign slash = page.dir | split: '/' -%}
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      {% include modals/re-map-modal.html %}
+    {%- endif -%}
+
   </body>
 </html>
