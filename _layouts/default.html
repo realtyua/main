@@ -61,7 +61,7 @@ layout: compress
      $(function() {
           let rows = [];
 
-          $('.list-seller > .row > .col').each(function(i,row) {
+          $('#data-container > .col').each(function(i,row) {
               return rows.push(row);
           });
 
@@ -73,7 +73,7 @@ layout: compress
               showNavigator: true,
               formatNavigator: 'Показано сторінку <%= currentPage %></span>, всього сторінок <%= totalPage %>, всього <%= totalNumber %> записів',
               callback: function(data,pagination) {
-                  $('.row').html(data);
+                  $('#data-container').html(data);
               }
           })
      });
