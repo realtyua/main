@@ -7,8 +7,8 @@ layout: compress
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
-    {%- include head.html -%}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/paginationjs@2.1.5/dist/pagination.css" integrity="sha256-fFqxRJ9q487bQTOBfn4T8jkJt8IGlrVzTeauNnuRHVA=" crossorigin="anonymous">
+    {%- include head.html -%}
   </head>
   <body>
     <div id="top"></div>
@@ -69,7 +69,7 @@ layout: compress
                   autoHidePrevious:true,
                   autoHideNext:true,
                   showNavigator:true,
-                  formatNavigator: 'Всього сторінок <%= totalPage %> та <%= totalNumber %> записів',
+                  formatNavigator: 'Всього сторінок <%= totalPage %>, записів <%= totalNumber %>',
                   callback:function(data,pagination){$('#list-seller').html(data);}
               })
          });
