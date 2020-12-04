@@ -76,8 +76,16 @@
 .paginationjs .paginationjs-pages li.active>a {
   background: #2d5ca6;
 }
+.paginationjs .paginationjs-pages li.active>a:hover {
+  background: #2d5ca6;
+
 .paginationjs .paginationjs-pages li>a:hover {
   background: #e9ecef;
+}
+main .paginationjs .paginationjs-pages a {
+    background-color: unset;
+    border-bottom: 0;
+    transition: none;
 }
 main .paginationjs .paginationjs-pages a:hover {
   transition: unset;
