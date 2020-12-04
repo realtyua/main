@@ -66,3 +66,20 @@
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(345deg) brightness(99%) contrast(102%);
   background-size: cover;
 }
+
+.paginationjs .paginationjs-pages li {
+  border: 1px solid #dee2e6;
+}
+.paginationjs .paginationjs-pages li:last-child {
+  border-right: 1px solid #dee2e6;
+}
+.paginationjs .paginationjs-pages li.active>a {
+  background: #2d5ca6;
+}
+.paginationjs .paginationjs-pages li>a:hover {
+  background: #e9ecef;
+}
+.paginationjs .paginationjs-pages a:hover {
+  transition: unset;
+  border-bottom: unset;
+}
