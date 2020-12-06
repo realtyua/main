@@ -4,22 +4,15 @@
     {%- assign slug = one.url | split: '/' | last -%}
     {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if '/' == current and one.navhide != 1 -%}
-
-        {% if one.url contains '/region/' %}
-          {%- comment -%}
-            <h1 class="mb-4">
-              <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
-            </h1>
-          {%- endcomment -%}
-        {% else %}
-        <div class="col-12">
-          <h4 class="mb-4">{{ one.navtitle }}</h4>
-        </div>
-        <div class="col-12">
-          {%- include home/anchor-region.html current=one.url -%}
-        </div>
-        {% endif %}
-
+      {% if one.url contains '/region/' %}
+      {% else %}
+      <div class="col-12">
+        <h4 class="mb-2">{{ one.navtitle }}</h4>
+      </div>
+      <div class="col-12">
+        {%- include home/anchor-region.html current=one.url -%}
+      </div>
+      {% endif %}
       {%- if one.url -%}
         {%- assign twos = site.html_pages -%}
         {%- for two in twos -%}
@@ -40,32 +33,3 @@
     {%- endif -%}
   {%- endfor -%}
 </div>
-
-
-
-
-
-{%- comment -%}
-<div class="row row-cols-1 row-cols-md-3">
-  {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
-  {%- for one in ones -%}
-    {%- assign slug = one.url | split: '/' | last -%}
-    {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-    {%- if '/' == current and one.navhide != 1 -%}
-      {%- include home/anchor-region.html current=one.url -%}
-      {%- if one.url -%}
-        {%- assign twos = site.html_pages -%}
-        {%- for two in twos -%}
-          {%- if two -%}
-            {%- assign slug = two.url | split: '/' | last -%}
-            {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
-            {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
-              {%- include home/anchor-region.html current=two.url -%}
-            {%- endif -%}
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
-    {%- endif -%}
-  {%- endfor -%}
-</div>
-{%- endcomment -%}
