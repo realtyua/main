@@ -4,7 +4,7 @@
     {%- assign slug = one.url | split: '/' | last -%}
     {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if '/' == current and one.navhide != 1 -%}
-      <div class="col-12">
+
         {% if one.url contains '/region/' %}
           {%- comment -%}
             <h1 class="mb-4">
@@ -12,12 +12,14 @@
             </h1>
           {%- endcomment -%}
         {% else %}
+        <div class="col-12">
           <h4 class="mb-4">{{ one.navtitle }}</h4>
+        </div>
+        <div class="col-12">
+          {%- include home/anchor-region.html current=one.url -%}
+        </div>
         {% endif %}
-      </div>
-      <div class="col-12">
-        {%- include home/anchor-region.html current=one.url -%}
-      </div>
+
       {%- if one.url -%}
         {%- assign twos = site.html_pages -%}
         {%- for two in twos -%}
@@ -26,7 +28,7 @@
             {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
             {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
             <div class="col-12">
-              <h4 class="mb-4">{{ two.navtitle }}</h4>
+              <h4 class="mb-2">{{ two.navtitle }}</h4>
             </div>
             <div class="col-12">
               {%- include home/anchor-region.html current=two.url -%}
