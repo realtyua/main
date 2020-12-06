@@ -1,3 +1,3 @@
 <div class="alert alert-success mb-0" role="alert">
-  Оголошення про {{ include.title | replace_first: 'Н', 'н' }} покищо відсутні, ви можете бути одним із перших додавши своє оголошення про продаж чи оренду власної {{ include.title | replace_first: 'Н', 'н' | replace: 'ість', 'ості' }}. <a href="/add" class="alert-link">Додати оголошення</a> про {{ include.title | replace_first: 'Н', 'н' }}.
+  {%- comment -%}Оголошення про {{ include.title | replace_first: 'Н', 'н' }} покищо відсутні, ви можете бути одним із перших додавши своє оголошення про продаж чи оренду власної {{ include.title | replace_first: 'Н', 'н' | replace: 'ість', 'ості' }}.{%- endcomment -%} <a href="#top" class="alert-link">Додати оголошення</a> про {{ include.title | replace_first: 'Н', 'н' }}.
 </div>
