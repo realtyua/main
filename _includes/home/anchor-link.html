@@ -1,3 +1,55 @@
+<div class="row">
+  {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
+  {%- for one in ones -%}
+    {%- assign slug = one.url | split: '/' | last -%}
+    {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+    {%- if '/' == current and one.navhide != 1 -%}
+      <div class="col-12">
+        {% if one.url contains '/region/' %}
+          <h1 class="mb-4">
+            <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
+          </h1>
+        {% else %}
+          <h2 class="mb-4">
+            <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
+            {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
+          </h2>
+        {% endif %}
+      </div>
+      <div class="col-12">
+        {%- include home/anchor-region.html current=one.url -%}
+      </div>
+      {%- if one.url -%}
+        {%- assign twos = site.html_pages -%}
+        {%- for two in twos -%}
+          {%- if two -%}
+            {%- assign slug = two.url | split: '/' | last -%}
+            {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
+            {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
+            <div class="col-12">
+              <h2 class="mb-4">
+                <a href="{{ two.url }}">
+                  {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
+                </a>
+                {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
+              </h2>
+            </div>
+            <div class="col-12">
+              {%- include home/anchor-region.html current=two.url -%}
+            </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+
+
+
+
+{%- comment -%}
 <div class="row row-cols-1 row-cols-md-3">
   {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
   {%- for one in ones -%}
@@ -20,3 +72,4 @@
     {%- endif -%}
   {%- endfor -%}
 </div>
+{%- endcomment -%}
