@@ -11,16 +11,11 @@ description:
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
-{%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
-{%- assign addtitle1 = index[1].title | split: " " | slice: 1, 4 | join: " " -%}
-{%- assign addtitle2 = index[2].title | split: " " | slice: 1, 4 | join: " " -%}
-
-{{addtitle1}}<br>
-{{addtitle2}}<br>
+{%- assign addtitle = index[2].title | split: " " | slice: 1, 4 | join: " " -%}
 
 <div class="row">
   <div class="col-12">
-    <h1>Агенти з продажу {{ addtitle }}</h1>
+    <h1>{{ page.title }} {{ addtitle }}</h1>
     {%- include nav-section.html -%}
     <h2 class="md-3">Агенти, що професійно замаються операціями з нерухомостю</h2>
     {%- include elements/list-pages.html l=6 -%}
