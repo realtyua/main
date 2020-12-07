@@ -17,9 +17,9 @@ layout: compress
       {%- include header.html -%}
       <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
         {% if page.url == "/" %}
-          <div class="container-md pb-1 lead">
-            <a class="badge badge-primary" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea">Виберіть місцевіть</a> де б ви хотіли <strong>знайти, купити чи продати нерухомість</strong> або
-            <a class="badge badge-primary text-wrap" data-toggle="collapse" href="#collapseAds" role="button" aria-expanded="false" aria-controls="collapseAds">побудувати чи просто зробити ремонт і облаштувати свою оселю</a>
+          <div class="container-md pb-1 lead-badge">
+            <a class="badge badge-primary" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea">Виберіть місцевіть</a> <span class="badge badge-light text-wrap text-left">де б ви хотіли <strong>знайти, купити чи продати нерухомість</strong> або</span>
+            <a class="badge badge-primary text-wrap text-left" data-toggle="collapse" href="#collapseAds" role="button" aria-expanded="false" aria-controls="collapseAds">побудувати чи просто зробити ремонт і облаштувати свою оселю</a>
           </div>
           <div class="bg-light mb-3">
             <div class="container-md collapse" id="collapseArea">
