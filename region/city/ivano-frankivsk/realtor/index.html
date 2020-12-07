@@ -15,7 +15,7 @@ description:
 {%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
 {%- endcomment -%}
 
-%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
+{%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
 {%- assign addtitle = name | split: ' ' | slice: 2, 4 | join: ' ' -%}
 
 <div class="row">
