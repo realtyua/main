@@ -9,9 +9,14 @@ description:
 
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
-{%- assign dir = back | slice: 0, size | join: "/" | append: '/index.html' -%}
+{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
-{%- assign addtitle = index[1].title | split: " " | slice: 1, 4 | join: " " -%}
+{%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
+{%- assign addtitle1 = index[1].title | split: " " | slice: 1, 4 | join: " " -%}
+{%- assign addtitle2 = index[2].title | split: " " | slice: 1, 4 | join: " " -%}
+
+{{addtitle1}}<br>
+{{addtitle2}}<br>
 
 <div class="row">
   <div class="col-12">
