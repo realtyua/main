@@ -10,11 +10,16 @@ description:
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+###{{dir}}###<br>
+{%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
+###{{index}}###<br>
+
 {%- comment -%}
-{%- assign index = site.pages | sort: "dir" | where: "dir", dir | where_exp: 'i', 'i.url contains "index.html"' -%}
-{%- endcomment -%}
 {%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.dir contains dir or i.url contains 'index.html'" -%}
+%- endcomment -%}
+
 {%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
+###{{addtitle}}###<br>
 
 <div class="row">
   <div class="col-12">
