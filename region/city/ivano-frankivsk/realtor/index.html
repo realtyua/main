@@ -13,7 +13,7 @@ description:
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
 
 
-{%- for it in index
+{%- for it in index -%}
   {%- if it.url contains '/index.html' -%}
     {%- assign addtitle = it.title | split: " " | slice: 1, 4 | join: " " -%}
   {% endif %}
