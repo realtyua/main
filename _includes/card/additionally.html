@@ -30,7 +30,7 @@
 {%- else -%}
 <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
 {%- endif -%}
-<dd>{% if offer.price_sqmt contains '$' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% else %}{{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}.{% endif %}</dd>
+<dd>{% if offer.price_sqmt contains '$' %}<span data-bs-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% elsif offer.price_sqmt contains '€' %}<span data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% else %}{{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}.{% endif %}</dd>
 {%- endif -%}
 {%- if offer.seller -%}
   {%- if offer.rent == '1' -%}
