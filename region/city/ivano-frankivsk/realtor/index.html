@@ -15,9 +15,11 @@ description:
 
 {%- assign index1 = site.pages | sort: "dir" | where_exp: "i", "i.dir ==  dir" -%}
 ###{{dir}}###<br>
-==={{index1}}===
+==={{index1[0].title}}===<br>
+==={{index1[1].title}}===<br>
+==={{index1[2].title}}===<br>
 
-{%- assign addtitle = index[2].title | split: " " | slice: 1, 4 | join: " " -%}
+{%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
 
 <div class="row">
   <div class="col-12">
