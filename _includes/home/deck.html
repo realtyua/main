@@ -4,21 +4,28 @@
     {%- assign slug = one.url | split: '/' | last -%}
     {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if '/' == current and one.navhide != 1 -%}
-      <div class="col-12">
-        {% if one.url contains '/region/' %}
+      {% if one.url contains '/region/' %}
+      {%- comment -%}
+        <div class="col-12">
           <h1 class="mb-4">
             <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
           </h1>
-        {% else %}
-          <h2 class="mb-4">
-            <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
-            {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
-          </h2>
-        {% endif %}
+        </div>
+        <div class="col-12">
+          {%- include home/region.html current=one.url -%}
+        </div>
+      {%- endcomment -%}
+      {% else %}
+      <div class="col-12">
+        <h2 class="mb-4">
+          <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
+          {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
+        </h2>
       </div>
       <div class="col-12">
         {%- include home/region.html current=one.url -%}
       </div>
+      {% endif %}
       {%- if one.url -%}
         {%- assign twos = site.html_pages -%}
         {%- for two in twos -%}
