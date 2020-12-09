@@ -106,7 +106,10 @@
   email: shevchenko@realestate.if.ua
   www: https://shevchenko.realestate.if.ua
 
-- type: realtor
+#
+# Agency
+#
+- type: agency
   item: franko
   name: Агент з нерухомості Іван Франко
   address: 76000, м. Івано-Франківськ, вул.&nbsp;Франка,&nbsp;0

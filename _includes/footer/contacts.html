@@ -5,10 +5,12 @@
 {%- assign village = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "village" -%}{%- assign village = village | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign developer = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "developer" -%}{%- assign developer = developer | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign realtor = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "realtor" -%}{%- assign realtor = realtor | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign agency = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "agency" -%}{%- assign agency = agency | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign url = page.url | split: "/" -%}{%- assign size = url | size -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 {%- if page.url contains "developer" -%}{%- assign isDeveloper = true -%}{%- else -%}{%- assign isDeveloper = false -%}{%- endif -%}
 {%- if page.url contains "realtor" -%}{%- assign isRealtor = true -%}{%- else -%}{%- assign isRealtor = false -%}{%- endif -%}
+{%- if page.url contains "agency" -%}{%- assign isAgency = true -%}{%- else -%}{%- assign isAgency = false -%}{%- endif -%}
 
 {%- if size != 9 -%}
   {%- for contact in region -%}
@@ -24,7 +26,7 @@
   {%- endfor -%}
 {%- endif -%}
 
-{%- if isDeveloper == true or isRealtor == true -%}
+{%- if isDeveloper == true or isRealtor == true or isAgency == true -%}
 {%- else -%}
   {%- for contact in city -%}
     {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
@@ -102,6 +104,18 @@
 {%- endfor -%}
 
 {%- for contact in realtor -%}
+  {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
+    {%- if include.legal contains "phone" -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == "email" -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for contact in agency -%}
   {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
     {%- if include.legal contains "phone" -%}
       {%- include footer/phone.html legal=include.legal -%}

@@ -65,6 +65,8 @@ layout: compress
       {%- include pagination-js.html -%}
     {%- elsif page.url contains '/developer/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
+    {%- elsif page.url contains '/agency/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
+      {%- include pagination-js.html -%}
     {%- endif -%}
 
     {% include modals/net-realestate-modal.html %}

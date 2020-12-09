@@ -25,7 +25,7 @@
 {%- for lo in ps limit:1 -%}{%- if lo.breadcrumb -%}{%- assign location = lo.breadcrumb -%}{%- else -%}{%- assign location = lo.navtitle -%}{%- endif -%}{%- endfor -%}
 {%- capture aid -%}6{%- increment counter -%}{%- endcapture -%}
 {%- if forloop.first -%}
-<div{% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %} id="list-seller"{% endif %} class="row mt-4 mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+<div{% if page.url contains '/realtor/' or page.url contains '/developer/' or page.url contains '/agency/' and back.size == 4 or back.size == 5 %} id="list-seller"{% endif %} class="row mt-4 mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
   <div class="col px-2 mb-3">
     <div class="card h-100">
@@ -90,7 +90,7 @@
   </div>
 {%- if forloop.last -%}
 </div>
-{%- if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 -%}
+{%- if page.url contains '/realtor/' or page.url contains '/developer/' or page.url contains '/agency/' and back.size == 4 or back.size == 5 -%}
 <div id="pagination"></div>
 {%- endif -%}
 {%- endif -%}
