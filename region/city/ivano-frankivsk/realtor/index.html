@@ -10,8 +10,13 @@ description:
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+
+{%- comment -%}
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
-{%- assign addtitle = index[2].title | split: " " | slice: 1, 4 | join: " " -%}
+{%- endcomment -%}
+
+{%- assign index = site.pages | sort: "dir" | where: "dir", dir | where_exp: 'i', 'i.dir == dir and i.url contains "/index.html"' -%}
+{%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
 
 <div class="row">
   <div class="col-12">
