@@ -10,14 +10,14 @@ description:
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
-
-{%- comment -%}
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
-{%- endcomment -%}
 
-{%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.dir == dir and i.url contains 'index.html'" -%}
-###{{index}}###
-{%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
+
+{%- assign index1 = site.pages | sort: "dir" | where_exp: "i", "i.dir contains dir and i.url contains 'index.html'" -%}
+###{{dir}}###<br>
+==={{index1}}===
+
+{%- assign addtitle = index[2].title | split: " " | slice: 1, 4 | join: " " -%}
 
 <div class="row">
   <div class="col-12">
