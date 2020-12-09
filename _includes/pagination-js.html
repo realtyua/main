@@ -1,0 +1,19 @@
+<script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script>
+   $(function() {
+        let rows = [];
+        $('#list-seller>.col').each(function(i,row){return rows.push(row);});
+        $('#pagination').pagination({
+            dataSource:rows,
+            pageSize:3,
+            prevText:'&lsaquo;',
+            nextText:'&rsaquo;',
+            autoHidePrevious:true,
+            autoHideNext:true,
+            showNavigator:true,
+            formatNavigator: 'Всього сторінок <%= totalPage %>, записів <%= totalNumber %>',
+            hideWhenLessThanOnePage:true,
+            callback:function(data,pagination){$('#list-seller').html(data);}
+        })
+   });
+</script>

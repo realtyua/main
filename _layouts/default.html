@@ -4,6 +4,7 @@ layout: compress
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
@@ -13,9 +14,13 @@ layout: compress
     <div id="top"></div>
 
     <div class="main">
+
       {%- include header.html -%}
+
       <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
+
         {% if page.url == "/" %}
+
           <div class="container-md pb-1 lead-badge">
             <a class="badge badge-primary" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea">Виберіть місцевіть</a> <span class="badge badge-light text-wrap text-left">де б ви хотіли <strong>знайти, купити чи продати нерухомість</strong> або</span>
             <a class="badge badge-primary text-wrap text-left" data-toggle="collapse" href="#collapseAds" role="button" aria-expanded="false" aria-controls="collapseAds">побудувати чи просто зробити ремонт і облаштувати свою оселю</a>
@@ -34,7 +39,9 @@ layout: compress
               </div>
             </div>
           </div>
+
         {%- endif -%}
+
         <div class="container">
           {%- include breadcrumb.html -%}
           {%- assign isContent = content | strip_newlines -%}
@@ -44,53 +51,20 @@ layout: compress
             {{ content }}
           {%- endif -%}
         </div>
+
       </main>
+
       {%- include footer.html -%}
+
     </div>
 
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
 
     {%- if page.url contains '/realtor/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
-      <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-      <script>
-         $(function() {
-              let rows = [];
-              $('#list-seller>.col').each(function(i,row){return rows.push(row);});
-              $('#pagination').pagination({
-                  dataSource:rows,
-                  pageSize:3,
-                  prevText:'&lsaquo;',
-                  nextText:'&rsaquo;',
-                  autoHidePrevious:true,
-                  autoHideNext:true,
-                  showNavigator:true,
-                  formatNavigator: 'Всього сторінок <%= totalPage %>, записів <%= totalNumber %>',
-                  hideWhenLessThanOnePage:true,
-                  callback:function(data,pagination){$('#list-seller').html(data);}
-              })
-         });
-      </script>
+      {%- include pagination-js.html -%}
     {%- elsif page.url contains '/developer/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
-      <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-      <script>
-         $(function() {
-              let rows = [];
-              $('#list-seller>.col').each(function(i,row){return rows.push(row);});
-              $('#pagination').pagination({
-                  dataSource:rows,
-                  pageSize:3,
-                  prevText:'&lsaquo;',
-                  nextText:'&rsaquo;',
-                  autoHidePrevious:true,
-                  autoHideNext:true,
-                  showNavigator:true,
-                  formatNavigator: 'Всього сторінок <%= totalPage %>, записів <%= totalNumber %>',
-                  hideWhenLessThanOnePage:true,
-                  callback:function(data,pagination){$('#list-seller').html(data);}
-              })
-         });
-      </script>
+      {%- include pagination-js.html -%}
     {%- endif -%}
 
     {% include modals/net-realestate-modal.html %}
