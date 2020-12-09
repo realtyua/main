@@ -9,11 +9,11 @@ description:
 
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
-{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
+{%- assign dir = back | slice: 0, size | join: "/" | append: '/index.html' -%}
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
 
 
-{%- assign index1 = site.pages | sort: "dir" | where_exp: "i", "i.dir contains dir and i.url contains 'index.html'" -%}
+{%- assign index1 = site.pages | sort: "dir" | where_exp: "i", "i.dir ==  dir" -%}
 ###{{dir}}###<br>
 ==={{index1}}===
 
