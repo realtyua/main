@@ -15,10 +15,8 @@ description:
 
 {%- for it in index -%}
   {%- if it.url == dir -%}
-    {{it.title}} != {%- assign addtitle = it.title | split: " " | slice: 1, 4 | join: " " -%}
+    {{it.title}} == {%- assign addtitle = it.title | split: " " | slice: 1, 4 | join: " " -%}
   {% endif %}
-  <br>
-  {{it.title}} = {{it.url}}<br>
 {%- endfor -%}
 
 
