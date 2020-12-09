@@ -13,7 +13,6 @@ layout: default
     <h1>{{ page.title }} {{ addtitle }}</h1>
     {%- assign isContent = content | strip_newlines -%}
     {%- if isContent == '' -%}
-      <p>...</p>
     {%- else -%}
       {{ content }}
     {%- endif -%}

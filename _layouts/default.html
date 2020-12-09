@@ -7,7 +7,6 @@ layout: compress
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/paginationjs@2.1.5/dist/pagination.css" integrity="sha256-fFqxRJ9q487bQTOBfn4T8jkJt8IGlrVzTeauNnuRHVA=" crossorigin="anonymous">
     {%- include head.html -%}
   </head>
   <body>
@@ -52,7 +51,7 @@ layout: compress
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
 
-    {% if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 %}
+    {%- if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
       <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       <script>
          $(function() {
