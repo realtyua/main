@@ -9,12 +9,12 @@ description:
 
 {%- assign back = page.dir | split: "/" -%}
 {%- assign size = back | size | minus:1 -%}
-{%- assign dir = back | slice: 0, size | join: "/" | append: '/index.html' -%}
+{%- assign dir = back | slice: 0, size | join: "/" | append: '/' -%}
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
 
-
-{%- assign index1 = site.pages | sort: "dir" | where_exp: "i", "i.dir ==  dir" -%}
-###{{dir}}###<br>
+{%- assign url = back | slice: 0, size | join: "/" | append: '/index.html' -%}
+{%- assign index1 = site.pages | sort: "dir" | where_exp: "i", "i.url == url" -%}
+###{{url}}###<br>
 ==={{index1[0].title}}===<br>
 ==={{index1[1].title}}===<br>
 ==={{index1[2].title}}===<br>
