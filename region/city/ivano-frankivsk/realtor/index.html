@@ -13,12 +13,13 @@ description:
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
 
 
-{%- for it in index -%}
-{{it.dir}}<br>
+{%- for it in index
+  {%- if it.url contains '/index.html' -%}
+    {%- assign addtitle = it.title | split: " " | slice: 1, 4 | join: " " -%}
+  {% endif %}
+  {{it.title}} = {{it.url}}<br>
 {%- endfor -%}
 
-
-{%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
 
 <div class="row">
   <div class="col-12">
