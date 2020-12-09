@@ -13,7 +13,7 @@ description:
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
 
 {%- assign url = back | slice: 0, size | join: "/" | append: '/index.html' -%}
-{%- assign index1 = site.pages | sort: "dir" | where_exp: "i", "i.url == url" -%}
+{%- assign index1 = site.pages | sort: "dir" | where: "url", url -%}
 ###{{url}}###<br>
 ==={{index1[0].title}}===<br>
 ==={{index1[1].title}}===<br>
