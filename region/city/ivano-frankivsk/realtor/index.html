@@ -15,7 +15,7 @@ description:
 {%- assign index = site.pages | sort: "dir" | where: "dir", dir -%}
 {%- endcomment -%}
 
-{%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.dir == dir" -%}
+{%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.dir == dir and i.url contains 'index.html'" -%}
 ###{{index}}###
 {%- assign addtitle = index[0].title | split: " " | slice: 1, 4 | join: " " -%}
 
