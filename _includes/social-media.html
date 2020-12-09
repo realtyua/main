@@ -42,6 +42,13 @@
     </a>
   </li>
   {%- endif -%}
+  {%- if include.messenger == 1 -%}
+  <li class="list-inline-item">
+    <a href="https://messenger.com" target="_blank" rel="noopener" aria-label="Messenger">
+      <span>{%- include icons/messenger.svg width="24" height="24" -%}</span>
+    </a>
+  </li>
+  {%- endif -%}
 </ul>
 
 {% comment %}

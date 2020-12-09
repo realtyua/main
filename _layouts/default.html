@@ -51,7 +51,7 @@ layout: compress
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
 
-    {%- if page.url contains '/realtor/' or page.url contains '/developer/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
+    {%- if page.url contains '/realtor/' and page.table != 1 or page.table != 2 or page.url contains '/developer/' and page.table != 1 or page.table != 2 and back.size == 4 or back.size == 5 -%}
       <script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       <script>
          $(function() {
