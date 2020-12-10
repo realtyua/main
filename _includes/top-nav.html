@@ -17,7 +17,6 @@
 {%- assign tns = site.html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.url == '/add.html' and i.navhide != 1 and i.title != ''" -%}
 {%- for tn in tns -%}
   {%- if forloop.first -%}
-      <a href="/contacts" class="nav-link">Контакти</a>
     </nav>
   </div>
   {%- endif -%}
