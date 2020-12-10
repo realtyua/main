@@ -4,35 +4,65 @@ title: Контакти
 
 <h1>Ми у...</h1>
 
-<nav class="navbar navbar-expand-md navbar-light bg-white p-0">
-  <div class="navbar-brand d-md-none">
-    <span class="small">Виберіть тип контактів</span>
-    <span class="ml-1 float-right align-middle text-primary">→</span>
-  </div>
-  <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarContacts" aria-controls="navbarContacts" aria-expanded="false" aria-label="Toggle button">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarContacts">
-    <ul class="navbar-nav nav nav-tabs border-0" id="contacts-nav">
-      <li class="nav-item" role="presentation">
-        <a class="nav-link border-0 active" href="#messenger" id="messenger-tab" data-toggle="tab" role="tab" aria-controls="messenger" aria-selected="true">
-          <span>Mобільний додаток</span>
-        </a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link border-0" href="#sociology" id="sociology-tab" data-toggle="tab" role="tab" aria-controls="sociology" aria-selected="true">
-          <span>Соціальні мережі</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<hr class="mt-2 mt-md-0">
-<div class="tab-content" id="contacts-content">
-  <div class="tab-pane fade show active" id="messenger" role="tabpanel" aria-labelledby="messenger-tab">
-    ...
-  </div>
-  <div class="tab-pane fade" id="sociology" role="tabpanel" aria-labelledby="sociology-tab">
-    ...
+<div class="row">
+  <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+    <div class="navbar-brand d-md-none">
+      <span class="small">Виберіть тип контактів</span>
+      <span class="ml-1 float-right align-middle text-primary">→</span>
+    </div>
+    <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarContacts" aria-controls="navbarContacts" aria-expanded="false" aria-label="Toggle button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarContacts">
+      <ul class="navbar-nav nav nav-tabs border-0" id="contacts-nav">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link border-0 active" href="#office" id="office-tab" data-toggle="tab" role="tab" aria-controls="office" aria-selected="true">
+            <span>Офіс</span>
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link border-0" href="#messenger" id="messenger-tab" data-toggle="tab" role="tab" aria-controls="messenger" aria-selected="true">
+            <span>Mобільні додатоки</span>
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link border-0" href="#sociology" id="sociology-tab" data-toggle="tab" role="tab" aria-controls="sociology" aria-selected="true">
+            <span>Соціальні мережі</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <hr class="mt-2 mt-md-0">
+  <div class="tab-content" id="contacts-content">
+    <div class="tab-pane fade show active" id="office" role="tabpanel" aria-labelledby="office-tab">
+
+      <div class="row row-cols-auto">
+        <div class="col">
+          <address>
+            <strong>Мережа вебсайтів нерухомості</strong>,<br>
+            вулиця Січових Стрільців, будинок 56,<br>
+            місто Івано-Франківськ,<br>
+            поштовий індекс 76018,<br>
+            Україна.
+            <abbr title="Phone">P:</abbr> (123) 456-7890
+          </address>
+        </div>
+        <div class="col">
+          <address>
+            <strong>Телефони</strong>:<br>
+            <abbr title="Телефон для співпраці">Питання співпраці:</abbr> {%- include footer/phone.html legal=site.contact.phone_sms type='text' -%}
+            <abbr title="Телефон для оголошень">Подати оголошення:</abbr> {%- include footer/phone.html legal=site.contact.phone_hot type='text' -%}
+          </address>
+        </div>
+      </div>
+
+    </div>
+    <div class="tab-pane fade" id="messenger" role="tabpanel" aria-labelledby="messenger-tab">
+      ...
+    </div>
+    <div class="tab-pane fade" id="sociology" role="tabpanel" aria-labelledby="sociology-tab">
+      ...
+    </div>
   </div>
 </div>
