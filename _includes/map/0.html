@@ -7,7 +7,10 @@
     {%- if "/" == current and 0.navhide != 1 -%}
       <div class="col-sm-6 col-md-3">
         {%- if 0.url == '/region/' -%}
-          <h6>...</h6>
+          <h6>Інші сторінки</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2">...</li>
+          </ul>
         {%- else -%}
           {%- if 0.url == page.url -%}
             <h6>{%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}</h6>
