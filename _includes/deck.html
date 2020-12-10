@@ -4,18 +4,41 @@
     {%- assign slug = one.url | split: "/" | last -%}
     {%- assign current = one.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if "/" == current and one.url contains include.current and one.navhide != 1 -%}
-      <div class="col-12">
-        <h1 class="mb-4">
-          {% if one.url contains "/region/" %}{{ site.data.lang-uk.deck_region }} {% endif %}
-          {%- if one.url contains "/region/" -%}
-            {%- if one.navtitle -%}{{ one.navtitle | downcase }}{%- else -%}{{ one.title | downcase }}{%- endif -%}
-          {%- else -%}
-            {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
-          {%- endif -%}
-          {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
-        </h1>
-      </div>
-      <div class="col-12">{%- include home/region.html current=one.url -%}</div>
+      {%- if one.url contains "/region/" -%}
+
+        <div class="col-12">
+          <div class="row row-cols-1 row-cols-md-2">
+            <div class="col mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-text">...</div>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-text">...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {%- else -%}
+        <div class="col-12">
+          <h1 class="mb-4">
+            {% if one.url contains "/region/" %}{{ site.data.lang-uk.deck_region }} {% endif %}
+            {%- if one.url contains "/region/" -%}
+              {%- if one.navtitle -%}{{ one.navtitle | downcase }}{%- else -%}{{ one.title | downcase }}{%- endif -%}
+            {%- else -%}
+              {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+            {%- endif -%}
+            {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
+          </h1>
+        </div>
+        <div class="col-12">{%- include home/region.html current=one.url -%}</div>
+      {%- endif -%}
       {%- if one.url -%}
         {%- assign twos = site.pages -%}
         {%- for two in twos -%}
