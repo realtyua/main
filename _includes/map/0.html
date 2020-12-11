@@ -1,6 +1,6 @@
 <hr>
 <div class="row mt-3">
-  {%- assign rps = site.html_pages | sort: "path" | where_exp: "i", "i.dir == '/'" -%}
+  {%- assign rps = site.html_pages | sort: "path" | where_exp: "i", "i.dir == '/' and i.name != '404.html' and i.name != 'index.html'" -%}
   {%- assign 0s = site.html_pages | sort: 'path' | reverse -%}
   {%- for 0 in 0s -%}
     {%- assign slug = 0.url | split: "/" | last -%}
