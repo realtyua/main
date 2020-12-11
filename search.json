@@ -3,7 +3,7 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-{%- assign all = "" -%}
+{%- assign all = '' -%}
 {%- include data/ivano-frankivsk/all.html -%}
-{{ offers | push: all }}
+{{ all = offers | push: all }}
 {{ all | jsonify }}
