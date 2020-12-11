@@ -1,5 +1,6 @@
 <hr>
 <div class="row mt-3">
+  {%- assign rps = site.html_pages | sort: "path" | where_exp: "i", "i.dir == '/'" -%}
   {%- assign 0s = site.html_pages | sort: 'path' | reverse -%}
   {%- for 0 in 0s -%}
     {%- assign slug = 0.url | split: "/" | last -%}
@@ -7,9 +8,17 @@
     {%- if "/" == current and 0.navhide != 1 -%}
       <div class="col-sm-6 col-md-3">
         {%- if 0.url == '/region/' -%}
-          <h6>Інші сторінки</h6>
+          <h6><a href="/">Головна</a></h6>
           <ul class="list-unstyled">
-            <li class="mb-2">...</li>
+            {%- for rp in rps -%}
+              <li class="mb-2">
+                {%- if rp.url == page.url -%}
+                  <span>{%- if rp.navtitle -%}{{ rp.navtitle }}{%- else -%}{{ rp.title }}{%- endif -%}</span>
+                {%- else -%}
+                  <a href="{{ rp.url }}">{%- if rp.navtitle -%}{{ rp.navtitle }}{%- else -%}{{ rp.title }}{%- endif -%}</a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
           </ul>
         {%- else -%}
           {%- if 0.url == page.url -%}
