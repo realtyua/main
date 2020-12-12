@@ -50,12 +50,10 @@ layout: default
         {%- for offer in offers -%}
           {%- include table/html.html -%}
         {%- else -%}
-          {% capture ctitle %}
-            нерухомість {% if page.url contains "/all.html" %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}
-          {% endcapture %}
+          {% assign atitle = name | replace_first: "Нерухомість", "нерухомості" %}
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              {%- include none-advertisement.html title=ctitle -%}
+              {%- include none-advertisement.html title=atitle -%}
             </div>
           </div>
         {%- endfor -%}
