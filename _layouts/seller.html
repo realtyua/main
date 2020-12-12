@@ -6,8 +6,7 @@ layout: default
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: "/" -%}
 {%- assign index = site.html_pages | sort: "dir" | where_exp: "i", "i.url == dir" -%}
-{% assign title = index[0]title %}
-{% assign addtitle = title | split: " " | slice: 1, 4 | join: " " %}
+{% assign addtitle = index.title | split: " " | slice: 1, 4 | join: " " %}
 
 <div class="row">
   <div class="col-12">
