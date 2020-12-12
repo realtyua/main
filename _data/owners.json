@@ -190,27 +190,6 @@
       "images": ""
   },
   {
-      "id": "9",
-      "type": "Квартира",
-      "rent": "",
-      "rooms": "3",
-      "surface": "70",
-      "surface_land": "",
-      "price": "$165000",
-      "price_sqmt": "$850",
-      "floor": "1",
-      "floors": "5",
-      "parking": "Власне місце для паркування",
-      "region": "",
-      "location": "м. Тисмениця",
-      "address": "вул. Галицька",
-      "date": "2020-08-29",
-      "seller": "Олексій Іванович Шкурко",
-      "phone": "380007880078",
-      "description": "",
-      "images": ""
-  },
-  {
       "id": "10",
       "type": "Квартира",
       "rent": "",
