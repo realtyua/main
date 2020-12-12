@@ -11,11 +11,13 @@ layout: compress
     {%- include head.html -%}
   </head>
   <body>
+{%- comment -%}
     <div id="preloader" class="d-flex justify-content-center">
       <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
+{%- endcomment -%}
 
     <div id="top"></div>
 
@@ -83,11 +85,13 @@ layout: compress
       {% include modals/re-map-modal.html %}
     {%- endif -%}
 
+{%- comment -%}
     <script>
       $(window).on('load', function() {
         $('#preloader').delay(1000).fadeOut(300);
       });
     </script>
+{%- endcomment -%}
 
   </body>
 </html>
