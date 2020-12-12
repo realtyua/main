@@ -50,10 +50,9 @@ layout: default
         {%- for offer in offers -%}
           {%- include table/html.html -%}
         {%- else -%}
-          {% assign atitle = name | replace_first: "Нерухомість", "нерухомості" %}
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              {%- include none-advertisement.html title=atitle -%}
+              {%- include none-advertisement.html title=name -%}
             </div>
           </div>
         {%- endfor -%}
