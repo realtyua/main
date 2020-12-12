@@ -136,6 +136,12 @@
                     </div>
                   </div>
                   {%- endif -%}
+                {%- else -%}
+                  <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                      {%- include none-advertisement.html title=page.title -%}
+                    </div>
+                  </div>
                 {%- endfor -%}
               {%- endif -%}
             </div>
