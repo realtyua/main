@@ -12,11 +12,7 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {{ addtitle }}</h1>
-    {%- assign isContent = content | strip_newlines -%}
-    {%- if isContent == "" -%}
-    {%- else -%}
-      {{ content }}
-    {%- endif -%}
+    {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
     <h2 class="md-3">{{ page.subtitle }}</h2>
     {%- include elements/list-pages.html l=6 -%}

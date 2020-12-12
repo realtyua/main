@@ -6,7 +6,7 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title }} {% if page.url contains "/all.html" %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}</h1>
-    {{ content }}
+    {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
     <h2>
     {%- if page.url contains "rent" -%}
@@ -50,7 +50,14 @@ layout: default
         {%- for offer in offers -%}
           {%- include table/html.html -%}
         {%- else -%}
-          {%- include none-advertisement.html -%}
+          {% capture ctitle %}
+            нерухомість {% if page.url contains "/all.html" %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}
+          {% endcapture %}
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              {%- include none-advertisement.html title="{{ ctitle }}" -%}
+            </div>
+          </div>
         {%- endfor -%}
       {%- endif -%}
     {%- endif -%}

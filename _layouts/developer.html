@@ -17,12 +17,7 @@ layout: default
         {%- endif -%}
       </div>
       <div class="col-md-8 mt-3 mt-md-0">
-        {%- assign isContent = content | strip_newlines -%}
-        {%- if isContent == '' -%}
-          <p>{{ page.title }} це...</p>
-        {%- else -%}
-          {{ content }}
-        {%- endif -%}
+        {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
       </div>
     </div>
     {%- if isJson.size > 0 or stabs.size > 0 -%}
