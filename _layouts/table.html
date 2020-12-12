@@ -1,43 +1,45 @@
 ---
 layout: default
 ---
-{%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
-{%- assign addtitle = name | split: ' ' | slice: 2, 4 | join: ' ' -%}
+{%- capture name -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
+{%- assign addtitle = name | split: " " | slice: 2, 4 | join: " " -%}
 <div class="row">
   <div class="col-12">
-    <h1>{{ page.title }} {% if page.url contains '/all.html' %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}</h1>
+    <h1>{{ page.title }} {% if page.url contains "/all.html" %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}</h1>
     {{ content }}
     {%- include nav-section.html -%}
-    {%- if page.url contains 'rent' -%}
-      <h2>{{ site.data.lang-uk.re_rent_h2 }}</h2>
-    {%- elsif page.url contains 'land' -%}
-      <h2>{{ site.data.lang-uk.re_land_h2 }}</h2>
-    {%- elsif page.url contains 'house' -%}
-      <h2>{{ site.data.lang-uk.re_house_h2 }}</h2>
-    {%- elsif page.url contains 'garage' -%}
-      <h2>{{ site.data.lang-uk.re_garage_h2 }}</h2>
-    {%- elsif page.url contains 'commercial' -%}
-      <h2>{{ site.data.lang-uk.re_commercial_h2 }}</h2>
-    {%- elsif page.url contains 'apartment' -%}
-      <h2>{{ site.data.lang-uk.re_apartment_h2 }}</h2>
-    {%- elsif page.url contains 'all' -%}
-      <h2>{{ site.data.lang-uk.re_all_h2 }}</h2>
+    <h2>
+    {%- if page.url contains "rent" -%}
+      {{ site.data.lang-uk.re_rent_h2 }}
+    {%- elsif page.url contains "land" -%}
+      {{ site.data.lang-uk.re_land_h2 }}
+    {%- elsif page.url contains "house" -%}
+      {{ site.data.lang-uk.re_house_h2 }}
+    {%- elsif page.url contains "garage" -%}
+      {{ site.data.lang-uk.re_garage_h2 }}
+    {%- elsif page.url contains "commercial" -%}
+      {{ site.data.lang-uk.re_commercial_h2 }}
+    {%- elsif page.url contains "apartment" -%}
+      {{ site.data.lang-uk.re_apartment_h2 }}
+    {%- elsif page.url contains "all" -%}
+      {{ site.data.lang-uk.re_all_h2 }}
     {%- endif -%}
+    </h2>
     {%- assign slug = page.url | split: "/" | last -%}
-    {%- assign l = page.url | split: '/' -%}
-    {%- if page.url contains 'all.html' -%}
-      {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
+    {%- assign l = page.url | split: "/" -%}
+    {%- if page.url contains "all.html" -%}
+      {%- assign json = page.url | replace: "all.html", "data/all.json" -%}
       {%- if l.size == 4 -%}
-        {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+        {%- assign data = page.url | split: "/" | slice: 2, 4 | join: "/" | prepend: "data/" -%}
       {%- elsif l.size == 5 -%}
-        {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+        {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: "data/" -%}
       {%- endif -%}
     {%- else -%}
-      {%- assign json = here | append: 'data/' | append: slug | append: '.json' -%}
+      {%- assign json = here | append: "data/" | append: slug | append: ".json" -%}
       {%- if l.size == 4 -%}
-        {%- assign data = page.url | split: "/" | slice: 2, 4 | join: "/" | prepend: 'data/' | append: '.html' -%}
+        {%- assign data = page.url | split: "/" | slice: 2, 4 | join: "/" | prepend: "data/" | append: ".html" -%}
       {%- elsif l.size == 5 -%}
-        {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: 'data/' | append: '.html' -%}
+        {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: "data/" | append: ".html" -%}
       {%- endif -%}
     {%- endif -%}
     {%- if data -%}
@@ -47,6 +49,8 @@ layout: default
       {%- else -%}
         {%- for offer in offers -%}
           {%- include table/html.html -%}
+        {%- else -%}
+          {%- include none-advertisement.html -%}
         {%- endfor -%}
       {%- endif -%}
     {%- endif -%}
