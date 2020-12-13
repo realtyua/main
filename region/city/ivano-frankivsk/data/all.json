@@ -3,6 +3,7 @@ layout: null
 sitemap: false
 navhide: 1
 ---
+{%- include data/ivano-frankivsk/all.html -%}
 [
   {%- for offer in offers -%}
     {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
@@ -35,7 +36,7 @@ navhide: 1
       "phone":"{{ offer.phone }}",
       "description":"{{ offer.description }}",
       {%- if isImage != '' -%}
-        "images": [
+        "images":[
           {%- for file in site.static_files -%}
             {%- if file.path contains folder and file.extname == '.jpg' -%}
               {
