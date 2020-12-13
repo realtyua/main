@@ -4,8 +4,7 @@ sitemap: false
 navhide: 1
 ---
 {%- include data/ivano-frankivsk/all.html -%}
-[
-  {%- for offer in offers -%}
+[{%- for offer in offers -%}
     {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
     {%- capture files -%}{%- for file in site.static_files -%}{%- if file.path contains folder and file.extname == '.jpg' -%}{{ file.path }}{%- endif -%}{%- endfor -%}{%- endcapture -%}
     {%- assign isImage = files | strip_newlines -%}
@@ -14,13 +13,13 @@ navhide: 1
         "images":[
           {%- for file in site.static_files -%}
             {%- if file.path contains folder and file.extname == '.jpg' -%}
-              {"src":"{{ file.name }}","alt":"image1 alt Json","title":"image1 title Json"}{%- if file.path contains folder and forloop.last -%}{%- else -%},{%- endif -%}
+              {%- capture img -%}{"src":"{{ file.name }}","alt":"image1 alt Json","title":"image1 title Json"},{%- endcapture -%}
+              {{ img | replace: '"},]}', '"}]}' }}
             {%- endif -%}
           {%- endfor -%}
         ]
       {%- else -%}
         "images":""
       {%- endif -%}
-    }{%- unless forloop.last %},{% endunless -%}
-  {%- endfor -%}
-]
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}]
