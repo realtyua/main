@@ -1,12 +1,8 @@
----
-layout: null
-sitemap: false
----
 
 $(function () {
   "use strict";
   var expandedRow = null;
-  if ($('table#property').length > 0) {
+  if ($('div.pswp').length < 1 && $('table#property').length > 0) {
       var photoswipeTemplate = '\
           <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\
               <div class="pswp__bg"></div>\
@@ -67,10 +63,6 @@ function jsDetailFormatter(index, row, $detail) {
   "use strict";
   var d = new Date(row.date);
   var n = d.getMonth();
-
-  // function rePriceSqmt () {
-  //
-  // }
 
   $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
