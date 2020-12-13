@@ -13,11 +13,7 @@ navhide: 1
       {%- endfor -%}
     {%- endcapture -%}
     {%- assign isImage = files | strip_newlines -%}
-    {
-      "id":"{{ offer.id }}",
-      "type":"{{ offer.type }}",
-      "rent":"{{ offer.rent }}",
-      "rooms":"{{ offer.rooms }}",
+    {"id":"{{ offer.id }}","type":"{{ offer.type }}","rent":"{{ offer.rent }}","rooms":"{{ offer.rooms }}",
       "surface":"{{ offer.surface }}",
       "surface_land":"{{ offer.surface_land }}",
       "price":"{{ offer.price }}",
@@ -30,19 +26,13 @@ navhide: 1
       "address":"{{ offer.address }}",
       "coordinates":"{{ offer.coordinates }}",
       "date":"{{ offer.date }}",
-      "seller":"{{ offer.seller }}",
-      "phone":"{{ offer.phone }}",
-      "description":"{{ offer.description }}",
+      "seller":"{{ offer.seller }}","phone":"{{ offer.phone }}","description":"{{ offer.description }}",
       {%- if isImage != '' -%}
         "images":[
           {%- for file in site.static_files -%}
             {%- if file.path contains folder and file.extname == '.jpg' -%}
-              {
-                "src":"{{ file.name }}",
-                "alt":"image1 alt Json",
-                "title":"image1 title Json"
-              }{%- unless forloop.last %},{% endunless -%}
-            {%- endif -%}
+              {"src":"{{ file.name }}","alt":"image1 alt Json","title":"image1 title Json"}
+            {%- endif -%}{%- unless forloop.last %},{% endunless -%}
           {%- endfor -%}
         ]
       {%- else -%}
