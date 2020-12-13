@@ -12,4 +12,4 @@ navhide: 1
 {%- assign name = page.name | remove: '.json' -%}
 {%- assign data = site.data[name] | where_exp: 'i', 'i.location contains location' -%}
 {%- assign offers = data | sort: 'date' | reverse -%}
-{{ offers | jsonify }}
+{%- include offer-json.html -%}

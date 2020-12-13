@@ -4,4 +4,4 @@ sitemap: false
 navhide: 1
 ---
 {%- include data/ivano-frankivsk/apartment.html -%}
-{{ offers | jsonify }}
+{%- include offer-json.html -%}
