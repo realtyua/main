@@ -171,10 +171,28 @@ function jsDetailFormatter(index, row, $detail) {
 
   const images = Object.values(row.images || {});
 
+
   if (images.length) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
-      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      /*
+      / return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      */
+
+return '
+
+{%- capture folder -%}/assets/images/' + row.phone + '/' + row.id + '/{%- endcapture -%}
+{%- capture files -%}
+  {%- for file in site.static_files -%}
+    {%- if file.path contains folder and file.extname == ".jpg" -%}
+      <figure class="col px-1"><a href="{{ file.path }}" class="lightbox" title="Title Image Realestate" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="{{ file.path }}" loading="lazy" title="Title Image Realestate" alt="Alt Image Realestate" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign isImage = files | strip_newlines -%}
+
+'
+
     }).join('')),
     html.push('</span>')
   }
