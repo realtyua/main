@@ -7,32 +7,15 @@ navhide: 1
 [
   {%- for offer in offers -%}
     {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
-    {%- capture files -%}
-      {%- for file in site.static_files -%}
-        {%- if file.path contains folder and file.extname == '.jpg' -%}{{ file.path }}{%- endif -%}
-      {%- endfor -%}
-    {%- endcapture -%}
+    {%- capture files -%}{%- for file in site.static_files -%}{%- if file.path contains folder and file.extname == '.jpg' -%}{{ file.path }}{%- endif -%}{%- endfor -%}{%- endcapture -%}
     {%- assign isImage = files | strip_newlines -%}
-    {"id":"{{ offer.id }}","type":"{{ offer.type }}","rent":"{{ offer.rent }}","rooms":"{{ offer.rooms }}",
-      "surface":"{{ offer.surface }}",
-      "surface_land":"{{ offer.surface_land }}",
-      "price":"{{ offer.price }}",
-      "price_sqmt":"{{ offer.price_sqmt }}",
-      "floor":"{{ offer.floor }}",
-      "floors":"{{ offer.floors }}",
-      "parking":"{{ offer.parking }}",
-      "region":"{{ offer.region }}",
-      "location":"{{ offer.location }}",
-      "address":"{{ offer.address }}",
-      "coordinates":"{{ offer.coordinates }}",
-      "date":"{{ offer.date }}",
-      "seller":"{{ offer.seller }}","phone":"{{ offer.phone }}","description":"{{ offer.description }}",
+    {"id":"{{ offer.id }}","type":"{{ offer.type }}","page":"{{ offer.page }}","rent":"{{ offer.rent }}","rooms":"{{ offer.rooms }}","surface":"{{ offer.surface }}","surface_land":"{{ offer.surface_land }}","price":"{{ offer.price }}","price_sqmt":"{{ offer.price_sqmt }}","floor":"{{ offer.floor }}","floors":"{{ offer.floors }}","parking":"{{ offer.parking }}","region":"{{ offer.region }}","location":"{{ offer.location }}","address":"{{ offer.address }}","coordinates":"{{ offer.coordinates }}","date":"{{ offer.date }}","seller":"{{ offer.seller }}","phone":"{{ offer.phone }}","description":"{{ offer.description }}",
       {%- if isImage != '' -%}
         "images":[
           {%- for file in site.static_files -%}
             {%- if file.path contains folder and file.extname == '.jpg' -%}
-              {"src":"{{ file.name }}","alt":"image1 alt Json","title":"image1 title Json"}
-            {%- endif -%}{%- unless forloop.last %},{% endunless -%}
+              {"src":"{{ file.name }}","alt":"image1 alt Json","title":"image1 title Json"}{%- if file.path contains folder and forloop.last -%}{%- else -%},{%- endif -%}
+            {%- endif -%}
           {%- endfor -%}
         ]
       {%- else -%}
