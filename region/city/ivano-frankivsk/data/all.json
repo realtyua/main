@@ -13,7 +13,7 @@ navhide: 1
         "images":[{%- for file in site.static_files -%}
             {%- if file.path contains folder and file.extname == '.jpg' -%}
               {%- capture img -%}{"src":"{{ file.name }}","alt":"image1 alt Json","title":"image1 title Json"},{%- endcapture -%}
-              {{ img | replace: "},]}", "}]}" }}
+              /\{\{/ img | replace: "},]}", "}]}" /\}\}/
             {%- endif -%}
           {%- endfor -%}]
       {%- else -%}"images":""{%- endif -%}
