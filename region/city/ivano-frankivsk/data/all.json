@@ -20,7 +20,7 @@ navhide: 1
             {%- endfor -%}
           ]
         {%- endcapture -%}
-        {{ img | replace: "},]", "}]" }}
+        {% raw %}{{ img | replace: "},]", "}]" }}{% endraw %}
       {%- else -%}"images":""{%- endif -%}
     }{%- unless forloop.last -%},{%- endunless -%}
   {%- endfor -%}]

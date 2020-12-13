@@ -49,8 +49,6 @@ markdown: kramdown
 kramdown:
   auto_ids: false
 
-excerpt_separator: ""
-
 collections:
   stabs:
     output: true
