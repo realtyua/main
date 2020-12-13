@@ -9,9 +9,7 @@ navhide: 1
     {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
     {%- capture files -%}
       {%- for file in site.static_files -%}
-        {%- if file.path contains folder and file.extname == '.jpg' -%}
-          {{ file.path }}
-        {%- endif -%}
+        {%- if file.path contains folder and file.extname == '.jpg' -%}{{ file.path }}{%- endif -%}
       {%- endfor -%}
     {%- endcapture -%}
     {%- assign isImage = files | strip_newlines -%}
@@ -30,7 +28,7 @@ navhide: 1
       "region":"{{ offer.region }}",
       "location":"{{ offer.location }}",
       "address":"{{ offer.address }}",
-      "coordinates":"{{ offer. }}",
+      "coordinates":"{{ offer.coordinates }}",
       "date":"{{ offer.date }}",
       "seller":"{{ offer.seller }}",
       "phone":"{{ offer.phone }}",
