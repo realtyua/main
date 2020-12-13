@@ -8,8 +8,12 @@ layout: compress
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
+    {%- include head.html -%}
+
     <link rel="stylesheet" href="{{ "/assets/css/spin.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+
     <script src="{{ "/assets/js/spin.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+
     <style type="text/css">
       .spinner {
         position: fixed;
@@ -21,7 +25,6 @@ layout: compress
       }
     </style>
 
-    {%- include head.html -%}
   </head>
   <body>
 
@@ -110,6 +113,7 @@ layout: compress
         });
 
         function mySpinner(isStart) {
+
             var opts = {
                 lines: 13,
                 length: 3,
@@ -134,6 +138,7 @@ layout: compress
                 $('#waitSpinner').html(spinner.el);
                 $('#overlay').show();
             }
+            
             else if (spinner) {
                 setTimeout(function () {
                     spinner.stop();
@@ -142,6 +147,7 @@ layout: compress
                     $('#overlay').remove();
                 }, 1000);
             }
+
         };
 
     </script>
