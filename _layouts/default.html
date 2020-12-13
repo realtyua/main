@@ -9,10 +9,22 @@ layout: compress
 <html dir="ltr" lang="uk-UA">
   <head>
     <link rel="stylesheet" href="{{ "/assets/css/spin.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+    <style type="text/css">
+      .spinner {
+        position: fixed;
+        left: 50%;
+        top: 40px;
+        margin-left: -32px; /* -1 * image width / 2 */
+        margin-top: -32px;  /* -1 * image height / 2 */
+        z-index: 99999999;
+      }
+    </style>
     <script src="{{ "/assets/js/spin.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     <script>
-      var target = document.getElementById('spinner');
-      var spinner = new Spinner(opts).spin(target);
+      $(function() {
+        var target = document.getElementById("spinner");
+        var spinner = new Spinner(opts).spin(target);
+      });
     </script>
     {%- include head.html -%}
   </head>
