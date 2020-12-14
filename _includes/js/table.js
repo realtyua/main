@@ -337,7 +337,7 @@ function htmlDetailFormatter(index, row, $detail) {
 
 }
 
-$(document).on('click', 'a.lightbox', function(event){
+$('table#property').on('click', 'a.lightbox', function(event){
   event.preventDefault();
   var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
