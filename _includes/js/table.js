@@ -174,7 +174,7 @@ function jsDetailFormatter(index, row, $detail) {
   if (images.length) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
-      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="' + image.title + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="' + image.title + '" alt="' + image.alt + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="' + image.title + '" data-lightbox-caption="' + image.title + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="' + image.title + '" alt="' + image.alt + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
   }
@@ -314,7 +314,7 @@ function htmlDetailFormatter(index, row, $detail) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
       console.log(image);
-      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" alt="Нерухомість в ' + row.location + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-caption="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" alt="Нерухомість в ' + row.location + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
   }
