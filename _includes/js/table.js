@@ -191,6 +191,7 @@ function jsDetailFormatter(index, row, $detail) {
     } else {
         caption = $link.next('figcaption').text();
     }
+    console.log (caption);
     items[index].push({
         src: $link.attr('href'),
         title: $link.attr("title"),
@@ -338,6 +339,7 @@ function htmlDetailFormatter(index, row, $detail) {
     } else {
         caption = $link.next('figcaption').text();
     }
+    console.log (caption);
     items[index].push({
         src: $link.attr('href'),
         title: $link.attr("title"),
