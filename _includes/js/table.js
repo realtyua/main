@@ -190,7 +190,6 @@ function jsDetailFormatter(index, row, $detail) {
         title: $(this).attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        pid: $(this).index('a.lightbox[data-lightbox-group=' + gid + ']'),
     })
   })
 
@@ -332,7 +331,6 @@ function htmlDetailFormatter(index, row, $detail) {
         title: $(this).attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        pid: $(this).index('a.lightbox[data-lightbox-group=' + gid + ']'),
     })
   })
 
