@@ -314,7 +314,6 @@ function htmlDetailFormatter(index, row, $detail) {
   if (images.length) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
-      console.log(image);
       return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" alt="' + row.type + ' в ' + row.location + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
@@ -332,6 +331,7 @@ function htmlDetailFormatter(index, row, $detail) {
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
     })
+    console.log(items);
   })
 
 }
@@ -355,6 +355,11 @@ $(document).on('click', 'a.lightbox', function(event){
     bgOpacity: 0.85,
     showHideOpacity: true
   };
+
+  console.log(options);
+
+  console.log(items[index]);
+
   if(items.length > 0) {
     var index = $(this).closest('.detail-view').prev().data('index');
     var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
