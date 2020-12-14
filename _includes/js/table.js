@@ -187,9 +187,9 @@ function jsDetailFormatter(index, row, $detail) {
     var $link = $(this).find('a.lightbox');
     items[index].push({
         src: $link.attr('href'),
+        title: $(this).attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
         pid: $(this).index('a.lightbox[data-lightbox-group=' + gid + ']'),
     })
   })
@@ -332,7 +332,6 @@ function htmlDetailFormatter(index, row, $detail) {
         title: $(this).attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
         pid: $(this).index('a.lightbox[data-lightbox-group=' + gid + ']'),
     })
   })
