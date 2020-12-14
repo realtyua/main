@@ -174,7 +174,7 @@ function jsDetailFormatter(index, row, $detail) {
   if (images.length) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
-      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="' + image.title + '" data-lightbox-caption="' + image.title + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="' + image.title + '" alt="' + image.alt + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="' + image.title + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="' + image.title + '" alt="' + image.alt + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
   }
@@ -315,7 +315,7 @@ function htmlDetailFormatter(index, row, $detail) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
       console.log(image);
-      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-caption="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" alt="' + row.type + ' в ' + row.location + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" alt="' + row.type + ' в ' + row.location + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
   }
@@ -340,6 +340,17 @@ $(document).on('click', 'a.lightbox', function(event){
   event.preventDefault();
   var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
+    addCaptionHTMLFn: function(item, captionEl, isFake) {
+        if(!item.title) {
+            captionEl.children[0].innerHTML = '';
+            return false;
+        }
+        captionEl.children[0].innerHTML = '<div class="pswp__caption__title">' + item.title + '</div>';
+        if(item.caption) {
+            captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + item.caption + '</div>';
+        }
+        return true;
+    },
     index: $(this).parent('figure').index(),
     bgOpacity: 0.85,
     showHideOpacity: true
