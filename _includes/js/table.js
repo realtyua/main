@@ -343,7 +343,6 @@ $(document).on('click', 'a.lightbox', function(event){
   options = {
     index: $(this).parent('figure').index(),
     bgOpacity: 0.85,
-    captionEl: true,
     showHideOpacity: true
   };
 
