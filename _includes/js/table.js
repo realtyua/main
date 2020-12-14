@@ -327,11 +327,10 @@ function htmlDetailFormatter(index, row, $detail) {
     var $link = $(this).find('a.lightbox');
     items[index].push({
         src: $link.attr('href'),
-        title: $(this).attr("title"),
+        title: $link.attr("title"),
         w: $link.data('lightbox-width'),
-        h: $link.data('lightbox-height'),
+        h: $link.data('lightbox-height')
     })
-    console.log(items);
   })
 
 }
@@ -358,7 +357,7 @@ $(document).on('click', 'a.lightbox', function(event){
 
   console.log(options);
 
-  console.log(items);
+  console.log(item);
 
   if(items.length > 0) {
     var index = $(this).closest('.detail-view').prev().data('index');
