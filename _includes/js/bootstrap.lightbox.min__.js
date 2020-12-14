@@ -67,24 +67,9 @@ $(function () {
             });
         });
         var options = {
-            index: pid,
-            addCaptionHTMLFn: function(item, captionEl) { captionEl.children[0].innerHTML = ''; if(item.title && item.title !== '--none--') { captionEl.children[0].innerHTML += '<div class="pswp__caption__title">' + item.title + '</div>'; } if(item.caption) { captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + item.caption + '</div>'; } return true; },
-            spacing:        0.12,
-            loop:           true,
-            bgOpacity:      1,
-            closeOnScroll:  true,
-            history:        true,
-            galleryUID:     gid,
-            galleryPIDs:    true,
-            closeEl:        true,
-            captionEl:      true,
-            fullscreenEl:   true,
-            zoomEl:         true,
-            shareEl:        false,
-            counterEl:      true,
-            arrowEl:        true,
-            preloaderEl:    true,
-        }; if(items.length > 0) { var gallery = new PhotoSwipe( photoswipeContainer, PhotoSwipeUI_Default, items, options); gallery.init(); } }
+            index: pid,addCaptionHTMLFn: function(item, captionEl) { captionEl.children[0].innerHTML = ''; if(item.title && item.title !== '--none--') { captionEl.children[0].innerHTML += '<div class="pswp__caption__title">' + item.title + '</div>'; } if(item.caption) { captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + item.caption + '</div>'; } return true; },
+            spacing:0.12,loop:true,bgOpacity:1,closeOnScroll:true,history:true,galleryUID:gid,galleryPIDs:true,closeEl:true,captionEl:true,fullscreenEl:true,zoomEl:true,shareEl:false,counterEl:true,arrowEl:true,preloaderEl:true,
+        }; if(items.length>0) { var gallery = new PhotoSwipe(photoswipeContainer,PhotoSwipeUI_Default,items,options); gallery.init(); } }
 
 var getPhotoSwipeParamsFromHash = function() { var hash = window.location.hash.substring(1), params = {}; if(hash.length < 5) { return params; } var vars = hash.split('&'); for (var i = 0; i < vars.length; i++) { if(!vars[i]) { continue; } var pair = vars[i].split('='); if(pair.length < 2) { continue; } params[pair[0]] = pair[1]; } return params; };
 var photoSwipeHashData = getPhotoSwipeParamsFromHash(); if(photoSwipeHashData.pid && photoSwipeHashData.gid) { openPhotoSwipe( parseInt(photoSwipeHashData.pid) , photoSwipeHashData.gid); } $('body').on('click', 'a.lightbox', function(e) { e.preventDefault(); var gid = $(this).attr('data-lightbox-group'); var pid = $(this).index('a.lightbox[data-lightbox-group=' + gid + ']'); openPhotoSwipe(pid, gid); }); });
