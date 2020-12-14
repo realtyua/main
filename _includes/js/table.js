@@ -356,8 +356,8 @@ $(document).on('click', 'a.lightbox', function(event){
   };
 
   console.log(options);
-
-  console.log(item);
+console.log(index);
+  console.log(items[index]);
 
   if(items.length > 0) {
     var index = $(this).closest('.detail-view').prev().data('index');
