@@ -187,7 +187,7 @@ function jsDetailFormatter(index, row, $detail) {
     var $link = $(this).find('a.lightbox');
     items[index].push({
         src: $link.attr('href'),
-        title: $(this).attr("title"),
+        title: $link.attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
     })
@@ -339,14 +339,14 @@ $(document).on('click', 'a.lightbox', function(event){
   event.preventDefault();
   var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
-    addCaptionHTMLFn: function(item, captionEl, isFake) {
-        if(!t.title) {
+    addCaptionHTMLFn: function(items, index, captionEl, isFake) {
+        if(!items.title) {
             captionEl.children[0].innerHTML = '';
             return false;
         }
-        captionEl.children[0].innerHTML = '<div class="pswp__caption__title">' + t.title + '</div>';
-        if(t.caption) {
-            captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + t.caption + '</div>';
+        captionEl.children[0].innerHTML = '<div class="pswp__caption__title">' + items.title + '...' + index.title + '</div>';
+        if(items.caption) {
+            captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + items.caption + '</div>';
         }
         return true;
     },
@@ -356,6 +356,7 @@ $(document).on('click', 'a.lightbox', function(event){
   };
 
   console.log(items);
+  console.log(items.src);
 
   if(items.length > 0) {
     var index = $(this).closest('.detail-view').prev().data('index');
