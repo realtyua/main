@@ -340,13 +340,13 @@ $(document).on('click', 'a.lightbox', function(event){
   var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
     addCaptionHTMLFn: function(item, captionEl, isFake) {
-        if(!item.title) {
+        if(!t.title) {
             captionEl.children[0].innerHTML = '';
             return false;
         }
-        captionEl.children[0].innerHTML = '<div class="pswp__caption__title">' + item.title + '</div>';
-        if(item.caption) {
-            captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + item.caption + '</div>';
+        captionEl.children[0].innerHTML = '<div class="pswp__caption__title">' + t.title + '</div>';
+        if(t.caption) {
+            captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + t.caption + '</div>';
         }
         return true;
     },
