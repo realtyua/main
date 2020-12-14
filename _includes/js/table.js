@@ -185,6 +185,7 @@ function jsDetailFormatter(index, row, $detail) {
 
   $detail.find('figure').each(function(){
     var $link = $(this).find('a.lightbox');
+    var caption = '';
     if($link.data('lightbox-caption')) {
         caption = $link.data('lightbox-caption');
     } else {
