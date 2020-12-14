@@ -314,7 +314,7 @@ function htmlDetailFormatter(index, row, $detail) {
     html.push('<hr><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
       console.log(image);
-      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-caption="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" alt="Нерухомість в ' + row.location + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-caption="' + row.type + ' по ' + row.address + ' в ' + row.location + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '" alt="' + row.type + ' в ' + row.location + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
   }
@@ -327,14 +327,17 @@ function htmlDetailFormatter(index, row, $detail) {
     var $link = $(this).find('a.lightbox');
     items[index].push({
         src: $link.attr('href'),
+        title: $(this).attr("title"),
         w: $link.data('lightbox-width'),
-        h: $link.data('lightbox-height')
+        h: $link.data('lightbox-height'),
+        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
+        pid: $(this).index('a.lightbox[data-lightbox-group=' + gid + ']'),
     })
   })
 
 }
 
-$(document).on('click', '.lightbox', function(event){
+$(document).on('click', 'a.lightbox', function(event){
   event.preventDefault();
   var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
