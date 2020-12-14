@@ -185,18 +185,12 @@ function jsDetailFormatter(index, row, $detail) {
 
   $detail.find('figure').each(function(){
     var $link = $(this).find('a.lightbox');
-    var caption = '';
-    if($link.data('lightbox-caption')) {
-        caption = $link.data('lightbox-caption');
-    } else {
-        caption = $link.next('figcaption').text();
-    }
     items[index].push({
         src: $link.attr('href'),
         title: $link.attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
+        caption: $link.data('lightbox-caption'),
     })
   })
 
@@ -332,18 +326,12 @@ function htmlDetailFormatter(index, row, $detail) {
 
   $detail.find('figure').each(function(){
     var $link = $(this).find('a.lightbox');
-    var caption = '';
-    if($link.data('lightbox-caption')) {
-        caption = $link.data('lightbox-caption');
-    } else {
-        caption = $link.next('figcaption').text();
-    }
     items[index].push({
         src: $link.attr('href'),
         title: $link.attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
+        caption: $link.data('lightbox-caption'),
     })
   })
 
