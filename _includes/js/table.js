@@ -188,7 +188,9 @@ function jsDetailFormatter(index, row, $detail) {
     items[index].push({
         src: $link.attr('href'),
         w: $link.data('lightbox-width'),
-        h: $link.data('lightbox-height')
+        h: $link.data('lightbox-height'),
+        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
+        pid: $(this).index('a.lightbox[data-lightbox-group=' + gid + ']'),
     })
   })
 
