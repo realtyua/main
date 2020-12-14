@@ -191,13 +191,12 @@ function jsDetailFormatter(index, row, $detail) {
     } else {
         caption = $link.next('figcaption').text();
     }
-    console.log (caption);
     items[index].push({
         src: $link.attr('href'),
         title: $link.attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />')
+        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
     })
   })
 
@@ -339,13 +338,12 @@ function htmlDetailFormatter(index, row, $detail) {
     } else {
         caption = $link.next('figcaption').text();
     }
-    console.log (caption);
     items[index].push({
         src: $link.attr('href'),
         title: $link.attr("title"),
         w: $link.data('lightbox-width'),
         h: $link.data('lightbox-height'),
-        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />')
+        caption: caption.replace(/(?:\r\n|\r|\n)/g, '<br />'),
     })
   })
 
@@ -357,11 +355,12 @@ $(document).on('click', 'a.lightbox', function(event){
   options = {
     index: $(this).parent('figure').index(),
     bgOpacity: 0.85,
+    captionEl: true,
     showHideOpacity: true
   };
 
   if(items.length > 0) {
-    var index = $(this).closest('.detail-view').prev().data('index');
+    var index = $(this).closest('tr.detail-view').prev().data('index');
     var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
     gallery.init();
   }
