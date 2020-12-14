@@ -340,14 +340,14 @@ $(document).on('click', 'a.lightbox', function(event){
   event.preventDefault();
   var photoswipeContainer = document.querySelectorAll('.pswp')[0];
   options = {
-    addCaptionHTMLFn: function(item[index], captionEl, isFake) {
-        if(!item[index].title) {
+    addCaptionHTMLFn: function(item, captionEl, isFake) {
+        if(!item.title) {
             captionEl.children[0].innerHTML = '';
             return false;
         }
-        captionEl.children[0].innerHTML = '<div class="pswp__caption__title">' + item[index].title + '</div>';
-        if(item[index].caption) {
-            captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + item[index].caption + '</div>';
+        captionEl.children[0].innerHTML = '<div class="pswp__caption__title">' + item.title + '</div>';
+        if(item.caption) {
+            captionEl.children[0].innerHTML += '<div class="pswp__caption__subtitle">' + item.caption + '</div>';
         }
         return true;
     },
