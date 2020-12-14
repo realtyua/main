@@ -355,9 +355,7 @@ $(document).on('click', 'a.lightbox', function(event){
     showHideOpacity: true
   };
 
-  console.log(options);
-console.log(index);
-  console.log(items[index]);
+  console.log(items);
 
   if(items.length > 0) {
     var index = $(this).closest('.detail-view').prev().data('index');
