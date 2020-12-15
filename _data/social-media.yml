@@ -11,6 +11,12 @@
 - name: skype
   title: Skype
   url: skype:live:.cid.f6f06c675b2b479c?chat
+  links:
+    - userinfo: skype:live:.cid.f6f06c675b2b479c?userinfo
+      chat: skype:live:.cid.f6f06c675b2b479c?chat
+      voicemail: skype:live:.cid.f6f06c675b2b479c?voicemail
+      call: skype:live:.cid.f6f06c675b2b479c?call
+      add: skype:live:.cid.f6f06c675b2b479c?add
 
 - name: whatsapp
   title: WhatsApp
