@@ -1,0 +1,31 @@
+- name: twitter
+  title: Twitter
+  url: https://twitter.com/
+
+- name: facebook
+  title: Facebook
+  url: https://www.facebook.com/groups/{{ site.domain }}
+  w: 23
+  h: 23
+
+- name: skype
+  title: Skype
+  url: skype:live:.cid.f6f06c675b2b479c?chat
+
+- name: whatsapp
+  title: WhatsApp
+  url: https://wa.me/380504949649
+  w: 28
+  h: 28
+
+- name: messenger
+  title: Messenger
+  url: https://messenger.com/
+
+- name: viber
+  title: Viber
+  url: viber://pa/info?uri=realestate_ua
+
+- name: telegram
+  title: Telegram
+  url: https://twitter.com/

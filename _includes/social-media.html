@@ -1,5 +1,30 @@
+{%- if include.text == 1 -%}
+<ul class="list-inline social-link">
+  {% for sm in site.data.social-media %}
+    {%- if include[sm.name] == 1 -%}
+    <li class="list-inline-item">
+      <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
+        <span>{{ sm.title }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+  {% endfor %}
+</ul>
+{%- else -%}
 <h6 class="mt-1">{{ site.data.lang-uk.sent_ads }}</h6>
 <ul class="list-inline social-link">
+
+  {% for sm in site.data.social-media %}
+    {%- if include[sm.name] == 1 -%}
+    <li class="list-inline-item">
+      <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
+        <span>{%- include icons/{{ sm.name }}.svg width="{%- if sm.w -%}{{ sm.w }}{%- else -%}24{%- endif -%}" height="{%- if sm.h -%}{{ sm.h }}{%- else -%}24{%- endif -%}" -%}</span>
+      </a>
+    </li>
+    {%- endif -%}
+  {% endfor %}
+
+{%- comment -%}
   {%- if include.twitter == 1 -%}
   <li class="list-inline-item">
     <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="GitHub">
@@ -49,7 +74,9 @@
     </a>
   </li>
   {%- endif -%}
+{%- endcomment -%}
 </ul>
+{%- endif -%}
 
 {% comment %}
 
