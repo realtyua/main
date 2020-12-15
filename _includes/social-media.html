@@ -1,7 +1,8 @@
 {%- if include.text == 1 -%}
 <ul class="list-inline social-link">
   {% for sm in site.data.social-media %}
-    {%- if include[sm.name] == 1 -%}
+    {%- assign name = sm.name -%}
+    {%- if include[name] == 1 -%}
     <li class="list-inline-item">
       <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
         <span>{{ sm.title }}</span>
