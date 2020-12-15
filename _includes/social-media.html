@@ -17,12 +17,12 @@
 <ul class="list-inline social-link">
   {% for sm in sms %}
     {%- assign name = sm.name -%}
-    {%- capture w -%}{%- if sm.w -%}{{ sm.w }}{%- else -%}24{%- endif -%}{%- endcapture -%}
-    {%- capture h -%}{%- if sm.h -%}{{ sm.h }}{%- else -%}24{%- endif -%}{%- endcapture -%}
+    {%- capture width -%}{%- if sm.w and sm.w != '' -%}{{ sm.w }}{%- else -%}24{%- endif -%}{%- endcapture -%}
+    {%- capture height -%}{%- if sm.h and sm.h != '' -%}{{ sm.h }}{%- else -%}24{%- endif -%}{%- endcapture -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
       <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
-        <span>{%- include icons/{{ sm.name }}.svg width="{{ w }}" height="{{ h }}" -%}</span>
+        <span>{%- include icons/{{ sm.name }}.svg width=width height=height -%}</span>
       </a>
     </li>
     {%- endif -%}
