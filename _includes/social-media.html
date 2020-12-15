@@ -1,6 +1,7 @@
+{%- assign sms = site.data.social-media -%}
 {%- if include.text == 1 -%}
 <ul class="list-inline social-link">
-  {% for sm in site.data.social-media %}
+  {% for sm in sms %}
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
@@ -14,13 +15,14 @@
 {%- else -%}
 <h6 class="mt-1">{{ site.data.lang-uk.sent_ads }}</h6>
 <ul class="list-inline social-link">
-
-  {% for sm in site.data.social-media %}
+  {% for sm in sms %}
     {%- assign name = sm.name -%}
+    {%- capture w -%}{%- if sm.w -%}{{ sm.w }}{%- else -%}24{%- endif -%}{%- endcapture -%}
+    {%- capture h -%}{%- if sm.h -%}{{ sm.h }}{%- else -%}24{%- endif -%}{%- endcapture -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
       <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
-        <span>{%- include icons/{{ sm.name }}.svg width="{%- if sm.w -%}{{ sm.w }}{%- else -%}24{%- endif -%}" height="{%- if sm.h -%}{{ sm.h }}{%- else -%}24{%- endif -%}" -%}</span>
+        <span>{%- include icons/{{ sm.name }}.svg width="{{ w }}" height="{{ h }}" -%}</span>
       </a>
     </li>
     {%- endif -%}
