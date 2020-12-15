@@ -181,19 +181,6 @@ function jsDetailFormatter(index, row, $detail) {
 
   $detail.html(html.join(''))
 
-  items[index] = [];
-
-  $detail.find('figure').each(function(){
-    var $link = $(this).find('a.lightbox');
-    items[index].push({
-        src: $link.attr('href'),
-        title: $link.attr("title"),
-        w: $link.data('lightbox-width'),
-        h: $link.data('lightbox-height'),
-        caption: $link.data('lightbox-caption'),
-    })
-  })
-
 }
 
 function htmlDetailFormatter(index, row, $detail) {
@@ -322,36 +309,7 @@ function htmlDetailFormatter(index, row, $detail) {
 
   $detail.html(html.join(''))
 
-  items[index] = [];
-
-  $detail.find('figure').each(function(){
-    var $link = $(this).find('a.lightbox');
-    items[index].push({
-        src: $link.attr('href'),
-        title: $link.attr("title"),
-        w: $link.data('lightbox-width'),
-        h: $link.data('lightbox-height'),
-        caption: $link.data('lightbox-caption'),
-    })
-  })
-
 }
-
-$('table#property').on('click', 'a.lightbox', function(event){
-  event.preventDefault();
-  var photoswipeContainer = document.querySelectorAll('.pswp')[0];
-  options = {
-    index: $(this).parent('figure').index(),
-    bgOpacity: 0.85,
-    showHideOpacity: true
-  };
-
-  if(items.length > 0) {
-    var index = $(this).closest('tr.detail-view').prev().data('index');
-    var gallery = new PhotoSwipe(photoswipeContainer, PhotoSwipeUI_Default, items[index], options);
-    gallery.init();
-  }
-});
 
 function propertyFormatter(value, row) {
   "use strict";
