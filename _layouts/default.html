@@ -77,7 +77,6 @@ layout: compress
     {%- assign slash = page.dir | split: '/' -%}
 
     {%- if page.url contains 'map.html' -%}
-
     {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
       {% include modals/re-map-modal.html %}
     {%- endif -%}

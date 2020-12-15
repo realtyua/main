@@ -1,7 +1,3 @@
-{% comment %}
-<script src="{{ "/assets/js/leaflet.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-{% endcomment %}
-
 <div class="modal fade realestate" id="reMap" tabindex="-1" role="dialog" aria-labelledby="reMap" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content net-realestate">
@@ -30,7 +26,8 @@
       if (map) {
           L.marker(eval(loc)).addTo(map);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18,
+            maxZoom: 16,
+            minZoom: 16,
             attribution: '<a href="{{ site.url }}">{{ site.title }}</a> - {{ site.region }}',
             tileSize: 512,
             zoomOffset: -1
