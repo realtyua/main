@@ -17,18 +17,16 @@
   {% for sm in sms %}
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
-    <div class="col">
+    <div class="col mb-3 px-2">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></h5>
           <div class="card-text"></div>
           <ul class="list-group list-group-flush">
-            {% for link in sm.links %}
-            <li class="list-group-item px-0">Додати оголошення через <a href="{%- if link.chat and link.chat != '' -%}{{ link.chat }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
-            <li class="list-group-item px-0">Залишити голосове повідомлення у <a href="{%- if link.voicemail and link.voicemail != '' -%}{{ link.voicemail }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
-            <li class="list-group-item px-0">Зателефоновати нам на <a href="{%- if link.call and link.call != '' -%}{{ link.call }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
-            <li class="list-group-item px-0">Додати наші контаки до <a href="{%- if link.add and link.add != '' -%}{{ link.add }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
-            {% endfor %}
+            <li class="list-group-item px-0">Додати оголошення через <a href="{%- if sm.links.chat and sm.links.chat != '' -%}{{ sm.links.chat }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
+            <li class="list-group-item px-0">Залишити голосове повідомлення у <a href="{%- if sm.links.voicemail and sm.links.voicemail != '' -%}{{ sm.links.voicemail }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
+            <li class="list-group-item px-0">Зателефоновати нам на <a href="{%- if sm.links.call and sm.links.call != '' -%}{{ sm.links.call }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
+            <li class="list-group-item px-0">Додати наші контаки до <a href="{%- if sm.links.add and sm.links.add != '' -%}{{ sm.links.add }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
           </ul>
         </div>
       </div>
