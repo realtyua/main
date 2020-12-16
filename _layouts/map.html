@@ -22,7 +22,7 @@ layout: compress
     <link rel="canonical" href="{{ page.url | absolute_url }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-    <script src="{{ "/assets/js/map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    <script src="{{ "/assets/js/main.map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   </head>
   <body>
     {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
