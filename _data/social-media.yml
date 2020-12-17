@@ -4,7 +4,7 @@
 
 - name: facebook
   title: Facebook
-  url: https://www.facebook.com/groups/{{ site.domain }}
+  url: https://www.facebook.com/groups/realestate.if.ua
   w: 23
   h: 23
 
