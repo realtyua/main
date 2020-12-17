@@ -10,6 +10,8 @@ layout: compress
 <html dir="ltr" lang="uk-UA">
   <head>
     {%- include head.html -%}
+    <link href="https://unpkg.com/prelodr/dist/prelodr.min.css">
+    <script src="https://unpkg.com/prelodr/dist/prelodr.min.js"></script>
   </head>
   <body>
 
@@ -81,6 +83,15 @@ layout: compress
       {% include modals/re-map-modal.html %}
     {%- endif -%}
 
+    <script>
+
+      (function () {
+        const pre = require('prelodr')()
+        pre.show('Loading...')
+        pre.hide()
+      })(this);
+
+    </script>
 
   </body>
 </html>
