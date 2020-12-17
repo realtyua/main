@@ -86,7 +86,22 @@ layout: compress
 
     <script>
 
+      (function() {
+        // Prelodr Example
+        // ---------------
 
+        // Definition
+        const pre = prelodr()
+
+        pre.on('shown', function() {
+          console.log('shown!')
+        })
+
+        pre.on('hidden', function() {
+          console.log('hidden!')
+        })
+
+      })(window)
 
     </script>
 
