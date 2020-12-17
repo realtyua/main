@@ -1,3 +1,9 @@
+{%- if slug == 'apartment' -%}
+### YES ###
+{%- else -%}
+### NO ###
+{%- endif -%}
+
 <div class="alert alert-success mb-0" role="alert">
   <a href="/add" class="alert-link">{{ site.data.lang-uk.phone_add_ads }}</a> {{ site.data.lang-uk.re_pro }} {{ include.title | replace_first: 'Н', 'н' }}.
 </div>
