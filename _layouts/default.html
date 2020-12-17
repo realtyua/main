@@ -10,12 +10,9 @@ layout: compress
 <html dir="ltr" lang="uk-UA">
   <head>
     {%- include head.html -%}
-    <link href="https://unpkg.com/prelodr/dist/prelodr.min.css">
-    <script src="https://unpkg.com/prelodr/dist/prelodr.min.js"></script>
   </head>
   <body>
-
-
+    
     <div id="top"></div>
 
     <div class="main">
@@ -83,44 +80,6 @@ layout: compress
     {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
       {% include modals/re-map-modal.html %}
     {%- endif -%}
-
-    <script>
-
-      (function() {
-        // Prelodr Example
-        // ---------------
-
-        // Definition
-        const pre = prelodr()
-
-        // Step 1
-        pre
-          .show('Initializing...')
-          .hide(done => {
-            console.log(' 1 second delay... ')
-            setTimeout(() => {
-              done()
-            }, 1000)
-          })
-
-        // Step 2
-        pre
-          .show('Processing...')
-          .hide(done => {
-            console.log(' 2 seconds delay... ')
-            setTimeout(() => {
-              done()
-            }, 3000)
-          })
-
-        // Step 3
-        pre
-          .show('Closing...')
-          .hide()
-
-      })(window)
-
-    </script>
 
   </body>
 </html>
