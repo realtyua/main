@@ -1,8 +1,6 @@
 <div class="alert alert-success mb-0" role="alert">
-  <a href="/add" class="alert-link">{{ site.data.lang-uk.phone_add_ads }}</a> {{ site.data.lang-uk.re_pro }} продаж
-  {%- case slug -%}
-    {%- when 'apartment'-%}{{ include.title | replace_first: 'Нерухомість', 'квартири' }}
-    {%- when 'house' -%}{{ include.title | replace_first: 'Нерухомість', 'будинку' }}
-    {%- when 'land' -%}{{ include.title | replace_first: 'Нерухомість', 'землі' }}
-    {%- else -%}{{ include.title | replace_first: 'Нерухомість', 'нерухомості' }}
-  {%- endcase -%}.</div>
+<a href="/add" class="alert-link">{{ site.data.lang-uk.phone_add_ads }}</a> {{ site.data.lang-uk.re_pro }} продаж {% case slug %}
+{% when 'apartment'%}{{ include.title | replace_first: 'Нерухомість', 'квартири' }}
+{% when 'house' %}{{ include.title | replace_first: 'Нерухомість', 'будинку' }}
+{% when 'land' %}{{ include.title | replace_first: 'Нерухомість', 'землі' }}
+{% else %}{{ include.title | replace_first: 'Нерухомість', 'нерухомості' }}{% endcase %}.</div>
