@@ -13,10 +13,6 @@ layout: compress
   </head>
   <body>
 
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-
     <div id="top"></div>
 
     <div class="main">
@@ -85,16 +81,6 @@ layout: compress
       {% include modals/re-map-modal.html %}
     {%- endif -%}
 
-    <script>
-      $(document).ready(function () {
-
-        // preloader
-        $(window).load(function(){
-          $('.spinner-grow').delay(400).fadeOut(500);
-        })
-
-      })
-    </script>
 
   </body>
 </html>
