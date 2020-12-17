@@ -15,6 +15,10 @@ layout: compress
   </head>
   <body>
 
+<div id="myContainer" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
     <div id="top"></div>
 
     <div class="main">
@@ -85,11 +89,8 @@ layout: compress
 
     <script>
 
-      (function () {
-        const pre = require('prelodr')()
-        pre.show('Loading...')
-        pre.hide()
-      })(this);
+      var prelodr = new Prelodr(document.getElementById('myContainer'));
+      prelodr.in('Loading...');
 
     </script>
 
