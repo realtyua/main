@@ -18,6 +18,7 @@ title: Нерухомість в місті Івано-Франківськ та
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 
+{% comment %}
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -28,6 +29,7 @@ title: Нерухомість в місті Івано-Франківськ та
     </div>
   </div>
 </div>
+{% endcomment %}
 
 <div id="ads" class="card-deck mx-n2 mb-3"></div>
 

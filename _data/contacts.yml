@@ -37,36 +37,6 @@
   email: info@realestate.if.ua
   www: https://www.realestate.if.ua/
 
-- type: town
-  item: dolyna
-  name: Нерухомість у місті Долина
-  # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  # phone_main: 380974949649
-  # phone_hot: 380974949649
-  # phone_fax: 380974949649
-  # email: info@realestate.if.ua
-  # www: https://www.realestate.if.ua/
-
-- type: town
-  item: halych
-  name: Нерухомість у місті Галич
-  # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  # phone_main: 380974949649
-  # phone_hot: 380974949649
-  # phone_fax: 380974949649
-  # email: info@realestate.if.ua
-  # www: https://www.realestate.if.ua/
-
-- type: town
-  item: tlumach
-  name: Нерухомість у місті Тлумач
-  # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  # phone_main: 380974949649
-  # phone_hot: 380974949649
-  # phone_fax: 380974949649
-  # email: info@realestate.if.ua
-  # www: https://www.realestate.if.ua/
-
 #
 # Region / City
 #
@@ -83,25 +53,16 @@
 #
 # Developers / Company
 #
-- type: developer
-  item: bud
-  name: Нерухомість від Компанії БУД
-  address: 76000, м. Івано-Франківськ, вул.&nbsp;Будівельників,&nbsp;0
-  phone_main: 380342000033
-  phone_hot:  380342000033
-  phone_fax:  380342000033
-  email: bud@realestate.if.ua
-  www: https://bud.realestate.if.ua
 
 - type: developer
   item: vambud
   name: Будівельна компанія "Вамбуд"
-  address: 76000, м. Івано-Франківськ, вул.&nbsp;Вовчинецька,&nbsp;121
-  phone_main: 380504337722
-  phone_hot:  380673537722
-  phone_fax:  380342727200
-  email: office@vambud.com
-  www: http://www.vambud.com.ua
+  # address: 76000, м. Івано-Франківськ, вул.&nbsp;Вовчинецька,&nbsp;121
+  # phone_main: 380504337722
+  # phone_hot:  380673537722
+  # phone_fax:  380342727200
+  # email: office@vambud.com
+  # www: http://www.vambud.com.ua
 
 #
 # Realtor / Agent
@@ -129,12 +90,3 @@
 #
 # Agency
 #
-- type: agency
-  item: franko
-  name: Агент з нерухомості Іван Франко
-  address: 76000, м. Івано-Франківськ, вул.&nbsp;Франка,&nbsp;0
-  phone_main: 380342000011
-  phone_hot:  380342000011
-  phone_fax:  380342000011
-  email: franko@realestate.if.ua
-  www: https://franko.realestate.if.ua
