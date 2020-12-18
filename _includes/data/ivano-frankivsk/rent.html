@@ -4,6 +4,5 @@
 {%- assign mosiychuk = site.data.mosiychuk -%}
 {%- assign mykhalchuk = site.data.mykhalchuk -%}
 {%- assign franko = site.data.franko -%}
-{%- assign shevchenko = site.data.shevchenko -%}
 {%- include data/ivano-frankivsk/i-rent.html -%}
 {%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.rent == '1'" -%}

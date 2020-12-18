@@ -2,6 +2,5 @@
 {%- assign owners = owners -%}
 {%- assign vambud = site.data.vambud -%}
 {%- assign franko = site.data.franko -%}
-{%- assign shevchenko = site.data.shevchenko -%}
 {%- include data/ivano-frankivsk/i-land.html -%}
 {%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.type == 'Земля' and i.rent != '1'" -%}
