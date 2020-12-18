@@ -26,11 +26,11 @@
   {% elsif site.contact.phone_hot and site.contact.phone_hot != '' %}
     {%- assign t = site.contact.phone_hot -%}
     {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,2 }}&nbsp;{{ t | slice:7,2 }}&nbsp;{{ t | slice:9,1 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
-    <a href="tel:+{{ t }}">{{ n }} / {{ include.legal </a>
+    <a href="tel:+{{ t }}">{{ n }} / {{ include.legal }}</a>
   {% elsif site.contact.phone_fax and site.contact.phone_fax !='' %}
     {%- assign t = site.contact.phone_fax -%}
     {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,2 }}&nbsp;{{ t | slice:7,2 }}&nbsp;{{ t | slice:9,1 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
-    <a href="tel:+{{ t }}">{{ n }} / {{ include.legal </a>
+    <a href="tel:+{{ t }}">{{ n }} / {{ include.legal }}</a>
   {% else %}
     <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
   {% endif %}

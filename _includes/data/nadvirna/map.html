@@ -1,0 +1,4 @@
+{%- include data/owner.html -%}
+{%- assign owners = owners -%}
+{%- include data/nadvirna/i-map.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.coordinates and i.coordinates != ''" -%}
