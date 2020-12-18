@@ -3,5 +3,5 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-{%- include data/kosiv/land.html -%}
+{%- include data/horodenka/land.html -%}
 {{ offers | jsonify }}
