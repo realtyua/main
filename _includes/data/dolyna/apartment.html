@@ -1,0 +1,4 @@
+{%- include data/owner.html -%}
+{%- assign owners = owners -%}
+{%- include data/dolyna/i-apartment.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.type == 'Квартира' and i.rent != '1'" -%}
