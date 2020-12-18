@@ -1,7 +1,0 @@
----
-layout: null
-sitemap: false
-navhide: 1
----
-{%- include data/tlumach/house.html -%}
-{{ offers | jsonify }}
