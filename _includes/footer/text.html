@@ -1,5 +1,9 @@
 {%- if contact[include.legal] -%}
   {{ contact[include.legal] }}
 {%- else -%}
-  <span class="text-muted">{{ site.data.lang-uk.no_data }}</span>
+  {%- if site.contact.address and site.contact.address != '' -%}
+    {{ csite.contact.address }}
+  {%- else -%}
+    <span class="text-muted">{{ site.data.lang-uk.no_data }}</span>
+  {%- endif -%}
 {%- endif -%}
