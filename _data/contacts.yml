@@ -37,6 +37,36 @@
   email: info@realestate.if.ua
   www: https://www.realestate.if.ua/
 
+- type: town
+  item: dolyna
+  name: Нерухомість у місті Долина
+  # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  # phone_main: 380974949649
+  # phone_hot: 380974949649
+  # phone_fax: 380974949649
+  # email: info@realestate.if.ua
+  # www: https://www.realestate.if.ua/
+
+- type: town
+  item: halych
+  name: Нерухомість у місті Галич
+  # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  # phone_main: 380974949649
+  # phone_hot: 380974949649
+  # phone_fax: 380974949649
+  # email: info@realestate.if.ua
+  # www: https://www.realestate.if.ua/
+
+- type: town
+  item: halych
+  name: Нерухомість у місті Галич
+  # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  # phone_main: 380974949649
+  # phone_hot: 380974949649
+  # phone_fax: 380974949649
+  # email: info@realestate.if.ua
+  # www: https://www.realestate.if.ua/
+
 #
 # Region / City
 #
