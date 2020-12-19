@@ -5,14 +5,14 @@
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
-      {%- if sm.url and sm.url == '' -%}
-      <span class="alert-link" data-toggle="tooltip" title="Додайте наш телефон {%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.">
-        <span>{{ sm.title }}</span>
-      </span>
-      {%- else -%}
+      {%- if sm.url and sm.url != '' -%}
       <a class="alert-link" href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
         <span>{{ sm.title }}</span>
       </a>
+      {%- else -%}
+      <span class="alert-link" data-toggle="tooltip" title="Додайте наш номер телефон&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.">
+        <span>{{ sm.title }}</span>
+      </span>
       {%- endif -%}
     </li>
     {%- endif -%}
@@ -28,10 +28,7 @@
       <div class="card h-100">
         <div class="card-body">
 
-          {%- if sm.url and sm.url == '' -%}
-          <h5 class="card-title">Програмний додаток <b>{{ sm.title }}</b></h5>
-          <div class="card-text">Додайте наш телефон {%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.</div>
-          {%- else -%}
+          {%- if sm.url and sm.url != '' -%}
           <h5 class="card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></h5>
           <div class="card-text"></div>
           <ul class="list-group list-group-flush">
@@ -40,6 +37,9 @@
             <li class="list-group-item px-0">Зателефоновати нам на <a href="{%- if sm.links.call and sm.links.call != '' -%}{{ sm.links.call }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
             <li class="list-group-item px-0">Додати наші контаки до <a href="{%- if sm.links.add and sm.links.add != '' -%}{{ sm.links.add }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
           </ul>
+          {%- else -%}
+          <h5 class="card-title">Програмний додаток <b>{{ sm.title }}</b></h5>
+          <div class="card-text">Додайте наш номер телефону&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.</div>
           {%- endif -%}
 
         </div>
@@ -56,11 +56,21 @@
     {%- capture width -%}{%- if sm.w and sm.w != '' -%}{{ sm.w }}{%- else -%}24{%- endif -%}{%- endcapture -%}
     {%- capture height -%}{%- if sm.h and sm.h != '' -%}{{ sm.h }}{%- else -%}24{%- endif -%}{%- endcapture -%}
     {%- if include[name] == 1 -%}
+
+    {%- if sm.url and sm.url != '' -%}
     <li class="list-inline-item">
       <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
         <span>{%- include icons/{{ sm.name }}.svg width=width height=height -%}</span>
       </a>
     </li>
+    {%- else -%}
+    <li class="list-inline-item">
+      <span data-toggle="tooltip" title="Додайте наш номер телефон&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.">
+        <span>{{ sm.title }}</span>
+      </span>
+    </li>
+    {%- endif -%}
+
     {%- endif -%}
   {% endfor %}
 </ul>
