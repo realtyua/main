@@ -2,7 +2,7 @@
 {%- if include.type == "text" -%}
 <ul class="list-inline social-link">
   {% for sm in sms %}
-    {% capture tooltip %}Додайте наш номер телефон <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
+    {% capture tooltip %}Додайте наш номер телефону <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
@@ -50,7 +50,7 @@
 <h6 class="mt-1">{{ site.data.lang-uk.sent_ads }}</h6>
 <ul class="list-inline social-link">
   {% for sm in sms %}
-    {% capture tooltip %}Додайте наш номер телефон <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
+    {% capture tooltip %}Додайте наш номер телефону <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
     {%- assign name = sm.name -%}
     {%- capture width -%}{%- if sm.w and sm.w != '' -%}{{ sm.w }}{%- else -%}24{%- endif -%}{%- endcapture -%}
     {%- capture height -%}{%- if sm.h and sm.h != '' -%}{{ sm.h }}{%- else -%}24{%- endif -%}{%- endcapture -%}
