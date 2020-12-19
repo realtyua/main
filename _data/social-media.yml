@@ -30,7 +30,8 @@
 
 - name: viber
   title: Viber
-  url: viber://pa/info?uri=realestate_ua
+  url:
+  # url: viber://pa/info?uri=realestate_ua
 
 - name: telegram
   title: Telegram

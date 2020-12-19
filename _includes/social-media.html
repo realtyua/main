@@ -22,9 +22,9 @@
       <div class="card h-100">
         <div class="card-body">
 
-          {%- if sm.links and sm.links != '' -%}
+          {%- if sm.url and sm.url != '' -%}
           <h5 class="card-title">Програмний додаток <b>{{ sm.title }}</b></h5>
-          <div class="card-text">Додайте наш телефон до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.</div>
+          <div class="card-text">Додайте наш телефон {%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.</div>
           {%- else -%}
           <h5 class="card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></h5>
           <div class="card-text"></div>
