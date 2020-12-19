@@ -17,12 +17,6 @@
 - type: district
   item: ivano-frankivskyy
   name: Нерухомість у Івано-Франківському районі
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: 380974949649
-  phone_hot: 380974949649
-  phone_fax: 380974949649
-  email: info@realestate.if.ua
-  www: https://www.realestate.if.ua/
 
 #
 # District / Town
@@ -30,12 +24,6 @@
 - type: town
   item: tysmenytsya
   name: Нерухомість у місті Тисмениця
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: 380974949649
-  phone_hot: 380974949649
-  phone_fax: 380974949649
-  email: info@realestate.if.ua
-  www: https://www.realestate.if.ua/
 
 #
 # Region / City
@@ -43,12 +31,6 @@
 - type: city
   item: ivano-frankivsk
   name: Нерухомість у місті Івано-Франківськ
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: 380974949649
-  phone_hot: 380974949649
-  phone_fax: 380974949649
-  email: info@realestate.if.ua
-  www: https://www.realestate.if.ua/
 
 #
 # Developers / Company
@@ -57,12 +39,6 @@
 - type: developer
   item: vambud
   name: Будівельна компанія "Вамбуд"
-  # address: 76000, м. Івано-Франківськ, вул.&nbsp;Вовчинецька,&nbsp;121
-  # phone_main: 380504337722
-  # phone_hot:  380673537722
-  # phone_fax:  380342727200
-  # email: office@vambud.com
-  # www: http://www.vambud.com.ua
 
 #
 # Realtor / Agent
