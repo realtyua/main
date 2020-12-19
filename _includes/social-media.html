@@ -13,6 +13,7 @@
   {% endfor %}
 </ul>
 {%- elsif include.type == "card" -%}
+
 <div class="row row-cols-1 row-cols-md-3">
   {% for sm in sms %}
     {%- assign name = sm.name -%}
@@ -20,6 +21,11 @@
     <div class="col mb-3 px-2">
       <div class="card h-100">
         <div class="card-body">
+
+          {%- if sm.links and sm.links != '' -%}
+          <h5 class="card-title">Програмний додаток <b>{{ sm.title }}</b></h5>
+          <div class="card-text">Додайте наш телефон до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.</div>
+          {%- else -%}
           <h5 class="card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></h5>
           <div class="card-text"></div>
           <ul class="list-group list-group-flush">
@@ -28,6 +34,8 @@
             <li class="list-group-item px-0">Зателефоновати нам на <a href="{%- if sm.links.call and sm.links.call != '' -%}{{ sm.links.call }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
             <li class="list-group-item px-0">Додати наші контаки до <a href="{%- if sm.links.add and sm.links.add != '' -%}{{ sm.links.add }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></li>
           </ul>
+          {%- endif -%}
+
         </div>
       </div>
     </div>
