@@ -1,7 +1,8 @@
-{%- assign sms = site.data.social-media -%}
+%- assign sms = site.data.social-media -%}
 {%- if include.type == "text" -%}
 <ul class="list-inline social-link">
   {% for sm in sms %}
+    {% capture tooltip %}Додайте наш номер телефон&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.{% endcapture %}
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
@@ -10,7 +11,7 @@
         <span>{{ sm.title }}</span>
       </a>
       {%- else -%}
-      <span class="alert-link" data-toggle="tooltip" title="Додайте наш номер телефон&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.">
+      <span class="alert-link" data-toggle="tooltip" title="{{ tooltip }}">
         <span>{{ sm.title }}</span>
       </span>
       {%- endif -%}
@@ -19,15 +20,14 @@
   {% endfor %}
 </ul>
 {%- elsif include.type == "card" -%}
-
 <div class="row row-cols-1 row-cols-md-3">
   {% for sm in sms %}
+    {% capture tooltip %}Додайте наш номер телефон&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.{% endcapture %}
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
     <div class="col mb-3 px-2">
       <div class="card h-100">
         <div class="card-body">
-
           {%- if sm.url and sm.url != '' -%}
           <h5 class="card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}">{{ sm.title }}</a></h5>
           <div class="card-text"></div>
@@ -39,9 +39,8 @@
           </ul>
           {%- else -%}
           <h5 class="card-title">Програмний додаток <b>{{ sm.title }}</b></h5>
-          <div class="card-text">Додайте наш номер телефону&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.</div>
+          <div class="card-text">Додайте наш номер телефону&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших <b>{{ sm.title }}</b> контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у <b>{{ sm.title }}</b>.</div>
           {%- endif -%}
-
         </div>
       </div>
     </div>
@@ -52,25 +51,24 @@
 <h6 class="mt-1">{{ site.data.lang-uk.sent_ads }}</h6>
 <ul class="list-inline social-link">
   {% for sm in sms %}
+    {% capture tooltip %}Додайте наш номер телефон&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.{% endcapture %}
     {%- assign name = sm.name -%}
     {%- capture width -%}{%- if sm.w and sm.w != '' -%}{{ sm.w }}{%- else -%}24{%- endif -%}{%- endcapture -%}
     {%- capture height -%}{%- if sm.h and sm.h != '' -%}{{ sm.h }}{%- else -%}24{%- endif -%}{%- endcapture -%}
     {%- if include[name] == 1 -%}
-
-    {%- if sm.url and sm.url != '' -%}
-    <li class="list-inline-item">
-      <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
-        <span>{%- include icons/{{ sm.name }}.svg width=width height=height -%}</span>
-      </a>
-    </li>
-    {%- else -%}
-    <li class="list-inline-item">
-      <span data-toggle="tooltip" title="Додайте наш номер телефон&nbsp;{%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.">
-        <span>{{ sm.title }}</span>
-      </span>
-    </li>
-    {%- endif -%}
-
+      {%- if sm.url and sm.url != '' -%}
+      <li class="list-inline-item">
+        <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
+          <span>{%- include icons/{{ sm.name }}.svg width=width height=height -%}</span>
+        </a>
+      </li>
+      {%- else -%}
+      <li class="list-inline-item">
+        <span data-toggle="tooltip" title="{{ tooltip }}">
+          <span>{{ sm.title }}</span>
+        </span>
+      </li>
+      {%- endif -%}
     {%- endif -%}
   {% endfor %}
 </ul>
