@@ -21,6 +21,7 @@ layout: compress
     <link rel="shortlink" href="{{ site.url }}" />
     <link rel="canonical" href="{{ page.url | absolute_url }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    {%- include meta-name.html -%}
     <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
     <script src="{{ "/assets/js/main.map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   </head>
