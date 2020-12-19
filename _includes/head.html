@@ -32,7 +32,7 @@
 
 {%- include meta-name.html -%}
 
-{%- if page.url contains 'map.html' and page.layout == 'map'
+{%- if page.url contains 'map.html' and page.layout == 'map' -%}
 
   <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 
