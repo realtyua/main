@@ -18,6 +18,8 @@
   </a>
 {%- elsif include.legal and include.type == 'text' -%}
   <a href="tel:+{{ t }}" data-toggle="tooltip" title="{% if include.legal == site.contact.phone_sms %}{{ site.data.lang-uk.phone_sent_ads }}{% elsif include.legal == site.contact.phone_hot %}{% else %}{{ site.data.lang-uk.re_seller }} {{ n }}{% endif %}">{{ n }}</a>
+{%- elsif include.legal and include.type == 'number' -%}
+  <strong>{{ n }}</strong>
 {%- else -%}
   {% if site.contact[include.legal] and site.contact[include.legal] != '' %}
     {%- assign t = site.contact[include.legal] -%}
