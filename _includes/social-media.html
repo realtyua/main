@@ -2,7 +2,7 @@
 {%- if include.type == "text" -%}
 <ul class="list-inline social-link">
   {% for sm in sms %}
-    {% capture tooltip %}Додайте наш номер телефон <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи {{ sm.title }}.{% endcapture %}
+    {% capture tooltip %}Додайте наш номер телефон <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
