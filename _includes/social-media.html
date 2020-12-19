@@ -5,9 +5,15 @@
     {%- assign name = sm.name -%}
     {%- if include[name] == 1 -%}
     <li class="list-inline-item">
+      {%- if sm.url and sm.url == '' -%}
+      <span class="alert-link" data-toggle="tooltip" title="Додайте наш телефон {%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.">
+        <span>{{ sm.title }}</span>
+      </span>
+      {%- else -%}
       <a class="alert-link" href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
         <span>{{ sm.title }}</span>
       </a>
+      {%- endif -%}
     </li>
     {%- endif -%}
   {% endfor %}
@@ -22,7 +28,7 @@
       <div class="card h-100">
         <div class="card-body">
 
-          {%- if sm.url and sm.url != '' -%}
+          {%- if sm.url and sm.url == '' -%}
           <h5 class="card-title">Програмний додаток <b>{{ sm.title }}</b></h5>
           <div class="card-text">Додайте наш телефон {%- include phone-brand.html n=site.contact.phone_submit_ads -%} до ваших {{ sm.title }} контактів та нідішліть нам своє безкоштовне оголошення про нерухомість у {{ sm.title }}.</div>
           {%- else -%}
