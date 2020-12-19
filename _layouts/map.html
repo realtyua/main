@@ -4,21 +4,18 @@ layout: compress
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
-{%- capture title -%}
-  {%- if page.title -%}
-    {{ page.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.title | smartify }}
-  {%- else -%}
-    {{ site.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.name | smartify }}
-  {%- endif -%}
-{%- endcapture -%}
+
 <!doctype html>
+
 <html dir="ltr" lang="uk-UA">
   <head>
-    {%- include meta-name.html -%}
-    <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-    <script src="{{ "/assets/js/main.map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+
+    {%- include head.html -%}
+
   </head>
+
   <body>
+
     {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
     <div id="map"></div>
     {%- assign slug = page.url | split: "/" | last -%}
@@ -70,5 +67,6 @@ layout: compress
         <script>var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:11,zoom:10}).setView([{{ page.coordinates }}],10); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',tileSize:512,zoomOffset:-1}).addTo(map); map.attributionControl.setPrefix(''); L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ page.breadcrumb }}<b>').openPopup(); {%- include map/left-menu-map.html -%}</script>
       {%- endif -%}
     {%- endif -%}
+
   </body>
 </html>

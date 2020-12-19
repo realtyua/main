@@ -32,61 +32,71 @@
 
 {%- include meta-name.html -%}
 
-{%- if page.table == 1 or page.table == 2 -%}
-  {%- if page.url contains 'map.html' -%}
-  {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-    <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-  {%- else -%}
-    <link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-  {%- endif -%}
-{%- else -%}
-  {%- if page.url contains 'map.html' -%}
-  {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-    <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-  {%- else -%}
-    <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-  {%- endif -%}
-{%- endif -%}
+{%- if page.url contains 'map.html' and page.layout == 'map'
 
-{%- if page.dir == '/' -%}
-  <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-{%- else -%}
-  {%- if page.table == 1 -%}
-    {%- if page.url contains 'map.html' -%}
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-      <link rel="preload" href="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-    {%- else -%}
-      <link rel="preload" href="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-    {%- endif -%}
-  {%- elsif page.table == 2 -%}
-    {%- if page.url contains 'map.html' -%}
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-      <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-    {%- else -%}
-      <link rel="preload" href="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-    {%- endif -%}
-  {%- else -%}
-    {%- if page.url contains 'map.html' -%}
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-      <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-    {%- else -%}
-      <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-    {%- endif -%}
-  {%- endif -%}
-{%- endif -%}
+  <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 
-{%- if page.table == 1 or page.table == 2 -%}
-  {%- if page.url contains 'map.html' -%}
-  {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-    <link href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
-  {%- else -%}
-    <link href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
-  {%- endif -%}
+  <script src="{{ "/assets/js/main.map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+
 {%- else -%}
-  {%- if page.url contains 'map.html' -%}
-  {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-    <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+
+  {%- if page.table == 1 or page.table == 2 -%}
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+    {%- else -%}
+      <link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+    {%- endif -%}
   {%- else -%}
-    <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+    {%- else -%}
+      <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+    {%- endif -%}
   {%- endif -%}
+
+  {%- if page.dir == '/' -%}
+    <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  {%- else -%}
+    {%- if page.table == 1 -%}
+      {%- if page.url contains 'map.html' -%}
+      {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+        <link rel="preload" href="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- else -%}
+        <link rel="preload" href="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- endif -%}
+    {%- elsif page.table == 2 -%}
+      {%- if page.url contains 'map.html' -%}
+      {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+        <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- else -%}
+        <link rel="preload" href="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- endif -%}
+    {%- else -%}
+      {%- if page.url contains 'map.html' -%}
+      {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+        <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- else -%}
+        <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if page.table == 1 or page.table == 2 -%}
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      <link href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+    {%- else -%}
+      <link href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+    {%- endif -%}
+  {%- else -%}
+    {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+    {%- else -%}
+      <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+    {%- endif -%}
+  {%- endif -%}
+
 {%- endif -%}
