@@ -12,15 +12,12 @@ layout: default
         {%- assign folder = '/assets/images/logo/' -%}
         {%- for file in site.static_files -%}
           {%- if file.path contains folder file.basename contains slug and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-            {%- assign logo = folder | append: slug | append: file.extname -%}
+          <img src="{{ file.path }}" class="card-img-top" alt="Логотип {{ page.title | replace: '&nbsp;', ' ' }}">
+          {%- else -%}
+          <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="Логотип {{ page.title | replace: '&nbsp;', ' ' }}">
           {%- endif -%}
         {%- endfor -%}
-
-        {%- if logo -%}
-          <img src="{{ logo }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' }}">
-        {%- else -%}
-          <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' }}">
-        {%- endif -%}
+        
       </div>
       <div class="col-md-8 mt-3 mt-md-0">
         {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
