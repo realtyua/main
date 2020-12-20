@@ -15,9 +15,12 @@
       {%- endif -%}
         <div class="col px-2 mb-3">
           <div class="card h-100">
+            {%- comment -%}
             {%- assign logos = '/assets/images/logo/' -%}
             {%- assign logo = logos | append: section | append: '.png' -%}
             {%- include static-file.html file=logo -%}
+            {%- endcomment -%}
+            {%- include folder.html dir='/assets/images/logo/' slug=section -%}
             {%- if file == true -%}
               <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ item.title }}">
             {%- else -%}
