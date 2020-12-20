@@ -23,9 +23,9 @@
           {%- assign path = slug | prepend: dir | append: '.jpg' | relative_url -%}
           {%- assign file = site.static_files | where: "path", path | first -%}
           {%- if file -%}
-            <img src="{{ file.path | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
+            <img loading="lazy" src="{{ file.path | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
           {%- else -%}
-            <img src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
+            <img loading="lazy" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
           {%- endif -%}
           <div class="card-body p-3">
             <h5 class="card-title">
