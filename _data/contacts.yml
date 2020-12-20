@@ -37,8 +37,8 @@
 #
 
 - type: developer
-  item: vambud
-  name: Будівельна компанія "Вамбуд"
+  item: builder
+  name: Будівельна компанія "Будівельник"
 
 #
 # Realtor / Agent
