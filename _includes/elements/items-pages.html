@@ -40,7 +40,7 @@
 <div{% if page.url contains '/realtor/' or page.url contains '/developer/' or page.url contains '/agency/' and back.size == 4 or back.size == 5 %} id="list-seller"{% endif %} class="row mt-4 mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
 {%- endif -%}
   <div class="col px-2 mb-3">
-    <div class="card h-100">
+    <div class="card h-100">### {{ logo }} ###
       {%- comment -%}
       {%- include static-file.html file=logo -%}
       {%- endcomment -%}
