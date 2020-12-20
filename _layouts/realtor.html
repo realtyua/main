@@ -7,7 +7,16 @@ layout: default
     <h1 class="mb-3">{{ page.title }}</h1>
     <div class="row">
       <div class="col-md-4">
-        {%- assign logo = '/assets/images/logo/' | append: slug | append: '.png' -%}
+
+        {%- assign folder = '/assets/images/logo/' -%}
+        {%- capture files -%}
+          {%- for file in site.static_files -%}
+            {%- if file.path contains folder file.basename contains slug and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+              {%- assign logo = folder | append: slug | append: file.extname -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+
         {%- include static-file.html file=logo -%}
         {%- if file == true -%}
           <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ page.title | replace: '&nbsp;', ' ' }}">
