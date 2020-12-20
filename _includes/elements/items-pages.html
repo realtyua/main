@@ -1,21 +1,21 @@
 {%- assign back = page.dir | split: '/' -%}
 {%- assign logos = '/assets/images/logo/' -%}
-{%- assign logo = logos | append: section | append: '.png' -%}
+{%- assign logo = logos | append: section | append: '.jpg' -%}
 {%- if back.size == 5 -%}
   {%- assign section = item.dir | split: '/' | last -%}
-  {%- assign logo = logos | append: section | append: '.png' -%}
+  {%- assign logo = logos | append: section | append: '.jpg' -%}
 {%- elsif back.size == 6 -%}
   {%- assign size = back | size | minus:2 -%}
   {%- assign section = back | last -%}
   {%- assign object = item.dir | split: '/' | last -%}
-  {%- assign logo = logos | append: object | append: '.png' -%}
+  {%- assign logo = logos | append: object | append: '.jpg' -%}
 {%- elsif back.size == 7 -%}
   {%- assign size = back | size | minus:3 -%}
   {%- assign gauge = back | size | minus:1 -%}
   {%- assign piece = back | slice: 0, gauge | join: "/" -%}
   {%- assign section = piece | split: "/" | last -%}
   {%- assign object = item.dir | split: '/' | last -%}
-  {%- assign logo = logos | append: object | append: '.png' -%}
+  {%- assign logo = logos | append: object | append: '.jpg' -%}
 {%- else -%}
   {%- assign size = back | size | minus:1 -%}
 {%- endif -%}
@@ -31,9 +31,9 @@
     <div class="card h-100">
       {%- include static-file.html file=logo -%}
       {%- if file == true -%}
-        <img src="{{ logo }}" class="card-img-top" alt="Логотип {{ item.title | replace: '&nbsp;', ' ' }}">
+        <img src="{{ logo }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' }}">
       {%- else -%}
-        <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="Логотип {{ item.title | replace: '&nbsp;', ' ' }}">
+        <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' }}">
       {%- endif -%}
       <div class="card-body">
         <h5 class="card-title">
