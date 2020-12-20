@@ -8,11 +8,6 @@ layout: default
     <h1 class="mb-3">{{ page.title }}</h1>
     <div class="row">
       <div class="col-md-4">
-        {%- comment -%}
-        {%- assign logo = '/assets/images/logo/' | append: slug | append: '.jpg' -%}
-        {%- include static-file.html file=logo -%}
-        {%- if file == true -%}
-        {%- endcomment -%}
 
         {%- assign folder = '/assets/images/logo/' -%}
         {%- for file in site.static_files -%}
@@ -21,7 +16,7 @@ layout: default
           {%- endif -%}
         {%- endfor -%}
 
-        {%- if logo != ''-%}
+        {%- if logo -%}
           <img src="{{ logo }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' }}">
         {%- else -%}
           <img src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' }}">
