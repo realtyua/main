@@ -10,7 +10,7 @@ layout: default
       <div class="col-md-4">
         {%- include folder.html dir='/assets/images/logo/' slug=slug -%}
         {%- if file == true -%}
-          <img loading="lazy" src="{{ logo }}" class="card-img-top" alt="{{ site.data.lamg-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' }}">
+          <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lamg-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' }}">
         {%- else -%}
           <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lamg-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' }}">
         {%- endif -%}

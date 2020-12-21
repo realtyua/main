@@ -17,7 +17,7 @@
           <div class="card h-100">
             {%- include folder.html dir='/assets/images/logo/' slug=section -%}
             {%- if file == true -%}
-              <img loading="lazy" src="{{ logo }}" class="card-img-top" alt="{{ site.data.lamg-uk.re_logo }} {{ item.title }}">
+              <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lamg-uk.re_logo }} {{ item.title }}">
             {%- else -%}
               <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lamg-uk.re_logo }} {{ item.title }}">
             {%- endif -%}
