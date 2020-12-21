@@ -18,9 +18,14 @@
 {%- endcapture -%}
 
 {%- assign edge = page.url | split: '/' | last -%}
+
+{%- comment -%}
 {%- assign dir = '/assets/images/locations/' -%}
 {%- assign path = edge | prepend: dir | append: '.jpg' | relative_url -%}
 {%- assign file = site.static_files | where: "path", path | first -%}
+{%- endcomment -%}
+
+{%- include folder.html dir='/assets/images/locations/' slug=edge -%}
 
 {%- capture title -%}
   {%- if page.title -%}

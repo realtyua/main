@@ -19,13 +19,6 @@
     {% endcomment %}
       <div id="{{ slug }}" class="col mb-4">
         <div class="card">
-
-          {%- comment -%}
-          {%- assign dir = '/assets/images/locations/' -%}
-          {%- assign path = slug | prepend: dir | append: '.jpg' | relative_url -%}
-          {%- assign file = site.static_files | where: "path", path | first -%}
-          {%- endcomment -%}
-
           {%- include folder.html dir='/assets/images/locations/' slug=slug -%}
           {%- if file -%}
             <img loading="lazy" src="{{ location }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
