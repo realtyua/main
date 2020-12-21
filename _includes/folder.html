@@ -5,7 +5,7 @@
     {%- if folder contains '/logo/' -%}
       {%- assign logo = folder | append: include.slug | append: file.extname | url_decode | absolute_url -%}
     {%- else -%}
-      {%- assign location = slug | prepend: folder | append: file.extname | url_decode | absolute_url -%}
+      {%- assign picture = slug | prepend: folder | append: file.extname | url_decode | absolute_url -%}
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}

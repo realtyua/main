@@ -21,7 +21,7 @@
         <div class="card">
           {%- include folder.html dir='/assets/images/locations/' slug=slug -%}
           {%- if file -%}
-            <img loading="lazy" src="{{ location }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
+            <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
           {%- else -%}
             <img loading="lazy" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
           {%- endif -%}
