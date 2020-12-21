@@ -14,7 +14,7 @@ function generateRandomRe() {
       if (data[i].type === 'Квартира' && data[i].rent === '' && data[i].price !== '') {
         div.append('<div class="card mx-2"><div class="card-body"><strong>Продаю квартиру</strong> загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].rooms + ', на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
       } else if (data[i].rent === '1' && data[i].price !== '' && data[i].price_sqmt === '' && data[i].type.indexOf('приміщення') !== -1) {
-        div.append('' + reAdsRent()+ '');
+        div.append('' + reAdsRent() + '');
       } else if (data[i].rent === '1' && data[i].price !== '' && data[i].price_sqmt === '' && data[i].type === 'Магазин') {
         div.append('<div class="card mx-2"><div class="card-body"><strong>Здається в оренду <span class="text-lowercase">' + data[i].type +  '</span></strong> загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ' за місяць, ' + reAdsTel() + '</div></div>');
       } else if (data[i].rent === '1' && data[i].price !== '' && data[i].price_sqmt === '' && data[i].type === 'Будинок') {
