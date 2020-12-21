@@ -3,14 +3,10 @@
 {%- for file in site.static_files -%}
   {%- if file.path contains folder and file.basename contains slug and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
     {%- if folder contains '/logo/' -%}
-      {%- assign logo = folder | append: slug | append: file.extname | relative_url -%}
+      {%- assign picture = folder | append: slug | append: file.extname | relative_url -%}
     {%- else -%}
       {%- assign picture = slug | prepend: folder | append: file.extname | relative_url -%}
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
-{%- if folder contains '/logo/' -%}
-  {%- include static-file.html file=logo -%}
-{%- else -%}
-  {%- include static-file.html file=picture -%}
-{%- endif -%}
+{%- include static-file.html file=picture -%}
