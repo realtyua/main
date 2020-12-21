@@ -18,13 +18,6 @@
 {%- endcapture -%}
 
 {%- assign edge = page.url | split: '/' | last -%}
-
-{%- comment -%}
-{%- assign dir = '/assets/images/locations/' -%}
-{%- assign path = edge | prepend: dir | append: '.jpg' | relative_url -%}
-{%- assign file = site.static_files | where: "path", path | first -%}
-{%- endcomment -%}
-
 {%- include folder.html dir='/assets/images/locations/' slug=edge -%}
 
 {%- capture title -%}
@@ -38,11 +31,8 @@
 {%- include meta-name.html -%}
 
 {%- if page.url contains 'map.html' and page.layout == 'map' -%}
-
   <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
-
   <script src="{{ "/assets/js/main.map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-
 {%- else -%}
 
   {%- if page.table == 1 or page.table == 2 -%}
