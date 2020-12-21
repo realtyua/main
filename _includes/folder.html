@@ -1,7 +1,16 @@
 {%- assign folder = include.dir -%}
+{%- assign slug = include.slug -%}
 {%- for file in site.static_files -%}
-  {%- if file.path contains folder file.basename contains include.slug and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-    {%- assign logo = folder | append: include.slug | append: file.extname -%}
+  {%- if file.path contains folder file.basename contains slug and file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
+    {%- if folder contains '/logo/' -%}
+      {%- assign logo = folder | append: include.slug | append: file.extname | relative_url -%}
+    {%- else -%}
+      {%- assign location = slug | prepend: folder | append: file.extname | relative_url -%}
+    {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
-{%- include static-file.html file=logo -%}
+{%- if folder contains '/logo/' -%}
+  {%- include static-file.html file=logo -%}
+{%- else -%}
+  {%- include static-file.html file=path -%}
+{%- endif -%}
