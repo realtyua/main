@@ -9,7 +9,7 @@ layout: default
       {% if page.url contains "/index.html" %}
         {{ page.title | replace_first: 'Всі оголошення про ', 'Вся ' }}
       {% elsif page.url contains "/all.html" %}
-        {{ page.title | replace_first: 'Всі оголошення про', 'Вся ' }} {{ site.data.lang-uk.re_in }} {{ addtitle }}
+        {{ page.title | replace_first: 'Всі оголошення про', 'Вся ' }}
       {% elsif page.url contains "/rent/" %}
         {{ page.title | replace_first: 'Оголошення про оренду', 'Оренда' }} {{ site.data.lang-uk.re_in }} {{ addtitle }}
       {% else %}
