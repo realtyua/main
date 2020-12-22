@@ -12,5 +12,8 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
+    <a class="d-none d-md-block" data-toggle="collapse" data-target=".collapse{{ offer.id }}{{ offer.phone }}{{ include.aid }}" href="#close" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% if isImage != '' %} photo-property-1{{ offer.id }}{{ offer.phone }}{{ include.aid }}{% endif %}">
+      {{ site.data.lang-uk.re_collapse }}
+    </a>
   </div>
 </div>
