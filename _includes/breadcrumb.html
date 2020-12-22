@@ -30,11 +30,11 @@
         {%- endfor -%}
         {%- if page.layout == "post" -%}
           <li class="breadcrumb-item active" aria-current="page">
-              {{ page.title }}
+            {{ page.title }}
           </li>
         {%- elsif page.url contains ".html" -%}
           <li class="breadcrumb-item active" aria-current="page">
-              {{ page.title }}
+            {%- if page.breadcrumb -%}{{ page.breadcrumb }}{%- elsif breadcrumb_page.navtitle -%}{{ page.navtitle }}{%- else -%}{{ page.title }}{%- endif -%}
           </li>
         {%- endif -%}
       </ol>
