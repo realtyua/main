@@ -65,6 +65,10 @@ title: Контакти
               {%- include footer/phone.html legal=site.contact.phone_sms type='text' -%}<br>
               {%- include footer/phone.html legal=site.contact.phone_hot type='text' -%}
             </address>
+            <address>
+              <strong>Електронна пошта:</strong>:<br>
+              {% include footer/contact.html legal="email" %}
+            </address>
           </div>
         </div>
 
