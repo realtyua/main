@@ -5,7 +5,17 @@ layout: default
 {%- assign addtitle = name | split: " " | slice: 2, 4 | join: " " -%}
 <div class="row">
   <div class="col-12">
-    <h1>{{ page.title | replace_first: 'Всі оголошення про ', 'Вся ' }} {% if page.url contains "/all.html" %}{% else %}{{ site.data.lang-uk.re_in }} {{ addtitle }}{% endif %}</h1>
+    <h1>
+      {% if page.url contains "/index.html" %}
+        {{ page.title | replace_first: 'Всі оголошення про ', 'Вся ' }}
+      {% elsif page.url contains "/all.html" %}
+        {{ page.title | replace_first: 'Оголошення про п', 'П' }} {{ site.data.lang-uk.re_in }} {{ addtitle }}
+      {% elsif page.url contains "/rent/" %}
+        {{ page.title | replace_first: 'Оголошення про оренду', 'Оренда' }} {{ site.data.lang-uk.re_in }} {{ addtitle }}
+      {% else %}
+        {{ page.title | replace_first: 'Оголошення про п', 'П' }} {{ site.data.lang-uk.re_in }} {{ addtitle }}
+      {% endif %}
+    </h1>
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
     <h2>
