@@ -99,7 +99,7 @@
         <div class="tab-pane fade" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
           <div class="row">
             <div class="col-12">
-              {%- assign addtitle = page.title | split: " " | slice: 1, 4 | join: " " -%}
+              {%- assign addtitle = page.title | split: " " | slice: 3, 6 | join: " " -%}
               {%- if slug == 'realtor' or slug == 'agency' or slug == 'developer' -%}
                 <h2 class="mb-3">{{ title }} {{ site.data.lang-uk.nerukhomisti }} {{ addtitle }}</h2>
                 {%- assign dir = page.dir | append: slug | append: '/' -%}
