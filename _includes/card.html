@@ -7,7 +7,7 @@
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
 <div class="card mb-3">
-  <div id="close-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}" class="card-body pb-0">
+  <div id="ads-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}" class="card-body pb-0">
     <p class="card-text mb-1">{% include card/body.html %}</p>
     <p class="card-text mb-1">
       <span class="small text-muted">{{ site.data.lang-uk.re_date }}&nbsp;{%- include date.html date=offer.date -%}</span>
