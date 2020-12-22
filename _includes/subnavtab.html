@@ -41,7 +41,7 @@
   <div class="tab-pane fade show active" id="newly" role="tabpanel" aria-labelledby="newly-tab">
     <div class="row">
       <div class="col-12">
-        <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | replace_first: 'Н', 'н' }}</h2>
+        <h2 class="mb-3">{{ site.data.lang-uk.vsya }} {{ page.title | replace_first: 'Оголошення про', '' }}</h2>
         {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
         {%- include {{ data }} -%}
         {%- if offers.size > 0 -%}
