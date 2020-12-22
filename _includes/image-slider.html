@@ -14,7 +14,7 @@
 {%- assign files = '' | split:'' -%}
 {%- for i in site.static_files -%}
   {%- if i.path contains folder -%}
-    {%- if i.extname == '.jpg' or i.extname == '.jpeg' or i.extname == '.JPG' or i.extname == '.JPEG' -%}
+    {%- if i.extname == '.jpg' or i.extname == '.JPG' or i.extname == '.jpeg' or i.extname == '.JPEG' or i.extname == '.png' or i.extname == '.PNG' -%}
       {%- assign sizename = i.basename | size -%}
       {%- assign attribute_alt = i.basename | slice: 2, sizename -%}
       {%- assign attribute_title = attribute_alt | replace: '_', ' ' | capitalize -%}
