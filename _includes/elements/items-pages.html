@@ -30,9 +30,9 @@
   <div class="col px-2 mb-3">
     <div class="card h-100">
       {%- if file == true -%}
-        <img src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' }}">
+        <img src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
       {%- else -%}
-        <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' }}">
+        <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
       {%- endif -%}
       <div class="card-body">
         <h5 class="card-title">

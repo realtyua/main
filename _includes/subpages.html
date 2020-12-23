@@ -17,9 +17,9 @@
           <div class="card h-100">
             {%- include folder.html dir='/assets/images/logo/' slug=section -%}
             {%- if file == true -%}
-              <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title }}">
+              <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
             {%- else -%}
-              <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title }}">
+              <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
             {%- endif -%}
             <div class="card-body">
               <h5 class="card-title">

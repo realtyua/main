@@ -1,9 +1,8 @@
-main a :not(.lightbox), footer a :not(.lightbox) {
+main a:not(.lightbox), footer a:not(.lightbox) {
   background-color: transparent;
   border-bottom: $border-width solid transparent;
   transition: 0.4s ease-in-out;
-
-  &:hover :not(.lightbox) {
+  &:hover {
     transition: .4s ease-in-out;
     border-bottom: $border-width solid $link-color;
   }
@@ -24,7 +23,6 @@ main a :not(.lightbox), footer a :not(.lightbox) {
   background-color: transparent;
   border-bottom: $border-width solid transparent;
   transition: 0.4s ease-in-out;
-
   &:hover {
     transition: .4s ease-in-out;
     border-bottom: $border-width solid $white;
