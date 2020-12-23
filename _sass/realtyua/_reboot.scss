@@ -1,9 +1,9 @@
-main a:not(.lightbox, .social-link), footer a:not(.lightbox, .social-link) {
+main a :not(.lightbox) :not(.social-link), footer a :not(.lightbox) :not(.social-link) {
   background-color: transparent;
   border-bottom: $border-width solid transparent;
   transition: 0.4s ease-in-out;
 
-  &:hover {
+  &:hover :not(.lightbox) :not(.social-link) {
     transition: .4s ease-in-out;
     border-bottom: $border-width solid $link-color;
   }
