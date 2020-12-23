@@ -1,38 +1,53 @@
-{%- if offer.type == land -%}
+{%- if offer.type and offer.type == land -%}
 {%- else -%}
   {%- if offer.type != site.data.lang-uk.re_house -%}
     {%- if offer.floor and offer.floors and offer.type != site.data.lang-uk.re_house -%}
-    <dt>{{ site.data.lang-uk.re_floor }}</dt>
-    <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
+      <dt>{{ site.data.lang-uk.re_floor }}</dt>
+      <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
     {% elsif offer.floor and offer.floor != '' %}
-    <dt>{{ site.data.lang-uk.re_floor }}</dt>
-    <dd>{{ offer.floor }}</dd>
+      <dt>{{ site.data.lang-uk.re_floor }}</dt>
+      <dd>{{ offer.floor }}</dd>
     {%- endif -%}
   {%- endif -%}
   {%- if offer.parking and offer.parking != '' -%}
-  <dt>{{ site.data.lang-uk.re_parking }}</dt>
-  <dd>{{ offer.parking }}</dd>
+    <dt>{{ site.data.lang-uk.re_parking }}</dt>
+    <dd>{{ offer.parking }}</dd>
   {%- endif -%}
   {%- if offer.object and offer.object != '' -%}
-  <dt>{{ site.data.lang-uk.re_object }}</dt>
-  <dd>{{ offer.object }}</dd>
+    <dt>{{ site.data.lang-uk.re_object }}</dt>
+    <dd>{{ offer.object }}</dd>
   {%- endif -%}
   {%- if offer.surface_land != '' and offer.surface_land != '0' -%}
-  <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
-  <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
+    <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
+    <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
   {%- endif -%}
 {%- endif -%}
+
 {%- if offer.price_sqmt and offer.price_sqmt != '' -%}
-{%- if offer.rent == '1' -%}
-<dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
-{%- elsif offer.type == 'Земля' or offer.type == 'земля' -%}
-<dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
-{%- else -%}
-<dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
+  {%- if offer.rent == '1' -%}
+    <dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
+  {%- elsif offer.type == 'Земля' or offer.type == 'земля' -%}
+    <dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
+  {%- else -%}
+    <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
+  {%- endif -%}
+  <dd>
+    {% if offer.price_sqmt contains '$' %}
+      <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
+    {% elsif offer.price_sqmt contains '€' %}
+      <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
+    {% else %}
+      <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}">{{ offer.price_sqmt }}</span> {{ site.data.lang-uk.re_uah }}.
+    {% endif %}
+  </dd>
 {%- endif -%}
-<dd>{% if offer.price_sqmt contains '$' %}<span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% elsif offer.price_sqmt contains '€' %}<span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.{% else %}{{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}.{% endif %}</dd>
+
+{%- if offer.description and offer.description == '' -%}
+  <dt>{{ site.data.lang-uk.re_description }}</dt>
+  <dd>{{ offer.description }}</dd>
 {%- endif -%}
-{%- if offer.seller -%}
+
+{%- if offer.seller and offer.seller != '' -%}
   {%- if offer.rent == '1' -%}
     <dt>{{ site.data.lang-uk.re_sellerr }}</dt>
   {%- else -%}
@@ -40,7 +55,8 @@
   {%- endif -%}
   <dd>{{ offer.seller }}</dd>
 {%- endif -%}
-{%- if offer.phone -%}
+
+{%- if offer.phone and offer.phone != '' -%}
   {%- if offer.rent == '1' -%}
     <dt>{{ site.data.lang-uk.re_phoner }}</dt>
   {%- else -%}
@@ -48,7 +64,8 @@
   {%- endif -%}
   <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
 {%- endif -%}
-{%- if offer.page == '1' -%}
-<dt>{{ site.data.lang-uk.re_page }}</dt>
-<dd><a a href="{{ site.url }}/{{ offer.phone }}" target="_blank">www.{{ site.domain }}/{{ offer.phone }}</a></dd>
+
+{%- if offer.page and offer.page == '1' -%}
+  <dt>{{ site.data.lang-uk.re_page }}</dt>
+  <dd><a a href="{{ site.url }}/{{ offer.phone }}" target="_blank">www.{{ site.domain }}/{{ offer.phone }}</a></dd>
 {%- endif -%}
