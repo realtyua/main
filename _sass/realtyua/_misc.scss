@@ -71,3 +71,7 @@
   font-size: 1.365rem;
   font-weight: 300;
 }
+
+table#property tr:not([.detail-view]) {
+  cursor: pointer;
+}
