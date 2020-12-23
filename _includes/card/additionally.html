@@ -42,7 +42,7 @@
   </dd>
 {%- endif -%}
 
-{%- if offer.description and offer.description == '' -%}
+{%- if offer.description and offer.description != '' -%}
   <dt>{{ site.data.lang-uk.re_description }}</dt>
   <dd>{{ offer.description }}</dd>
 {%- endif -%}
