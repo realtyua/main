@@ -2,38 +2,8 @@
 layout: default
 ---
 
-{%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
-
-{%- assign name = page.name | remove ".html" -%}
-{%- assign ss = site.data[name] -%}
-{%- if ss[0] -%}
-  {%- for s in ss | sort: "d" -%}
-    {%- if forloop.first -%}
-    <div id="list-seller" class="row mt-4 mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
-    {%- endif -%}
-      <div class="col px-2 mb-3">
-        <div class="card">
-          <div class="card-header bg-white border-bottom-0 font-weight-bold">
-            {%- if s.w and s.w !="" -%}
-              <a href="{{ s.w }}">{{ s.n }}</a>
-            {%- else -%}
-              {{ s.n }}
-            {%- endif -%}
-          </div>
-          <div class="card-body py-0">
-            <p class="card-text">{{ s.t }}</p>
-          </div>
-          <div class="card-footer bg-white border-top-0 text-right">
-            {%- include footer/phone.html legal=s.p type="text" -%}
-          </div>
-        </div>
-      </div>
-    {%- if forloop.last -%}
-    </div>
-    <hr>
-    <div id="pagination"></div>
-    {%- endif -%}
-  {%- endfor -%}
+{%- assign isContent = content | strip_newlines -%}
+  {%- if isContent == "" -%}
 {%- else -%}
-<p>Тут нічого...</p>
+  {{ content }}
 {%- endif -%}
