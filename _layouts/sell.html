@@ -9,9 +9,9 @@ layout: default
 {%- endif -%}
 
 {%- assign name = page.name | remove: ".html" -%}
-{%- assign ss = site.data[name] | sort: "d" -%}
+{%- assign ss = site.data[name] -%}
 {%- if ss[0] -%}
-  {%- for s in ss -%}
+  {%- for s in ss | sort: "d" -%}
     {%- if forloop.first -%}
     <div id="list-seller" class="row mt-4 mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
     {%- endif -%}
