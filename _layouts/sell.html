@@ -4,26 +4,27 @@ layout: default
 
 {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
 
-{%- assign name = page.name | remove '.html' -%}
-
-  {% for sell in site.data[name] | sort: "d" %}
+{%- assign name = page.name | remove ".html" -%}
+{%- assign ss = site.data[name] -%}
+{%- if ss[0] -%}
+  {%- for s in ss | sort: "d" -%}
     {%- if forloop.first -%}
     <div id="list-seller" class="row mt-4 mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
     {%- endif -%}
       <div class="col px-2 mb-3">
         <div class="card">
           <div class="card-header bg-white border-bottom-0 font-weight-bold">
-            {%- if sell.w and sell.w !="" -%}
-              <a href="{{ sell.w }}">{{ sell.n }}</a>
+            {%- if s.w and s.w !="" -%}
+              <a href="{{ s.w }}">{{ s.n }}</a>
             {%- else -%}
-              {{ sell.n }}
+              {{ s.n }}
             {%- endif -%}
           </div>
           <div class="card-body py-0">
-            <p class="card-text">{{ sell.t }}</p>
+            <p class="card-text">{{ s.t }}</p>
           </div>
           <div class="card-footer bg-white border-top-0 text-right">
-            {%- include footer/phone.html legal=sell.p type='text' -%}
+            {%- include footer/phone.html legal=s.p type="text" -%}
           </div>
         </div>
       </div>
@@ -32,4 +33,7 @@ layout: default
     <hr>
     <div id="pagination"></div>
     {%- endif -%}
-  {% endfor %}
+  {%- endfor -%}
+{%- else -%}
+<p>Тут нічого...</p>
+{%- endif -%}
