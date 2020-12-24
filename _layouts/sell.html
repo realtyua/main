@@ -8,7 +8,7 @@ layout: default
   {{ content }}
 {%- endif -%}
 
-{%- assign name = page.name | remove ".html" -%}
+{%- assign name = page.name | remove: ".html" -%}
 {%- assign ss = site.data[name] | sort: "d" -%}
 {%- if ss[0] -%}
   {%- for s in ss -%}
