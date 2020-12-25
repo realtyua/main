@@ -8,6 +8,7 @@ layout: default
   {{ content }}
 {%- endif -%}
 
+
 {%- assign name = page.name | remove: ".html" -%}
 {%- assign ss = site.data[name] -%}
 {%- if ss[0] -%}
@@ -25,6 +26,13 @@ layout: default
               {{ s.n }}
             {%- endif -%}
           </div>
+          {%- assign slug = s.i | append: '-' | append: s.p -%}
+          {%- include folder.html dir='/assets/images/ads/' slug=slug -%}
+          {%- if file == true -%}
+            <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+          {%- else -%}
+            <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+          {%- endif -%}
           <div class="card-body py-0">
             <p class="card-text">{{ s.t }}</p>
           </div>
@@ -35,7 +43,7 @@ layout: default
       </div>
     {%- if forloop.last -%}
     </div>
-    <hr>
+    <hr class="mt-0">
     <div id="pagination"></div>
     {%- endif -%}
   {%- endfor -%}
