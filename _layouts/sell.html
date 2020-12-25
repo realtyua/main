@@ -32,7 +32,7 @@ layout: default
             <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="Рекламна картинка">
           {%- endif -%}
           <div class="card-body py-0">
-            <p class="card-text">{{ s.t }}</p>
+            <p class="card-text">{{ slug }} / {{ s.t }}</p>
           </div>
           <div class="card-footer bg-white border-top-0 text-right">
             {%- include footer/phone.html legal=s.p type="text" -%}
