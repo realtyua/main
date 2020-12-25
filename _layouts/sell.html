@@ -32,13 +32,13 @@ layout: default
           {%- assign slug = s.i | append: "-" | append: s.p -%}
           {%- include folder.html dir="/assets/images/client/" slug=slug -%}
 
-          {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and file.basename == slug" -%}
+          {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
 
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file.path | relative_url }}" class="card-img-top" alt="logo">
           {%- endif -%}
           <div class="card-body{% if s.n and s.n !='' %} py-0{% endif %}">
-            <p class="card-text">{{ s.t }}</p>
+            <p class="card-text">{{ file.path | relative_url }} / {{ s.t }}</p>
           </div>
           <div class="card-footer bg-white border-top-0 text-right">
             {%- include footer/phone.html legal=s.p type="text" -%}
