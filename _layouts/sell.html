@@ -33,7 +33,7 @@ layout: default
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="logo">
           {%- endif -%}
-          <div class="card-body{% if s.n and s.n !='' %} py-0{% endif %}">
+          <div class="card-body{% if s.n and s.n !='' %} py-0{% else %} pb-0{% endif %}">
             {%- if file[0] and s.n and s.n !="" -%}
               {%- if s.w and s.w !="" -%}
               <h5 class="card-title">
@@ -46,7 +46,7 @@ layout: default
             <p class="card-text">{{ s.t }}</p>
           </div>
           <div class="card-footer bg-white pt-0 border-top-0 text-right">
-            {{ site.data.lang-uk.re_tel }}: {% include footer/phone.html legal=s.p type="text" %}
+            {{ site.data.lang-uk.re_tel | capitalize }}: {% include footer/phone.html legal=s.p type="text" %}
           </div>
         </div>
       </div>
