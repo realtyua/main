@@ -6,7 +6,7 @@
       {%- assign picture = folder | append: slug | append: file.extname | relative_url -%}
     {%- elsif folder contains '/locations/' -%}
       {%- assign picture = slug | prepend: folder | append: file.extname | relative_url -%}
-    {%- if folder contains '/ads/' -%}
+    {%- elsif folder contains '/ads/' -%}
       {%- assign picture = folder | append: slug | append: file.extname | relative_url -%}
     {%- else -%}
       {%- assign picture = file.path -%}
