@@ -14,7 +14,7 @@ layout: default
   {%- for s in ss | sort: "d" -%}
     {%- if forloop.first -%}
     <hr>
-    <div id="list-seller" class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2" data-masonry='{"percentPosition": true }'>
+    <div id="list-seller" class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
     {%- endif -%}
     {%- assign slug = s.i | append: s.p -%}
     {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
