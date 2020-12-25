@@ -69,13 +69,13 @@
                   {%- include card.html offer=offer aid=aid -%}
                 {%- endfor -%}
                 <div class="card border-0 text-center">
-                  <a href="{{ item.url }}" class="btn btn-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
+                  <a href="{{ item.url }}" class="btn btn-primary">{{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}</a>
                 </div>
               {%- else -%}
                 <div class="alert alert-primary" role="alert">
                   <p>Поки що тут жодної нерухомості, але ви можете виправити це додавши свої пропозиції, а ми залюбки опублікуємо їх тут.</p>
                   <hr>
-                  <p class="mb-0">Про те, як це зробити ви можете дізнатись перейшовши за цим посиланням '<a href="#" class="alert-link">додати свою нерухомість</a>'.</p>
+                  <p class="mb-0">Про те, як це зробити ви можете дізнатись перейшовши за цим посиланням '<a href="/add" class="alert-link">додати свою нерухомість</a>'.</p>
                 </div>
               {%- endif -%}
             </div>
