@@ -19,20 +19,22 @@ layout: default
     {%- endif -%}
       <div class="col px-2 mb-3">
         <div class="card">
-          <div class="card-header bg-white border-bottom-0 font-weight-bold">
+          {%- if s.n and s.n !="" -%}
             {%- if s.w and s.w !="" -%}
+            <div class="card-header bg-white border-bottom-0 font-weight-bold">
               <a href="{{ s.w }}">{{ s.n }}</a>
+            </div>
             {%- else -%}
-              {{ s.n }}
+            <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
             {%- endif -%}
-          </div>
-          {%- assign slug = s.i | append: '-' | append: s.p -%}
-          {%- include folder.html dir='/assets/images/ads/' slug=slug -%}
+          {%- endif -%}
+          {%- assign slug = s.i | append: "-" | append: s.p -%}
+          {%- include folder.html dir="/assets/images/ads/" slug=slug -%}
           {%- if file == true -%}
             <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="Рекламна картинка">
           {%- endif -%}
-          <div class="card-body py-0">
-            <p class="card-text">{{ slug }} / {{ s.t }}</p>
+          <div class="card-body{% if s.n and s.n !='' %} py-0{% endif %}">
+            <p class="card-text">{{ slug }} | {{ file.basename }} | {{ s.t }}</p>
           </div>
           <div class="card-footer bg-white border-top-0 text-right">
             {%- include footer/phone.html legal=s.p type="text" -%}
