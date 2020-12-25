@@ -8,9 +8,9 @@ layout: default
     <h1 class="mb-3">{{ page.title }}</h1>
     <div class="row">
       <div class="col-md-4">
-        {%- include folder.html dir='/assets/images/logo/' slug=slug -%}
-        {%- if file == true -%}
-          <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+        {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slug" -%}
+        {%- if file[0] -%}
+          <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
         {%- else -%}
           <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
         {%- endif -%}
