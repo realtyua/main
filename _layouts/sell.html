@@ -28,10 +28,11 @@ layout: default
             <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
             {%- endif -%}
           {%- endif -%}
+
           {%- assign slug = s.i | append: "-" | append: s.p -%}
           {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
           {%- if file[0] -%}
-            <img loading="lazy" src="{{ file.path | url_decode | relative_url }}" class="card-img-top" alt="logo">
+            <img loading="lazy" src="{{ file.path | relative_url }}" class="card-img-top" alt="logo">
           {%- endif -%}
           <div class="card-body{% if s.n and s.n !='' %} py-0{% endif %}">
             <p class="card-text">{{ file.path | relative_url }} / {{ s.t }}</p>
