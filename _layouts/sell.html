@@ -14,7 +14,7 @@ layout: default
   {%- for s in ss | sort: "d" -%}
     {%- if forloop.first -%}
     <hr>
-    <div id="list-seller" class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+    <div id="list-seller" class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2" data-masonry="{'percentPosition': true }">
     {%- endif -%}
     {%- assign slug = s.i | append: s.p -%}
     {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
@@ -58,3 +58,5 @@ layout: default
 {%- else -%}
   {%- include info-visitors.html -%}
 {%- endif -%}
+
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
