@@ -28,14 +28,8 @@ layout: default
             <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
             {%- endif -%}
           {%- endif -%}
-
           {%- assign slug = s.i | append: "-" | append: s.p -%}
-          {%- include folder.html dir="/assets/images/client/" slug=slug -%}
-
           {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
-
-          ### {{ file[0] | url_decode | relative_url }} ###<br>
-
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file.path | url_decode | relative_url }}" class="card-img-top" alt="logo">
           {%- endif -%}
