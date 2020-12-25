@@ -29,8 +29,8 @@ layout: default
             {%- endif -%}
           {%- endif -%}
           {%- assign slug = s.i | append: "-" | append: s.p -%}
-          {%- include folder.html dir="/assets/images/ads/" slug=slug -%}
-          {%- if file == true -%}
+          {%- include folder.html dir="/assets/images/ad/" slug=slug -%}
+          {%- if file == true and picture contains slug -%}
             <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="Рекламна картинка">
           {%- endif -%}
           <div class="card-body{% if s.n and s.n !='' %} py-0{% endif %}">
