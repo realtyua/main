@@ -28,8 +28,15 @@ layout: default
             <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
             {%- endif -%}
           {%- endif -%}
+          
           {%- assign slug = s.i | append: "-" | append: s.p -%}
-          {%- include folder.html dir="/assets/images/ads/" slug=slug -%}
+
+          {%- for file in site.static_files -%}
+            {%- if file.path contains "/assets/images/ads/" and file.basename contains slug and file.extname == '.png' or file.extname == '.PNG' or file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' -%}
+              {{ file.path }}
+            {%- endif -%}
+          {%- endfor -%}
+
           {%- if file == true -%}
             <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="Рекламна картинка">
           {%- endif -%}
