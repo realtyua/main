@@ -34,6 +34,8 @@ layout: default
 
           {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
 
+          ### {{ file }} ###
+
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file.path | relative_url }}" class="card-img-top" alt="logo">
           {%- endif -%}
