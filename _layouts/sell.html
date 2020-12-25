@@ -17,9 +17,11 @@ layout: default
     <hr>
     <div id="list-seller" class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
     {%- endif -%}
+    {%- assign slug = s.i | append: s.p -%}
+    {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
       <div class="col px-2 mb-3">
         <div class="card">
-          {%- if s.n and s.n !="" -%}
+          {%- if file[0] != '' and s.n and s.n !="" -%}
             {%- if s.w and s.w !="" -%}
             <div class="card-header bg-white border-bottom-0 font-weight-bold">
               <a href="{{ s.w }}">{{ s.n }}</a>
@@ -28,16 +30,23 @@ layout: default
             <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
             {%- endif -%}
           {%- endif -%}
-          {%- assign slug = s.i | append: s.p -%}
-          {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="logo">
           {%- endif -%}
           <div class="card-body{% if s.n and s.n !='' %} py-0{% endif %}">
+            {%- if file[0] and s.n and s.n !="" -%}
+              {%- if s.w and s.w !="" -%}
+              <h5 class="card-title">
+                <a href="{{ s.w }}">{{ s.n }}</a>
+              </h5>
+              {%- else -%}
+              <h5 class="card-title">{{ s.n }}</h5>
+              {%- endif -%}
+            {%- endif -%}
             <p class="card-text">{{ s.t }}</p>
           </div>
-          <div class="card-footer bg-white border-top-0 text-right">
-            {%- include footer/phone.html legal=s.p type="text" -%}
+          <div class="card-footer bg-white pt-0 border-top-0 text-right">
+            {{ site.data.lang-uk.re_tel }}: {% include footer/phone.html legal=s.p type="text" %}
           </div>
         </div>
       </div>
