@@ -78,11 +78,12 @@ layout: compress
     {%- endcomment -%}
       <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
       <script>
+        // init Infinite Scroll
         $('.row').infiniteScroll({
-          // options
           path: '.pagination__next',
           append: '.col',
-          history: false,
+          status: '.scroller-status',
+          hideNav: '.pagination',
         });
       </script>
     {%- endif -%}
