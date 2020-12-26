@@ -77,13 +77,13 @@ layout: compress
       {%- include pagination-js.html -%}
     {%- endcomment -%}
       <script>
-        $('#list-seller').ready(function(){
-          $(".col").slice(0, 3).show();
+        $(document).ready(function(){
+          $(".col").slice(0, 4).show();
           $("#more").on("click", function(e){
             e.preventDefault();
-            $(".col:hidden").slice(0, 3).slideDown();
+            $(".col:hidden").slice(0, 4).slideDown();
             if($(".col:hidden").length == 0) {
-              $("#,ore").text("Більше немає");
+              $("#,ore").text("No Content");
             }
           });
         })
