@@ -77,7 +77,7 @@ layout: compress
       {%- include pagination-js.html -%}
     {%- endcomment -%}
       <script>
-        $(document).ready(function(){
+        $("#list-offer").ready(function(){
           $(".col").slice(0, 3).show();
           $("#more").on("click", function(e){
             e.preventDefault();
