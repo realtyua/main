@@ -73,7 +73,24 @@ layout: compress
     {%- elsif page.url contains '/agency/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- elsif page.url contains 'building-materials' and page.table != 1 or page.table != 2 -%}
+    {%- comment -%}
       {%- include pagination-js.html -%}
+    {%- endcomment -%}
+    <script>
+      $( document ).ready(function () {
+      		$(".col").slice(0, 3).show();
+      		if ($(".col:hidden").length != 0) {
+      			$("#more").show();
+      		}
+      		$("#loadMore").on('click', function (e) {
+      			e.preventDefault();
+      			$(".col:hidden").slice(0, 6).slideDown();
+      			if ($(".col:hidden").length == 0) {
+      				$("#more").fadeOut('slow');
+      			}
+      		});
+    	});
+    </script>
     {%- endif -%}
 
     {% include modals/net-realestate-modal.html %}
