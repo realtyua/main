@@ -78,10 +78,10 @@ layout: compress
     {%- endcomment -%}
       <script>
         $(document).ready(function(){
-          $(".col").slice(0, 4).show();
+          $(".col").slice(0, 3).show();
           $("#more").on("click", function(e){
             e.preventDefault();
-            $(".col:hidden").slice(0, 4).slideDown();
+            $(".col:hidden").slice(0, 3).slideDown();
             if($(".col:hidden").length == 0) {
               $("#,ore").text("No Content");
             }

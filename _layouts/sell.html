@@ -18,7 +18,7 @@ layout: default
     {%- endif -%}
     {%- assign slug = s.i | append: s.p -%}
     {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
-      <div class="col px-2 mb-3">
+      <div class="col px-2 mb-3" style="display:none;">
         <div class="card">
           {%- if file[0] != '' and s.n and s.n !="" -%}
             {%- if s.w and s.w !="" -%}
