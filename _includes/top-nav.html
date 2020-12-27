@@ -1,7 +1,7 @@
 {%- assign tns = site.html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.url != '/add.html' and i.navhide != 1 and i.title != ''" -%}
 {%- for tn in tns -%}
   {%- if forloop.first -%}
-  <div class="col-lg-4 order-2 order-lg-1 mt-3 mt-lg-0 mb-3 mb-lg-0 pr-lg-0 mr-lg-n3">
+  <div class="col-lg-4 order-2 order-lg-1 mt-3 mt-lg-0 mb-3 mb-lg-0 pr-lg-0">
     <nav class="nav nav-masthead justify-content-end">
   {%- endif -%}
   {%- if tn.url == page.url -%}
@@ -21,13 +21,13 @@
   </div>
   {%- endif -%}
   {%- if tn.url == page.url -%}
-    <div class="col-lg-2 order-1 order-lg-2 text-right">
+    <div class="col-auto order-1 order-lg-2 text-right">
       <span class="btn btn-add btn-sm">
         {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
       </span>
     </div>
   {%- else -%}
-    <div class="col-lg-2 order-1 order-lg-2 text-right">
+    <div class="col-auto order-1 order-lg-2 text-right">
       <a href="{{ tn.url }}" class="btn btn-add btn-sm">
         {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
       </a>
