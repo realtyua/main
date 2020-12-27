@@ -17,7 +17,7 @@
     <dt>{{ site.data.lang-uk.re_object }}</dt>
     <dd>{{ offer.object }}</dd>
   {%- endif -%}
-  {%- if offer.surface_land != '' and offer.surface_land != '0' -%}
+  {%- if offer.surface_land and offer.surface_land != '' -%}
     <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
     <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
   {%- endif -%}
