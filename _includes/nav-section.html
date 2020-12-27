@@ -11,6 +11,15 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
+    {%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
+    {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
+    {%- if isMap == 'true' -%}
+    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+      <li class="nav-item">
+        <a class="nav-link border-0" href="{{ mapPage }}"><span>Мапа</span></a>
+      </li>
+    </ul>
+    {%- endif -%}
     <ul class="navbar-nav nav nav-tabs border-0">
       {%- for one in ones -%}
         {%- assign isJson = false -%}
