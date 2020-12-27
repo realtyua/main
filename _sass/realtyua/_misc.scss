@@ -1,5 +1,3 @@
----
----
 //
 // Scrolltop
 //
@@ -81,7 +79,7 @@ table#property tr:not(.detail-view) { cursor: pointer; }
 }
 
 .flag-ua .d-flex span:first-child {
-  font-size: {{ site.region_size }};
+  font-size: .9rem;
 }
 
 #list-offer .col { display: none; }
