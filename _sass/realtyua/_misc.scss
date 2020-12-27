@@ -1,3 +1,5 @@
+---
+---
 //
 // Scrolltop
 //
@@ -76,6 +78,10 @@ table#property tr:not(.detail-view) { cursor: pointer; }
   margin-left: 3px;
   margin-right: 3px;
   line-height: 1;
+}
+
+.flag-ua .d-flex span:first-child {
+  font-size: {{ site.region_size }};
 }
 
 #list-offer .col { display: none; }
