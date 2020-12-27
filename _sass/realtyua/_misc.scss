@@ -70,4 +70,12 @@
 .lead-badge { font-size: 1.365rem; font-weight: 300; }
 table#property tr:not(.detail-view) { cursor: pointer; }
 
+.dropdown-menu small {
+  display: block;
+  color: #fff;
+  margin-left: 3px;
+  margin-right: 3px;
+  line-height: 1;
+}
+
 #list-offer .col { display: none; }
