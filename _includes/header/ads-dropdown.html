@@ -1,0 +1,14 @@
+{%- assign ads = site.html_pages | where_exp: 'i', "i.ads == 1" -%}
+{%- if ad[0] -%}
+<div class="dropdown-menu mt-0 w-100 border-top-0 rounded-0" aria-labelledby="navDropRealEstate{{ slug | capitalize }}">
+  <div class="row w-100 mt-mx-2 mt-md-3 mx-0 px-0">
+    {%- for ad in ads -%}
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+      <a href="{{ ad.url }}" target="_blank" class="dropdown-item">
+        {{ ad.navtitle }}
+      </a>
+    </div>
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}

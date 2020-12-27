@@ -1,4 +1,17 @@
+{%- assign ads = site.html_pages | where_exp: 'i', "i.ads == 1" -%}
+{%- if ad[0] -%}
+  {%- for ad in ads -%}
+  <div class="col mb-3 mb-md-0">
+    <div class="card h-100">
+      <div class="card-body">
+        <p class="card-text"><a href="{{ ad.url }}">{{ ad.subtitle }}</a></p>
+      </div>
+    </div>
+  </div>
+  {%- endfor -%}
+{%- endif -%}
 
+{%- comment -%}
 <div class="col mb-3 mb-md-0">
   <div class="card h-100">
     <div class="card-body">
@@ -30,3 +43,4 @@
     </div>
   </div>
 </div>
+{%- endcomment -%}
