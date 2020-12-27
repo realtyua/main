@@ -25,5 +25,9 @@
 }
 
 .card-text .nav-tabs .nav-link {
-    margin-bottom: -1px;
+  margin-bottom: -1px;
+}
+
+#realestate-map .nav-link:first-child {
+  margin-left: 0;
 }
