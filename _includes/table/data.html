@@ -11,7 +11,7 @@
   data-detail-view-by-click="true"
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
-  {% if page.url contains '/all' and isMap == 'true' %}data-buttons="buttons" data-buttons-align="left"{% endif %}
+  {%- comment -%}{% if page.url contains '/all' and isMap == 'true' %}data-buttons="buttons" data-buttons-align="left"{% endif %}{%- endcomment -%}
   data-buttons-class="primary">
   <thead class="thead-re">
     <tr>

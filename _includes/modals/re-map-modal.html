@@ -37,27 +37,27 @@
     map.remove();
   });
 
-{%- include map/page-exists.html -%}
-
-{%- capture url -%}{%- if page.url contains '/all' -%}{{ page.url | replace: '/all', '/map' }}{%- endif -%}{%- endcapture -%}
-
-{%- if page.url contains '/all' and isMap == 'true' -%}
-  function buttons () {
-    return {
-      openMap: {
-        text: 'Map',
-        icon: 're-map',
-        event: {
-          'click': () => {
-            window.open('{{ url }}', '_blank');
+{%- comment -%}
+  {%- include map/page-exists.html -%}
+  {%- capture url -%}{%- if page.url contains '/all' -%}{{ page.url | replace: '/all', '/map' }}{%- endif -%}{%- endcapture -%}
+  {%- if page.url contains '/all' and isMap == 'true' -%}
+    function buttons () {
+      return {
+        openMap: {
+          text: 'Map',
+          icon: 're-map',
+          event: {
+            'click': () => {
+              window.open('{{ url }}', '_blank');
+            }
+          },
+          attributes: {
+            title: '{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_on_map }}'
           }
-        },
-        attributes: {
-          title: '{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_on_map }}'
         }
       }
     }
-  }
-{%- endif -%}
+  {%- endif -%}
+{%- endcomment -%}
 
 </script>
