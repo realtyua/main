@@ -1,4 +1,9 @@
 ---
 ---
+
 @charset 'utf-8';
 @import "realtyua/base";
+
+.flag-ua .d-flex span:first-child {
+  font-size: {{ site.region_size }};
+}
