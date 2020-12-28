@@ -36,12 +36,13 @@
     <h5 class="mb-2">{{ site.data.lang-uk.other_regions_ua }}</h5>
   </div>
   <div class="col-12">
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
       {%- assign regs = site.data.realestate | sort: 'navtitle' -%}
       {%- for reg in regs -%}
       {%- if reg.url != site.url -%}
       <div class="col mb-2">
         <a href="{{ reg.url }}" target="_blank">{{ reg.navtitle }}</a>
+        <small>{{ reg.subtitle }}</small>
       </div>
       {%- endif -%}
       {%- endfor -%}
