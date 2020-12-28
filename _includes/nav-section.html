@@ -11,7 +11,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
-    {%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
+    {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
     {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
     {%- if isMap == 'true' -%}
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
