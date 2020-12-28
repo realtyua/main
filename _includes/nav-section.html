@@ -19,11 +19,11 @@
         <a class="nav-link border-0" href="/{{ mapPage }}"><span>Мапа</span></a>
       </li>
     </ul>
-    {%- else -%}
-    {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
+    {%- elsif isMap == 'true' -%}
+    {%- assign mapPage = here | append: 'map.html' -%}
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
-        <a class="nav-link border-0" href="/{{ mapPage }}"><span>Мапа</span></a>
+        <a class="nav-link border-0" href="{{ mapPage }}"><span>Мапа</span></a>
       </li>
     </ul>
     {%- endif -%}
