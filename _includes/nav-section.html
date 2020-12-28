@@ -20,6 +20,7 @@
       </li>
     </ul>
     {%- else -%}
+    {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
         <a class="nav-link border-0" href="/{{ mapPage }}"><span>Мапа</span></a>
