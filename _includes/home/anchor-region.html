@@ -1,6 +1,6 @@
 {%- assign threes = site.pages | sort: 'path' | where_exp: 'i', "i.url contains include.current and i.url != include.current and i.navhide != 1" -%}
 {%- if threes.size > 0 -%}
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3{% if include.current contains '/town/' %} row-cols-lg-5{% else %} row-cols-lg-4{% endif %}">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3{% if include.current contains '/town/' %} row-cols-lg-5{% elsif include.current contains '/district/' %} row-cols-lg-3{% else %} row-cols-lg-4{% endif %}">
   {%- for three in threes -%}
     {%- assign slug = three.url | split: '/' | last -%}
     {%- assign current = three.url | remove: slug | remove: '//' | append: '/' -%}
