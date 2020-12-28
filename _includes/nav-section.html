@@ -13,7 +13,13 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
     {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
     {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
-    {%- if isMap == 'true' -%}
+    {%- if isMap == 'true' and page.dir == here-%}
+    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+      <li class="nav-item">
+        <a class="nav-link border-0" href="/{{ mapPage }}"><span>Мапа</span></a>
+      </li>
+    </ul>
+    {%- else -%}
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
         <a class="nav-link border-0" href="/{{ mapPage }}"><span>Мапа</span></a>
