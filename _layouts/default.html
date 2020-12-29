@@ -99,5 +99,10 @@ layout: compress
       {% include modals/re-map-modal.html %}
     {%- endif -%}
 
+    {%- if page.url contains '/submit.html' -%}
+      <script src="{{ '/assets/add.js' | relative_url }}"></script>
+      <script src="https://www.google.com/recaptcha/api.js"></script>
+    {%- endif -%}
+
   </body>
 </html>
