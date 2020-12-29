@@ -24,10 +24,14 @@
   border-bottom: 4px solid #2d5ca6;
 }
 
-.card-text .nav-tabs .nav-link {
-  margin-bottom: -1px;
+.card-text .nav-tabs .nav-link { margin-bottom: -1px; }
+#realestate-map .nav-link:first-child { padding-left: 0; }
+
+
+.navbar-toggler.collapsed .navbar-toggler-icon {
+  margin-top: 1px;
 }
 
-#realestate-map .nav-link:first-child {
-  padding-left: 0;
+.card .card-footer .navbar-toggler {
+  margin-bottom: 1px;
 }
