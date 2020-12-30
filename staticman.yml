@@ -3,7 +3,7 @@ comments:
   requiredFields: ["name", "email", "message"]
   allowedOrigins: ["localhost", "realestate.if.ua", "www.realestate.if.ua"]
   branch: master
-  commitMessage: "New Property from {fields.name} on {options.slug} / {fields.date}"
+  commitMessage: "New Property from {fields.date} on {options.slug}"
   filename: "entry{@timestamp}"
   format: "yaml"
   generatedFields:
