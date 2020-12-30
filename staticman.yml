@@ -13,7 +13,7 @@ comments:
         format: "timestamp-seconds"
   moderation: true
   name: "Add New Property"
-  path: "_data/{options.slug}"
+  path: "_data/comments/{options.slug}"
   transforms:
     email: md5
   notifications:
