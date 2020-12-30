@@ -101,7 +101,7 @@ compress_html:
   startings: [html, head, body]
 
 # staticman_url: https://${bridge_app_name}.herokuapp.com/v2/entry/${github-username}/${blog-repo}/master/comments
-staticman_url: https://addnew.herokuapp.com/v2/entry/realtyua/main/master/
+staticman_url: https://addnew.herokuapp.com/v2/entry/realtyua/main/master/entries
 
 reCaptcha:
   siteKey: 6LdKdRkaAAAAAANwi81j7jDqLF9gUxhsMb4-Tq8t
