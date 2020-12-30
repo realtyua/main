@@ -1,5 +1,5 @@
 comments:
-  allowedFields: ["name", "email", "slug", "message"]
+  allowedFields: ["name", "email", "message"]
   requiredFields: ["name", "email", "message"]
   allowedOrigins: ["localhost", "realestate.if.ua", "www.realestate.if.ua"]
   branch: master
@@ -18,11 +18,6 @@ comments:
     email: md5
   notifications:
     enabled: false
-  generatedFields:
-    date:
-      type: "date"
-      options:
-        format: "iso8601"
   reCaptcha:
     enabled: true
     siteKey: 6LdKdRkaAAAAAANwi81j7jDqLF9gUxhsMb4-Tq8t
