@@ -16,8 +16,8 @@ comments:
   path: "_data/comments/{options.slug}"
   transforms:
     email: md5
-  notifications:
-    enabled: false
+  # notifications:
+  #   enabled: false
   generatedFields:
     date:
       type: "date"
