@@ -100,7 +100,7 @@ compress_html:
   profile: false
   startings: [html, head, body]
 
-staticman_url: https://addnew.herokuapp.com/v2/entry/realtyua/main/master/property
+staticman_url: https://addnew.herokuapp.com/v2/entry/realtyua/main/master/comments
 
 reCaptcha:
   siteKey: 6LdKdRkaAAAAAANwi81j7jDqLF9gUxhsMb4-Tq8t
