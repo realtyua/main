@@ -100,7 +100,6 @@ compress_html:
   profile: false
   startings: [html, head, body]
 
-# staticman_url: https://${bridge_app_name}.herokuapp.com/v2/entry/${github-username}/${blog-repo}/master/comments
 staticman_url: https://addnew.herokuapp.com/v2/entry/realtyua/main/master/property
 
 reCaptcha:

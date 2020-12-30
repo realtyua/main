@@ -1,5 +1,7 @@
 comments:
-  allowedFields: ["name", "email", "message"]
+  allowedFields: ["name", "email", "slug", "message"]
+  requiredFields: ["name", "email", "message"]
+  allowedOrigins: ["localhost", "realestate.if.ua", "www.realestate.if.ua"]
   branch: master
   commitMessage: "Property from {fields.name} on {options.slug}"
   filename: "entry{@timestamp}"
@@ -11,10 +13,11 @@ comments:
         format: "timestamp-seconds"
   moderation: true
   name: "Add New Property"
-  path: "_data/property/{options.slug}"
-  requiredFields: ["name", "email", "message"]
+  path: "_data/comments/{options.slug}"
   transforms:
     email: md5
+  notifications:
+    enabled: false
   generatedFields:
     date:
       type: "date"
