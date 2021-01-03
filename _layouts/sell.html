@@ -7,18 +7,18 @@ layout: default
   {{ content }}
 {%- endif -%}
 {%- assign name = page.name | remove: ".html" -%}
-{%- assign ss = site.data[name] -%}
+{%- assign ss = site.data[name] | sort: "d" -%}
 {%- if ss[0] -%}
-  {%- for s in ss | sort: "d" -%}
+  {%- for s in ss -%}
     {%- if forloop.first -%}
     <hr>
     <div id="list-offer" class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
     {%- endif -%}
     {%- assign slug = s.i | append: s.p -%}
-    {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
+    {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
       <div class="col px-2 mb-3">
         <div class="card">
-          {%- if file[0] != '' and s.n and s.n !="" -%}
+          {%- if file[0] != "" and s.n and s.n != "" -%}
             {%- if s.w and s.w !="" -%}
             <div class="card-header bg-white border-bottom-0 font-weight-bold">
               <a href="{{ s.w }}">{{ s.n }}</a>
@@ -30,7 +30,7 @@ layout: default
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="logo">
           {%- endif -%}
-          <div class="card-body{% if s.n and s.n !='' %} py-0{% else %} pb-0{% endif %}">
+          <div class="card-body{% if s.n and s.n != "" %} py-0{% else %} pb-0{% endif %}">
             {%- if file[0] and s.n and s.n !="" -%}
               {%- if s.w and s.w !="" -%}
               <h5 class="card-title">
