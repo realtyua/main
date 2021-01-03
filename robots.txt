@@ -4,4 +4,6 @@ Disallow: /*/data/*
 Disallow: /*/data/
 Disallow: /*/data/*.json
 Disallow: *.json
+Disallow: 404.html
+Disallow: new.html
 Sitemap: https://www.realestate.if.ua/sitemap.xml
