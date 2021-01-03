@@ -164,11 +164,11 @@ function jsDetailFormatter(index, row, $detail) {
   const images = Object.values(row.images || {});
 
   if (images.length) {
-    var district = row.region.replace('кий', 'кому');
-    var region = row.region.replace('район', 'районі');
+    var region = row.region.replace('кий', 'кому');
+    var district = region.replace('район', 'районі');
     html.push('<hr class="mt-0"><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
-      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="' + image.title + '" data-lightbox-caption="{{ site.data.lang-uk.re_free_ads_in }} ' + row.location + '' + region + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="' + image.title + '" alt="' + image.alt + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      return '<figure class="col px-1"><a href="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" class="lightbox" title="' + image.title + '" data-lightbox-caption="{{ site.data.lang-uk.re_free_ads_in }} ' + row.location + '' + district + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="/assets/images/' + row.phone + '/' + row.id + '/' + image.src + '" loading="lazy" title="' + image.title + '" alt="' + image.alt + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
   }
@@ -294,11 +294,11 @@ function htmlDetailFormatter(index, row, $detail) {
   })
 
   if (images.length) {
-    var district = row.region.replace('кий', 'кому');
-    var region = row.region.replace('район', 'районі');
+    var region = row.region.replace('кий', 'кому');
+    var district = region.replace('район', 'районі');
     html.push('<hr class="mt-0"><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
-      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '' + region + '" data-lightbox-caption="{{ site.data.lang-uk.re_free_ads_in }} ' + row.location + '' + region + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '' + region + '" alt="' + row.type + ' в ' + row.location + '' + region + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
+      return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '' + district + '" data-lightbox-caption="{{ site.data.lang-uk.re_free_ads_in }} ' + row.location + '' + district + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' по ' + row.address + ' в ' + row.location + '' + district + '" alt="' + row.type + ' в ' + row.location + '' + district + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
     }).join('')),
     html.push('</span>')
   }
