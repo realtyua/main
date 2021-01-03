@@ -2,12 +2,16 @@
 layout: default
 ---
 {%- assign isContent = content | strip_newlines -%}
-  {%- if isContent == "" -%}
+{%- if isContent == "" -%}
 {%- else -%}
   {{ content }}
 {%- endif -%}
 {%- assign name = page.name | remove: ".html" -%}
-{%- assign ss = site.data[name] | sort: "d" -%}
+{%- if site.data[name] == "" -%}
+  {%- assign ss = site.data[name] -%}
+{%- else -%}
+  {%- assign ss = site.data[name] | sort: "d" -%}
+{%- endif -%}
 {%- if ss[0] -%}
   {%- for s in ss -%}
     {%- if forloop.first -%}
