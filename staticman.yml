@@ -1,6 +1,6 @@
 comments:
   allowedFields: ["are", "tre", "surface", "sland", "rooms", "floor", "floors", "taddress", "address", "number", "tlocation", "location", "region", "description", "currency", "price", "phone", "fn", "ln", "agree"]
-  requiredFields: ["are", "tre", "surface", "sland", "rooms", "floor", "floors", "taddress", "address", "number", "tlocation", "location", "region", "description", "currency", "price", "phone", "fn", "ln", "agree"]
+  # requiredFields: ["are", "tre", "surface", "sland", "rooms", "floor", "floors", "taddress", "address", "number", "tlocation", "location", "region", "description", "currency", "price", "phone", "fn", "ln", "agree"]
   allowedOrigins: ["localhost", "realestate.if.ua", "www.realestate.if.ua"]
   branch: master
   commitMessage: "New Property from {fields.date} on {options.slug}"
