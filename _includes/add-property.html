@@ -1,1 +1,222 @@
- 
+<form id="add-form" class="needs-validation" method="post" action="{{ site.staticman_url }}" novalidate>
+    <div class="form-row">
+        <div class="col-12 mt-3">
+            <div class="alert alert-info" role="alert">
+                Якщо ви вже прочитали <a href="#" target="_blank" class="alert-link">правила і умови</a>, тоді вам залишається погодитись з ними та прийняти їх і розпочати заповнювати форму подачі оголошення та надіслати ваше оголошення нам.
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="actionRealestate">Дія яка вчиняється з нерухомістю</label>
+            <select name="fields[are]" class="custom-select" id="actionRealestate" required>
+                <option selected disabled value="">Виберіть дію яку вчиняєте</option>
+                <option value="sell">Продаю</option>
+                <option value="rent">Передаю в оренду</option>
+            </select>
+            <div class="valid-feedback">Начебто дію, яка вчиняється з нерухомістю вибрано.</div>
+            <div class="invalid-feedback">Будь ласка виберить дію, яку вчиняєте з нерухомістю.</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="typeRealestate">Тип нерухомого майна</label>
+            <select name="fields[tre]" class="custom-select" id="typeRealestate" required>
+                <option selected disabled value="">Виберіть тип нерухомості</option>
+                <option value="house">Будинок</option>
+                <option value="parthouse">Частина будинку</option>
+                <option value="apartment">Квартира</option>
+                <option value="partapartment">Частина квартири</option>
+                <option value="separateroom">Кімната</option>
+                <option value="nonresidential">Нежитлове приміщення</option>
+                <option value="land">Земля</option>
+                <option value="garage">Гараж</option>
+                <option value="parking">Місце для паркування</option>
+                <option value="commercial">Комерційна нерухомість</option>
+            </select>
+            <div class="valid-feedback">Начебто тип нерухомого майна вибрано.</div>
+            <div class="invalid-feedback">Будь ласка виберить тип нерухомого майна.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="surface">Загальна площа м<sup>2</sup> нерухомості</label>
+            <div class="input-group is-invalid">
+                <input name="fields[surface]" type="number" class="form-control" id="surface" required>
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupSurface">м<sup>2</sup></span>
+                </div>
+                <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі у об'єка написано правильно!</div>
+                <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі у об'єкта нерухомості.</div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="surfaceLand">Загальна площа м<sup>2</sup> землі</label>
+            <div class="input-group is-invalid">
+                <input name="fields[sland]" type="number" class="form-control" id="surfaceLand" required>
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupSurfaceLand">м<sup>2</sup></span>
+                </div>
+                <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі землі написано правильно!</div>
+                <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі землі.</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="rooms">Кількість кімнат</label>
+            <input name="fields[rooms]" type="number" class="form-control" id="rooms" min="1" max="20" required>
+            <div class="valid-feedback">Начебто кількість кімнат введено правильно.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсну кількість кімнат.</div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="floor">На якому поверсі</label>
+            <input name="fields[floor]" type="number" class="form-control" id="floor" min="0" max="16" required>
+            <div class="valid-feedback">Начебто номер поверху введено правильно.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсний номер поверху.</div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="floors">Кількість поверхів</label>
+            <input name="fields[floors]" type="number" class="form-control" id="floors" min="1" max="16" required>
+            <div class="valid-feedback">Начебто кількість поверхів введено правильно.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсну кількість поверхів.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label for="typeAddress">Тип адреси</label>
+            <select name="fields[taddress]" class="custom-select" id="typeAddress" required>
+                <option selected disabled value="">Тип...</option>
+                <option value="alley">Алея</option>
+                <option value="boulevard">Бульвар</option>
+                <option value="street">Вулиця</option>
+                <option value="prospectus">Проспект</option>
+                <option value="square">Площа</option>
+                <option value="lane">Провулок</option>
+                <option value="maidan">Майдан</option>
+                <option value="uzviz">Узвіз</option>
+            </select>
+            <div class="valid-feedback">Начебто тип адреси вибрано!</div>
+            <div class="invalid-feedback">Будь ласка виберить тип адреси.</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="address">Адреса</label>
+            <input name="fields[address]" type="text" minlength="2" maxlength="20" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,20}" class="form-control" id="address" required>
+            <div class="valid-feedback">Начебто адресу написано правильно.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсне адресу.</div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="houseNumber">Будинку</label>
+            <input name="fields[number]" type="number" min="1" max="300" class="form-control" id="houseNumber" required>
+            <div class="valid-feedback">Начебто номер будинку надано.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсний номер будинку.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="typeLocation">Тип населеного пункту</label>
+            <select name="fields[tlocation]" class="custom-select" id="typeLocation" required>
+                <option selected disabled value="">Виберіть тип...</option>
+                <option value="city">Місто</option>
+                <option value="town">Містечко</option>
+                <option value="townvillage">Селище міського типу</option>
+                <option value="bigvillage">Селище</option>
+                <option value="village">Село</option>
+                <option value="smallvillage">Хутір</option>
+            </select>
+            <div class="valid-feedback">Начебто тип населеного пункту вибрано!</div>
+            <div class="invalid-feedback">Будь ласка виберить тип населеного пункту.</div>
+        </div>
+        <div class="col-md-7 mb-3">
+            <label for="location">Найменування населеного пункту</label>
+            <input name="fields[location]" type="text" minlength="2" maxlength="25" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,25}" class="form-control" id="location" required>
+            <div class="valid-feedback">Начебто найменування населеного пункту написано правильно.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсне найменування населеного пункту.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-12 mb-3">
+            <label for="region">Район Івано-Франківської області</label>
+            <select name="fields[region]" class="custom-select" id="region" required>
+                <option selected disabled value="">Виберіть район...</option>
+                <option value="ivano-frankivskyy">Івано-Франківський район</option>
+                <option value="kaluskyy">Калуський район</option>
+                <option value="kolomyyskyy">Коломийський район</option>
+                <option value="kosivskyy">Косівський район</option>
+                <option value="nadvirnyanskyy">Надвірнянський район</option>
+                <option value="verkhovynskyy">Верховинський район</option>
+            </select>
+            <div class="valid-feedback">Начебто район вибрано!</div>
+            <div class="invalid-feedback">Будь ласка виберить район Івано-Франківської області де розташовано населений пункту.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-12 mb-3">
+            <label for="description">Додатково про нерухомість</label>
+            <textarea name="fields[description]" minlength="0" maxlength="256" class="form-control" id="description"></textarea>
+            <div class="valid-feedback">Начебто тут все гаразд.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label for="currency">Валюта</label>
+            <select name="fields[currency]" class="custom-select" id="currency" required>
+                <option selected disabled value="">Валюта...</option>
+                <option value="uah">Гривня</option>
+                <option value="eur">Євро</option>
+                <option value="usd">Долар</option>
+            </select>
+            <div class="valid-feedback">Начебто валюту вибрано!</div>
+            <div class="invalid-feedback">Будь ласка виберить валюту.</div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="price">Ціна нерухомості</label>
+            <input name="fields[price]" type="number" min="1" max="9000000" class="form-control" id="price" required>
+            <div class="valid-feedback">Начебто ціну надано.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть ціну нерухомості.</div>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="phone">Телефон</label>
+            <div class="input-group is-invalid">
+                <div class="input-group-phone"><span class="input-group-text">+</span></div>
+                <input name="fields[phone]" type="tel" maxlength="12" minlength="12" size="12" pattern="[0-9]{12,12}" class="form-control" id="phone" placeholder="380504949649" required>
+                <div class="valid-feedback">Начебто номер телефону написано правильно.</div>
+                <div class="invalid-feedback">Будь ласка вкажіть дійсний номер телефону у форматі 380504949649.</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="firstName">Ім'я</label>
+            <input name="fields[fn]" type="text" minlength="2" maxlength="20" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,20}" class="form-control" id="firstName" required>
+            <div class="valid-feedback">Начебто ім'я написано правильно.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсне ім'я.</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="lastName">Прізвище</label>
+            <input name="fields[ln]" type="text" minlength="2" maxlength="30" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,30}" class="form-control" id="lastName" required>
+            <div class="valid-feedback">Начебто прізвище написано правильно.</div>
+            <div class="invalid-feedback">Будь ласка вкажіть дійсне прізвище.</div>
+        </div>
+    </div>
+    <div class="form-row form-group">
+        <div id="reCaptcha" class="g-recaptcha input-group" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
+    </div>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox mb-3">
+            <input type="checkbox" class="custom-control-input" id="agreeCheck" required="">
+            <label class="custom-control-label" for="agreeCheck">Прийміть <a href="#" target="_blank">правила і умови використання</a></label>
+            <div class="invalid-feedback">Ви повинні погодитись перед подачею оголошення.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <input type="hidden" name="options[origin]" value="{{ page.url | absolute_url }}">
+        <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+        <input type="hidden" name="options[reCaptcha][siteKey]" value="{{ site.reCaptcha.siteKey }}">
+        <input type="hidden" name="options[reCaptcha][secret]"  value="{{ site.reCaptcha.secret }}">
+        <div class="col-12 alerts d-none">
+            <div class="alert alert-danger" role="alert">
+              <p class="alert-text mb-0"></p>
+            </div>
+        </div>
+    </div>
+    <button id="add-submit" class="btn btn-primary" type="submit">Надіслати</button>
+</form>
