@@ -1,155 +1,155 @@
-// Static comments
-// from: https://github.com/eduardoboucas/popcorn/blob/gh-pages/js/main.js
-(function ($) {
-  var $comments = $('.js-comments');
 
-  $('.js-form').submit(function () {
+(function() {
+    "use strict";
+    window.addEventListener("load", function() {
+        var forms = document.getElementsByClassName("needs-validation");
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener("submit", function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+            }, false);
+        });
+    }, false);
+})();
+
+$(document).ready(function() {
+    var checkbox = document.querySelector('input[id="agreeCheck"]');
+    $('.form-row:not(:first-child)').css('display', 'none');
+    $('.btn').css('display', 'none');
+    checkbox.addEventListener('change', (e) => {
+        e.preventDefault();
+        if (checkbox.checked) {
+            $('.form-row:first-child').css('display', 'none');
+            $('.form-row:not(:first-child)').css('display', 'flex');
+            $('.btn').css('display', 'inline-block');
+        } else {
+            $('.form-row:first-child').css('display', 'flex');
+            $('.form-row:not(:first-child)').css('display', 'none');
+            $('.btn').css('display', 'none');
+        }
+    });
+    const selectTL = document.querySelector("select#typeLocation");
+    const selectTRE = document.querySelector("select#typeRealestate");
+    var region = document.getElementById("region");
+    var surface = document.getElementById("surface");
+    var surfaceLand = document.getElementById("surfaceLand");
+    var rooms = document.getElementById("rooms");
+    var floor = document.getElementById("floor");
+    var floors = document.getElementById("floors");
+    var houseNumber = document.getElementById("houseNumber");
+    selectTL.addEventListener("change", (e) => {
+        e.preventDefault();
+        const valueTL = selectTL.value;
+        if (valueTL === "city" || valueTL === "town") {
+            region.setAttribute("disabled", "");
+            region.removeAttribute("required");
+            region.value = "";
+        } else {
+            region.setAttribute("required", "");
+            region.removeAttribute("disabled");
+        }
+    });
+    selectTRE.addEventListener("change", (e) => {
+        e.preventDefault();
+        const valueTRE = selectTRE.value;
+        if (valueTRE === "land") {
+            surfaceLand.setAttribute("required", "");
+            surfaceLand.removeAttribute("readonly");
+            surface.setAttribute("disabled", "");
+            surface.removeAttribute("required");
+            surface.value = "";
+            rooms.setAttribute("disabled", "");
+            rooms.removeAttribute("required");
+            rooms.value = "";
+            floor.setAttribute("disabled", "");
+            floor.removeAttribute("required");
+            floor.value = "";
+            floors.setAttribute("disabled", "");
+            floors.removeAttribute("required");
+            floors.value = "";
+            houseNumber.setAttribute("disabled", "");
+            houseNumber.removeAttribute("required");
+            houseNumber.value = "";
+        } else if (valueTRE === "garage") {
+            surface.setAttribute("required", "");
+            surface.removeAttribute("disabled");
+            surfaceLand.setAttribute("required", "");
+            surfaceLand.removeAttribute("disabled");
+            rooms.setAttribute("required", "");
+            rooms.removeAttribute("disabled");
+            floor.setAttribute("required", "");
+            floor.removeAttribute("disabled");
+            floors.setAttribute("required", "");
+            floors.removeAttribute("disabled");
+        } else if (valueTRE === "apartment" || valueTRE === "partapartment" || valueTRE === "separateroom") {
+            surfaceLand.setAttribute("disabled", "");
+            surfaceLand.removeAttribute("required");
+            surfaceLand.value = "";
+            surface.setAttribute("required", "");
+            surface.removeAttribute("disabled");
+            rooms.setAttribute("required", "");
+            rooms.removeAttribute("disabled");
+            floor.setAttribute("required", "");
+            floor.removeAttribute("disabled");
+            floors.setAttribute("required", "");
+            floors.removeAttribute("disabled");
+            houseNumber.setAttribute("required", "");
+            houseNumber.removeAttribute("disabled");
+        } else {
+            surface.setAttribute("required", "");
+            surface.removeAttribute("disabled");
+            surfaceLand.setAttribute("required", "");
+            surfaceLand.removeAttribute("disabled");
+            rooms.setAttribute("required", "");
+            rooms.removeAttribute("disabled");
+            floor.setAttribute("required", "");
+            floor.removeAttribute("disabled");
+            floors.setAttribute("required", "");
+            floors.removeAttribute("disabled");
+            houseNumber.setAttribute("required", "");
+            houseNumber.removeAttribute("disabled");
+        }
+    });
+});
+
+(function ($) {
+  var $comments = $('#add-form');
+
+  $('#add-form').submit(function () {
     var form = this;
 
-
-    $("#comment-form-submit").html(
-      '<svg class="icon spin"><use xlink:href="#icon-loading"></use></svg> Sending...'
-    );
     $(form).addClass('disabled');
+    $('#add-submit').html('Надсилаю<div class="spinner-border spinner-border-sm text-warning ml-1" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
     $.ajax({
       type: $(this).attr('method'),
-      url:  $(this).attr('action'),
+      url: $(this).attr('action'),
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-        showModal('Comment submitted', 'Thanks! Your comment is <a href="https://github.com/realtyua/main/pulls">pending</a>. It will appear when approved.');
-
-        $("#comment-form-submit")
-          .html("Submit");
-
-        $(form)[0].reset();
-        $(form).removeClass('disabled');
+        $('#add-submit').html('Надіслано');
+        $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
+        showAlert('<strong>Thanks for your comment!</strong> It will show on the site once it has been approved.');
         grecaptcha.reset();
       },
       error: function (err) {
         console.log(err);
-        var ecode = (err.responseJSON || {}).errorCode || "unknown";
-        showModal('Error', 'An error occured.<br>[' + ecode + ']');
-        $("#comment-form-submit").html("Submit")
+        $('#add-submit').html('Надіслати');
+        $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
+        showAlert('<strong>Sorry, there was an error with your submission.</strong> Please make sure all required fields have been completed and try again.');
         $(form).removeClass('disabled');
         grecaptcha.reset();
       }
     });
+
     return false;
   });
 
-  $('.js-close-modal').click(function () {
-    $('body').removeClass('show-modal');
-  });
-
-  function showModal(title, message) {
-    $('.js-modal-title').text(title);
-    $('.js-modal-text').html(message);
-    $('body').addClass('show-modal');
+  function showAlert(message) {
+    $('#add-form .alerts').removeClass('d-none');
+    $('#add-form .alert-text').html(message);
   }
 })(jQuery);
-
-// Staticman comment replies, from https://github.com/mmistakes/made-mistakes-jekyll
-// modified from Wordpress https://core.svn.wordpress.org/trunk/wp-includes/js/comment-reply.js
-// Released under the GNU General Public License - https://wordpress.org/about/gpl/
-// addComment.moveForm is called from comment.html when the reply link is clicked.
-var addComment = {
-  // commId - the id attribute of the comment replied to (e.g., "comment-10")
-  // respondId - the string 'respond', I guess
-  // postId - the page slug
-  moveForm: function( commId, respondId, postId, parentUid ) {
-    var div, element, style, cssHidden,
-    t           = this,                    //t is the addComment object, with functions moveForm and I, and variable respondId
-    comm        = t.I( commId ),                                // whole comment
-    respond     = t.I( respondId ),                             // whole new comment form
-    cancel      = t.I( 'cancel-comment-reply-link' ),           // whole reply cancel link
-    parentuidF  = t.I( 'comment-replying-to-uid' ),             // a hidden element in the comment
-    post        = t.I( 'comment-post-slug' ),                   // null
-    commentForm = respond.getElementsByTagName( 'form' )[0];    // the <form> part of the comment_form div
-
-    if ( ! comm || ! respond || ! cancel || ! parentuidF || ! commentForm ) {
-      return;
-    }
-
-    t.respondId = respondId;
-    postId = postId || false;
-
-    if ( ! t.I( 'sm-temp-form-div' ) ) {
-      div = document.createElement( 'div' );
-      div.id = 'sm-temp-form-div';
-      div.style.display = 'none';
-      respond.parentNode.insertBefore( div, respond ); //create and insert a bookmark div right before comment form
-    }
-
-    comm.parentNode.insertBefore( respond, comm.nextSibling );  //move the form from the bottom to above the next sibling
-    if ( post && postId ) {
-      post.value = postId;
-    }
-    parentuidF.value = parentUid;
-    cancel.style.display = '';                        //make the cancel link visible
-
-    cancel.onclick = function() {
-      var t       = addComment,
-      temp    = t.I( 'sm-temp-form-div' ),            //temp is the original bookmark
-      respond = t.I( t.respondId );                   //respond is the comment form
-
-      if ( ! temp || ! respond ) {
-        return;
-      }
-
-      t.I( 'comment-replying-to-uid' ).value = null;
-      temp.parentNode.insertBefore( respond, temp );  //move the comment form to its original location
-      temp.parentNode.removeChild( temp );            //remove the bookmark div
-      this.style.display = 'none';                    //make the cancel link invisible
-      this.onclick = null;                            //retire the onclick handler
-      return false;
-    };
-
-    /*
-     * Set initial focus to the first form focusable element.
-     * Try/catch used just to avoid errors in IE 7- which return visibility
-     * 'inherit' when the visibility value is inherited from an ancestor.
-     */
-    try {
-      for ( var i = 0; i < commentForm.elements.length; i++ ) {
-        element = commentForm.elements[i];
-        cssHidden = false;
-
-        // Modern browsers.
-        if ( 'getComputedStyle' in window ) {
-          style = window.getComputedStyle( element );
-        // IE 8.
-        } else if ( document.documentElement.currentStyle ) {
-        style = element.currentStyle;
-        }
-
-      /*
-       * For display none, do the same thing jQuery does. For visibility,
-       * check the element computed style since browsers are already doing
-       * the job for us. In fact, the visibility computed style is the actual
-       * computed value and already takes into account the element ancestors.
-       */
-        if ( ( element.offsetWidth <= 0 && element.offsetHeight <= 0 ) || style.visibility === 'hidden' ) {
-          cssHidden = true;
-        }
-
-        // Skip form elements that are hidden or disabled.
-        if ( 'hidden' === element.type || element.disabled || cssHidden ) {
-          continue;
-        }
-
-        element.focus();
-        // Stop after the first focusable element.
-        break;
-      }
-
-    } catch( er ) {}
-
-    return false;
-  },
-
-  I: function( id ) {
-    return document.getElementById( id );
-  }
-};
