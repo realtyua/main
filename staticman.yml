@@ -1,5 +1,5 @@
 comments:
-  allowedFields: ["name", "email", "message"]
+  allowedFields: ["are", "tre", "surface", "sland", "rooms", "floor", "floors"]
   requiredFields: ["name", "email", "message"]
   allowedOrigins: ["localhost", "realestate.if.ua", "www.realestate.if.ua"]
   branch: master
