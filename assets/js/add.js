@@ -15,103 +15,59 @@
 })();
 
 $(document).ready(function() {
-  var checkbox = document.querySelector('input[id="agreeCheck"]');
-  $('#add-form .form-row:not(:first-child)').css('display', 'none');
-  $('#add-form .btn').css('display', 'none');
-  checkbox.addEventListener('change', (e) => {
-    e.preventDefault();
-    if (checkbox.checked) {
-      $('#add-form .form-row:first-child').css('display', 'none');
-      $('#add-form .form-row:not(:first-child)').css('display', 'flex');
-      $('#add-form .btn').css('display', 'inline-block');
-    } else {
-      $('#add-form .form-row:first-child').css('display', 'flex');
-      $('#add-form .form-row:not(:first-child)').css('display', 'none');
-      $('#add-form .btn').css('display', 'none');
+    var form = document.getElementById('add-form');
+    var checkbox = document.querySelector('input[id="agreeCheck"]');
+    var btn = document.querySelector('#add-form .btn');
+    var lead = document.querySelector('p.lead');
+    const formRow = document.querySelectorAll('#add-form div.form-row');
+    var length = formRow.length;
+    for (var i = 0; i < length; i++) {
+        if (i !== 0) {
+            formRow[i].style.display = "none";
+        }
     }
-  });
-  const selectTL = document.querySelector("select#typeLocation");
-  const selectTRE = document.querySelector("select#typeRealestate");
-  var region = document.getElementById("region");
-  var surface = document.getElementById("surface");
-  var surfaceLand = document.getElementById("surfaceLand");
-  var rooms = document.getElementById("rooms");
-  var floor = document.getElementById("floor");
-  var floors = document.getElementById("floors");
-  var houseNumber = document.getElementById("houseNumber");
-  selectTL.addEventListener("change", (e) => {
-    e.preventDefault();
-    const valueTL = selectTL.value;
-    if (valueTL === "city" || valueTL === "town") {
-      region.setAttribute("disabled", "");
-      region.removeAttribute("required");
-      region.value = "";
-    } else {
-      region.setAttribute("required", "");
-      region.removeAttribute("disabled");
-    }
-  });
-  selectTRE.addEventListener("change", (e) => {
-    e.preventDefault();
-    const valueTRE = selectTRE.value;
-    if (valueTRE === "land") {
-      surfaceLand.setAttribute("required", "");
-      surfaceLand.removeAttribute("readonly");
-      surface.setAttribute("disabled", "");
-      surface.removeAttribute("required");
-      surface.value = "";
-      rooms.setAttribute("disabled", "");
-      rooms.removeAttribute("required");
-      rooms.value = "";
-      floor.setAttribute("disabled", "");
-      floor.removeAttribute("required");
-      floor.value = "";
-      floors.setAttribute("disabled", "");
-      floors.removeAttribute("required");
-      floors.value = "";
-      houseNumber.setAttribute("disabled", "");
-      houseNumber.removeAttribute("required");
-      houseNumber.value = "";
-    } else if (valueTRE === "garage") {
-      surface.setAttribute("required", "");
-      surface.removeAttribute("disabled");
-      surfaceLand.setAttribute("required", "");
-      surfaceLand.removeAttribute("disabled");
-      rooms.setAttribute("required", "");
-      rooms.removeAttribute("disabled");
-      floor.setAttribute("required", "");
-      floor.removeAttribute("disabled");
-      floors.setAttribute("required", "");
-      floors.removeAttribute("disabled");
-    } else if (valueTRE === "apartment" || valueTRE === "partapartment" || valueTRE === "separateroom") {
-      surfaceLand.setAttribute("disabled", "");
-      surfaceLand.removeAttribute("required");
-      surfaceLand.value = "";
-      surface.setAttribute("required", "");
-      surface.removeAttribute("disabled");
-      rooms.setAttribute("required", "");
-      rooms.removeAttribute("disabled");
-      floor.setAttribute("required", "");
-      floor.removeAttribute("disabled");
-      floors.setAttribute("required", "");
-      floors.removeAttribute("disabled");
-      houseNumber.setAttribute("required", "");
-      houseNumber.removeAttribute("disabled");
-    } else {
-      surface.setAttribute("required", "");
-      surface.removeAttribute("disabled");
-      surfaceLand.setAttribute("required", "");
-      surfaceLand.removeAttribute("disabled");
-      rooms.setAttribute("required", "");
-      rooms.removeAttribute("disabled");
-      floor.setAttribute("required", "");
-      floor.removeAttribute("disabled");
-      floors.setAttribute("required", "");
-      floors.removeAttribute("disabled");
-      houseNumber.setAttribute("required", "");
-      houseNumber.removeAttribute("disabled");
-    }
-  });
+    lead.classList.add("mb-0");
+    btn.style.display = "none";
+    document.querySelector('p.lead').classList.add("mb-0");
+    checkbox.addEventListener('change', (e) => {
+        e.preventDefault();
+        if (checkbox.checked) {
+            for (var i = 0; i < length; i++) {
+                if (i === 0) {
+                    formRow[i].style.display = "none";
+                } else {
+                    formRow[i].removeAttribute("style");
+                }
+            }
+            btn.removeAttribute("style");
+            lead.classList.add("mb-2");
+        } else {
+            for (var i = 0; i < length; i++) {
+                if (i === 0) {
+                    formRow[i].removeAttribute("style");
+                } else {
+                    formRow[i].style.display = "none";
+                }
+            }
+            lead.classList.remove("mb-2");
+            lead.classList.add("mb-0");
+            btn.style.display = "none";
+        }
+    });
+    const selectType = document.querySelector("select#typeLocation");
+    var district = document.getElementById("region");
+    selectType.addEventListener("change", (e) => {
+        e.preventDefault();
+        const typeLocation = selectType.value;
+        if (typeLocation === "city" || typeLocation === "town") {
+            district.setAttribute("disabled", "");
+            district.removeAttribute("required");
+            district.value = "";
+        } else {
+            district.setAttribute("required", "");
+            district.removeAttribute("disabled");
+        }
+    });
 });
 
 (function ($) {
@@ -121,7 +77,7 @@ $(document).ready(function() {
     var form = this;
 
     $(form).addClass('disabled');
-    $('#add-submit').html('Надсилаю оголошення <div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
+    $('#add-submit').html('Надсилаю<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
     $.ajax({
       type: $(this).attr('method'),
@@ -129,17 +85,19 @@ $(document).ready(function() {
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-        $('#add-submit').html('Оголошення надіслано');
+        $('#add-submit').html('Надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
-        showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
+        showAlert('<strong>Thanks for your comment!</strong> It will show on the site once it has been approved.');
+        document.getElementById('add-form').reset();
         grecaptcha.reset();
       },
       error: function (err) {
         console.log(err);
         $('#add-submit').html('Надіслати');
         $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
-        showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
+        showAlert('<strong>Sorry, there was an error with your submission.</strong> Please make sure all required fields have been completed and try again.');
         $(form).removeClass('disabled');
+        document.getElementById('add-form').reset();
         grecaptcha.reset();
       }
     });
