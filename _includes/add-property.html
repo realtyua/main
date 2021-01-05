@@ -42,7 +42,9 @@
           <div class="input-group is-invalid">
               <input name="fields[surface]" type="number" min="0" max="2000" value="0" class="form-control" id="surface" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupSurface">м<sup>2</sup></span>
+                  <span class="input-group-text" id="inputGroupSurface">
+                      <small>м<sup>2</sup></small>
+                  </span>
               </div>
               <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі у об'єка написано правильно!</div>
               <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі у об'єкта нерухомості.</div>
@@ -53,7 +55,9 @@
           <div class="input-group is-invalid">
               <input name="fields[sland]" type="number" min="0" max="20000" value="0" class="form-control" id="surfaceLand" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupSurfaceLand">м<sup>2</sup></span>
+                  <span class="input-group-text" id="inputGroupSurfaceLand">
+                      <small>м<sup>2</sup></small>
+                  </span>
               </div>
               <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі землі написано правильно!</div>
               <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі землі.</div>
@@ -135,17 +139,24 @@
   <div class="form-row">
       <div class="col-12 mb-3">
           <label for="region">Район Івано-Франківської області</label>
-          <select name="fields[region]" class="custom-select" id="region" autocomplete="off" required>
-              <option selected disabled value="">Виберіть район...</option>
-              <option value="ivano-frankivskyy">Івано-Франківський район</option>
-              <option value="kaluskyy">Калуський район</option>
-              <option value="kolomyyskyy">Коломийський район</option>
-              <option value="kosivskyy">Косівський район</option>
-              <option value="nadvirnyanskyy">Надвірнянський район</option>
-              <option value="verkhovynskyy">Верховинський район</option>
-          </select>
-          <div class="valid-feedback">Начебто район вибрано!</div>
-          <div class="invalid-feedback">Будь ласка виберить район Івано-Франківської області де розташовано населений пункту.</div>
+          <div class="input-group is-invalid">
+              <select name="fields[region]" class="custom-select" id="region" autocomplete="off" required>
+                  <option selected disabled value="">Виберіть район...</option>
+                  <option value="ivano-frankivskyy">Івано-Франківський район</option>
+                  <option value="kaluskyy">Калуський район</option>
+                  <option value="kolomyyskyy">Коломийський район</option>
+                  <option value="kosivskyy">Косівський район</option>
+                  <option value="nadvirnyanskyy">Надвірнянський район</option>
+                  <option value="verkhovynskyy">Верховинський район</option>
+              </select>
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupRegion">
+                      <a href="#" class="badge badge-info" data-toggle="modal" data-target="#aboutDistrict">&nbsp;i&nbsp;</a>
+                  </span>
+              </div>
+              <div class="valid-feedback">Начебто район вибрано!</div>
+              <div class="invalid-feedback">Будь ласка виберить район Івано-Франківської області де розташовано населений пункту.</div>
+          </div>
       </div>
   </div>
   <div class="form-row">
@@ -174,10 +185,10 @@
           <div class="invalid-feedback">Будь ласка вкажіть ціну нерухомості.</div>
       </div>
       <div class="col-md-5 mb-3">
-          <label for="phone">Телефон</label>
+          <label for="phone">Телефон продавця</label>
           <div class="input-group is-invalid">
-              <div class="input-group-phone"><span class="input-group-text">+</span></div>
-              <input name="fields[phone]" type="tel" maxlength="12" minlength="12" size="12" pattern="[0-9]{12,12}" class="form-control" id="phone" placeholder="380504949649" autocomplete="off" required>
+              <div class="input-group-phone"><span class="input-group-text">+380</span></div>
+              <input name="fields[phone]" type="tel" maxlength="9" minlength="9" size="9" pattern="[0-9]{9,9}" class="form-control" id="phone" placeholder="504949649" autocomplete="off" required>
               <div class="valid-feedback">Начебто номер телефону написано правильно.</div>
               <div class="invalid-feedback">Будь ласка вкажіть дійсний номер телефону у форматі 380504949649.</div>
           </div>
@@ -197,7 +208,7 @@
           <div class="invalid-feedback">Будь ласка вкажіть дійсне прізвище.</div>
       </div>
   </div>
-  <div class="form-row form-group">
+  <div class="form-row form-group px-1">
       <div id="reCaptcha" class="g-recaptcha input-group" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
   </div>
   <div class="form-group">
@@ -218,5 +229,5 @@
           </div>
       </div>
   </div>
-  <button id="add-submit" class="btn btn-primary" type="submit">Надіслати</button>
+  <button id="add-submit" class="btn btn-primary" type="submit">Надіслати оголошення</button>
 </form>

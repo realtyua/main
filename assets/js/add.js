@@ -77,7 +77,7 @@ $(document).ready(function() {
     var form = this;
 
     $(form).addClass('disabled');
-    $('#add-submit').html('Надсилаю<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
+    $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
     $.ajax({
       type: $(this).attr('method'),
@@ -85,7 +85,7 @@ $(document).ready(function() {
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-        $('#add-submit').html('Надіслано');
+        $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
         showAlert('<strong>Thanks for your comment!</strong> It will show on the site once it has been approved.');
         document.getElementById('add-form').reset();
@@ -93,9 +93,9 @@ $(document).ready(function() {
       },
       error: function (err) {
         console.log(err);
-        $('#add-submit').html('Надіслати');
+        $('#add-submit').html('Надіслати оголошення');
         $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
-        showAlert('<strong>Sorry, there was an error with your submission.</strong> Please make sure all required fields have been completed and try again.');
+        showAlert('strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
         $(form).removeClass('disabled');
         document.getElementById('add-form').reset();
         grecaptcha.reset();
