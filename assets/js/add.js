@@ -87,7 +87,7 @@ $(document).ready(function() {
       success: function (data) {
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
-        showAlert('<strong>Thanks for your comment!</strong> It will show on the site once it has been approved.');
+        showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
         document.getElementById('add-form').reset();
         grecaptcha.reset();
       },
