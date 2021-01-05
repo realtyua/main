@@ -103,7 +103,7 @@
       </div>
       <div class="col-md-6 mb-3">
           <label for="address">Адреса</label>
-          <input name="fields[address]" type="text" minlength="2" maxlength="20" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,20}" class="form-control" id="address" autocomplete="off" required>
+          <input name="fields[address]" type="text" minlength="2" maxlength="20" pattern="([^\s-][а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s-][^\s-]+){2,20}" class="form-control" id="address" autocomplete="off" required>
           <div class="valid-feedback">Начебто адресу написано правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсну адресу.</div>
       </div>
@@ -131,7 +131,7 @@
       </div>
       <div class="col-md-7 mb-3">
           <label for="location">Найменування населеного пункту</label>
-          <input name="fields[location]" type="text" minlength="2" maxlength="25" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,25}" class="form-control" id="location" autocomplete="off" required>
+          <input name="fields[location]" type="text" minlength="2" maxlength="25" pattern="([^\s-][а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s-][^\s-]+){2,25}" class="form-control" id="location" autocomplete="off" required>
           <div class="valid-feedback">Начебто найменування населеного пункту написано правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсне найменування населеного пункту.</div>
       </div>
