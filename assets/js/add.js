@@ -95,7 +95,7 @@ $(document).ready(function() {
         console.log(err);
         $('#add-submit').html('Надіслати оголошення');
         $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
-        showAlert('strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
+        showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
         $(form).removeClass('disabled');
         document.getElementById('add-form').reset();
         grecaptcha.reset();
