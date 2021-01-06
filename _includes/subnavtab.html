@@ -14,8 +14,8 @@
     {%- if isMap == 'true' -%}
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
-        <a class="nav-link border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map }} - {{ location }}">
-          <span class="d-none d-sm-block">{%- include icons/marker.svg width="12" height="18" -%}</span><span class="d-md-none d-lg-none d-xl-block">{{ site.data.lang-uk.re_map }}</span>
+        <a class="nav-link border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map }}" style="display:inline;">
+          <span class="d-none d-sm-block">{%- include icons/marker.svg width="12" height="18" -%}</span><span class="d-md-none d-lg-none d-xl-none">{{ site.data.lang-uk.re_map }}</span>
         </a>
       </li>
     </ul>
