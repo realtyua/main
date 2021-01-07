@@ -31,7 +31,7 @@ function generateRandomRe() {
       } else if (data[i].type === 'Частина будинку') {
         div.append('<div class="card mx-2"><div class="card-body"><strong>Продаю частину будинку</strong> загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].rooms + ', на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
       } else if (data[i].type === '{{ site.data.lang-uk.re_land }}') {
-        div.append('<div class="card mx-2"><div class="card-body"><strong>{{ site.data.lang-uk.re_sell_land }}</strong> площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+        div.append('<div class="card mx-2"><div class="card-body"><strong>{{ site.data.lang-uk.re_sell_land }}</strong> площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
       } else if (data[i].type === 'Гараж' || data[i].type === 'Магазин') {
         div.append('<div class="card mx-2"><div class="card-body"><strong>{{ site.data.lang-uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> площею ' + data[i].surface + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
       } else if (data[i].type.indexOf('приміщення') !== -1) {
