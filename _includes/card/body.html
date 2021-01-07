@@ -5,7 +5,7 @@
 {% if offer.rooms and offer.rooms != '' %}{{ site.data.lang-uk.re_rooms }} <strong>{{ offer.rooms }}</strong>, {% endif %}{% if offer.floor and offer.floor != '' and offer.type != site.data.lang-uk.re_house %}{{ site.data.lang-uk.re_na }} <strong>{{ offer.floor }}</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, {% endif %}{% if offer.floors and offer.floors != '' and offer.type == site.data.lang-uk.re_house %}{{ site.data.lang-uk.re_floorss }} <strong>{{ offer.floors }}</strong>, {% endif %}
 {% endif %}
 {% if offer.location and offer.location != '' %}{{ site.data.lang-uk.re_location }} <strong>{{ offer.location }}</strong> {% endif %}
-{% if offer.address %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>{% if offer.object and offer.object != '' %} ({{ site.data.lang-uk.re_rc }}&nbsp;{{ offer.object }}){% endif %}, {% endif %}{% if offer.region and offer.region != '' and offer.location == '' %}<strong>{{ offer.region }}</strong>, {% endif %}
+{% if offer.address and offer.address != '' %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>{% if offer.object and offer.object != '' %} ({{ site.data.lang-uk.re_rc }}&nbsp;{{ offer.object }}){% endif %}, {% endif %}{% if offer.region and offer.region != '' %}<strong>{{ offer.region }}</strong>, {% endif %}
 {% if offer.price %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_pricer }} {% elsif offer.rent == '1' and offer.price == '' and offer.price_sqmt != '' %}{{ site.data.lang-uk.re_price_sqmtr | downcase }} {% elsif offer.type == site.data.lang-uk.re_land %}{{ site.data.lang-uk.re_pricel }} {% else %}{{ site.data.lang-uk.re_price }} {% endif %}
 {%- if offer.price != '' -%}
   {% if offer.price contains '$' %}
