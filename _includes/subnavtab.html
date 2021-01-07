@@ -12,11 +12,9 @@
     {%- assign mapPage = page.url | append: 'map.html' | remove_first: '/' -%}
     {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
     {%- if isMap == 'true' -%}
-    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto my-2 my-md-0 my-lg-0" id="realestate-map">
+    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
-        <a class="nav-link border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map }}" style="display:inline;">
-          <span class="d-none d-sm-block">{%- include icons/marker.svg width="12" height="18" -%}</span><span class="d-md-none d-lg-none d-xl-none">{{ site.data.lang-uk.re_map }}</span>
-        </a>
+        <a class="nav-link border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map }}"><span>{{ site.data.lang-uk.re_map }}</span></a>
       </li>
     </ul>
     {%- endif -%}

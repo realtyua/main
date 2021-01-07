@@ -54,7 +54,8 @@ re_date: Нерухомість доступна з
 re_dater: Оренда нерухомості доступна з
 re_parking: Паркування
 re_surface_land: Площа землі
-re_map: Мапа нерухомості
+re_map_on: Мапа нерухомості
+re_map: Мапа
 re_on_map: на мапі
 re_show_map: Показати мапу
 re_land: Земля
