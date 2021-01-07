@@ -1,7 +1,16 @@
 function generateRandomRe() {
   $.getJSON("https://www.realestate.if.ua/region/ivano-frankivska/data/all.json", function(data) {
     var count = data.length; var random = []; var counter = 0; var number = 3; var div = $("#ads"); var usd = {{ site.usd }}; var eur = {{ site.eur }};
-    function reAdsLocation() {  var isCityTown = (data[i].location && data[i].location !== '') ? ' в ' + data[i].location : ''; return isCityTown; };
+    function reAdsLocation() {
+      if (data[i].location && data[i].location !== '') {
+        return ' в ' + data[i].location + '';
+      }
+    };
+    function reAdsRegion() {
+      if (data[i].region && data[i].region !== '') {
+        return ', ' + data[i].region + '';
+      }
+    };
     function reAdsRegion() { var isDistrict = (data[i].region && data[i].region !== '') ? ', ' + data[i].region : ''; return isDistrict; };
     function reAdsPrice() { if (data[i].price !== '' && data[i].price.indexOf('$') !== -1) { return '{{ site.data.lang-uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('$','') * usd).toFixed(0) + '</span>&nbsp;{{ site.data.lang-uk.re_uah }}'; } else if (data[i].price !== '' && data[i].price.indexOf('€') !== -1) { return '{{ site.data.lang-uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('€','') * eur).toFixed(0) + '</span>&nbsp;{{ site.data.lang-uk.re_uah }}'; } else if (data[i].price !== '') { return '{{ site.data.lang-uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price * 1).toFixed(0) + '</span>&nbsp;{{ site.data.lang-uk.re_uah }}'; } }
     function reAdsRent() { if (data[i].rent === '1') { return '<div class="card mx-2"><div class="card-body"><strong>Здається в оренду <span class="text-lowercase">' + data[i].type +  '</span></strong> загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ' за місяць, ' + reAdsTel() + '</div></div>'; } }
@@ -23,7 +32,7 @@ function generateRandomRe() {
       } else if (data[i].type === 'Частина будинку') {
         div.append('<div class="card mx-2"><div class="card-body"><strong>Продаю частину будинку</strong> загальною площею ' + data[i].surface + '&nbsp;м<sup>2</sup>, кімнат ' + data[i].rooms + ', на ' + data[i].floor + '-му поверсі за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
       } else if (data[i].type === '{{ site.data.lang-uk.re_land }}') {
-        div.append('<div class="card mx-2"><div class="card-body"><strong>{{ site.data.lang-uk.re_sell_lend }}</strong> площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+        div.append('<div class="card mx-2"><div class="card-body"><strong>{{ site.data.lang-uk.re_sell_land }}</strong> площею ' + data[i].surface_land + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
       } else if (data[i].type === 'Гараж' || data[i].type === 'Магазин') {
         div.append('<div class="card mx-2"><div class="card-body"><strong>{{ site.data.lang-uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> площею ' + data[i].surface + '&nbsp;м<sup>2</sup> за адресою ' + data[i].address + ' в ' + data[i].location + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
       } else if (data[i].type.indexOf('приміщення') !== -1) {
