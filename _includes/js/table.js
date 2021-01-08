@@ -333,6 +333,7 @@ function propertyFormatter(value, row) {
       if (row.location && row.location !== '') {
         html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
       }
+      if (row.region && row.region !== '') { html.push(',' + row.region + '') }
     } else if (row.rent !== '' && row.rent === '1' && row.price === '' && row.price_sqmt !== '') {
       html = ['{{ site.data.lang-uk.re_for_rentd }} <strong class="text-lowercase">' + row.type + '</strong>, ']
       if (row.surface && row.surface !== '') {
@@ -350,6 +351,7 @@ function propertyFormatter(value, row) {
       if (row.location && row.location !== '') {
         html.push('{{ site.data.lang-uk.re_location }} <strong>' + row.location + '</strong>, {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
       }
+      if (row.region && row.region !== '') { html.push(', ' + row.region + '') }
     } else {
       html = ['{{ site.data.lang-uk.re_for_sale }} <strong class="text-lowercase">' + row.type + '</strong>, ']
       if (row.surface && row.surface !== '') {
@@ -367,7 +369,7 @@ function propertyFormatter(value, row) {
           html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
         }
       }
-      if (row.region && row.region !== '' && row.region.indexOf('район') !== -1) {
+      if (row.region && row.region !== '') {
         if (row.region && row.region !== '') {
           html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + ', ' + row.region + '</strong>.')
         }
