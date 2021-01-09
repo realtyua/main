@@ -40,11 +40,11 @@
       <div class="col-md-6 mb-3">
           <label for="surface">Загальна площа м<sup>2</sup> нерухомості</label>
           <div class="input-group is-invalid">
-              <input name="fields[surface]" type="number" min="5" max="2000" value="0" class="form-control" id="surface" autocomplete="off" required>
+              <input name="fields[surface]" type="number" min="2" max="2000" placeholder="Від 2 і більше" class="form-control" id="surface" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupSurface">
-                      <small>м<sup>2</sup></small>
-                  </span>
+                  <a class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutSurface">
+                      <small><b>м<sup>2</sup></b></small>
+                  </a>
               </div>
               <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі у об'єка написано правильно!</div>
               <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі у об'єкта нерухомості.</div>
@@ -53,11 +53,11 @@
       <div class="col-md-6 mb-3">
           <label for="surfaceLand">Загальна площа м<sup>2</sup> землі</label>
           <div class="input-group is-invalid">
-              <input name="fields[sland]" type="number" min="0" max="20000" value="0" class="form-control" id="surfaceLand" autocomplete="off" required>
+              <input name="fields[sland]" type="number" min="5" max="20000" placeholder="Від 0 і більше" class="form-control" id="surfaceLand" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupSurfaceLand">
-                      <small>м<sup>2</sup></small>
-                  </span>
+                  <a class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutArea">
+                      <small><b>м<sup>2</sup></b></small>
+                  </a>
               </div>
               <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі землі написано правильно!</div>
               <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі землі.</div>
@@ -67,19 +67,19 @@
   <div class="form-row">
       <div class="col-md-4 mb-3">
           <label for="rooms">Кількість кімнат</label>
-          <input name="fields[rooms]" type="number" class="form-control" id="rooms" min="1" max="20" value="1" autocomplete="off" required>
+          <input name="fields[rooms]" type="number" class="form-control" id="rooms" min="1" max="20" placeholder="Як мінімум одна" autocomplete="off" required>
           <div class="valid-feedback">Начебто кількість кімнат введено правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсну кількість кімнат.</div>
       </div>
       <div class="col-md-4 mb-3">
           <label for="floor">На якому поверсі</label>
-          <input name="fields[floor]" type="number" class="form-control" id="floor" min="0" max="16" value="0" autocomplete="off" required>
+          <input name="fields[floor]" type="number" class="form-control" id="floor" min="0" max="16" placeholder="0 це підвал" autocomplete="off" required>
           <div class="valid-feedback">Начебто номер поверху введено правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсний номер поверху.</div>
       </div>
       <div class="col-md-4 mb-3">
           <label for="floors">Кількість поверхів</label>
-          <input name="fields[floors]" type="number" class="form-control" id="floors" min="1" max="16" value="1" autocomplete="off" required>
+          <input name="fields[floors]" type="number" class="form-control" id="floors" min="1" max="16" placeholder="Як мінімум один" autocomplete="off" required>
           <div class="valid-feedback">Начебто кількість поверхів введено правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсну кількість поверхів.</div>
       </div>
@@ -102,14 +102,14 @@
           <div class="invalid-feedback">Будь ласка виберить тип адреси.</div>
       </div>
       <div class="col-md-6 mb-3">
-          <label for="address">Адреса</label>
-          <input name="fields[address]" type="text" minlength="2" maxlength="20" pattern="([^\s-][а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s-][^\s-]+){2,20}" class="form-control" id="address" autocomplete="off" required>
+          <label for="address">Найменування адреси</label>
+          <input name="fields[address]" type="text" minlength="2" maxlength="20" pattern="([^\s-][а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s-][^\s-]+){2,20}" class="form-control" id="address" placeholder="Наприклад Степана Бандери" autocomplete="off" required>
           <div class="valid-feedback">Начебто адресу написано правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсну адресу.</div>
       </div>
       <div class="col-md-3 mb-3">
-          <label for="houseNumber">Будинку</label>
-          <input name="fields[number]" type="number" min="1" max="300" value="1" class="form-control" id="houseNumber" autocomplete="off" required>
+          <label for="houseNumber">Номер будинку</label>
+          <input name="fields[number]" type="number" min="1" max="300" placeholder="Тільки не 0" class="form-control" id="houseNumber" autocomplete="off" required>
           <div class="valid-feedback">Начебто номер будинку надано.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсний номер будинку.</div>
       </div>
@@ -131,7 +131,7 @@
       </div>
       <div class="col-md-7 mb-3">
           <label for="location">Найменування населеного пункту</label>
-          <input name="fields[location]" type="text" minlength="2" maxlength="25" pattern="([^\s-][а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s-][^\s-]+){2,25}" class="form-control" id="location" autocomplete="off" required>
+          <input name="fields[location]" type="text" minlength="2" maxlength="25" pattern="([^\s-][а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s-][^\s-]+){2,25}" class="form-control" id="location" placeholder="Наприклад Івано-Франківськ" autocomplete="off" required>
           <div class="valid-feedback">Начебто найменування населеного пункту написано правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсне найменування населеного пункту.</div>
       </div>
@@ -150,9 +150,7 @@
                   <option value="verkhovynskyy">Верховинський район</option>
               </select>
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupRegion">
-                      <a href="#" class="badge badge-info" data-toggle="modal" data-target="#aboutDistrict">&nbsp;i&nbsp;</a>
-                  </span>
+                  <a class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutDistrict"><b>i</b></a>
               </div>
               <div class="valid-feedback">Начебто район вибрано!</div>
               <div class="invalid-feedback">Будь ласка виберить район Івано-Франківської області де розташовано населений пункту.</div>
@@ -162,8 +160,8 @@
   <div class="form-row">
       <div class="col-12 mb-3">
           <label for="description">Додатково про нерухомість</label>
-          <textarea name="fields[description]" minlength="0" maxlength="256" class="form-control" id="description" autocomplete="off"></textarea>
-          <div class="valid-feedback">Начебто тут все гаразд.</div>
+          <textarea name="fields[description]" placeholder="Напишіть щось важливе про нерухомість" minlength="0" maxlength="256" class="form-control" id="description" autocomplete="off"></textarea>
+          <div class="valid-feedback">Це не обов'язкове для заповнення поле і начебто тут все гаразд.</div>
       </div>
   </div>
   <div class="form-row">
@@ -180,42 +178,48 @@
       </div>
       <div class="col-md-4 mb-3">
           <label for="price">Ціна нерухомості</label>
-          <input name="fields[price]" type="number" min="1" max="9000000" value="1" class="form-control" id="price" autocomplete="off" required>
+          <input name="fields[price]" type="number" min="1" max="9000000" placeholder="Тільки не 0" class="form-control" id="price" autocomplete="off" required>
           <div class="valid-feedback">Начебто ціну надано.</div>
           <div class="invalid-feedback">Будь ласка вкажіть ціну нерухомості.</div>
       </div>
       <div class="col-md-5 mb-3">
           <label for="phone">Телефон продавця</label>
           <div class="input-group is-invalid">
-              <div class="input-group-phone"><span class="input-group-text">+380</span></div>
-              <input name="fields[phone]" type="tel" maxlength="9" minlength="9" size="9" pattern="[0-9]{9,9}" class="form-control" id="phone" placeholder="504949649" autocomplete="off" required>
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPhone">+380</span>
+              </div>
+              <input name="fields[phone]" type="tel" maxlength="9" minlength="9" size="9" pattern="[0-9]{9,9}" class="form-control rounded-right" id="phone" placeholder="504949649" autocomplete="off" aria-describedby="inputGroupPhone" required>
               <div class="valid-feedback">Начебто номер телефону написано правильно.</div>
-              <div class="invalid-feedback">Будь ласка вкажіть дійсний номер телефону у форматі 380504949649.</div>
+              <div class="invalid-feedback">Будь ласка вкажіть дійсний номер телефону у форматі 504949649.</div>
           </div>
       </div>
   </div>
   <div class="form-row">
       <div class="col-md-6 mb-3">
           <label for="firstName">Ім'я</label>
-          <input name="fields[fn]" type="text" minlength="2" maxlength="20" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,20}" class="form-control" id="firstName" autocomplete="off" required>
+          <input name="fields[fn]" type="text" minlength="2" maxlength="20" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,20}" class="form-control" id="firstName" placeholder="Наприклад Василь" autocomplete="off" required>
           <div class="valid-feedback">Начебто ім'я написано правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсне ім'я.</div>
       </div>
       <div class="col-md-6 mb-3">
           <label for="lastName">Прізвище</label>
-          <input name="fields[ln]" type="text" minlength="2" maxlength="30" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,30}" class="form-control" id="lastName" autocomplete="off" required>
+          <input name="fields[ln]" type="text" minlength="2" maxlength="30" pattern="[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]{2,30}" class="form-control" id="lastName" placeholder="Наприклад Мосійчук" autocomplete="off" required>
           <div class="valid-feedback">Начебто прізвище написано правильно.</div>
           <div class="invalid-feedback">Будь ласка вкажіть дійсне прізвище.</div>
       </div>
   </div>
-  <div class="form-row form-group px-1">
-      <div id="reCaptcha" class="g-recaptcha input-group" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
+  <div class="form-row">
+      <div class="col-12">
+          <div id="reCaptcha" class="g-recaptcha input-group" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
+      </div>
   </div>
-  <div class="form-group">
-      <div class="custom-control custom-checkbox mb-3">
-          <input name="fields[agreed]" type="checkbox" class="custom-control-input" id="agreeCheck" required>
-          <label class="custom-control-label" for="agreeCheck">Прийміть <a href="/terms-and-conditions" target="_blank">правила і умови використання</a></label>
-          <div class="invalid-feedback">Ви повинні погодитись перед подачею оголошення.</div>
+  <div class="form-row">
+      <div class="col-12">
+          <div class="custom-control custom-checkbox mb-3">
+              <input name="fields[agreed]" type="checkbox" class="custom-control-input" id="agreeCheck" required>
+              <label class="custom-control-label" for="agreeCheck">Прийміть <a href="/terms-and-conditions" target="_blank">правила і умови використання</a></label>
+              <div class="invalid-feedback">Ви повинні погодитись перед подачею оголошення.</div>
+          </div>
       </div>
   </div>
   <div class="form-row">
@@ -227,6 +231,7 @@
           <div class="alert alert-danger" role="alert">
             <p class="alert-text mb-0"></p>
           </div>
+          <a href="/" class="btn btn-primary">Перейти на головну</a>
       </div>
   </div>
   <button id="add-submit" class="btn btn-primary" type="submit">Надіслати оголошення</button>

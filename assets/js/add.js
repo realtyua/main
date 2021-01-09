@@ -1,17 +1,18 @@
+
 (function() {
-  "use strict";
-  window.addEventListener("load", function() {
-    var forms = document.getElementsByClassName("needs-validation");
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener("submit", function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add("was-validated");
-      }, false);
-    });
-  }, false);
+    "use strict";
+    window.addEventListener("load", function() {
+        var forms = document.getElementsByClassName("needs-validation");
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener("submit", function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+            }, false);
+        });
+    }, false);
 })();
 
 $(document).ready(function() {
@@ -21,11 +22,7 @@ $(document).ready(function() {
     var lead = document.querySelector('p.lead');
     const formRow = document.querySelectorAll('#add-form div.form-row');
     var length = formRow.length;
-    for (var i = 0; i < length; i++) {
-        if (i !== 0) {
-            formRow[i].style.display = "none";
-        }
-    }
+    for (var i = 0; i < length; i++) { if (i !== 0 && i !== 11) { formRow[i].style.display = "none"; } }
     lead.classList.add("mb-0");
     btn.style.display = "none";
     document.querySelector('p.lead').classList.add("mb-0");
@@ -35,6 +32,8 @@ $(document).ready(function() {
             for (var i = 0; i < length; i++) {
                 if (i === 0) {
                     formRow[i].style.display = "none";
+                } else if (i === 11) {
+                    formRow[i].removeAttribute("style");
                 } else {
                     formRow[i].removeAttribute("style");
                 }
@@ -45,6 +44,8 @@ $(document).ready(function() {
             for (var i = 0; i < length; i++) {
                 if (i === 0) {
                     formRow[i].removeAttribute("style");
+                } else if (i === 11) {
+                    formRow[i].removeAttribute("style");
                 } else {
                     formRow[i].style.display = "none";
                 }
@@ -54,11 +55,52 @@ $(document).ready(function() {
             btn.style.display = "none";
         }
     });
-    const selectType = document.querySelector("select#typeLocation");
-    var district = document.getElementById("region");
+
+    const selectType = document.querySelector("select#typeRealestate");
+    var surface = document.getElementById("surface");
+    var surfaceLand = document.getElementById("surfaceLand");
+    var rooms = document.getElementById("rooms");
+    var floor = document.getElementById("floor");
+    var floors = document.getElementById("floors");
+
+
     selectType.addEventListener("change", (e) => {
         e.preventDefault();
-        const typeLocation = selectType.value;
+        const typeRealestate = selectType.value;
+        if (typeRealestate === "land") {
+            surface.setAttribute("disabled", "");
+            surface.value = "0";
+            surface.min = "0";
+            rooms.setAttribute("disabled", "");
+            rooms.value = "0";
+            rooms.min = "0";
+            floor.setAttribute("disabled", "");
+            floor.value = "0";
+            floors.setAttribute("disabled", "");
+            floors.value = "0";
+            floors.min = "0";
+            surfaceLand.placeholder = "Від 1 і більше";
+        } else {
+            surface.removeAttribute("disabled");
+            surface.value = "";
+            surface.min = "2";
+            rooms.removeAttribute("disabled");
+            rooms.value = "";
+            rooms.min = "1";
+            floor.removeAttribute("disabled");
+            floor.value = "";
+            floors.removeAttribute("disabled");
+            floors.value = "";
+            floors.min = "1";
+            surfaceLand.placeholder = "Від 0 і більше";
+        }
+    });
+
+    const selectLocation = document.querySelector("select#typeLocation");
+    var district = document.getElementById("region");
+    selectLocation.addEventListener("change", (e) => {
+        e.preventDefault();
+        const typeLocation = selectLocation.value;
         if (typeLocation === "city" || typeLocation === "town") {
             district.setAttribute("disabled", "");
             district.removeAttribute("required");
@@ -68,6 +110,7 @@ $(document).ready(function() {
             district.removeAttribute("disabled");
         }
     });
+
 });
 
 (function ($) {
@@ -90,6 +133,7 @@ $(document).ready(function() {
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
         document.getElementById('add-form').reset();
         grecaptcha.reset();
+        btn.style.display = "none";
       },
       error: function (err) {
         console.log(err);
