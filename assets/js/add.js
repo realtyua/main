@@ -68,28 +68,28 @@ $(document).ready(function() {
         e.preventDefault();
         const typeRealestate = selectType.value;
         if (typeRealestate === "land") {
-            surface.setAttribute("disabled", "");
+            surface.setAttribute("readonly", "");
             surface.value = "0";
             surface.min = "0";
-            rooms.setAttribute("disabled", "");
+            rooms.setAttribute("readonly", "");
             rooms.value = "0";
             rooms.min = "0";
-            floor.setAttribute("disabled", "");
+            floor.setAttribute("readonly", "");
             floor.value = "0";
-            floors.setAttribute("disabled", "");
+            floors.setAttribute("readonly", "");
             floors.value = "0";
             floors.min = "0";
             surfaceLand.placeholder = "Від 1 і більше";
         } else {
-            surface.removeAttribute("disabled");
+            surface.removeAttribute("readonly");
             surface.value = "";
             surface.min = "2";
-            rooms.removeAttribute("disabled");
+            rooms.removeAttribute("readonly");
             rooms.value = "";
             rooms.min = "1";
-            floor.removeAttribute("disabled");
+            floor.removeAttribute("readonly");
             floor.value = "";
-            floors.removeAttribute("disabled");
+            floors.removeAttribute("readonly");
             floors.value = "";
             floors.min = "1";
             surfaceLand.placeholder = "Від 0 і більше";
@@ -102,11 +102,11 @@ $(document).ready(function() {
         e.preventDefault();
         const typeLocation = selectLocation.value;
         if (typeLocation === "city" || typeLocation === "town") {
-            district.setAttribute("disabled", "");
+            district.setAttribute("readonly", "");
             district.removeAttribute("required");
             district.value = "";
         } else {
-            district.setAttribute("required", "");
+            district.setAttribute("readonly", "");
             district.removeAttribute("disabled");
         }
     });
@@ -131,8 +131,9 @@ $(document).ready(function() {
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
-        // $('#add-form').reset();
-        // $('#add-form #reCaptcha').reset();
+        $('#add-form').reset();
+        $('#add-form #reCaptcha').reset();
+        $('#add-form .form-row:not(:last-child)').style.display = "none";
         $('#add-form .add-submit').style.display = "none";
         $('#add-form .gohome').removeAttribute("style");
         //grecaptcha.reset();
@@ -146,7 +147,9 @@ $(document).ready(function() {
         $(form).removeClass('disabled');
         // document.getElementById('add-form').reset();
         // document.getElementById('reCaptcha').reset();
-        document.getElementById('gohome').style.display = "none";
+        $('#add-form #reCaptcha').reset();
+        $('#add-form .gohome').style.display = "none";
+        // document.getElementById('gohome').style.display = "none";
         //grecaptcha.reset();
       }
     });
