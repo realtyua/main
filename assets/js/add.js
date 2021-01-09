@@ -142,6 +142,7 @@ $(document).ready(function() {
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
+        $('#add-form .form-row:not(:last-child)').addClass('d-none');
         $(form).setAttribute("disabled", "");
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
@@ -155,7 +156,8 @@ $(document).ready(function() {
         $('#add-submit').html('Надіслати оголошення');
         $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
         showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
-        $(form).removeAttribute('disabled');
+        //$(form).removeAttribute('disabled');
+        $('#add-form #go-home').addClass('d-none');
       }
     });
 
