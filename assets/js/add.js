@@ -143,7 +143,7 @@ $(document).ready(function() {
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
         $('#add-form .form-row:not(:last-child)').addClass('d-none');
-        $(form).setAttribute("disabled", "");
+        //$(form).setAttribute("disabled", "");
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
