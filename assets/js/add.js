@@ -118,8 +118,6 @@ $(document).ready(function() {
   $('#add-form').submit(function () {
     var form = this;
 
-    //$(form).addClass('disabled');
-    $('#add-form #gohome').addClass('d-none');
     $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
     $.ajax({
@@ -132,13 +130,9 @@ $(document).ready(function() {
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
-        // $('#add-form').reset();
-        // $('#add-form #reCaptcha').reset();
         $('#add-form .form-row:not(:last-child)').addClass('d-none');
-        $('#add-form .add-submit').addClass('d-none');
-        $('#add-form .gohome').removeAttribute("style");
-        //grecaptcha.reset();
-        // btn.style.display = "none";
+        $('#add-form #add-submit').addClass('d-none');
+        $('#add-form #go-home').removeClass('d-none');
       },
       error: function (err) {
         console.log(err);
@@ -146,12 +140,6 @@ $(document).ready(function() {
         $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
         showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
         $(form).removeAttribute('disabled');
-        // document.getElementById('add-form').reset();
-        // document.getElementById('reCaptcha').reset();
-        // $('#add-form #reCaptcha').reset();
-        //$('#add-form .gohome').style.display = "none";
-        // document.getElementById('gohome').style.display = "none";
-        //grecaptcha.reset();
       }
     });
 
