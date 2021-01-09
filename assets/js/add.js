@@ -132,8 +132,10 @@ $(document).ready(function() {
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
         document.getElementById('add-form').reset();
-        grecaptcha.reset();
-        btn.style.display = "none";
+        document.getElementById('reCaptcha').reset();
+        document.getElementById('add-submit').style.display = "none";
+        //grecaptcha.reset();
+        // btn.style.display = "none";
       },
       error: function (err) {
         console.log(err);
@@ -142,7 +144,8 @@ $(document).ready(function() {
         showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
         $(form).removeClass('disabled');
         document.getElementById('add-form').reset();
-        grecaptcha.reset();
+        document.getElementById('reCaptcha').reset();
+        //grecaptcha.reset();
       }
     });
 

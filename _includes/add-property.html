@@ -42,9 +42,9 @@
           <div class="input-group is-invalid">
               <input name="fields[surface]" type="number" min="2" max="2000" placeholder="Від 2 і більше" class="form-control" id="surface" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <a class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutSurface">
+                  <button class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutSurface">
                       <small><b>м<sup>2</sup></b></small>
-                  </a>
+                  </button>
               </div>
               <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі у об'єка написано правильно!</div>
               <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі у об'єкта нерухомості.</div>
@@ -55,9 +55,9 @@
           <div class="input-group is-invalid">
               <input name="fields[sland]" type="number" min="5" max="20000" placeholder="Від 0 і більше" class="form-control" id="surfaceLand" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <a class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutArea">
+                  <button class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutArea">
                       <small><b>м<sup>2</sup></b></small>
-                  </a>
+                  </button>
               </div>
               <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі землі написано правильно!</div>
               <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі землі.</div>
@@ -150,7 +150,7 @@
                   <option value="verkhovynskyy">Верховинський район</option>
               </select>
               <div class="input-group-prepend">
-                  <a class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutDistrict"><b>i</b></a>
+                  <button class="btn btn-primary rounded-right" data-toggle="modal" data-target="#aboutDistrict"><b>i</b></button>
               </div>
               <div class="valid-feedback">Начебто район вибрано!</div>
               <div class="invalid-feedback">Будь ласка виберить район Івано-Франківської області де розташовано населений пункту.</div>
@@ -209,13 +209,13 @@
       </div>
   </div>
   <div class="form-row">
-      <div class="col-12">
+      <div class="col-12 mb-3">
           <div id="reCaptcha" class="g-recaptcha input-group" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
       </div>
   </div>
   <div class="form-row">
-      <div class="col-12">
-          <div class="custom-control custom-checkbox mb-3">
+      <div class="col-12 mb-3">
+          <div class="custom-control custom-checkbox">
               <input name="fields[agreed]" type="checkbox" class="custom-control-input" id="agreeCheck" required>
               <label class="custom-control-label" for="agreeCheck">Прийміть <a href="/terms-and-conditions" target="_blank">правила і умови використання</a></label>
               <div class="invalid-feedback">Ви повинні погодитись перед подачею оголошення.</div>
