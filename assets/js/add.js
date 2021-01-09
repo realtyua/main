@@ -21,15 +21,15 @@ $(document).ready(function() {
   var btn = document.querySelector('#add-form .btn');
   var lead = document.querySelector('p.lead');
   const formRow = document.querySelectorAll('#add-form div.form-row');
-  var length = formRow.length;
-  for (var i = 0; i < length; i++) { if (i !== 0 && i !== 11) { formRow[i].classList.add("d-none"); } }
+  var lengthRow = formRow.length;
+  for (var i = 0; i < lengthRow; i++) { if (i !== 0 && i !== 11) { formRow[i].classList.add("d-none"); } }
   lead.classList.add("mb-0");
   btn.classList.add("d-none");
   document.querySelector('p.lead').classList.add("mb-0");
   checkbox.addEventListener('change', (e) => {
       e.preventDefault();
       if (checkbox.checked) {
-          for (var i = 0; i < length; i++) {
+          for (var i = 0; i < lengthRow; i++) {
               if (i === 0) {
                   formRow[i].classList.add("d-none");
               } else if (i === 11) {
@@ -41,7 +41,7 @@ $(document).ready(function() {
           btn.classList.remove("d-none");
           lead.classList.add("mb-2");
       } else {
-          for (var i = 0; i < length; i++) {
+          for (var i = 0; i < lengthRow; i++) {
               if (i === 0) {
                   formRow[i].classList.remove("d-none");
               } else if (i === 11) {
@@ -62,8 +62,6 @@ $(document).ready(function() {
   var rooms = document.getElementById("rooms");
   var floor = document.getElementById("floor");
   var floors = document.getElementById("floors");
-
-
   selectType.addEventListener("change", (e) => {
       e.preventDefault();
       const typeRealestate = selectType.value;
@@ -79,6 +77,7 @@ $(document).ready(function() {
           floors.setAttribute("readonly", "");
           floors.value = "0";
           floors.min = "0";
+          formRow[3].classList.add("d-none");
           surfaceLand.placeholder = "Від 1 і більше";
       } else {
           surface.removeAttribute("readonly");
@@ -92,22 +91,39 @@ $(document).ready(function() {
           floors.removeAttribute("readonly");
           floors.value = "";
           floors.min = "1";
+          formRow[3].classList.remove("d-none");
           surfaceLand.placeholder = "Від 0 і більше";
       }
   });
 
   const selectLocation = document.querySelector("select#typeLocation");
-  var district = document.getElementById("region");
+  var selectRegion = document.getElementById("region");
   selectLocation.addEventListener("change", (e) => {
       e.preventDefault();
-      const typeLocation = selectLocation.value;
-      if (typeLocation === "city" || typeLocation === "town") {
-          district.setAttribute("readonly", "");
-          district.removeAttribute("required");
-          district.value = "";
+      const location = selectLocation.value;
+      const region = selectRegion.value;
+      var lengthRegion = selectRegion.length;
+      if (location === "citytown") {
+          for (var i = 0; i < lengthRegion; i++) {
+              if (i !== 0) {
+                  formRow[6].classList.add("d-none");
+                  selectRegion[i].setAttribute("disabled", "");
+              } else {
+                  selectRegion[i].removeAttribute("disabled");
+                  selectRegion[i].innerHTML = "Без вибору...";
+                  selectRegion[i].value = "none";
+              }
+          }
       } else {
-          district.setAttribute("required", "");
-          district.removeAttribute("readonly");
+          for (var i = 0; i < lengthRegion; i++) {
+              if (i !== 0) {
+                  formRow[6].classList.remove("d-none");
+                  selectRegion[i].removeAttribute("disabled");
+              } else {
+                  selectRegion[i].setAttribute("disabled", "");
+                  selectRegion[i].innerHTML = "Виберіть район...";
+              }
+          }
       }
   });
 });
