@@ -16,101 +16,100 @@
 })();
 
 $(document).ready(function() {
-    var form = document.getElementById('add-form');
-    var checkbox = document.querySelector('input[id="agreeCheck"]');
-    var btn = document.querySelector('#add-form .btn');
-    var lead = document.querySelector('p.lead');
-    const formRow = document.querySelectorAll('#add-form div.form-row');
-    var length = formRow.length;
-    for (var i = 0; i < length; i++) { if (i !== 0 && i !== 11) { formRow[i].style.display = "none"; } }
-    lead.classList.add("mb-0");
-    btn.style.display = "none";
-    document.querySelector('p.lead').classList.add("mb-0");
-    checkbox.addEventListener('change', (e) => {
-        e.preventDefault();
-        if (checkbox.checked) {
-            for (var i = 0; i < length; i++) {
-                if (i === 0) {
-                    formRow[i].style.display = "none";
-                } else if (i === 11) {
-                    formRow[i].removeAttribute("style");
-                } else {
-                    formRow[i].removeAttribute("style");
-                }
-            }
-            btn.removeAttribute("style");
-            lead.classList.add("mb-2");
-        } else {
-            for (var i = 0; i < length; i++) {
-                if (i === 0) {
-                    formRow[i].removeAttribute("style");
-                } else if (i === 11) {
-                    formRow[i].removeAttribute("style");
-                } else {
-                    formRow[i].style.display = "none";
-                }
-            }
-            lead.classList.remove("mb-2");
-            lead.classList.add("mb-0");
-            btn.style.display = "none";
-        }
-    });
+  var form = document.getElementById('add-form');
+  var checkbox = document.querySelector('input[id="agreeCheck"]');
+  var btn = document.querySelector('#add-form .btn');
+  var lead = document.querySelector('p.lead');
+  const formRow = document.querySelectorAll('#add-form div.form-row');
+  var length = formRow.length;
+  for (var i = 0; i < length; i++) { if (i !== 0 && i !== 11) { formRow[i].classList.add("d-none"); } }
+  lead.classList.add("mb-0");
+  btn.classList.add("d-none");
+  document.querySelector('p.lead').classList.add("mb-0");
+  checkbox.addEventListener('change', (e) => {
+      e.preventDefault();
+      if (checkbox.checked) {
+          for (var i = 0; i < length; i++) {
+              if (i === 0) {
+                  formRow[i].classList.add("d-none");
+              } else if (i === 11) {
+                  formRow[i].classList.remove("d-none");
+              } else {
+                  formRow[i].classList.remove("d-none");
+              }
+          }
+          btn.classList.remove("d-none");
+          lead.classList.add("mb-2");
+      } else {
+          for (var i = 0; i < length; i++) {
+              if (i === 0) {
+                  formRow[i].classList.remove("d-none");
+              } else if (i === 11) {
+                  formRow[i].classList.remove("d-none");
+              } else {
+                  formRow[i].classList.add("d-none");
+              }
+          }
+          lead.classList.remove("mb-2");
+          lead.classList.add("mb-0");
+          btn.classList.remove("d-none");
+      }
+  });
 
-    const selectType = document.querySelector("select#typeRealestate");
-    var surface = document.getElementById("surface");
-    var surfaceLand = document.getElementById("surfaceLand");
-    var rooms = document.getElementById("rooms");
-    var floor = document.getElementById("floor");
-    var floors = document.getElementById("floors");
+  const selectType = document.querySelector("select#typeRealestate");
+  var surface = document.getElementById("surface");
+  var surfaceLand = document.getElementById("surfaceLand");
+  var rooms = document.getElementById("rooms");
+  var floor = document.getElementById("floor");
+  var floors = document.getElementById("floors");
 
 
-    selectType.addEventListener("change", (e) => {
-        e.preventDefault();
-        const typeRealestate = selectType.value;
-        if (typeRealestate === "land") {
-            surface.setAttribute("readonly", "");
-            surface.value = "0";
-            surface.min = "0";
-            rooms.setAttribute("readonly", "");
-            rooms.value = "0";
-            rooms.min = "0";
-            floor.setAttribute("readonly", "");
-            floor.value = "0";
-            floors.setAttribute("readonly", "");
-            floors.value = "0";
-            floors.min = "0";
-            surfaceLand.placeholder = "Від 1 і більше";
-        } else {
-            surface.removeAttribute("readonly");
-            surface.value = "";
-            surface.min = "2";
-            rooms.removeAttribute("readonly");
-            rooms.value = "";
-            rooms.min = "1";
-            floor.removeAttribute("readonly");
-            floor.value = "";
-            floors.removeAttribute("readonly");
-            floors.value = "";
-            floors.min = "1";
-            surfaceLand.placeholder = "Від 0 і більше";
-        }
-    });
+  selectType.addEventListener("change", (e) => {
+      e.preventDefault();
+      const typeRealestate = selectType.value;
+      if (typeRealestate === "land") {
+          surface.setAttribute("readonly", "");
+          surface.value = "0";
+          surface.min = "0";
+          rooms.setAttribute("readonly", "");
+          rooms.value = "0";
+          rooms.min = "0";
+          floor.setAttribute("readonly", "");
+          floor.value = "0";
+          floors.setAttribute("readonly", "");
+          floors.value = "0";
+          floors.min = "0";
+          surfaceLand.placeholder = "Від 1 і більше";
+      } else {
+          surface.removeAttribute("readonly");
+          surface.value = "";
+          surface.min = "2";
+          rooms.removeAttribute("readonly");
+          rooms.value = "";
+          rooms.min = "1";
+          floor.removeAttribute("readonly");
+          floor.value = "";
+          floors.removeAttribute("readonly");
+          floors.value = "";
+          floors.min = "1";
+          surfaceLand.placeholder = "Від 0 і більше";
+      }
+  });
 
-    const selectLocation = document.querySelector("select#typeLocation");
-    var district = document.getElementById("region");
-    selectLocation.addEventListener("change", (e) => {
-        e.preventDefault();
-        const typeLocation = selectLocation.value;
-        if (typeLocation === "city" || typeLocation === "town") {
-            district.setAttribute("readonly", "");
-            district.removeAttribute("required");
-            district.value = "";
-        } else {
-            district.setAttribute("readonly", "");
-            district.removeAttribute("disabled");
-        }
-    });
-
+  const selectLocation = document.querySelector("select#typeLocation");
+  var district = document.getElementById("region");
+  selectLocation.addEventListener("change", (e) => {
+      e.preventDefault();
+      const typeLocation = selectLocation.value;
+      if (typeLocation === "city" || typeLocation === "town") {
+          district.setAttribute("readonly", "");
+          district.removeAttribute("required");
+          district.value = "";
+      } else {
+          district.setAttribute("required", "");
+          district.removeAttribute("readonly");
+      }
+  });
 });
 
 (function ($) {
