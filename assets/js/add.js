@@ -142,7 +142,10 @@ $(document).ready(function() {
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-        $('#add-form .form-row:not(:last-child)').addClass('d-none');
+        //$('#add-form .form-row:not(:last-child)').addClass('d-none');
+        $('#add-form .form-row').addClass('d-none');
+        //$('#add-form .form-row')[12].removeClass('d-none');
+        $('#add-form .form-row').lastChild.removeClass('d-none');
         //$(form).setAttribute("disabled", "");
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
