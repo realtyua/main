@@ -154,7 +154,10 @@ $(document).ready(function() {
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
         //dNoneRow();
-        for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].addClass('d-none'); } }
+         if (formRow.last()) {
+         } else {
+           formRow.addClass('d-none')
+         }
         //$('#add-form .form-row:not(:last-child)').addClass('d-none');
         //$('#add-form .form-row').addClass('d-none');
         //$('#add-form .form-row')[12].removeClass('d-none');
