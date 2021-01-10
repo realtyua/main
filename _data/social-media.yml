@@ -39,3 +39,7 @@
 - name: website
   title: Вебсайт
   url: https://www.realestate.if.ua/new
+
+- name: voicemail
+  title: Електронна пошта
+  url: mailto:info@realestate.if.ua
