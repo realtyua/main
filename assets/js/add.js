@@ -1,9 +1,7 @@
 (function() {
   'use strict';
   window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
@@ -11,12 +9,8 @@
           event.preventDefault();
           event.stopPropagation();
         } else {
-          // still prevent the form from actually submitting, as we're not REALLY doing that - we're AJAXing
           event.preventDefault();
           event.stopPropagation();
-          
-          // do your AJAX thing ...
-
           (function ($) {
             $('#add-form').submit(function () {
               var form = this;
@@ -48,15 +42,11 @@
               });
               return false;
             });
-
             function showAlert(message) {
               $('#add-form .alerts').removeClass('d-none');
               $('#add-form .alert-text').html(message);
             }
           })(jQuery);
-
-          // then clear the form
-
           form.classList.remove('was-validated');
           form.reset();
         }
@@ -64,24 +54,6 @@
     });
   }, false);
 })();
-
-
-
-// (function() {
-//     "use strict";
-//     window.addEventListener("load", function() {
-//         var forms = document.getElementsByClassName("needs-validation");
-//         var validation = Array.prototype.filter.call(forms, function(form) {
-//             form.addEventListener("submit", function(event) {
-//                 if (form.checkValidity() === false) {
-//                     event.preventDefault();
-//                     event.stopPropagation();
-//                 }
-//                 form.classList.add("was-validated");
-//             }, false);
-//         });
-//     }, false);
-// })();
 
 $(document).ready(function() {
   var form = document.getElementById('add-form');
@@ -109,7 +81,7 @@ $(document).ready(function() {
           }
           addSubmit.classList.remove("d-none");
           lead.classList.add("mb-2");
-          agree.textContent = "Я прийняв";
+          agree.textContent = "Я приймаю";
       } else {
           for (var i = 0; i < lengthRow; i++) {
               if (i === 0) {
@@ -198,41 +170,3 @@ $(document).ready(function() {
       }
   });
 });
-
-(function ($) {
-  $('#add-form').submit(function () {
-    var form = this;
-    $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
-    $.ajax({
-      type: $(this).attr('method'),
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      contentType: 'application/x-www-form-urlencoded',
-      success: function (data) {
-        const formRow = $('#add-form div.form-row');
-        var lengthRow = formRow.length;
-        for (var i = 0; i < lengthRow; i++) { if (i !== 12) { formRow[i].classList.add("d-none"); } }
-        $('h1').html('Оголошення надіслано');
-        $('#add-submit').html('Оголошення надіслано');
-        $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
-        showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
-        $('p.lead').addClass('d-none');
-        $('#add-form #add-submit').addClass('d-none');
-        $('#add-form #go-home').removeClass('d-none');
-      },
-      error: function (err) {
-        console.log(err);
-        $('#add-submit').html('Надіслати оголошення');
-        $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
-        showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
-        $('#add-form #go-home').addClass('d-none');
-      }
-    });
-    return false;
-  });
-
-  function showAlert(message) {
-    $('#add-form .alerts').removeClass('d-none');
-    $('#add-form .alert-text').html(message);
-  }
-})(jQuery);
