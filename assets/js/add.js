@@ -132,12 +132,9 @@ $(document).ready(function() {
 });
 
 (function ($) {
-  var $comments = $('#add-form');
-
   $('#add-form').submit(function () {
     var form = this;
     $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
-
     $.ajax({
       type: $(this).attr('method'),
       url: $(this).attr('action'),
@@ -163,7 +160,6 @@ $(document).ready(function() {
         $('#add-form #go-home').addClass('d-none');
       }
     });
-
     return false;
   });
 

@@ -31,8 +31,11 @@
 - name: viber
   title: Viber
   url:
-  # url: viber://pa/info?uri=realestate_ua
 
 - name: telegram
   title: Telegram
   url: https://t.me/realestate_net
+
+- name: website
+  title: Вебсайт
+  url: https://www.realestate.if.ua/new
