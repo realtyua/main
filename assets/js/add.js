@@ -18,13 +18,13 @@
 $(document).ready(function() {
   var form = document.getElementById('add-form');
   var checkbox = document.querySelector('input[id="agreeCheck"]');
-  var btn = document.querySelector('#add-form .btn');
+  var addSubmit = document.getElementById('add-submit');
   var lead = document.querySelector('p.lead');
   const formRow = document.querySelectorAll('#add-form div.form-row');
   var lengthRow = formRow.length;
   for (var i = 0; i < lengthRow; i++) { if (i !== 0 && i !== 11) { formRow[i].classList.add("d-none"); } }
   lead.classList.add("mb-0");
-  btn.classList.add("d-none");
+  addSubmit.classList.add("d-none");
   document.querySelector('p.lead').classList.add("mb-0");
   checkbox.addEventListener('change', (e) => {
       e.preventDefault();
@@ -38,7 +38,7 @@ $(document).ready(function() {
                   formRow[i].classList.remove("d-none");
               }
           }
-          btn.classList.remove("d-none");
+          addSubmit.classList.remove("d-none");
           lead.classList.add("mb-2");
       } else {
           for (var i = 0; i < lengthRow; i++) {
@@ -52,7 +52,7 @@ $(document).ready(function() {
           }
           lead.classList.remove("mb-2");
           lead.classList.add("mb-0");
-          btn.classList.remove("d-none");
+          addSubmit.classList.add("d-none");
       }
   });
 
@@ -128,15 +128,6 @@ $(document).ready(function() {
   });
 });
 
-//
-// function dNoneRow() {
-//   const formRow = document.querySelectorAll('#add-form div.form-row');
-//   var countRow = formRow.length;
-//   for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].classList.add('d-none'); } }
-// };
-//
-
-
 (function ($) {
   var $comments = $('#add-form');
 
@@ -144,39 +135,37 @@ $(document).ready(function() {
     var form = this;
     $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
-    const formRow = $('#add-form div.form-row');
-    var countRow = formRow.length;
-
     $.ajax({
       type: $(this).attr('method'),
       url: $(this).attr('action'),
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-        //dNoneRow();
-         if (formRow.last()) {
-         } else {
-           formRow.addClass('d-none')
-         }
-        //$('#add-form .form-row:not(:last-child)').addClass('d-none');
-        //$('#add-form .form-row').addClass('d-none');
-        //$('#add-form .form-row')[12].removeClass('d-none');
-        //$('#add-form .form-row').lastChild.removeClass('d-none');
-        //$("div.form-row:nth-last-child").removeClass('d-none');
-        //$(form).setAttribute("disabled", "");
+
+        const formRow = $('#add-form div.form-row');
+        var lengthRow = formRow.length;
+        for (var i = 0; i < lengthRow; i++) {
+            if (i !== 12) {
+                formRow[i].classList.add("d-none");
+            }
+        }
+
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
+
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
-        //$('#add-form .form-row:not(:last-child)').addClass('d-none');
+
         $('#add-form #add-submit').addClass('d-none');
         $('#add-form #go-home').removeClass('d-none');
       },
       error: function (err) {
         console.log(err);
+
         $('#add-submit').html('Надіслати оголошення');
         $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
+
         showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
-        //$(form).removeAttribute('disabled');
+
         $('#add-form #go-home').addClass('d-none');
       }
     });
