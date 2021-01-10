@@ -20,6 +20,7 @@ $(document).ready(function() {
   var checkbox = document.querySelector('input[id="agreeCheck"]');
   var addSubmit = document.getElementById('add-submit');
   var lead = document.querySelector('p.lead');
+  var agree = document.getElementById('agree');
   const formRow = document.querySelectorAll('#add-form div.form-row');
   var lengthRow = formRow.length;
   for (var i = 0; i < lengthRow; i++) { if (i !== 0 && i !== 11) { formRow[i].classList.add("d-none"); } }
@@ -40,6 +41,7 @@ $(document).ready(function() {
           }
           addSubmit.classList.remove("d-none");
           lead.classList.add("mb-2");
+          agree.textContent = "Я прийняв";
       } else {
           for (var i = 0; i < lengthRow; i++) {
               if (i === 0) {
@@ -53,6 +55,7 @@ $(document).ready(function() {
           lead.classList.remove("mb-2");
           lead.classList.add("mb-0");
           addSubmit.classList.add("d-none");
+          agree.textContent = "Прийміть";
       }
   });
 
@@ -141,31 +144,22 @@ $(document).ready(function() {
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-
         const formRow = $('#add-form div.form-row');
         var lengthRow = formRow.length;
-        for (var i = 0; i < lengthRow; i++) {
-            if (i !== 12) {
-                formRow[i].classList.add("d-none");
-            }
-        }
-
+        for (var i = 0; i < lengthRow; i++) { if (i !== 12) { formRow[i].classList.add("d-none"); } }
+        $('h1').html('Оголошення надіслано');
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
-
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
-
+        $('p.lead').addClass('d-none');
         $('#add-form #add-submit').addClass('d-none');
         $('#add-form #go-home').removeClass('d-none');
       },
       error: function (err) {
         console.log(err);
-
         $('#add-submit').html('Надіслати оголошення');
         $('#add-form .alert').removeClass('alert-success').addClass('alert-danger');
-
         showAlert('<strong>На жаль з вашим поданням сталася помилка</strong>. Переконайтесь, що всі обов’язкові поля помічені червоним кольром заповнені, і спробуйте ще раз.');
-
         $('#add-form #go-home').addClass('d-none');
       }
     });
