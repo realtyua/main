@@ -128,14 +128,14 @@ $(document).ready(function() {
   });
 });
 
+//
+// function dNoneRow() {
+//   const formRow = document.querySelectorAll('#add-form div.form-row');
+//   var countRow = formRow.length;
+//   for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].classList.add('d-none'); } }
+// };
+//
 
-function dNoneRow() {
-  const formRow = document.querySelectorAll('#add-form div.form-row');
-  var countRow = formRow.length;
-  for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].classList.add('d-none'); } }
-};
-
-console.log(form.checkValidity());
 
 (function ($) {
   var $comments = $('#add-form');
