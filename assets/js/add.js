@@ -144,7 +144,7 @@ $(document).ready(function() {
     var form = this;
     $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
-    const formRow = document.querySelectorAll('#add-form div.form-row');
+    const formRow = $('#add-form div.form-row');
     var countRow = formRow.length;
 
     $.ajax({
@@ -154,7 +154,7 @@ $(document).ready(function() {
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
         //dNoneRow();
-        for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].classList.add('d-none'); } }
+        for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].addClass('d-none'); } }
         //$('#add-form .form-row:not(:last-child)').addClass('d-none');
         //$('#add-form .form-row').addClass('d-none');
         //$('#add-form .form-row')[12].removeClass('d-none');
@@ -164,7 +164,7 @@ $(document).ready(function() {
         $('#add-submit').html('Оголошення надіслано');
         $('#add-form .alert').removeClass('alert-danger').addClass('alert-success');
         showAlert('<strong>Дякуємо за надану інформацію!</strong> Ваше оголошення з’явиться на вебсайті після його перевірки.');
-        $('#add-form .form-row:not(:last-child)').addClass('d-none');
+        //$('#add-form .form-row:not(:last-child)').addClass('d-none');
         $('#add-form #add-submit').addClass('d-none');
         $('#add-form #go-home').removeClass('d-none');
       },
