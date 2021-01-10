@@ -130,10 +130,12 @@ $(document).ready(function() {
 
 
 function dNoneRow() {
-  const formRow = document.querySelectorAll('#add-form .form-row');
+  const formRow = document.querySelectorAll('#add-form div.form-row');
   var countRow = formRow.length;
   for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].classList.add('d-none'); } }
 };
+
+console.log(form.checkValidity());
 
 (function ($) {
   var $comments = $('#add-form');
@@ -142,13 +144,17 @@ function dNoneRow() {
     var form = this;
     $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
+    const formRow = document.querySelectorAll('#add-form div.form-row');
+    var countRow = formRow.length;
+
     $.ajax({
       type: $(this).attr('method'),
       url: $(this).attr('action'),
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-        dNoneRow();
+        //dNoneRow();
+        for (var i = 0; i < countRow; i++) { if (i !== 12) { formRow[i].classList.add('d-none'); } }
         //$('#add-form .form-row:not(:last-child)').addClass('d-none');
         //$('#add-form .form-row').addClass('d-none');
         //$('#add-form .form-row')[12].removeClass('d-none');
