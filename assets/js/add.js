@@ -132,7 +132,7 @@ $(document).ready(function() {
 function dNoneRow() {
   const formRow = document.querySelectorAll('#add-form .form-row');
   var countRow = formRow.length;
-  for (var i = 0; i < countRow; i++) { if (i !== 12) { countRow[i].addClass('d-none'); } }
+  for (var i = 0; i < countRow; i++) { if (i !== 12) { countRow[i].classList.add('d-none'); } }
 };
 
 (function ($) {
