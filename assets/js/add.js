@@ -128,12 +128,18 @@ $(document).ready(function() {
   });
 });
 
+
+function dNoneRow() {
+  const formRow = document.querySelectorAll('#add-form .form-row');
+  var countRow = formRow.length;
+  for (var i = 0; i < countRow; i++) { if (i !== 12) { countRow[i].addClass('d-none'); } }
+};
+
 (function ($) {
   var $comments = $('#add-form');
 
   $('#add-form').submit(function () {
     var form = this;
-    const formRow = document.querySelectorAll('#add-form div.form-row');
     $('#add-submit').html('Надсилаю оголошення<div class="spinner-border spinner-border-sm text-warning ml-2" role="status"><span class="sr-only">Надсилаю...</span></div>');
 
     $.ajax({
@@ -142,9 +148,7 @@ $(document).ready(function() {
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-
-        for (var i = 0; i < formRow.length; i++) { if (i !== 12) { formRow[i].addClass('d-none'); } }
-
+        dNoneRow();
         //$('#add-form .form-row:not(:last-child)').addClass('d-none');
         //$('#add-form .form-row').addClass('d-none');
         //$('#add-form .form-row')[12].removeClass('d-none');
