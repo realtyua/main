@@ -11,7 +11,8 @@
           <h6><a href="/">Головна</a></h6>
           <ul class="list-unstyled">
             {%- for rp in rps -%}
-              {%- if rp.url != "/new.html" or rp.url != "/add.html" -%}
+              {%- if rp.url contains "new.html" or rp.url contains "add.html" -%}
+              {%- else -%}
                 <li class="mb-2">
                   {%- if rp.url == page.url -%}
                     <span>{%- if rp.navtitle -%}{{ rp.navtitle }}{%- else -%}{{ rp.title }}{%- endif -%}</span>
