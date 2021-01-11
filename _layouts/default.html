@@ -73,9 +73,10 @@ layout: compress
     {%- elsif page.url contains '/agency/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- elsif page.url contains 'building-materials' and page.table != 1 or page.table != 2 -%}
-    {%- comment -%}
+
       {%- include pagination-js.html -%}
-    {%- endcomment -%}
+      
+{%- comment -%}
       <script>
         $("#list-offer").ready(function(){
           $(".col").slice(0, 3).show();
@@ -88,6 +89,8 @@ layout: compress
           });
         })
       </script>
+{%- endcomment -%}
+
     {%- endif -%}
 
     {% include modals/net-realestate-modal.html %}
