@@ -88,7 +88,7 @@ function jsDetailFormatter(index, row, $detail) {
         html = [
           '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'
         ]
-        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1) {
+        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1 || row.type.indexOf('{{ site.data.lang-uk.re_house_not }}') === -1) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floor + ' {{ site.data.lang-uk.re_at }} ' + row.floors + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
         }
         if (row.parking !== '') {
@@ -125,7 +125,7 @@ function jsDetailFormatter(index, row, $detail) {
         if (row.surface_land !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_surface_land }}</dt><dd>' + row.surface_land + ' {{ site.data.lang-uk.re_m }}<sup>2</sup></dd></dl></span>')
         }
-        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1) {
+        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1 || row.type.indexOf('{{ site.data.lang-uk.re_house_not }}') === -1) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floor + ' {{ site.data.lang-uk.re_at }} ' + row.floors + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
         }
         if (row.price_sqmt !== '' && row.price_sqmt.indexOf('$') !== -1) {
@@ -220,7 +220,7 @@ function htmlDetailFormatter(index, row, $detail) {
         html = [
           '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">'
         ]
-        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1) {
+        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1 || row.type.indexOf('{{ site.data.lang-uk.re_house_not }}') === -1) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floor + ' {{ site.data.lang-uk.re_at }} ' + row.floors + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
         }
         if (row.parking !== '') {
@@ -257,7 +257,7 @@ function htmlDetailFormatter(index, row, $detail) {
         if (row.surface_land !== '') {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_surface_land }}</dt><dd>' + row.surface_land + ' {{ site.data.lang-uk.re_m }}<sup>2</sup></dd></dl></span>')
         }
-        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1) {
+        if (row.floor !== '' && row.floors !== '' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') === -1 || row.type.indexOf('{{ site.data.lang-uk.re_house_not }}') === -1) {
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floor + ' {{ site.data.lang-uk.re_at }} ' + row.floors + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
         }
         if (row.parking !== '') {
@@ -358,7 +358,7 @@ function propertyFormatter(value, row) {
       if (row.rooms && row.rooms !== '') {
         html.push('{{ site.data.lang-uk.re_rooms }} ' + row.rooms + ', ')
       }
-      if (row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1) {
+      if (row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_house_not }}') !== -1) {
         if (row.floors && row.floors !== '') {
           html.push('{{ site.data.lang-uk.re_floorss }} <strong>' + row.floors + '</strong>, ')
         }
