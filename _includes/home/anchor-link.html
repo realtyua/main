@@ -42,7 +42,7 @@
       {%- if reg.url != site.url -%}
       <div class="col mb-2">
         <a href="{{ reg.url }}" target="_blank">{{ reg.navtitle }}</a>
-        <small>та {{ reg.small }}</small>
+        <small>{{ site.data.lang-uk.re_ta }} {{ reg.small }}</small>
       </div>
       {%- endif -%}
       {%- endfor -%}
