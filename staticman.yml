@@ -3,7 +3,7 @@ comments:
   requiredFields: ["are", "tre", "surface", "sland", "rooms", "floor", "floors", "taddress", "address", "number", "tlocation", "location", "region", "currency", "price", "phone", "fn", "ln", "agreed"]
   allowedOrigins: ["localhost", "realestate.if.ua", "www.realestate.if.ua"]
   branch: master
-  commitMessage: "Property from {fields.date} on {options.slug}"
+  commitMessage: "Property from {fields.date} - {options.slug}"
   filename: "entry{@timestamp}"
   format: "yaml"
   generatedFields:
