@@ -56,7 +56,8 @@ layout: compress
           var re = markers[i];
           var title = re[2] + ' ' + re[3];
           var rooms = (re[5] == 0) ? '' : ', {{ site.data.lang-uk.re_rooms }} ' + re[5];
-          var description = ',<br/>{{ site.data.lang-uk.re_surface }} ' + re[4] + ' м<sup>2</sup>' + rooms + ',<br/>{{ site.data.lang-uk.re_na }} ' + re[6] + '{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }},<br/>{{ site.data.lang-uk.re_cost }} ' + re[7] + ' {{ site.data.lang-uk.re_uah }},<br/>{{ site.data.lang-uk.re_tel }} ' + re[8];
+          var floors = (re[6] == 0) ? '' : re[6] + '{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }},';
+          var description = ',<br/>{{ site.data.lang-uk.re_surface }} ' + re[4] + ' м<sup>2</sup>' + rooms + ',<br/>{{ site.data.lang-uk.re_na }} ' + floors + '<br/>{{ site.data.lang-uk.re_cost }} ' + re[7] + ' {{ site.data.lang-uk.re_uah }},<br/>{{ site.data.lang-uk.re_tel }} ' + re[8];
           var marker = L.marker(new L.LatLng(re[0],re[1]),{title:title});
           marker.bindPopup(title + description);
           markersClusters.addLayer(marker);
