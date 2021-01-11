@@ -14,6 +14,7 @@ comments:
   moderation: true
   name: "Add New Property"
   path: "_data/comments/{options.slug}"
+  pullRequestBody: It is new record.
   transforms:
     email: md5
   notifications:
