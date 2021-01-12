@@ -44,7 +44,19 @@ layout: default
       {%- if fJson == 'true' and isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- else -%}
-        <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">&nbsp;</div>
+        <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="alert alert-info" role="alert">
+                {%- if whois == 'realtor' -%}
+                  {{ site.data.lang-uk.realtor_offer_text }}
+                {%- else -%}
+                  {{ site.data.lang-uk.company_offer_text }}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
       {%- endif -%}
       {%- if stabs.size > 0 -%}
         {%- include elements/others-pane.html tabs=stabs -%}
