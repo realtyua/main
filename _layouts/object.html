@@ -5,6 +5,7 @@ layout: compress
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 {%- include variables/object.html -%}
+{%- include variables/whois.html minus=1 -%}
 <!doctype html>
 <html dir="ltr" lang="uk-UA">
   <head>
@@ -111,7 +112,7 @@ layout: compress
             </div>
           </div>
           <div class="row mb-3">
-            <div class="col-12">
+            <div class="col-12 {{ whois }}">
               {%- if fJson == 'true' or otabs.size > 0 or data.size > 0 -%}
               <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
                 <div class="navbar-brand d-md-none">

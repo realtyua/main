@@ -1,0 +1,4 @@
+{%- assign slash = page.dir | split: "/" -%}
+{%- assign minus = slash | size | minus:include.minus -%}
+{%- assign iswho = slash | slice: 0, minus | join: '/'-%}
+{%- assign whois = iswho | split: "/" | last -%}
