@@ -1,0 +1,4 @@
+{%- include data/owner.html -%}
+{%- assign owners = owners -%}
+{%- include data/kaluskyy/i-all.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.region contains location" -%}
