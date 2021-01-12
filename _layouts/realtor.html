@@ -30,6 +30,7 @@ layout: default
           {%- if fJson == 'true' and isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- else -%}
+            {%- include elements/offer-tab.html hide=1 -%}
           {%- endif -%}
           {%- if stabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=stabs -%}
