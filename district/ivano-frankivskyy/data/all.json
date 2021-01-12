@@ -1,7 +1,0 @@
----
-layout: null
-sitemap: false
-navhide: 1
----
-{%- include data/ivano-frankivskyy/all.html -%}
-{%- include offer-json.html -%}
