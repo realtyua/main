@@ -1,5 +1,5 @@
 ---
-title: Послуги агента
+title: Послуги
 sitemap: false
 ---
 
