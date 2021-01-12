@@ -7,5 +7,4 @@ Disallow: *.json
 Disallow: /404.html
 Disallow: /add.html
 Disallow: /new.html
-Disallow: /sent.html
 Sitemap: https://www.realestate.if.ua/sitemap.xml
