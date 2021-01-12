@@ -1,0 +1,7 @@
+---
+layout: null
+sitemap: false
+navhide: 1
+---
+{%- include data/kaluskyy/all.html -%}
+{%- include offer-json.html -%}
