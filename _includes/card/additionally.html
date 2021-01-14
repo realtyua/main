@@ -23,7 +23,7 @@
   {%- endif -%}
 {%- endif -%}
 
-{%- if offer.price_sqmt and offer.price_sqmt != '' -%}
+{%- if offer.price_sqmt -%}
   {%- if offer.rent == '1' -%}
     <dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
   {%- elsif offer.type == land or offer.type == landm -%}
@@ -44,9 +44,9 @@
       {% if offer.price_sqmt contains '$' %}
         <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">
           {%- if offer.type == land or offer.type == landm -%}
-            {{ pus | modulo: offer.surface_land }}
+            {{ pus | divided_by: offer.surface_land }}
           {%- else -%}
-            {{ pus | modulo: offer.surface }}
+            {{ pus | divided_by: offer.surface }}
           {%- endif -%}
         </span> {{ site.data.lang-uk.re_uah }}.
       {% elsif offer.price_sqmt contains '€' %}
