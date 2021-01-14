@@ -1,5 +1,27 @@
 [
   {
+    "id": "10",
+    "type": "Земля",
+    "rent": "",
+    "rooms": "",
+    "surface": "",
+    "surface_land": "1000",
+    "price": "$40000",
+    "price_sqmt": "$400",
+    "floor": "",
+    "floors": "",
+    "parking": "",
+    "region": "Надвірнянський район",
+    "location": "",
+    "address": "вул. Грушевського, 17, с. Микуличин",
+    "object": "",
+    "coordinates": "49.41453,24.59889",
+    "date": "2021-01-14",
+    "seller": "Наталя Кузьмич",
+    "phone": "380962143450",
+    "description": ""
+  },
+  {
     "id": "9",
     "type": "Земля",
     "rent": "",
