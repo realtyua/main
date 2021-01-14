@@ -26,7 +26,7 @@
 {%- if offer.price_sqmt and offer.price_sqmt != '' -%}
   {%- if offer.rent == '1' -%}
     <dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
-  {%- elsif offer.type == "{{ site.data.lang-uk.re_land }}" or offer.type == "{{ site.data.lang-uk.re_land | downcase }}" -%}
+  {%- elsif offer.type == land or offer.type == landm -%}
     <dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
   {%- else -%}
     <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dt>
@@ -43,7 +43,7 @@
   {%- else -%}
     {% if offer.price_sqmt contains '$' %}
       <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">
-        {%- elsif offer.type == "{{ site.data.lang-uk.re_land }}" or offer.type == "{{ site.data.lang-uk.re_land | downcase }}" -%}
+        {%- elsif offer.type == land or offer.type == landm -%}
           {{ offer.price | remove: '$' | divided_by: offer.surface_land }}
         {%- else -%}
           {{ offer.price | remove: '$' | divided_by: offer.surface }}
@@ -51,7 +51,7 @@
       </span> {{ site.data.lang-uk.re_uah }}.
     {% elsif offer.price_sqmt contains '€' %}
       <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">
-        {%- elsif offer.type == "{{ site.data.lang-uk.re_land }}" or offer.type == "{{ site.data.lang-uk.re_land | downcase }}" -%}
+        {%- elsif offer.type == land or offer.type == landm -%}
           {{ offer.price | remove: '€' | divided_by: offer.surface_land }}
         {%- else -%}
           {{ offer.price | remove: '€' | divided_by: offer.surface }}
@@ -59,7 +59,7 @@
       </span> {{ site.data.lang-uk.re_uah }}.
     {% else %}
       <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}">
-        {%- elsif offer.type == "{{ site.data.lang-uk.re_land }}" or offer.type == "{{ site.data.lang-uk.re_land | downcase }}" -%}
+        {%- elsif offer.type == land or offer.type == landm -%}
           {{ offer.price | divided_by: offer.surface_land }}
         {%- else -%}
           {{ offer.price | divided_by: offer.surface }}
