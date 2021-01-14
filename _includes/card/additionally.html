@@ -44,9 +44,9 @@
       {% if offer.price_sqmt contains '$' %}
         <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">
           {%- if offer.type == land or offer.type == landm -%}
-            {{ offer.price | remove: '$' | divided_by: offer.surface_land }}
+            {{ pus | divided_by: offer.surface_land }}
           {%- else -%}
-            {{ offer.price | remove: '$' | divided_by: offer.surface }}
+            {{ pus | divided_by: offer.surface }}
           {%- endif -%}
         </span> {{ site.data.lang-uk.re_uah }}.
       {% elsif offer.price_sqmt contains '€' %}
