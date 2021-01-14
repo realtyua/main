@@ -49,8 +49,14 @@
             {{ pus }} / {{ pus | divided_by: offer.surface }} / {{ pus | modulo: offer.surface }}
           {%- endif -%}
         </span> {{ site.data.lang-uk.re_uah }}.
-      {% elsif offer.price_sqmt contains '€' %}
-        <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
+      {% elsif offer.price_sqmt == '' and offer.price != '' and offer.price contains '€' %}
+        <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">
+          {%- if offer.type == land or offer.type == landm -%}
+            {{ peu }} / {{ peu | divided_by: offer.surface_land }} / {{ peu | modulo: offer.surface_land }}
+          {%- else -%}
+            {{ peu }} / {{ peu | divided_by: offer.surface }} / {{ peu | modulo: offer.surface }}
+          {%- endif -%}
+        </span> {{ site.data.lang-uk.re_uah }}.
       {% else %}
         <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }} {{ site.data.lang-uk.re_uah }}">{{ offer.price_sqmt }}</span> {{ site.data.lang-uk.re_uah }}.
       {% endif %}

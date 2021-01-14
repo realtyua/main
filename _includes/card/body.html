@@ -1,5 +1,5 @@
 {%- assign land = site.data.lang-uk.re_land -%}{%- assign landm = site.data.lang-uk.re_land | downcase -%}
-{% if offer.price_sqmt contains '$' %}{%- assign pus = offer.price | remove: '$' -%}{% elsif offer.price_sqmt contains '€' %}{%- assign peu = offer.price | remove: '€' -%}{% else %}{%- assign pua = offer.price -%}{% endif %}
+{% if offer.price contains '$' %}{%- assign pus = offer.price | remove: '$' -%}{% elsif offer.price contains '€' %}{%- assign peu = offer.price | remove: '€' -%}{% else %}{%- assign pua = offer.price -%}{% endif %}
 {% if offer.type %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_for_rent }}{% elsif offer.rent == '1' and offer.price == '' %}{{ site.data.lang-uk.re_for_rentd }}{% else %}{{ site.data.lang-uk.re_for_sale }}{% endif %} <strong class="text-lowercase">{{ offer.type }}</strong>, {% endif %}
 {% if offer.type == land %} {{ site.data.lang-uk.re_surface }} <strong class="mark" data-toggle="tooltip" title="0.{{ offer.surface_land }} га">{{ offer.surface_land }}</strong>&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup>, {% else %}
 {% if offer.surface %}{{ site.data.lang-uk.re_surface }} <strong>{{ offer.surface }}</strong>&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup>, {% endif %}

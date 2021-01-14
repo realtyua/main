@@ -1,5 +1,27 @@
 [
   {
+    "id": "13",
+    "type": "Земля",
+    "rent": "",
+    "rooms": "",
+    "surface": "",
+    "surface_land": "700",
+    "price": "$5500",
+    "price_sqmt": "",
+    "floor": "",
+    "floors": "",
+    "parking": "",
+    "region": "",
+    "location": "м. Болехів",
+    "address": "вул. Довжанська, 37",
+    "object": "",
+    "coordinates": "49.05550,23.86149",
+    "date": "2021-01-14",
+    "seller": "Вадим Михайловський",
+    "phone": "380996144471",
+    "description": ""
+  },
+  {
     "id": "12",
     "type": "Квартира",
     "rent": "",
