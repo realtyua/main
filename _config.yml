@@ -100,6 +100,7 @@ compress_html:
   profile: false
   startings: [html, head, body]
 
+main_url: https://www.realestate.net.ua
 staticman_url: https://addnew.herokuapp.com/v2/entry/realtyua/main/master/comments
 
 reCaptcha:
