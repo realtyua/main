@@ -212,7 +212,7 @@ news_list_empty: Новин поки що немає :(
 #
 # Decisions
 #
-decisions: статті
-decisions_all: Усі статті
-decisions_back_list: Повернутися до спсику статтей
-decisions_list_empty: Cтаттей поки що немає :(
+articles: статті
+articles_all: Усі статті
+articles_back_list: Повернутися до спсику статтей
+articles_list_empty: Cтаттей поки що немає :(
