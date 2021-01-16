@@ -1,0 +1,36 @@
+{%- assign articles = '' | split:'' -%}
+{%- for i in site.categories[include.cat] -%}
+  {%- unless i.url contains "news" -%}
+    {%- assign articles = articles | push:i -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+{%- for article in articles limit:include.num -%}
+  {%- if forloop.first -%}
+  <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2">
+  {%- endif -%}
+  <div class="col mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <p class="card-text"><span class="small text-muted">{%- include date.html date=article.date -%}</span></p>
+        <h5 class="card-title"><a href="{{ article.url }}">{{ article.title }}</a></h5>
+        <p class="card-text">{{ article.excerpt | strip_html | truncate: 110 }}</p>
+      </div>
+    </div>
+  </div>
+  {%- if forloop.last -%}
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-auto ml-auto">
+      <a href="{{page.dir}}news/" class="btn btn-primary">{{ site.data.lang-uk.articles_all }}</a>
+    </div>
+  </div>
+  {%- endif -%}
+{%- else -%}
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="alert alert-info" role="alert">{{ site.data.lang-uk.articles_list_empty }}</div>
+    </div>
+  </div>
+{%- endfor -%}

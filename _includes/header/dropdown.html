@@ -21,7 +21,13 @@
   </div>
   <div class="row w-100 mx-0 px-0">
     <div class="col-auto ml-auto">
-      <a href="{{ include.current }}" class="dropdown-item">{{ include.title }}</a>
+      <a href="{{ include.current }}" class="dropdown-item">
+        {%- if include.title contains "містах" -%}
+          {{ include.title | truncate: 20 }}
+        {%- else -%}
+          {{ include.title }}
+        {%- endif -%}
+      </a>
     </div>
   </div>
 </div>

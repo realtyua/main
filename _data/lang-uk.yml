@@ -202,3 +202,17 @@ kolomyyskyy: Коломийського району
 kosivskyy: Косівського району
 nadvirnyanskyy: Надвірнянського району
 verkhovynskyy: Верховинського району
+#
+# News
+#
+news: новини
+news_all: Усі новини
+news_back_list: Повернутися до спсику новин
+news_list_empty: Новин поки що немає :(
+#
+# Decisions
+#
+decisions: статті
+decisions_all: Усі статті
+decisions_back_list: Повернутися до спсику статтей
+decisions_list_empty: Cтаттей поки що немає :(

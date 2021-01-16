@@ -69,7 +69,12 @@ defaults:
     values:
       layout: "post"
   - scope:
-      path: /*/news/
+      path: /articles/
+      type: "articles"
+    values:
+      layout: "articles"
+  - scope:
+      path: /news/
       type: "news"
     values:
       layout: "news"
