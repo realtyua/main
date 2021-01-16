@@ -5,8 +5,36 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1 class="mb-4">{{ page.title }}</h1>
-    {%- include nav-section.html -%}
+
+    {%- assign back = page.dir | split: "/" -%}
+    {%- assign size = back | size | minus:1 -%}
+    {%- assign here = back | slice: 0, size | join: "/" | append: "/" -%}
+
+    {%- assign ones = site.pages | sort: 'dir' | reverse -%}
+    <div class="row mb-4 justify-content-end">
+      <div class="col-md-auto">
+        <div class="list-group list-group-horizontal-sm section">
+        {%- for one in ones -%}
+          {%- capture slug -%}{{ one.url | split: "/" | last }}{%- endcapture -%}
+          {%- capture current -%}{{ one.url | remove: slug | remove: "//" | append: "/" }}{%- endcapture -%}
+          {%- if here == current and one.url contains here and one.navhide != 1 -%}
+            {%- if one.url == page.url -%}
+            <span class="list-group-item list-group-item-action active">
+              {%- if one.navtitle -%}{{ one.navtitle }}{%- elsif one.breadcrumb -%}{{ one.breadcrumb }}{%- else -%}{{ one.title }}{%- endif -%}
+            </span>
+            {%- else -%}
+            <a href="{{ one.url }}" class="list-group-item list-group-item-action">
+              {%- if one.navtitle -%}{{ one.navtitle }}{%- elsif one.breadcrumb -%}{{ one.breadcrumb }}{%- else -%}{{ one.title }}{%- endif -%}
+            </a>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
     {{ content }}
     {%- include news-list.html cat=page.pagination.category -%}
+    
   </div>
 </div>
