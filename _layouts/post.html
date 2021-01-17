@@ -2,11 +2,29 @@
 layout: default
 ---
 
+<div class="row justify-content-end">
+  <div class="col-md-auto">
+    <div class="list-group list-group-horizontal-sm section">
+      <a href="/news/" class="list-group-item list-group-item-action">Новини</a>
+      <a href="/articles/" class="list-group-item list-group-item-action">Статті</a>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-12">
     <p><span class="small text-muted">{%- include date.html date=page.date -%}</span></p>
     <h1 class="mb-4">{{ page.title }}</h1>
     {{ content }}
+    <p class="text-right">
+      <span class="small text-muted">Джерело:
+        {%- if page.source.url != '' -%}
+          <a href="{{ page.source.url }}" target="_blank"><b>{{ page.source.title }}</b></a>
+        {%- else -%}
+          <b>{{ page.source.title }}</b>
+        {%- endif -%}
+      </span>
+    </p>
     {%- include back.html -%}
   </div>
 </div>
