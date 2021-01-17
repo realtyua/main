@@ -1,7 +1,7 @@
 {%- assign srs = site.data.realestate -%}
 {%- for sr in srs -%}
   {%- assign region = sr.url | split: "." | slice: 2, 4 | join: "." | replace: ".", "-" -%}
-  {%- if sr.slug and sr.slug != '' -%}
+  {%- if sr.slug and sr.slug != '' and sr.url != site.url -%}
     function {{ region | remove: "-" }}Random() {
       $.getJSON("{{ sr.url }}/region/{{ sr.slug }}/data/all.json", function(data) {
         var count = data.length; var random = []; var counter = 0; var number = 3; var div = $("#{{ region }}"); var usd = {{ site.usd }}; var eur = {{ site.eur }};
