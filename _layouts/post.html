@@ -7,6 +7,22 @@ layout: default
     <p><span class="small text-muted">{%- include date.html date=page.date -%}</span></p>
     <h1 class="mb-4">{{ page.title }}</h1>
     {{ content }}
+
+    <hr>
+    
+    <span class="mr-1">&larr;</span>
+    <a href="{{ page.dir }}">
+      {%- if back contains "news" -%}
+        {{ site.data.lang-uk.news_back_list }}
+      {%- elsif back contains "articles" -%}
+        {{ site.data.lang-uk.articles_back_list }}
+      {%- else -%}
+        {{ site.data.lang-uk.back_list }}
+      {%- endif -%}
+    </a>
+
+  {%- comment -%}
     {%- include back.html -%}
+  {%- endcomment -%}
   </div>
 </div>
