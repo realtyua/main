@@ -1,14 +1,11 @@
 <hr>
-
 {%- assign back = page.url | split: "/" -%}
 {%- if back contains "news" or back contains "articles" -%}
   {%- assign minus = 4 -%}
 {%- else -%}
   {%- assign minus = 1 -%}
 {%- endif -%}
-
 {%- assign size = back | size | minus:minus -%}
-
 <span class="mr-1">&larr;</span>
 <a href="{{ back | slice: 0, size | join: "/" }}/">
   {%- if back contains "news" -%}
