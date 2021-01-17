@@ -51,8 +51,10 @@
     {%- endif -%}
   {%- endif -%}
 
-  {%- if page.dir == '/' -%}
+  {%- if page.dir == '/' and page.url contains '/index.html' -%}
     <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  {%- elsif page.dir == '/' and  page.url contains '/ukraine.html' -%}
+    <link rel="preload" href="{{ "/assets/js/main.ua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   {%- else -%}
     {%- if page.table == 1 -%}
       {%- if page.url contains 'map.html' -%}
