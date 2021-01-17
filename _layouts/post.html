@@ -9,7 +9,9 @@ layout: default
     {{ content }}
 
     <hr>
-    
+
+    {{ page.dir }} // {{ page.url }} // {{ page.link }}
+
     <span class="mr-1">&larr;</span>
     <a href="{{ page.dir }}">
       {%- if back contains "news" -%}
