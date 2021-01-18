@@ -33,6 +33,8 @@
               <span>
                 {%- if slug == 'commercial' -%}
                   {{ site.data.lang-uk.title_tab_commercial }}
+                {%- elsif slug == 'realtor' -%}
+                  {{ site.data.lang-uk.title_tab_realtor }}
                 {%- else -%}
                   {%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}
                 {%- endif -%}
