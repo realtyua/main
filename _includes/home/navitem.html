@@ -2,6 +2,8 @@
 {%- capture navlink -%}
   {%- if slug == 'commercial' -%}
     {{ site.data.lang-uk.title_tab_commercial }}
+  {%- elsif slug == 'realtor' -%}
+    {{ site.data.lang-uk.title_tab_realtor }}
   {%- else -%}
     {%- if s.navtitle -%}
       {{ s.navtitle }}
