@@ -16,8 +16,8 @@ source:
 
 <div class="table-responsive">
 <table class="table table-sm table-hover table-striped">
-  <caption>List of users</caption>
-  <tbody>
+  <caption>Про державну реєстрацію речових прав на нерухоме майно та їх обтяжень  встановлює адміністративний збір у таких розмірах</caption>
+  <thead>
     <tr>
       <td>
         <p><strong>Вид дії, </strong><strong>за яку стягується плата</strong></p>
@@ -32,6 +32,8 @@ source:
         <p><strong>Округлена сума, грн.</strong></p>
       </td>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td rowspan="4">
         <p>За державну реєстрацію права власності (у тому числі довірчої власності як способу забезпечення виконання зобов’язань)</p>
