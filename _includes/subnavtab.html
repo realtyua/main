@@ -110,7 +110,7 @@
             <div class="col-12">
               {%- assign addtitle = page.title | split: " " | slice: 1, 4 | join: " " -%}
               {%- if slug == 'realtor' or slug == 'agency' or slug == 'developer' -%}
-                <h2 class="mb-3">{{ title }} {{ site.data.lang-uk.nerukhomisti }} {{ addtitle }}</h2>
+                <h2 class="mb-3">{{ title }} {{ site.data.lang-uk.nerukhomisti }} {{ addtitle }} </h2>
                 {%- assign dir = page.dir | append: slug | append: '/' -%}
                 {%- include subpages.html dir=dir page=slug title=title -%}
               {%- else -%}
