@@ -104,12 +104,12 @@ title: Контакти
           <div class="col-md-8 offset-md-2">
             <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
               {%- for tf in team -%}
-                {%- if tf.title != '' and tf.position contains 'Засновник' -%}
+                {%- if tf.name != '' and tf.position contains 'Засновник' -%}
                 <div class="col px-2 mb-3">
                   <div class="card h-100">
                     <img loading="lazy" src="/assets/images/logo/{{ tf.picture }}.jpg" class="card-img-top" alt="{{ tf.position }}">
                     <div class="card-body">
-                      <div class="card-title">{{ tf.title }}</div>
+                      <div class="card-title">{{ tf.name }}</div>
                     </div>
                   </div>
                 </div>

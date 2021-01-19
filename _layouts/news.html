@@ -2,14 +2,25 @@
 layout: default
 ---
 
-<div class="row mb-3 justify-content-end">
-  <div class="col-md-auto">
-    <div class="list-group list-group-horizontal-sm section">
-      <a href="/news/" class="list-group-item list-group-item-action">Новини</a>
-      <a href="/articles/" class="list-group-item list-group-item-action">Статті</a>
+{%- for ng in navgroup -%}
+  {%- if forloop.first -%}
+  <div class="row mb-3 justify-content-end">
+    <div class="col-md-auto">
+      <div class="list-group list-group-horizontal-sm section">
+  {%- endif -%}
+      {%- if ng.title != '' and ng.url != '' -%}
+        {%- if page.dir contains ng.url -%}
+          <span class="list-group-item list-group-item-action active">{{ ng.title }}</span>
+        {%- else -%}
+          <a href="/{{ ng.url }}/" class="list-group-item list-group-item-action">{{ ng.title }}</a>
+        {%- endif -%}
+      {%- endif -%}
+  {%- if forloop.last -%}
+      </div>
     </div>
   </div>
-</div>
+  {%- endif -%}
+{%- endfor -%}
 
 <div class="row">
   <div class="col-12">
