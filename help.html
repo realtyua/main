@@ -10,12 +10,12 @@ navhide: 1
   {%- if forloop.first -%}
   <div class="accordion" id="accordion-help">
     <div class="card">
-  {%- else -%}
+  {%- endif -%}
 
   <div class="card-header" id="help-1">
     <h2 class="mb-0">
       <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-        {{ h.title }} // {{ h.name }}
+        {{ h.title }} // {{ h.name }} // {{ h.url }}
       </button>
     </h2>
   </div>
@@ -27,6 +27,6 @@ navhide: 1
   {%- if forloop.last -%}
     </div>
   </div>
-  {%- else -%}
+  {%- endif -%}
 
 {%- endfor -%}
