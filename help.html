@@ -7,6 +7,9 @@ navhide: 1
 
 {%- for h in site.help -%}
 
+  {%- assign name = h.url | split: '/' first -%}
+  {%- assign namber = h.url | split: '/' last -%}
+
   {%- if forloop.first -%}
   <div class="accordion" id="accordion-help">
     <div class="card">
@@ -15,13 +18,17 @@ navhide: 1
   <div class="card-header" id="help-1">
     <h2 class="mb-0">
       <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-        {{ h.title }} // {{ h.name }} // {{ h.url }}
+        {{ h.title }} // h.label // {{ h.url }}
       </button>
     </h2>
   </div>
 
   <div id="collapse-1" class="collapse show" aria-labelledby="help-1" data-parent="#accordion-help">
-    <div class="card-body">{{ h.content }}</div>
+    <div class="card-body">
+      {{ name }} // {{ namber }}
+      <br>
+      {{ h.content }}
+    </div>
   </div>
 
   {%- if forloop.last -%}
