@@ -3,11 +3,11 @@ title: Ваші запитання і нашві відповіді
 navhide: 1
 ---
 
-<h1>Ви запитуєте, ми відповідаємо</h1>
+<h1 class="mb-3">Ви запитуєте, ми відповідаємо</h1>
 
 {%- for h in site.help -%}
 
-  {%- assign name = h.url | split: '/' | first -%}
+  {%- assign name = h.url | remove_first: '/' | split: '/' | first -%}
   {%- assign namber = h.url | split: '/' | last | remove: '.html' -%}
 
   {%- if forloop.first -%}
@@ -24,11 +24,7 @@ navhide: 1
   </div>
 
   <div id="collapse-{{ namber }}" class="collapse" aria-labelledby="{{ name }}-{{ namber }}" data-parent="#accordion-{{ name }}">
-    <div class="card-body">
-      {{ name }} // {{ namber }}
-      <br>
-      {{ h.content }}
-    </div>
+    <div class="card-body">{{ h.content }}</div>
   </div>
 
   {%- if forloop.last -%}
