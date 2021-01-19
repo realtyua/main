@@ -3,15 +3,11 @@
     {%- if page.url != '/' -%}
     <div class="row pt-4">
       <div class="col-12">
-        <div class="row justify-content-between">
-          <div class="col-2">
-            <a id="mapsite" class="badge badge-primary collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">
-              {{ site.data.lang-uk.map_site }}
-            </a>
-          </div>
-          <div class="col-1">
-            <a href="/help" class="badge badge-primary">{{ site.data.lang-uk.help }}</a>
-          </div>
+        <div class="d-flex justify-content-end">
+          <a id="mapsite" class="badge badge-primary mr-2 collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">
+            {{ site.data.lang-uk.map_site }}
+          </a>
+          <a href="/help" class="badge badge-primary">{{ site.data.lang-uk.help }}</a>
         </div>
         <div class="collapse multi-collapse website-map" id="websitemap">{%- include map/0.html -%}</div>
       </div>
