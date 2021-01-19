@@ -7,45 +7,26 @@ navhide: 1
 
 {%- for h in site.help -%}
 
-  {{ h.title }}<br>
-  {{ h.content }}
+  {%- if forloop.first -%}
+  <div class="accordion" id="accordion-help">
+    <div class="card">
+  {%- else -%}
+
+  <div class="card-header" id="help-1">
+    <h2 class="mb-0">
+      <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+        {{ h.title }} // {{ h.name }}
+      </button>
+    </h2>
+  </div>
+
+  <div id="collapse-1" class="collapse show" aria-labelledby="help-1" data-parent="#accordion-help">
+    <div class="card-body">{{ h.content }}</div>
+  </div>
+
+  {%- if forloop.last -%}
+    </div>
+  </div>
+  {%- else -%}
 
 {%- endfor -%}
-
-
-<div class="accordion" id="accordion-help">
-  <div class="accordion-item card">
-    <div class="accordion-header card-header" id="accordion-heading-help-1">
-        <h4 class="accordion-title">
-            <a href="#accordion-help-1" class="accordion-title-link collapsed" data-toggle="collapse" data-parent="#accordion-help" aria-expanded="false" aria-controls="accordion-help-1">
-                <span class="accordion-title-link-text">Media Left</span>
-                <span class="accordion-title-link-state"></span>
-            </a>
-        </h4>
-    </div>
-    <div id="accordion-help-1" class="accordion-collapse collapse" aria-labelledby="accordion-heading-help-1" data-parent="#accordion-help">
-      <div class="accordion-body card-body">
-        <div class="accordion-content">
-          <p>....</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item card">
-    <div class="accordion-header card-header" id="accordion-heading-help-2">
-      <h4 class="accordion-title"
-        <a href="#accordion-help-2" class="accordion-title-link collapsed" data-toggle="collapse" data-parent="#accordion-help" aria-expanded="false" aria-controls="accordion-help-2">
-          <span class="accordion-title-link-text">Media Right</span>
-          <span class="accordion-title-link-state"></span>
-        </a>
-      </h4>
-    </div>
-    <div id="accordion-help-2" class="accordion-collapse collapse" aria-labelledby="accordion-heading-help-2" data-parent="#accordion-help">
-      <div class="accordion-body card-body">
-        <div class="accordion-content">
-          <p>....</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
