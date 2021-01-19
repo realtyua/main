@@ -5,7 +5,7 @@ layout: default
 {%- assign addtitle = name | split: " " | slice: 2, 4 | join: " " -%}
 <div class="row">
   <div class="col-12">
-    <h1>
+    <h1 class="h{%- if page.dir == 'realtor' -%}3{%- else -%}2{%- endif -%}">
       {% if page.url contains "/index.html" %}
         {{ page.title | replace_first: 'Всі оголошення про ', 'Вся ' }}
       {% elsif page.url contains "/all.html" %}
@@ -18,7 +18,7 @@ layout: default
     </h1>
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
-    <h2>
+    <h2 class="h3">
     {%- if page.url contains "rent" -%}
       {{ site.data.lang-uk.re_rent_h2 }}
     {%- elsif page.url contains "land" -%}
