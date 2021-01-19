@@ -6,7 +6,7 @@ layout: default
 {%- include variables/whois.html minus=1 -%}
 <div class="row">
   <div class="col-12 {{ whois }}">
-    <h1 class="mb-3">{{ page.title }}</h1>
+    <h1 class="h2 mb-3">{{ page.title }}</h1>
     <div class="row">
       <div class="col-md-4">
         {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slug" -%}
@@ -52,7 +52,7 @@ layout: default
       {%- endif -%}
       {%- if pp.size > 0 -%}
       <div class="tab-pane fade show" id="{{ index }}" role="tabpanel" aria-labelledby="{{ index }}-tab">
-        <h2>{{ site.data.lang-uk.re_from_developer }} {{ page.title }}</h2>
+        <h2 ca;class="h3">{{ site.data.lang-uk.re_from_developer }} {{ page.title }}</h2>
         {%- for item in pp -%}
           {%- include elements/items-pages.html -%}
         {%- endfor -%}
