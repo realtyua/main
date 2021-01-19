@@ -1,11 +1,15 @@
 - title: Нвини
+  subtitle: Новини про нерухомість
   url: /news/
 
 - title: Статті
+  subtitle: Статті про нерухомість
   url: /articles/
 
 - title: Законодавство
+  subtitle: Законодавство про нерухомість
   url: /laws/
 
 - title: Документи
+  subtitle: Документи про нерухомість
   url: /docs/
