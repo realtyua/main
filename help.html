@@ -4,3 +4,10 @@ navhide: 1
 ---
 
 <h1>Ви запитуєте, ми відповідаємо</h1>
+
+{%- h ct in help -%}
+
+  {{ h.title }}<br>
+  {{ h.content }}
+
+{%- endfor -%}

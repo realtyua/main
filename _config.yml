@@ -50,6 +50,8 @@ kramdown:
   auto_ids: false
 
 collections:
+  help:
+    output: true
   stabs:
     output: true
   otabs:
