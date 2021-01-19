@@ -46,15 +46,8 @@
     }
 }
 
-.section .list-group-item {
-  padding: .25rem 0.75rem;
-}
-
-.fixed-table-toolbar .btn {
-  border-radius: unset;
-  padding: 5px 5px 2px 5px;
-}
-
+.section .list-group-item { padding: .25rem 0.75rem; }
+.fixed-table-toolbar .btn { border-radius: unset; padding: 5px 5px 2px 5px; }
 .lead-badge { font-size: 1.365rem; font-weight: 300; }
 table#property tr:not(.detail-view) { cursor: pointer; }
 
@@ -72,12 +65,7 @@ table#property tr:not(.detail-view) { cursor: pointer; }
   line-height: 1;
 }
 
-.flag-ua .d-flex span:first-child {
-  font-size: .9rem;
-}
-
+.flag-ua .d-flex span:first-child { font-size: .9rem; }
 #list-offer .col { display: none; }
-
 #add-form label { font-weight: 600; }
-
 .accordion .btn:focus, .accordion .btn.focus { box-shadow: none; }
