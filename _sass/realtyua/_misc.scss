@@ -70,3 +70,8 @@ table#property tr:not(.detail-view) { cursor: pointer; }
 #add-form label { font-weight: 600; }
 .accordion .btn:focus, .accordion .btn.focus { box-shadow: none; }
 .multi-collapse button:focus { outline: 0; outline: 0; }
+
+main a.list-group-item:hover, footer a.list-group-item:hover {
+    transition: unset;
+    border-bottom: 1px solid rgba(0,0,0,0.125);
+}
