@@ -18,25 +18,18 @@ layout: default
     {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
       <div class="col px-2 mb-3">
         <div class="card">
-          {%- if file[0] == "" and s.n and s.n != "" -%}
-            {%- if s.w and s.w !="" -%}
-              <div class="card-header pb-0 bg-white border-bottom-0 font-weight-bold">
-                <a href="{{ s.w }}">{{ s.n }}</a>
-              </div>
-            {%- else -%}
-              <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
-            {%- endif -%}
-          {%- else -%}
-            {%- if s.w and s.w !="" -%}
-              <div class="card-header pb-0 bg-white border-bottom-0 font-weight-bold">
-                <a href="{{ s.w }}">{{ s.n }}</a>
-              </div>
-            {%- else -%}
-              <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
-            {%- endif -%}
-          {%- endif -%}
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="logo">
+          {%- else -%}
+            {%- if file[0] == "" and s.n and s.n != "" -%}
+              {%- if s.w and s.w !="" -%}
+                <div class="card-header pb-0 bg-white border-bottom-0 font-weight-bold">
+                  <a href="{{ s.w }}">{{ s.n }}</a>
+                </div>
+              {%- else -%}
+                <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
+              {%- endif -%}
+            {%- endif -%}
           {%- endif -%}
           <div class="card-body{% if s.n and s.n != "" %} py-0{% else %} pb-0{% endif %}">
             <p class="card-text my-0 text-right"><small class="text-muted">{{ s.r }}</small></p>
