@@ -41,9 +41,10 @@ layout: default
               {%- endif -%}
             {%- endif -%}
             <p class="card-text">{{ s.t }}</p>
+            <p class="card-text mt-1"><small class="text-muted">{{ s.r }}</small></p>
           </div>
           <div class="card-footer bg-white pt-0 border-top-0 text-right">
-            T.{% include footer/phone.html legal=s.p type="text" %}
+            {% include footer/phone.html legal=s.p type="text" %}
           </div>
         </div>
       </div>
