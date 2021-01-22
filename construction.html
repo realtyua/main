@@ -1,65 +1,8 @@
 ---
+layout: sells
 title: Будівництво нерухомості
 navtitle: Будівництво нерухомості
 subtitle: Будуємо житлові та не житлові споруди та різні будівельні конструкції
 navhide: 1
 ads: 1
 ---
-
-{%- assign isContent = content | strip_newlines -%}
-{%- if isContent == "" -%}
-{%- else -%}
-  {{ content }}
-{%- endif -%}
-{%- assign name = page.name | remove: ".html" -%}
-{%- assign ss = site.data[name] -%}
-{%- if ss[0] -%}
-  {%- for s in ss -%}
-    {%- if forloop.first -%}
-    <hr>
-    <div class="row mx-n2" data-masonry='{"percentPosition": true }'>
-    {%- endif -%}
-    {%- assign slug = s.i | append: s.p -%}
-    {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
-      <div class="col-sm-6 col-lg-4 mb-3">
-        <div class="card">
-          {%- if file[0] -%}
-            <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="logo">
-          {%- else -%}
-            {%- if s.n and s.n != "" -%}
-              {%- if s.w and s.w !="" -%}
-                <div class="card-header pb-0 bg-white border-bottom-0 font-weight-bold">
-                  <a href="{{ s.w }}">{{ s.n }}</a>
-                </div>
-              {%- else -%}
-                <div class="card-header bg-white border-bottom-0 font-weight-bold pb-0">{{ s.n }}</div>
-              {%- endif -%}
-            {%- endif -%}
-          {%- endif -%}
-          <div class="card-body{% if s.n and s.n != "" %} py-0{% else %} pt-2 pb-0{% endif %}">
-            <p class="card-text my-0 text-right"><small class="text-muted">{{ s.r }}</small></p>
-            {%- if file[0] and s.n and s.n !="" -%}
-              {%- if s.w and s.w !="" -%}
-                <h5 class="card-title mb-1">
-                  <a href="{{ s.w }}">{{ s.n }}</a>
-                </h5>
-              {%- else -%}
-                <h5 class="card-title">{{ s.n }}</h5>
-              {%- endif -%}
-            {%- endif -%}
-            <p class="card-text">{{ s.t }}</p>
-          </div>
-          <div class="card-footer bg-white pt-0 border-top-0 text-right">
-            {% include footer/phone.html legal=s.p type="text" %}
-          </div>
-        </div>
-      </div>
-    {%- if forloop.last -%}
-    </div>
-    <hr class="mt-0">
-    <div id="pagination"></div>
-    {%- endif -%}
-  {%- endfor -%}
-{%- else -%}
-  {%- include info-visitors.html -%}
-{%- endif -%}
