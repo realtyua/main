@@ -55,7 +55,8 @@ $dropDown       : true;
         .navbar-nav {
             .nav-link {
                 color: $primary;
-                padding: .45rem;
+                // padding: .45rem;
+                padding: .25rem .25rem .55rem .25rem;
             }
             .nav-link:last-child {
                 padding-right: 0;
@@ -408,6 +409,6 @@ $dropDown       : true;
     }
 }
 
-.realtor .navbar .navbar-nav .nav-link { padding-bottom: .48rem; }
-.developer .navbar .navbar-nav .nav-link { padding-bottom: .48rem; }
-.object .navbar .navbar-nav .nav-link { padding-bottom: .48rem; }
+// .realtor .navbar .navbar-nav .nav-link { padding-bottom: .48rem; }
+// .developer .navbar .navbar-nav .nav-link { padding-bottom: .48rem; }
+// .object .navbar .navbar-nav .nav-link { padding-bottom: .48rem; }
