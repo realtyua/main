@@ -73,24 +73,7 @@ layout: compress
     {%- elsif page.url contains '/agency/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- elsif page.url contains 'building-materials' and page.table != 1 or page.table != 2 -%}
-
       {%- include pagination-js.html -%}
-      
-{%- comment -%}
-      <script>
-        $("#list-offer").ready(function(){
-          $(".col").slice(0, 3).show();
-          $("#more").on("click", function(e){
-            e.preventDefault();
-            $(".col:hidden").slice(0, 3).slideDown();
-            if($(".col:hidden").length == 0) {
-              $("#,ore").text("No Content");
-            }
-          });
-        })
-      </script>
-{%- endcomment -%}
-
     {%- endif -%}
 
     {% include modals/net-realestate-modal.html %}
@@ -105,6 +88,26 @@ layout: compress
     {%- if page.url contains '/new.html' -%}
       <script src="{{ '/assets/js/add.js' | relative_url }}"></script>
       <script src="https://www.google.com/recaptcha/api.js?hl=uk"></script>
+    {%- endif -%}
+
+    {%- if page.url contains '/construction.html' -%}
+      <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+
+      {%- comment -%}
+            <script>
+              $("#list-offer").ready(function(){
+                $(".col").slice(0, 3).show();
+                $("#more").on("click", function(e){
+                  e.preventDefault();
+                  $(".col:hidden").slice(0, 3).slideDown();
+                  if($(".col:hidden").length == 0) {
+                    $("#,ore").text("No Content");
+                  }
+                });
+              })
+            </script>
+      {%- endcomment -%}
+
     {%- endif -%}
 
   </body>
