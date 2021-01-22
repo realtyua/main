@@ -21,8 +21,8 @@ layout: default
     <hr>
     <div class="row" data-masonry='{"percentPosition": true }'>
     {%- endif -%}
-    {%- assign slug = s.i | append: s.p -%}
-    {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
+      {%- assign slug = s.i | append: s.p -%}
+      {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
       <div class="col-sm-6 col-lg-4 mb-4">
         <div class="card">
           {%- if file[0] -%}
