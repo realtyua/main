@@ -27,11 +27,11 @@ layout: default
                   <a href="{{ s.w }}">{{ s.n }}</a>
                 </div>
               {%- else -%}
-                <div class="card-header bg-white border-bottom-0 font-weight-bold">{{ s.n }}</div>
+                <div class="card-header bg-white border-bottom-0 font-weight-bold pb-0">{{ s.n }}</div>
               {%- endif -%}
             {%- endif -%}
           {%- endif -%}
-          <div class="card-body{% if s.n and s.n != "" %} py-0{% else %} pb-0{% endif %}">
+          <div class="card-body{% if s.n and s.n != "" %} py-0{% else %} pt-2 pb-0{% endif %}">
             <p class="card-text my-0 text-right"><small class="text-muted">{{ s.r }}</small></p>
             {%- if file[0] and s.n and s.n !="" -%}
               {%- if s.w and s.w !="" -%}
