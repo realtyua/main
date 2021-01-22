@@ -1,11 +1,13 @@
 ---
 layout: default
 ---
+
 {%- assign isContent = content | strip_newlines -%}
 {%- if isContent == "" -%}
 {%- else -%}
   {{ content }}
 {%- endif -%}
+
 {%- assign name = page.name | remove: ".html" -%}
 {%- assign ss = site.data[name] -%}
 {%- if ss[0] -%}
