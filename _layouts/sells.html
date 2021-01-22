@@ -8,7 +8,12 @@ layout: default
   {{ content }}
 {%- endif -%}
 
+{%- comment -%}
 {%- assign name = page.name | remove: ".html" -%}
+{%- endcomment -%}
+
+{%- assign name = building-materials -%}
+
 {%- assign ss = site.data[name] -%}
 {%- if ss[0] -%}
   {%- for s in ss -%}
