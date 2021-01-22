@@ -92,21 +92,11 @@ layout: compress
 
     {%- if page.url contains '/construction.html' and page.layout == 'sells'-%}
       <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+      <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
 
-      {%- comment -%}
-            <script>
-              $("#list-offer").ready(function(){
-                $(".col").slice(0, 3).show();
-                $("#more").on("click", function(e){
-                  e.preventDefault();
-                  $(".col:hidden").slice(0, 3).slideDown();
-                  if($(".col:hidden").length == 0) {
-                    $("#,ore").text("No Content");
-                  }
-                });
-              })
-            </script>
-      {%- endcomment -%}
+      <script>
+]
+      </script>
 
     {%- endif -%}
 
