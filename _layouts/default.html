@@ -66,6 +66,12 @@ layout: compress
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
 
+    {%- if page.url contains '/construction.html' and page.layout == 'sells'-%}
+      <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+      <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+      <script></script>
+    {%- endif -%}
+
     {%- if page.url contains '/realtor/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- elsif page.url contains '/developer/' and back.size == 4 or back.size == 5 and page.table != 1 or page.table != 2 -%}
@@ -90,13 +96,6 @@ layout: compress
       <script src="https://www.google.com/recaptcha/api.js?hl=uk"></script>
     {%- endif -%}
 
-    {%- if page.url contains '/construction.html' and page.layout == 'sells'-%}
-      <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
-      <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
-
-      <script></script>
-
-    {%- endif -%}
 
   </body>
 </html>
