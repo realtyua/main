@@ -19,11 +19,11 @@ layout: default
   {%- for s in ss -%}
     {%- if forloop.first -%}
     <hr>
-    <div class="row" data-masonry='{"percentPosition": true }'>
+    <div class="row mx-n2" data-masonry='{"percentPosition": true }'>
     {%- endif -%}
       {%- assign slug = s.i | append: s.p -%}
       {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
-      <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="col-sm-6 col-lg-4 px-2 mb-2">
         <div class="card">
           {%- if file[0] -%}
             <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="logo">
