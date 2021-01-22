@@ -15,5 +15,5 @@
   {%- endif -%}
 {%- endcapture -%}
 <li class="nav-item m-0">
-  <a class="nav-link border-0 px-2{%- if forloop.last -%} pt-1 pb-2{%- else -%} py-1{%- endif -%}" href="{{ s.url }}">{{ navlink }}</a>
+  <a class="nav-link border-0 px-2{% if forloop.last %} pt-1 pb-2{% else %} py-1{% endif %}" href="{{ s.url }}">{{ navlink }}</a>
 </li>
