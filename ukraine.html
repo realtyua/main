@@ -50,7 +50,12 @@ navhide: 1
             <hr class="m-0">
             <div class="tab-content" id="{{ region }}-realestate-content">
               <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
+                <h3>{{ r.small }} пропонує таку нерухомість</h3>
                 <div id="{{ region }}"></div>
+              </div>
+              <div class="tab-pane pt-3 fade show" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
+                <h3>{{ r.small }}...</h3>
+                <p>Новини з ...</p>
               </div>
               <div class="tab-pane pt-3 fade show" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
                 {{ site.data.lang-uk.www }} <strong>{{ r.url | remove: 'http://' | remove: 'https://' }}</strong> {{ site.data.lang-uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} {{ site.data.lang-uk.re_ta }} {{ title }}.
