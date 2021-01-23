@@ -59,17 +59,24 @@
         {%- if offers.size > 0 -%}
           {%- for offer in offers limit:9 -%}
             {%- if forloop.first -%}
-            <div class="row mx-n2">
+            {%- comment -%}<div class="row mx-n2">{%- endcomment -%}
+            <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
             {%- endif -%}
+{%- comment -%}
               {%- assign index = forloop.index0 | modulo: 3 -%}
               {%- assign cycle = forloop.index | modulo: 3 -%}
               {%- if index == 0 -%}
-              <div class="col-md-4 px-2">
+                <div class="col-md-4 px-2">
               {%- endif -%}
-              {%- include card.html offer=offer aid='0' -%}
+{%- endcomment -%}
+              <div class="col px-2 mb-3">
+                {%- include card.html offer=offer aid='0' -%}
+              </div>
+{%- comment -%}
               {%- if cycle == 0 -%}
               </div>
               {%- else -%}
+{%- endcomment -%}
               {%- if forloop.last -%}
               </div>
               {%- endif -%}
