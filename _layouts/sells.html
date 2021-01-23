@@ -19,7 +19,7 @@ layout: default
   {%- for s in ss -%}
     {%- if forloop.first -%}
     <hr>
-    <div id="seller-list" class="row mx-n2" data-masonry='{"itemSelector": ".px-2", "columnWidth": ".col-lg-4"}'>
+    <div id="seller-list" class="row mx-n2" data-masonry='{"percentPosition": true, "itemSelector": ".px-2", "columnWidth": ".col-lg-4"}' data-infinite-scroll='{ "path": ".pagination__next", "append": ".col-sm-6", "history": false }'>
     {%- endif -%}
       {%- assign slug = s.i | append: s.p -%}
       {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
