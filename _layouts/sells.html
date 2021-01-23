@@ -57,18 +57,8 @@ layout: default
         </div>
       </div>
     {%- if forloop.last -%}
-      <div class="scroller-status">
-        <div class="infinite-scroll-request loader-ellips">
-          ...
-        </div>
-        <p class="infinite-scroll-last">End of content</p>
-        <p class="infinite-scroll-error">No more pages to load</p>
-      </div>
     </div>
     <hr class="mt-0">
-    <p class="pagination">
-      <a class="pagination__next" href="page2.html">Next page</a>
-    </p>
     {%- endif -%}
   {%- endfor -%}
 {%- else -%}
