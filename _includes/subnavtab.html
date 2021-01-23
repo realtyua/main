@@ -118,32 +118,26 @@
                 {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
                 {%- include {{ data }} -%}
                 {%- for offer in offers limit: 9 -%}
+
                   {%- if forloop.first -%}
-                  <div class="row mx-n2">
+                    <div class="row mx-n2">
                   {%- endif -%}
-                    {%- assign index = forloop.index0 | modulo: 3 -%}
-                    {%- assign cycle = forloop.index | modulo: 3 -%}
-                    {%- if index == 0 -%}
-                    <div class="col-md-4 px-2">
-                    {%- endif -%}
-                    {%- include card.html offer=offer aid=aid -%}
-                    {%- if cycle == 0 -%}
-                    </div>
-                    {%- else -%}
-                    {%- if forloop.last -%}
-                    </div>
-                    {%- endif -%}
-                    {%- endif -%}
+
+                      <div class="col px-2 mb-3">
+                        {%- include card.html offer=offer aid=aid -%}
+                      </div>
+
                   {%- if forloop.last -%}
-                  </div>
-                  <div class="row">
-                    <div class="col-auto ml-auto">
-                      <a class="btn btn-primary" href="{{ content.url }}">
-                        {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_section }} {{ content.navtitle }}
-                      </a>
                     </div>
-                  </div>
+                    <div class="row">
+                      <div class="col-auto ml-auto">
+                        <a class="btn btn-primary" href="{{ content.url }}">
+                          {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_section }} {{ content.navtitle }}
+                        </a>
+                      </div>
+                    </div>
                   {%- endif -%}
+
                 {%- else -%}
                   <div class="row">
                     <div class="col-md-6 offset-md-3">
