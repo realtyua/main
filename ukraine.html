@@ -19,6 +19,35 @@ navhide: 1
             <a href="{{ r.url }}">{{ r.subtitle }} {{ site.data.lang-uk.re_ta }} {{ title }}</a>
           </h2>
           <div class="card-text">
+            <nav class="navbar navbar-expand-sm navbar-light bg-white p-0">
+              <div class="navbar-brand d-md-none">
+                <span class="small">Виберіть розділ</span>
+                <span class="ml-1 float-right align-middle text-primary">→</span>
+              </div>
+              <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar-{{ region }}-realEstate" aria-controls="navbar-{{ region }}-realEstate" aria-expanded="false" aria-label="Toggle button">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="navbar-collapse justify-content-end collapse" id="navbar-{{ region }}-realEstate">
+                <ul class="navbar-nav nav nav-tabs border-0" id="{{ region }}-realestate-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link border-0 active" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
+                      <span>Оголошення</span>
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link border-0" id="{{ region }}-news-tab" data-toggle="tab"  href="#{{ region }}-news" role="tab" aria-controls="{{ region }}-news" aria-selected="true">
+                      <span>Новини</span>
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link border-0" id="{{ region }}-about-tab" data-toggle="tab" href="#{{ region }}-about" role="tab" aria-controls="{{ region }}-about" aria-selected="true">
+                      <span>Про вебсайт</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          {% comment %}
             <div class="d-flex justify-content-between">
               <div class="tabs flex-fill">
                 <nav>
@@ -26,6 +55,11 @@ navhide: 1
                     <li class="nav-item" role="presentation">
                       <a class="nav-link active" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
                         <span>Оголошення</span>
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="{{ region }}-news-tab" data-toggle="tab" href="#{{ region }}-news" role="tab" aria-controls="{{ region }}-news" aria-selected="true">
+                        <span>Новини</span>
                       </a>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -37,9 +71,13 @@ navhide: 1
                 </nav>
               </div>
             </div>
+          {% emdcomment %}
             <hr class="m-0">
             <div class="tab-content" id="{{ region }}-realestate-content">
               <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
+                <div id="{{ region }}"></div>
+              </div>
+              <div class="tab-pane pt-2 fade show" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
                 <div id="{{ region }}"></div>
               </div>
               <div class="tab-pane pt-3 fade show" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
