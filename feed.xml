@@ -2,8 +2,9 @@
 layout: null
 ---
 
+{%- assign name = "news" -%}
 {%- assign news = '' | split:'' -%}
-{%- for i in site.categories.mews -%}
+{%- for i in site.categories[name] -%}
   {%- unless i.url contains "articles" -%}
     {%- assign news = news | push:i -%}
   {%- endunless -%}
@@ -12,8 +13,8 @@ layout: null
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
+    <title>{{ "Новини" | xml_escape }} · {{ site.title | xml_escape }} · {{ site.region }}</title>
+    <description>{{ site.description | replace: 'Безкоштовні оголошення', 'Новини вебсайту безкоштовних оголошень' | xml_escape }}</description>
     <link>{{ site.url }}{{ site.baseurl }}/</link>
     <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
