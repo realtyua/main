@@ -17,14 +17,14 @@ layout: null
     <description>{{ site.description | replace: 'Безкоштовні оголошення', 'Новини вебсайту безкоштовних оголошень' | xml_escape }}</description>
     <link>{{ site.url }}{{ site.baseurl }}/</link>
     <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{% include date-xml.html date=site.time %}</lastBuildDate>
+    <pubDate>{%- include date-xml.html date=site.time -%}</pubDate>
+    <lastBuildDate>{%- include date-xml.html date=site.time -%}</lastBuildDate>
     <generator>{{ site.title | xml_escape }}</generator>
     {% for a in news limit:3 %}
       <item>
         <title>{{ a.title | xml_escape }}</title>
         <description>{{ a.content | strip_html | truncate: 180 | xml_escape }}</description>
-        <pubDate>{% include date-xml.html date=a.date %}</pubDate>
+        <pubDate>{%- include date-xml.html date=a.date -%}</pubDate>
         <link>{{ a.url | prepend: site.baseurl | prepend: site.url }}</link>
         <guid isPermaLink="true">{{ a.url | prepend: site.baseurl | prepend: site.url }}</guid>
         {% for tag in a.tags %}
