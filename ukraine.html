@@ -39,6 +39,13 @@ navhide: 1
                       <span>Новини</span>
                     </a>
                   </li>
+                  {%- if r.slug and r.slug !='' -%}
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link pl-0 pr-1 border-0" id="{{ region }}-map-tab" href="{{ r.url }}/region/{{ r.slug }}/map.html">
+                      <span>Мапа</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
                   <li class="nav-item" role="presentation">
                     <a class="nav-link pl-0 border-0" id="{{ region }}-about-tab" data-toggle="tab" href="#{{ region }}-about" role="tab" aria-controls="{{ region }}-about" aria-selected="true">
                       <span>Про вебсайт</span>
@@ -54,7 +61,7 @@ navhide: 1
                 <div id="{{ region }}"></div>
               </div>
               <div class="tab-pane pt-3 fade show" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
-                <h3 class="h6">{{ r.small }} інформує</h3>
+                <h3 class="h6">Новини про {{ r.title | replace: 'Н', 'н' }}</h3>
                 <p>Новини з ...</p>
               </div>
               <div class="tab-pane pt-3 fade show" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
