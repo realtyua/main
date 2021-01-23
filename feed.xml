@@ -24,7 +24,7 @@ layout: null
       <item>
         <title>{{ a.title | xml_escape }}</title>
         <description>{{ a.content | strip_html | truncate: 140 | xml_escape }}</description>
-        <pubDate>{%- include date-xml.html date=a.date -%}</pubDate>
+        <publishedDate>{%- include date-xml.html date=a.date -%}</publishedDate>
         <link>{{ a.url | prepend: site.baseurl | prepend: site.url }}</link>
         <guid isPermaLink="true">{{ a.url | prepend: site.baseurl | prepend: site.url }}</guid>
         {% for tag in a.tags %}
