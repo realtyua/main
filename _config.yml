@@ -92,17 +92,17 @@ defaults:
 
 plugins:
   - jekyll-sitemap
-  - jekyll-feed
+  # - jekyll-feed
   - jekyll-paginate-v2
 
 sass:
   style: compressed
 
-feed:
-  path: news/atom.xml
-  categories:
-    - news
-  posts_limit: 3
+# feed:
+#   path: news/atom.xml
+#   categories:
+#     - news
+#   posts_limit: 3
 
 compress_html:
   clippings: all
