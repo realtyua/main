@@ -30,17 +30,17 @@ navhide: 1
               <div class="navbar-collapse justify-content-end collapse" id="navbar-{{ region }}-realEstate">
                 <ul class="navbar-nav nav nav-tabs border-0" id="{{ region }}-realestate-tab" role="tablist">
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link border-0 active" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
+                    <a class="nav-link pl-0 pr-1 border-0 active" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
                       <span>Оголошення</span>
                     </a>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link border-0" id="{{ region }}-news-tab" data-toggle="tab"  href="#{{ region }}-news" role="tab" aria-controls="{{ region }}-news" aria-selected="true">
+                    <a class="nav-link pl-0 pr-1 border-0" id="{{ region }}-news-tab" data-toggle="tab"  href="#{{ region }}-news" role="tab" aria-controls="{{ region }}-news" aria-selected="true">
                       <span>Новини</span>
                     </a>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link border-0" id="{{ region }}-about-tab" data-toggle="tab" href="#{{ region }}-about" role="tab" aria-controls="{{ region }}-about" aria-selected="true">
+                    <a class="nav-link pl-0 border-0" id="{{ region }}-about-tab" data-toggle="tab" href="#{{ region }}-about" role="tab" aria-controls="{{ region }}-about" aria-selected="true">
                       <span>Про вебсайт</span>
                     </a>
                   </li>
@@ -50,11 +50,11 @@ navhide: 1
             <hr class="m-0">
             <div class="tab-content" id="{{ region }}-realestate-content">
               <div class="tab-pane pt-2 fade show active" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
-                <h3 class="h6">{{ r.small }} пропонує таку нерухомість</h3>
+                <h3 class="h6">{{ r.small | remove: "область" }} нерухомість</h3>
                 <div id="{{ region }}"></div>
               </div>
               <div class="tab-pane pt-3 fade show" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
-                <h3 class="h6">{{ r.small }} інформує про нерухомість</h3>
+                <h3 class="h6">{{ r.small }} інформує</h3>
                 <p>Новини з ...</p>
               </div>
               <div class="tab-pane pt-3 fade show" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
