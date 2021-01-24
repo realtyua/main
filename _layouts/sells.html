@@ -20,6 +20,7 @@ layout: default
     {%- if forloop.first -%}
     <hr>
     <div class="row seller-list mx-n2">
+      <div class="col-sm-6 col-lg-4"></div>
     {%- endif -%}
       {%- assign slug = s.i | append: s.p -%}
       {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
