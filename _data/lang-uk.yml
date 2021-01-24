@@ -123,7 +123,8 @@ flag_ua_net: Мережа Вебсайтів Нерухомості
 brand_header: Виберіть регіон нерухомості
 brand_content: Виберіть розділ нерухомості
 newly_realestate: Нещодавно
-vsya: Вся
+#vsya: Вся
+vsya: Оголошення про
 nerukhomisti: нерухомості
 to_section: До розділу
 sections: Розділи
