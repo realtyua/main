@@ -154,7 +154,7 @@
   {%- else -%}
     <dt>{{ site.data.lang-uk.re_phone }}</dt>
   {%- endif -%}
-  <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}</dd>
+  <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i></dd>
 {%- endif -%}
 
 {%- if offer.page and offer.page == '1' -%}
