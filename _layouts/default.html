@@ -97,12 +97,9 @@ layout: compress
 
         var elem = document.querySelector('.seller-list');
         var msnry = new Masonry( elem, {
-          percentPosition: true,
-          itemSelector: '.col-lg-6',
+          itemSelector: '.col-lg-4',
           columnWidth: '.col-lg-4',
-          stagger: 30,
-          visibleStyle: { transform: 'translateY(0)', opacity: 1 },
-          hiddenStyle: { transform: 'translateY(100px)', opacity: 0 },
+          percentPosition: true
         });
 
         var infScroll = new InfiniteScroll( elem, {
