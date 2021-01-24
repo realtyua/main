@@ -19,7 +19,7 @@ layout: default
   {%- for s in ss -%}
     {%- if forloop.first -%}
     <hr>
-    <div id="seller-list" class="row mx-n2">
+    <div class="row seller-list mx-n2">
     {%- endif -%}
       {%- assign slug = s.i | append: s.p -%}
       {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
