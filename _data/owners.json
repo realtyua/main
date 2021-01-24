@@ -1,5 +1,27 @@
 [
   {
+    "id": "26",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "1",
+    "surface": "45",
+    "surface_land": "",
+    "price": "$17000",
+    "price_sqmt": "",
+    "floor": "2",
+    "floors": "2",
+    "parking": "Прибудинкова територія",
+    "region": "",
+    "location": "м. Рогатин",
+    "address": "вул. Михайла Грушевського, 1",
+    "object": "",
+    "coordinates": "49.408279,24.608416",
+    "date": "2021-01-21",
+    "seller": "Володимир Владика",
+    "phone": "380976444908",
+    "description": ""
+  },
+  {
     "id": "25",
     "type": "Квартира",
     "rent": "",
