@@ -19,7 +19,7 @@ layout: default
   {%- for s in ss -%}
     {%- if forloop.first -%}
     <hr>
-    <div id="seller-list" class="row mx-n2" data-masonry='{"percentPosition": true, "itemSelector": ".px-2", "columnWidth": ".col-lg-4"}'>
+    <div id="seller-list" class="row mx-n2">
     {%- endif -%}
       {%- assign slug = s.i | append: s.p -%}
       {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
@@ -58,6 +58,18 @@ layout: default
       </div>
     {%- if forloop.last -%}
     </div>
+
+    <div class="page-load-status">
+      <div class="loader-ellips infinite-scroll-request">
+        <span class="loader-ellips__dot"></span>
+        <span class="loader-ellips__dot"></span>
+        <span class="loader-ellips__dot"></span>
+        <span class="loader-ellips__dot"></span>
+      </div>
+      <p class="infinite-scroll-last">End of content</p>
+      <p class="infinite-scroll-error">No more pages to load</p>
+    </div>
+
     <hr class="mt-0">
     {%- endif -%}
   {%- endfor -%}
