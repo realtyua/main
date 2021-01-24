@@ -2,13 +2,33 @@
 layout: default
 ---
 
-{%- include navgroup.html -%}
+<div class="row mb-lg-3">
+  <div class="col-lg-auto mr-auto"></div>
+  <div class="col-lg-auto align-self-center order-1 order-lg-2 mb-2 mb-lg-0">
+    {%- include navgroup.html -%}
+  </div>
+</div>
 
-<div class="row">
+<div class="row mt-3 mt-lg-0">
   <div class="col-12">
+
     <p><span class="small text-muted">{%- include date.html date=page.date -%}</span></p>
+
     <h1 class="mb-4">{{ page.title }}</h1>
+
     {{ content }}
+
+    <div class="row">
+      <div class="col-lg-auto mr-auto">Автор: <b>{{ page.author }}</b></div>
+      <div class="col-lg-auto align-self-center order-1 order-lg-2 mb-2 mb-lg-0">Джерело:
+        {% if page.source.url != '' %}
+          <a href="{{ page.source.url }}" target="_blank"><b>{{ page.source.title }}</b></a>
+        {% else %}
+          <b>{{ page.source.title }}</b>
+        {% endif %}
+      </div>
+    </div>
+
     <p class="text-right">
       <span class="small text-muted">
         {% if page.author and page.author != '' %}Автор: <b>{{ page.author }}</b>,{% endif %} Джерело:
@@ -19,6 +39,8 @@ layout: default
         {% endif %}
       </span>
     </p>
+
     {%- include back.html -%}
+
   </div>
 </div>
