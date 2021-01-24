@@ -28,7 +28,7 @@ navhide: 1
               <div class="navbar-collapse justify-content-end collapse" id="navbar-{{ region }}-realEstate">
                 <ul class="navbar-nav nav nav-tabs border-0" id="{{ region }}-realestate-tab" role="tablist">
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link pl-0 pr-1 border-0{% if r.slug and r.slug != '' %} active{% endif %}" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
+                    <a class="nav-link pl-0 pr-1 border-0{% if r.slug and r.slug != '' %} active{% else %}{% endif %}" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
                       <span>Оголошення</span>
                     </a>
                   </li>
@@ -50,7 +50,7 @@ navhide: 1
                   </li>
                   {%- endif -%}
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link pl-0 border-0{% if r.slug and r.slug == '' %} active{% endif %}" id="{{ region }}-about-tab" data-toggle="tab" href="#{{ region }}-about" role="tab" aria-controls="{{ region }}-about" aria-selected="true">
+                    <a class="nav-link pl-0 border-0{% if r.slug and r.slug != '' %}{% else %} active{% endif %}" id="{{ region }}-about-tab" data-toggle="tab" href="#{{ region }}-about" role="tab" aria-controls="{{ region }}-about" aria-selected="true">
                       <span>Про вебсайт</span>
                     </a>
                   </li>
@@ -59,13 +59,14 @@ navhide: 1
             </nav>
             <hr class="m-0">
             <div class="tab-content" id="{{ region }}-realestate-content">
-              <div class="tab-pane pt-2 fade show{% if r.slug and r.slug != '' %} active{% endif %}" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
+              <div class="tab-pane pt-2 fade show{% if r.slug and r.slug != '' %} active{% else %}{% endif %}" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
                 <h3 class="h6">{{ r.small | remove: "область" }} нерухомість</h3>
                 <div id="{{ region }}"></div>
               </div>
-              <div class="tab-pane pt-3 fade show{% if r.slug and r.slug == '' %} active{% endif %}" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
+              <div class="tab-pane pt-3 fade show{% if r.slug and r.slug != '' %}{% else %} active{% endif %}" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
                 <p>{{ site.data.lang-uk.www }} <strong>{{ r.url | remove: 'http://' | remove: 'https://' }}</strong> {{ site.data.lang-uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} {{ site.data.lang-uk.re_ta }} {{ title }}.</p>
                 <p>Будь-хто, хто має нерухомість, чи професійно займається нерухомістю у цьому регіоні можте безкоштовно розмістити своє оголошення про купівлю-продаж і оренду нерухомості, яка знаходиться {{ title }}.</p>
+                <p>Якщо у вас є новини про нерухомість {{ title }} або ви пишете статті про нерухомость надсилайте нам і ми залюбки їх опублікуємо на сторінці "{{ site.title }}" - {{ r.small }}</p>
                 {%- if r.slug and r.slug !='' -%}<p><a href="{{ r.url }}/add">Подати безкоштовне оголошення</a> {{ title }}.</p>{%- endif -%}
               </div>
             </div>
