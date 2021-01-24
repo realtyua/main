@@ -3,8 +3,7 @@ layout: default
 ---
 
 <div class="row mb-lg-3">
-  <div class="col-lg-auto mr-auto"></div>
-  <div class="col-lg-auto align-self-center order-1 order-lg-2 mb-2 mb-lg-0">
+  <div class="col-lg-auto ml-auto align-self-center order-1 order-lg-2 mb-2 mb-lg-0">
     {%- include navgroup.html -%}
   </div>
 </div>
@@ -19,26 +18,26 @@ layout: default
     {{ content }}
 
     <div class="row">
-      <div class="col-lg-auto mr-auto">Автор: <b>{{ page.author }}</b></div>
-      <div class="col-lg-auto align-self-center order-1 order-lg-2 mb-2 mb-lg-0">Джерело:
-        {% if page.source.url != '' %}
-          <a href="{{ page.source.url }}" target="_blank"><b>{{ page.source.title }}</b></a>
-        {% else %}
-          <b>{{ page.source.title }}</b>
-        {% endif %}
+      {% if page.author and page.author != '' %}
+        <div class="col-lg-auto mr-auto">
+          <p class="text-right">
+            <span class="small text-muted">Автор: <b>{{ page.author }}</b></span>
+          </p>
+        </div>
+      {% endif %}
+      <div class="col-lg-auto{% if page.author and page.author != '' %}{% else %} ml-auto{% endif %} align-self-center order-1 order-lg-2 mb-2 mb-lg-0">
+        <p class="text-right">
+          <span class="small text-muted">
+            Джерело:
+            {% if page.source.url != '' %}
+              <a href="{{ page.source.url }}" target="_blank"><b>{{ page.source.title }}</b></a>
+            {% else %}
+              <b>{{ page.source.title }}</b>
+            {% endif %}
+          </span>
+        </p>
       </div>
     </div>
-
-    <p class="text-right">
-      <span class="small text-muted">
-        {% if page.author and page.author != '' %}Автор: <b>{{ page.author }}</b>,{% endif %} Джерело:
-        {% if page.source.url != '' %}
-          <a href="{{ page.source.url }}" target="_blank"><b>{{ page.source.title }}</b></a>
-        {% else %}
-          <b>{{ page.source.title }}</b>
-        {% endif %}
-      </span>
-    </p>
 
     {%- include back.html -%}
 
