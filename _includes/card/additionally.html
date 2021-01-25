@@ -1,13 +1,18 @@
 {%- assign ssland = offer.surface_land | size -%}
+
+{%- if offer.type contains site.data.lang-uk.re_house or offer.type contains 'Будинок' -%}
+  {%- assign isHouse = true -%}
+{%- else -%}
+  {%- assign isHouse = false -%}
+{%- endif -%}
+
 {%- if offer.type and offer.type == land -%}
 {%- else -%}
 
   {%- if offer.type != site.data.lang-uk.re_house or offer.type != site.data.lang-uk.re_house_not -%}
 
-    {%- if offer.floor and offer.floor == '' and offer.floors and offer.floors != '' and offer.type != site.data.lang-uk.re_house or offer.type != site.data.lang-uk.re_house_not -%}
-      <dt>{{ site.data.lang-uk.re_floorss | capitalize }}</dt>
-      <dd>{{ offer.floors }}</dd>
-    {%- elsif offer.floor and offer.floor != '' and offer.floors and offer.floors != '' and offer.type != site.data.lang-uk.re_house or offer.type != site.data.lang-uk.re_house_not -%}
+    {%- if isHouse == true -%}
+    {%- elsif offer.floor and offer.floor != '' and offer.floors and offer.floors != '' and isHouse == false -%}
       <dt>{{ site.data.lang-uk.re_floor }}</dt>
       <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
     {% elsif offer.floor and offer.floor != '' and offer.floors and offer.floors == '' %}
