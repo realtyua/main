@@ -3,7 +3,8 @@
     <div class="d-flex justify-content-end">
       <h5 class="mb-0">
         <a class="badge badge-success mr-1" data-toggle="collapse" href="#thanks" role="button" aria-expanded="true" aria-controls="thanks" data-target=".thanks">Дякуємо!</a>
-        <a class="badge badge-primary" data-toggle="collapse" href="#please" role="button" aria-expanded="true" aria-controls="please" data-target=".please">Просимо!</a>
+        <a class="badge badge-primary mr-1" data-toggle="collapse" href="#please" role="button" aria-expanded="true" aria-controls="please" data-target=".please">Просимо!</a>
+        <a class="badge badge-danger" data-toggle="collapse" href="#attention" role="button" aria-expanded="true" aria-controls="attention" data-target=".attention">Увага!</a>
       </h5>
     </div>
     <div class="multi-collapse thanks collapse" id="thanks">
@@ -24,6 +25,18 @@
           <div class="alert alert-info alert-dismissible fade show" role="alert">
             <strong>Будь ласка!</strong> <u>Повідомте продавцю чи орендодавцю, що знайшли оголошення</u> на сторінці "<strong>{{ site.title }}</strong>" - {{ site.region }}. <b>Дякуємо!</b>
             <button type="button" class="close" data-toggle="collapse" href="#please" aria-expanded="true" aria-controls="please" data-target=".please" title="Закрити">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="multi-collapse attention collapse" id="attention">
+      <div class="row mt-2">
+        <div class="col-md-6 offset-md-3">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Увага!</strong> Ніколи не поспішайтею. Перед тим, як віддати гроші за нерухомість, сім раз перевірте чи все гаразд з нерухомістю, яку хочете купити чи орендувати.
+            <button type="button" class="close" data-toggle="collapse" href="#attention" aria-expanded="true" aria-controls="attention" data-target=".attention" title="Закрити">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
