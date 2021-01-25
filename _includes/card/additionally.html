@@ -31,7 +31,7 @@
 
   {%- if offer.surface_land and offer.surface_land != '' -%}
     <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
-    <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
+    <dd><span class="mark" data-toggle="tooltip" title="{% if ssland == 4 %}0.{% else %}0.0{% endif %}{{ offer.surface_land }} га">{{ offer.surface_land }}</span>&nbsp;{{ site.data.lang-uk.re_m }}<sup>2</sup></dd>
   {%- endif -%}
 
 {%- endif -%}
