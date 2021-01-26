@@ -73,7 +73,7 @@
 
       {%- else -%}
 
-        {%= if offer.price_sqmt == '' and offer.price contains '$'= %}
+        {%= if offer.price_sqmt == '' and offer.price contains '$' -%}
           <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | ceil }}">{{ pus | divided_by: offer.surface | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
         {%= elsif offer.price_sqmt == '' and offer.price contains '€' =%}
           <span class="mark" data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | ceil }}">{{ peu | divided_by: offer.surface | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
