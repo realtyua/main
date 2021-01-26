@@ -73,19 +73,19 @@
 
       {%- else -%}
 
-        {%= if offer.price_sqmt == '' and offer.price contains '$' -%}
+        {%- if offer.price_sqmt == '' and offer.price contains '$' -%}
           <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | ceil }}">{{ pus | divided_by: offer.surface | times: site.usd | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
-        {%= elsif offer.price_sqmt == '' and offer.price contains '€' =%}
+        {%- elsif offer.price_sqmt == '' and offer.price contains '€' -%}
           <span class="mark" data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | ceil }}">{{ peu | divided_by: offer.surface | times: site.eur | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
-        {%= else =%}
+        {%- else -%}
           <span class="mark" data-toggle="tooltip" title="{{ pua | divided_by: offer.surface | ceil }} {{ site.data.lang-uk.re_uah }}">{{ pua | divided_by: offer.surface | ceil }}</span> {{ site.data.lang-uk.re_uah }}.
-        {%= endif =%}
+        {%- endif -%}
 
       {% endif %}
 
     {%- else -%}
 
-      {% if offer.price_sqmt == '' and offer.price != '' and offer.price contains '$' %}
+      {%- if offer.price_sqmt == '' and offer.price != '' and offer.price contains '$' -%}
 
         {%- if offer.type == land or offer.type == landm -%}
           <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface_land }}">
@@ -97,7 +97,7 @@
           </span>
         {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}.
 
-      {% elsif offer.price_sqmt == '' and offer.price != '' and offer.price contains '€' %}
+      {%- elsif offer.price_sqmt == '' and offer.price != '' and offer.price contains '€' -%}
 
         {%- if offer.type == land or offer.type == landm -%}
           <span class="mark" data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface_land }}">
