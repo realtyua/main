@@ -1,10 +1,10 @@
 {%- assign lists = site.pages | sort: 'path' | reverse -%}
 {%- assign region = page.url | split: "/" | last -%}
 <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
-  <a class="navbar-brand d-md-none" href="{{ page.url }}">
+  <div class="navbar-brand d-md-none p-0">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
     <span class="ml-1 float-right align-middle text-primary">→</span>
-  </a>
+  </div>
   <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarTwoRealEstate" aria-controls="navbarTwoRealEstate" aria-expanded="false" aria-label="Toggle button">
     <span class="navbar-toggler-icon"></span>
   </button>
