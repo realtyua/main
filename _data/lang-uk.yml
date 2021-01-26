@@ -13,7 +13,10 @@ recently_added: Нещодавно додані
 articles: Статті
 news: Новини
 developers: Забудовники
-realtors: Агенти
+new_buildings: Новобудови
+new_building: Новобудова
+realtors: Ріелтори
+agents: Агенти
 city: місто
 district: район
 description_site: містить оголошення, новини, статті та іншу інформацію про нерухомість, яка будується, продається або передається в оренду і знаходиться в
@@ -65,6 +68,8 @@ re_on_map: на мапі
 re_show_map: Показати мапу
 re_land: Земля
 re_apartment: Квартира
+re_no_apartment: Нежитлове приміщення
+re_no_apartments: Нежитлові приміщення
 re_cost: ціна
 re_offer: Власність
 re_price_sqmt: Вартість нерухомості за 1
@@ -134,6 +139,7 @@ sections: Розділи
 other_regions: Інші регіони України
 other_regions_ua: Нерухомість в інших регіонах України
 others: Інші
+and: і
 others_offers: пропозиції нерухомості
 realtor_offer: Мої пропозиції
 realtor_offer_text: <b>Прошу вибачень!</b> Я зараз займаюся питаннями підготовки та розміщенням своїх пропозицій.
