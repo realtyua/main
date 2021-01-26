@@ -28,7 +28,8 @@ re_for_rent: Здається в оренду
 re_for_rentd: Здається в оренду на короткий термін
 re_surface: площею
 re_rooms: кімнат
-re_roomsp: окремих приміщень
+re_roomsp: приміщення
+re_roomsps: приміщень
 re_kimnaty: приміщення
 re_floor: Поверх
 re_house: Будинок

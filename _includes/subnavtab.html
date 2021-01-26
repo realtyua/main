@@ -14,17 +14,12 @@
     {%- if isMap == 'true' -%}
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
-
         <h5 class="m-lg-0">
-          <a class="badge badge-success border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}"
+          <a class="badge badge-success border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
             <span>{{ site.data.lang-uk.re_map }}</span>
-            <span class="ml-2 d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+            <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
           </a>
         </h5>
-
-        {% comment %}
-        <a class="nav-link border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map }}"><span>{{ site.data.lang-uk.re_map }}</span></a>
-        {% endcomment %}
       </li>
     </ul>
     {%- endif -%}
