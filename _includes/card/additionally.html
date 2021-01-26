@@ -92,11 +92,11 @@
       {%- if offer.price_sqmt == '' and offer.price != '' and offer.price contains '$' -%}
 
         {%- if offer.type == land or offer.type == landm -%}
-          <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface_land }}">
+          <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface_land | ceil }}">
           {{ pus | divided_by: offer.surface_land | times: site.usd | ceil }}
           </span>
         {%- else -%}
-          <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface }}">
+          <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | ceil }}">
           {{ pus | divided_by: offer.surface | times: site.usd | ceil }}
           </span>
         {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}.
@@ -104,11 +104,11 @@
       {%- elsif offer.price_sqmt == '' and offer.price != '' and offer.price contains '€' -%}
 
         {%- if offer.type == land or offer.type == landm -%}
-          <span class="mark" data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface_land }}">
+          <span class="mark" data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface_land | ceil }}">
           {{ peu | divided_by: offer.surface_land | times: site.eur | ceil }}
           </span>
         {%- else -%}
-          <span class="mark" data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface }}">
+          <span class="mark" data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | ceil }}">
           {{ peu | divided_by: offer.surface | times: site.eur | ceil }}
           </span>
         {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}.
@@ -116,10 +116,10 @@
       {% elsif offer.price_sqmt == '' and offer.price != '' %}
 
         {%- if offer.type == land or offer.type == landm -%}
-          <span class="mark" data-toggle="tooltip" title="{{ offer.price | divided_by: offer.surface_land }} {{ site.data.lang-uk.re_uah }}">
+          <span class="mark" data-toggle="tooltip" title="{{ offer.price | divided_by: offer.surface_land | ceil }} {{ site.data.lang-uk.re_uah }}">
           {{ offer.price | divided_by: offer.surface_land }}
         {%- else -%}
-          <span class="mark" data-toggle="tooltip" title="{{ offer.price | divided_by: offer.surface }} {{ site.data.lang-uk.re_uah }}">
+          <span class="mark" data-toggle="tooltip" title="{{ offer.price | divided_by: offer.surface | ceil }} {{ site.data.lang-uk.re_uah }}">
           {{ offer.price | divided_by: offer.surface }}
           </span>
         {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}.
