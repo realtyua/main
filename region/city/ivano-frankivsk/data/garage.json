@@ -4,5 +4,5 @@ sitemap: false
 navhide: 1
 ---
 
-{%- include data/ivano-frankivsk/rent.html -%}
+{%- include data/ivano-frankivsk/garage.html -%}
 {%- include offer-json.html -%}
