@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-end">
           <h5 class="mb-0">
             {%- if page.url contains 'help.html' -%}{%- else -%}<a href="/help" class="badge badge-success mr-2">{{ site.data.lang-uk.help }}</a>{%- endif -%}
-            <a id="mapsite" class="badge badge-primary collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">{{ site.data.lang-uk.map_site }}</a>
+            <a id="mapsite" class="badge badge-secondary collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">{{ site.data.lang-uk.map_site }}</a>
           </h5>
         </div>
         <div class="collapse multi-collapse website-map" id="websitemap">{%- include map/0.html -%}</div>
