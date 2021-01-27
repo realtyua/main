@@ -1,0 +1,8 @@
+---
+layout: null
+sitemap: false
+navhide: 1
+---
+
+{%- include data/ivano-frankivsk/house.html -%}
+{%- include offer-json.html -%}
