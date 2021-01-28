@@ -365,10 +365,10 @@ $dropDown       : true;
                 }
             }
         }
-        ul#realestate-nav {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-        }
+        // ul#realestate-nav {
+        //   display: grid;
+        //   grid-template-columns: repeat(5, 1fr);
+        // }
     }
 }
 @include media-breakpoint-up(lg) {
