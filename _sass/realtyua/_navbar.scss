@@ -188,6 +188,14 @@ $dropDown       : true;
         }
     }
 }
+@include media-breakpoint-only(xs) {
+  .content {
+      ul#realestate-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+  }
+}
 @include media-breakpoint-down(sm) {
     .navbar {
         .navbar-brand {
@@ -229,7 +237,7 @@ $dropDown       : true;
         }
         ul#realestate-nav {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
         }
     }
 }
@@ -295,10 +303,10 @@ $dropDown       : true;
                 }
             }
         }
-        ul#realestate-nav {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-        }
+        // ul#realestate-nav {
+        //   display: grid;
+        //   grid-template-columns: repeat(3, 1fr);
+        // }
     }
 }
 @include media-breakpoint-up(md) {
