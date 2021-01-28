@@ -188,7 +188,7 @@ $dropDown       : true;
         }
     }
 }
-@media (max-width: 360px) {
+@media (max-width: 361px) {
   .content {
       ul#realestate-nav {
         display: grid;
@@ -235,9 +235,13 @@ $dropDown       : true;
                 }
             }
         }
+        ul#realestate-nav {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
     }
 }
-@media (min-width: 375px) and (max-width: 375px) {
+@media (min-width: 374px) and (max-width: 376px) {
   .content {
       ul#realestate-nav {
         display: grid;
