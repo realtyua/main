@@ -196,14 +196,6 @@ $dropDown       : true;
       }
   }
 }
-@media (min-width: 375px) and (max-width: 375px) {
-  .content {
-      ul#realestate-nav {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-      }
-  }
-}
 @include media-breakpoint-down(sm) {
     .navbar {
         .navbar-brand {
@@ -248,6 +240,14 @@ $dropDown       : true;
           grid-template-columns: repeat(2, 1fr);
         }
     }
+}
+@media (min-width: 375px) and (max-width: 375px) {
+  .content {
+      ul#realestate-nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+  }
 }
 @include media-breakpoint-up(sm) {
     .navbar {
@@ -311,10 +311,6 @@ $dropDown       : true;
                 }
             }
         }
-        // ul#realestate-nav {
-        //   display: grid;
-        //   grid-template-columns: repeat(3, 1fr);
-        // }
     }
 }
 @include media-breakpoint-up(md) {
@@ -341,6 +337,14 @@ $dropDown       : true;
             background-color: $bgHighlight;
         }
     }
+}
+@include media-breakpoint-between(md, lg) {
+  .content {
+      ul#realestate-nav {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+      }
+  }
 }
 @include media-breakpoint-down(lg) {
     .navbar {
@@ -381,10 +385,6 @@ $dropDown       : true;
                 }
             }
         }
-        // ul#realestate-nav {
-        //   display: grid;
-        //   grid-template-columns: repeat(5, 1fr);
-        // }
     }
 }
 @include media-breakpoint-up(lg) {
