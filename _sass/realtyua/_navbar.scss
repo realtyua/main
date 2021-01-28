@@ -188,6 +188,22 @@ $dropDown       : true;
         }
     }
 }
+@media (max-width: 280px) {
+  .content {
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+@media (max-width: 320px) {
+  .content {
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
 @media (max-width: 360px) {
   .content {
     ul#realestate-nav {
