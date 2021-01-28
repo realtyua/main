@@ -188,23 +188,7 @@ $dropDown       : true;
         }
     }
 }
-@media (min-width: 280px) and (max-width: 280px) {
-  .content {
-    ul#realestate-nav {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-}
-@media (min-width: 320px) and (max-width: 320px) {
-  .content {
-    ul#realestate-nav {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-}
-@media (min-width: 360px) and (max-width: 360px) {
+@media (max-width: 280px) and (max-width: 320px) and (max-width: 360px) {
   .content {
     ul#realestate-nav {
       display: grid;
