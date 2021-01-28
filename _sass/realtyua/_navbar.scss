@@ -188,7 +188,7 @@ $dropDown       : true;
         }
     }
 }
-@media (max-width: 280px) {
+@media (min-width: 280px) and (max-width: 280px) {
   .content {
     ul#realestate-nav {
       display: grid;
@@ -196,7 +196,7 @@ $dropDown       : true;
     }
   }
 }
-@media (max-width: 320px) {
+@media (min-width: 320px) and (max-width: 320px) {
   .content {
     ul#realestate-nav {
       display: grid;
@@ -204,7 +204,7 @@ $dropDown       : true;
     }
   }
 }
-@media (max-width: 360px) {
+@media (min-width: 360px) and (max-width: 360px) {
   .content {
     ul#realestate-nav {
       display: grid;
