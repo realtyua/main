@@ -188,54 +188,13 @@ $dropDown       : true;
         }
     }
 }
-@media (max-width: 361px) {
+@media (max-width: 360px) {
   .content {
     ul#realestate-nav {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
   }
-}
-@include media-breakpoint-down(sm) {
-    .navbar {
-        .navbar-brand {
-            .small {
-                font-size: 72%;
-            }
-        }
-    }
-    .content {
-        .navbar {
-            .navbar-brand {
-                margin-right: 0;
-            }
-            .navbar-brand {
-                .small {
-                    font-size: 72%;
-                }
-            }
-            .nav-tabs {
-                .nav-link {
-                    //padding: .5rem 0;
-                    padding: .25rem 0;
-                }
-                .nav-link:last-child {
-                    padding-right: 0;
-                }
-                .nav-link span {
-                    border-bottom: 4px solid $white;
-                }
-
-                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 4px solid $white;
-                }
-
-                .nav-link span:hover, .nav-tabs .nav-link span:focus {
-                    border-bottom: 4px solid $white;
-                }
-            }
-        }
-    }
 }
 @media (min-width: 375px) and (max-width: 375px) {
   .content {
@@ -245,11 +204,49 @@ $dropDown       : true;
     }
   }
 }
-@include media-breakpoint-up(sm) {
-  ul#realestate-nav {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+@include media-breakpoint-down(sm) {
+  .navbar {
+    .navbar-brand {
+      .small {
+        font-size: 72%;
+      }
+    }
   }
+  .content {
+    .navbar {
+      .navbar-brand {
+        margin-right: 0;
+      }
+      .navbar-brand {
+        .small {
+          font-size: 72%;
+        }
+      }
+      .nav-tabs {
+        .nav-link {
+          padding: .25rem 0;
+        }
+        .nav-link:last-child {
+          padding-right: 0;
+        }
+        .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link span:hover, .nav-tabs .nav-link span:focus {
+          border-bottom: 4px solid $white;
+        }
+      }
+    }
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+@include media-breakpoint-up(sm) {
   .navbar {
     .navbar-nav {
       .nav-item {
@@ -273,52 +270,49 @@ $dropDown       : true;
 }
 @include media-breakpoint-between(sm, md) {
   .content {
-      ul#realestate-nav {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-      }
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
   }
 }
 @include media-breakpoint-down(md) {
+  .navbar {
+    .navbar-brand {
+      .small {
+        font-size: 72%;
+      }
+    }
+  }
+  .content {
     .navbar {
-        .navbar-brand {
-            .small {
-                font-size: 72%;
-            }
+      .navbar-brand {
+        margin-right: 0;
+      }
+      .navbar-brand {
+        .small {
+          font-size: 72%;
         }
-    }
-    .content {
-        .navbar {
-            .navbar-brand {
-                margin-right: 0;
-            }
-            .navbar-brand {
-                .small {
-                    font-size: 72%;
-                }
-            }
-            .nav-tabs {
-                .nav-link {
-                    //padding: .5rem 0;
-                    padding: .25rem 0;
-                }
-                .nav-link:last-child {
-                    padding-right: 0;
-                }
-                .nav-link span {
-                    border-bottom: 4px solid $white;
-                }
-
-                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
-                    border-bottom: 4px solid $white;
-                }
-
-                .nav-link span:hover, .nav-tabs .nav-link span:focus {
-                    border-bottom: 4px solid $white;
-                }
-            }
+      }
+      .nav-tabs {
+        .nav-link {
+          padding: .25rem 0;
         }
+        .nav-link:last-child {
+          padding-right: 0;
+        }
+        .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link span:hover, .nav-tabs .nav-link span:focus {
+          border-bottom: 4px solid $white;
+        }
+      }
     }
+  }
 }
 @include media-breakpoint-up(md) {
     .navbar {
@@ -454,14 +448,14 @@ $dropDown       : true;
 // Toggler
 //
 .navbar-toggler {
-    padding: 0;
-    height: 34px;
-    width: 34px;
-    position: relative;
-    border: 0;
-    &:focus {
-        outline: 0;
-    }
+  padding: 0;
+  height: 34px;
+  width: 34px;
+  position: relative;
+  border: 0;
+  &:focus {
+    outline: 0;
+  }
 }
 .navbar-toggler-icon:after,
 .navbar-toggler-icon,
