@@ -318,33 +318,7 @@ $dropDown       : true;
         }
     }
 }
-@include media-breakpoint-up(lg) {
-    .navbar {
-        .navbar-nav {
-            .nav-item {
-                margin-right: .85rem;
-            }
-            .nav-link {
-                padding: 0.75rem 0.65rem;
-            }
-        }
-    }
-    .navbar-expend-lg .navbar-nav .show .dropdown-menu {
-        .dropdown-item {
-            color: $white;
-
-            &:hover,
-            &:focus {
-                color: $colHighlight;
-            }
-        }
-        .dropdown-item.active {
-            color: $colHighlight;
-            background-color: $bgHighlight;
-        }
-    }
-}
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(lg) {
     .navbar {
         .navbar-brand {
             .small {
@@ -382,6 +356,32 @@ $dropDown       : true;
                     border-bottom: 4px solid $white;
                 }
             }
+        }
+    }
+}
+@include media-breakpoint-up(lg) {
+    .navbar {
+        .navbar-nav {
+            .nav-item {
+                margin-right: .85rem;
+            }
+            .nav-link {
+                padding: 0.75rem 0.65rem;
+            }
+        }
+    }
+    .navbar-expend-lg .navbar-nav .show .dropdown-menu {
+        .dropdown-item {
+            color: $white;
+
+            &:hover,
+            &:focus {
+                color: $colHighlight;
+            }
+        }
+        .dropdown-item.active {
+            color: $colHighlight;
+            background-color: $bgHighlight;
         }
     }
 }
