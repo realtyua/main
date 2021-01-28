@@ -252,6 +252,47 @@ $dropDown       : true;
         }
     }
 }
+@include media-breakpoint-down(md) {
+    .navbar {
+        .navbar-brand {
+            .small {
+                font-size: 72%;
+            }
+        }
+    }
+    .content {
+        .navbar {
+            .navbar-brand {
+                margin-right: 0;
+            }
+            .navbar-brand {
+                .small {
+                    font-size: 72%;
+                }
+            }
+            .nav-tabs {
+                .nav-link {
+                    //padding: .5rem 0;
+                    padding: .25rem 0;
+                }
+                .nav-link:last-child {
+                    padding-right: 0;
+                }
+                .nav-link span {
+                    border-bottom: 4px solid $white;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 4px solid $white;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 4px solid $white;
+                }
+            }
+        }
+    }
+}
 @include media-breakpoint-up(md) {
     .navbar {
         .navbar-nav {
@@ -300,6 +341,47 @@ $dropDown       : true;
         .dropdown-item.active {
             color: $colHighlight;
             background-color: $bgHighlight;
+        }
+    }
+}
+@include media-breakpoint-down(sm) {
+    .navbar {
+        .navbar-brand {
+            .small {
+                font-size: 72%;
+            }
+        }
+    }
+    .content {
+        .navbar {
+            .navbar-brand {
+                margin-right: 0;
+            }
+            .navbar-brand {
+                .small {
+                    font-size: 72%;
+                }
+            }
+            .nav-tabs {
+                .nav-link {
+                    //padding: .5rem 0;
+                    padding: .25rem 0;
+                }
+                .nav-link:last-child {
+                    padding-right: 0;
+                }
+                .nav-link span {
+                    border-bottom: 4px solid $white;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 4px solid $white;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 4px solid $white;
+                }
+            }
         }
     }
 }
