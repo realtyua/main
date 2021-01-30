@@ -17,7 +17,8 @@ layout: default
 
     {{ content }}
 
-    {% if page.author and page.author == '' and page.source and page.source.title == '' %}
+    {% if page.author == '' and page.source.title == '' %}
+    {% else %}
       <div class="row">
         {% if page.author and page.author != '' %}
           <div class="col-lg-auto mr-auto">
