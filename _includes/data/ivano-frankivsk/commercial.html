@@ -2,4 +2,4 @@
 {%- assign owners = owners -%}
 {%- assign mykhalchuk = site.data.mykhalchuk -%}
 {%- include data/ivano-frankivsk/i-commercial.html -%}
-{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.rent != '1' and i.type contains 'нежитлове' or i.location contains location and i.rent != '1' and i.type contains 'нежитловий' or i.location contains location and i.rent != '1' and i.type contains 'приміщення'" -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.rent != '1' and i.type contains 'Нежитлове' or i.type contains 'нежитлове' or i.type contains 'Нежитловий'" -%}
