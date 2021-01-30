@@ -1,9 +1,9 @@
-{%- if offer.type contains site.data.lang-uk.re_house or offer.type contains "{{ site.data.lang-uk.re_house | downcase }}" -%}
+{%- assign house_downcase = site.data.lang-uk.re_house | downcase -%}
+{%- if offer.type contains site.data.lang-uk.re_house or offer.type contains house_downcase -%}
   {%- assign isHouse = true -%}
 {%- else -%}
   {%- assign isHouse = false -%}
 {%- endif -%}
-
 {%- assign kimnaty = site.data.lang-uk.re_kimnaty -%}{%- assign land = site.data.lang-uk.re_land -%}{%- assign landm = site.data.lang-uk.re_land | downcase -%}{%- assign ssland = offer.surface_land | size -%}
 {% if offer.price contains '$' %}{%- assign pus = offer.price | remove: '$' -%}{% elsif offer.price contains '€' %}{%- assign peu = offer.price | remove: '€' -%}{% else %}{%- assign pua = offer.price -%}{% endif %}
 {% if offer.type %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_for_rent }}{% elsif offer.rent == '1' and offer.price == '' %}{{ site.data.lang-uk.re_for_rentd }}{% else %}{{ site.data.lang-uk.re_for_sale }}{% endif %} <strong class="text-lowercase">{{ offer.type }}</strong>, {% endif %}
