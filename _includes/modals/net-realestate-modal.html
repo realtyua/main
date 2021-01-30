@@ -13,7 +13,7 @@
           {%- for re in res -%}
           {%- if re.url != site.url -%}
           <li class="col mb-1">
-            <a rel="noopener noreferrer" href="{{ re.url }}" target="_blank" class="link-light">{{ re.title }}</a>
+            <a rel="noopener noreferrer" href="{{ re.url }}" target="_blank">{{ re.title }}</a>
           </li>
           {%- endif -%}
           {%- endfor -%}
