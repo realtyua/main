@@ -1,6 +1,20 @@
+
+---
+layout: table
+title: Мапа нерухомості
+navtitle: Мапа
+---
+
+
+
+
+
+{%- comment -%}
+
 ---
 layout: compress
 ---
+
 {%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
 {%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
@@ -71,3 +85,5 @@ layout: compress
 
   </body>
 </html>
+
+{%- endcomment -%}

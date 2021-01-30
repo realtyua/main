@@ -33,40 +33,77 @@ layout: default
       {{ site.data.lang-uk.re_apartment_h2 }}
     {%- elsif page.url contains "all" -%}
       {{ site.data.lang-uk.re_all_h2 }}
+    {%- elsif page.url contains "map" -%}
+      Мапа нерухомості
     {%- endif -%}
     </h2>
     {%- assign slug = page.url | split: "/" | last -%}
     {%- assign l = page.url | split: "/" -%}
     {%- if page.url contains "all.html" -%}
+
       {%- assign json = page.url | replace: "all.html", "data/all.json" -%}
       {%- if l.size == 4 -%}
         {%- assign data = page.url | split: "/" | slice: 2, 4 | join: "/" | prepend: "data/" -%}
       {%- elsif l.size == 5 -%}
         {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: "data/" -%}
       {%- endif -%}
+
+    {%- elsif page.url contains 'map.html' -%}
+
+      {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
+      {%- if l.size == 4 -%}
+        {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+      {%- elsif l.size == 5 -%}
+        {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- endif -%}
+
     {%- else -%}
+
       {%- assign json = here | append: "data/" | append: slug | append: ".json" -%}
       {%- if l.size == 4 -%}
         {%- assign data = page.url | split: "/" | slice: 2, 4 | join: "/" | prepend: "data/" | append: ".html" -%}
       {%- elsif l.size == 5 -%}
         {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: "data/" | append: ".html" -%}
       {%- endif -%}
+      
     {%- endif -%}
     {%- if data -%}
       {%- include {{ data }} -%}
-      {%- if offers.size > 10 -%}
-        {%- include table/js.html -%}
+
+      {%- if page.url contains "map" -%}
+
+        <div class="row">
+          <div class="col-12">
+            <div id="map"></div>
+          </div>
+        </div>
+
       {%- else -%}
-        {%- for offer in offers -%}
-          {%- include table/html.html -%}
-        {%- else -%}
+
+        {%- if offers.size > 10 -%}
           <div class="row">
-            <div class="col-md-6 offset-md-3">
-              {%- include none-advertisement.html title=name -%}
+            <div class="col-12">
+              {%- include table/js.html -%}
             </div>
           </div>
-        {%- endfor -%}
+        {%- else -%}
+          {%- for offer in offers -%}
+            <div class="row">
+              <div class="col-12">
+                {%- include table/html.html -%}
+              </div>
+            </div>
+          {%- else -%}
+            <div class="row">
+              <div class="col-md-6 offset-md-3">
+                {%- include none-advertisement.html title=name -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
       {%- endif -%}
+
     {%- endif -%}
   </div>
 </div>
