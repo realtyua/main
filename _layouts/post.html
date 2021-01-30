@@ -17,25 +17,28 @@ layout: default
 
     {{ content }}
 
-    <div class="row">
-      {% if page.author and page.author != '' %}
-        <div class="col-lg-auto mr-auto">
-          <p><span class="small text-muted">Автор: <b>{{ page.author }}</b></span></p>
+    {% if page.author == '' and page.source.title == '' %}
+    {% else %}
+      <div class="row">
+        {% if page.author and page.author != '' %}
+          <div class="col-lg-auto mr-auto">
+            <p><span class="small text-muted">Автор: <b>{{ page.author }}</b></span></p>
+          </div>
+        {% endif %}
+        <div class="col-lg-auto{% if page.author and page.author != '' %}{% else %} ml-auto{% endif %} align-self-center order-1 order-lg-2 mb-2 mb-lg-0">
+          <p>
+            <span class="small text-muted">
+              Джерело:
+              {% if page.source.url != '' %}
+                <a href="{{ page.source.url }}" target="_blank"><b>{{ page.source.title }}</b></a>
+              {% else %}
+                <b>{{ page.source.title }}</b>
+              {% endif %}
+            </span>
+          </p>
         </div>
-      {% endif %}
-      <div class="col-lg-auto{% if page.author and page.author != '' %}{% else %} ml-auto{% endif %} align-self-center order-1 order-lg-2 mb-2 mb-lg-0">
-        <p>
-          <span class="small text-muted">
-            Джерело:
-            {% if page.source.url != '' %}
-              <a href="{{ page.source.url }}" target="_blank"><b>{{ page.source.title }}</b></a>
-            {% else %}
-              <b>{{ page.source.title }}</b>
-            {% endif %}
-          </span>
-        </p>
       </div>
-    </div>
+    {% endif %}
 
     {%- include back.html -%}
 

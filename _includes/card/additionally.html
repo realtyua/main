@@ -117,10 +117,10 @@
 
         {%- if offer.type == land or offer.type == landm -%}
           <span class="mark" data-toggle="tooltip" title="{{ offer.price | divided_by: offer.surface_land | ceil }} {{ site.data.lang-uk.re_uah }}">
-          {{ offer.price | divided_by: offer.surface_land }}
+          {{ offer.price | divided_by: offer.surface_land | ceil }}
         {%- else -%}
           <span class="mark" data-toggle="tooltip" title="{{ offer.price | divided_by: offer.surface | ceil }} {{ site.data.lang-uk.re_uah }}">
-          {{ offer.price | divided_by: offer.surface }}
+          {{ offer.price | divided_by: offer.surface | ceil }}
           </span>
         {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}.
 
