@@ -314,73 +314,73 @@ function propertyFormatter(value, row) {
   "use strict";
   if (value !== '') {
     if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
-      html = ['{{ site.data.lang-uk.re_for_sale }} <strong class="text-lowercase">' + row.type + '</strong>, ']
-      if (row.surface_land && row.surface_land !== '') { html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface_land + ' {{ site.data.lang-uk.re_m }}</strong><sup>2</sup>') }
-      if (row.location && row.location !== '') { html.push(', {{ site.data.lang-uk.re_location }} <i class="d-none">{{ site.data.lang-uk.re_at }} ' + row.location + '</i>') }
-      if (row.address && row.address !== '' && row.location !== '') { html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>') }
-      if (row.address && row.address !== '' && row.location === '') { html.push(', {{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>') }
+      html = ['{{ site.data.lang-uk.re_for_sale }} <b class="text-lowercase">' + row.type + '</b>, ']
+      if (row.surface_land && row.surface_land !== '') { html.push('{{ site.data.lang-uk.re_surface }} <b>' + row.surface_land + ' {{ site.data.lang-uk.re_m }}</b><sup>2</sup>') }
+      if (row.location && row.location !== '') { html.push(', {{ site.data.lang-uk.re_location }} <b>{{ site.data.lang-uk.re_at }} ' + row.location + '</b>') }
+      if (row.address && row.address !== '' && row.location !== '') { html.push('{{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>') }
+      if (row.address && row.address !== '' && row.location === '') { html.push(', {{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>') }
       if (row.region && row.region !== '' && row.location === '') { html.push(', ' + row.region + '.') }
     } else if (row.rent !== '' && row.rent === '1' && row.price !== '') {
-      html = ['{{ site.data.lang-uk.re_for_rent }} <strong class="text-lowercase">' + row.type + '</strong>, ']
+      html = ['{{ site.data.lang-uk.re_for_rent }} <b class="text-lowercase">' + row.type + '</b>, ']
       if (row.surface && row.surface !== '') {
-        html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + ' {{ site.data.lang-uk.re_m }}</strong><sup>2</sup>, ')
+        html.push('{{ site.data.lang-uk.re_surface }} <b>' + row.surface + ' {{ site.data.lang-uk.re_m }}</b><sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
         html.push('{{ site.data.lang-uk.re_rooms }} ' + row.rooms + ', ')
       }
       if (row.floor && row.floor !== '') {
-        html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
+        html.push('{{ site.data.lang-uk.re_na }} <b>' + row.floor + '</b>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
       if (row.floor === '' && row.floors !== '') {
-        html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
+        html.push('{{ site.data.lang-uk.re_at }} <b>' + row.floors + '</b> {{ site.data.lang-uk.re_floors }}, ')
       }
       if (row.location && row.location !== '') {
-        html.push('{{ site.data.lang-uk.re_location }}<i class="d-none"> {{ site.data.lang-uk.re_at }}' + row.location + '</i> {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>')
+        html.push('{{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_at }} <b>' + row.location + '</b>, {{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>')
       }
     } else if (row.rent !== '' && row.rent === '1' && row.price === '' && row.price_sqmt !== '') {
-      html = ['{{ site.data.lang-uk.re_for_rentd }} <strong class="text-lowercase">' + row.type + '</strong>, ']
+      html = ['{{ site.data.lang-uk.re_for_rentd }} <b class="text-lowercase">' + row.type + '</b>, ']
       if (row.surface && row.surface !== '') {
-        html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + ' {{ site.data.lang-uk.re_m }}</strong><sup>2</sup>, ')
+        html.push('{{ site.data.lang-uk.re_surface }} <b>' + row.surface + ' {{ site.data.lang-uk.re_m }}</b><sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
         html.push('{{ site.data.lang-uk.re_rooms }} ' + row.rooms + ', ')
       }
       if (row.floor && row.floor !== '') {
-        html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
+        html.push('{{ site.data.lang-uk.re_na }} <b>' + row.floor + '</b>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
       }
       if (row.floor === '' && row.floors !== '') {
-        html.push('{{ site.data.lang-uk.re_at }} <strong>' + row.floors + '</strong> {{ site.data.lang-uk.re_floors }}, ')
+        html.push('{{ site.data.lang-uk.re_at }} <b>' + row.floors + '</b> {{ site.data.lang-uk.re_floors }}, ')
       }
       if (row.location && row.location !== '') {
-        html.push('{{ site.data.lang-uk.re_location }}<i class="d-none">{{ site.data.lang-uk.re_at }} ' + row.location + '</i> {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
+        html.push('{{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_at }} <b>' + row.location + '</b>, {{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>.')
       }
     } else {
-      html = ['{{ site.data.lang-uk.re_for_sale }} <strong class="text-lowercase">' + row.type + '</strong>, ']
+      html = ['{{ site.data.lang-uk.re_for_sale }} <b class="text-lowercase">' + row.type + '</b>, ']
       if (row.surface && row.surface !== '') {
-        html.push('{{ site.data.lang-uk.re_surface }} <strong>' + row.surface + ' {{ site.data.lang-uk.re_m }}</strong><sup>2</sup>, ')
+        html.push('{{ site.data.lang-uk.re_surface }} <b>' + row.surface + ' {{ site.data.lang-uk.re_m }}</b><sup>2</sup>, ')
       }
       if (row.rooms && row.rooms !== '') {
         html.push('{{ site.data.lang-uk.re_rooms }} ' + row.rooms + ', ')
       }
       if (row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_house_not }}') !== -1) {
         if (row.floors && row.floors !== '') {
-          html.push('{{ site.data.lang-uk.re_floorss }} <strong>' + row.floors + '</strong>, ')
+          html.push('{{ site.data.lang-uk.re_floorss }} <b>' + row.floors + '</b>, ')
         }
       } else {
         if (row.floor && row.floor !== '') {
-          html.push('{{ site.data.lang-uk.re_na }} <strong>' + row.floor + '</strong>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
+          html.push('{{ site.data.lang-uk.re_na }} <b>' + row.floor + '</b>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
         }
       }
       if (row.region && row.region !== '' && row.region.indexOf('район') !== -1) {
         if (row.region && row.region !== '') {
-          html.push('{{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong><i class="d-none">, ' + row.region + '</i>.')
+          html.push('{{ site.data.lang-uk.re_address }} <b>' + row.address + ', ' + row.region + '</b>.')
         }
         if (row.page && row.page === '1') {
           html.push(' <a href=/' + row.phone + '>Сторінка оголошення</a>.')
         }
       } else {
         if (row.location && row.location !== '') {
-          html.push('{{ site.data.lang-uk.re_location }}<i class="d-none">{{ site.data.lang-uk.re_at }} ' + row.location + '</i> {{ site.data.lang-uk.re_address }} <strong>' + row.address + '</strong>.')
+          html.push('{{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_at }} <b>' + row.location + '</b>, {{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>.')
         }
         if (row.page && row.page === '1') {
           html.push(' <a href="{{ site.url }}/' + row.phone + '" target="_blank">Сторінка оголошення</a>.')
