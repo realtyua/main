@@ -38,29 +38,25 @@
   </div>
   <div class="form-row">
       <div class="col-md-6 mb-3">
-          <label for="surface">Загальна площа м<sup>2</sup> нерухомості</label>
+          <label for="surface">Загальна площа {{ site.data.lang-uk.m }} нерухомості</label>
           <div class="input-group is-invalid">
               <input name="fields[surface]" type="number" min="4" max="2000" placeholder="Від 4 і більше" class="form-control" id="surface" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <a href="#" class="btn btn-primary rounded-right" role="button" data-toggle="modal" data-target="#aboutSurface">
-                      <small><b>м<sup>2</sup></b></small>
-                  </a>
+                  <button title="{{ site.data.lang-uk.info_refer }}" class="btn btn-primary rounded-right" type="button" data-toggle="modal" data-target="#aboutSurface">м<sup>2</sup></button>
               </div>
-              <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі у об'єка написано правильно!</div>
-              <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі у об'єкта нерухомості.</div>
+              <div class="valid-feedback">Начебто загальна кількість {{ site.data.lang-uk.m }} площі у об'єка написано правильно!</div>
+              <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість {{ site.data.lang-uk.m }} площі у об'єкта нерухомості.</div>
           </div>
       </div>
       <div class="col-md-6 mb-3">
-          <label for="surfaceLand">Загальна площа м<sup>2</sup> землі</label>
+          <label for="surfaceLand">Загальна площа {{ site.data.lang-uk.m }} землі</label>
           <div class="input-group is-invalid">
               <input name="fields[sland]" type="number" min="4" max="20000" placeholder="Від 4 і більше" class="form-control" id="surfaceLand" autocomplete="off" required>
               <div class="input-group-prepend">
-                  <a href="#" class="btn btn-primary rounded-right" role="button" data-toggle="modal" data-target="#aboutArea">
-                      <small><b>м<sup>2</sup></b></small>
-                  </a>
+                  <button title="{{ site.data.lang-uk.info_refer }}" class="btn btn-primary rounded-right" type="button" data-toggle="modal" data-target="#aboutArea">м<sup>2</sup></button>
               </div>
-              <div class="valid-feedback">Начебто загальна кількість м<sup>2</sup> площі землі написано правильно!</div>
-              <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість м<sup>2</sup> площі землі.</div>
+              <div class="valid-feedback">Начебто загальна кількість {{ site.data.lang-uk.m }} площі землі написано правильно!</div>
+              <div class="invalid-feedback">Будь ласка вкажіть дійсну загальну кількість {{ site.data.lang-uk.m }} площі землі.</div>
           </div>
       </div>
   </div>
@@ -149,7 +145,7 @@
                   <option value="verkhovynskyy">Верховинський район</option>
               </select>
               <div class="input-group-prepend">
-                  <a href="#" class="btn btn-primary rounded-right" role="button" data-toggle="modal" data-target="#aboutDistrict"><b>i</b></a>
+                  <button title="{{ site.data.lang-uk.info_refer }}" class="btn btn-primary rounded-right" type="button" data-toggle="modal" data-target="#aboutDistrict"><b>i</b></button>
               </div>
               <div class="valid-feedback">Начебто район вибрано!</div>
               <div class="invalid-feedback">Будь ласка виберить район Івано-Франківської області де розташовано населений пункту.</div>
