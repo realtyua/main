@@ -1,11 +1,5 @@
 {%- assign ssland = offer.surface_land | size -%}
 
-{%- if offer.type contains site.data.lang-uk.re_house or offer.type contains 'Будинок' -%}
-  {%- assign isHouse = true -%}
-{%- else -%}
-  {%- assign isHouse = false -%}
-{%- endif -%}
-
 {%- if offer.type and offer.type == land -%}
 {%- else -%}
 
