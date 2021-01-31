@@ -34,9 +34,9 @@
   <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
   <script src="{{ "/assets/js/main.map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- elsif page.url contains 'karta.html' and page.layout == 'karta' -%}
-  <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-  <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+  <link rel="preload" href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+  <link rel="preload" href="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  <link href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
 {%- else -%}
 
   {%- if page.table == 1 or page.table == 2 -%}
@@ -83,7 +83,7 @@
       {%- if page.url contains 'map.html' -%}
       {%- elsif page.url contains 'karta.html' -%}
       {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-        <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+        <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}-1" as="script">
       {%- else -%}
         <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- endif -%}
@@ -102,7 +102,7 @@
     {%- if page.url contains 'map.html' -%}
     {%- elsif page.url contains 'karta.html' -%}
     {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-      <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+      <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}-0" rel="stylesheet">
     {%- else -%}
       <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
     {%- endif -%}
