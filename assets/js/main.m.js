@@ -3,6 +3,7 @@ layout: null
 sitemap: false
 ---
 {%- include js/jquery.min.js -%}
+{%- include js/popper.min.js -%}
 {%- include js/bootstrap.min.js -%}
 {%- include js/leaflet.js -%}
 {%- include js/leaflet.markercluster.js -%}
