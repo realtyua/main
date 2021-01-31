@@ -84,7 +84,9 @@ layout: compress
       map.addLayer(markersClusters);setTimeout(function(){map.fitBounds(markersClusters.getBounds());},5);
       </script>
     {%- else -%}
-      <script>var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:11,zoom:10}).setView([{{ page.coordinates }}],10); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',tileSize:512,zoomOffset:-1}).addTo(map); map.attributionControl.setPrefix(''); L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ page.breadcrumb }}<b>').openPopup(); {%- include map/left-menu-map.html -%}</script>
+      {% comment %}
+        <script>var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:11,zoom:10}).setView([{{ page.coordinates }}],10); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'<a href="{{ site.url }}" target="_blank">{{ site.title }}</a> - {{ page.breadcrumb }}',tileSize:512,zoomOffset:-1}).addTo(map); map.attributionControl.setPrefix(''); L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ page.breadcrumb }}<b>').openPopup(); {%- include map/left-menu-map.html -%}</script>
+      {% endcomment %}
     {%- endif -%}
 
     {%- include scroll-top.html -%}
