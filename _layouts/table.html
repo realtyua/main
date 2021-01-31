@@ -48,9 +48,9 @@ layout: default
         {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: "data/" -%}
       {%- endif -%}
 
-    {%- elsif page.url contains 'map.html' -%}
+    {%- elsif page.url contains 'karta.html' -%}
 
-      {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
+      {%- assign json = page.url | replace: 'karta.html', 'data/map.json' -%}
       {%- if l.size == 4 -%}
         {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
       {%- elsif l.size == 5 -%}
@@ -65,12 +65,12 @@ layout: default
       {%- elsif l.size == 5 -%}
         {%- assign data = page.url | split: "/" | slice: 3, 5 | join: "/" | prepend: "data/" | append: ".html" -%}
       {%- endif -%}
-      
+
     {%- endif -%}
     {%- if data -%}
       {%- include {{ data }} -%}
 
-      {%- if page.url contains "map" -%}
+      {%- if page.url contains 'karta.html' -%}
 
         <div class="row">
           <div class="col-12">
