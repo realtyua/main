@@ -30,11 +30,9 @@
 
 {%- include meta-name.html -%}
 
-{%- if page.url contains 'map.html' and page.layout == 'map' or page.url contains 'karta.html' and page.layout == 'table' -%}
-
+{%- if page.url contains 'map.html' and page.layout == 'map' -%}
   <link rel="stylesheet" href="{{ "/assets/css/map.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
   <script src="{{ "/assets/js/main.map.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-
 {%- else -%}
 
   {%- if page.table == 1 or page.table == 2 -%}
