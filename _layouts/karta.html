@@ -33,8 +33,10 @@ layout: compress
 
     <div id="top"></div>
 
-
     <div class="main">
+
+      {%- include header.html -%}
+
       <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
 
         {% if page.url == "/" %}
