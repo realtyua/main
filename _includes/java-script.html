@@ -21,6 +21,8 @@
     {%- endif -%}
   {%- else -%}
     {%- if page.url contains 'map.html' -%}
+    {%- elsif page.url contains 'karta.html' -%}
+      <script src="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
       <script src="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- else -%}
