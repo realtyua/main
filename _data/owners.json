@@ -1,5 +1,27 @@
 [
   {
+    "id": "57",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "1",
+    "surface": "34.8",
+    "surface_land": "",
+    "price": "$10500",
+    "price_sqmt": "",
+    "floor": "3",
+    "floors": "5",
+    "parking": "Прибудинкова територія",
+    "region": "",
+    "location": "м. Городенка",
+    "address": "вул. Братів Окуневських, 30",
+    "object": "",
+    "coordinates": "48.663404,25.601354",
+    "date": "2021-01-31",
+    "seller": "Руслан Паращук",
+    "phone": "380950021048",
+    "description": ""
+  },
+  {
     "id": "56",
     "type": "Квартира",
     "rent": "",
