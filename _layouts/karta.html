@@ -15,9 +15,16 @@ layout: compress
   </head>
 
   <body>
+    
 
     {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
-    <div id="map"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <div id="map"></div>
+      </div>
+    </div>
+
     {%- assign slug = page.url | split: "/" | last -%}
     {%- assign l = page.url | split: '/' -%}
 
