@@ -43,6 +43,7 @@
   {%- if page.table == 1 or page.table == 2 -%}
     {%- if page.url contains 'map.html' -%}
     {%- elsif page.url contains 'karta.html' -%}
+      <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
       <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- else -%}
