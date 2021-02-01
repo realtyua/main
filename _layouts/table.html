@@ -56,7 +56,20 @@ layout: default
       {%- include {{ data }} -%}
       {%- if offers.size > 10 -%}
         <div class="row">
-          <div class="col-12">{%- include table/js.html -%}</div>
+          <div class="col-12">
+
+            {%- if page.url contains "all.html" -%}
+
+              {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type == 'Частина будинку'" -%}
+              ### {{ nhouse | size }} ###<br>
+              {%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира'" -%}
+              ### {{ napartment | size }} ###<br>
+
+            {%- else -%}
+              {%- include table/js.html -%}
+            {%- endif -%}
+
+          </div>
         </div>
       {%- else -%}
         {%- for offer in offers -%}
