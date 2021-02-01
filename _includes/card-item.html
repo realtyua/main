@@ -2,21 +2,21 @@
 
 {%- capture navitemtitle -%}
   {%- if slug == 'apartment' -%}
-    {{ one.navtitle }} і частини квартири та кімнати
+    {{ one.navtitle }} і частини квартир та кімнати
   {%- elsif slug == 'commercial' -%}
-    {{ one.navtitle }}
+    Нежитлова і {{ one.navtitle }}
   {%- elsif slug == 'developer' -%}
     {{ one.navtitle }} і новобудови
   {%- elsif slug == 'garage' -%}
     {{ one.navtitle }} і паркувальні місця
   {%- elsif slug == 'house' -%}
-    {{ one.navtitle }} і частини будинку та кімнати
+    {{ one.navtitle }} і частини будинків та кімнати
   {%- elsif slug == 'land' -%}
     {{ one.navtitle }} і земельні ділянки
   {%- elsif slug == 'realtor' -%}
-    {{ one.navtitle }} і ріелтори
+    {{ one.navtitle }}
   {%- elsif slug == 'rent' -%}
-   Подобова та довгострокова оренда
+   Подобова і довгострокова оренда
   {%- else -%}
     {%- if one.navtitle -%}
       {{ one.navtitle }}
@@ -69,11 +69,11 @@
   {%- elsif slug == 'house' -%}
 
   {%- elsif slug == 'land' -%}
-
+    Земельні ділянки для будівництва та ведення особистого селянського господарства
   {%- elsif slug == 'realtor' -%}
 
   {%- elsif slug == 'rent' -%}
-
+    Оренда квартир, окремих кімнат і будинків, земельних ділянок та нежитлових приміщень
   {%- else -%}
 
   {%- endif -%}
