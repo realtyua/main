@@ -19,15 +19,18 @@
     {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
     {%- else -%}
       <div class="col px-2 mb-3">
-        {%- if one.url == page.url -%}
-        <span class="nav-link border-0 active">
-          <span>{{ navitemtitle }}</span>
-        </span>
-        {%- else -%}
-        <a href="{{ one.url }}" class="nav-link border-0">
-          <span>{{ navitemtitle }} / {{ records }} - 0</span>
-        </a>
-        {%- endif -%}
+
+        <div class="card bg-dark text-white">
+          <img src="/assets/images/locations/default.jpg" class="card-img" alt="{{ navitemtitle }}">
+          <div class="card-img-overlay">
+            <h5 class="card-title">
+              <a href="{{ one.url }}">У розділі {{ navitemtitle }}</a>
+            </h5>
+            <p class="card-text">Тут...{{ records }} / {{ number }}</p>
+            <p class="card-text">...оголошень</p>
+          </div>
+        </div>
+
       </div>
     {%- endif -%}
   {%- endif -%}
@@ -36,15 +39,9 @@
   {%- else -%}
     {%- if here == current and one.url contains here and one.navhide != 1 -%}
     <div class="col px-2 mb-3">
-      {%- if one.url == page.url -%}
-      <span class="nav-link border-0 active">
-        <span>{{ navitemtitle }}</span>
-      </span>
-      {%- else -%}
       <a href="{{ one.url }}" class="nav-link border-0">
         <span>{{ navitemtitle }} / {{ records }} - 1</span>
       </a>
-      {%- endif -%}
     </div>
     {%- endif -%}
   {%- endif -%}
