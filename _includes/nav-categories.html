@@ -1,29 +1,14 @@
-{%- assign card_back = page.dir | split: '/' -%}
-{%- assign card_size = card_back | size | minus: 1 -%}
-{%- assign card_here = card_back | slice: 0, card_size | join: '/' | append: '/' -%}
-{%- assign cards = site.pages | sort: 'dir' | reverse -%}
 
-{%- assign card_house = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
-{%- assign card_apartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
-{%- assign card_rent = offers | where_exp: "i", "i.rent == '1'" -%}
 
 <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
-  {%- for card in cards -%}
-    {%- assign isJson = false -%}
-    {%- if card.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-    {%- assign card_slug = card.url | split: '/' | last -%}
-    {%- assign card_current = card.url | remove: card_slug | remove: '//' | append: '/' -%}
-    {%- if card.title != '' and isJson == false -%}
-    <div class="col px-2 mb-3">
-      <img src="/assets/images/locations/default.jpg" class="card-img" alt="image">
-      <div class="card bg-dark text-white">
-        <div class="card-img-overlay">
-          <h5 class="card-title">У розділі {{ card.title }}</h5>
-          <p class="card-text">Тут...### {{ nhouse | size }} ### / ### {{ napartment | size }} ###</p>
-          <p class="card-text">...оголошень</p>
-        </div>
+  <div class="col px-2 mb-3">
+    <img src="/assets/images/locations/default.jpg" class="card-img" alt="image">
+    <div class="card bg-dark text-white">
+      <div class="card-img-overlay">
+        <h5 class="card-title">У розділі {{ card.title }}</h5>
+        <p class="card-text">Тут...### {{ nhouse | size }} ### / ### {{ napartment | size }} ###</p>
+        <p class="card-text">...оголошень</p>
       </div>
     </div>
-    {%- endif -%}
-  {%- endfor -%}
+  </div>
 </div>
