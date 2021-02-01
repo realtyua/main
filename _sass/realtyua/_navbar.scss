@@ -193,6 +193,7 @@ $dropDown       : true;
     ul#realestate-nav {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      column-gap: 10px;
     }
   }
 }
@@ -201,6 +202,7 @@ $dropDown       : true;
     ul#realestate-nav {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      column-gap: 10px;
     }
   }
 }
@@ -209,6 +211,7 @@ $dropDown       : true;
     ul#realestate-nav {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      column-gap: 10px;
     }
   }
 }
@@ -251,6 +254,7 @@ $dropDown       : true;
     ul#realestate-nav {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      column-gap: 10px;
     }
   }
 }
@@ -281,6 +285,7 @@ $dropDown       : true;
     ul#realestate-nav {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
+      column-gap: 10px;
     }
   }
 }
