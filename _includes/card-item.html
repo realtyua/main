@@ -19,7 +19,7 @@
 {%- capture records -%}
   {%- if slug == 'apartment' -%}
     {%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
-    {%- napartment | size -%}
+    {{ napartment | size }}
   {%- elsif slug == 'commercial' -%}
 
   {%- elsif slug == 'developer' -%}
@@ -28,14 +28,14 @@
 
   {%- elsif slug == 'house' -%}
     {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
-    {%- nhouse | size -%}
+    {{ nhouse | size }}
   {%- elsif slug == 'land' -%}
 
   {%- elsif slug == 'realtor' -%}
 
   {%- elsif slug == 'rent' -%}
     {%- assign nrent = offers | where_exp: "i", "i.rent == '1'" -%}
-    {%- nrent | size -%}
+    {{ nrent | size }}
   {%- else -%}
 
   {%- endif -%}
