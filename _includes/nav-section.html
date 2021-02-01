@@ -61,7 +61,7 @@
 
       {%- endif -%}
 
-      <ul class="navbar-nav nav nav-tabs border-0">
+      <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
         {%- for one in ones -%}
           {%- assign isJson = false -%}
           {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
