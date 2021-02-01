@@ -19,7 +19,7 @@
 {%- capture records -%}
   {%- if slug == 'apartment' -%}
     {%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
-    {%- assign napartment | size -%}
+    {%- napartment | size -%}
   {%- elsif slug == 'commercial' -%}
 
   {%- elsif slug == 'developer' -%}
@@ -28,14 +28,36 @@
 
   {%- elsif slug == 'house' -%}
     {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
-    {%- assign nhouse | size -%}
+    {%- nhouse | size -%}
   {%- elsif slug == 'land' -%}
 
   {%- elsif slug == 'realtor' -%}
 
   {%- elsif slug == 'rent' -%}
     {%- assign nrent = offers | where_exp: "i", "i.rent == '1'" -%}
-    {%- assign nrent | size -%}
+    {%- nrent | size -%}
+  {%- else -%}
+
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture description -%}
+  {%- if slug == 'apartment' -%}
+
+  {%- elsif slug == 'commercial' -%}
+
+  {%- elsif slug == 'developer' -%}
+
+  {%- elsif slug == 'garage' -%}
+
+  {%- elsif slug == 'house' -%}
+
+  {%- elsif slug == 'land' -%}
+
+  {%- elsif slug == 'realtor' -%}
+
+  {%- elsif slug == 'rent' -%}
+
   {%- else -%}
 
   {%- endif -%}
@@ -51,9 +73,9 @@
           <img src="/assets/images/locations/default.jpg" class="card-img" alt="{{ navitemtitle }}">
           <div class="card-img-overlay">
             <h5 class="card-title text-white">
-              <a href="{{ one.url }}">Розділ {{ navitemtitle }}</a>
+              <a href="{{ one.url }}" class="text-white">Розділ {{ navitemtitle }}</a>
             </h5>
-            <p class="card-text">Тут...</p>
+            <p class="card-text">{{ description }}</p>
             <p class="card-text">{{ records }} оголошень</p>
           </div>
         </div>
