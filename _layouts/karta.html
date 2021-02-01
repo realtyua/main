@@ -67,6 +67,7 @@ layout: compress
 
         <div class="container">
           {%- include breadcrumb.html -%}
+          {%- include nav-section.html -%}
           {%- assign isContent = content | strip_newlines -%}
           {%- if isContent == '' -%}
             {%- include info-visitors.html -%}
