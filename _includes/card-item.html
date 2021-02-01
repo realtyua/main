@@ -35,7 +35,7 @@
     {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
     {{ nhouse | size }}
   {%- elsif slug == 'land' -%}
-    {%- assign nland = offers | where_exp: "i", "i.rent != '1' and i.seller == 'Земля'" -%}
+    {%- assign nland = offers | where_exp: "i", "i.rent != '1' and i.type == 'Земля'" -%}
     {{ nland | size }}
   {%- elsif slug == 'realtor' -%}
     {%- assign nrealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
@@ -80,7 +80,7 @@
           <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ navitemtitle }}">
           <div class="card-img-overlay">
             <h5 class="card-title py-1 px-2" style="display:inline-block;">
-              <a href="{{ one.url }}" class="text-white">Розділ {{ navitemtitle }}</a>
+              <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
             </h5>
             <p class="card-text">{{ description }}</p>
             <p class="card-text text-right">{{ records }} оголошень</p>
