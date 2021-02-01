@@ -5,6 +5,8 @@
     {{ site.data.lang-uk.title_tab_commercial }}
   {%- elsif slug == 'realtor' -%}
     {{ site.data.lang-uk.title_tab_realtor }}
+  {%- elsif slug == 'garage' -%}
+    {{ one.navtitle }} і паркувальні місця
   {%- else -%}
     {%- if one.navtitle -%}
       {{ one.navtitle }}
@@ -21,7 +23,7 @@
     {%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
     {{ napartment | size }}
   {%- elsif slug == 'commercial' -%}
-    {%- assign ncommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'нежитловий'" -%}
+    {%- assign ncommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'Нежитловий'" -%}
     {{ ncommercial | size }}
   {%- elsif slug == 'developer' -%}
     {%- assign ndeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
@@ -33,7 +35,7 @@
     {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
     {{ nhouse | size }}
   {%- elsif slug == 'land' -%}
-    {%- assign nland = offers | where_exp: "i", "i.rent != '1' and i.seller == 'land'" -%}
+    {%- assign nland = offers | where_exp: "i", "i.rent != '1' and i.seller == 'Земля'" -%}
     {{ nland | size }}
   {%- elsif slug == 'realtor' -%}
     {%- assign nrealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
