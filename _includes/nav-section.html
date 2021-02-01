@@ -2,6 +2,23 @@
 {%- assign size = back | size | minus: 1 -%}
 {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
+
+include.style
+
+{%- if include.style == "card" -%}
+
+  {%- for one in ones -%}
+    {%- assign isJson = false -%}
+    {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+    {%- assign slug = one.url | split: '/' | last -%}
+    {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+    {%- if one.title != '' and isJson == false -%}
+      {%- include card-item.html -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+{%- else -%}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
   <div class="navbar-brand d-lg-none">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
@@ -52,3 +69,5 @@
 </nav>
 <hr class="mb-2 mt-2 mt-md-0 mt-lg-0">
 {%- include thanks-please.html -%}
+
+{%- endif -%}

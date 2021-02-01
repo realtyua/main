@@ -58,7 +58,9 @@ layout: default
         <div class="row">
           <div class="col-12">
             {%- if page.url contains "all.html" -%}
-              {%- include nav-categories.html -%}
+              <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+                {%- include nav-section.html style="card" -%}
+              </div>
             {%- else -%}
               {%- include table/js.html -%}
             {%- endif -%}
