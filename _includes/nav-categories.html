@@ -1,0 +1,19 @@
+
+
+
+
+{%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type == 'Частина будинку'" -%}
+{%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира'" -%}
+
+
+  <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+    <div class="col px-2 mb-3">
+      <div class="card bg-dark text-white">
+        <div class="card-img-overlay">
+          <h5 class="card-title">У розділі {{ card.title }}</h5>
+          <p class="card-text">Тут...### {{ nhouse | size }} ### / ### {{ napartment | size }} ###</p>
+          <p class="card-text">...оголошень</p>
+        </div>
+      </div>
+    </div>
+  </div>
