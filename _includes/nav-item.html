@@ -15,7 +15,7 @@
 {%- endcapture -%}
 {%- if page.url contains '/all.html' -%}
   {%- if page.dir == current or one.url contains page.url and page.navhide != 1 -%}
-  <li class="nav-item">
+  <li class="nav-item d-none">
     {%- if one.url == page.url -%}
     <span class="nav-link border-0 active">
       <span>{{ navitemtitle }}</span>
@@ -29,7 +29,7 @@
   {%- endif -%}
 {%- else -%}
   {%- if one.url contains here and one.url contains 'all' and one.navhide != 1 -%}
-    <li class="nav-item">
+    <li class="nav-item d-none">
       {%- if one.url == page.url -%}
       <span class="nav-link border-0 active">
         <span>{{ navitemtitle }}</span>

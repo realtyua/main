@@ -12,7 +12,7 @@
     {%- assign isJson = false -%}
     {%- if card.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
     {%- assign card_slug = card.url | split: '/' | last -%}
-    {%- assign card_current = card.url | remove: slug | remove: '//' | append: '/' -%}
+    {%- assign card_current = card.url | remove: card_slug | remove: '//' | append: '/' -%}
     {%- if card.title != '' and isJson == false -%}
     <div class="col px-2 mb-3">
       <img src="/assets/images/locations/default.jpg" class="card-img" alt="image">
