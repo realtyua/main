@@ -1,12 +1,22 @@
 {%- assign records = number -%}
 
 {%- capture navitemtitle -%}
-  {%- if slug == 'commercial' -%}
-    {{ site.data.lang-uk.title_tab_commercial }}
-  {%- elsif slug == 'realtor' -%}
-    {{ site.data.lang-uk.title_tab_realtor }}
+  {%- if slug == 'apartment' -%}
+    {{ one.navtitle }} і частини квартири та кімнати
+  {%- elsif slug == 'commercial' -%}
+    {{ one.navtitle }}
+  {%- elsif slug == 'developer' -%}
+    {{ one.navtitle }} і новобудови
   {%- elsif slug == 'garage' -%}
     {{ one.navtitle }} і паркувальні місця
+  {%- elsif slug == 'house' -%}
+    {{ one.navtitle }} і частини будинку та кімнати
+  {%- elsif slug == 'land' -%}
+    {{ one.navtitle }} і земельні ділянки
+  {%- elsif slug == 'realtor' -%}
+    {{ one.navtitle }} і ріелтори
+  {%- elsif slug == 'rent' -%}
+   Подобова та довгострокова оренда
   {%- else -%}
     {%- if one.navtitle -%}
       {{ one.navtitle }}
@@ -44,7 +54,6 @@
     {%- assign nrent = offers | where_exp: "i", "i.rent == '1'" -%}
     {{ nrent | size }}
   {%- else -%}
-
   {%- endif -%}
 {%- endcapture -%}
 
