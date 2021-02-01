@@ -1,23 +1,20 @@
-{%- assign back = page.dir | split: '/' -%}
-{%- assign size = back | size | minus: 1 -%}
-{%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- assign ones = site.pages | sort: 'dir' | reverse -%}
-<nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
-  <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
-    {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
-    <ul class="navbar-nav nav nav-tabs border-0">
-      {%- for one in ones -%}
-        {%- assign isJson = false -%}
-        {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-        {%- assign slug = one.url | split: '/' | last -%}
-        {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- if one.title != '' and isJson == false -%}
-          {%- include nav-item.html -%}
-        {%- endif -%}
-      {%- endfor -%}
-    </ul>
-  </div>
-</nav>
+{%- assign card_back = page.dir | split: '/' -%}
+{%- assign card_size = card_back | size | minus: 1 -%}
+{%- assign card_here = card_back | slice: 0, card_size | join: '/' | append: '/' -%}
+{%- assign cards = site.pages | sort: 'dir' | reverse -%}
+
+<ul>
+  {%- for card in cards -%}
+    {%- assign isJson = false -%}
+    {%- if card.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+    {%- assign slug = card.url | split: '/' | last -%}
+    {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+    {%- if card.title != '' and isJson == false -%}
+      {{ card.title }}
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+
 
 
 {% comment %}
