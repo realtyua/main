@@ -67,13 +67,30 @@ layout: compress
 
         <div class="container">
           {%- include breadcrumb.html -%}
-          {%- include nav-section.html -%}
-          {%- assign isContent = content | strip_newlines -%}
-          {%- if isContent == '' -%}
-            {%- include info-visitors.html -%}
-          {%- else -%}
-            {{ content }}
-          {%- endif -%}
+          <div class="row">
+            <div class="col-12">
+
+              <h1 class="h3">Мапа нерухомості Івано-Франківська</h1>
+
+              {%- include nav-section.html -%}
+
+              <h2>Вся нерухомість на мапі міста Івано-Франківськ</h2>
+
+              {%- assign isContent = content | strip_newlines -%}
+              {%- if isContent == '' -%}
+                {%- include info-visitors.html -%}
+              {%- else -%}
+                {{ content }}
+              {%- endif -%}
+              
+              <div class="row">
+                <div class="col-12">
+                  <div id="map"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
 
       </main>
