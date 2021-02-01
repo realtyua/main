@@ -3,9 +3,11 @@
 {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ones = site.pages | sort: 'dir' | reverse -%}
 
-include.style
-
 {%- if include.style == "card" -%}
+
+  {%- assign card_house = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
+  {%- assign card_apartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
+  {%- assign card_rent = offers | where_exp: "i", "i.rent == '1'" -%}
 
   {%- for one in ones -%}
     {%- assign isJson = false -%}
@@ -13,61 +15,62 @@ include.style
     {%- assign slug = one.url | split: '/' | last -%}
     {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if one.title != '' and isJson == false -%}
+      {%- assign number = "card_" | append: slug -%}
       {%- include card-item.html -%}
     {%- endif -%}
   {%- endfor -%}
 
 {%- else -%}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
-  <div class="navbar-brand d-lg-none">
-    <span class="small">{{ site.data.lang-uk.brand_content }}</span>
-    <span class="ml-1 float-right align-middle text-primary">→</span>
-  </div>
-  <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarThreeRealEstate" aria-controls="navbarThreeRealEstate" aria-expanded="false" aria-label="Toggle button">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
-    {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
-    {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
-    {%- if isMap == 'true' and page.url contains '/all.html' -%}
-    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-      <li class="nav-item">
-        <h5 class="m-lg-0">
-          <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-            <span>{{ site.data.lang-uk.re_map }}</span>
-            <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-          </a>
-        </h5>
-      </li>
-    </ul>
-    {%- else -%}
-    {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
-    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-      <li class="nav-item">
-        <h5 class="m-lg-0">
-          <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-            <span>{{ site.data.lang-uk.re_map }}</span>
-            <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-          </a>
-        </h5>
-      </li>
-    </ul>
-    {%- endif -%}
-    <ul class="navbar-nav nav nav-tabs border-0">
-      {%- for one in ones -%}
-        {%- assign isJson = false -%}
-        {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-        {%- assign slug = one.url | split: '/' | last -%}
-        {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-        {%- if one.title != '' and isJson == false -%}
-          {%- include nav-item.html -%}
-        {%- endif -%}
-      {%- endfor -%}
-    </ul>
-  </div>
-</nav>
-<hr class="mb-2 mt-2 mt-md-0 mt-lg-0">
-{%- include thanks-please.html -%}
+  <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+    <div class="navbar-brand d-lg-none">
+      <span class="small">{{ site.data.lang-uk.brand_content }}</span>
+      <span class="ml-1 float-right align-middle text-primary">→</span>
+    </div>
+    <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarThreeRealEstate" aria-controls="navbarThreeRealEstate" aria-expanded="false" aria-label="Toggle button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
+      {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
+      {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
+      {%- if isMap == 'true' and page.url contains '/all.html' -%}
+      <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+        <li class="nav-item">
+          <h5 class="m-lg-0">
+            <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
+              <span>{{ site.data.lang-uk.re_map }}</span>
+              <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+            </a>
+          </h5>
+        </li>
+      </ul>
+      {%- else -%}
+      {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
+      <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+        <li class="nav-item">
+          <h5 class="m-lg-0">
+            <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
+              <span>{{ site.data.lang-uk.re_map }}</span>
+              <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+            </a>
+          </h5>
+        </li>
+      </ul>
+      {%- endif -%}
+      <ul class="navbar-nav nav nav-tabs border-0">
+        {%- for one in ones -%}
+          {%- assign isJson = false -%}
+          {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+          {%- assign slug = one.url | split: '/' | last -%}
+          {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+          {%- if one.title != '' and isJson == false -%}
+            {%- include nav-item.html -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+  <hr class="mb-2 mt-2 mt-md-0 mt-lg-0">
+  {%- include thanks-please.html -%}
 
 {%- endif -%}
