@@ -5,17 +5,12 @@
 
 {%- if include.style == "card" -%}
 
-  {%- assign house = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
-  {%- assign apartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
-  {%- assign rent = offers | where_exp: "i", "i.rent == '1'" -%}
-
   {%- for one in ones -%}
     {%- assign isJson = false -%}
     {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
     {%- assign slug = one.url | split: '/' | last -%}
     {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if one.title != '' and isJson == false -%}
-      {%- assign number = slug -%}
       {%- include card-item.html -%}
     {%- endif -%}
   {%- endfor -%}
@@ -34,6 +29,7 @@
       {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
       {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
       {%- if isMap == 'true' and page.url contains '/all.html' -%}
+
       <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
         <li class="nav-item">
           <h5 class="m-lg-0">
@@ -44,8 +40,10 @@
           </h5>
         </li>
       </ul>
+
       {%- else -%}
       {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
+
       <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
         <li class="nav-item">
           <h5 class="m-lg-0">
@@ -56,7 +54,9 @@
           </h5>
         </li>
       </ul>
+
       {%- endif -%}
+
       <ul class="navbar-nav nav nav-tabs border-0">
         {%- for one in ones -%}
           {%- assign isJson = false -%}
@@ -68,6 +68,7 @@
           {%- endif -%}
         {%- endfor -%}
       </ul>
+
     </div>
   </nav>
   <hr class="mb-2 mt-2 mt-md-0 mt-lg-0">

@@ -1,4 +1,5 @@
 {%- assign records = number -%}
+
 {%- capture navitemtitle -%}
   {%- if slug == 'commercial' -%}
     {{ site.data.lang-uk.title_tab_commercial }}
@@ -14,6 +15,32 @@
     {%- endif -%}
   {%- endif -%}
 {%- endcapture -%}
+
+{%- capture records -%}
+  {%- if slug == 'apartment' -%}
+    {%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
+    {%- assign napartment | size -%}
+  {%- elsif slug == 'commercial' -%}
+
+  {%- elsif slug == 'developer' -%}
+
+  {%- elsif slug == 'garage' -%}
+
+  {%- elsif slug == 'house' -%}
+    {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
+    {%- assign nhouse | size -%}
+  {%- elsif slug == 'land' -%}
+
+  {%- elsif slug == 'realtor' -%}
+
+  {%- elsif slug == 'rent' -%}
+    {%- assign nrent = offers | where_exp: "i", "i.rent == '1'" -%}
+    {%- assign nrent | size -%}
+  {%- else -%}
+
+  {%- endif -%}
+{%- endcapture -%}
+
 {%- if page.url contains '/all.html' -%}
   {%- if page.dir == current or one.url contains page.url and page.navhide != 1 -%}
     {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
@@ -23,11 +50,11 @@
         <div class="card bg-dark text-white">
           <img src="/assets/images/locations/default.jpg" class="card-img" alt="{{ navitemtitle }}">
           <div class="card-img-overlay">
-            <h5 class="card-title">
-              <a href="{{ one.url }}">У розділі {{ navitemtitle }}</a>
+            <h5 class="card-title text-white">
+              <a href="{{ one.url }}">Розділ {{ navitemtitle }}</a>
             </h5>
-            <p class="card-text">Тут...{{ records }} / {{ number }}</p>
-            <p class="card-text">...оголошень</p>
+            <p class="card-text">Тут...</p>
+            <p class="card-text">{{ records }} оголошень</p>
           </div>
         </div>
 
