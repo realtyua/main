@@ -83,7 +83,7 @@
       {%- if page.url contains 'map.html' -%}
       {%- elsif page.url contains 'karta.html' -%}
       {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
-        <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}-1" as="script">
+        <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- else -%}
         <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- endif -%}
