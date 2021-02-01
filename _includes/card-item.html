@@ -21,18 +21,23 @@
     {%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
     {{ napartment | size }}
   {%- elsif slug == 'commercial' -%}
-
+    {%- assign ncommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'нежитловий'" -%}
+    {{ ncommercial | size }}
   {%- elsif slug == 'developer' -%}
-
+    {%- assign ndeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
+    {{ ndeveloper | size }}
   {%- elsif slug == 'garage' -%}
-
+    {%- assign ngarage = offers | where_exp: "i", "i.rent != '1' and i.type == 'Гараж' or i.type contains 'Місце'" -%}
+    {{ ngarage | size }}
   {%- elsif slug == 'house' -%}
     {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
     {{ nhouse | size }}
   {%- elsif slug == 'land' -%}
-
+    {%- assign nland = offers | where_exp: "i", "i.rent != '1' and i.seller == 'land'" -%}
+    {{ nland | size }}
   {%- elsif slug == 'realtor' -%}
-
+    {%- assign nrealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
+    {{ nrealtor | size }}
   {%- elsif slug == 'rent' -%}
     {%- assign nrent = offers | where_exp: "i", "i.rent == '1'" -%}
     {{ nrent | size }}
@@ -69,14 +74,14 @@
     {%- else -%}
       <div class="col px-2 mb-3">
 
-        <div class="card bg-dark text-white">
+        <div class="card text-white">
           <img src="/assets/images/locations/default.jpg" class="card-img" alt="{{ navitemtitle }}">
           <div class="card-img-overlay">
-            <h5 class="card-title text-white">
+            <h5 class="card-title py-1 px-2" style="display:inline-block;">
               <a href="{{ one.url }}" class="text-white">Розділ {{ navitemtitle }}</a>
             </h5>
             <p class="card-text">{{ description }}</p>
-            <p class="card-text">{{ records }} оголошень</p>
+            <p class="card-text text-right">{{ records }} оголошень</p>
           </div>
         </div>
 
