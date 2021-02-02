@@ -4,7 +4,7 @@
   {%- if slug == 'apartment' -%}
     {{ one.navtitle }} і частини квартир та оуркми кімнат у квартирі
   {%- elsif slug == 'commercial' -%}
-    Нежитлова і {{ one.navtitle | downcase }} для ведення госопдарської та комерційної діяльності
+    Нежитлова і {{ one.navtitle | downcase }} для ведення підприємницької діяльності
   {%- elsif slug == 'developer' -%}
     {{ one.navtitle }} і новобудови та житлові комплекси і масиви
   {%- elsif slug == 'garage' -%}
@@ -64,7 +64,13 @@
       <div class="col px-2 mb-3">
 
         <div class="card text-white">
-          <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ navitemtitle }}">
+
+          {%- include folder.html dir='/assets/images/section/' slug=slug -%}
+          {%- if file == true -%}
+            <img loading="lazy" src="{{ picture }}" class="card-img" alt="{{ slug }}">
+          {%- else -%}
+            <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img" alt="{{ slug }}">
+          {%- endif -%}
           <div class="card-img-overlay">
             <h5 class="card-title">
               <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
@@ -88,19 +94,3 @@
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}
-
-
-{% comment %}
-
-<div class="col px-2 mb-3">
-  <div class="card bg-dark text-white">
-    <img src="/assets/images/locations/default.jpg" class="card-img" alt="image">
-    <div class="card-img-overlay">
-      <h5 class="card-title">У розділі {{ one.title }}</h5>
-      <p class="card-text">Тут...{{ number }}</p>
-      <p class="card-text">...оголошень</p>
-    </div>
-  </div>
-</div>
-
-{% endcomment %}
