@@ -6,15 +6,15 @@
   {%- elsif slug == 'commercial' -%}
     Нежитлова і {{ one.navtitle | downcase }} для ведення підприємницької діяльності
   {%- elsif slug == 'developer' -%}
-    {{ one.navtitle }} нерухомості і новобудови та житлові комплекси, і масиви
+    Місцеві {{ one.navtitle | downcase }} нерухомості та їх новобудови та житлові комплекси, і масиви
   {%- elsif slug == 'garage' -%}
-    {{ one.navtitle }} і паркувальні місця над землею та під землею
+    Окремі та спільні {{ one.navtitle | downcase }} і паркувальні місця над землею та під землею
   {%- elsif slug == 'house' -%}
     {{ one.navtitle }} і частини будинків та окремих кімнати у будинку
   {%- elsif slug == 'land' -%}
     {{ one.navtitle }} дял сільського господарства і земельні ділянки для будівництва
   {%- elsif slug == 'realtor' -%}
-    {{ one.navtitle }}
+    Місцеві {{ one.navtitle | downcase }} з купівлі і продажу та оренди нерухомості
   {%- elsif slug == 'rent' -%}
    Подобова і довгострокова {{ one.navtitle | downcase }} квартир і будинків та окремих кімнат
   {%- else -%}
