@@ -28,11 +28,11 @@
       {%- else -%}
         <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }} - real estate">
       {%- endif -%}
-      <div class="card-img-overlay">
+      <div class="card-img-overlay">{{ site.data.lang-uk[map] }}
         <h5 class="card-title">
-          <a href="{{ page.dir }}map.html" class="text-white">Мапа нерухомості {{ page.title }} / {{ location }}</a>
+          <a href="{{ page.dir }}map.html" class="text-white">{{ page.title }} на памі міста</a>
         </h5>
-        <p class="font-weight-bold mb-0 text-right">{{ offers | size }} пропозицій</p>
+        <p class="font-weight-bold mb-0 text-right">Усі {{ offers | size }} пропозицій на мапі</p>
       </div>
     </div>
   </div>
