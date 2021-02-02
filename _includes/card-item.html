@@ -6,7 +6,7 @@
   {%- elsif slug == 'commercial' -%}
     Нежитлова і {{ one.navtitle | downcase }} для ведення підприємницької діяльності
   {%- elsif slug == 'developer' -%}
-    Місцеві {{ one.navtitle | downcase }} нерухомості та їх новобудови та житлові комплекси, і масиви
+    Місцеві {{ one.navtitle | downcase }} нерухомості та їх новобудови та житлові комплекси і масиви
   {%- elsif slug == 'garage' -%}
     Окремі та спільні {{ one.navtitle | downcase }} і паркувальні місця над землею та під землею
   {%- elsif slug == 'house' -%}
@@ -67,9 +67,9 @@
 
           {%- include folder.html dir='/assets/images/section/' slug=slug -%}
           {%- if file == true -%}
-            <img loading="lazy" src="{{ picture }}" class="card-img" alt="{{ slug }}">
+            <img loading="lazy" src="{{ picture }}" class="card-img" alt="{{ slug }} - real estate">
           {%- else -%}
-            <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }}">
+            <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }} - real estate">
           {%- endif -%}
           <div class="card-img-overlay">
             <h5 class="card-title">
@@ -88,7 +88,7 @@
     {%- if here == current and one.url contains here and one.navhide != 1 -%}
     <div class="col px-2 mb-3">
       <a href="{{ one.url }}" class="nav-link border-0">
-        <span>{{ navitemtitle }} / {{ records }} - 1</span>
+        <span>{{ navitemtitle }}</span>
       </a>
     </div>
     {%- endif -%}
