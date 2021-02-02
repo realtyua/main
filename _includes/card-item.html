@@ -2,21 +2,21 @@
 
 {%- capture navitemtitle -%}
   {%- if slug == 'apartment' -%}
-    {{ one.navtitle }} і частини квартир та кімнати
+    {{ one.navtitle }} і частини квартир та оуркми кімнат у квартирі
   {%- elsif slug == 'commercial' -%}
-    Нежитлова і {{ one.navtitle }}
+    Нежитлова і {{ one.navtitle | downcase }} для ведення госопдарської та комерційної діяльності
   {%- elsif slug == 'developer' -%}
-    {{ one.navtitle }} і новобудови
+    {{ one.navtitle }} і новобудови та житлові комплекси і масиви
   {%- elsif slug == 'garage' -%}
-    {{ one.navtitle }} і паркувальні місця
+    {{ one.navtitle }} і паркувальні місця над землею та під землею
   {%- elsif slug == 'house' -%}
-    {{ one.navtitle }} і частини будинків та кімнати
+    {{ one.navtitle }} і частини будинків та окремих кімнати у будинку
   {%- elsif slug == 'land' -%}
     {{ one.navtitle }} і земельні ділянки
   {%- elsif slug == 'realtor' -%}
     {{ one.navtitle }}
   {%- elsif slug == 'rent' -%}
-   Подобова і довгострокова оренда
+   Подобова і довгострокова {{ one.navtitle | downcase }} квартир і будинків та окремих кімнат
   {%- else -%}
     {%- if one.navtitle -%}
       {{ one.navtitle }}
@@ -57,28 +57,6 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- capture description -%}
-  {%- if slug == 'apartment' -%}
-
-  {%- elsif slug == 'commercial' -%}
-
-  {%- elsif slug == 'developer' -%}
-
-  {%- elsif slug == 'garage' -%}
-
-  {%- elsif slug == 'house' -%}
-
-  {%- elsif slug == 'land' -%}
-    Земельні ділянки для будівництва та ведення особистого селянського господарства
-  {%- elsif slug == 'realtor' -%}
-
-  {%- elsif slug == 'rent' -%}
-    Оренда квартир, окремих кімнат і будинків, земельних ділянок та нежитлових приміщень
-  {%- else -%}
-
-  {%- endif -%}
-{%- endcapture -%}
-
 {%- if page.url contains '/all.html' -%}
   {%- if page.dir == current or one.url contains page.url and page.navhide != 1 -%}
     {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
@@ -91,8 +69,7 @@
             <h5 class="card-title">
               <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
             </h5>
-            <small>{{ description }}</small>
-            <small>{{ records }} оголошень</small>
+            <p class="small">{{ records }} пропозицій</p>
           </div>
         </div>
 
