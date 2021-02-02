@@ -35,7 +35,7 @@
       {%- if isMap == 'true' and page.url contains '/all.html' -%}
 
       <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-        <li class="nav-item">
+        <li class="nav-item mb-2">
           <h5 class="m-lg-0">
             <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
               <span>{{ site.data.lang-uk.re_map }}</span>
@@ -49,7 +49,7 @@
       {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
 
       <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-        <li class="nav-item">
+        <li class="nav-item mb-2">
           <h5 class="m-lg-0">
             <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
               <span>{{ site.data.lang-uk.re_map }}</span>
@@ -61,17 +61,20 @@
 
       {%- endif -%}
 
-      <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
-        {%- for one in ones -%}
-          {%- assign isJson = false -%}
-          {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-          {%- assign slug = one.url | split: '/' | last -%}
-          {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-          {%- if one.title != '' and isJson == false -%}
-            {%- include nav-item.html -%}
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
+      {%- if page.url contains '/all.html' -%}
+      {%- else -%}
+        <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
+          {%- for one in ones -%}
+            {%- assign isJson = false -%}
+            {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+            {%- assign slug = one.url | split: '/' | last -%}
+            {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+            {%- if one.title != '' and isJson == false -%}
+              {%- include nav-item.html -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
 
     </div>
   </nav>
