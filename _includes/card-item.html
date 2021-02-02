@@ -2,17 +2,17 @@
 
 {%- capture navitemtitle -%}
   {%- if slug == 'apartment' -%}
-    {{ one.navtitle }} і частини квартир та оуркми кімнат у квартирі
+    {{ one.navtitle }} і частини квартир та окремих кімнат у квартирі або гуртожитьку
   {%- elsif slug == 'commercial' -%}
     Нежитлова і {{ one.navtitle | downcase }} для ведення підприємницької діяльності
   {%- elsif slug == 'developer' -%}
-    {{ one.navtitle }} і новобудови та житлові комплекси і масиви
+    {{ one.navtitle }} нерухомості і новобудови та житлові комплекси, і масиви
   {%- elsif slug == 'garage' -%}
     {{ one.navtitle }} і паркувальні місця над землею та під землею
   {%- elsif slug == 'house' -%}
     {{ one.navtitle }} і частини будинків та окремих кімнати у будинку
   {%- elsif slug == 'land' -%}
-    {{ one.navtitle }} і земельні ділянки
+    {{ one.navtitle }} дял сільського господарства і земельні ділянки для будівництва
   {%- elsif slug == 'realtor' -%}
     {{ one.navtitle }}
   {%- elsif slug == 'rent' -%}
