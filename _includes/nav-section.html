@@ -19,6 +19,24 @@
     {%- endif -%}
   {%- endfor -%}
 
+  <div class="col px-2 mb-3">
+    <div class="card text-white">
+      {%- assign map = page.dir | split: '/' | last -%}
+      {%- include folder.html dir='/assets/images/section/' slug=map -%}
+      {%- if file == true -%}
+        <img loading="lazy" src="{{ picture }}" class="card-img" alt="{{ slug }} - real estate">
+      {%- else -%}
+        <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }} - real estate">
+      {%- endif -%}
+      <div class="card-img-overlay">
+        <h5 class="card-title">
+          <a href="{{ page.dir }}" class="text-white">Мапа нерухомості {{ title }}</a>
+        </h5>
+        <p class="font-weight-bold mb-0 text-right">{{ offers | size }} пропозицій</p>
+      </div>
+    </div>
+  </div>
+
 {%- else -%}
 
   {%- if page.url contains '/all.html' -%}
