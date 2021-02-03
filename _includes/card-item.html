@@ -36,6 +36,8 @@
     {%- assign ncommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'Нежитловий'" -%}
     {{ ncommercial | size }}
   {%- elsif slug == 'developer' -%}
+    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'object'" -%}
+    {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'developer'" -%}
     {%- assign ndeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
     {{ ndeveloper | size }}
   {%- elsif slug == 'garage' -%}
@@ -48,6 +50,7 @@
     {%- assign nland = offers | where_exp: "i", "i.rent != '1' and i.type == 'Земля'" -%}
     {{ nland | size }}
   {%- elsif slug == 'realtor' -%}
+    {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'realtor'" -%}
     {%- assign nrealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
     {{ nrealtor | size }}
   {%- elsif slug == 'rent' -%}
@@ -75,7 +78,10 @@
               <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
             </h5>
             <p class="text-right">
-              <span class="badge badge-primary">{{ records }} пропозицій</span>
+              {%- if records == 0 and realtors > 0 -%}<span class="badge badge-primary mr-2">{{ realtors }} агентів і ріелторів</span>{%- endif -%}
+              {%- if developers > 0 -%}<span class="badge badge-primary mr-2">{{ realtors }} забудовників</span>{%- endif -%}
+              {%- if objects > 0 -%}<span class="badge badge-primary mr-2">{{ objects }} житлових комплексів</span>{%- endif -%}
+              {%- if records > 0 -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
             </p>
           </div>
         </div>
