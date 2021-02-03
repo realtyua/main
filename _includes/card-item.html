@@ -93,7 +93,7 @@
             </h5>
             <p class="text-right">
               {%- if nsellers != '' -%}{{ nsellers }}{%- endif -%}
-              {%- if ncomplexes > 0 -%}<span class="badge badge-primary mr-2">{{ ncomplexes }} житлових комплексів</span>{%- endif -%}
+              {%- if ncomplexes != '0' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }} житлових комплексів</span>{%- endif -%}
               {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій / {{ realtors | size }}</span>{%- endif -%}
             </p>
           </div>
