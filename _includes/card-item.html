@@ -36,6 +36,8 @@
     {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'Нежитловий'" -%}
     {{ ocommercial | size }}
   {%- elsif slug == 'developer' -%}
+    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object'" | size -%}
+    {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer'" | size -%}
     {%- assign odeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
     {{ odeveloper | size }}
   {%- elsif slug == 'garage' -%}
@@ -48,6 +50,7 @@
     {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type == 'Земля'" -%}
     {{ oland | size }}
   {%- elsif slug == 'realtor' -%}
+    {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor'" | size -%}
     {%- assign orealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
     {{ orealtor | size }}
   {%- elsif slug == 'rent' -%}
