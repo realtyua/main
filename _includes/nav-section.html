@@ -29,10 +29,12 @@
         <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }} - real estate">
       {%- endif -%}
       <div class="card-img-overlay">
-        <h5 class="card-title">
+        <h5 class="card-title text-shadow">
           <a href="{{ page.dir }}map.html" class="text-white">{{ page.title }} на мапі міста</a>
         </h5>
-        <p class="font-weight-bold mb-0 text-right">Усі {{ offers | size }} пропозицій на мапі</p>
+        <p class="text-right">
+          <span class="badge badge-primary">{{ offers | size }} пропозицій</span>
+        </p>
       </div>
     </div>
   </div>

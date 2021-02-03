@@ -71,7 +71,7 @@ table#property tr:not(.detail-view) { cursor: pointer; }
 .accordion .btn:focus, .accordion .btn.focus { box-shadow: none; }
 .multi-collapse button:focus { outline: 0; outline: 0; }
 
-main a.list-group-item:hover, footer a.list-group-item:hover {
+main a.list-group-item:hover, footer a.list-group-item:hover, .text-shadow a.text-white:hover {
     transition: unset;
     border-bottom: 1px solid rgba(0,0,0,0.125);
 }
@@ -87,4 +87,8 @@ a.badge-add:hover, a.badge-add:focus {
 
 main .leaflet-menu {
   border-right: 1px solid rgb(45, 92, 166);
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px black, 0 0 25px black, 0 0 5px black !important;
 }

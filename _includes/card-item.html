@@ -71,10 +71,12 @@
             <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }} - real estate">
           {%- endif -%}
           <div class="card-img-overlay">
-            <h5 class="card-title">
+            <h5 class="card-title text-shadow">
               <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
             </h5>
-            <p class="font-weight-bold mb-0 text-right">{{ records }} пропозицій</p>
+            <p class="text-right">
+              <span class="badge badge-primary">{{ records }} пропозицій</span>
+            </p>
           </div>
         </div>
 
