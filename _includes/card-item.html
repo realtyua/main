@@ -30,7 +30,6 @@
 
 {%- capture ncomplexes -%}
   {%- if slug == 'developer' -%}
-    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object'" -%}
     {{ assign nobjects = objects | size }}
     {%- if nobjects > 0 -%}<span class="badge badge-primary mr-2">{{ nobjects }} житлових комплексів</span>{%- endif -%}
   {%- endif -%}
@@ -38,11 +37,9 @@
 
 {%- capture nsellers -%}
   {%- if slug == 'developer' -%}
-    {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer'" -%}
     {{ assign ndevelopers = developers | size }}
     {%- if ndevelopers > 0 -%}<span class="badge badge-primary mr-2">{{ nrealtors }} забудовників</span>{%- endif -%}
   {%- elsif slug == 'realtor' -%}
-    {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.url[0] > 0" -%}
     {{ assign nrealtors = realtors | size }}
     {%- if nrealtors > 0 -%}<span class="badge badge-primary mr-2">{{ nrealtors }} агентів і ріелторів</span>{%- endif -%}
   {%- endif -%}

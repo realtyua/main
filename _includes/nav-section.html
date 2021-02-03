@@ -11,6 +11,10 @@
 
   {%- assign thehere = page.dir | split: '/' | last -%}
 
+  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.url[0] > 0" -%}
+  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer' and i.url[0] > 0" -%}
+  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.url[0] > 0" -%}
+
   {%- for one in ones -%}
     {%- assign isJson = false -%}
     {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
