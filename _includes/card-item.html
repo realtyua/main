@@ -30,8 +30,8 @@
 
 {%- capture ncomplexes -%}
   {%- if slug == 'developer' -%}
-    {{ assign nobjects = objects | size }}
-    {%- if nobjects > 0 -%}<span class="badge badge-primary mr-2">{{ nobjects }} житлових комплексів</span>{%- endif -%}
+    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
+    {{ objects | size }}
   {%- endif -%}
 {%- endcapture -%}
 
@@ -93,8 +93,8 @@
             </h5>
             <p class="text-right">
               {%- if nsellers != '' -%}{{ nsellers }}{%- endif -%}
-              {%- if ncomplexes != '' -%}{{ ncomplexes }}{%- endif -%}
-              {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
+              {%- if ncomplexes > 0 -%}<span class="badge badge-primary mr-2">{{ ncomplexes }} житлових комплексів</span>{%- endif -%}
+              {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій / {{ realtors | size }}</span>{%- endif -%}
             </p>
           </div>
         </div>
