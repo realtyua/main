@@ -4,5 +4,5 @@ sitemap: false
 navhide: 1
 ---
 
-{%- include data/tlumach/commercial.html -%}
+{%- include data/tlumach/rent.html -%}
 {%- include offer-json.html -%}
