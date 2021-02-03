@@ -9,9 +9,10 @@
 
 {%- if include.style == "card" -%}
 
-  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'object'" -%}
-  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'developer'" -%}
-  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'realtor'" -%}
+  {%- assign thehere = here | split: '/' | last -%}
+  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object'" -%}
+  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer'" -%}
+  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor'" -%}
 
   {%- for one in ones -%}
     {%- assign isJson = false -%}
@@ -37,7 +38,7 @@
           <a href="{{ page.dir }}map.html" class="text-white">{{ page.title }} на мапі міста</a>
         </h5>
         <p class="text-right">
-          <span class="badge badge-primary">{{ offers | size }} пропозицій</span>
+          <span class="badge badge-primary">{{ offers | size }} пропозицій // {{thehere}} / {{realtors}} / {{developers}}</span>
         </p>
       </div>
     </div>
