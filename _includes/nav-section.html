@@ -11,9 +11,9 @@
 
   {%- assign thehere = page.dir | split: '/' | last -%}
 
-  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object'" -%}
-  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer'" -%}
-  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor'" -%}
+  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
+  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer' and i.layout == 'developer'" -%}
+  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.layout == 'realtor'" -%}
 
   {%- for one in ones -%}
     {%- assign isJson = false -%}
