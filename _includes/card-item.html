@@ -31,17 +31,17 @@
 {%- capture ncomplexes -%}
   {%- if slug == 'developer' -%}
     {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
-    {{ objects | size }}
+    {{ objects | size }} житлових комплексів
   {%- endif -%}
 {%- endcapture -%}
 
 {%- capture nsellers -%}
   {%- if slug == 'developer' -%}
-    {{ assign ndevelopers = developers | size }}
-    {%- if ndevelopers > 0 -%}<span class="badge badge-primary mr-2">{{ nrealtors }} забудовників</span>{%- endif -%}
+    {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer' and i.layout == 'developer'" -%}
+    {{ developers | size }} забудовників
   {%- elsif slug == 'realtor' -%}
-    {{ assign nrealtors = realtors | size }}
-    {%- if nrealtors > 0 -%}<span class="badge badge-primary mr-2">{{ nrealtors }} агентів і ріелторів</span>{%- endif -%}
+    {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.layout == 'realtor'" -%}
+    {{ realtors | size }} агентів і ріелторів
   {%- endif -%}
 {%- endcapture -%}
 
@@ -92,8 +92,8 @@
               <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
             </h5>
             <p class="text-right">
-              {%- if nsellers != '' -%}{{ nsellers }}{%- endif -%}
-              {%- if ncomplexes != '0' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }} житлових комплексів</span>{%- endif -%}
+              {%- if nsellers != '0' -%}<span class="badge badge-primary mr-2">{{ nsellers }}</span>{%- endif -%}
+              {%- if ncomplexes != '0' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }}</span>{%- endif -%}
               {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій / {{ realtors | size }}</span>{%- endif -%}
             </p>
           </div>
