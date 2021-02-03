@@ -92,9 +92,9 @@
               <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
             </h5>
             <p class="text-right">
-              {%- if nsellers != '0' -%}<span class="badge badge-primary mr-2">{{ nsellers }}</span>{%- endif -%}
-              {%- if ncomplexes != '0' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }}</span>{%- endif -%}
-              {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій / {{ realtors | size }}</span>{%- endif -%}
+              {%- if nsellers != '' -%}<span class="badge badge-primary mr-2">{{ nsellers }}</span>{%- endif -%}
+              {%- if ncomplexes != '' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }}</span>{%- endif -%}
+              {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
             </p>
           </div>
         </div>
