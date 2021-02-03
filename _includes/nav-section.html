@@ -9,10 +9,10 @@
 
 {%- if include.style == "card" -%}
 
-  {%- assign thehere = here | split: '/' | last -%}
-  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object'" -%}
-  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer'" -%}
-  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor'" -%}
+  {%- assign thehere = page.dir | split: '/' | last -%}
+  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object'" | size -%}
+  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer'" | size -%}
+  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor'" | size -%}
 
   {%- for one in ones -%}
     {%- assign isJson = false -%}
