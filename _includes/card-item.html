@@ -30,32 +30,29 @@
 
 {%- capture records -%}
   {%- if slug == 'apartment' -%}
-    {%- assign napartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
-    {{ napartment | size }}
+    {%- assign oapartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type == 'Кімната'" -%}
+    {{ oapartment | size }}
   {%- elsif slug == 'commercial' -%}
-    {%- assign ncommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'Нежитловий'" -%}
-    {{ ncommercial | size }}
+    {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'Нежитловий'" -%}
+    {{ ocommercial | size }}
   {%- elsif slug == 'developer' -%}
-    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'object'" -%}
-    {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'developer'" -%}
-    {%- assign ndeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
-    {{ ndeveloper | size }}
+    {%- assign odeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
+    {{ odeveloper | size }}
   {%- elsif slug == 'garage' -%}
-    {%- assign ngarage = offers | where_exp: "i", "i.rent != '1' and i.type == 'Гараж' or i.type contains 'Місце'" -%}
-    {{ ngarage | size }}
+    {%- assign ogarage = offers | where_exp: "i", "i.rent != '1' and i.type == 'Гараж' or i.type contains 'Місце'" -%}
+    {{ ogarage | size }}
   {%- elsif slug == 'house' -%}
-    {%- assign nhouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
-    {{ nhouse | size }}
+    {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
+    {{ ohouse | size }}
   {%- elsif slug == 'land' -%}
-    {%- assign nland = offers | where_exp: "i", "i.rent != '1' and i.type == 'Земля'" -%}
-    {{ nland | size }}
+    {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type == 'Земля'" -%}
+    {{ oland | size }}
   {%- elsif slug == 'realtor' -%}
-    {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'realtor'" -%}
-    {%- assign nrealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
-    {{ nrealtor | size }}
+    {%- assign orealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
+    {{ orealtor | size }}
   {%- elsif slug == 'rent' -%}
-    {%- assign nrent = offers | where_exp: "i", "i.rent == '1'" -%}
-    {{ nrent | size }}
+    {%- assign orent = offers | where_exp: "i", "i.rent == '1'" -%}
+    {{ orent | size }}
   {%- else -%}
   {%- endif -%}
 {%- endcapture -%}
@@ -78,10 +75,10 @@
               <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
             </h5>
             <p class="text-right">
-              {%- if records == 0 and realtors > 0 -%}<span class="badge badge-primary mr-2">{{ realtors }} агентів і ріелторів</span>{%- endif -%}
+              {%- if realtors > 0 -%}<span class="badge badge-primary mr-2">{{ realtors }} агентів і ріелторів</span>{%- endif -%}
               {%- if developers > 0 -%}<span class="badge badge-primary mr-2">{{ realtors }} забудовників</span>{%- endif -%}
               {%- if objects > 0 -%}<span class="badge badge-primary mr-2">{{ objects }} житлових комплексів</span>{%- endif -%}
-              {%- if records > 0 -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
+              {%- if records != '' -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
             </p>
           </div>
         </div>

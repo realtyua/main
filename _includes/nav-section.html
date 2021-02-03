@@ -9,6 +9,10 @@
 
 {%- if include.style == "card" -%}
 
+  {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'object'" -%}
+  {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'developer'" -%}
+  {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains here and i.url contains 'realtor'" -%}
+
   {%- for one in ones -%}
     {%- assign isJson = false -%}
     {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
