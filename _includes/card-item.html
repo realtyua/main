@@ -6,7 +6,7 @@
   {%- elsif slug == 'commercial' -%}
     Нежитлова і {{ one.navtitle | downcase }} для ведення підприємницької діяльності
   {%- elsif slug == 'developer' -%}
-    Місцеві {{ one.navtitle | downcase }} нерухомості і новобудови та житлові комплекси, і масиви
+    Місцеві {{ one.navtitle | downcase }} нерухомості і новобудови та житлові комплекси
   {%- elsif slug == 'garage' -%}
     Окремі та спільні {{ one.navtitle | downcase }} і паркувальні місця над землею та під землею
   {%- elsif slug == 'house' -%}
@@ -14,9 +14,9 @@
   {%- elsif slug == 'land' -%}
     {{ one.navtitle }} для сільського господарства і земельні ділянки для будівництва
   {%- elsif slug == 'realtor' -%}
-    Місцеві {{ one.navtitle | downcase }} з купівлі, продажу і оренди нерухомості та їх послуги
+    Місцеві {{ one.navtitle | downcase }} з купівлі, продажу і оренди нерухомості
   {%- elsif slug == 'rent' -%}
-   Подобова і довгострокова {{ one.navtitle | downcase }} земелі та житлової і не житлової нерухомості
+   Подобова і довгострокова {{ one.navtitle | downcase }} квартир, будинків, приміщень, земелі
   {%- else -%}
     {%- if one.navtitle -%}
       {{ one.navtitle }}
@@ -31,17 +31,17 @@
 {%- capture ncomplexes -%}
   {%- if slug == 'developer' -%}
     {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
-    {{ objects | size }} житлових комплексів
+    Об'єктів {{ objects | size }}
   {%- endif -%}
 {%- endcapture -%}
 
 {%- capture nsellers -%}
   {%- if slug == 'developer' -%}
     {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer' and i.layout == 'developer'" -%}
-    {{ developers | size }} забудовників
+    Забудовників {{ developers | size }}
   {%- elsif slug == 'realtor' -%}
     {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.layout == 'realtor'" -%}
-    {{ realtors | size }} агентів і ріелторів
+    Aгентів і ріелторів {{ realtors | size }}
   {%- endif -%}
 {%- endcapture -%}
 
