@@ -59,9 +59,15 @@
             <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
               {% if back.size >= 6 %}
                 {%- include variables/complex.html title=item.title slice=2 -%}
-                {%- assign records = site.data[section] | where_exp: "i", "i.location contains location and i.object contains item.breadcrumb" -%}
+                {%- assign records = site.data[section] | where_exp: "i", "i.object contains item.breadcrumb" -%}
+                {% comment %}
+                  {%- assign records = site.data[section] | where_exp: "i", "i.location contains location and i.object contains item.breadcrumb" -%}
+                {% endcomment %}
               {% else %}
-                {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
+                {%- assign records = site.data[section] -%}
+                {% comment %}
+                  {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
+                {% endcomment %}
               {% endif %}
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
