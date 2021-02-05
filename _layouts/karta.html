@@ -106,8 +106,8 @@ layout: compress
     {%- assign slug = page.url | split: "/" | last -%}
     {%- assign l = page.url | split: '/' -%}
 
-    {%- if page.url contains 'karta.html' -%}
-      {%- assign json = page.url | replace: 'karta.html', 'data/karta.json' -%}
+    {%- if page.url contains 'map.html' -%}
+      {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
       {%- if l.size == 4 -%}
         {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
       {%- elsif l.size == 5 -%}
