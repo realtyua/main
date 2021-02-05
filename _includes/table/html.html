@@ -1,12 +1,17 @@
 {%- assign district = offer.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' -%}
+
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+
 {%- capture files -%}
   {%- for file in site.static_files -%}
     {%- if file.path contains folder and file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' or file.extname == '.png' or file.extname == '.PNG' -%}{{ file.path }}{%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}
+
 {%- assign isImage = files | strip_newlines -%}
+
 {%- include map/page-exists.html -%}
+
 {%- if forloop.first -%}
   <table
     id="property"
