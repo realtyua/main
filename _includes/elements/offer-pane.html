@@ -4,7 +4,7 @@
     {%- if data.size > 10 -%}
       {%- include table/data.html -%}
     {%- else -%}
-      {%- for offer in offers -%}
+      {%- for offer in data -%}
         {%- include table/html.html -%}
       {%- endfor -%}
     {%- endif -%}
