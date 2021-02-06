@@ -1,5 +1,27 @@
 [
   {
+    "id": "67",
+    "type": "Будинок",
+    "rent": "",
+    "rooms": "5",
+    "surface": "110",
+    "surface_land": "1900",
+    "price": "$25000",
+    "price_sqmt": "",
+    "floor": "",
+    "floors": "2",
+    "parking": "Власний двір",
+    "region": "",
+    "location": "м. Снятин",
+    "address": "вул. Володимира Хроновича, 39 A",
+    "object": "",
+    "coordinates": "48.450233,25.565243",
+    "date": "2021-02-05",
+    "seller": "Людмила Ткачук",
+    "phone": "380978190500",
+    "description": ""
+  },
+  {
     "id": "66",
     "type": "Будинок",
     "rent": "",
