@@ -9,6 +9,12 @@
 <link rel="image_src" href="{{ picture }}" />
 {%- else -%}
   {%- if page.url contains 'realtor' or page.url contains 'developer' -%}
+    {%- include folder.html dir='/assets/images/logo/' slug=edge -%}
+    {%- if file == true -%}
+      <link rel="image_src" href="{{ picture }}" />
+    {%- else -%}
+      <link rel="image_src" href="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" />
+    {%- endif -%}
   {%- else -%}
     <link rel="image_src" href="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" />
   {%- endif -%}
@@ -38,7 +44,6 @@
 <meta property="og:image:height" content="220" />
 {%- else -%}
   {%- if page.url contains 'realtor' or page.url contains 'developer' -%}
-    {%- include folder.html dir='/assets/images/logo/' slug=edge -%}
     {%- if file == true -%}
       <meta property="og:image" content="{{ picture }}" />
       <meta property="og:image:type" content="image/jpg" />
