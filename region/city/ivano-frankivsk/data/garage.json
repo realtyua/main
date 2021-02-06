@@ -3,6 +3,5 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-
 {%- include data/ivano-frankivsk/garage.html -%}
 {%- include offer-json.html -%}
