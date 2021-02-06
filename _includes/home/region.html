@@ -10,7 +10,7 @@
       <div class="col mb-4">
         <div class="card">
           <div class="card-body p-2">
-            <h5 class="card-title">{{ site.data.lang-uk.recently_added }}</h5>
+            <h5 class="card-title mb-2">{{ site.data.lang-uk.recently_added }}</h5>
             <div class="card-text">...</div>
           </div>
         </div>
@@ -26,7 +26,7 @@
             <img loading="lazy" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
           {%- endif -%}
           <div class="card-body p-2">
-            <h5 class="card-title">
+            <h5 class="card-title mb-2">
               <a href="{{ three.url }}" title="{{ three.title | replace: site.data.lang-uk.realestate_at, site.data.lang-uk.apartment_house_in }}">
                 {%- if three.title -%}{{ three.title | replace_first: 'Оголошення про н', 'Н' }}{%- else -%}{{ three.navtitle }}{%- endif -%}
               </a>
