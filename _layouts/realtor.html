@@ -10,9 +10,9 @@ layout: default
       <div class="col-md-4">
         {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slug" -%}
         {%- if file[0] -%}
-          <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+          <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} - {{ page.breadcrumb }}">
         {%- else -%}
-          <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+          <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} - {{ page.breadcrumb }}">
         {%- endif -%}
       </div>
       <div class="col-md-8 mt-3 mt-md-0">
