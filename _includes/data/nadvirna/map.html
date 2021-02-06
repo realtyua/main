@@ -1,4 +1,5 @@
 {%- include data/owner.html -%}
 {%- assign owners = owners -%}
+{%- assign ferents = site.data.ferents -%}
 {%- include data/nadvirna/i-map.html -%}
 {%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.coordinates and i.coordinates != ''" -%}
