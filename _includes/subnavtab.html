@@ -15,10 +15,17 @@
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
         <h5 class="m-lg-0">
-          <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-            <span>{{ site.data.lang-uk.re_map }}</span>
-            <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-          </a>
+          {%- if paga.url == mapPage -%}
+            <span class="badge badge-primary border-0" title="{{ site.data.lang-uk.re_map_on }}">
+              <span>{{ site.data.lang-uk.re_map }}</span>
+              <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+            </span>
+          {%- else -%}
+            <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
+              <span>{{ site.data.lang-uk.re_map }}</span>
+              <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+            </a>
+          {%- endif -%}
         </h5>
       </li>
     </ul>
