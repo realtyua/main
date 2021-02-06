@@ -1,5 +1,27 @@
 [
   {
+    "id": "68",
+    "type": "Будинок",
+    "rent": "",
+    "rooms": "3",
+    "surface": "79",
+    "surface_land": "2000",
+    "price": "$32000",
+    "price_sqmt": "",
+    "floor": "",
+    "floors": "1",
+    "parking": "Власний двір",
+    "region": "",
+    "location": "м. Снятин",
+    "address": "вул. Володимира Хроновича, 23",
+    "object": "",
+    "coordinates": "48.450049,25.564373",
+    "date": "2021-02-05",
+    "seller": "Марія Кейван",
+    "phone": "380677890863",
+    "description": ""
+  },
+  {
     "id": "67",
     "type": "Будинок",
     "rent": "",
