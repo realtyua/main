@@ -17,9 +17,9 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- assign edge = page.url | split: '/' | last -%}
-{%- include folder.html dir='/assets/images/locations/' slug=edge -%}
-{%- include folder.html dir='/assets/images/logo/' slug=edge -%}
+{%- assign pic = page.url | split: '/' | last -%}
+{%- include folder.html dir='/assets/images/locations/' slug=pic -%}
+{%- include folder.html dir='/assets/images/logo/' slug=pic -%}
 
 {%- capture title -%}
   {%- if page.title -%}
