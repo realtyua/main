@@ -1,10 +1,10 @@
 {%- include location.html -%}
 {%- assign items = '' | split:'' -%}
-{%- assign pages = site.html_pages | sort: 'date' -%}
+{%- assign pages = site.html_pages -%}
 {%- for lp in pages -%}
   {%- assign l = lp.dir | split: '/' -%}
   {%- if lp.dir contains page.dir and lp.dir != page.dir and l.size == include.l -%}
-    {%- assign items = items | push: lp | sort: 'date' -%}
+    {%- assign items = items | push: lp -%}
   {%- endif -%}
 {%- endfor -%}
 {%- if items.size > 0 -%}
