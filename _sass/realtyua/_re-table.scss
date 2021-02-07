@@ -57,12 +57,32 @@ $primary: #2d5ca6 !default;
   }
 }
 
-#property .card-views .card-view .card-view-title { display: none; }
-
-#property .card-views div:nth-child(2) .card-view-value {
-  background: #2d5ca6;
-  padding-left: 6px;
-  padding-right: 6px;
-  color: #ffffff;
-  margin-top: 6px;
+#property {
+  .card-views {
+    .card-view {
+      .card-view-title { display: none; }
+      div:nth-child(2) {
+        text-align: right;
+        .card-view-value {
+          background: #2d5ca6;
+          padding-left: 6px;
+          padding-right: 6px;
+          color: #ffffff;
+          margin-top: 6px;
+        }
+      }
+    }
+  }
 }
+
+//
+// #property .card-views .card-view .card-view-title { display: none; }
+// #property .card-views .card-view:nth-child(2) { text-align: right; }
+// #property .card-views div:nth-child(2) .card-view-value {
+//   background: #2d5ca6;
+//   padding-left: 6px;
+//   padding-right: 6px;
+//   color: #ffffff;
+//   margin-top: 6px;
+// }
+//
