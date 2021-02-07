@@ -6,7 +6,9 @@
     <div class="tabs flex-fill">
       <nav>
         <ul class="nav nav-tabs border-0" id="{{ region }}-realestate-tab" role="tablist">
-          <li class="nav-item my-2" role="presentation"><span class="mr-1">Виберіть розділ для перегляду</span><span>→</span></li>
+          <li class="nav-item my-2" role="presentation">
+            <span class="mr-1">Виберіть розділ цього{%- if title contains 'місті' -%} міста{%- else -%} району{%- endif -%}</span><span>→</span>
+          </li>
           {% comment %}
           <li class="nav-item d-none" role="presentation">
             <a class="nav-link active" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
