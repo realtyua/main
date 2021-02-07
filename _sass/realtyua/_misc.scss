@@ -104,7 +104,7 @@ main .leaflet-menu {
 // https://codepen.io/rodriguezcommaj/pen/MPdNqm
 //
 
-button.shadow-none {
+button.attention {
   height: 16px;
   width: 16px;
   margin: 0 auto;
@@ -121,7 +121,7 @@ button.shadow-none {
 
 @keyframes attention {
   0% {
-    transform: scale(.6);
+    transform: scale(.3);
     //background-color: red;
     border-radius: 100%;
   }
