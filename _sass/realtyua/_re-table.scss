@@ -56,3 +56,13 @@ $primary: #2d5ca6 !default;
     border-radius: unset;
   }
 }
+
+#property .card-views .card-view .card-view-title { display: none; }
+
+// #property .card-views .card-view .card-view-value {
+//   background: darkblue;
+//   padding-left: 6px;
+//   padding-right: 6px;
+//   color: aliceblue;
+//   margin-top: 6px;
+// }
