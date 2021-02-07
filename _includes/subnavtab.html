@@ -141,7 +141,7 @@
 
                   {%- if forloop.last -%}
                     </div>
-                    {%- assign others = offers | size | minus:9 -%}
+                    {%- assign others = offers | minus:9 | size -%}
                     {%- if others > 0 -%}
                       <div class="row">
                         <div class="col-auto ml-auto">

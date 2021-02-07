@@ -63,7 +63,7 @@
                 <div class="card-body p-2">{% include card/body.html %}</div>
               </div>
               {%- if forloop.last -%}
-                {%- assign others = offers | size | minus:3 -%}
+                {%- assign others = offers | minus:3 | size -%}
                 {%- if others > 0 -%}
                   <div class="row">
                     <div class="col-auto ml-auto">
