@@ -104,13 +104,12 @@ main .leaflet-menu {
 // https://codepen.io/rodriguezcommaj/pen/MPdNqm
 //
 
-button.attention {
+#attention {
   height: 16px;
   width: 16px;
   margin: 0 auto;
-  //background-color: red;
   animation-name: attention;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
   animation-timing-function: ease-out;
   animation-delay: 0;
   animation-direction: alternate;
@@ -122,14 +121,11 @@ button.attention {
 @keyframes attention {
   0% {
     transform: scale(.3);
-    //background-color: red;
     border-radius: 100%;
   }
   50% {
-    //background-color: white;
   }
   100% {
     transform: scale(2);
-    //background-color: white;
   }
 }
