@@ -123,9 +123,7 @@ main .leaflet-menu {
     transform: scale(.3);
     border-radius: 100%;
   }
-  50% {
-  }
   100% {
-    transform: scale(2);
+    transform: scale(1);
   }
 }
