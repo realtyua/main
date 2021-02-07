@@ -6,16 +6,16 @@
     <div class="tabs flex-fill">
       <nav>
         <ul class="nav nav-tabs border-0" id="{{ region }}-realestate-tab" role="tablist">
+          {% comment %}
           <li class="nav-item mt-2 mb-1 mr-2" role="presentation">
             <span class="mr-1">Розділи{% if include.title contains 'місті' %} міста{% else %} району{% endif %}</span><span>→</span>
           </li>
-          {% comment %}
+          {% endcomment %}
           <li class="nav-item d-none" role="presentation">
             <a class="nav-link active" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
-              <span>Нещодавно додано</span>
+              <span>Розділи{% if include.title contains 'місті' %} міста{% else %} району{% endif %}</span>
             </a>
           </li>
-          {% endcomment %}
           {% comment %}
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="{{ region }}-recently1-tab" data-toggle="tab" href="#{{ region }}-recently1" role="tab" aria-controls="{{ region }}-recently1" aria-selected="true">
