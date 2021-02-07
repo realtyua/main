@@ -98,3 +98,34 @@ main .leaflet-menu {
     font-size: 1rem;
   }
 }
+
+
+button.shadow-none {
+  height: 34px;
+  width: 34px;
+  margin: 0 auto;
+  background-color: red;
+  animation-name: attention;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+  animation-play-state: running;
+}
+
+@keyframes attention {
+  0% {
+    transform: scale(.6);
+    background-color: red;
+    border-radius: 100%;
+  }
+  50% {
+    background-color: white;
+  }
+  100% {
+    transform: scale(2);
+    background-color: white;
+  }
+}
