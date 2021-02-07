@@ -84,12 +84,11 @@
               </div>
               {%- assign total = offers | size -%}
               {%- assign others = total | minus:9 -%}
-              ### {{ offers }} // {{ total }} // {{ others }} - 9 ###
               {%- if others > 0 -%}
                 <div class="row">
                   <div class="col-auto ml-auto">
                     <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-                      {{ site.data.lang-uk.others }} <strong>{{ others | size }}</strong> {{ site.data.lang-uk.others_offers }}
+                      {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_offers }}
                     </a>
                   </div>
                 </div>
