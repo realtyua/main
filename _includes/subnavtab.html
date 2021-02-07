@@ -82,13 +82,17 @@
 
             {%- if forloop.last -%}
               </div>
-              <div class="row">
-                <div class="col-auto ml-auto">
-                  <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
-                    {{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}
-                  </a>
+              {%- assign others = offers | minus:9 -%}
+              ### {{ others }} - 0 ###
+              {%- if others > 0 -%}
+                <div class="row">
+                  <div class="col-auto ml-auto">
+                    <a class="btn btn-primary" href="{{ page.dir | append: 'all' }}">
+                      {{ site.data.lang-uk.others }} <strong>{{ others | size }}</strong> {{ site.data.lang-uk.others_offers }}
+                    </a>
+                  </div>
                 </div>
-              </div>
+              {%- endif -%}
             {%- endif -%}
 
           {%- else -%}

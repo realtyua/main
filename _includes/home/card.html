@@ -64,6 +64,7 @@
               </div>
               {%- if forloop.last -%}
                 {%- assign others = offers | minus:3 -%}
+                ### {{ others }} - 2 ###
                 {%- if others > 0 -%}
                   <div class="row">
                     <div class="col-auto ml-auto">
