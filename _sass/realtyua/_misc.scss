@@ -99,12 +99,15 @@ main .leaflet-menu {
   }
 }
 
+//
+// https://codepen.io/team/css-tricks/pen/EjaJNd
+//
 
 button.shadow-none {
-  height: 34px;
-  width: 34px;
+  height: 24px;
+  width: 24px;
   margin: 0 auto;
-  background-color: red;
+  //background-color: red;
   animation-name: attention;
   animation-duration: 1.5s;
   animation-timing-function: ease-out;
@@ -118,14 +121,14 @@ button.shadow-none {
 @keyframes attention {
   0% {
     transform: scale(.6);
-    background-color: red;
+    //background-color: red;
     border-radius: 100%;
   }
   50% {
-    background-color: white;
+    //background-color: white;
   }
   100% {
     transform: scale(2);
-    background-color: white;
+    //background-color: white;
   }
 }
