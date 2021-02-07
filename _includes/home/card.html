@@ -63,8 +63,9 @@
                 <div class="card-body p-2">{% include card/body.html %}</div>
               </div>
               {%- if forloop.last -%}
-                {%- assign others = offers | minus:3 -%}
-                ### {{ others }} - 2 ###
+                {%- assign total = offers | size -%}
+                {%- assign others = total | minus:3 -%}
+                ### {{ offers }} // {{ total }} // {{ others }} - 3 ###
                 {%- if others > 0 -%}
                   <div class="row">
                     <div class="col-auto ml-auto">
