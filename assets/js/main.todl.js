@@ -11,6 +11,7 @@ sitemap: false
 {%- include js/bootstrap.smoothscroll.min.js -%}
 {%- include js/bootstrap-table.min.js -%}
 {%- include js/bootstrap-table-uk-UA.min.js -%}
+{%- include js/bootstrap-table-mobile.min.js -%}
 {%- include object/js-middle.html -%}
 {%- include js/table.js -%}
 {%- include js/realtyua.js -%}
