@@ -1,5 +1,27 @@
 [
   {
+    "id": "71",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "3",
+    "surface": "64",
+    "surface_land": "",
+    "price": "$33000",
+    "price_sqmt": "",
+    "floor": "9",
+    "floors": "10",
+    "parking": "Прибудинкова територія",
+    "region": "",
+    "location": "м. Івано-Франківськ",
+    "address": "вул. Вовчинецька, 25",
+    "object": "",
+    "coordinates": "",
+    "date": "2021-02-08",
+    "seller": "Ірина Кошелюк",
+    "phone": "380954286558",
+    "description": ""
+  },
+  {
     "id": "70",
     "type": "Будинок",
     "rent": "",
