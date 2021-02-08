@@ -1,5 +1,27 @@
 [
   {
+    "id": "69",
+    "type": "Земля",
+    "rent": "",
+    "rooms": "",
+    "surface": "",
+    "surface_land": "3200",
+    "price": "$7000",
+    "price_sqmt": "",
+    "floor": "",
+    "floors": "",
+    "parking": "",
+    "region": "Калуський район",
+    "location": "",
+    "address": "с. Сенечів (урочище Обіч)",
+    "object": "",
+    "coordinates": "48.741028,23.569762",
+    "date": "2021-02-08",
+    "seller": "Оксана Рак",
+    "phone": "380664457027",
+    "description": ""
+  },
+  {
     "id": "68",
     "type": "Будинок",
     "rent": "",
