@@ -1,5 +1,27 @@
 [
   {
+    "id": "72",
+    "type": "Будинок",
+    "rent": "",
+    "rooms": "6",
+    "surface": "192",
+    "surface_land": "600",
+    "price": "$69000",
+    "price_sqmt": "",
+    "floor": "",
+    "floors": "2",
+    "parking": "Власне подвір'я",
+    "region": "",
+    "location": "м. Снятин",
+    "address": "вул. Виноградна, 38",
+    "object": "",
+    "coordinates": "48.45018,25.57366",
+    "date": "2021-02-08",
+    "seller": "Анастасія Філіпчук",
+    "phone": "380952049980",
+    "description": ""
+  },
+  {
     "id": "71",
     "type": "Квартира",
     "rent": "",
