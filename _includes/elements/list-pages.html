@@ -8,8 +8,8 @@
   {%- endif -%}
 {%- endfor -%}
 {%- if items.size > 0 -%}
-  {%- for item in items limit:6 | sort: 'date' -%}
-    {%- assign section = item.url | split: "/" | last -%}
+  {%- for item in items limit: 6 | sort: 'date' -%}
+    {%- assign section = item.url | split: '/' | last -%}
     {%- include elements/items-pages.html -%}
   {%- else -%}
   {%- endfor -%}
