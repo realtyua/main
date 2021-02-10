@@ -8,7 +8,7 @@
     {%- endif -%}
   {%- endfor -%}
   {%- if items.size > 0 -%}
-    {%- for item in items limit: 6 | sort: 'date' -%}
+    {%- for item in items limit: 6 | sort: 'date' | reverse -%}
       {%- assign section = item.url | split: '/' | last -%}
       {%- if forloop.first -%}
       <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
