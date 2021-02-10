@@ -1,5 +1,27 @@
 [
   {
+    "id": "79",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "1",
+    "surface": "34",
+    "surface_land": "",
+    "price": "$16000",
+    "price_sqmt": "",
+    "floor": "6",
+    "floors": "9",
+    "parking": "Прибудинкова територія",
+    "region": "",
+    "location": "м. Коломия",
+    "address": "вул. Гетьмана Мазепи, 298",
+    "object": "",
+    "coordinates": "48.567526,25.065161",
+    "date": "2021-02-10",
+    "seller": "Олег Геник",
+    "phone": "380677357904",
+    "description": ""
+  },
+  {
     "id": "78",
     "type": "Квартира",
     "rent": "",
