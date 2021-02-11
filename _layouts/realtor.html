@@ -37,16 +37,19 @@ layout: default
           {%- if stabs.size > 0 -%}
             {%- include elements/others-tab.html tabs=stabs -%}
           {%- endif -%}
+          {% comment %}
           <li class="nav-item" role="presentation">
             <a class="nav-link border-0" href="#map" id="map-tab" data-toggle="tab" role="tab" aria-controls="map" aria-selected="true">
               <span>Мапа</span>
             </a>
           </li>
+          {% endcomment %}
         </ul>
       </div>
     </nav>
     <hr class="mt-2 mt-md-0">
     <div class="tab-content" id="{{ slug }}-content">
+      {% comment %}
       <div class="tab-pane fade show" id="map" role="tabpanel" aria-labelledby="map-tab">
         <div class="row">
           <div class="col-12">
@@ -55,6 +58,7 @@ layout: default
           </div>
         </div>
       </div>
+      {% endcomment %}
       {%- if fJson == 'true' and isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- else -%}
