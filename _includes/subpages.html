@@ -1,4 +1,5 @@
 {%- if include.dir != page.dir and include.dir contains page.dir -%}
+
   {%- assign items = '' | split: '' -%}
   {%- assign pages = site.html_pages | sort: 'date' | reverse -%}
   {%- for p in pages -%}
@@ -7,7 +8,9 @@
       {%- assign items = items | push: p -%}
     {%- endif -%}
   {%- endfor -%}
+
   {%- if items.size > 0 -%}
+
     {%- for item in items limit: 6 -%}
       {%- assign section = item.url | split: '/' | last -%}
       {%- if forloop.first -%}
@@ -90,6 +93,8 @@
         </div>
       </div>
     {%- endfor -%}
+
   {%- endif -%}
+  
 {%- else -%}
 {%- endif -%}
