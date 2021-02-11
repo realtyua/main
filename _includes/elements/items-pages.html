@@ -74,9 +74,13 @@
                 {%- for offer in offers limit: 1 -%}
                   {%- include card.html offer=offer aid=aid -%}
                 {%- endfor -%}
+                {%- assign total = offers | size -%}
+                {%- assign others = total | minus:1 -%}
+                {%- if others > 0 -%}
                 <div class="card border-0 text-center">
                   <a href="{{ item.url }}" class="btn btn-primary">{{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong> {{ site.data.lang-uk.others_offers }}</a>
                 </div>
+                {%- endif -%}
               {%- else -%}
                 <div class="alert alert-primary" role="alert">
                   <p>Поки що тут жодної нерухомості, але ви можете виправити це додавши свої пропозиції, а ми залюбки опублікуємо їх тут.</p>

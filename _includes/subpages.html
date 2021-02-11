@@ -44,7 +44,7 @@
                 </nav>
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
-                    {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
+                    {%- assign records = site.data[section] -%}
                     {%- if records.size > 0 -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
                       {%- for offer in offers limit: 1 -%}
@@ -54,7 +54,7 @@
                       {%- assign others = total | minus:1 -%}
                       {%- if others > 0 -%}
                         <div class="card border-0 text-center">
-                          <a href="{{ item.url }}" class="btn btn-primary">Інші <strong>{{ offers | size }}</strong> пропозиції нерухомості</a>
+                          <a href="{{ item.url }}" class="btn btn-primary">{{ site.data.lang-uk.others }} <strong>{{ offers | size }}</strong>  {{ site.data.lang-uk.others_offers }}</a>
                         </div>
                       {%- endif -%}
                     {%- else -%}
