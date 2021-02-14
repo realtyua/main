@@ -16,7 +16,10 @@
   <nav class="navbar p-0">
     {%- if isMap == 'true' -%}
     <a class="marker mr-2" href="{{ url }}map" title="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_on_map }}">
+      <i class="d-none">{{ region }}</i>
+      {% comment %}
       {%- include icons/marker.svg width="12" height="18" -%}
+      {% endcomment %}
     </a>
     {%- endif -%}
     <button id="uvaga" title="{{ site.data.lang-uk.sections }}" class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
