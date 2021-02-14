@@ -99,11 +99,6 @@ main .leaflet-menu {
   }
 }
 
-//
-// https://codepen.io/team/css-tricks/pen/EjaJNd
-// https://codepen.io/rodriguezcommaj/pen/MPdNqm
-//
-
 #uvaga {
   height: 24px;
   width: 24px;
@@ -121,4 +116,13 @@ main .leaflet-menu {
 @keyframes attention {
   0% { transform: scale(.8); border-radius: 100%; }
   100% { transform: scale(1); }
+}
+
+a.marker {
+  display: block;
+  text-indent: -9999px;
+  width: 12px;
+  height: 18px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTIiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAzNjUgNTYwIj48Zz48cGF0aCBmaWxsPSIjMmQ1Y2E2IiBkPSJNMTgyLjksNTUxLjdjMCwwLjEsMC4yLDAuMywwLjIsMC4zUzM1OC4zLDI4MywzNTguMywxOTQuNmMwLTEzMC4xLTg4LjgtMTg2LjctMTc1LjQtMTg2LjkgQzk2LjMsNy45LDcuNSw2NC41LDcuNSwxOTQuNmMwLDg4LjQsMTc1LjMsMzU3LjQsMTc1LjMsMzU3LjRTMTgyLjksNTUxLjcsMTgyLjksNTUxLjd6IE0xMjIuMiwxODcuMmMwLTMzLjYsMjcuMi02MC44LDYwLjgtNjAuOCBjMzMuNiwwLDYwLjgsMjcuMiw2MC44LDYwLjhTMjE2LjUsMjQ4LDE4Mi45LDI0OEMxNDkuNCwyNDgsMTIyLjIsMjIwLjgsMTIyLjIsMTg3LjJ6Ij48L3BhdGg+PC9nPjwvc3ZnPg==");
+  background-size: 12px 18px;
 }
