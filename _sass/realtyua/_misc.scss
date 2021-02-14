@@ -118,7 +118,7 @@ main .leaflet-menu {
   100% { transform: scale(1); }
 }
 
-.card-footer a.marker {
+.card-footer a.marker, .navbar a.marker  {
   display: block;
   text-indent: -9999px;
   margin-top: 5px;
