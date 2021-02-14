@@ -371,19 +371,19 @@ function propertyFormatter(value, row) {
           html.push('{{ site.data.lang-uk.re_na }} <b>' + row.floor + '</b>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, ')
         }
       }
-      if (row.region && row.region !== '' && row.region.indexOf('район') !== -1) {
+      if (row.region && row.region !== '' && row.region.indexOf('{{ site.data.lang-uk.district }}') !== -1) {
         if (row.region && row.region !== '') {
           html.push('{{ site.data.lang-uk.re_address }} <b>' + row.address + ', ' + row.region + '</b>.')
         }
         if (row.page && row.page === '1') {
-          html.push(' <a href=/' + row.phone + '>Сторінка оголошення</a>.')
+          html.push(' <a href=/' + row.phone + '>{{ site.data.lang-uk.re_page_ads }}</a>.')
         }
       } else {
         if (row.location && row.location !== '') {
           html.push('{{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_at }} <b>' + row.location + '</b>, {{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>.')
         }
         if (row.page && row.page === '1') {
-          html.push(' <a href="{{ site.url }}/' + row.phone + '" target="_blank">Сторінка оголошення</a>.')
+          html.push(' <a href="{{ site.url }}/' + row.phone + '" target="_blank">{{ site.data.lang-uk.re_page_ads }}</a>.')
         }
       }
     }
