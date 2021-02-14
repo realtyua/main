@@ -373,7 +373,7 @@ function propertyFormatter(value, row) {
       }
       if (row.region && row.region !== '' && row.region.indexOf('{{ site.data.lang-uk.district }}') !== -1) {
         if (row.region && row.region !== '') {
-          html.push('{{ site.data.lang-uk.re_address }} <b>' + row.address + ', ' + row.region + '</b>.')
+          html.push('{{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>, ' + row.region + '.')
         }
         if (row.page && row.page === '1') {
           html.push(' <a href=/' + row.phone + '>{{ site.data.lang-uk.re_page_ads }}</a>.')
