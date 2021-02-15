@@ -3,5 +3,6 @@
 {%- assign mykhalchuk = site.data.mykhalchuk -%}
 {%- assign mosiychuk = site.data.mosiychuk -%}
 {%- assign ferents = site.data.ferents -%}
+{%- assign matsalak = site.data.matsalak -%}
 {%- include data/ivano-frankivska/i-map.html -%}
 {%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.coordinates and i.coordinates != ''" -%}
