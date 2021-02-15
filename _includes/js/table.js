@@ -316,7 +316,7 @@ function propertyFormatter(value, row) {
     if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
       html = ['{{ site.data.lang-uk.re_for_sale }} <b class="text-lowercase">' + row.type + '</b>, ']
       if (row.surface_land && row.surface_land !== '') { html.push('{{ site.data.lang-uk.re_surface }} <b>' + row.surface_land + ' {{ site.data.lang-uk.re_m }}</b><sup>2</sup>') }
-      if (row.location && row.location !== '') { html.push(', {{ site.data.lang-uk.re_location }} <b>{{ site.data.lang-uk.re_at }} ' + row.location + '</b>') }
+      if (row.location && row.location !== '') { html.push(', {{ site.data.lang-uk.re_location }} <b>{{ site.data.lang-uk.re_at }} ' + row.location + '</b>, ') }
       if (row.address && row.address !== '' && row.location !== '') { html.push('{{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>') }
       if (row.address && row.address !== '' && row.location === '') { html.push(', {{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_address }} <b>' + row.address + '</b>') }
       if (row.region && row.region !== '' && row.location === '') { html.push(', ' + row.region + '.') }
