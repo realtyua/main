@@ -1,5 +1,27 @@
 [
   {
+    "id": "91",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "2",
+    "surface": "51.6",
+    "surface_land": "",
+    "price": "$30000",
+    "price_sqmt": "",
+    "floor": "5",
+    "floors": "5",
+    "parking": "Прибудинкова територія",
+    "region": "",
+    "location": "м. Яремче",
+    "address": "вул. Свободи, 216",
+    "object": "",
+    "coordinates": "48.45637,24.55881",
+    "date": "2021-02-15",
+    "seller": "Ганна Герушинська",
+    "phone": "380972644825",
+    "description": ""
+  },
+  {
     "id": "90",
     "type": "Квартира",
     "rent": "",
