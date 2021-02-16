@@ -26,10 +26,14 @@ layout: default
             {%- if s.n and s.n != "" -%}
               {%- if s.w and s.w !="" -%}
                 <div class="card-header pb-0 bg-white border-bottom-0 font-weight-bold">
-                  <a href="{{ s.w }}">{{ s.n }}</a>
+                  <a href="{{ s.w }}">
+                    {%- if s.h and s.h != "" -%}{{ s.h }}{%- else -%}{{ s.n }}{%- endif -%}
+                  </a>
                 </div>
               {%- else -%}
-                <div class="card-header bg-white border-bottom-0 font-weight-bold pb-0">{{ s.n }}</div>
+                <div class="card-header bg-white border-bottom-0 font-weight-bold pb-0">
+                  {%- if s.h and s.h != "" -%}{{ s.h }}{%- else -%}{{ s.n }}{%- endif -%}
+                </div>
               {%- endif -%}
             {%- endif -%}
           {%- endif -%}
@@ -38,10 +42,14 @@ layout: default
             {%- if file[0] and s.n and s.n !="" -%}
               {%- if s.w and s.w !="" -%}
                 <h5 class="card-title mb-1">
-                  <a href="{{ s.w }}">{{ s.n }}</a>
+                  <a href="{{ s.w }}">
+                    {%- if s.h and s.h != "" -%}{{ s.h }}{%- else -%}{{ s.n }}{%- endif -%}
+                  </a>
                 </h5>
               {%- else -%}
-                <h5 class="card-title">{{ s.n }}</h5>
+                <h5 class="card-title">
+                  {%- if s.h and s.h != "" -%}{{ s.h }}{%- else -%}{{ s.n }}{%- endif -%}
+                </h5>
               {%- endif -%}
             {%- endif -%}
             <p class="card-text">{{ s.t }}</p>
