@@ -6,12 +6,13 @@ layout: default
   <div class="col-12">
     <h1>{{ page.title | replace_first: ' в ', ' у ' }}</h1>
     {%- if page.community -%}<p>{{ page.community }}</p>{%- endif -%}
-    {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include subnavtab.html -%}
   </div>
-  {%- if page.smalltext -%}
+  {%- assign isContent = content | strip_newlines -%}
+  {%- if isContent == "" -%}
+  {%- else -%}
   <div class="col-12">
-    <p class="small">{{ page.smalltext }}</p>
+    {{ content }}
   </div>
   {%- endif -%}
 </div>
