@@ -17,7 +17,7 @@ navhide: 1
     {%- assign communities = site.html_pages | sort: "title" | where_exp: 'i', "i.community and i.community != ''" -%}
     {%- for c in communities -%}
       {%- if c.size > 0 -%}
-        <p><strong><a href="{{ c.url }}">{{ c.navtitle | capitalize }}</a></strong> - {{ c.community }}</p>
+        <p><strong><a href="{{ c.url }}">{{ c.navtitle | replace_first: 'м', 'М'  }}</a></strong> - {{ c.community }}</p>
       {%- endif -%}
     {%- endfor -%}
   </div>
