@@ -5,7 +5,15 @@ layout: default
 <div class="row">
   <div class="col-12">
     <h1>{{ page.title | replace_first: ' в ', ' у ' }}</h1>
+    {%- if page.communities -%}<p>{{ page.communities }}</p>{%- endif -%}
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include subnavtab.html -%}
+  </div>
+  <div class="col-12">
+    {%- assign isContent = content | strip_newlines -%}
+    {%- if isContent == '' -%}
+    {%- else -%}
+      {{ content }}
+    {%- endif -%}
   </div>
 </div>
