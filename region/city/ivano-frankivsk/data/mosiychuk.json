@@ -13,7 +13,3 @@ navhide: 1
 {%- assign data = site.data[name] -%}
 {%- assign offers = data | sort: 'date' | reverse -%}
 {%- include offer-json.html -%}
-
-{% comment %}
-  {%- assign offers = data | sort: 'date' | reverse | where_exp: 'i', 'i.location contains location' -%}
-{% endcomment %}

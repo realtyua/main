@@ -4,3 +4,21 @@ navtitle:
 subtitle:
 navhide: 1
 ---
+
+<table
+  id="laws"
+  data-toggle="table"
+  data-url="/laws/data/laws.json">
+  <thead>
+    <tr>
+      <th data-field="t" data-title="Короткий опис">t</th>
+      <th data-field="l" data-formatter="linkFormatter" data-title="Посилання">l</th>
+    </tr>
+  </thead>
+</table>
+
+<script>
+  function linkFormatter(value) {
+    return '<a href="' + value + '" target="_blank" rel="noopener">Переглянути</a>'
+  }
+</script>
