@@ -5,21 +5,29 @@ subtitle:
 navhide: 1
 ---
 
-<table
-  id="laws"
-  data-locale="{{ site.lang | replace: '_', '-' }}"
-  data-toggle="table"
-  data-pagination="true"
-  data-mobile-responsive="true"
-  data-buttons-class="primary"
-  data-url="/laws/data/laws.json">
-  <thead class="thead-re">
-    <tr>
-      <th data-field="t" data-title="Короткий опис">t</th>
-      <th data-field="l" data-formatter="linkFormatter" data-title="Посилання">l</th>
-    </tr>
-  </thead>
-</table>
+<div class="row">
+  <div class="col-12">
+    <h1>Законодавство Україні на ринку нерухомості</h1>
+    <p>Ми зібрали для вас каталог посилань на закони, кодекси, постанови, розпорядження і законодавчі та нормативно-правові акти, які регулюють ринок нерухомості в Україні</p>
+  </div>
+  <div class="col-12">
+    <table
+      id="laws"
+      data-locale="{{ site.lang | replace: '_', '-' }}"
+      data-toggle="table"
+      data-pagination="true"
+      data-mobile-responsive="true"
+      data-buttons-class="primary"
+      data-url="/laws/data/laws.json">
+      <thead class="thead-re">
+        <tr>
+          <th data-field="t" data-title="Короткий опис">t</th>
+          <th data-field="l" data-formatter="linkFormatter" data-title="Посилання">l</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
 
 <script>
   function linkFormatter(value) {
