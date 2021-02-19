@@ -1,5 +1,27 @@
 [
   {
+    "id": "116",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "4",
+    "surface": "148",
+    "surface_land": "",
+    "price": "$47000",
+    "price_sqmt": "",
+    "floor": "9",
+    "floors": "10",
+    "parking": "",
+    "region": "",
+    "location": "м. Івано-Франківськ",
+    "address": "вул. Гната Хоткевича, 57 А",
+    "object": "",
+    "coordinates": "48.92445,24.73488",
+    "date": "2021-02-19",
+    "seller": "Мар'ян Савчак",
+    "phone": "380954974513",
+    "description": ""
+  },
+  {
     "id": "115",
     "type": "Квартира",
     "rent": "",
