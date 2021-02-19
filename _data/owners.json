@@ -1,5 +1,27 @@
 [
   {
+    "id": "115",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "3",
+    "surface": "62",
+    "surface_land": "",
+    "price": "$32000",
+    "price_sqmt": "",
+    "floor": "2",
+    "floors": "9",
+    "parking": "",
+    "region": "",
+    "location": "м. Коломия",
+    "address": "вул. Миколи Леонтовича, 22",
+    "object": "",
+    "coordinates": "48.543496,25.035821",
+    "date": "2021-02-19",
+    "seller": "Валерій Данилюк",
+    "phone": "380506840014",
+    "description": ""
+  },
+  {
     "id": "114",
     "type": "Земля",
     "rent": "",
