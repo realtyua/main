@@ -16,8 +16,8 @@
     letter-spacing: 0.1em;
   }
 
-  details > summary:before {
-    content:"\0260E";
+  details > summary::before {
+    content:"\260E";
   }
 
   details > summary::-webkit-details-marker {

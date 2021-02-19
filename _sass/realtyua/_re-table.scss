@@ -57,7 +57,7 @@ $primary: #2d5ca6 !default;
   }
 }
 
-#property .card-views .card-view .card-view-title { display: none; }
+#property .card-views .card-view .card-view-title, #laws .card-views .card-view .card-view-title { display: none; }
 #property .card-views .card-view:nth-child(2) { text-align: right; }
 #property .card-views div:nth-child(2) .card-view-value {
   background: #2d5ca6;
@@ -67,7 +67,12 @@ $primary: #2d5ca6 !default;
   margin-top: 6px;
 }
 
-#property .card-views .card-view:nth-child(2):after {
+#laws .card-view-value:nth-child(2) a::after {
+  content: "\21E2";
+  margin-left: .2rem;
+}
+
+#property .card-views .card-view:nth-child(2)::after {
   content: "\2193";
   font-size: 1.2rem;
   position: relative;
