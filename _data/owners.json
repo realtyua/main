@@ -1,5 +1,27 @@
 [
   {
+     "id": "119",
+     "type": "Будинок",
+     "rent": "",
+     "rooms": "9",
+     "surface": "200",
+     "surface_land": "900",
+     "price": "$30000",
+     "price_sqmt": "",
+     "floor": "",
+     "floors": "2",
+     "parking": "Власне огороджене подвір'я",
+     "region": "",
+     "location": "м. Галич",
+     "address": "вул Коротка, 7",
+     "object": "",
+     "coordinates": "49.129791,24.734235",
+     "date": "2021-02-19",
+     "seller": "Роман Степанович Кружиньський",
+     "phone": "380972557880",
+     "description": ""
+   },
+  {
      "id": "118",
      "type": "Земля",
      "rent": "",
