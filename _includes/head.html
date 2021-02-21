@@ -35,7 +35,7 @@
   <link rel="preload" href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
   <link rel="preload" href="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   <link href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
-{%- elsif slash.size > 0 and page.lightbox == '1' -%}
+{%- elsif page.lightbox == '1' -%}
   <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
   <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
