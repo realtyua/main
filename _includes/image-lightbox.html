@@ -1,0 +1,5 @@
+{%- if include.src != '' -%}
+<a href="/assets/images/{{ include.folder | default: include.group }}/{{ include.src }}" class="lightbox" title="{{ include.title | default: include.alt }}" data-lightbox-caption="{{ include.caption | default: include.alt }}" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="{{ include.group | default: include.folder }}">
+  <img src="/assets/images/{{ include.folder | default: include.group }}/{{ include.src }}" loading="lazy" class="img-fluid img-thumbnail" title="{{ include.title | default: include.alt }}" alt="{{ include.alt }}" intrinsicsize="1024x768">
+</a>
+{%- endif -%}
