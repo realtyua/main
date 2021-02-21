@@ -35,10 +35,6 @@
   <link rel="preload" href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
   <link rel="preload" href="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   <link href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
-{%- elsif page.lightbox == '1' -%}
-  <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-  <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
 {%- else -%}
 
   {%- if page.table == 1 or page.table == 2 -%}
@@ -54,6 +50,8 @@
       <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- elsif page.dir != '/laws/' or page.dir != '/docs/' -%}
       <link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+    {%- elsif page.lightbox == '1' -%}
+      <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- else -%}
       <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- endif -%}
@@ -61,6 +59,8 @@
 
   {%- if page.dir == '/' and page.url contains '/ukraine.html' -%}
     <link rel="preload" href="{{ "/assets/js/main.ua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+  {%- elsif page.dir == '/' and page.lightbox == '1' -%}
+    <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   {%- elsif page.dir == '/' and page.url contains '/' -%}
     <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   {%- else -%}
