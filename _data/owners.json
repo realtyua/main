@@ -1,5 +1,27 @@
 [
   {
+     "id": "122",
+     "type": "Квартира",
+     "rent": "",
+     "rooms": "2",
+     "surface": "53",
+     "surface_land": "",
+     "price": "$18000",
+     "price_sqmt": "",
+     "floor": "2",
+     "floors": "4",
+     "parking": "Прибудинкова територія",
+     "region": "",
+     "location": "м. Рогатин",
+     "address": "вул. Галицька, 62",
+     "object": "",
+     "coordinates": "49.41024,24.61004",
+     "date": "2021-02-23",
+     "seller": "Галина Деркач",
+     "phone": "380972468820",
+     "description": ""
+   },
+  {
      "id": "121",
      "type": "Нежитлове приміщення",
      "rent": "1",
