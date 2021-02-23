@@ -69,6 +69,8 @@
 
       {%- elsif offer.price_sqmt != '' and offer.price != '' -%}
 
+      {%- elsif offer.type == land or offer.type == landm -%}
+
         {%- if offer.price_sqmt contains '$' -%}
           <span class="mark" data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | round: 2 }}</span> {{ site.data.lang-uk.re_uah }}.
         {%- elsif offer.price_sqmt contains '€' -%}
