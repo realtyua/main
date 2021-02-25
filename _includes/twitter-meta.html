@@ -3,10 +3,11 @@
 <meta name="twitter:creator" content="@realestate_ua">
 <meta name="twitter:title" content="{{ title | remove: ' · Мережа Вебсайтів Нерухомості' }}">
 <meta name="twitter:description" content="{{ page.description | default: site.description | smartify }}">
+<meta name="twitter:card" content="summary">
 {%- if file -%}
-<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{{ picture }}">
 {%- else -%}
-<meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}">
 {%- endif -%}
+<meta name="twitter:image:width" content="538">
+<meta name="twitter:image:height" content="220">
