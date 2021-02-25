@@ -27,7 +27,7 @@
 <meta property="og:title" content="{{ title | remove: ' · Мережа Вебсайтів Нерухомості' }}" />
 <meta property="og:description" content="{{ page.description | default: site.description | smartify }}" />
 {%- if file -%}
-  <meta property="og:image" content="{{ picture }}" />
+  <meta property="og:image" content="{{ picture | prepend: site.url }}" />
   <meta property="og:image:url" content="{{ picture | prepend: site.url }}" />
   {%- assign extname = picture | split: '.' | last -%}
   <meta property="og:image:type" content="image/{{ extname }}" />
