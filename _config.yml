@@ -97,12 +97,6 @@ plugins:
 sass:
   style: compressed
 
-# feed:
-#   path: news/atom.xml
-#   categories:
-#     - news
-#   posts_limit: 3
-
 compress_html:
   clippings: all
   comments: [""]
