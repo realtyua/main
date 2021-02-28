@@ -80,11 +80,9 @@
     {%- else -%}
       <div class="col px-2 mb-3">
 
-        <div class="card" style="width: 18rem;">
+        <div class="card">
           <div class="card-body">
-            <h5 class="card-title">
-              <a href="{{ one.url }}">{{ navitemtitle }}</a>
-            </h5>
+            <h5 class="card-title"><a href="{{ one.url }}">{{ navitemtitle }}</a></h5>
           </div>
           <div class="card-footer bg-transparent border-top-0 text-right">
             {%- if nsellers != '' -%}<span class="badge badge-primary mr-2">{{ nsellers }}</span>{%- endif -%}
@@ -112,7 +110,7 @@
             </p>
           </div>
         </div>
-{% comment %}
+{% endcomment %}
 
       </div>
     {%- endif -%}
