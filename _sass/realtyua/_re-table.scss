@@ -79,6 +79,8 @@ $primary: #2d5ca6 !default;
   width: 100%;
 }
 
+.detail-view td { border: 1px double #2d5ca6 }
+
 // #property tr.active .card-views .card-view:nth-child(2)::after {
 //   content: "\2191";
 //   font-size: 1.2rem;
