@@ -80,6 +80,20 @@
     {%- else -%}
       <div class="col px-2 mb-3">
 
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{{ one.url }}">{{ navitemtitle }}</a>
+            </h5>
+          </div>
+          <div class="card-footer bg-transparent border-top-0 text-right">
+            {%- if nsellers != '' -%}<span class="badge badge-primary mr-2">{{ nsellers }}</span>{%- endif -%}
+            {%- if ncomplexes != '' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }}</span>{%- endif -%}
+            {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
+          </div>
+        </div>
+
+{% comment %}
         <div class="card text-white">
           {%- include folder.html dir='/assets/images/section/' slug=slug -%}
           {%- if file == true -%}
@@ -98,11 +112,13 @@
             </p>
           </div>
         </div>
+{% comment %}
 
       </div>
     {%- endif -%}
   {%- endif -%}
 {%- else -%}
+
   {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
   {%- else -%}
     {%- if here == current and one.url contains here and one.navhide != 1 -%}
@@ -113,4 +129,5 @@
     </div>
     {%- endif -%}
   {%- endif -%}
+
 {%- endif -%}
