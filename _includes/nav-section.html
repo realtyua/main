@@ -28,36 +28,13 @@
           <a href="{{ page.dir }}map.html">{{ page.title }} на мапі міста</a>
         </h5>
       </div>
-      <div class="card-footer bg-transparent border-top-0 text-right">
+      <div class="card-footer bg-transparent border-top-0 text-right px-2">
         <span class="badge text-white p-0 m-1">
-          <span class="bg-info py-1 px-2 rounded-left">{{ offers | size }}</span>
-          <span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
+          <span class="bg-info py-1 px-2 rounded-left">{{ offers | size }}</span><span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
         </span>
       </div>
     </div>
   </div>
-
-{% comment %}
-  <div class="col px-2 mb-3">
-    <div class="card text-white">
-      {%- assign map = page.dir | split: '/' | last -%}
-      {%- include folder.html dir='/assets/images/section/' slug=map -%}
-      {%- if file == true -%}
-        <img loading="lazy" src="{{ picture }}" class="card-img" alt="{{ slug }} - real estate">
-      {%- else -%}
-        <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }} - real estate">
-      {%- endif -%}
-      <div class="card-img-overlay">
-        <h5 class="card-title text-shadow">
-          <a href="{{ page.dir }}map.html" class="text-white">{{ page.title }} на мапі міста</a>
-        </h5>
-        <p class="text-right">
-          <span class="badge badge-primary">{{ offers | size }} пропозицій</span>
-        </p>
-      </div>
-    </div>
-  </div
-{% endcomment %}
 
 {%- else -%}
 
@@ -108,7 +85,8 @@
                   </span>
                 {%- else -%}
                   <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-                    <span>{{ site.data.lang-uk.re_map }}</span><span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+                    <span>{{ site.data.lang-uk.re_map }}</span>
+                    <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
                   </a>
                 {%- endif -%}
               </h5>

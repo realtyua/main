@@ -90,7 +90,7 @@
           <div class="card-body">
             <h5 class="card-title"><a href="{{ one.url }}">{{ navitemtitle }}</a></h5>
           </div>
-          <div class="card-footer bg-transparent border-top-0 text-right">
+          <div class="card-footer bg-transparent border-top-0 text-right px-2">
             {%- if nsellers != '' -%}{{ nsellers }}{%- endif -%}
             {%- if ncomplexes != '' -%}{{ ncomplexes }}{%- endif -%}
             {%- if records != '0' -%}
@@ -100,38 +100,6 @@
             {%- endif -%}
           </div>
         </div>
-
-{% comment %}
-
-<span class="badge text-white p-0 m-1">
-  <span class="bg-primary py-1 px-2 rounded-left">key</span>
-  <span class="py-1 px-2 bg-info rounded-right">value</span>
-</span>
-
-<span class="badge text-white p-0 m-1">
-  <span class="bg-primary py-1 px-2 rounded-left">key</span>
-  <span class="py-1 px-2 bg-warning rounded-right">value</span>
-</span>
-
-        <div class="card text-white">
-          {%- include folder.html dir='/assets/images/section/' slug=slug -%}
-          {%- if file == true -%}
-            <img loading="lazy" src="{{ picture }}" class="card-img" alt="{{ slug }} - real estate">
-          {%- else -%}
-            <img src="/assets/images/section/default.jpg" class="card-img" alt="{{ slug }} - real estate">
-          {%- endif -%}
-          <div class="card-img-overlay">
-            <h5 class="card-title text-shadow">
-              <a href="{{ one.url }}" class="text-white">{{ navitemtitle }}</a>
-            </h5>
-            <p class="text-right">
-              {%- if nsellers != '' -%}<span class="badge badge-primary mr-2">{{ nsellers }}</span>{%- endif -%}
-              {%- if ncomplexes != '' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }}</span>{%- endif -%}
-              {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
-            </p>
-          </div>
-        </div>
-{% endcomment %}
 
       </div>
     {%- endif -%}
