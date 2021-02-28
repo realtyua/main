@@ -31,17 +31,26 @@
 {%- capture ncomplexes -%}
   {%- if slug == 'developer' -%}
     {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
-    Об'єктів {{ objects | size }}
+    <span class="badge text-white p-0 m-1">
+      <span class="bg-primary py-1 px-2 rounded-left">Об'єктів</span>
+      <span class="py-1 px-2 bg-info rounded-right">{{ objects | size }}</span>
+    </span>
   {%- endif -%}
 {%- endcapture -%}
 
 {%- capture nsellers -%}
   {%- if slug == 'developer' -%}
     {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer' and i.layout == 'developer'" -%}
-    Забудовників {{ developers | size }}
+    <span class="badge text-white p-0 m-1">
+      <span class="bg-primary py-1 px-2 rounded-left">Забудовників</span>
+      <span class="py-1 px-2 bg-info rounded-right">{{ developers | size }}</span>
+    </span>
   {%- elsif slug == 'realtor' -%}
     {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.layout == 'realtor'" -%}
-    Aгентів і ріелторів {{ realtors | size }}
+    <span class="badge text-white p-0 m-1">
+      <span class="bg-primary py-1 px-2 rounded-left">Aгентів і ріелторів</span>
+      <span class="py-1 px-2 bg-info rounded-right">{{ realtors | size }}</span>
+    </span>
   {%- endif -%}
 {%- endcapture -%}
 
@@ -85,13 +94,29 @@
             <h5 class="card-title"><a href="{{ one.url }}">{{ navitemtitle }}</a></h5>
           </div>
           <div class="card-footer bg-transparent border-top-0 text-right">
-            {%- if nsellers != '' -%}<span class="badge badge-primary mr-2">{{ nsellers }}</span>{%- endif -%}
-            {%- if ncomplexes != '' -%}<span class="badge badge-primary mr-2">{{ ncomplexes }}</span>{%- endif -%}
-            {%- if records != '0' -%}<span class="badge badge-primary">{{ records }} пропозицій</span>{%- endif -%}
+            {%- if nsellers != '' -%}{{ nsellers }}{%- endif -%}
+            {%- if ncomplexes != '' -%}{{ ncomplexes }}{%- endif -%}
+            {%- if records != '0' -%}
+            <span class="badge text-white p-0 m-1">
+              <span class="bg-info py-1 px-2 rounded-left">{{ records }}</span>
+              <span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
+            </span>
+            {%- endif -%}
           </div>
         </div>
 
 {% comment %}
+
+<span class="badge text-white p-0 m-1">
+  <span class="bg-primary py-1 px-2 rounded-left">key</span>
+  <span class="py-1 px-2 bg-info rounded-right">value</span>
+</span>
+
+<span class="badge text-white p-0 m-1">
+  <span class="bg-primary py-1 px-2 rounded-left">key</span>
+  <span class="py-1 px-2 bg-warning rounded-right">value</span>
+</span>
+
         <div class="card text-white">
           {%- include folder.html dir='/assets/images/section/' slug=slug -%}
           {%- if file == true -%}
