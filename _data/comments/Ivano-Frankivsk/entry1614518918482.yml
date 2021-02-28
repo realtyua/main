@@ -1,0 +1,22 @@
+_id: dd7cb610-79c8-11eb-bf8b-efb116d45d7b
+are: sell
+tre: apartment
+surface: '44'
+sland: '44'
+rooms: '2'
+floor: '3'
+floors: '5'
+taddress: street
+address: Данила Галицького
+number: '3'
+tlocation: citytown
+location: Надвірна
+region: none
+description: "Продається двокімнатна квартира 43,6 кв.м., 2/3/5, мікрорайон Ломоносова по вул. Д. Галицького. Кімнати прохідні, санвузол роздільний.\r\nІндивідуальне опалення; наявні усі лічильники. Металопластикові вікна. Квартира не кутова, цегляна.\r\nТорг умісний"
+currency: usd
+price: '18000'
+phone: '674687701'
+fn: Євген
+ln: Гриців
+agreed: 'on'
+date: 1614518918
