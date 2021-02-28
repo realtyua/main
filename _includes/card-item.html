@@ -32,8 +32,7 @@
   {%- if slug == 'developer' -%}
     {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
     <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Об'єктів</span>
-      <span class="py-1 px-2 bg-info rounded-right">{{ objects | size }}</span>
+      <span class="bg-primary py-1 px-2 rounded-left">Об'єктів</span><span class="py-1 px-2 bg-info rounded-right">{{ objects | size }}</span>
     </span>
   {%- endif -%}
 {%- endcapture -%}
@@ -42,14 +41,12 @@
   {%- if slug == 'developer' -%}
     {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer' and i.layout == 'developer'" -%}
     <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Забудовників</span>
-      <span class="py-1 px-2 bg-info rounded-right">{{ developers | size }}</span>
+      <span class="bg-primary py-1 px-2 rounded-left">Забудовників</span><span class="py-1 px-2 bg-info rounded-right">{{ developers | size }}</span>
     </span>
   {%- elsif slug == 'realtor' -%}
     {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.layout == 'realtor'" -%}
     <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Aгентів і ріелторів</span>
-      <span class="py-1 px-2 bg-info rounded-right">{{ realtors | size }}</span>
+      <span class="bg-primary py-1 px-2 rounded-left">Aгентів і ріелторів</span><span class="py-1 px-2 bg-info rounded-right">{{ realtors | size }}</span>
     </span>
   {%- endif -%}
 {%- endcapture -%}
@@ -98,8 +95,7 @@
             {%- if ncomplexes != '' -%}{{ ncomplexes }}{%- endif -%}
             {%- if records != '0' -%}
             <span class="badge text-white p-0 m-1">
-              <span class="bg-info py-1 px-2 rounded-left">{{ records }}</span>
-              <span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
+              <span class="bg-info py-1 px-2 rounded-left">{{ records }}</span><span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
             </span>
             {%- endif -%}
           </div>
