@@ -29,13 +29,16 @@
 # Region / City
 #
 - type: city
+  item: kolomyia
+  name: Нерухомість у місті Коломия
+
+- type: city
   item: ivano-frankivsk
   name: Нерухомість у місті Івано-Франківськ
 
 #
 # Developers / Company
 #
-
 - type: developer
   item: builder
   name: Будівельна компанія "Будівельник"
