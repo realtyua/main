@@ -1,5 +1,27 @@
 [
   {
+     "id": "141",
+     "type": "Будинок",
+     "rent": "",
+     "rooms": "5",
+     "surface": "150",
+     "surface_land": "300",
+     "price": "$45000",
+     "price_sqmt": "",
+     "floor": "",
+     "floors": "2",
+     "parking": "Прибудинкова територія",
+     "region": "",
+     "location": "м. Коломия",
+     "address": "вул. Богдана Лепкого, 67",
+     "object": "",
+     "coordinates": "48.542103,25.041017",
+     "date": "2021-03-01",
+     "seller": "Петро Ткачук",
+     "phone": "380986354098",
+     "description": ""
+   },
+  {
      "id": "140",
      "type": "Квартира",
      "rent": "",
