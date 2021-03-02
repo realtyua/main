@@ -1,8 +1,46 @@
 <div class="col mb-4">
   <div class="card">
+    <img loading="lazy" src="/assets/images/locations/сarpathians.jpg" class="card-img-top" alt="Нерухомість у Карпатах">
     <div class="card-body p-2">
       <h5 class="card-title mb-2">{{ site.data.lang-uk.recently_added }}</h5>
-      <div class="card-text">...</div>
+      <div class="card-text">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+          <div class="navbar-brand d-lg-none">
+            <span class="small">Виберіть розділ</span>
+            <span class="ml-1 float-right align-middle text-primary">→</span>
+          </div>
+          <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar-realEstate" aria-controls="navbar-realEstate" aria-expanded="false" aria-label="Toggle button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse justify-content-end collapse" id="navbar-realEstate">
+            <ul class="navbar-nav nav nav-tabs border-0" id="realestate-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link pt-0 pl-0 pr-1 border-0 active" id="news-tab" data-toggle="tab" href="#news" role="tab" aria-controls="news" aria-selected="true" title="...">
+                  <span>Новини</span>
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link pt-0 pl-0 border-0" id="articles-tab" data-toggle="tab" href="#articles" role="tab" aria-controls="articles" aria-selected="true" title="...">
+                  <span>Статті</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <hr class="m-0">
+
+        <div class="tab-content" id="realestate-content">
+          <div class="tab-pane pt-2 fade show active" id="news" role="tabpanel" aria-labelledby="news-tab">
+            ...Нвини
+          </div>
+          <div class="tab-pane pt-2 fade show" id="articles" role="tabpanel" aria-labelledby="articles-tab">
+            ...Статті
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
