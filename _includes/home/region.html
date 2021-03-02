@@ -7,14 +7,7 @@
     {%- if include.current == current and three.navhide != 1 and three.title != '' -%}
     {% comment %}
       {%- if three.url contains 'ivano-frankivska' -%}
-      <div class="col mb-4">
-        <div class="card">
-          <div class="card-body p-2">
-            <h5 class="card-title mb-2">{{ site.data.lang-uk.recently_added }}</h5>
-            <div class="card-text">...</div>
-          </div>
-        </div>
-      </div>
+        {%- include home/main-card.html -%}
       {%- endif -%}
     {% endcomment %}
       <div id="{{ slug }}" class="col mb-4">
