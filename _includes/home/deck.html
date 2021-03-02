@@ -5,9 +5,9 @@
     {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if '/' == current and one.navhide != 1 -%}
       {% if one.url contains '/region/' %}
-        {%- comment -%}
+
           {%- include home/main-region.html -%}
-        {%- endcomment -%}
+
       {% else %}
       {%- comment -%}
       <div class="col-12">
