@@ -25,7 +25,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">
-          <a href="{{ page.dir }}map.html">{{ page.title }} на мапі{% if isCityTown == true %} міста{%- else -%} району{% endif %}
+          <a href="{{ page.dir }}map.html">{{ page.title }} на мапі{% if page.url contains '/city/' or '/town/' %} міста{% else %} району{% endif %}
           </a>
         </h5>
       </div>
