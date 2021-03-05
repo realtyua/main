@@ -71,9 +71,14 @@ table#property tr:not(.detail-view) { cursor: pointer; }
 .accordion .btn:focus, .accordion .btn.focus { box-shadow: none; }
 .multi-collapse button:focus { outline: 0; outline: 0; }
 
-main a.list-group-item:hover, footer a.list-group-item:hover, .text-shadow a.text-white:hover, main a.btn:hover {
+main a.list-group-item:hover, footer a.list-group-item:hover, .text-shadow a.text-white:hover {
   transition: unset;
   border-bottom: 1px solid rgba(0,0,0,0.125);
+}
+
+main a.btn:hover {
+  transition: unset;
+  border-bottom: 0;
 }
 
 .badge-add {
