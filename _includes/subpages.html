@@ -57,7 +57,7 @@
                       {%- assign others = total | minus:1 -%}
                       {%- if others > 0 -%}
                         <div class="card border-0 text-center">
-                          <a href="{{ item.url }}" class="btn btn-primary">{{ site.data.lang-uk.others }} <strong>{{ others }}</strong>  {{ site.data.lang-uk.others_offers }}</a>
+                          <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.lang-uk.others }} <strong>{{ others }}</strong>  {{ site.data.lang-uk.others_offers }}</a>
                         </div>
                       {%- endif -%}
                     {%- else -%}
@@ -80,7 +80,7 @@
       </div>
       <div class="row">
         <div class="col-auto ml-auto">
-          <a class="btn btn-primary" href="{{include.dir}}">{{ site.data.lang-uk.others }} {{ title | downcase }}</a>
+          <a class="btn btn-sm btn-primary" href="{{include.dir}}">{{ site.data.lang-uk.others }} {{ title | downcase }}</a>
         </div>
       </div>
       {%- endif -%}
@@ -95,6 +95,6 @@
     {%- endfor -%}
 
   {%- endif -%}
-  
+
 {%- else -%}
 {%- endif -%}
