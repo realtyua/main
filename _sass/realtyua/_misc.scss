@@ -76,11 +76,6 @@ main a.list-group-item:hover, footer a.list-group-item:hover, .text-shadow a.tex
   border-bottom: 1px solid rgba(0,0,0,0.125);
 }
 
-main a.btn:hover {
-  transition: unset;
-  border-bottom: 0;
-}
-
 .badge-add {
   color: #fff;
   background-color: #ed7600;
