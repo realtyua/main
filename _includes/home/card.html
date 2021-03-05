@@ -68,8 +68,8 @@
                 {%- if others > 0 -%}
                   <div class="row">
                     <div class="col-auto ml-auto">
-                      <a class="btn btn-primary btn-sm" href="{{ d.url }}">
-                        {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_offers }}
+                      <a class="text-decoration-none" href="{{ d.url }}">
+                        <span class="badge text-white p-0"><span class="bg-white text-dark py-1 px-2">{{ site.data.lang-uk.others }}</span><span class="bg-info py-1 px-2 rounded-left">{{ others }}</span><span class="bg-primary py-1 px-2 rounded-right">{{ site.data.lang-uk.others_offers }}</span></span>
                       </a>
                     </div>
                   </div>
