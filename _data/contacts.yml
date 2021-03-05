@@ -29,6 +29,10 @@
 # Region / City
 #
 - type: city
+  item: burshtyn
+  name: Нерухомість у місті Бурштин
+
+- type: city
   item: kolomyia
   name: Нерухомість у місті Коломия
 
