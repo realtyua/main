@@ -14,7 +14,12 @@ layout: default
     </h1>
     {%- if page.community -%}
     <div class="collapse" id="collapseCommunity">
-      <div class="card card-body">{{ page.community }}</div>
+      <div class="card card-body">
+        {{ page.community }}
+        <button type="button" class="close" data-dismiss="card" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     </div>
     {%- endif -%}
     {%- include subnavtab.html -%}
