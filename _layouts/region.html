@@ -4,8 +4,19 @@ layout: default
 
 <div class="row">
   <div class="col-12">
-    <h1>{{ page.title | replace_first: ' в ', ' у ' }}</h1>
-    {%- if page.community -%}<p>{{ page.community }}</p>{%- endif -%}
+    <h1>
+      {{ page.title | replace_first: ' в ', ' у ' }}
+      {%- if page.community -%}
+      <button type="button" class="btn bg-transparent shadow-none border-0 dropdown-toggle dropdown-toggle-split" data-toggle="collapse" data-target="#collapseCommunity" aria-expanded="false" aria-controls="collapseCommunity">
+        <span class="visually-hidden">Об'єднана територіальна громада</span>
+      </button>
+      {%- endif -%}
+    </h1>
+    {%- if page.community -%}
+    <div class="collapse" id="collapseCommunity">
+      <div class="card card-body">{{ page.community }}</div>
+    </div>
+    {%- endif -%}
     {%- include subnavtab.html -%}
   </div>
   {%- assign isContent = content | strip_newlines -%}
