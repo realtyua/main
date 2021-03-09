@@ -128,9 +128,10 @@ main .leaflet-menu {
     top: 0;
     right: 0;
     z-index: 2;
-    padding: $alert-padding-y $alert-padding-x;
+    padding: .05rem .35rem;
     color: inherit;
   }
 }
 
-.multi-collapse .alert-dismissible { padding-right: 1rem; }
+.multi-collapse .alert-dismissible .close { padding: .05rem .35rem; }
+.multi-collapse .alert-dismissible { padding-right: 0; }
