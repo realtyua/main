@@ -62,8 +62,9 @@
     > div.more {
           position: absolute;
           top: 100%;
-          z-index: 1000;
-          width: 100%;
+          right: -1px;
+          z-index: 1;
+          width: 100.6%;
           background-color: rgb(255, 255, 255);
           background-clip: padding-box;
           border: 1px solid rgba(0, 0, 0, 0.15);
