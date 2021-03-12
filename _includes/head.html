@@ -43,6 +43,8 @@
 
   {%- if page.table == 1 or page.table == 2 -%}
     {%- if page.url contains 'map.html' -%}
+    {%- elsif slash.size == 3 and page.dir == '/region/' -%}
+      <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
       <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- else -%}
@@ -73,6 +75,8 @@
       {%- endif -%}
     {%- elsif page.table == 2 -%}
       {%- if page.url contains 'map.html' -%}
+      {%- elsif slash.size == 3 and page.dir == '/region/' -%}
+        <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- else -%}
