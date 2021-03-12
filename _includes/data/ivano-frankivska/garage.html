@@ -1,0 +1,5 @@
+{%- include data/owner.html -%}
+{%- assign owners = owners -%}
+{%- include data/ivano-frankivska/sallers.html -%}
+{%- include data/ivano-frankivska/i-sallers.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.type == 'Гараж' or i.type contains 'Місце' and i.rent != '1'" -%}
