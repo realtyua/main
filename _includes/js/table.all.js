@@ -43,7 +43,7 @@ $(function () {
   $('table#property').on('expand-row.bs.table', function (event, index) { if (expandedRow !== index) { $('table').bootstrapTable('collapseRow', expandedRow); } expandedRow = index; });
   $('table#property').on('click-row.bs.table', function (e, row, $element) { $($element).siblings().removeClass('active'); $($element).addClass('active'); });
   $('select#data').change(function () {
-    $('table##property').bootstrapTable('refresh', {
+    $('table#property').bootstrapTable('refresh', {
       url: 'data/' + $(this).val() + '.json'
     })
   });
