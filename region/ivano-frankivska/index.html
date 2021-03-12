@@ -6,3 +6,40 @@ subtitle:
 breadcrumb:
 breadcrumb: Івано-Франківська
 ---
+
+<div class="row">
+  <div class="col-12">
+    <h1 class="h2">Продаж нерухомості в Івано-Франківській області</h1>
+    <hr class="mb-2 mt-2 mt-md-0 mt-lg-0">
+    <h2 class="h3">Оголошення про продаж нерухомості в Івано-Франківській області</h2>
+    <div class="row">
+      <div class="col-12">
+
+        <table
+          id="property"
+          data-locale="{{ site.lang | replace: '_', '-' }}"
+          data-toggle="table"
+          data-search="true"
+          data-search-accent-neutralise="true"
+          data-sort-class="table-active"
+          data-sortable="true"
+          data-detail-view="true"
+          data-detail-view-icon="false"
+          data-detail-view-by-click="true"
+          data-detail-formatter="jsDetailFormatter"
+          data-pagination="true"
+          data-mobile-responsive="true"
+          data-buttons-class="primary"
+          data-url="https://www.realestate.if.ua/region/ivano-frankivska/data/all.json}">
+          <thead class="thead-re">
+            <tr>
+              <th data-field="type" data-title="{{ site.data.lang-uk.re_offer }}" data-formatter="propertyFormatter">Property</th>
+              <th data-field="price" data-title="{{ site.data.lang-uk.re_cost | capitalize }}" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Price</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
