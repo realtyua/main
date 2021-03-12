@@ -18,7 +18,7 @@
     {%- endif -%}
   {%- elsif page.table == 2 -%}
     {%- if page.url contains 'map_.html' -%}
-    {%- elsif slash.size == 3 and page.dir == '/region/' -%}
+    {%- elsif slash.size == 3 and page.dir == '/region/ivano-frankivska/' -%}
       <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
       <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
