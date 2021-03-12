@@ -20,7 +20,13 @@
     content:"\260E";
   }
 
-  details > summary::-webkit-details-marker {
+  // details > summary::-webkit-details-marker {
+  //   background: none;
+  //   color: transparent;
+  // }
+
+  details > summary {
+    display: block;
     background: none;
     color: transparent;
   }
