@@ -3,5 +3,5 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-
-{{ site.data.docs | jsonify }}
+{%- assign type = page.name | remove: '.json' -%}
+{{ site.data[type] | jsonify }}
