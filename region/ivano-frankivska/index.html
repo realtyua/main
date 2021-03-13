@@ -13,55 +13,32 @@ table: 2
 
     <h1 class="h2">Продаж нерухомості в Івано-Франківській області</h1>
 
-{% comment %}
-    <div class="row mb-2">
-      <div class="col">
-
-      </div>
-      <div class="col-auto">
-
-        <select id="data" class="custom-select">
-          <option selected>Виберіть тип нерухомості</option>
-          <option value="all">Вся нерухомість</option>
-          <option value="apartment">Квартири</option>
-          <option value="house">Будинки</option>
-          <option value="commercial">Комерція</option>
-          <option value="garage">Гаражі</option
-          <option value="land">Земля</option>
-          <option value="rent">Оренда</option>
-        </select>
-
-      </div>
-    </div>
-{% endcomment %}
-
-    <div class="row justify-content-between mb-2">
+    <div class="row justify-content-between">
       {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
       {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
       {%- if isMap == 'true' -%}
-        <div class="col-lg-1">
-          <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-            <li class="nav-item mb-2">
-              <h5 class="m-lg-0">
-                {%- if page.url contains mapPage -%}
-                  <span class="badge badge-primary border-0" title="{{ site.data.lang-uk.re_map_on }}">
-                    <span>{{ site.data.lang-uk.re_map }}</span>
-                    <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-                  </span>
-                {%- else -%}
-                  <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-                    <span>{{ site.data.lang-uk.re_map }}</span>
-                    <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-                  </a>
-                {%- endif -%}
-              </h5>
-            </li>
-          </ul>
-        </div>
+      <div class="col-lg-1 align-self-center">
+        <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+          <li class="nav-item mb-2">
+            <h5 class="m-lg-0">
+              {%- if page.url contains mapPage -%}
+                <span class="badge badge-primary border-0" title="{{ site.data.lang-uk.re_map_on }}">
+                  <span>{{ site.data.lang-uk.re_map }}</span>
+                  <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+                </span>
+              {%- else -%}
+                <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
+                  <span>{{ site.data.lang-uk.re_map }}</span>
+                  <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+                </a>
+              {%- endif -%}
+            </h5>
+          </li>
+        </ul>
+      </div>
       {%- endif -%}
       <div class="col-lg-2">
-
-        <select id="data" class="custom-select custom-select-sm">
+        <select id="data" class="custom-select custom-select-sm mb-lg-2">
           <option value="all" selected>Вся нерухомість</option>
           <option value="apartment">Квартири</option>
           <option value="house">Будинки</option>
@@ -70,7 +47,6 @@ table: 2
           <option value="land">Земля</option>
           <option value="rent">Оренда</option>
         </select>
-
       </div>
     </div>
 
