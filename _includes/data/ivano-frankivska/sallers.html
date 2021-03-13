@@ -2,3 +2,10 @@
 {%- assign mosiychuk = site.data.mosiychuk -%}
 {%- assign ferents = site.data.ferents -%}
 {%- assign matsalak = site.data.matsalak -%}
+{%-
+  assign records = owners
+  | concat: mosiychuk
+  | concat: mykhalchuk
+  | concat: ferents
+  | concat: matsalak
+-%}
