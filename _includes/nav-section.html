@@ -97,6 +97,7 @@
         {%- endif -%}
 
           <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
+
             {%- for one in ones -%}
               {%- assign isJson = false -%}
               {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
@@ -111,10 +112,11 @@
             {%- if page.url contains mapRegion -%}
             <li class="nav-item" role="presentation">
               <a class="nav-link border-0" href="{{ page.url | replace: 'map', 'index' }}">
-                <span>Перелік нерухомості</span>
+                <span>Весь список</span>
               </a>
             </li>
             {%- endif -%}
+            
           </ul>
 
       </div>
