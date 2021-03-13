@@ -4,10 +4,6 @@ sitemap: false
 navhide: 1
 ---
 
-{%- assign back = page.dir | split: '/' -%}
-{%- assign size = back | size | minus: 1 -%}
-{%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- assign zone = page.dir | split: '/' | last -%}
-
-{%- include data/ivano-frankivska/all.html -%}
+{%- include data-include.html appe='/all.html' -%}
+{%- include {{ incl }} -%}
 {%- include offer-json.html -%}
