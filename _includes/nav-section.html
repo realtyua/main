@@ -104,6 +104,12 @@
               {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
               {%- if one.title != '' and isJson == false -%}
                 {%- include nav-item.html -%}
+              {%- else -%}
+              <li class="nav-item" role="presentation">
+                <a class="nav-link border-0" href="/index.html" id="rent-tab" data-toggle="tab" role="tab" aria-controls="rent" aria-selected="true">
+                  <span>Перелік нерухомості</span>
+                </a>
+              </li>
               {%- endif -%}
             {%- else -%}
               <li class="nav-item" role="presentation">
