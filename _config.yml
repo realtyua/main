@@ -7,6 +7,7 @@ lang: uk_UA
 timezone: Europe/Kyiv
 country: Україна
 region: Івано-Франківська область
+region_slug: ivano-frankivska
 region_size: .89rem
 
 usd: 27.68
