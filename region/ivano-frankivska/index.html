@@ -56,17 +56,6 @@ table: 2
 
     <h2 class="h3">Всі оголошення про продаж нерухомості</h2>
 
-    <p>
-
-      {%- assign back = page.dir | split: '/' -%}
-      {%- assign size = back | size | minus: 1 -%}
-      {%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
-      {%- assign zone = here | split: '/' | last -%}
-
-      {{ zone }}
-
-    </p>
-
     <div class="row">
       <div class="col-12">
 
