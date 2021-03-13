@@ -50,12 +50,12 @@ table: 2
       </div>
     </div>
 
-    {%- assign mapRegion = site.region_slug | append: '/map.html' -%}
+    {%- assign mapUrl = site.region_slug | append: '/map.html' -%}
 
     <hr class="mb-2 mt-2 mt-md-0 mt-lg-0">
     {%- include thanks-please.html -%}
     <h2 class="h3">Всі оголошення про продаж нерухомості</h2>
-    <p>{{ mapRegion }}</p>
+    <p>{{ mapUrl }}</p>
     <div class="row">
       <div class="col-12">
 
