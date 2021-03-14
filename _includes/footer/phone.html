@@ -24,7 +24,7 @@
       {% if include.legal == site.contact.phone_sms %}{{ site.data.lang-uk.phone_sent_ads }}{% elsif include.legal == site.contact.phone_hot %}{% else %}{{ site.data.lang-uk.re_seller }} {{ n }}{% endif %}
     {% endif %}
   {%- endcapture -%}
-  <a href="tel:+{{ t }}" data-toggle="tooltip" title="{{ master }}">{{ n }}</a>
+  <a href="tel:+{{ t }}"{% if master %} data-toggle="tooltip" title="{{ master }}"{% endif %}>{{ n }}</a>
 {%- elsif include.legal and include.type == 'number' -%}
   {{ n }}
 {%- else -%}
