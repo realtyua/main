@@ -3,6 +3,7 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-
-{%- include data/tlumach/house.html -%}
+{%- assign type = page.name | replace: '.json', '.html' | prepend: '/' -%}
+{%- include data-include.html appe=type -%}
+{%- include {{ incl }} -%}
 {%- include offer-json.html -%}
