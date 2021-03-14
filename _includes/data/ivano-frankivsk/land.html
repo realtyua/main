@@ -1,5 +1,4 @@
 {%- include data/owner.html -%}
 {%- assign owners = owners -%}
-{%- assign ferents = site.data.ferents -%}
-{%- include data/ivano-frankivsk/i-land.html -%}
+{%- include data/sallers.html -%}
 {%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.location contains location and i.rent != '1' and i.type == 'Земля'" -%}

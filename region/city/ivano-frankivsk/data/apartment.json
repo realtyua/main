@@ -3,6 +3,7 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-
-{%- include data/ivano-frankivsk/apartment.html -%}
+{%- assign type = page.name | replace: '.json', '.html' | prepend: '/' -%}
+{%- include data-include.html appe=type -%}
+{%- include {{ incl }} -%}
 {%- include offer-json.html -%}
