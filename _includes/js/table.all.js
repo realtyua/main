@@ -1,7 +1,5 @@
----
----
 
-var cdate = '{{ site.time | date: "%Y-%m-%d }}';
+var cdate = {{ site.time | date: "%Y-%m-%d }};
 
 $(function () {
   "use strict";
