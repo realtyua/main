@@ -58,10 +58,14 @@ var html = [];
 function jsDetailFormatter(index, row, $detail) {
 
   "use strict";
+  var cDate = {{ site.time | date: "%Y-%m-%d" }};
   var cd = new Date();
   var cn = cd.getMonth();
   var d = new Date(row.date);
   var n = d.getMonth();
+
+  console.log(cDate);
+  console.log(row.date);
 
   $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
