@@ -49,7 +49,6 @@ $(function () {
   });
 });
 
-var cdate = {{ site.time | date: "%Y-%m-%d" }};
 var month = ["{{ site.data.lang-uk.m_01 }}","{{ site.data.lang-uk.m_02 }}","{{ site.data.lang-uk.m_03 }}","{{ site.data.lang-uk.m_04 }}","{{ site.data.lang-uk.m_05 }}","{{ site.data.lang-uk.m_06 }}","{{ site.data.lang-uk.m_07 }}","{{ site.data.lang-uk.m_08 }}","{{ site.data.lang-uk.m_09 }}","{{ site.data.lang-uk.m_10 }}","{{ site.data.lang-uk.m_11 }}","{{ site.data.lang-uk.m_12 }}"];
 var usd = {{ site.usd }};
 var eur = {{ site.eur }};
@@ -59,6 +58,8 @@ var html = [];
 function jsDetailFormatter(index, row, $detail) {
 
   "use strict";
+  var cdate = {{ site.time | date: "%Y-%m-%d" }};
+  var сd = new Date(cdate);
   var d = new Date(row.date);
   var n = d.getMonth();
 
