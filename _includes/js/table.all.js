@@ -1,3 +1,4 @@
+
 $(function () {
   "use strict";
   var expandedRow = null;
@@ -57,7 +58,6 @@ var html = [];
 function jsDetailFormatter(index, row, $detail) {
 
   "use strict";
-  var cdate = {{ site.time | date: "%Y-%m-%d" }};
   var d = new Date(row.date);
   var n = d.getMonth();
 
