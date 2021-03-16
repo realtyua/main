@@ -63,9 +63,6 @@ function jsDetailFormatter(index, row, $detail) {
   var d = new Date(row.date);
   var n = d.getMonth();
 
-  console.log(cDate);
-  console.log(row.date);
-
   $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
       if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
