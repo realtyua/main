@@ -58,12 +58,10 @@ var html = [];
 function jsDetailFormatter(index, row, $detail) {
 
   "use strict";
-  var cdate = {{ site.time | date: "%Y-%m-%d" }};
-  var too = row.date;
+  var cd = new Date();
+  var cn = cd.getMonth();
   var d = new Date(row.date);
-  var moo = d;
   var n = d.getMonth();
-  var poo = n;
 
   $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
@@ -83,6 +81,7 @@ function jsDetailFormatter(index, row, $detail) {
           html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
         }
         if (row.date !== '') {
+          html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + cd.getDate() + '&nbsp;' + month[cn] + '&nbsp;' + cd.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>'),
           html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_date }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
         }
         if (row.seller && row.seller !== '') {
