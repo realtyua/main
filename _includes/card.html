@@ -1,3 +1,4 @@
+{%- assign cdate = site.time | date: "%Y-%m-%d" -%}
 {%- assign offer = include.offer -%}
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
 {%- capture files -%}
@@ -10,7 +11,19 @@
   <div class="card-body pb-0">
     <p class="card-text mb-1">{% include card/body.html %}</p>
     <p class="card-text mb-1">
-      <span class="small text-muted">{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_dater }}{%- else -%}{{ site.data.lang-uk.re_date }}{%- endif -%}&nbsp;{%- include date.html date=offer.date -%}</span>
+      <span class="small text-muted">
+        {%- if offer.rent == '1' -%}
+          {{ site.data.lang-uk.re_dater }}
+        {%- else -%}
+          {{ site.data.lang-uk.re_date }}
+        {%- endif -%}
+        &nbsp;
+        {%- if offer.date > cdate -%}
+          {%- include date.html date=cdate -%}
+        {%- else -%}
+          {%- include date.html date=offer.date -%}
+        {%- endif -%}
+      </span>
     </p>
   </div>
   <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
