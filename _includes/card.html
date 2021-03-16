@@ -1,3 +1,4 @@
+{%- assign cdate = site.time | date: "%Y-%m-%d" -%}
 {%- assign offer = include.offer -%}
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
 {%- capture files -%}
