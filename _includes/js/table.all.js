@@ -59,7 +59,7 @@ function jsDetailFormatter(index, row, $detail) {
 
   "use strict";
   var cdate = {{ site.time | date: "%Y-%m-%d" }};
-  var сd = new Date('cdate');
+  var сd = new Date('{{ site.time | date: "%Y-%m-%d" }}');
   var d = new Date(row.date);
   var n = d.getMonth();
 
