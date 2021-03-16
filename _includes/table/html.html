@@ -72,13 +72,7 @@
         <td>{{ offer.location }}</td>
         <td>{{ offer.address }}</td>
         <td>{{ offer.coordinates }}</td>
-        <td>
-          {%- if offer.date > cdate -%}
-            {%- include date.html date=cdate -%}
-          {%- else -%}
-            {%- include date.html date=offer.date -%}
-          {%- endif -%}
-        </td>
+        <td>{%- if offer.date > cdate -%}{{ cdate }}{%- else -%}{{ offer.date }}{%- endif -%}</td>
         <td>{{ offer.seller }}</td>
         <td>{{ offer.phone }}</td>
         <td>{{ offer.description }}</td>
