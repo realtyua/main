@@ -5,7 +5,8 @@ ukr: Українська нерухомість
 realestate: Нерухомість
 realestate_at: Нерухомість у
 
-m: за 1 м<sup>2</sup>
+m_za: за 1 м<sup>2</sup>
+m: м<sup>2</sup>
 
 deck_region_in:  Івано-Франківської області
 deck_region: Івано-Франківська

@@ -84,11 +84,11 @@ function jsDetailFormatter(index, row, $detail) {
 		if (row.price !== '' && row.price_sqmt == '' && row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
 
 			if (row.price.indexOf('$') !== -1) {
-				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m }}</dt><dd>' + (row.price.replace('$', '') / row.surface_land * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price.replace('$', '') / row.surface_land * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
 			} else if (row.price.indexOf('€') !== -1) {
-				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m }}</dt><dd>' + (row.price.replace('€', '') / row.surface_land * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price.replace('€', '') / row.surface_land * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
 			} else if (row.price !== '') {
-				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m }}</dt><dd>' + (row.price * row.surface_land / 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price * row.surface_land / 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
 			}
 
 		} else if (row.price == '' && row.price_sqmt !== '' && row.rent && row.rent !== '' && row.rent === '1') {
@@ -104,11 +104,11 @@ function jsDetailFormatter(index, row, $detail) {
 		} else if (row.price !== '' && row.price_sqmt == '' && row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('{{ site.data.lang-uk.re_roomsp }}') !== -1) {
 
 			if (row.price.indexOf('$') !== -1) {
-				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_pricer | capitalize }}</dt><dd>' + (row.price.replace('$', '') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} (' + (row.price.replace('$', '') / row.surface * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} {{ site.data.lang-uk.m }})</dd></dl></span>')
+				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_pricer | capitalize }}</dt><dd>' + (row.price.replace('$', '') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} (' + (row.price.replace('$', '') / row.surface * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} {{ site.data.lang-uk.m_za }})</dd></dl></span>')
 			} else if (row.price.indexOf('€') !== -1) {
-				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_pricer | capitalize }}</dt><dd>' + (row.price.replace('€', '') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} (' + (row.price.replace('€', '') / row.surface * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} {{ site.data.lang-uk.m }})</dd></dl></span>')
+				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_pricer | capitalize }}</dt><dd>' + (row.price.replace('€', '') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} (' + (row.price.replace('€', '') / row.surface * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} {{ site.data.lang-uk.m_za }})</dd></dl></span>')
 			} else if (row.price !== '') {
-				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_pricer | capitalize }}</dt><dd>' + (row.price * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} (' + (row.price / row.surface * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} {{ site.data.lang-uk.m }})</dd></dl></span>')
+				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_pricer | capitalize }}</dt><dd>' + (row.price * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} (' + (row.price / row.surface * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} {{ site.data.lang-uk.m_za }})</dd></dl></span>')
 			}
 
     } else if (row.price !== '' && row.price_sqmt === '' && row.rent && row.rent !== '' && row.rent === '1') {
