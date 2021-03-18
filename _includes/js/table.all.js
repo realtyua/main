@@ -63,7 +63,14 @@ function jsDetailFormatter(index, row, $detail) {
   var d = new Date(row.date);
   var n = d.getMonth();
 
-  var reСoordinates = function() {html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',] if (row.coordinates && row.coordinates !== '') {html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')}};
+  var reСoordinates = function() {
+    html = [
+      '<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',
+    ]
+    if (row.coordinates && row.coordinates !== '') {
+      html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
+    }
+  };
 
   var reSurfaceLand = function() {
 		if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
@@ -159,6 +166,7 @@ function jsDetailFormatter(index, row, $detail) {
 	};
 
   var reSeller = function() {
+
 		if (row.seller && row.seller !== '' && row.rent === '1') {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_sellerr }}</dt><dd>' + row.seller + '</dd></dl></span>'),
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phoner }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></span>'),
@@ -168,11 +176,20 @@ function jsDetailFormatter(index, row, $detail) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_phone }}</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></span>'),
 			html.push('</span>')
 		}
+
 	};
 
-  var reDescription = function() { if (row.description && row.description !== '') { html.push('<span class="row mx-n1">'), html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'), html.push('</span>') }	};
+  var reDescription = function() {
+
+    if (row.description && row.description !== '') {
+      html.push('<span class="row mx-n1">'),
+      html.push('<span class="col-12 px-1"><dl><dt>{{ site.data.lang-uk.re_description }}</dt><dd>' + row.description + '</dd></dl></span>'), html.push('</span>')
+    }
+
+  };
 
   var reFloorParkingObject = function() {
+
 		if (row.floor === '' && row.floors === '') {
 		} else if (row.floor === '' && row.floors !== '' && row.floors === '1' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_house | downcase }}') !== -1) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fno }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
@@ -187,9 +204,20 @@ function jsDetailFormatter(index, row, $detail) {
 		if (row.object && row.object !== '') {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
 		}
+
 	};
 
-  $.each(row, function (key, value) { if (key !== 'images' || key !== 'id' && value !== '') { reСoordinates(); reFloorParkingObject(); reSurfaceLand(); rePriceSqmt(); reDate(); reSeller(); reDescription(); } })
+  $.each(row, function (key, value) {
+    if (key !== 'images' || key !== 'id' && value !== '') {
+      reСoordinates();
+      reFloorParkingObject();
+      reSurfaceLand();
+      rePriceSqmt();
+      reDate();
+      reSeller();
+      reDescription();
+    }
+  })
 
   const images = Object.values(row.images || {});
 
@@ -319,3 +347,11 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb
 }
+
+// $(function () {
+//   $('#data').change(function () {
+//     $('#property').bootstrapTable('refresh', {
+//       url: 'data/' + $(this).val() + '.json'
+//     })
+//   })
+// });
