@@ -5,7 +5,7 @@ ukr: Українська нерухомість
 realestate: Нерухомість
 realestate_at: Нерухомість у
 
-m: м<sup>2</sup>
+m: за 1 м<sup>2</sup>
 
 deck_region_in:  Івано-Франківської області
 deck_region: Івано-Франківська
@@ -39,6 +39,8 @@ re_kimnaty: приміщення
 re_floor: Поверх
 re_house: Будинок
 re_house_not: Недобудований будинок
+re_fx: -х
+re_fno: -но
 re_in: в
 re_at: у
 re_m: м
@@ -55,6 +57,7 @@ re_logo: Логотип
 re_floorss: поверхів
 re_floorci: поверсі
 re_floors: поверховому будинку
+re_floorsh: поверховий будинок
 re_location: знаходиться
 re_address: за адресою
 re_price: вартість нерухомості
@@ -62,6 +65,7 @@ re_pricel: вартість землі
 re_pricer: вартість оренди за місяць
 re_date: Нерухомість доступна для купівлі з
 re_dater: Оренда нерухомості доступна з
+re_datel: Земля доступна для купівлі з
 re_parking: Паркування
 re_surface_land: Площа землі
 re_map_on: Мапа нерухомості
@@ -74,9 +78,9 @@ re_no_apartment: Нежитлове приміщення
 re_no_apartments: Нежитлові приміщення
 re_cost: ціна
 re_offer: Власність
-re_price_sqmt: Вартість нерухомості за 1
-re_price_sqmtl: Вартість землі за 1
-re_price_sqmtr: Вартість оренди за 24 години
+re_price_sqmt: Вартість нерухомості
+re_price_sqmtl: Вартість землі
+re_price_sqmtr: Вартість оренди за 24 години (добу)
 re_seller: Продавець
 re_object: Житловий комплекс
 re_sellerr: Орендодавець
