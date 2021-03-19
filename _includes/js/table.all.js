@@ -48,17 +48,12 @@ $(function () {
     })
   });
 });
-
-var month = ["{{ site.data.lang-uk.m_01 }}","{{ site.data.lang-uk.m_02 }}","{{ site.data.lang-uk.m_03 }}","{{ site.data.lang-uk.m_04 }}","{{ site.data.lang-uk.m_05 }}","{{ site.data.lang-uk.m_06 }}","{{ site.data.lang-uk.m_07 }}","{{ site.data.lang-uk.m_08 }}","{{ site.data.lang-uk.m_09 }}","{{ site.data.lang-uk.m_10 }}","{{ site.data.lang-uk.m_11 }}","{{ site.data.lang-uk.m_12 }}"];
-var usd = {{ site.usd }};
-var eur = {{ site.eur }};
-var items = [];
-var html = [];
-
+var month = ["{{ site.data.lang-uk.m_01 }}","{{ site.data.lang-uk.m_02 }}","{{ site.data.lang-uk.m_03 }}","{{ site.data.lang-uk.m_04 }}","{{ site.data.lang-uk.m_05 }}","{{ site.data.lang-uk.m_06 }}","{{ site.data.lang-uk.m_07 }}","{{ site.data.lang-uk.m_08 }}","{{ site.data.lang-uk.m_09 }}","{{ site.data.lang-uk.m_10 }}","{{ site.data.lang-uk.m_11 }}","{{ site.data.lang-uk.m_12 }}"]; var usd = {{ site.usd }}; var eur = {{ site.eur }}; var items = []; var html = [];
 function jsDetailFormatter(index, row, $detail) {
 
   "use strict"; var cd = new Date(); var cn = cd.getMonth(); var d = new Date(row.date); var n = d.getMonth();
-  var reСoordinates = function() { html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',] if (row.coordinates && row.coordinates !== '') { html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>') } };
+  var reСoordinates = function() { html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">', ]
+  if (row.coordinates && row.coordinates !== '') { html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>') } };
   var reSurfaceLand = function() { if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) { } else if (row.surface_land !== '') { html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_surface_land }}</dt><dd>' + row.surface_land + ' {{ site.data.lang-uk.m }} (' + (row.surface_land / 10000) + ' га)</dd></dl></span>') } };
 
   var rePriceSqmt = function() {
