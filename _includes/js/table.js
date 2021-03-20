@@ -56,7 +56,8 @@ function jsDetailFormatter(index, row, $detail) {
 	var cn = cd.getMonth();
 	var d = new Date(row.date);
 	var n = d.getMonth();
-  var floorShy = (row.floor !== '') ? "-й" : "";
+  var frY = (row.floor !== '') ? row.floor + "-й" : "";
+  var flX = function() { if (row.floors == 1) { return row.floors + "-но"; } else if (row.floors < 5) { return row.floors + "-х"; } else { return row.floors + "-ти"; } };
 
   var reСoordinates = function() {
 		html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',]
@@ -189,7 +190,7 @@ function jsDetailFormatter(index, row, $detail) {
 		} else if (row.floor === '' && row.floors !== '' && row.floors > '1' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_house | downcase }}') !== -1) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fx }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
 		} else {
-			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floor + ' {{ site.data.lang-uk.re_at }} ' + row.floors + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
+			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + frY + ' {{ site.data.lang-uk.re_at }} ' + flX() + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
 		}
 		if (row.parking && row.parking !== '') {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
