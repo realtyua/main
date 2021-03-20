@@ -57,7 +57,7 @@ function jsDetailFormatter(index, row, $detail) {
 	var d = new Date(row.date);
 	var n = d.getMonth();
   var frY = (row.floor !== '') ? row.floor + "-й" : "";
-  var flX = function() { if (row.floors == 1) { return row.floors + "-но"; } else if (row.floors < 5) { return row.floors + "-х"; } else { return row.floors + "-ти"; } };
+  var flX = function() { if (row.floors == 1) { return row.floors + "-но"; } else if (row.floors < 5) { return row.floors + "-х"; } else if (row.floors == 7 || row.floors == 8) { return row.floors + "-ми"; } else { return row.floors + "-ти"; } };
 
   var reСoordinates = function() {
 		html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',]
@@ -78,11 +78,11 @@ function jsDetailFormatter(index, row, $detail) {
     if (row.price !== '' && row.price_sqmt == '' && row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
 
       if (row.price.indexOf('$') !== -1) {
-      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m }}</dt><dd>' + (row.price.replace('$', '') / row.surface_land * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price.replace('$', '') / row.surface_land * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       } else if (row.price.indexOf('€') !== -1) {
-      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m }}</dt><dd>' + (row.price.replace('€', '') / row.surface_land * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price.replace('€', '') / row.surface_land * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       } else if (row.price !== '') {
-      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m }}</dt><dd>' + (row.price * row.surface_land / 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price * row.surface_land / 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       }
 
     } else if (row.price == '' && row.price_sqmt !== '' && row.rent && row.rent !== '' && row.rent === '1') {
