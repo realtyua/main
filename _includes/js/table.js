@@ -56,6 +56,7 @@ function jsDetailFormatter(index, row, $detail) {
 	var cn = cd.getMonth();
 	var d = new Date(row.date);
 	var n = d.getMonth();
+  var floorShy = (row.floor !== '') ? "-й" : "";
 
   var reСoordinates = function() {
 		html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',]
