@@ -250,7 +250,7 @@ function htmlDetailFormatter(index, row, $detail) {
     if (row.floor === '' && row.floors === '') {
 		} else if (row.floor === '' && row.floors !== '' && row.floors === '1' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_house | downcase }}') !== -1) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fno }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
-		} else if (row.floor === '' && row.floors !== '' && row.floors > '1' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_house | downcase }}') !== -1) {
+		} else if (row.floor === '' && row.floors !== '' && row.floors > '1' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}') == true) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fx }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
 		} else {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + frY + ' {{ site.data.lang-uk.re_at }} ' + flX() + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
