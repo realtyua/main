@@ -65,14 +65,11 @@ function jsDetailFormatter(index, row, $detail) {
 		if (row.coordinates && row.coordinates !== '') {
       html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
     }
-	};
-
-  var reSurfaceLand = function() {
-  	if (row.type.includes('{{ site.data.lang-uk.re_land }}') || row.type.includes('{{ site.data.lang-uk.re_land | downcase }}')) {
+    if (row.type.includes('{{ site.data.lang-uk.re_land }}') || row.type.includes('{{ site.data.lang-uk.re_land | downcase }}')) {
   	} else if (row.surface_land !== '') {
   		html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_surface_land }}</dt><dd>' + row.surface_land + ' {{ site.data.lang-uk.m }} (' + (row.surface_land / 10000) + ' га)</dd></dl></span>')
   	}
-  };
+	};
 
   var rePriceSqmt = function() {
 
@@ -206,7 +203,6 @@ function jsDetailFormatter(index, row, $detail) {
     if (key !== 'images' || key !== 'id' && value !== '') {
       reСoordinates();
       reFloorParkingObject();
-      reSurfaceLand();
       rePriceSqmt();
       reDate();
       reSeller();
