@@ -57,8 +57,8 @@ function jsDetailFormatter(index, row, $detail) {
 	var cn = cd.getMonth();
 	var d = new Date(row.date);
 	var n = d.getMonth();
-  var frY = (row.floor !== '') ? row.floor + "-й" : "";
-  var flX = function() { if (row.floors == 1) { return row.floors + "-но"; } else if (row.floors < 5) { return row.floors + "-х"; } else if (row.floors == 7 || row.floors == 8) { return row.floors + "-ми"; } else { return row.floors + "-ти"; } };
+  var frY = (row.floor !== '') ? row.floor + '-й' : '';
+  var flX = function() { if (row.floors == 1) { return row.floors + '-но'; } else if (row.floors < 5) { return row.floors + '-х'; } else if (row.floors == 7 || row.floors == 8) { return row.floors + '-ми'; } else { return row.floors + '-ти'; } };
 
   var reСoordinates = function() {
 		html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',]
