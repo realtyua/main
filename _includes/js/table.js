@@ -248,9 +248,9 @@ function htmlDetailFormatter(index, row, $detail) {
   		html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_surface_land }}</dt><dd>' + row.surface_land + ' {{ site.data.lang-uk.m }} (' + (row.surface_land / 10000) + ' га)</dd></dl></span>')
   	}
     if (row.floor === '' && row.floors === '') {
-		} else if (row.floor === '' && row.floors !== '' && row.floors === '1' && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}'))) {
+		} else if (row.floor === '' && row.floors !== '' && row.floors == 1 && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}'))) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fno }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
-		} else if (row.floor === '' && row.floors !== '' && row.floors > '1' && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}'))) {
+		} else if (row.floor === '' && row.floors !== '' && row.floors > 1 && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}'))) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fx }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
 		} else {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + frY + ' {{ site.data.lang-uk.re_at }} ' + flX() + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
@@ -265,7 +265,7 @@ function htmlDetailFormatter(index, row, $detail) {
 
   var rePriceSqmt = function() {
 
-    if (row.price !== '' && row.price_sqmt == '' && row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
+    if (row.price !== '' && row.price_sqmt == '' && (row.type.includes('{{ site.data.lang-uk.re_land }}') || row.type.includes('{{ site.data.lang-uk.re_land | downcase }}'))) {
 
       if (row.price.indexOf('$') !== -1) {
       	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price.replace('$', '') / row.surface_land * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
@@ -285,7 +285,7 @@ function htmlDetailFormatter(index, row, $detail) {
       	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt><dd>' + (row.price_sqmt * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       }
 
-    } else if (row.price !== '' && row.price_sqmt == '' && row.rent && row.rent !== '' && row.rent === '1' && row.type.indexOf('{{ site.data.lang-uk.re_roomsp }}') !== -1) {
+    } else if (row.price !== '' && row.price_sqmt == '' && row.rent && row.rent !== '' && row.rent === '1' && row.type.includes('{{ site.data.lang-uk.re_roomsp }}')) {
 
       if (row.price.indexOf('$') !== -1) {
       	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_pricer | capitalize }}</dt><dd>' + (row.price.replace('$', '') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} (' + (row.price.replace('$', '') / row.surface * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }} {{ site.data.lang-uk.m_za }})</dd></dl></span>')
