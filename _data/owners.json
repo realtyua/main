@@ -1,5 +1,27 @@
 [
   {
+     "id": "186",
+     "type": "Квартира",
+     "rent": "",
+     "rooms": "3",
+     "surface": "59.6",
+     "surface_land": "",
+     "price": "$18000",
+     "price_sqmt": "",
+     "floor": "4",
+     "floors": "5",
+     "parking": "Прибудинкова територія",
+     "region": "",
+     "location": "м. Калуш",
+     "address": "вул. Юрія Литвина. 11",
+     "object": "",
+     "coordinates": "49.04521,24.35038",
+     "date": "2021-03-21",
+     "seller": "Іванна Логущак",
+     "phone": "380502460668",
+     "description": ""
+   },
+  {
      "id": "185",
      "type": "Будинок",
      "rent": "",
