@@ -82,7 +82,7 @@ function jsDetailFormatter(index, row, $detail) {
       } else if (row.price.indexOf('€') !== -1) {
       	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price.replace('€', '') / row.surface_land * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       } else if (row.price !== '') {
-      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price * row.surface_land / 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmtl }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price / row.surface_land * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       }
 
     } else if (row.price == '' && row.price_sqmt !== '' && row.rent && row.rent !== '' && row.rent === '1') {
@@ -122,7 +122,7 @@ function jsDetailFormatter(index, row, $detail) {
       } else if (row.price.indexOf('€') !== -1) {
       	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmt }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price.replace('€', '') / row.surface * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       } else if (row.price !== '') {
-      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmt }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price * 1).toFixed(0) / row.surface + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
+      	html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_price_sqmt }} {{ site.data.lang-uk.m_za }}</dt><dd>' + (row.price / row.surface * 1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</dd></dl></span>')
       }
 
     }
@@ -243,14 +243,14 @@ function htmlDetailFormatter(index, row, $detail) {
 
   var reHeader = function() {
     html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',]
-    if (row.type.indexOf('{{ site.data.lang-uk.re_land }}') !== -1 || row.type.indexOf('{{ site.data.lang-uk.re_land | downcase }}') !== -1) {
+    if (row.type.includes('{{ site.data.lang-uk.re_land }}') || row.type.includes('{{ site.data.lang-uk.re_land | downcase }}')) {
   	} else if (row.surface_land !== '') {
   		html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_surface_land }}</dt><dd>' + row.surface_land + ' {{ site.data.lang-uk.m }} (' + (row.surface_land / 10000) + ' га)</dd></dl></span>')
   	}
     if (row.floor === '' && row.floors === '') {
-		} else if (row.floor === '' && row.floors !== '' && row.floors === '1' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}')) {
+		} else if (row.floor === '' && row.floors !== '' && row.floors === '1' && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}'))) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fno }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
-		} else if (row.floor === '' && row.floors !== '' && row.floors > '1' && row.type.indexOf('{{ site.data.lang-uk.re_house }}') !== -1 || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}')) {
+		} else if (row.floor === '' && row.floors !== '' && row.floors > '1' && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}'))) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fx }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
 		} else {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + frY + ' {{ site.data.lang-uk.re_at }} ' + flX() + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
