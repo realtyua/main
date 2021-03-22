@@ -143,9 +143,9 @@ function jsDetailFormatter(index, row, $detail) {
 
   };
 
-  var reDate = function(){
+  var reFooter = function() {
 
-		if (row.rent && row.rent !== '' && row.rent == 1) {
+    if (row.rent && row.rent !== '' && row.rent == 1) {
 
 			if (row.date !== '' && d > cd) {
 				html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_dater }}</dt><dd>' + cd.getDate() + '&nbsp;' + month[cn] + '&nbsp;' + cd.getFullYear() + '&nbsp;{{ site.data.lang-uk.roku }}</dd></dl></span>')
@@ -171,10 +171,6 @@ function jsDetailFormatter(index, row, $detail) {
 
 		}
 
-	};
-
-  var reFooter = function() {
-
     if (row.seller && row.seller !== '') {
 			html.push('<span class="col px-1"><dl><dt>' + reSelleOrSeller + '</dt><dd>' + row.seller + '</dd></dl></span>'),
 			html.push('<span class="col px-1"><dl><dt>' + rePhoneOrPhoner + '</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></span>'),
@@ -192,7 +188,6 @@ function jsDetailFormatter(index, row, $detail) {
     if (key !== 'images' || key !== 'id' && value !== '') {
       reHeader();
       rePriceSqmt();
-      reDate();
       reFooter();
     }
   })
@@ -306,7 +301,7 @@ function priceFormatter(value, row) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
   } else if (value !== '' && value.includes('€')) {
     return '<span data-toggle="tooltip" title="' + value + '">' + (value.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
-  } else if (value === '' && row.price_sqmt !== '') {
+  } else if (value == '' && row.price_sqmt !== '') {
     if (row.price_sqmt !== '' && row.price_sqmt.includes('$')) {
       return '<span data-toggle="tooltip" title="' + row.price_sqmt + '">' + (row.price_sqmt.replace('$','') * usd).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
     } else if (row.price_sqmt !== '' && row.price_sqmt.includes('€')) {
