@@ -47,9 +47,9 @@
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price == '' -%}
 
   {%- elsif offer.type == land or offer.type == landm -%}
-    <dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.m }}</dt>
+    <dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.m_za }}</dt>
   {%- else -%}
-    <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.m }}</dt>
+    <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.m_za }}</dt>
   {%- endif -%}
 
   <dd>
@@ -66,7 +66,7 @@
           {%- else -%}
             {{ pua | divided_by: offer.surface | round: 2 }} {{ site.data.lang-uk.re_uah }}
           {%- endif -%}
-          
+
         {%- endif -%}
 
       {%- elsif offer.price_sqmt != '' and offer.price == '' -%}
