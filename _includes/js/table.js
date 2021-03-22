@@ -61,7 +61,7 @@ function jsDetailFormatter(index, row, $detail) {
   var frY = (row.floor !== '') ? row.floor + "-й" : "";
   var flX = function() { if (row.floors == 1) { return row.floors + "-но"; } else if (row.floors < 5) { return row.floors + "-х"; } else if (row.floors == 7 || row.floors == 8) { return row.floors + "-ми"; } else { return row.floors + "-ти"; } };
 
-  var reСoordinates = function() {
+  var reHeader = function() {
 		html = ['<span class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-n1">',]
 		if (row.coordinates && row.coordinates !== '') {
       html.push('<span class="col px-1"><dl><dt>' + row.type + ' {{ site.data.lang-uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">{{ site.data.lang-uk.re_show_map }}</a></dd></dl></span>')
@@ -70,11 +70,7 @@ function jsDetailFormatter(index, row, $detail) {
   	} else if (row.surface_land !== '') {
   		html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_surface_land }}</dt><dd>' + row.surface_land + ' {{ site.data.lang-uk.m }} (' + (row.surface_land / 10000) + ' га)</dd></dl></span>')
   	}
-	};
-
-  var reFloorParkingObject = function() {
-
-		if (row.floor == '' && row.floors == '') {
+    if (row.floor == '' && row.floors == '') {
 		} else if (row.floor == '' && row.floors !== '' && row.floors == 1 && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}') || row.type.includes('{{ site.data.lang-uk.re_roomsp }}'))) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + row.floors + '{{ site.data.lang-uk.re_fno }} {{ site.data.lang-uk.re_floorsh }}</dd></dl></span>')
 		} else if (row.floor == '' && row.floors !== '' && row.floors > 1 && (row.type.includes('{{ site.data.lang-uk.re_house }}') || row.type.includes('{{ site.data.lang-uk.re_house | downcase }}') || row.type.includes('{{ site.data.lang-uk.re_roomsp }}'))) {
@@ -88,7 +84,6 @@ function jsDetailFormatter(index, row, $detail) {
 		if (row.object && row.object !== '') {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
 		}
-
 	};
 
   var rePriceSqmt = function() {
@@ -177,7 +172,7 @@ function jsDetailFormatter(index, row, $detail) {
 
 	};
 
-  var reDescription = function() {
+  var reFooter = function() {
 
     if (row.seller && row.seller !== '') {
 			html.push('<span class="col px-1"><dl><dt>' + reSelleOrSeller + '</dt><dd>' + row.seller + '</dd></dl></span>'),
@@ -194,11 +189,10 @@ function jsDetailFormatter(index, row, $detail) {
 
   $.each(row, function (key, value) {
     if (key !== 'images' || key !== 'id' && value !== '') {
-      reСoordinates();
-      reFloorParkingObject();
+      reHeader();
       rePriceSqmt();
       reDate();
-      reDescription();
+      reFooter();
     }
   })
 
