@@ -15,8 +15,7 @@ layout: default
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
     {%- assign level = back | size | plus:1 %}
-    <h2 class="h3 md-3">{{ page.subtitle }} / {{ level }}</h2>
+    <h2 class="h3 md-3">{{ page.subtitle }}</h2>
     {%- include elements/list-pages.html l=level -%}
-
   </div>
 </div>
