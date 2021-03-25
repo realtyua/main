@@ -14,7 +14,9 @@ layout: default
     <h1 class="h{%- if page.dir contains 'realtor' -%}3{%- else -%}2{%- endif -%}">{{ page.title }} {{ addtitle }}</h1>
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
-    <h2 class="h3 md-3">{{ page.subtitle }}</h2>
+    {%- assign level = back | size %}
+    <h2 class="h3 md-3">{{ page.subtitle }} / {{ level }}</h2>
     {%- include elements/list-pages.html l=6 -%}
+
   </div>
 </div>
