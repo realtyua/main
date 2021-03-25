@@ -54,15 +54,15 @@
 #
 # Realtor / Agent
 #
-- type: realtor
-  item: myronyuk
-  name: Продавець Аня Миронюк
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: 380675571844
-  phone_hot: 380675571844
-  phone_fax: 380675571844
-  email: info@realestate.if.ua
-  www: https://www.realestate.if.ua/
+# - type: realtor
+#   item: myronyuk
+#   name: Продавець Аня Миронюк
+#   address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+#   phone_main: 380675571844
+#   phone_hot: 380675571844
+#   phone_fax: 380675571844
+#   email: info@realestate.if.ua
+#   www: https://www.realestate.if.ua/
 
 - type: realtor
   item: mykhalchuk
