@@ -145,3 +145,5 @@ main .leaflet-menu {
   button.dropdown-toggle:focus { outline: none; }
   button.dropdown-toggle:focus::after { outline: 1px solid red; }
 }
+
+.leaflet-menu-contents h2 { margin-top: 8px; }
