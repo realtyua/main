@@ -31,7 +31,7 @@
 
   {%- if offer.surface_land and offer.surface_land != '' -%}
     <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
-    <dd><span class="mark" data-toggle="tooltip" title="{% if ssland < 4 %}0.0{% else %}0.{% endif %}{{ offer.surface_land }} га">{{ offer.surface_land }} ({{ offer.surface_land | divided_by: 10000 }} / {{ offer.surface_land | divided_by: 10000.00 }} / {{ offer.surface_land | divided_by: 10000 | round: 4 }})</span>&nbsp;{{ site.data.lang-uk.m }}</dd>
+    <dd><span class="mark" data-toggle="tooltip" title="{% if ssland < 4 %}0.0{% else %}0.{% endif %}{{ offer.surface_land }} га">{{ offer.surface_land }}</span>&nbsp;{{ site.data.lang-uk.m }}</dd>
   {%- endif -%}
 
 {%- endif -%}
