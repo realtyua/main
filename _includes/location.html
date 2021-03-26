@@ -17,6 +17,8 @@
   {%- assign size = back | size | minus: 1 -%}
 {%- elsif back.size == 4 and page.dir contains 'district' -%}
   {%- assign size = back | size | minus: 1 -%}
+{%- elsif back.size == 5 and page.dir contains 'district' -%}
+  {%- assign size = back | size | minus: 2 -%}
 {%- endif -%}
 {%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
