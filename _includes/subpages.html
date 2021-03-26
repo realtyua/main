@@ -49,15 +49,15 @@
                 <div class="tab-content" id="{{ region }}-{{ section }}-content">
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
                     {%- assign records = site.data[section] -%}
+                    {%- assign total = offers | size -%}
+                    {%- assign others = total | minus:1 -%}
                     {%- if records.size > 0 -%}
                       {%- assign offers = records | sort: 'date' | reverse -%}
                       {%- for offer in offers limit: 1 -%}
                         {%- include card.html offer=offer aid='1' -%}
                       {%- endfor -%}
-                      {%- assign total = offers | size -%}
-                      {%- assign others = total | minus:1 -%}
                       {%- if others > 0 -%}
-                        <div class="card border-0 text-center">
+                        <div class="card-footer bg-white pr-3 pt-0 border-1 border-top-0 text-right">
                           <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.lang-uk.others }} <strong>{{ others }}</strong>  {{ site.data.lang-uk.others_offers }}</a>
                         </div>
                       {%- endif -%}
