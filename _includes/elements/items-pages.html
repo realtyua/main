@@ -34,7 +34,7 @@
       {%- else -%}
         <img loading="lazy" src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
       {%- endif -%}
-      <div class="card-body pb-0">
+      <div class="card-body">
         <h5 class="card-title">
           <a href="{{ item.url }}">
             {%- if item.title -%}{{ item.title }}{%- else -%}{{ item.navtitle }}{%- endif -%}
@@ -74,17 +74,13 @@
                 {%- for offer in offers limit: 1 -%}
                   {%- include card.html offer=offer aid=aid -%}
                 {%- endfor -%}
-
-{% comment %}
                 {%- assign total = offers | size -%}
                 {%- assign others = total | minus:1 -%}
                 {%- if others > 0 -%}
-                <div class="card border-0 text-center">
+                <div class="card-footer bg-white pr-3 pt-0 border-1 border-top-0 text-right">
                   <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_offers }}</a>
                 </div>
                 {%- endif -%}
-{% endcomment %}
-
               {%- else -%}
                 <div class="alert alert-primary" role="alert">
                   <p>Поки що тут жодної нерухомості, але ви можете виправити це додавши свої пропозиції, а ми залюбки опублікуємо їх тут.</p>
@@ -98,15 +94,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="card-footer bg-white border-top-0 text-right">
-        {%- assign total = offers | size -%}
-        {%- assign others = total | minus:1 -%}
-        {%- if others > 0 -%}
-        <div class="card border-0 text-center">
-          <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_offers }}</a>
-        </div>
-        {%- endif -%}
       </div>
     </div>
   </div>
