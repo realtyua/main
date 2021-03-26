@@ -6,7 +6,8 @@
 {%- assign developer = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "developer" -%}{%- assign developer = developer | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign realtor = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "realtor" -%}{%- assign realtor = realtor | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign agency = '' | split:'' -%}{%- for i in site.data.contacts -%}{%- if i.type contains "agency" -%}{%- assign agency = agency | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign url = page.url | split: "/" -%}{%- assign size = url | size -%}
+{%- assign url = page.url | split: "/" -%}
+{%- assign size = url | size -%}
 {%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
 {%- if page.url contains "developer" -%}{%- assign isDeveloper = true -%}{%- else -%}{%- assign isDeveloper = false -%}{%- endif -%}
 {%- if page.url contains "realtor" -%}{%- assign isRealtor = true -%}{%- else -%}{%- assign isRealtor = false -%}{%- endif -%}
@@ -41,7 +42,7 @@
   {%- endfor -%}
 {%- endif -%}
 
-{%- if size != 6 and size != 7 and size != 10 -%}
+{%- if size != 5 and size != 6 and size != 7 and size != 10 -%}
   {%- for contact in district -%}
     {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
       {%- if size == 5 and page.url contains "village" -%}
