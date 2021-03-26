@@ -42,7 +42,8 @@
   {%- endfor -%}
 {%- endif -%}
 
-{%- if size != 5 and size != 6 and size != 7 and size != 10 -%}
+{%- if isDeveloper == true or isRealtor == true or isAgency == true -%}
+{%- else -%}
   {%- for contact in district -%}
     {%- if page.url and page.url contains contact.type and page.url contains contact.item -%}
       {%- if size == 5 and page.url contains "village" -%}
