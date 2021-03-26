@@ -19,6 +19,14 @@
   name: Нерухомість у Івано-Франківському районі
 
 - type: district
+  item: kolomyyskyy
+  name: Нерухомість у Коломийському районі
+
+- type: district
+  item: nadvirnyanskyy
+  name: Нерухомість у Надвірнянському районі
+
+- type: district
   item: verkhovynskyy
   name: Нерухомість в українських Карпатах
 
@@ -27,7 +35,15 @@
 #
 - type: town
   item: tysmenytsya
-  name: Нерухомість у місті Тисмениця
+  name: Нерухомість в місті Тисмениця
+
+- type: town
+  item: sniatyn
+  name: Нерухомість в місті Снятин
+
+- type: town
+  item: tlumach
+  name: Нерухомість в місті Тлумач
 
 #
 # Region / City
@@ -76,7 +92,7 @@
 
 - type: realtor
   item: mosiychuk
-  name: Продаж квартир в&nbsp;Івано-Франківську
+  name: Продаж нерухомості
   address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
   phone_main: 380504949649
   phone_hot: 380504949649
