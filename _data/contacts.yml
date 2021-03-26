@@ -56,12 +56,12 @@
 #
 - type: realtor
   item: myronyuk
-  name: 0
-  address: 1
-  phone_main: 2
-  phone_hot: 3
-  phone_fax: 4
-  email: 5
+  name: Нерухомість в Карпатах - Аня Миронюк
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380675571844
+  phone_hot: 380675571844
+  phone_fax: 380675571844
+  email: anuamir702@gmail.com
   www: https://www.realestate.if.ua/
 
 - type: realtor
