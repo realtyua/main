@@ -32,9 +32,9 @@
 {%- endif -%}
 {% endif %}
 <div class="btn-group">
-  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">☎</button>
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button>
   <div class="dropdown-menu px-2 dropdown-menu-right">
-    <span class="text-nowrap">{{ offer.seller }}</span<br/>
+    <span class="text-nowrap">{{ offer.seller }}</span><br/>
     {%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>
   </div>
 </div>
@@ -43,7 +43,7 @@
 
 {%- if split.size <= 2 -%}
 <div class="btn-group">
-  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">☎</button>
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button>
   <div class="dropdown-menu px-2 dropdown-menu-right">
     <span class="text-nowrap">{{ offer.seller }}</span>
     {%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>
@@ -51,7 +51,7 @@
 </div>
 {%- elsif split.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}
 <div class="btn-group">
-  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">☎</button>
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button>
   <div class="dropdown-menu px-2 dropdown-menu-right">
     <span class="text-nowrap">{{ offer.seller }}</span>
     {%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>
