@@ -1,56 +1,56 @@
-.card-body {
-  .phone {
-    position: relative;
-  }
-
-  details {
-    display: inline !important;
-    line-height: 1.1em;
-  }
-
-  details > summary {
-    display: list-item;
-    list-style-type: none;
-    color: $primary;
-    font-size: 1em;
-    letter-spacing: 0.1em;
-  }
-
-  details > summary::before {
-    content:"\260E";
-  }
-
-  details > summary::-webkit-details-marker {
-    background: none;
-    color: transparent;
-  }
-
-  details > summary:hover {
-    color: red;
-  }
-
-  details[open] {
-    a {
-      margin-left: 20px;
-    }
-  }
-
-  details[open] summary {
-    position: absolute;
-    top: 1px;
-    font-size: 1em;
-  }
-
-  details[open] summary::before {
-    content:"\02716";
-  }
-
-  :focus {
-    border: 1px solid transparent;
-    outline: none !important;
-    -moz-appearance: none !important;
-  }
-}
+// .card-body {
+//   .phone {
+//     position: relative;
+//   }
+//   //
+//   // details {
+//   //   display: inline !important;
+//   //   line-height: 1.1em;
+//   // }
+//   // 
+//   // details > summary {
+//   //   display: list-item;
+//   //   list-style-type: none;
+//   //   color: $primary;
+//   //   font-size: 1em;
+//   //   letter-spacing: 0.1em;
+//   // }
+//   //
+//   // details > summary::before {
+//   //   content:"\260E";
+//   // }
+//   //
+//   // details > summary::-webkit-details-marker {
+//   //   background: none;
+//   //   color: transparent;
+//   // }
+//   //
+//   // details > summary:hover {
+//   //   color: red;
+//   // }
+//   //
+//   // details[open] {
+//   //   a {
+//   //     margin-left: 20px;
+//   //   }
+//   // }
+//   //
+//   // details[open] summary {
+//   //   position: absolute;
+//   //   top: 1px;
+//   //   font-size: 1em;
+//   // }
+//   //
+//   // details[open] summary::before {
+//   //   content:"\02716";
+//   // }
+//   //
+//   :focus {
+//     border: 1px solid transparent;
+//     outline: none !important;
+//     -moz-appearance: none !important;
+//   }
+// }
 //
 // Custom Card
 //
