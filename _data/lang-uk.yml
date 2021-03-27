@@ -32,13 +32,19 @@ re_sell_apartment: Продаю квартиру
 re_for_sale: Продається
 re_for_rent: Здається в оренду
 re_for_rentd: Здається в оренду на короткий термін
+re_for_rentnd: Здається в оренду на нетривалий термін
 re_surface: площею
+re_surface_total: загальною площею
 re_rooms: кімнат
 re_roomsp: приміщення
 re_roomsps: приміщень
 re_kimnaty: приміщення
 re_floor: Поверх
 re_house: Будинок
+re_garage: Гараж
+re_store: Магазин
+re_house_part: Частина будинку
+re_house_partm: частину будинку
 re_house_not: Недобудований будинок
 re_fx: -х
 re_fno: -но
@@ -64,6 +70,8 @@ re_address: за адресою
 re_price: вартість нерухомості
 re_pricel: вартість землі
 re_pricer: вартість оренди за місяць
+re_for_month: за місяць
+re_for_day: за місяць
 re_date: Нерухомість доступна для купівлі з
 re_dater: Оренда нерухомості доступна з
 re_datel: Земля доступна для купівлі з

@@ -69,15 +69,12 @@ layout: compress
     {%- if page.url contains 'realtor' and page.url contains 'region' and back.size == 4 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- elsif page.url contains 'realtor' and page.url contains 'district' and back.size == 5 and page.table != 1 or page.table != 2 -%}
-      {%- include pagination-js.html -%}
     {%- elsif page.url contains 'developer' and page.url contains 'region' and back.size == 4 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- elsif page.url contains 'developer' and page.url contains 'district' and back.size == 5 and page.table != 1 or page.table != 2 -%}
-      {%- include pagination-js.html -%}
     {%- elsif page.url contains 'agency' and page.url contains 'region' and back.size == 4 and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- elsif page.url contains 'agency' and page.url contains 'district' and back.size == 5 and page.table != 1 or page.table != 2 -%}
-      {%- include pagination-js.html -%}
     {%- elsif page.url contains 'building-materials' and page.table != 1 or page.table != 2 -%}
       {%- include pagination-js.html -%}
     {%- endif -%}
