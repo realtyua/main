@@ -10,7 +10,7 @@
 <div class="card h-100{% if others > 0 %} border-bottom-0{% endif %}">
   <div class="card-body pb-0">
     <div class="card-text mb-1">{% include card/body.html %}</div>
-    <div class="card-text mb-1">
+    <div class="card-text mb-1 date">
       <span class="small text-muted">
         {%- if offer.rent == '1' -%}
           {{ site.data.lang-uk.re_dater }}
