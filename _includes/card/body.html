@@ -30,4 +30,38 @@
     <mark>{{ offer.price_sqmt }}</mark>&nbsp;{{ site.data.lang-uk.re_uah }}.
   {% endif %}
 {%- endif -%}
-{% endif %}{%- if split.size <= 2 -%}&nbsp;<span class="phone" data-toggle="tooltip" title="{{ site.data.lang-uk.re_seller }} {{ offer.seller }}"><details><summary></summary>{%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>.</details></span>&nbsp;{%- elsif split.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}&nbsp;<span class="phone" data-toggle="tooltip" title="{{ site.data.lang-uk.re_seller }} {{ offer.seller }}"><details><summary></summary>{%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>.</details></span>&nbsp;{%- endif -%}
+{% endif %}
+<div class="btn-group">
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">☎</button>
+  <div class="dropdown-menu px-2 dropdown-menu-right">
+    <span class="text-nowrap">{{ offer.seller }}</span>
+    {%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>
+  </div>
+</div>
+
+{% comment %}
+
+{%- if split.size <= 2 -%}
+<div class="btn-group">
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">☎</button>
+  <div class="dropdown-menu px-2 dropdown-menu-right">
+    <span class="text-nowrap">{{ offer.seller }}</span>
+    {%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>
+  </div>
+</div>
+{%- elsif split.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}
+<div class="btn-group">
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">☎</button>
+  <div class="dropdown-menu px-2 dropdown-menu-right">
+    <span class="text-nowrap">{{ offer.seller }}</span>
+    {%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>
+  </div>
+</div>
+{%- endif -%}
+
+{%- if split.size <= 2 -%}
+&nbsp;<span class="phone" data-toggle="tooltip" title="{{ site.data.lang-uk.re_seller }} {{ offer.seller }}"><details><summary></summary>{%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>.</details></span>&nbsp;
+{%- elsif split.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}
+&nbsp;<span class="phone" data-toggle="tooltip" title="{{ site.data.lang-uk.re_seller }} {{ offer.seller }}"><details><summary></summary>{%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i>.</details></span>&nbsp;
+{%- endif -%}
+{% endcomment %}
