@@ -143,7 +143,13 @@ main .leaflet-menu {
 .card-footer {
   .dropdown-toggle::after { margin-left: 0; vertical-align: .155em; }
   button.dropdown-toggle:focus { outline: none; }
-  button.dropdown-toggle:focus::after { outline: 1px solid red; }
+  // button.dropdown-toggle:focus::after { outline: 1px solid red; }
 }
 
-.leaflet-menu-contents h2 { margin-top: 8px; }
+.card {
+  .btn-group, .btn-group-vertical {
+    vertical-align: unset;
+  }
+}
+
+// .leaflet-menu-contents h2 { margin-top: 8px; }
