@@ -32,7 +32,7 @@
 {%- endif -%}
 {% endif %}
 {%- if split.size <= 2 -%}
-&nbsp;{%- include footer/phone.html id=offer.id name=offer.seller legal=offer.phone type='dropdown' -%}
+&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}
 {%- elsif split.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}
-&nbsp;{%- include footer/phone.html id=offer.id name=offer.seller legal=offer.phone type='dropdown' -%}
+&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}
 {%- endif -%}
