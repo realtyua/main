@@ -28,7 +28,7 @@
   </div>
   <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
     <div class="row row-cols-auto justify-content-end">
-      <div class="col-auto pr-0">{%- include footer/phone.html name=offer.seller legal=offer.phone type='dropdown' -%}</div>
+      <div class="col-auto pr-0">{%- include footer/phone.html id=offer.id name=offer.seller legal=offer.phone type='dropdown' -%}</div>
       {%- if offer.coordinates and offer.coordinates != '' -%}
       <div class="col-auto pr-0">
         <a class="marker" data-coord="{{ offer.coordinates }}" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">

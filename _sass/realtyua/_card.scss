@@ -11,6 +11,12 @@
 
 .card-body .date { line-height: 1; }
 
+.card-footer {
+  .col-auto {
+    .btn-group { display: inline; }
+  }
+}
+
 //
 // Custom Card
 //
