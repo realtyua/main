@@ -168,7 +168,7 @@ function jsDetailFormatter(index, row, $detail) {
 		}
 
     if (row.seller && row.seller !== '') {
-			html.push('<span class="col px-1"><dl><dt>' + reSelleOrSeller + '</dt><dd>' + row.seller + '</dd></dl></span>'),
+			html.push('<span class="col px-1"><dl><dt>' + reSelleOrSeller + '</dt><dd>' + row.seller.replace('Продавець ','') + '</dd></dl></span>'),
 			html.push('<span class="col px-1"><dl><dt>' + rePhoneOrPhoner + '</dt><dd><a href="tel:+' + row.phone + '">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></span>'),
 			html.push('</span>')
 		}
