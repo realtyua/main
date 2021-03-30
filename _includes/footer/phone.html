@@ -16,6 +16,14 @@
   <a href="tel:+{{ t }}" class="card-link">
     <span class="align-middle" data-toggle="tooltip" data-placement="left" title="{{ site.data.lang-uk.re_seller }} {{ n }}" style="font-size:large;">&phone;</span>
   </a>
+{%- elsif include.legal and include.name and include.type == 'dropdown' -%}
+<div class="btn-group">
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button>
+  <div class="dropdown-menu px-2 dropdown-menu-right">
+    <span class="text-nowrap">{{ include.name| remove: 'Продавець ' }}</span><br>
+    <a href="tel:+{{ t }}">{{ n }}</a><i class="d-none">{{ offer.id }}</i>
+  </div>
+</div>
 {%- elsif include.legal and include.type == 'text' -%}
   {%- capture master -%}
     {%- if include.name and include.name != '' -%}

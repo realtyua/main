@@ -170,7 +170,7 @@
   {%- endif -%}
   <dd>
     {%- if offer.seller contains 'Продавець' -%}
-      {{ offer.seller | remove: 'Продавець' }}
+      {{ offer.seller | remove: 'Продавець ' }}
     {%- else -%}
       {{ offer.seller }}
     {%- endif -%}
