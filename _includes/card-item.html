@@ -53,7 +53,7 @@
 
 {%- capture records -%}
   {%- if slug == 'apartment' -%}
-    {%- assign oapartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type contains 'квартири' or i.type contains 'Кімната'" -%}
+    {%- assign oapartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type == 'Частина квартири' or i.type contains 'Кімната'" -%}
     {{ oapartment | size }}
   {%- elsif slug == 'commercial' -%}
     {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'Нежитловий'" -%}
@@ -65,13 +65,13 @@
     {%- assign ogarage = offers | where_exp: "i", "i.rent != '1' and i.type == 'Гараж' or i.type contains 'Місце'" -%}
     {{ ogarage | size }}
   {%- elsif slug == 'house' -%}
-    {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type contains 'будинок' or i.type contains 'будинку'" -%}
+    {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type == 'Частина будинку'" -%}
     {{ ohouse | size }}
   {%- elsif slug == 'land' -%}
     {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type == 'Земля'" -%}
     {{ oland | size }}
   {%- elsif slug == 'realtor' -%}
-    {%- assign orealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор'" -%}
+    {%- assign orealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор' or i.seller contains 'Агенція' or i.seller contains 'Менеджер' or i.seller contains 'Продавець'" -%}
     {{ orealtor | size }}
   {%- elsif slug == 'rent' -%}
     {%- assign orent = offers | where_exp: "i", "i.rent == '1'" -%}

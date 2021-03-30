@@ -168,7 +168,13 @@
   {%- else -%}
     <dt>{{ site.data.lang-uk.re_seller }}</dt>
   {%- endif -%}
-  <dd>{{ offer.seller }}</dd>
+  <dd>
+    {%- if offer.seller contains 'Продавець' -%}
+      {{ offer.seller | remove: 'Продавець' }}
+    {%- else -%}
+      {{ offer.seller }}
+    {%- endif -%}
+  </dd>
 {%- endif -%}
 
 {%- if offer.phone and offer.phone != '' -%}
