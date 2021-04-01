@@ -17,5 +17,3 @@
   {%- endif -%}
   {%- assign oa = oa | remove: of -%}
 {%- endfor -%}
-{%- assign property = site.data.property | jsonify -%}
-{%- assign owners = owners | concat: property -%}
