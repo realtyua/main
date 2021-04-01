@@ -12,8 +12,10 @@
 {%- if include.style == "card" -%}
 
   {%- assign thehere = page.dir | split: '/' | last -%}
+  {% assign count = 0 %}
 
   {%- for one in ones -%}
+    {% assign count = count | plus: 1 %}
     {%- assign isJson = false -%}
     {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
     {%- assign slug = one.url | split: '/' | last -%}
@@ -24,7 +26,7 @@
   {%- endfor -%}
 
   <div class="col px-2 mb-3">
-    <div class="card">
+    <div class="card bg-last">
       <div class="card-body">
         <h5 class="card-title">
           <a href="{{ page.dir }}map.html">{{ page.title }} на мапі</a>
@@ -37,6 +39,18 @@
       </div>
     </div>
   </div>
+
+{% comment %}
+
+  {% assign count = 0 %}
+
+  {% for something in somethings %}
+    {% assign count = count | plus: 1 %}
+  {% endfor %}
+
+  {{ count }}
+
+{% endcomment %}
 
 {%- else -%}
 
