@@ -26,7 +26,7 @@ $theme-color-interval: 8% !default;
 //
 // fusv-disable
 //
-$blue:     #0d6efd !default;
+$blue: #0d6efd !default;
 $blue-100: tint-color($blue, 8) !default;
 $blue-200: tint-color($blue, 6) !default;
 $blue-300: tint-color($blue, 4) !default;
@@ -37,15 +37,32 @@ $blue-700: shade-color($blue, 4) !default;
 $blue-800: shade-color($blue, 6) !default;
 $blue-900: shade-color($blue, 8) !default;
 
+$indigo: #6610f2 !default;
 $indigo-100: tint-color($indigo, 8) !default;
+
+$purple: #6f42c1 !default;
 $purple-100: tint-color($purple, 8) !default;
+
 $pink-100: tint-color($pink, 8) !default;
+$pink: #d63384 !default;
+
 $red-100: tint-color($red, 8) !default;
+$red: #dc3545 !default;
+
 $orange-100: tint-color($orange, 8) !default;
+$orange: #fd7e14 !default;
+
 $yellow-100: tint-color($yellow, 8) !default;
+$yellow: #ffc107 !default;
+
 $green-100: tint-color($green, 8) !default;
+$green: #198754 !default;
+
 $teal-100: tint-color($teal, 8) !default;
+$teal: #20c997 !default;
+
 $cyan-100: tint-color($cyan, 8) !default;
+$cyan: #0dcaf0 !default;
 
 //
 // Responsive font sizes
