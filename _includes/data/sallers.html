@@ -1,11 +1,11 @@
-{%- assign property = site.data.property | jsonify -%}
+{%- assign property = site.data.property -%}
 {%- assign mykhalchuk = site.data.mykhalchuk -%}
 {%- assign mosiychuk = site.data.mosiychuk -%}
 {%- assign ferents = site.data.ferents -%}
 {%- assign matsalak = site.data.matsalak -%}
 {%- assign myronyuk = site.data.myronyuk -%}
-{%-
-  assign records = owners
+{%- assign records = owners
+  | concat: property
   | concat: mosiychuk
   | concat: mykhalchuk
   | concat: ferents
