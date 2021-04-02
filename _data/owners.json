@@ -1,5 +1,27 @@
 [
   {
+      "id": "266",
+      "type": "Квартира",
+      "rent": "",
+      "rooms": "3",
+      "surface": "85",
+      "surface_land": "",
+      "price": "$27800",
+      "price_sqmt": "",
+      "floor": "2",
+      "floors": "10",
+      "parking": "Прибудинкова територія",
+      "region": "",
+      "location": "м. Івано-Франківськ",
+      "address": "вул. Хіміків, 35А",
+      "object": "",
+      "coordinates": "48.94077,24.70609",
+      "date": "2021-04-02",
+      "seller": "Артур Котвицький",
+      "phone": "380668997932",
+      "description": ""
+    },
+  {
       "id": "265",
       "type": "Земля",
       "rent": "",
