@@ -12,7 +12,8 @@
 {%- if include.style == "card" -%}
 
   {%- assign thehere = page.dir | split: '/' | last -%}
-  {%- include random-number.html min=1 max=10 -%}
+  {%- capture num -%}{%- increment counter -%}{%- endcapture -%}
+  {% assign number = 0 %}
 
   {%- for one in ones -%}
     {%- assign isJson = false -%}
@@ -48,6 +49,12 @@
   {% endfor %}
 
   {{ count }}
+
+  {%- capture number -%}
+    {%- if  -%}
+    {%- else -%}
+    {%- endif -%}
+  {%- endcapture -%}
 
 {% endcomment %}
 

@@ -78,13 +78,15 @@
   {%- endif -%}
 {%- endcapture -%}
 
+
 {%- if page.url contains '/all.html' -%}
   {%- if page.dir == current or one.url contains page.url and page.navhide != 1 -%}
     {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
     {%- else -%}
+      {% assign number = 0 | plus: 1 %}
       <div class="col px-2 mb-3">
 
-        <div class="card bg-{%- increment counter -%}-{{ forloop.index }}-{{ randomNumber }}">
+        <div class="card bg-{%- if num < 10 -%}{{ num }}{%- endif -%}-{{ number }}">
           <div class="card-body">
             <h5 class="card-title"><a href="{{ one.url }}">{{ navitemtitle }}</a></h5>
           </div>
