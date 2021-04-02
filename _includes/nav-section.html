@@ -12,7 +12,6 @@
 {%- if include.style == "card" -%}
 
   {%- assign thehere = page.dir | split: '/' | last -%}
-  {%- capture num -%}{%- increment counter -%}{%- endcapture -%}
   {% assign number = 0 %}
 
   {%- for one in ones -%}
