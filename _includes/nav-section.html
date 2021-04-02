@@ -25,7 +25,7 @@
   {%- endfor -%}
 
   <div class="col px-2 mb-3">
-    <div class="card р-100 bg-8">
+    <div class="card h-100 bg-8">
       <div class="card-body">
         <h5 class="card-title">
           <a href="{{ page.dir }}map.html">{{ page.title }} на мапі</a>
@@ -38,18 +38,6 @@
       </div>
     </div>
   </div>
-
-{% comment %}
-
-  {% assign count = 0 %}
-
-  {% for something in somethings %}
-    {% assign count = count | plus: 1 %}
-  {% endfor %}
-
-  {{ count }}
-
-{% endcomment %}
 
 {%- else -%}
 
