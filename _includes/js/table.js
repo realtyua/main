@@ -81,8 +81,8 @@ function jsDetailFormatter(index, row, $detail) {
 		if (row.parking && row.parking !== '') {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
 		}
-		if (row.complex && row.complex !== '') {
-			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.complex + '</dd></dl></span>')
+		if (row.object && row.object !== '') {
+			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
 		}
 	};
 
@@ -241,8 +241,8 @@ function htmlDetailFormatter(index, row, $detail) {
     if (row.parking && row.parking !== '') {
       html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>')
     }
-    if (row.complex && row.complex !== '') {
-      html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.complex + '</dd></dl></span>')
+    if (row.object && row.object !== '') {
+      html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>')
     }
   };
 

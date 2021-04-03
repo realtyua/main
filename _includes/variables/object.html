@@ -24,7 +24,7 @@
 {%- for city in cities limit:1 -%}
   {%- assign location = city.breadcrumb -%}
 {%- endfor -%}
-{%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.complex contains page.breadcrumb' -%}
+{%- assign data = site.data[slug] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
 
 {%- assign object = page.dir | split: "/" | last -%}
 {%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains object' -%}
