@@ -80,7 +80,7 @@ function jsDetailFormatter(index, row, $detail) {
 			html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_floor }}</dt><dd>' + frY + ' {{ site.data.lang-uk.re_at }} ' + flX() + ' {{ site.data.lang-uk.re_floors }}</dd></dl></span>')
 		}
 		if (row.parking && row.parking !== '') { html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_parking }}</dt><dd>' + row.parking + '</dd></dl></span>') }
-		if (row.object && row.object !== '') { html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.object + '</dd></dl></span>') }
+		if (row.complex && row.complex !== '') { html.push('<span class="col px-1"><dl><dt>{{ site.data.lang-uk.re_object }}</dt><dd>' + row.complex + '</dd></dl></span>') }
 	};
 
   var rePriceSqmt = function() {
@@ -140,10 +140,6 @@ function jsDetailFormatter(index, row, $detail) {
   };
 
   var reFooter = function() {
-
-    if (row.object && row.object !== '') {
-			html.push('<span class="col px-1"><dl><dt>{{ {{ site.data.lang-uk.re_object }} }}</dt><dd>' + row.object + '</dd></dl></span>')
-		}
 
     if (row.rent && row.rent !== '' && row.rent == 1) {
 
