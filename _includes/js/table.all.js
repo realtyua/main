@@ -141,6 +141,10 @@ function jsDetailFormatter(index, row, $detail) {
 
   var reFooter = function() {
 
+    if (row.object && row.object !== '') {
+			html.push('<span class="col px-1"><dl><dt>{{ {{ site.data.lang-uk.re_object }} }}</dt><dd>' + row.object + '</dd></dl></span>')
+		}
+
     if (row.rent && row.rent !== '' && row.rent == 1) {
 
 			if (row.date !== '' && d > cd) {
