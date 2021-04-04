@@ -65,10 +65,10 @@
     {%- assign ogarage = offers | where_exp: "i", "i.rent != '1' and i.type == 'Гараж' or i.type contains 'Місце'" -%}
     {{ ogarage | size }}
   {%- elsif slug == 'house' -%}
-    {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type == 'Будинок' or i.type == 'Частина будинку'" -%}
+    {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_house or i.type == site.data.lang-uk.re_house_part" -%}
     {{ ohouse | size }}
   {%- elsif slug == 'land' -%}
-    {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type == 'Земля'" -%}
+    {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type == site.data.lang-uk.re_land" -%}
     {{ oland | size }}
   {%- elsif slug == 'realtor' -%}
     {%- assign orealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор' or i.seller contains 'Агенція' or i.seller contains 'Менеджер' or i.seller contains 'Продавець'" -%}
