@@ -38,7 +38,7 @@
 
 {%- if offer.price_sqmt -%}
 
-  {%- if offer.rent == '1' and offer.type contains site.data.lang-uk.re_no_apartment or offer.rent == '1' and offer.type contains site.data.lang-uk.re_roomsp or offer.rent == '1' and offer.type contains site.data.lang-uk.re_non_residential -%}
+  {%- if offer.rent == '1' and offer.type contains site.data.lang-uk.re_no_apartment or offer.rent == '1' and offer.type contains site.data.lang-uk.re_roomsp or offer.rent == '1' and offer.type contains site.data.lang-uk.re_nezhytlovyy -%}
     <dt>{{ site.data.lang-uk.re_price_rent }} {{ site.data.lang-uk.m_za }}</dt>
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price != '' -%}
     <dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
@@ -57,7 +57,7 @@
 
       {%- if offer.price_sqmt == '' and offer.price != '' -%}
 
-        {%- if offer.type contains site.data.lang-uk.re_no_apartment or offer.type contains site.data.lang-uk.re_roomsp or offer.type contains site.data.lang-uk.re_non_residential -%}
+        {%- if offer.type contains site.data.lang-uk.re_no_apartment or offer.type contains site.data.lang-uk.re_roomsp or offer.type contains site.data.lang-uk.re_nezhytlovyy -%}
 
           {%- if offer.price_sqmt == '' and offer.price contains '$' -%}
             <span class="mark" data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | round: 2 }}">{{ pus | divided_by: offer.surface | times: site.usd | round: 2 }}</span> {{ site.data.lang-uk.re_uah }}.
