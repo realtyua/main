@@ -54,7 +54,7 @@
     {%- assign oapartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type == 'Частина квартири' or i.type contains 'Кімната'" -%}
     {{ oapartment | size }}
   {%- elsif slug == 'commercial' -%}
-    {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains 'приміщення' or i.type contains 'Нежитловий'" -%}
+    {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_roomsp" -%}
     {{ ocommercial | size }}
   {%- elsif slug == 'developer' -%}
     {%- assign odeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
