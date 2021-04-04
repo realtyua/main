@@ -18,8 +18,13 @@ news: Новини
 developers: Забудовники
 new_buildings: Новобудови
 new_building: Новобудова
+agency: Агенція
 realtors: Ріелтори
+realtor: Ріелтор
 agents: Агенти
+agent: Агент
+manager: Менеджер
+building_company: Будівельна компанія
 city: місто
 district: район
 description_site: містить оголошення, новини, статті та іншу інформацію про нерухомість, яка будується, продається або передається в оренду і знаходиться в
@@ -43,6 +48,7 @@ re_kimnaty: приміщення
 re_floor: Поверх
 re_house: Будинок
 re_garage: Гараж
+re_place: Місце
 re_store: Магазин
 re_house_part: Частина будинку
 re_house_partm: частину будинку

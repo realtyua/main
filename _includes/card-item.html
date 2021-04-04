@@ -59,10 +59,12 @@
     {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_roomsp" -%}
     {{ ocommercial | size }}
   {%- elsif slug == 'developer' -%}
-    {%- assign odeveloper = offers | where_exp: "i", "i.seller contains 'Будівельна компанія'" -%}
+    {%- assign odeveloper = offers | where_exp: "i", "i.seller contains site.data.lang-uk.building_company" -%}
     {{ odeveloper | size }}
   {%- elsif slug == 'garage' -%}
-    {%- assign ogarage = offers | where_exp: "i", "i.rent != '1' and i.type == 'Гараж' or i.type contains 'Місце'" -%}
+    {%- assign ogarage = offers | where_exp: "i", "i.rent != '1' and
+      i.type == site.data.lang-uk.re_garage or i.type contains site.data.lang-uk.re_place
+    " -%}
     {{ ogarage | size }}
   {%- elsif slug == 'house' -%}
     {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_house or i.type == site.data.lang-uk.re_house_part" -%}
@@ -71,7 +73,13 @@
     {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type == site.data.lang-uk.re_land" -%}
     {{ oland | size }}
   {%- elsif slug == 'realtor' -%}
-    {%- assign orealtor = offers | where_exp: "i", "i.seller contains 'Агент' or i.seller contains 'Ріелтор' or i.seller contains 'Агенція' or i.seller contains 'Менеджер' or i.seller contains 'Продавець'" -%}
+    {%- assign orealtor = offers | where_exp: "i", "
+      i.seller contains site.data.lang-uk.agent or
+      i.seller contains site.data.lang-uk.realtor or
+      i.seller contains site.data.lang-uk.agency or
+      i.seller contains site.data.lang-uk.manager or
+      i.seller contains site.data.lang-uk.re_seller
+    " -%}
     {{ orealtor | size }}
   {%- elsif slug == 'rent' -%}
     {%- assign orent = offers | where_exp: "i", "i.rent == '1'" -%}
