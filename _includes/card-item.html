@@ -51,7 +51,9 @@
 
 {%- capture records -%}
   {%- if slug == 'apartment' -%}
-    {%- assign oapartment = offers | where_exp: "i", "i.rent != '1' and i.type == 'Квартира' or i.type == 'Частина квартири' or i.type contains 'Кімната'" -%}
+    {%- assign oapartment = offers | where_exp: "i", "i.rent != '1' and
+      i.type == site.data.lang-uk.re_apartment or i.type == site.data.lang-uk.re_apartment_part or i.type contains site.data.lang-uk.re_room
+    " -%}
     {{ oapartment | size }}
   {%- elsif slug == 'commercial' -%}
     {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_roomsp" -%}
