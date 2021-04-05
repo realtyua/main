@@ -4,7 +4,7 @@ url: 'https://www.realestate.if.ua'
 
 encoding: UTF-8
 lang: uk_UA
-timezone: Europe/Kyiv
+timezone: Europe/Helsinki
 country: Україна
 region: Івано-Франківська область
 region_slug: ivano-frankivska
@@ -92,7 +92,6 @@ defaults:
       layout: "default"
 
 plugins:
-  - jekyll-last-modified-at
   - jekyll-sitemap
   - jekyll-paginate-v2
 
