@@ -92,6 +92,7 @@ defaults:
       layout: "default"
 
 plugins:
+  - jekyll-last-modified-at
   - jekyll-sitemap
   - jekyll-paginate-v2
 
