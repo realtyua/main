@@ -1,5 +1,27 @@
 [
   {
+     "id": "302",
+     "type": "Будинок",
+     "rent": "",
+     "rooms": "4",
+     "surface": "131",
+     "surface_land": "2150",
+     "price": "$26500",
+     "price_sqmt": "",
+     "floor": "",
+     "floors": "1",
+     "parking": "Власне подвір'я",
+     "region": "",
+     "location": "м. Калуш",
+     "address": "вул. Павла Грабовського, 39",
+     "object": "",
+     "coordinates": "49.039309,24.378095",
+     "date": "2021-04-06",
+     "seller": "Юрій Подоляк",
+     "phone": "380507476195",
+     "description": ""
+   },
+  {
      "id": "301",
      "type": "Гараж",
      "rent": "",
