@@ -518,10 +518,7 @@ $dropDown       : true;
 }
 .card {
     .card-footer {
-        .navbar-toggler {
-            height: 24px;
-            width: 24px;
-        }
+        .navbar-toggler { height: 24px; width: 24px; }
     }
 }
 
@@ -529,4 +526,5 @@ $dropDown       : true;
 .developer .navbar .navbar-nav .nav-link { padding: .35rem .25rem .5rem .25rem; }
 //.object .navbar .navbar-nav .nav-link { padding-bottom: .5rem; }
 
- #navbarRealEstate .dropdown-menu { z-index: 9999; }
+ #navbarRealEstate .dropdown-menu { z-index: 10000; }
+ .menu .cal { margin-right: 8px; cursor: pointer; }
