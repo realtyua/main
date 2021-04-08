@@ -1,7 +1,7 @@
 function generateRandomRe() {
   $.getJSON("https://www.{{ site.domain }}/region/{{ site.region_slug }}/data/all.json", function(data) {
     var count = data.length; var random = []; var counter = 0; var number = 3; var div = $("#adsre"); var usd = {{ site.usd }}; var eur = {{ site.eur }};
-    var reRoomOrPrym = (data.type.includes('{{ site.data.lang-uk.re_roomsp }}')) ? " {{ site.data.lang-uk.re_roomsps }}" : " {{ site.data.lang-uk.re_rooms }}";
+    var reRoomOrPrym = (data[i].type.includes('{{ site.data.lang-uk.re_roomsp }}')) ? " {{ site.data.lang-uk.re_roomsps }}" : " {{ site.data.lang-uk.re_rooms }}";
     function reAdsLocation() { return (data[i].location && data[i].location !== '') ? ', ' + data[i].location : ''; };
     function reAdsRegion() { return (data[i].region && data[i].region !== '') ? ', ' + data[i].region : ''; };
     function reAdsPrice() { if (data[i].price !== '' && data[i].price.includes('$')) { return '{{ site.data.lang-uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('$','') * usd).toFixed(0) + '</span>&nbsp;{{ site.data.lang-uk.re_uah }}'; } else if (data[i].price !== '' && data[i].price.includes('€')) { return '{{ site.data.lang-uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('€','') * eur).toFixed(0) + '</span>&nbsp;{{ site.data.lang-uk.re_uah }}'; } else if (data[i].price !== '') { return '{{ site.data.lang-uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price * 1).toFixed(0) + '</span>&nbsp;{{ site.data.lang-uk.re_uah }}'; } }
