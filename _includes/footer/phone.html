@@ -19,7 +19,7 @@
 {%- elsif include.legal and include.type == 'dropdown' -%}
 <div class="btn-group">
   <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button>
-  <div class="dropdown-menu px-2 dropdown-menu-right">
+  <div class="dropdown-menu px-2">
     <span class="text-nowrap">{{ offer.seller | remove: site.data.lang-uk.re_seller }}</span><br>
     <a href="tel:+{{ t }}" title="{{ site.data.lang-uk.re_tel | capitalize }}">{{ n }}</a><i class="d-none">{{ offer.id }}</i>
   </div>
