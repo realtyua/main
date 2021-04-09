@@ -1,0 +1,24 @@
+_id: c6104c90-995c-11eb-a449-3fdf9e1f5f1d
+are: sell
+tre: land
+surface: '0'
+sland: '5000'
+rooms: '0'
+floor: '0'
+floors: '0'
+taddress: street
+address: Вулиця Біла
+number: '01'
+tlocation: village
+location: Село Посіч
+region: ivano-frankivskyy
+description: >-
+  Земельна ділянка розташована біля центральної дороги. Призначення під
+  будівництво та с-г. Електрика.
+currency: usd
+price: '18000'
+phone: '931941546'
+fn: Марія
+ln: Канюс
+agreed: 'on'
+date: 1617990930
