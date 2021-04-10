@@ -44,11 +44,7 @@ $(function () {
   $('table#property').on('click-row.bs.table', function (e, row, $element) { $($element).siblings().removeClass('active'); $($element).addClass('active'); });
 });
 
-var month = ["{{ site.data.lang-uk.m_01 }}","{{ site.data.lang-uk.m_02 }}","{{ site.data.lang-uk.m_03 }}","{{ site.data.lang-uk.m_04 }}","{{ site.data.lang-uk.m_05 }}","{{ site.data.lang-uk.m_06 }}","{{ site.data.lang-uk.m_07 }}","{{ site.data.lang-uk.m_08 }}","{{ site.data.lang-uk.m_09 }}","{{ site.data.lang-uk.m_10 }}","{{ site.data.lang-uk.m_11 }}","{{ site.data.lang-uk.m_12 }}"];
-var usd = {{ site.usd }};
-var eur = {{ site.eur }};
-var items = [];
-var html = [];
+var month = ["{{ site.data.lang-uk.m_01 }}","{{ site.data.lang-uk.m_02 }}","{{ site.data.lang-uk.m_03 }}","{{ site.data.lang-uk.m_04 }}","{{ site.data.lang-uk.m_05 }}","{{ site.data.lang-uk.m_06 }}","{{ site.data.lang-uk.m_07 }}","{{ site.data.lang-uk.m_08 }}","{{ site.data.lang-uk.m_09 }}","{{ site.data.lang-uk.m_10 }}","{{ site.data.lang-uk.m_11 }}","{{ site.data.lang-uk.m_12 }}"], usd = {{ site.usd }}, eur = {{ site.eur }}, items = [], html = [];
 
 function jsDetailFormatter(index, row, $detail) {
   "use strict";
@@ -332,9 +328,7 @@ function htmlDetailFormatter(index, row, $detail) {
   })
 
   if (images.length) {
-    var address = (row.address.indexOf('{{ site.data.lang-uk.re_vul }}') !== -1) ? ' {{ site.data.lang-uk.re_po }} ' + row.address : ' {{ site.data.lang-uk.re_at }} ' + row.address;
-    var region = row.region.replace('кий', 'кому');
-    var district = region.replace('район', 'районі');
+    var address = (row.address.includes('{{ site.data.lang-uk.re_vul }}')) ? ' {{ site.data.lang-uk.re_po }} ' + row.address : ' {{ site.data.lang-uk.re_at }} ' + row.address, region = row.region.replace('кий', 'кому'), district = region.replace('район', 'районі');
     html.push('<hr class="mt-0"><span class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'),
     html.push(images.map(function (image) {
       return '<figure class="col px-1"><a href="' + image + '" class="lightbox" title="' + row.type + '' + address + ' {{ site.data.lang-uk.re_in }} ' + row.location + '' + district + '" data-lightbox-caption="{{ site.data.lang-uk.re_free_ads_in }} ' + row.location + '' + district + '" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' {{ site.data.lang-uk.re_po }} ' + row.address + ' {{ site.data.lang-uk.re_in }} ' + row.location + '' + district + '" alt="' + row.type + ' {{ site.data.lang-uk.re_in }} ' + row.location + '' + district + '" class="img-fluid img-thumbnail" intrinsicsize="1024x768"></a></figure>'
@@ -413,9 +407,4 @@ function priceFormatter(value, row) {
   }
 }
 
-function priceSorter(a, b) {
-  let s = /[$€₴]/g;
-  var aa = a.replace(s, '');
-  var bb = b.replace(s, '');
-  return aa - bb
-}
+function priceSorter(a, b) { let s = /[$€₴]/g; var aa = a.replace(s, ''), bb = b.replace(s, ''); return aa - bb }
