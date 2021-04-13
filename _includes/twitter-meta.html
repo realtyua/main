@@ -7,7 +7,7 @@
 {%- if file -%}
 <meta name="twitter:image" content="{{ picture | replace_first: '.', '_sm.' | prepend: site.url }}">
 {%- else -%}
-<meta name="twitter:image" content="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url | prepend: site.url }}">
+<meta name="twitter:image" content="{{ '/assets/images/locations/default_sm.jpg' | url_decode | relative_url | prepend: site.url }}">
 {%- endif -%}
 <meta name="twitter:image:width" content="600">
 <meta name="twitter:image:height" content="315">
