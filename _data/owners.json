@@ -1,5 +1,27 @@
 [
   {
+     "id": "379",
+     "type": "Будинок",
+     "rent": "",
+     "rooms": "3",
+     "surface": "102",
+     "surface_land": "700",
+     "price": "€18000",
+     "price_sqmt": "",
+     "floor": "",
+     "floors": "1",
+     "parking": "Власне подвір'я",
+     "region": "Івано-Франківський район",
+     "location": "",
+     "address": "вул. Миру, 55, c. Милування",
+     "object": "",
+     "coordinates": "48.964631,24.911172",
+     "date": "2021-04-20",
+     "seller": "Роман Ковтун",
+     "phone": "380504333617",
+     "description": ""
+   },
+  {
      "id": "378",
      "type": "Будинок",
      "rent": "",
