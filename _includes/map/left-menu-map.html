@@ -1,5 +1,5 @@
 var header = '<h1><a href="{{ site.url }}">{{ site.data.lang-uk.realestate }}</a> {{ site.data.lang-uk.re_on_map }}</h1>';
-var subheader = '<h2>- <a href="{{ site.url }}/region/ivano-frankivska/map.html">{{ site.region }}</a></h2>';
+var subheader = '<h2>- <a href="{{ site.url }}/region/{{ site.region_slug }}/map.html">{{ site.region }}</a></h2>';
 var contents = '{%- include map/left-navbar.html -%}';
 var ukraine = '<h2>- <a href="{{ site.main_url }}">{{ site.data.lang-uk.other_regions }}</a></h2>';
 var regions = '{%- include map/left-regions.html -%}';
