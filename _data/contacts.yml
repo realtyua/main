@@ -122,11 +122,11 @@
 
 - type: realtor
   item: agent
-  name: Нерухомість від Агента Продавеця
-  address: 76000, м. Івано-Франківськ, вул.&nbsp;Центральна,&nbsp;20
-  phone_main: 380000000000
-  phone_hot: 380000000000
-  phone_fax: 380000000000
+  name: Нерухомість від Агента Продавця
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380504949649
+  phone_hot: 380504949649
+  phone_fax: 380504949649
   email: agent@realestate.if.ua
   www: https://www.realestate.if.ua/
 
