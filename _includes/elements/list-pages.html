@@ -4,7 +4,7 @@
 {%- for lp in pages -%}
   {%- assign l = lp.dir | split: '/' -%}
   {%- if lp.dir contains page.dir and lp.dir != page.dir and l.size == include.l -%}
-    {%- unless lp.dir contains '/realtor/agent/' or lp.dir contains '/developer/builder/' and l.size == 5 -%}
+    {%- unless lp.dir contains '/realtor/agent/' or lp.dir contains '/developer/builder/' -%}
       {%- assign items = items | push: lp -%}
     {%- endunless -%}
   {%- endif -%}
