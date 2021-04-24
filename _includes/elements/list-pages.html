@@ -14,5 +14,12 @@
     {%- assign section = item.url | split: '/' | last -%}
     {%- include elements/items-pages.html -%}
   {%- else -%}
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="alert alert-info" role="alert">
+        <p>...</p>
+      </div>
+    </div>
+  </div>
   {%- endfor -%}
 {%- endif -%}
