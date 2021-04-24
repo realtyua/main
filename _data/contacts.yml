@@ -120,6 +120,16 @@
   email: olegf0139@gmail.com
   www: https://www.realestate.if.ua/
 
+- type: realtor
+  item: agent
+  name: Нерухомість від Агента Продавеця
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Центральна,&nbsp;20
+  phone_main: 380000000000
+  phone_hot: 380000000000
+  phone_fax: 380000000000
+  email: agent@realestate.if.ua
+  www: https://www.realestate.if.ua/
+
 #
 # Agency
 #
