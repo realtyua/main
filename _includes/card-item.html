@@ -28,7 +28,8 @@
 
 {%- capture ncomplexes -%}
   {%- if slug == 'developer' -%}
-    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
+    {%- assign demo_objects = site.region_slug | prepend: '/region/city/' | append: '/developer/builder/object/' -%}
+    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.url != demo_objects and i.layout == 'object'" -%}
     <span class="badge text-white p-0 m-1">
       <span class="bg-primary py-1 px-2 rounded-left">Об'єктів</span><span class="py-1 px-2 bg-info rounded-right">{{ objects | size }}</span>
     </span>
