@@ -1,5 +1,5 @@
 {%- assign cou = page.dir | split: '/' -%}
-{%- if isCityTown == true and cou.size == 5 -%}
+{%- if page.dir contains 'city' or page.dir contains 'town' and cou.size == 5 -%}
 {%- assign cat = cou | slice: 3, 2 | join: '_' -%}
 {%- elsif page.dir contains 'district' and cou.size == 4 -%}
 {%- assign cat = cou | slice: 2, 2 | join: '_' -%}
