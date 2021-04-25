@@ -1,5 +1,5 @@
 {%- assign coo = page.dir | split: '/' -%}
-{%- assign cat = coo | slice: 2, 0 | join: '_' -%}
+{%- assign cat = coo | slice: -3, 0 | join: '_' -%}
 {%- assign metaimage = cat | prepend: '/assets/images/locations/' | append: '_sm.jpg' -%}
 <meta charset="utf-8" />
 <meta name="robots" content="index, follow" />
