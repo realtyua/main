@@ -1,5 +1,11 @@
+{%- assign too = page.dir | split: "/" -%}
+{%- assign poo = too | size %}
+{%- assign pii = too | slice: 3, poo | join: "/" -%}
+{%- assign foo = pii | prepend: '/assets/images/' | append: '/' -%}
+
+
 {%- assign coo = page.dir | split: '/' -%}
-{%- assign cat = coo | slice: -3, 0 | join: '/' -%}
+{%- assign cat = coo | slice: 3, 2 | join: '/' -%}
 {%- assign metaimage = cat | prepend: '/assets/images/locations/' | append: '_sm.jpg' -%}
 <meta charset="utf-8" />
 <meta name="robots" content="index, follow" />
@@ -12,7 +18,7 @@
   <link rel="image_src" href="{{ picture | replace_first: '.', '_sm.' | prepend: site.url }}" />
 {%- else -%}
   {%- if page.metaimage and page.metaimage != '' -%}
-  <link rel="image_src {{ cat }}" href="{{ metaimage | url_decode | relative_url | prepend: site.url }}" />
+  <link rel="image_src {{ cat }}-{{ metaimage  }}-{{ foo }}-{{ pii }}" href="{{ metaimage | url_decode | relative_url | prepend: site.url }}" />
   {%- else -%}
   <link rel="image_src" href="{{ '/assets/images/locations/default_sm.jpg' | url_decode | relative_url | prepend: site.url }}" />
   {%- endif -%}
