@@ -1,12 +1,11 @@
-{%- assign too = page.dir | split: "/" -%}
-{%- assign poo = too | size %}
-{%- assign pii = too | slice: 3, poo | join: "/" -%}
-{%- assign foo = pii | prepend: '/assets/images/' | append: '/' -%}
-
-
-{%- assign coo = page.dir | split: '/' -%}
-{%- assign cat = coo | slice: 3, 2 | join: '/' -%}
+{%- assign cou = page.dir | split: '/' -%}
+{%- if page.dir contains 'city' or page.dir contains 'town' and cou.size == 5 -%}
+{%- assign cat = cou | slice: 3, 2 | join: '_' -%}
+{%- elsif page.dir contains 'district' and cou.size == 4 -%}
+{%- assign cat = cou | slice: 2, 2 | join: '_' -%}
+{%- endif -%}
 {%- assign metaimage = cat | prepend: '/assets/images/locations/' | append: '_sm.jpg' -%}
+{%- capture meta_image -%}{%- file_exists {{ metaimage }} -%}{%- endcapture -%}
 <meta charset="utf-8" />
 <meta name="robots" content="index, follow" />
 <meta name="language" content="Українська" />
@@ -17,8 +16,8 @@
 {%- if file -%}
   <link rel="image_src" href="{{ picture | replace_first: '.', '_sm.' | prepend: site.url }}" />
 {%- else -%}
-  {%- if page.metaimage and page.metaimage != '' -%}
-  <link rel="image_src {{ cat }}-{{ metaimage  }}-{{ foo }}-{{ pii }}" href="{{ metaimage | url_decode | relative_url | prepend: site.url }}" />
+  {%- if meta_image == 'true' -%}
+  <link rel="image_src" href="{{ metaimage | url_decode | relative_url | prepend: site.url }}" />
   {%- else -%}
   <link rel="image_src" href="{{ '/assets/images/locations/default_sm.jpg' | url_decode | relative_url | prepend: site.url }}" />
   {%- endif -%}
@@ -45,13 +44,12 @@
   {%- assign extname = picture | split: '.' | last -%}
   <meta property="og:image:type" content="image/{{ extname }}" />
 {%- else -%}
-  {%- if page.metaimage and page.metaimage != '' -%}
+  {%- if meta_image == 'true' -%}
   <meta property="og:image" content="{{ metaimage | url_decode | absolute_url }}" />
-  <meta property="og:image:type" content="image/jpg" />
   {%- else -%}
   <meta property="og:image" content="{{ '/assets/images/locations/default_sm.jpg' | url_decode | absolute_url }}" />
-  <meta property="og:image:type" content="image/jpg" />
   {%- endif -%}
+  <meta property="og:image:type" content="image/jpg" />
 {%- endif -%}
 <meta property="og:image:width" content="600" />
 <meta property="og:image:height" content="315" />
