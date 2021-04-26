@@ -5662,7 +5662,7 @@
      "surface_land": "400",
      "price": "14000",
      "price_sqmt": "",
-     "floor": "1, 2, 3",
+     "floor": "1-2-3",
      "floors": "3",
      "parking": "Власна огороджена територія з гаражами",
      "region": "",
