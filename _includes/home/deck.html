@@ -19,7 +19,7 @@
       {%- endcomment -%}
       <div class="col-12">
         <h2 class="mb-4">
-          <a href="{{ one.url }}" title="Безкоштовні оголошення про {{ two.navtitle | downcase }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
+          <a href="{{ one.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
           {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
         </h2>
         {%- include home/region.html current=one.url -%}
@@ -35,7 +35,7 @@
             {%- comment -%}
             <div class="col-12">
               <h2 class="mb-4">
-                <a href="{{ two.url }}" title="Безкоштовні оголошення про нерухомість у {{ two.navtitle | downcase }}">
+                <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
                   {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
                 </a>
                 {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
@@ -44,7 +44,7 @@
             {%- endcomment -%}
             <div class="col-12">
               <h2 class="mb-4">
-                <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.navtitle | downcase }}">
+                <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
                   {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
                 </a>
                 {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
