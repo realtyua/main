@@ -35,7 +35,7 @@
             {%- comment -%}
             <div class="col-12">
               <h2 class="mb-4">
-                <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.navtitle | downcase }}">
+                <a href="{{ two.url }}" title="Безкоштовні оголошення про нерухомість у {{ two.navtitle | downcase }}">
                   {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
                 </a>
                 {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
