@@ -14,16 +14,22 @@
         <div class="card">
           {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/locations/' and i.basename == slug" -%}
           {%- if file[0] -%}
-            <img loading="lazy" src="{{ file[0].path | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
+            <img loading="lazy" src="{{ file[0].path | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}" title="Продаж і оренда нерухомого майна {{ site.data.lang-uk[slug] }}">
           {%- else -%}
-            <img loading="lazy" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}">
+            <img loading="lazy" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}" title="Продаж і оренда нерухомого майна {{ site.data.lang-uk[slug] }}">
           {%- endif -%}
           <div class="card-body p-2">
-            <h5 class="card-title mb-2">
+            <h3 class="h5 card-title mb-2">
+              <a href="{{ three.url }}" title="{{ three.title | replace: site.data.lang-uk.realestate_in, site.data.lang-uk.apartment_house_at }}">
+                {{ three.title }}
+              </a>
+              <small>купівля, прода і оренда</small>
+              {% comment %}
               <a href="{{ three.url }}" title="{{ three.title | replace: site.data.lang-uk.realestate_at, site.data.lang-uk.apartment_house_in }}">
                 {%- if three.title -%}{{ three.title | replace_first: 'Оголошення про н', 'Н' }}{%- else -%}{{ three.navtitle }}{%- endif -%}
               </a>
-            </h5>
+              {% endcomment %}
+            </h3>
             {%- include home/card.html region=slug url=three.url title=three.title breadcrumb=three.breadcrumb -%}
           </div>
         </div>
