@@ -75,15 +75,16 @@
         <link rel="preload" href="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- endif -%}
     {%- elsif page.table == 2 -%}
+      {%- assign preload_all_json = main_region | append: 'data/all.json' -%}
+      {%- capture preload_alljson -%}{%- file_exists {{ preload_all_json }} -%}{%- endcapture -%}
       {%- if page.url contains 'map.html' -%}
-      {%- elsif slash.size == 3 and page.dir == main_region -%}
-        {% comment %}
+      {%- elsif page.dir == main_region -%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-        {% endcomment %}
-        <link rel="preload" href="data/all.json" as="fetch">
+        {%- if preload_alljson == 'true' -%}
+        <link rel="preload" href="{{ preload_all_json | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="fetch">
+        {%- endif -%}
       {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-        <link rel="preload" href="data/all.json" as="fetch">
       {%- else -%}
         <link rel="preload" href="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- endif -%}
