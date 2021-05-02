@@ -80,11 +80,13 @@
       {%- if page.url contains 'map.html' -%}
       {%- elsif page.dir == main_region -%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+        <meta name="{{ preload_alljson }}" content="{{ main_region }}">
         {%- if preload_alljson == 'true' -%}
         <link rel="preload" href="{{ preload_all_json | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="fetch">
         {%- endif -%}
       {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+        <meta name="{{ preload_alljson }}-0" content="{{ main_region }}">
         {%- if preload_alljson == 'true' -%}
         <link rel="preload {{ main_region }}" href="{{ preload_all_json | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="fetch">
         {%- endif -%}
