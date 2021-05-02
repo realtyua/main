@@ -77,9 +77,9 @@
     {%- elsif page.table == 2 -%}
       {%- if page.url contains 'map.html' -%}
       {%- elsif slash.size == 3 and page.dir == main_region -%}
-        <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
         {%- assign preload_all_json = region_slug | prepend: '/region/' | append: '/data/all.json' -%}
         {%- capture preload_alljson -%}{%- file_exists {{ preload_all_json }} -%}{%- endcapture -%}
+        <link rel="preload {{ preload_all_json }} {{ preload_alljson }}" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
         <link rel="preload" href="{{ preload_all_json }}" as="fetch">
         {%- if preload_alljson == 'true' -%}
         <link rel="preload" href="{{ preload_all_json | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="fetch">
