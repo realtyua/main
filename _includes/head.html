@@ -77,13 +77,15 @@
     {%- elsif page.table == 2 -%}
       {%- if page.url contains 'map.html' -%}
       {%- elsif slash.size == 3 and page.dir == main_region -%}
+        {% comment %}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-        <link rel="preload" href="data/all.json" as="fetch0">
+        {% endcomment %}
+        <link rel="preload" href="data/all.json" as="fetch">
       {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+        <link rel="preload" href="data/all.json" as="fetch">
       {%- else -%}
         <link rel="preload" href="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-        <link rel="preload" href="data/all.json" as="fetch1">
       {%- endif -%}
     {%- else -%}
       {%- if page.url contains 'map.html' -%}
