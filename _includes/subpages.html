@@ -6,7 +6,7 @@
   {%- for p in pages -%}
     {%- assign l = p.dir | split: '/' -%}
     {%- if p.dir contains include.dir and p.dir != include.dir and l.size == level -%}
-      {%- unless p.dir contains '/realtor/agent/' or p.dir contains '/developer/builder/' -%}
+      {%- unless p.dir contains '/realtor/agent/' or p.dir contains '/agency/ahentsiya/' or p.dir contains '/developer/builder/' -%}
         {%- assign items = items | push: p -%}
       {%- endunless -%}
     {%- endif -%}
@@ -96,7 +96,9 @@
         <div class="alert alert-info" role="alert">
           {% if include.page == 'realtor' %}
           <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/realtor/agent/" class="alert-link">Демонстраційна сторінка продавця нерухомості</a></p>
-          {%- else -%}
+          {%- elsif include.page == 'agency' -%}
+          <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/agency/ahentsiya/" class="alert-link">Демонстраційна сторінка продавця нерухомості</a></p>
+          {%- elsif include.page == 'developer' -%}
           <p>Сторінки розділу призначені для поширення інформації про забудовника, його житлові комлекси та перелік нерухомого майна, яке продається або передається в оренду компанією забудовником. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/developer/builder/" class="alert-link">Демонстраційна сторінка забудовника нерухомості</a></p>
           {%- endif -%}
         </div>
