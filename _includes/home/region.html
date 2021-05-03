@@ -20,7 +20,7 @@
           {%- endif -%}
           <div class="card-body p-2">
             <h3 class="h5 card-title mb-2">
-              <a href="{{ three.url }}" title="Продаж та оренда {{ three.title | replace: site.data.lang-uk.realestate, site.data.lang-uk.nerukhomisti }}">
+              <a href="{{ three.url }}" title="Оголошення про продаж та оренду {{ three.title | replace: site.data.lang-uk.realestate, site.data.lang-uk.nerukhomisti }}">
                 {%- if three.title -%}{{ three.title | replace_first: ' в ', ' у ' }}{%- else -%}{{ three.navtitle }}{%- endif -%}
               </a>
             </h3>
