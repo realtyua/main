@@ -4,7 +4,7 @@
 {%- for lp in pages -%}
   {%- assign l = lp.dir | split: '/' -%}
   {%- if lp.dir contains page.dir and lp.dir != page.dir and l.size == include.l -%}
-    {%- unless lp.dir contains '/realtor/agent/' or lp.dir contains '/developer/builder/' and l.size != 8 -%}
+    {%- unless lp.dir contains '/realtor/agent/' or lp.dir contains '/agency/ahentsiya/' or lp.dir contains '/developer/builder/' and l.size != 8 -%}
       {%- assign items = items | push: lp -%}
     {%- endunless -%}
   {%- endif -%}
@@ -21,7 +21,8 @@
     <div class="alert alert-info" role="alert">
       {% if include.page == 'realtor' %}
       <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/realtor/agent/" class="alert-link">Демонстраційна сторінка продавця нерухомості</a></p>
-      {%- else -%}
+      {%- elsif include.page == 'agency' -%}
+      {%- elsif include.page == 'developer' -%}
       <p>Сторінки розділу призначені для поширення інформації про забудовника, його житлові комлекси та перелік нерухомого майна, яке продається або передається в оренду компанією забудовником. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/developer/builder/" class="alert-link">Демонстраційна сторінка забудовника нерухомості</a></p>
       {%- endif -%}
     </div>

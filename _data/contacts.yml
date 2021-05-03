@@ -131,5 +131,14 @@
   www: https://www.realestate.if.ua/
 
 #
-# Agency
+# Agency / ahentsiya
 #
+- type: realtor
+  item: ahentsiya
+  name: Нерухомість від Агенції Продавця
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380504949649
+  phone_hot: 380504949649
+  phone_fax: 380504949649
+  email: agent@realestate.if.ua
+  www: https://www.realestate.if.ua/
