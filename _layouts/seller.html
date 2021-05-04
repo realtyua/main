@@ -3,7 +3,6 @@ layout: default
 ---
 
 {%- assign back = page.dir | split: "/" -%}
-{% assign slug = back | last %}
 {%- assign size = back | size | minus:1 -%}
 {%- assign dir = back | slice: 0, size | join: "/" | append: "/" -%}
 {%- assign index = site.html_pages | sort: "dir" | where_exp: "i", "i.url == dir" -%}
@@ -18,6 +17,6 @@ layout: default
     {%- include nav-section.html -%}
     {%- assign level = back | size | plus:1 %}
     <h2 class="h3 md-3">{{ page.subtitle }}</h2>
-    {%- include elements/list-pages.html l=level page=slug -%}
+    {%- include elements/list-pages.html l=level -%}
   </div>
 </div>
