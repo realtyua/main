@@ -13,6 +13,8 @@
     {{ one.navtitle }} для сільського господарства і земельні ділянки для будівництва
   {%- elsif slug == 'realtor' -%}
     Місцеві {{ one.navtitle | downcase }} з купівлі, продажу і оренди нерухомості
+  {%- elsif slug == 'agency' -%}
+    Місцеві {{ one.navtitle | downcase }} і агенства з купівлі, продажу і оренди нерухомості
   {%- elsif slug == 'rent' -%}
    Подобова і довгострокова {{ one.navtitle | downcase }} квартир, будинків, приміщень, земелі
   {%- else -%}
@@ -58,6 +60,11 @@
     <span class="badge text-white p-0 m-1">
       <span class="bg-primary py-1 px-2 rounded-left">Aгентів і ріелторів</span><span class="py-1 px-2 bg-info rounded-right">{{ realtors | size }}</span>
     </span>
+  {%- elsif slug == 'agency' -%}
+    {%- assign agencys = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'agency' and i.layout == 'realtor' and i.navtitle != 'Агенція Продавець'" -%}
+    <span class="badge text-white p-0 m-1">
+      <span class="bg-primary py-1 px-2 rounded-left">Aгенцій і агенств</span><span class="py-1 px-2 bg-info rounded-right">{{ agencys | size }}</span>
+    </span>
   {%- endif -%}
 {%- endcapture -%}
 
@@ -88,11 +95,16 @@
     {%- assign orealtor = offers | where_exp: "i", "
       i.seller contains site.data.lang-uk.agent or
       i.seller contains site.data.lang-uk.realtor or
-      i.seller contains site.data.lang-uk.agency or
       i.seller contains site.data.lang-uk.manager or
       i.seller contains site.data.lang-uk.re_seller
     " -%}
     {{ orealtor | size }}
+  {%- elsif slug == 'agency' -%}
+    {%- assign oagency = offers | where_exp: "i", "
+      i.seller contains site.data.lang-uk.agency or
+      i.seller contains site.data.lang-uk.ahentstvo
+    " -%}
+    {{ oagency | size }}
   {%- elsif slug == 'rent' -%}
     {%- assign orent = offers | where_exp: "i", "i.rent == '1'" -%}
     {{ orent | size }}
