@@ -124,7 +124,8 @@
   navtitle: місто Львів
   subtitle: Нерухомість в Львові
   small: Львівська область
-  url: http://www.property.lviv.ua
+  url: http://www.realestate.in.ua
+  # url: http://www.property.lviv.ua
 
 - title: Нерухомість в Херсонській області
   navtitle: місто Херсон
