@@ -44,7 +44,8 @@
   navtitle: місто Тернопіль
   subtitle: Нерухомість в Тернополі
   small: Тернопільська область
-  url: http://www.realestate.te.ua
+  url: https://www.realestate.te.ua
+  slug: ternopilska
 
 - title: Нерухомість в Харківській області
   navtitle: місто Харків
@@ -124,8 +125,8 @@
   navtitle: місто Львів
   subtitle: Нерухомість в Львові
   small: Львівська область
-  url: http://www.realestate.in.ua
-  # url: http://www.property.lviv.ua
+  url: https://www.realestate.in.ua
+  slug: lvivska
 
 - title: Нерухомість в Херсонській області
   navtitle: місто Херсон
