@@ -10,14 +10,14 @@
         {%- endcomment -%}
       {% else %}
       {%- comment -%}
-      <div class="col-12">
+      <div id="{{ slug }} class="col-12">
         <h2 class="mb-4">
           <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
           {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
         </h2>
       </div>
       {%- endcomment -%}
-      <div class="col-12">
+      <div id="{{ slug }} class="col-12">
         <h2 class="mb-4">
           <a href="{{ one.url }}" title="Безкоштовні оголошення про {{ one.title | downcase }}">
             {%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}
@@ -35,7 +35,7 @@
             {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
             {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
             {%- comment -%}
-            <div class="col-12">
+            <div id="{{ slug }} class="col-12">
               <h2 class="mb-4">
                 <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
                   {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
