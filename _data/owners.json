@@ -1,5 +1,27 @@
 [
   {
+     "id": "582",
+     "type": "Частина будинок",
+     "rent": "",
+     "rooms": "2",
+     "surface": "48",
+     "surface_land": "350",
+     "price": "$9500",
+     "price_sqmt": "",
+     "floor": "2",
+     "floors": "2",
+     "parking": "Прибудинкова територія",
+     "region": "",
+     "location": "м. Болехів",
+     "address": "вул. Петрушевича, 7",
+     "object": "",
+     "coordinates": "49.0634,23.85815",
+     "date": "2021-07-04",
+     "seller": "Віктор Левченко",
+     "phone": "380976509172",
+     "description": ""
+   },
+  {
      "id": "581",
      "type": "Будинок",
      "rent": "",
