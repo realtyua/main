@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Новини · Мережа Вебсайтів Нерухомості · Івано-Франківська область</title>
+    <description>Купівля, продаж і тривала та подобова оренда квартир, будинків, землі, комерційної нежитлової нерухомості в Івано-Франківську та області</description>
+    <link>https://www.realestate.if.ua/</link>
+    <atom:link href="https://www.realestate.if.ua/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 19 Jul 2021 18:42:35 +0300</pubDate>
+    <lastBuildDate>Mon, 19 Jul 2021 18:42:35 +0300</lastBuildDate>
+    <generator>Мережа Вебсайтів Нерухомості</generator>
+    
+      <item>
+        <title>Доступна іпотека 7% для приватних осіб</title>
+        <description>Програма &quot;Доступна іпотека 7%&quot; з 01.03.2021 р. реалізується Фондом розвитку підприємництва за ініціативи Президента та Уряду України згід...</description>
+        <pubDate>Mon, 01 Mar 2021 00:00:00 +0200</pubDate>
+        <link>https://www.realestate.if.ua/news/2021/03/01/mortgages-for-individuals.html</link>
+        <guid isPermaLink="true">https://www.realestate.if.ua/news/2021/03/01/mortgages-for-individuals.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
+    
+      <item>
+        <title>Будинок у якому працював видатний художник Опанас Заливаха виставлено на аукціон</title>
+        <description>Департамент комунальних ресурсів Івано-Франківської міської ради виставив на аукціон нежитлове приміщення по вулиці Незалежності, будинок...</description>
+        <pubDate>Thu, 21 Jan 2021 00:00:00 +0200</pubDate>
+        <link>https://www.realestate.if.ua/news/2021/01/21/the-house-where-the-outstanding-artist-opanas-zalivakha-worked-has-been-put-up-for-auction.html</link>
+        <guid isPermaLink="true">https://www.realestate.if.ua/news/2021/01/21/the-house-where-the-outstanding-artist-opanas-zalivakha-worked-has-been-put-up-for-auction.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
+    
+      <item>
+        <title>Mрії здійснюються</title>
+        <description>Перший в нашій країні 2021 року молодіжний житловий кредит видано цими днями на Луганщині. Отримала його родина внутрішньо переміщених ос...</description>
+        <pubDate>Wed, 13 Jan 2021 00:00:00 +0200</pubDate>
+        <link>https://www.realestate.if.ua/news/2021/01/13/dreams-come-true.html</link>
+        <guid isPermaLink="true">https://www.realestate.if.ua/news/2021/01/13/dreams-come-true.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
+    
+  </channel>
+</rss>
