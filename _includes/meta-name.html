@@ -8,7 +8,7 @@
 {%- capture meta_image -%}{%- file_exists {{ metaimage }} -%}{%- endcapture -%}
 <meta charset="utf-8" />
 <meta name="robots" content="index, follow" />
-<meta name="language" content="Українська" />
+<meta name="language" content="{{ site.language }}" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>{{ title }}</title>
 <link rel="shortlink" href="{{ site.url }}" />
