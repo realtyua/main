@@ -7,14 +7,11 @@
     {%- if include.current == current and second.navhide != 1 -%}
     <div class="col mb-3">
       {%- if page.url == second.url -%}
-        <span class="dropdown-item active">
-          {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
-        </span>
+          {%- if second.navtitle -%}<span class="dropdown-item active">{{ second.navtitle }}</span>{%- endif -%}
       {%- else -%}
-        <a href="{{ second.url }}" class="dropdown-item">
-          {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
-        </a>
+          {%- if second.navtitle -%}<a href="{{ second.url }}" class="dropdown-item">{{ second.navtitle }}</a>{%- endif -%}
       {%- endif -%}
+      {%- if second.subtitle -%}<small>{{ second.subtitle }}</small>{%- endif -%}
     </div>
     {%- endif -%}
   {%- endfor -%}
