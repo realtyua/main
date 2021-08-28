@@ -11,7 +11,7 @@
       {%- else -%}
           {%- if second.navtitle -%}<a href="{{ second.url }}" class="dropdown-item">{{ second.navtitle }}</a>{%- endif -%}
       {%- endif -%}
-      {%- if second.subtitle -%}<small>{{ second.subtitle }}</small>{%- endif -%}
+      {%- if second.subtitle -%}<small>{{ second.subtitle | replace_first: " терит", "<br>терит" }}</small>{%- endif -%}
     </div>
     {%- endif -%}
   {%- endfor -%}
