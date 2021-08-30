@@ -6,7 +6,7 @@
     {%- assign current = three.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and three.navhide != 1 and three.title != '' -%}
     <div class="col mb-2">
-      {%- if three.navtitle -%}<a href="#{{ slug }}" title="{{ three.title | replace: 'Нерухомість в місті', 'Нерухоме майно в' }}">{{ three.navtitle }}</a>{%- endif -%}
+      {%- if three.navtitle -%}<a href="#{{ slug }}" title="{{ three.title | replace: 'Нерухомість в місті', 'Нерухоме майно в м. ' }}">{{ three.navtitle }}</a>{%- endif -%}
       {%- if three.subtitle -%}<small>{{ three.subtitle }}</small>{%- endif -%}
     </div>
     {%- endif -%}
