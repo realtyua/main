@@ -1,0 +1,29 @@
+---
+title: Фото
+class: pt-3
+sitemap: false
+---
+
+<div class="container-fluid">
+
+  <div class="row my-md-3">
+    <div class="col-12 text-center">
+        <h2>Фотогалерея однокімнатної квартири в місті Івано-Франківськ з зовні</h2>
+        <p class="lead">Тут ви можете побачити де і у якому будинку знаходиться дана квартира</p>
+    </div>
+  </div>
+
+  {%- include owner/image-gallery.html folder='apartment' size='300x300' cols='4' -%}
+
+  <div class="row my-md-3">
+    <div class="col-12 text-center">
+        <h2>Фотогалерея однокімнатної квартири в місті Івано-Франківськ в середині</h2>
+        <p class="lead">Тут ви можете подивитись, як виглядає ця квартира в середині</p>
+    </div>
+  </div>
+
+  {%- include owner/image-gallery.html folder='inside' size='300x300' cols='4' -%}
+
+</div>
+
+<div id="location" style="height:480px;"></div>
