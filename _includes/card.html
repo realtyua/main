@@ -7,7 +7,7 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
-<div class="card h-100{% if others > 0 %} border-bottom-0{% endif %}">
+<article class="card h-100{% if others > 0 %} border-bottom-0{% endif %}" role="presentation">
   <div class="card-body pb-0">
     <div class="card-text mb-1">{% include card/body.html %}</div>
     <div class="card-text mb-1 date">
@@ -60,4 +60,4 @@
     </dl>
     {%- if isImage != "" -%}{%- include card/images.html -%}{%- endif -%}
   </div>
-</div>
+</article>

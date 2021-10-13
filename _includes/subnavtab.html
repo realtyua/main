@@ -73,15 +73,15 @@
           {%- for offer in offers limit:9 -%}
 
             {%- if forloop.first -%}
-              <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+              <ul class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 list-unstyled">
             {%- endif -%}
 
-                <div class="col px-2 mb-3">
+                <li class="col px-2 mb-3">
                 {%- include card.html offer=offer aid='0' -%}
-                </div>
+                </li>
 
             {%- if forloop.last -%}
-              </div>
+              </ul>
               {%- assign total = offers | size -%}
               {%- assign others = total | minus:9 -%}
               {%- if others > 0 -%}
