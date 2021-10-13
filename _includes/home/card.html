@@ -58,11 +58,13 @@
           {%- endif -%}
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
+            <ul class="list-unstyled">
             {%- for offer in offers limit: 3 -%}
-              <div class="card mb-2">
-                <div class="card-body p-2">{% include card/body.html %}</div>
-              </div>
+              <li class="card mb-2">
+                <article class="card-body p-2" role="presentation">{% include card/body.html %}</article>
+              </li>
               {%- if forloop.last -%}
+            </ul>
                 {%- assign total = offers | size -%}
                 {%- assign others = total | minus:3 -%}
                 {%- if others > 0 -%}
