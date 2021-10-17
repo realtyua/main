@@ -1,0 +1,5 @@
+{%- include data/owner.html -%}
+{%- include data/sallers.html -%}
+{%- assign offers = records | sort: "date" | reverse | where_exp: "i", "i.region contains location and i.rent != '1' and
+  i.type contains site.data.lang-uk.re_roomsp
+" -%}
