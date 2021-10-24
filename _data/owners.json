@@ -1,5 +1,27 @@
 [
   {
+     "id": "687",
+     "type": "Гараж",
+     "rent": "",
+     "rooms": "1",
+     "surface": "25",
+     "surface_land": "",
+     "price": "$15000",
+     "price_sqmt": "",
+     "floor": "",
+     "floors": "1",
+     "parking": "",
+     "region": "",
+     "location": "м. Івано-Франківська",
+     "address": "вул. Володимира Івасюка, 10",
+     "object": "",
+     "coordinates": "48.9336421,24.7436995",
+     "date": "2021-10-23",
+     "seller": "Богдан Савчук",
+     "phone": "380677565760",
+     "description": ""
+   },
+  {
      "id": "686",
      "type": "Будинок",
      "rent": "",
