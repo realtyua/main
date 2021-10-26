@@ -1,0 +1,1 @@
+{%- assign ff = include.floor -%}{%- assign fs = include.floors -%}{%- if ff && ff != '' -%}<br/>{{ site.data.lang-uk.re_na }} {{ ff }}{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}{%- if fs && fs != '' -%} {{ site.data.lang-uk.re_at }} {{ fs }} {{ site.data.lang-uk.re_floors }},{%- endif -%}{%- endif -%}
