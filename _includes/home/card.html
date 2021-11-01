@@ -62,7 +62,7 @@
             {%- for offer in offers limit: 3 -%}
               <li class="card mb-2">
                 <article class="card-body p-2" role="presentation">
-                  <h4 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_object_rent }}{%- else -%}{{ site.data.lang-uk.re_object_sell }}{%- endif -%}  #{{ offer.id }} - {{ offer.type }}</data></h4>
+                  <h4 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} #{{ offer.id }} - {{ offer.type }}</data></h4>
                   {% include card/body.html %}
                 </article>
               </li>
