@@ -344,7 +344,7 @@ function htmlDetailFormatter(index, row, $detail) {
 
 function propertyFormatter(value, row) {
   "use strict";
-  var reProdayu = (row.type.includes('{{ site.data.lang-uk.re_kvartyru }}')) ? "{{ site.data.lang-uk.re_prodayu }}" : "{{ site.data.lang-uk.re_for_sale }}";
+  var reProdayu = (row.type.includes('{{ site.data.lang-uk.re_kvartyru }}')) ? "{{ site.data.lang-uk.re_sale }}" : "{{ site.data.lang-uk.re_for_sale }}";
   var reRoomOrPrym = (row.type.includes('{{ site.data.lang-uk.re_roomsp }}')) ? "{{ site.data.lang-uk.re_roomsps }}" : "{{ site.data.lang-uk.re_rooms }}";
   if (value !== '') {
     if (row.type.includes('{{ site.data.lang-uk.re_land }}') || row.type.includes('{{ site.data.lang-uk.re_land | downcase }}')) {
