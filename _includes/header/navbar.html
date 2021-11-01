@@ -27,11 +27,11 @@
                 {%- endcomment -%}
               {%- else -%}
                 <li class="nav-item position-static{% if part >= 2 %} dropdown{% endif %}">
-                  <a class="nav-link{% if part >= 2 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if part >= 2 -%}#{%- else -%}{{ one.url }}{%- endif -%}"{% if part >= 2 %} id="navDropRealEstate{{ slug | capitalize }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
+                  <a class="nav-link{% if part >= 2 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if part >= 2 -%}#{%- else -%}{{ one.url }}{%- endif -%}"{% if part >= 2 %} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
                     {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
                   </a>
                   {% if part >= 2 %}
-                    {%- include header/dropdown.html current=one.url title=one.title -%}
+                    {%- include header/dropdown.html current=one.url title=one.title slug=slug -%}
                   {%- endif -%}
                 </li>
               {%- endif -%}
@@ -44,11 +44,11 @@
                   {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
                   {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
                   <li class="nav-item position-static{% if part >= 3 %} dropdown{%- endif -%}">
-                    <a class="nav-link{% if part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if part >= 3 -%}#{%- else -%}{{ two.url }}{%- endif -%}"{% if part >= 3 %} id="navDropRealEstate{{ slug | capitalize }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
+                    <a class="nav-link{% if part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if part >= 3 -%}#{%- else -%}{{ two.url }}{%- endif -%}"{% if part >= 3 %} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
                       {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                     </a>
                     {% if part >= 3 %}
-                      {%- include header/dropdown.html current=two.url title=two.title -%}
+                      {%- include header/dropdown.html current=two.url title=two.title slug=slug -%}
                     {%- endif -%}
                   </li>
                   {%- endif -%}
@@ -57,7 +57,7 @@
             {%- endif -%}
           {%- endfor -%}
           <li class="nav-item position-static dropdown mr-0">
-            <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" id="navDropRealEstateRegions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
+            <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
               {{ site.data.lang-uk.other_regions }}
             </a>
             {%- include header/regions.html -%}
@@ -66,14 +66,14 @@
         <hr class="mt-1 mb-0 border-top-1 border-white d-lg-none">
         <ul class="navbar-nav ml-md-auto">
           <li class="nav-item position-static dropdown mr-0">
-            <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" id="navDropRealEstateRegions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
+            <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
               Все для нерухомості
             </a>
             {%- include header/ads-dropdown.html -%}
           </li>
           {%- comment -%}
             <li class="nav-item position-static dropdown mr-0">
-              <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" id="navDropRealEstateRegions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
+              <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
                 {{ site.data.lang-uk.other_regions }}
               </a>
               {%- include header/regions.html -%}
