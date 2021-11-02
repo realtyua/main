@@ -119,10 +119,9 @@
     {%- else -%}
       {% assign number = number | plus: 1 %}
       <div class="col px-2 mb-3">
-
         <div class="card h-100 bg-{{ number }}">
           <div class="card-body">
-            <h5 class="card-title"><a href="{{ one.url }}">{{ navitemtitle }}</a></h5>
+            <h3 class="card-title h5"><a href="{{ one.url }}">{{ navitemtitle }}</a></h3>
           </div>
           <div class="card-footer bg-transparent border-top-0 text-right px-2">
             {%- if nsellers != '' -%}{{ nsellers }}{%- endif -%}
@@ -134,7 +133,6 @@
             {%- endif -%}
           </div>
         </div>
-
       </div>
     {%- endif -%}
   {%- endif -%}
