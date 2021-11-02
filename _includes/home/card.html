@@ -58,7 +58,7 @@
           {%- endif -%}
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
-            <ul class="list-unstyled">
+            <ul class="list-unstyled mb-1">
             {%- for offer in offers limit: 3 -%}
               <li class="card mb-2">
                 <article class="card-body p-2" role="presentation">
