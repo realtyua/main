@@ -132,7 +132,7 @@ main .leaflet-menu {
   }
 }
 
-article, address {
+article > address {
   display: inline;
   margin-bottom: unset;
   line-height: unset;

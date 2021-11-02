@@ -75,11 +75,7 @@
             {%- if forloop.first -%}
               <ul class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 list-unstyled">
             {%- endif -%}
-
-                <li class="col px-2 mb-3">
-                {%- include card.html offer=offer aid='0' -%}
-                </li>
-
+                <li class="col px-2 mb-3">{%- include card.html offer=offer aid='0' -%}</li>
             {%- if forloop.last -%}
               </ul>
               {%- assign total = offers | size -%}
@@ -133,14 +129,14 @@
                 {%- capture data -%}data/{{ region }}/{{ slug }}.html{%- endcapture -%}
                 {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
                 {%- include {{ data }} -%}
-                {%- for offer in offers limit: 9 -%}
+                {%- for offer in offers limit:9 -%}
 
                   {%- if forloop.first -%}
                     <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
                   {%- endif -%}
 
                       <div class="col px-2 mb-3">
-                        {%- include card.html offer=offer aid=aid -%}
+                        {%- include card.html offer=offer aid=aid slug=slug -%}
                       </div>
 
                   {%- if forloop.last -%}
