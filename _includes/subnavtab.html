@@ -14,7 +14,7 @@
     {%- if isMap == 'true' -%}
     <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
       <li class="nav-item">
-        <h5 class="m-lg-0">
+        <p class="m-lg-0 h5">
           {%- if page.url contains mapPage -%}
             <span class="badge badge-primary border-0" title="{{ site.data.lang-uk.re_map_on }}">
               <span>{{ site.data.lang-uk.re_map }}</span>
@@ -26,7 +26,7 @@
               <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
             </a>
           {%- endif -%}
-        </h5>
+        </p>
       </li>
     </ul>
     {%- endif -%}
@@ -136,7 +136,7 @@
                   {%- endif -%}
 
                       <div class="col px-2 mb-3">
-                        {%- include card.html offer=offer aid=aid slug=slug -%}
+                        {%- include card.html offer=offer aid=aid -%}
                       </div>
 
                   {%- if forloop.last -%}
