@@ -12,7 +12,7 @@
     <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} #{{ offer.id }} - {{ offer.type }}</data></h3>
     <div class="mb-1">{% include card/body.html %}</div>
     <div class="mb-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_dater }}{%- else -%}{{ site.data.lang-uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if offer.date > cdate -%}{{ cdate }}{%- else -%}{{ offer.date }}{%- endif -%}">{%- if offer.date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=offer.date -%}{%- endif -%}</time></div>
-  </div>border-bottom-0
+  </div>
   <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
     <div class="row row-cols-auto justify-content-end">
       <div class="col-auto pr-0">{%- include footer/phone.html legal=offer.phone type='dropdown' -%}</div>
