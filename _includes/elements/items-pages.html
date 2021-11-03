@@ -35,11 +35,11 @@
         <img loading="lazy" src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
       {%- endif -%}
       <div class="card-body">
-        <h5 class="card-title">
+        <h3 class="card-title h5">
           <a href="{{ item.url }}">
             {%- if item.title -%}{{ item.title }}{%- else -%}{{ item.navtitle }}{%- endif -%}
           </a>
-        </h5>
+        </h3>
         <div class="card-text mb-1">
           <nav>
             <ul class="nav nav-tabs" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-tab" role="tablist">
@@ -74,7 +74,7 @@
                 {%- assign total = offers | size -%}
                 {%- assign others = total | minus:1 -%}
                 {%- for offer in offers limit: 1 -%}
-                  {%- include card.html offer=offer aid=aid -%}
+                  {%- include card.html offer=offer aid=aid others=others -%}
                 {%- endfor -%}
                 {%- if others > 0 -%}
                 <div class="card-footer mt-n1 bg-white pr-3 pt-1 border-1 border-top-0 text-right">

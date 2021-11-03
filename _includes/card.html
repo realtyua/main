@@ -7,7 +7,7 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
-<article class="card h-100{% if include.slug == 'realtor' or include.slug == 'agency' or include.slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
+<article class="card h-100{% if include.slug == 'realtor' or include.slug == 'agency' or include.slug == 'developer' or include.others > 0 %} border-bottom-0{% endif %}" role="presentation">
   <div class="card-body pb-0">
     <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} #{{ offer.id }} - {{ offer.type }}</data></h3>
     <div class="mb-1">{% include card/body.html %}</div>
