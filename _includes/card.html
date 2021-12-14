@@ -7,7 +7,7 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
-<article class="card h-100{% if include.slug == 'realtor' or include.slug == 'agency' or include.slug == 'developer' or include.others > 0 %} border-bottom-0{% endif %}" role="presentation">
+<article class="card h-100{% if include.slug == 'realtor' or include.slug == 'agency' or include.slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
   <div class="card-body pb-0">
     <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} #{{ offer.id }} - {{ offer.type }}</data></h3>
     <div class="mb-1">{% include card/body.html %}</div>
@@ -18,14 +18,18 @@
       <div class="col-auto pr-0">{%- include footer/phone.html legal=offer.phone type='dropdown' -%}</div>
       {%- if offer.coordinates and offer.coordinates != '' -%}
       <div class="col-auto pr-0">
-        <a class="marker" data-coord="{{ offer.coordinates }}" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false">
-          <i class="d-none" aria-hidden="true">{{ offer.id }}</i>
+        <a class="marker" data-coord="{{ offer.coordinates }}" data-toggle="modal" data-target="#reMap" href="#reMap" aria-haspopup="true" aria-expanded="false" aria-label="{%- if offer.rent == 1 -%}{{ site.data.lang-uk.re_object_rent }}{%- else -%}{{ site.data.lang-uk.re_object_sell }}{%- endif -%} {{ site.data.lang-uk.re_on_map }}">
+          <span class="sr-only">{{ site.data.lang-uk.re_map }}:</span>
+          <span class="d-block h-100 w-100" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{ offer.type }} {{ site.data.lang-uk.re_on_map }}"></span>
         </a>
       </div>
       {%- endif -%}
       <div class="col-auto">
         <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" href="#more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-about-property-0{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-          <span data-toggle="tooltip" data-placement="left" title="{{ site.data.lang-uk.re_more }}" class="navbar-toggler-icon" aria-hidden="true"></span>
+          <span class="sr-only">{{ site.data.lang-uk.re_description }}:</span>
+          <span class="d-block h-100 w-100" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{ site.data.lang-uk.re_more }}">
+            <span class="navbar-toggler-icon"></span>
+          </span>
         </a>
       </div>
     </div>

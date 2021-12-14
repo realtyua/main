@@ -18,10 +18,13 @@
   </a>
 {%- elsif include.legal and include.type == 'dropdown' -%}
 <div class="btn-group">
-  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button>
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-label="{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_phone }}{%- else -%}{{ site.data.lang-uk.re_phoner }}{%- endif -%} - {{ site.data.lang-uk.re_tel | capitalize }}">
+    <span class="sr-only">{{ site.data.lang-uk.re_tel | capitalize }}:</span>
+    <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_phoner }}{%- else -%}{{ site.data.lang-uk.re_phone }}{%- endif -%}">&phone;</span>
+  </button>
   <div class="dropdown-menu px-2 dropdown-menu-right">
     <span class="text-nowrap">{{ offer.seller | remove: site.data.lang-uk.re_seller }}</span><br>
-    <a href="tel:+{{ t }}" title="{{ site.data.lang-uk.re_tel | capitalize }}">{{ n }}</a><i class="d-none">{{ offer.id }}</i>
+    <a href="tel:+{{ t }}" title="{{ site.data.lang-uk.re_tel | capitalize }}">{{ n }}</a>
   </div>
 </div>
 {%- elsif include.legal and include.type == 'text' -%}
