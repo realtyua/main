@@ -30,7 +30,7 @@
   {% elsif offer.price contains '€' %}
     <abbr data-toggle="tooltip" title="{{ offer.price }}">{{ offer.price | remove: '€' | times: site.eur | ceil }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
   {% else %}
-    <abbr data-toggle="tooltip" title="${{ offer.price | modulo: site.nbu | ceil }}">{{ offer.price }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
+    <abbr data-toggle="tooltip" title="${{ offer.price | divided_by: site.nbu | ceil }}">{{ offer.price }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
   {% endif %}
 {%- elsif offer.price == '' and offer.price_sqmt != '' -%}
   {% if offer.price_sqmt contains '$' %}
@@ -38,7 +38,7 @@
   {% elsif offer.price_sqmt contains '€' %}
     <abbr data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
   {% else %}
-    <abbr data-toggle="tooltip" title="${{ offer.price | modulo: site.nbu | ceil }}">{{ offer.price_sqmt }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
+    <abbr data-toggle="tooltip" title="${{ offer.price | divided_by: site.nbu | ceil }}">{{ offer.price_sqmt }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
   {% endif %}
 {%- endif -%}
 {% endif %}{%- if split.size <= 2 -%}{%- if offer.page and offer.page == '1' -%}&nbsp;<a href="{{ site.url }}/{{ offer.phone }}" target="_blank"><span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.lang-uk.re_page }}">{{ site.data.lang-uk.re_page_ads }}</span></a>{%- endif -%}&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}{%- elsif split.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}{%- if offer.page and offer.page == '1' -%}&nbsp;<a href="{{ site.url }}/{{ offer.phone }}" target="_blank"><span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.lang-uk.re_page }}">{{ site.data.lang-uk.re_page_ads }}</span></a>{%- endif -%}&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}{%- endif -%}
