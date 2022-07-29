@@ -403,10 +403,10 @@ function priceFormatter(value, row) {
     } else if (row.price_sqmt !== '' && row.price_sqmt.includes('€')) {
       return '<span data-toggle="tooltip" title="' + row.price_sqmt + '">' + (row.price_sqmt.replace('€','') * eur).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
     } else if (row.price_sqmt !== '') {
-      return '<span data-toggle="tooltip" title="' + row.price_sqmt + '&nbsp;{{ site.data.lang-uk.re_uah }}">' + (row.price_sqmt*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+      return '<span data-toggle="tooltip" title="$' + (row.price_sqmt / nbu).toFixed(0) + '">' + (row.price_sqmt*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
     }
   } else {
-    return '<span data-toggle="tooltip" title="' + value + '&nbsp;{{ site.data.lang-uk.re_uah }}">' + (value*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
+    return '<span data-toggle="tooltip" title="$' + (value / nbu).toFixed(0) + '">' + (value*1).toFixed(0) + '&nbsp;{{ site.data.lang-uk.re_uah }}</span>';
   }
 }
 
