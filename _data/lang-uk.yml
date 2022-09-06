@@ -110,6 +110,8 @@ re_price: вартість нерухомості
 re_pricel: вартість землі
 re_pricer: вартість оренди за місяць
 re_price_rent: Вартість оренди
+re_price_apartment: ціна квартири
+re_price_house: ціна будинку
 re_price_apartment1: ціна квартири
 re_price_house1: ціна будинку
 re_price_apartment2: вартість квартири
