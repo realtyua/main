@@ -58,7 +58,7 @@ navhide: 1
                 </ul>
               </div>
             </nav>
-            <hr class="m-0">
+            <hr class="m-0" style="position:relative;">
             <div class="tab-content" id="{{ region }}-realestate-content">
               <div class="tab-pane pt-2 fade show{% if r.slug and r.slug != '' %} active{% else %}{% endif %}" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
                 <h3 class="h6">{{ r.small | remove: "область" }} нерухомість</h3>
