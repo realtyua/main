@@ -1,0 +1,4 @@
+{%- assign ferents = site.data.ferents -%}
+{%- assign records = owners
+  | concat: ferents
+-%}
