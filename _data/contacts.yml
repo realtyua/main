@@ -111,16 +111,6 @@
   www: https://www.realestate.if.ua/
 
 - type: realtor
-  item: ferents
-  name: Агент з нерухомості Олег&nbsp;Ференц
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Шашкевича,&nbsp;2
-  phone_main: 380997522951
-  phone_hot: 380997522951
-  phone_fax: 380986842562
-  email: olegf0139@gmail.com
-  www: https://www.realestate.if.ua/
-
-- type: realtor
   item: agent
   name: Нерухомість від Агента Продавця
   address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
