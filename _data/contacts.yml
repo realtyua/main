@@ -28,7 +28,15 @@
 
 - type: district
   item: verkhovynskyy
-  name: Нерухомість в українських Карпатах
+  name: Нерухомість в Верховинському районі
+
+- type: district
+  item: kosivskyy
+  name: Нерухомість в Косівському районі
+
+- type: district
+  item: kaluskyy
+  name: Нерухомість в Калуському районі
 
 #
 # District / Town
@@ -45,9 +53,41 @@
   item: tlumach
   name: Нерухомість в місті Тлумач
 
+- type: town
+  item: dolyna
+  name: Нерухомість в місті Долина
+
+- type: town
+  item: halych
+  name: Нерухомість в місті Галич
+
+- type: town
+  item: horodenka
+  name: Нерухомість в місті Городенка
+
+- type: town
+  item: kosiv
+  name: Нерухомість в місті Косів
+
+- type: town
+  item: nadvirna
+  name: Нерухомість в місті Надвірна
+
+- type: town
+  item: rohatyn
+  name: Нерухомість в місті Рогатин
+
+- type: town
+  item: rohatyn
+  name: Нерухомість в місті Рогатин
+
 #
 # Region / City
 #
+- type: city
+  item: bolekhiv
+  name: Нерухомість у місті Болехів
+
 - type: city
   item: burshtyn
   name: Нерухомість у місті Бурштин
@@ -59,6 +99,14 @@
 - type: city
   item: ivano-frankivsk
   name: Нерухомість у місті Івано-Франківськ
+
+- type: city
+  item: kalush
+  name: Нерухомість у місті Калуш
+
+- type: city
+  item: yaremche
+  name: Нерухомість у місті Яремче
 
 #
 # Developers / Company
