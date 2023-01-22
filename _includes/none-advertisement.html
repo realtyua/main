@@ -1,5 +1,5 @@
 <div class="alert alert-success mb-0" role="alert">
-<a href="/add" class="alert-link">{{ site.data.lang-uk.phone_add_ads }}</a> {{ site.data.lang-uk.re_pro }} {% case slug %}
+<a href="{{ site.addre }}" class="alert-link">{{ site.data.lang-uk.phone_add_ads }}</a> {{ site.data.lang-uk.re_pro }} {% case slug %}
 {% when 'apartment'%}{{ include.title | replace_first: 'Оголошення про нерухомість', 'продаж квартири' }}
 {% when 'house' %}{{ include.title | replace_first: 'Оголошення про нерухомість', 'продаж будинку' }}
 {% when 'land' %}{{ include.title | replace_first: 'Оголошення про нерухомість', 'продаж землі' }}
