@@ -1,6 +1,7 @@
 baseurl: ''
 domain: realestate.if.ua
 url: 'https://www.realestate.if.ua'
+addre: 'http://add.realestate.if.ua'
 
 encoding: UTF-8
 lang: uk_UA
@@ -11,8 +12,8 @@ region: Івано-Франківська область
 region_slug: ivano-frankivska
 region_size: .89rem
 
-usd: 40.45
-eur: 43.44
+usd: 40.35
+eur: 43.80
 nbu: 36.5686
 
 title: Мережа Вебсайтів Нерухомості

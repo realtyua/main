@@ -20,16 +20,31 @@
     </nav>
   </div>
   {%- endif -%}
+  {%- comment -%}
+    {%- if tn.url == page.url -%}
+      <div class="col-auto order-1 order-lg-2 text-right">
+        <span class="btn btn-add btn-sm">
+          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+        </span>
+      </div>
+    {%- else -%}
+      <div class="col-auto order-1 order-lg-2 text-right">
+        <a href="{{ tn.url }}" class="btn btn-add btn-sm">
+          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+        </a>
+      </div>
+    {%- endif -%}
+  {%- endcomment -%}
   {%- if tn.url == page.url -%}
     <div class="col-auto order-1 order-lg-2 text-right">
       <span class="btn btn-add btn-sm">
-        {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+        {{ site.data.lang-uk.add_realestate }}
       </span>
     </div>
   {%- else -%}
     <div class="col-auto order-1 order-lg-2 text-right">
-      <a href="{{ tn.url }}" class="btn btn-add btn-sm">
-        {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
+      <a href="{{ site.addre }}" class="btn btn-add btn-sm">
+        {{ site.data.lang-uk.add_realestate }}
       </a>
     </div>
   {%- endif -%}
