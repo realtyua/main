@@ -42,7 +42,7 @@
 
 - name: website
   title: Вебсайт
-  url: http://add.realestate.if.ua
+  url: https://add.realestate.if.ua
 
 - name: email
   title: Електронна пошта
