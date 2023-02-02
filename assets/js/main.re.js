@@ -3,7 +3,8 @@ layout: null
 sitemap: false
 ---
 
-{%- include js/jquery.min.js -%}
-{%- include js/popper.min.js -%}
-{%- include js/bootstrap.min.js -%}
+{%- include js/jquery.last.min.js -%}
+{%- include js/popper.last.min.js -%}
+{%- include js/bootstrap.last.min.js -%}
 {%- include js/bootstrap.smoothscroll.min.js -%}
+{%- include js/re.js -%}
