@@ -2,8 +2,11 @@
 layout: null
 sitemap: false
 ---
-{%- include js/jquery.last.min.js -%}
-{%- include js/popper.last.min.js -%}
-{%- include js/bootstrap.last.min.js -%}
-{%- include js/bootstrap.smoothscroll.min.js -%}
-{%- include js/re.js -%}
+{%- include js/re/jquery.last.min.js -%}
+{%- include js/re/popper.last.min.js -%}
+{%- include js/re/bootstrap.last.min.js -%}
+{%- include js/re/bootstrap.smoothscroll.min.js -%}
+{%- include js/re/re.js -%}
+{%- include js/re/handlebars.js -%}
+{%- include js/re/alpaca.min.js -%}
+{%- include js/re/index.js -%}
