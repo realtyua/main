@@ -8,5 +8,3 @@ sitemap: false
 {%- include js/re/bootstrap.smoothscroll.min.js -%}
 {%- include js/re/re.js -%}
 {%- include js/re/handlebars.js -%}
-{%- include js/re/alpaca.min.js -%}
-{%- include js/re/index.js -%}
