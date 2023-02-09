@@ -4,7 +4,8 @@
     <div class="row h-100 align-items-center text-center">
       {%- if include.h1 -%}
       <div class="col-md-10 offset-md-1">
-        <h1 class="bg-gradient-primary p-4 mb-3 mb-md-5 text-uppercase text-white display-4">{{ include.h1 }}</h1>
+        {%- if include.sold == '1' -%}<h1 class="bg-gradient-danger p-4 mb-3 mb-md-5 text-uppercase text-white display-4">Продано</h1>{%- endif -%}
+        <h{%- if include.sold == '1' -%}2{%- else -%}1{%- endif -%} class="bg-gradient-primary p-4 mb-3 mb-md-5 text-uppercase text-white display-4">{{ include.h1 }}</h{%- if include.sold == '1' -%}2{%- else -%}1{%- endif -%}>
         {%- if include.p or include.href and include.button -%}
         {%- if include.p -%}
         <p class="lead bg-gradient-primary text-white p-4 mb-md-5 mx-3 mx-md-5">{{ include.p }}</p>

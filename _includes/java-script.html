@@ -1,8 +1,9 @@
 {%- assign slash = page.dir | split: '/' -%}
-
+{% comment %}
 {%- if page.url contains '/add.html' -%}
   <script src="{{ "/assets/js/main.re.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- endif -%}
+{% endcomment %}
 {%- if page.dir == '/' and page.url contains '/ukraine.html' -%}
   <script src="{{ "/assets/js/main.ua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- elsif page.dir == '/' and page.url contains '/' -%}
