@@ -51,7 +51,8 @@
   navtitle: місто Харків
   subtitle: Нерухомість в Харкові
   small: Харківська область
-  url: http://www.realestate.kh.ua
+  url: https://www.realestate.kh.ua
+  slug: kharkivska
 
 - title: Нерухомість в Кіровоградській області
   navtitle: місто Кропивницький
