@@ -107,7 +107,8 @@
   navtitle: місто Одеса
   subtitle: Нерухомість в Одесі
   small: Одеська область
-  url: http://www.realestate.od.ua
+  url: https://www.realestate.od.ua
+  slug: odeska
 
 - title: Нерухомість в Київській області
   navtitle: місто Київ
