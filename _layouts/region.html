@@ -15,7 +15,7 @@ layout: default
     {%- if page.community -%}
     <div class="collapse" id="collapseCommunity">
       <div class="card card-body">
-        <p class="mb-0">{{ page.community }}</p>
+        <p class="mb-0">{%- capture isMapPdf -%}{%- file_exists {{ page.dir }}territorial_community_on_the_map.pdf -%}{%- endcapture -%}{{ page.community }}{% if isMapPdf == 'true' %} (<a href="{{ page.dir }}territorial_community_on_the_map.pdf" target="_blank">мапа меж територіальної громади)</a>{% endif %}</p>
         <button type="button" class="close" data-toggle="collapse" data-target="#collapseCommunity" aria-expanded="false" aria-controls="collapseCommunity" aria-label="Close" title="{{ site.lang-uk.close }}">
           <span aria-hidden="true">&times;</span>
         </button>
