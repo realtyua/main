@@ -1,6 +1,8 @@
 {%- assign seconds = site.html_pages | sort: 'path' -%}
 <ul class="list-unstyled">
 {%- for second in seconds -%}
+  {%- assign title = second.title | replace: "'", "&prime;" -%}
+  {%- assign navtitle = second.navtitle | replace: "'", "&prime;" -%}
   {%- assign slug = second.url | split: '/' | last -%}
   {%- assign current = second.url | remove: slug | remove: '//' | append: '/' -%}
   {%- assign mapPage = second.url | append: 'map.html' -%}
@@ -9,13 +11,9 @@
     {%- if include.current == current and second.navhide != 1 and page.url != mapPage -%}
       <li>
         {%- if page.url == second.url -%}
-          <span>
-            {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
-          </span>
+          <span>{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</span>
         {%- else -%}
-          <a href="{{ second.url }}map">
-            {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
-          </a>
+          <a href="{{ second.url }}map">{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</a>
         {%- endif -%}
       </li>
     {%- endif -%}
@@ -23,13 +21,9 @@
     {%- if include.current == current and second.navhide != 1 -%}
       <li>
         {%- if page.url == second.url -%}
-          <span>
-            {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
-          </span>
+          <span>{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</span>
         {%- else -%}
-          <span>
-            {%- if second.navtitle -%}{{ second.navtitle }}{%- else -%}{{ second.title }}{%- endif -%}
-          </span>
+          <span>{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</span>
         {%- endif -%}
       </li>
     {%- endif -%}
