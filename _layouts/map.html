@@ -69,7 +69,7 @@ layout: compress
 
               {%- include nav-section.html -%}
 
-              <h2>Вся нерухомість на мапі</h2>
+              <h2>Вся нерухомість що продається або здається в оренду на мапі</h2>
 
               <div class="row">
                 <div class="col-12">
@@ -97,13 +97,31 @@ layout: compress
     {%- assign l = page.url | split: '/' -%}
 
     {%- if page.url contains 'map.html' -%}
-      {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
+
+      {%- if page.url contains 'map.html' -%}
+        {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
+      {%- elsif page.dir contains 'apartment' -%}
+        {%- assign json = page.url | replace: 'map.html', 'data/map-apartment.json' -%}
+      {%- elsif page.dir contains 'commercial' -%}
+        {%- assign json = page.url | replace: 'map.html', 'data/map-commercial.json' -%}
+      {%- elsif page.dir contains 'garage' -%}
+        {%- assign json = page.url | replace: 'map.html', 'data/map-garage.json' -%}
+      {%- elsif page.dir contains 'house' -%}
+        {%- assign json = page.url | replace: 'map.html', 'data/map-house.json' -%}
+      {%- elsif page.dir contains 'land' -%}
+        {%- assign json = page.url | replace: 'map.html', 'data/map-land.json' -%}
+      {%- elsif page.dir contains 'rent' -%}
+        {%- assign json = page.url | replace: 'map.html', 'data/map-rent.json' -%}
+      {%- endif -%}
+
       {%- if l.size == 4 -%}
         {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
       {%- elsif l.size == 5 -%}
         {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
       {%- endif -%}
     {%- endif -%}
+
+    <!-- {{ slug }} || {{ json }} || {{ data }} --!>
 
     {%- if location != '' -%}
       {%- assign place = location -%}
