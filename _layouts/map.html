@@ -100,18 +100,20 @@ layout: compress
 
       {%- if page.url contains 'map.html' -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
-      {%- elsif page.dir contains 'apartment' and page.url contains 'map.html' -%}
-        {%- assign json = page.url | replace: 'map.html', 'data/map-apartment.json' -%}
-      {%- elsif page.dir contains 'commercial' and page.url contains 'map.html'  -%}
-        {%- assign json = page.url | replace: 'map.html', 'data/map-commercial.json' -%}
-      {%- elsif page.dir contains 'garage' and page.url contains 'map.html'  -%}
-        {%- assign json = page.url | replace: 'map.html', 'data/map-garage.json' -%}
-      {%- elsif page.dir contains 'house' and page.url contains 'map.html'  -%}
-        {%- assign json = page.url | replace: 'map.html', 'data/map-house.json' -%}
-      {%- elsif page.dir contains 'land' and page.url contains 'map.html'  -%}
-        {%- assign json = page.url | replace: 'map.html', 'data/map-land.json' -%}
-      {%- elsif page.dir contains 'rent' and page.url contains 'map.html'  -%}
-        {%- assign json = page.url | replace: 'map.html', 'data/map-rent.json' -%}
+        {%- comment -%}
+          {%- elsif page.dir contains 'apartment' and page.url contains 'map.html' -%}
+            {%- assign json = page.url | replace: 'map.html', 'data/map-apartment.json' -%}
+          {%- elsif page.dir contains 'commercial' and page.url contains 'map.html'  -%}
+            {%- assign json = page.url | replace: 'map.html', 'data/map-commercial.json' -%}
+          {%- elsif page.dir contains 'garage' and page.url contains 'map.html'  -%}
+            {%- assign json = page.url | replace: 'map.html', 'data/map-garage.json' -%}
+          {%- elsif page.dir contains 'house' and page.url contains 'map.html'  -%}
+            {%- assign json = page.url | replace: 'map.html', 'data/map-house.json' -%}
+          {%- elsif page.dir contains 'land' and page.url contains 'map.html'  -%}
+            {%- assign json = page.url | replace: 'map.html', 'data/map-land.json' -%}
+          {%- elsif page.dir contains 'rent' and page.url contains 'map.html'  -%}
+            {%- assign json = page.url | replace: 'map.html', 'data/map-rent.json' -%}
+        {%- endcomment -%}
       {%- endif -%}
 
       {%- if l.size == 4 -%}
