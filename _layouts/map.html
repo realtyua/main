@@ -100,17 +100,17 @@ layout: compress
 
       {%- if page.url contains 'map.html' -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
-      {%- elsif page.dir contains 'apartment' -%}
+      {%- elsif page.url contains 'apartment' and page.url contains 'map.html' -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-apartment.json' -%}
-      {%- elsif page.dir contains 'commercial' -%}
+      {%- elsif page.url contains 'commercial' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-commercial.json' -%}
-      {%- elsif page.dir contains 'garage' -%}
+      {%- elsif page.url contains 'garage' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-garage.json' -%}
-      {%- elsif page.dir contains 'house' -%}
+      {%- elsif page.url contains 'house' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-house.json' -%}
-      {%- elsif page.dir contains 'land' -%}
+      {%- elsif page.url contains 'land' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-land.json' -%}
-      {%- elsif page.dir contains 'rent' -%}
+      {%- elsif page.url contains 'rent' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-rent.json' -%}
       {%- endif -%}
 
@@ -118,10 +118,13 @@ layout: compress
         {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
       {%- elsif l.size == 5 -%}
         {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- elsif l.size == 6 -%}
+        {%- assign data = page.url | split: '/' | slice: 4, 6 | join: '/' | prepend: 'data/' -%}
       {%- endif -%}
+      
     {%- endif -%}
 
-    <!-- {{ slug }} || {{ json }} || {{ data }} --!>
+    <!-- l.s: {{ l.size }} || slug: {{ slug }} || json: {{ json }} || data: {{ data }} --!>
 
     {%- if location != '' -%}
       {%- assign place = location -%}
