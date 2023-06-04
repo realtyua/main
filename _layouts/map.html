@@ -100,17 +100,17 @@ layout: compress
 
       {%- if page.url contains 'map.html' -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
-      {%- elsif page.url contains 'apartment' and page.url contains 'map.html' -%}
+      {%- elsif page.dir contains 'apartment' and page.url contains 'map.html' -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-apartment.json' -%}
-      {%- elsif page.url contains 'commercial' and page.url contains 'map.html'  -%}
+      {%- elsif page.dir contains 'commercial' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-commercial.json' -%}
-      {%- elsif page.url contains 'garage' and page.url contains 'map.html'  -%}
+      {%- elsif page.dir contains 'garage' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-garage.json' -%}
-      {%- elsif page.url contains 'house' and page.url contains 'map.html'  -%}
+      {%- elsif page.dir contains 'house' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-house.json' -%}
-      {%- elsif page.url contains 'land' and page.url contains 'map.html'  -%}
+      {%- elsif page.dir contains 'land' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-land.json' -%}
-      {%- elsif page.url contains 'rent' and page.url contains 'map.html'  -%}
+      {%- elsif page.dir contains 'rent' and page.url contains 'map.html'  -%}
         {%- assign json = page.url | replace: 'map.html', 'data/map-rent.json' -%}
       {%- endif -%}
 
@@ -121,7 +121,7 @@ layout: compress
       {%- elsif l.size == 6 -%}
         {%- assign data = page.url | split: '/' | slice: 4, 6 | join: '/' | prepend: 'data/' -%}
       {%- endif -%}
-      
+
     {%- endif -%}
 
     <!-- l.s: {{ l.size }} || slug: {{ slug }} || json: {{ json }} || data: {{ data }} --!>
