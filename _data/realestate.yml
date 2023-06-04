@@ -2,7 +2,8 @@
   navtitle: місто Запоріжжя
   subtitle: Нерухомість в Запоріжжі
   small: Запорізька область
-  url: http://www.realestate.zp.ua
+  url: https://www.realestate.zp.ua
+  slug: zaporizhzhska
 
 - title: Нерухомість в Житомирській області
   navtitle: місто Житомир
@@ -20,7 +21,8 @@
   navtitle: місто Ужгород
   subtitle: Нерухомість в Ужгороді
   small: Закарпатська область
-  url: http://www.realestate.uz.ua
+  url: https://www.realestate.uz.ua
+  slug: zakarpatska
 
 - title: Нерухомість в Вінницькій області
   navtitle: місто Вінниця
@@ -38,7 +40,8 @@
   navtitle: місто Чернівці
   subtitle: Нерухомість в Чернівцях
   small: Чернівецька область
-  url: http://www.realestate.cv.ua
+  url: https://www.realestate.cv.ua
+  slug: chernivetska
 
 - title: Нерухомість в Тернопільській області
   navtitle: місто Тернопіль
@@ -95,7 +98,8 @@
   navtitle: місто Луцьк
   subtitle: Нерухомість в Луцьку
   small: Волинська область
-  url: http://www.realestate.lt.ua
+  url: https://www.realestate.lt.ua
+  slug: volynska
 
 - title: Нерухомість в Миколаївській області
   navtitle: місто Миколаїв
