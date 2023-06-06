@@ -83,7 +83,7 @@ re_garage: Гараж
 re_place: Місце
 re_store: Магазин
 re_house_part: Частина будинку
-re_house_partm: частину будинку
+re_house_partm: частина будинку
 re_house_not: Недобудований будинок
 re_fx: -х
 re_fno: -но
@@ -131,7 +131,7 @@ re_show_map: Показати мапу
 re_land: Земля
 re_apartment: Квартира
 re_kvartyru: Квартиру
-re_apartment_part: Частина квартира
+re_apartment_part: Частина квартири
 re_nezhytlove: Нежитлове
 re_nezhytlovyy: Нежитловий
 re_no_apartment: Нежитлове приміщення
