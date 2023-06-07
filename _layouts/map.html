@@ -69,8 +69,8 @@ layout: compress
 
               {%- include nav-section.html -%}
 
-              <h2>Вся нерухомість що продається або здається в оренду на мапі</h2>
-
+              <h2>Об'єкти нерухомості на мапі</h2>
+              <p>Клацніть на маркер щоб переглянути основні параметри об'єкта нерухомості і контакти продавця</p>
               <div class="row">
                 <div class="col-12">
                   <div id="map"></div>
@@ -93,15 +93,16 @@ layout: compress
     {% include modals/net-realestate-modal.html %}
 
     {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
-    {%- assign slug = page.url | split: "/" | last -%}
+    {%- assign slug = page.dir | split: "/" | last -%}
     {%- assign l = page.url | split: '/' -%}
 
     {%- if page.url contains 'map.html' -%}
-      {%- assign json = page.url | replace: 'map.html', 'data/map.json' -%}
       {%- if l.size == 4 -%}
         {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
       {%- elsif l.size == 5 -%}
         {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- elsif l.size == 6 -%}
+        {%- assign data = page.url | split: '/' | slice: 3, 6 | join: '/' | prepend: 'data/' -%}
       {%- endif -%}
     {%- endif -%}
 

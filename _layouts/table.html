@@ -19,25 +19,25 @@ layout: default
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
     <h2 class="h3">
-    {%- if page.url contains "rent" -%}
+    {%- if page.dir contains "rent" -%}
       {{ site.data.lang-uk.re_rent_h2 }}
-    {%- elsif page.url contains "land" -%}
+    {%- elsif page.dir contains "land" -%}
       {{ site.data.lang-uk.re_land_h2 }}
-    {%- elsif page.url contains "house" -%}
+    {%- elsif page.dir contains "house" -%}
       {{ site.data.lang-uk.re_house_h2 }}
-    {%- elsif page.url contains "garage" -%}
+    {%- elsif page.dir contains "garage" -%}
       {{ site.data.lang-uk.re_garage_h2 }}
-    {%- elsif page.url contains "commercial" -%}
+    {%- elsif page.dir contains "commercial" -%}
       {{ site.data.lang-uk.re_commercial_h2 }}
-    {%- elsif page.url contains "apartment" -%}
+    {%- elsif page.dir contains "apartment" -%}
       {{ site.data.lang-uk.re_apartment_h2 }}
-    {%- elsif page.url contains "all" -%}
+    {%- elsif page.url contains "/all.html" -%}
       {{ site.data.lang-uk.re_all_h2 }}
     {%- endif -%}
     </h2>
-    {%- assign slug = page.url | split: "/" | last -%}
+    {%- assign slug = page.dir | split: "/" | last -%}
     {%- assign l = page.url | split: "/" -%}
-    {%- if page.url contains "all.html" -%}
+    {%- if page.url contains "/all.html" -%}
       {%- assign json = page.url | replace: "all.html", "data/all.json" -%}
       {%- if l.size == 4 -%}
         {%- assign data = page.url | split: "/" | slice: 2, 4 | join: "/" | prepend: "data/" -%}

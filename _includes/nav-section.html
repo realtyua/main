@@ -61,10 +61,7 @@
             <li class="nav-item mb-2 h5">
               <p class="m-lg-0">
                 {%- if page.url contains mapPage -%}
-                  <span class="badge badge-primary border-0" title="{{ site.data.lang-uk.re_map_on }}">
-                    <span>{{ site.data.lang-uk.re_map }}</span>
-                    <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-                  </span>
+                  &nbsp;
                 {%- else -%}
                   <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
                     <span>{{ site.data.lang-uk.re_map }}</span>
@@ -76,21 +73,34 @@
           </ul>
 
         {%- else -%}
+
+          {%- assign l = page.url | split: '/' -%}
           {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
+          {%- if page.dir != here -%}
+            {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
+          {%- endif -%}
+          {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
 
           <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
             <li class="nav-item mb-2">
               <p class="m-lg-0 h5">
                 {%- if page.url contains mapPage -%}
-                  <span class="badge badge-primary border-0" title="{{ site.data.lang-uk.re_map_on }}">
-                    <span>{{ site.data.lang-uk.re_map }}</span>
-                    <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-                  </span>
+                  {%- if page.dir == here and l.size < 6 and l.size != 4 -%}
+                    <a class="badge badge-primary border-0" href="{{ page.url | replace: 'map', 'index' }}">
+                      <span>{{ site.data.lang-uk.to_section }}</span>
+                    </a>
+                  {%- else -%}
+                    &nbsp;
+                  {%- endif -%}
                 {%- else -%}
-                  <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-                    <span>{{ site.data.lang-uk.re_map }}</span>
-                    <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-                  </a>
+                  {%- if isMap == 'true' -%}
+                    <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
+                      <span>{{ site.data.lang-uk.re_map }}</span>
+                      <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+                    </a>
+                  {%- else -%}
+                    &nbsp;
+                  {%- endif -%}
                 {%- endif -%}
               </p>
             </li>
@@ -103,7 +113,7 @@
             {%- for one in ones -%}
               {%- assign isJson = false -%}
               {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-              {%- assign slug = one.url | split: '/' | last -%}
+              {%- assign slug = one.dir | split: '/' | last -%}
               {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
               {%- if one.title != '' and isJson == false -%}
                 {%- include nav-item.html -%}
@@ -114,7 +124,13 @@
             {%- if page.url contains mapRegion -%}
             <li class="nav-item" role="presentation">
               <a class="nav-link border-0" href="{{ page.url | replace: 'map', 'index' }}">
-                <span>Весь список</span>
+                <span>Перейти до списоку</span>
+              </a>
+            </li>
+            {%- elsif page.url contains 'map.html' and l.size > 5 -%}
+            <li class="nav-item" role="presentation">
+              <a class="nav-link border-0" href="{{ page.url | replace: 'map', 'index' }}">
+                <span>Назад до списку</span>
               </a>
             </li>
             {%- endif -%}
