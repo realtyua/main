@@ -12,20 +12,19 @@
     {%- assign mapPage = page.url | append: 'map.html' | remove_first: '/' -%}
     {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
     {%- if isMap == 'true' -%}
-    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-      <li class="nav-item">
-        <p class="m-lg-0 h5">
-          {%- if page.url contains mapPage -%}
-            &nbsp;
-          {%- else -%}
+      {%- if page.url contains mapPage -%}
+      {%- else -%}
+      <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+        <li class="nav-item">
+          <p class="m-lg-0 h5">
             <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
               <span>{{ site.data.lang-uk.re_map }}</span>
               <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
             </a>
-          {%- endif -%}
-        </p>
-      </li>
-    </ul>
+          </p>
+        </li>
+      </ul>
+      {%- endif -%}
     {%- endif -%}
     <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
       <li class="nav-item" role="presentation">
@@ -131,11 +130,9 @@
                   {%- if forloop.first -%}
                     <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
                   {%- endif -%}
-
                       <div class="col px-2 mb-3">
                         {%- include card.html offer=offer aid=aid -%}
                       </div>
-
                   {%- if forloop.last -%}
                     </div>
                     {%- assign total = offers | size -%}
