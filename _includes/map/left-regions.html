@@ -3,9 +3,13 @@
   <ul class="list-unstyled">
     {%- assign regs = site.data.realestate | sort: 'navtitle' -%}
     {%- for reg in regs -%}
-    {%- if reg.url != site.url -%}
-    <li><a href="{{ reg.url }}">{{ reg.navtitle }}</a></li>
-    {%- endif -%}
+      {%- if reg.url != site.url -%}
+        {%- if reg.slug and reg.slug != '' -%}
+        <li><a href="{{ reg.url | append: '/region/' | append: reg.slug | append: '/map.html' }}">{{ reg.navtitle }}</a></li>
+        {%- else -%}
+        <li><a href="{{ reg.url }}">{{ reg.navtitle }}</a></li>
+        {%- endif -%}
+      {%- endif -%}
     {%- endfor -%}
   </ul>
 </details>

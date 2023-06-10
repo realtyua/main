@@ -1,29 +1,27 @@
 {%- assign seconds = site.html_pages | sort: 'path' -%}
 <ul class="list-unstyled">
 {%- for second in seconds -%}
+  {%- assign maps = site.html_pages | sort: "dir" | where_exp: "i", "i.url contains '/map.html' and i.dir contains second.dir" -%}
   {%- assign title = second.title | replace: "'", "&prime;" -%}
   {%- assign navtitle = second.navtitle | replace: "'", "&prime;" -%}
-  {%- assign slug = second.url | split: '/' | last -%}
+  {%- assign slug = second.dir | split: '/' | last -%}
   {%- assign current = second.url | remove: slug | remove: '//' | append: '/' -%}
-  {%- assign mapPage = second.url | append: 'map.html' -%}
+  {%- assign mapPage = second.dir | append: 'map.html' -%}
   {%- capture isMap -%}{%- file_exists {{ mapPage | remove_first: '/' }} -%}{%- endcapture -%}
   {%- if isMap == 'true' -%}
-    {%- if include.current == current and second.navhide != 1 and page.url != mapPage -%}
-      <li>
-        {%- if page.url == second.url -%}
-          <span>{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</span>
-        {%- else -%}
-          <a href="{{ second.url }}map">{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</a>
-        {%- endif -%}
-      </li>
-    {%- endif -%}
-  {%- else -%}
     {%- if include.current == current and second.navhide != 1 -%}
       <li>
-        {%- if page.url == second.url -%}
+        {%- if page.url == mapPage -%}
           <span>{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</span>
         {%- else -%}
-          <span>{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</span>
+          <a href="{{ mapPage }}">{%- if navtitle -%}{{ navtitle }}{%- else -%}{{ title }}{%- endif -%}</a>
+        {%- endif -%}
+        {%- if maps -%}
+          <ul class="list-unstyled">
+            {%- for map in maps -%}
+              <li>{%- if map.url == page.url -%}<span>{{ map.navtitle }}</span>{%- else -%}<a href="{{ map.url }}">{{ map.navtitle }}</a>{%- endif -%}</li>
+            {%- endfor -%}
+          </ul>
         {%- endif -%}
       </li>
     {%- endif -%}
