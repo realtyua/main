@@ -1,7 +1,7 @@
-var header = '<h1><a href="{{ site.url }}">{{ site.data.lang-uk.realestate }}</a> {{ site.data.lang-uk.re_on_map }}</h1>';
-var subheader = '<h2>- <a href="{{ site.url }}/region/{{ site.region_slug }}/map.html">{{ site.region }}</a></h2>';
+var header = '<h3 class="h5"><a href="{{ site.url }}">{{ site.data.lang-uk.realestate }}</a> {{ site.data.lang-uk.re_on_map }}</h3>';
+var subheader = '<h4 class="h6">- <a href="{{ site.url }}/region/{{ site.region_slug }}/map.html">{{ site.region }}</a></h4>';
 var contents = '{%- include map/left-navbar.html -%}';
-var ukraine = '<h2>- <a href="{{ site.main_url }}">{{ site.data.lang-uk.other_regions }}</a></h2>';
+var ukraine = '<h4 class="h6">- <a href="{{ site.main_url }}">{{ site.data.lang-uk.other_regions }}</a></h4>';
 var regions = '{%- include map/left-regions.html -%}';
 var options = {width:'280px'};
 L.control.slideMenu(header + subheader + contents + ukraine + regions, options).addTo(map);
