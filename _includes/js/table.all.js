@@ -1,6 +1,18 @@
 
 $(function () {
   "use strict";
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+  let value = params.id;
+  if (value && value !== '') {
+    if (value.split('').length === 12) {
+      $('#property').bootstrapTable('filterBy', { phone: value })
+    } else {
+      $('#property').bootstrapTable('filterBy', { id: value })
+      $('#property').bootstrapTable('toggleView')
+    }
+  }
   var expandedRow = null;
   if ($('div.pswp').length < 1 && $('table#property').length > 0) {
       var photoswipeTemplate = '\
