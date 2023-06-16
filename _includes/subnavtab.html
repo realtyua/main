@@ -1,5 +1,5 @@
 {%- assign lists = site.pages | sort: 'path' | reverse -%}
-{%- assign region = page.url | split: "/" | last -%}
+{%- assign region = page.dir | split: "/" | last -%}
 <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
   <div class="navbar-brand d-lg-none p-0">
     <span class="small">{{ site.data.lang-uk.brand_content }}</span>
@@ -12,19 +12,20 @@
     {%- assign mapPage = page.url | append: 'map.html' | remove_first: '/' -%}
     {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
     {%- if isMap == 'true' -%}
-      {%- if page.url contains mapPage -%}
-      {%- else -%}
-      <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-        <li class="nav-item">
-          <p class="m-lg-0 h5">
+    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+      <li class="nav-item">
+        <p class="m-lg-0 h5">
+          {%- if page.url contains mapPage -%}
+            &nbsp;
+          {%- else -%}
             <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
               <span>{{ site.data.lang-uk.re_map }}</span>
               <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
             </a>
-          </p>
-        </li>
-      </ul>
-      {%- endif -%}
+          {%- endif -%}
+        </p>
+      </li>
+    </ul>
     {%- endif -%}
     <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
       <li class="nav-item" role="presentation">
@@ -88,11 +89,13 @@
             {%- endif -%}
 
           {%- else -%}
+
             <div class="row">
               <div class="col-md-6 offset-md-3">
                 {%- include none-advertisement.html title=page.title -%}
               </div>
             </div>
+
           {%- endfor -%}
 
         {%- else -%}
@@ -130,9 +133,11 @@
                   {%- if forloop.first -%}
                     <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
                   {%- endif -%}
+
                       <div class="col px-2 mb-3">
                         {%- include card.html offer=offer aid=aid -%}
                       </div>
+
                   {%- if forloop.last -%}
                     </div>
                     {%- assign total = offers | size -%}

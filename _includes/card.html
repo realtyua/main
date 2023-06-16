@@ -7,9 +7,23 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
-<article class="card h-100{% if include.slug == 'realtor' or page.url contains 'realtor' or include.slug == 'agency' or page.url contains 'agency' or include.slug == 'developer' or page.url contains 'developer' %} border-bottom-0{% endif %}" role="presentation">
+{%- assign type = offer.type | split: ' ' -%}
+
+{%- capture offerType -%}
+  {%- if type.size >= 2 -%}
+    {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
+      {{ type | slice: 0,1 | join: ' ' }}
+    {%- else -%}
+      {{ type | slice: 0,2 | join: ' ' }}
+    {%- endif -%}
+  {%- else -%}
+    {{ type | slice: 0 }}
+  {%- endif -%}
+{%- endcapture -%}
+
+<article class="card h-100{% if include.slug == 'realtor' or include.slug == 'agency' or include.slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
   <div class="card-body pb-0">
-    <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} #{{ offer.id }} - {{ offer.type }}</data></h3>
+    <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.lang-uk.re_cost }} {{ offer.price }}</data></h3>
     <div class="mb-1">{% include card/body.html %}</div>
     <div class="mb-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_dater }}{%- else -%}{{ site.data.lang-uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if offer.date > cdate -%}{{ cdate }}{%- else -%}{{ offer.date }}{%- endif -%}">{%- if offer.date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=offer.date -%}{%- endif -%}</time></div>
   </div>

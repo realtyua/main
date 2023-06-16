@@ -10,7 +10,7 @@
 {%- assign landm = site.data.lang-uk.re_land | downcase -%}
 {%- assign ssland = offer.surface_land | size -%}
 {% capture set_type %}
-  {%- if offer.type == land -%}
+  {%- if offer.type contains land -%}
     {{ word_land | sample }}
   {%- else -%}
     {{ offer.type | downcase }}
@@ -18,12 +18,12 @@
 {% endcapture %}
 {% if offer.price contains '$' %}{%- assign pus = offer.price | remove: '$' -%}{% elsif offer.price contains '€' %}{%- assign peu = offer.price | remove: '€' -%}{% else %}{%- assign pua = offer.price -%}{% endif %}
 {% if offer.type %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_for_rent }}{% elsif offer.rent == '1' and offer.price == '' %}{{ site.data.lang-uk.re_for_rentd }}{% else %}{% if offer.type contains site.data.lang-uk.re_house or offer.type contains site.data.lang-uk.re_kvartyru or offer.type contains site.data.lang-uk.re_roomsp or offer.type contains site.data.lang-uk.re_garage %}{{ site.data.lang-uk.re_sell }}{% else %}{{ site.data.lang-uk.re_for_sale }}{% endif %}{% endif %} <strong>{{ set_type }}</strong>, {% endif %}
-{% if offer.type == land %} {{ site.data.lang-uk.re_surface }} <strong>{{ offer.surface_land }}</strong>&nbsp;{{ site.data.lang-uk.m }} ({{ offer.surface_land | divided_by: 10000.0000 | round: 4 }} га), {% else %}
+{% if offer.type contains land %} {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>&nbsp;{{ site.data.lang-uk.m }} ({{ offer.surface_land | divided_by: 10000.0000 | round: 4 }} га), {% else %}
 {% if offer.surface %}{{ site.data.lang-uk.re_surface }} <b><abbr data-toggle="tooltip" title="{{ site.data.lang-uk.re_total }}">{{ offer.surface }}</abbr></b>&nbsp;{{ site.data.lang-uk.m }}, {% endif %}{% if offer.rooms and offer.rooms != '' %}{% if offer.type contains kimnaty and offer.rooms == '1' %}{{ site.data.lang-uk.re_roomsp }}{% elsif offer.type contains kimnaty and offer.rooms > '1' %}{{ site.data.lang-uk.re_roomsps }}{% else %}{{ site.data.lang-uk.re_rooms }}{% endif %} <b>{{ offer.rooms }}</b>, {% endif %}{% if offer.floor and offer.floor != '' and isHouse == false %}{{ site.data.lang-uk.re_na }} <b>{{ offer.floor }}</b>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, {% endif %}{% if offer.floors and offer.floors != '' and isHouse == true %}{{ site.data.lang-uk.re_floorss }} <b>{{ offer.floors }}</b>, {% endif %}
 {% endif %}
 {% if offer.location and offer.location != '' %}{{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_at }} <strong>{{ offer.location }}</strong> {% endif %}
 {% if offer.address and offer.address != '' %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>{% if offer.object and offer.object != '' and page.url == '/' %} ({{ site.data.lang-uk.re_rc }}&nbsp;{{ offer.object }}){% endif %}, {% endif %}{% if offer.region and offer.region != '' %}<strong>{{ offer.region }}</strong>, {% endif %}
-{% if offer.price %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_pricer }} {% elsif offer.rent == '1' and offer.price == '' and offer.price_sqmt != '' %}{{ site.data.lang-uk.re_price_sqmtr | downcase }} {% elsif offer.type == site.data.lang-uk.re_land %}{{ site.data.lang-uk.re_pricel }} {% else %}{% if offer.type contains site.data.lang-uk.re_house %}{{ site.data.lang-uk.re_price_house }}{% elsif offer.type contains site.data.lang-uk.re_apartment %}{{ site.data.lang-uk.re_price_apartment }}{% else %}{{ site.data.lang-uk.re_price }}{% endif %} {% endif %}
+{% if offer.price %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_pricer }} {% elsif offer.rent == '1' and offer.price == '' and offer.price_sqmt != '' %}{{ site.data.lang-uk.re_price_sqmtr | downcase }} {% elsif offer.type contains site.data.lang-uk.re_land %}{{ site.data.lang-uk.re_pricel }} {% else %}{% if offer.type contains site.data.lang-uk.re_house %}{{ site.data.lang-uk.re_price_house }}{% elsif offer.type contains site.data.lang-uk.re_apartment %}{{ site.data.lang-uk.re_price_apartment }}{% else %}{{ site.data.lang-uk.re_price }}{% endif %} {% endif %}
 {%- if offer.price != '' -%}
   {% if offer.price contains '$' %}
     <abbr data-toggle="tooltip" title="{{ offer.price }}">{{ offer.price | remove: '$' | times: site.usd | ceil }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.

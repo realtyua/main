@@ -1,6 +1,6 @@
 {%- assign ssland = offer.surface_land | size -%}
 
-{%- if offer.type and offer.type == land -%}
+{%- if offer.type and offer.type contains land -%}
 {%- else -%}
 
   {%- if offer.type != site.data.lang-uk.re_house or offer.type != site.data.lang-uk.re_house_not -%}
@@ -46,7 +46,7 @@
 
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price == '' -%}
 
-  {%- elsif offer.type == land or offer.type == landm -%}
+  {%- elsif offer.type contains land or offer.type contains landm -%}
     <dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.m_za }}</dt>
   {%- else -%}
     <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.m_za }}</dt>
@@ -97,7 +97,7 @@
 
       {%- if offer.price_sqmt == '' and offer.price != '' and offer.price contains '$' -%}
 
-        {%- if offer.type == land or offer.type == landm -%}
+        {%- if offer.type contains land or offer.type contains landm -%}
           <abbr data-toggle="tooltip" title="${{ pus | divided_by: offer.surface_land | round: 2 }}">
           {{ pus | divided_by: offer.surface_land | times: site.usd | round: 2 }}
           </abbr>
@@ -109,7 +109,7 @@
 
       {%- elsif offer.price_sqmt == '' and offer.price != '' and offer.price contains '€' -%}
 
-        {%- if offer.type == land or offer.type == landm -%}
+        {%- if offer.type contains land or offer.type contains landm -%}
           <abbr data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface_land | round: 2 }}">
           {{ peu | divided_by: offer.surface_land | times: site.eur | round: 2 }}
           </abbr>
@@ -121,7 +121,7 @@
 
       {% elsif offer.price_sqmt == '' and offer.price != '' %}
 
-        {%- if offer.type == land or offer.type == landm -%}
+        {%- if offer.type contains land or offer.type contains landm -%}
           <abbr data-toggle="tooltip" title="${{ pua | divided_by: offer.surface_land | divided_by: site.nbu | round: 2 }}">
           {{ offer.price | divided_by: offer.surface_land | round: 2 }}
           </abbr>

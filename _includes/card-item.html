@@ -58,7 +58,7 @@
   {%- elsif slug == 'realtor' -%}
     {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.layout == 'realtor' and i.navtitle != 'Агент Продавець'" -%}
     <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Aгентів і рієлторів</span><span class="py-1 px-2 bg-info rounded-right">{{ realtors | size }}</span>
+      <span class="bg-primary py-1 px-2 rounded-left">Aгентів і ріелторів</span><span class="py-1 px-2 bg-info rounded-right">{{ realtors | size }}</span>
     </span>
   {%- elsif slug == 'agency' -%}
     {%- assign agencys = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'agency' and i.layout == 'realtor' and i.navtitle != 'Агенція Продавець'" -%}
@@ -89,7 +89,7 @@
     {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_house or i.type == site.data.lang-uk.re_house_part" -%}
     {{ ohouse | size }}
   {%- elsif slug == 'land' -%}
-    {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type == site.data.lang-uk.re_land" -%}
+    {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_land" -%}
     {{ oland | size }}
   {%- elsif slug == 'realtor' -%}
     {%- assign orealtor = offers | where_exp: "i", "
