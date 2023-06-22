@@ -36,9 +36,9 @@
   title: Viber
   url:
 
-- name: telegram
-  title: Telegram
-  url: https://t.me/realestate_net
+# - name: telegram
+#   title: Telegram
+#   url: https://t.me/realestate_net
 
 - name: website
   title: Вебсайт
