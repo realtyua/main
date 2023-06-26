@@ -1,17 +1,20 @@
 
 $(function () {
   "use strict";
-  const params = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
+  var $reObj = $('#property');
+  const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop), });
   let value = params.id;
   if (value && value !== '') {
-    if (value.split('').length === 12) {
-      $('#property').bootstrapTable('filterBy', { phone: value })
-    } else {
-      $('#property').bootstrapTable('filterBy', { id: value })
-      $('#property').bootstrapTable('toggleView')
-    }
+    if (value.split('').length === 12) { $reObj.bootstrapTable('filterBy', { phone: value }); } else { $reObj.bootstrapTable('filterBy', { id: value }); }
+    $reObj.bootstrapTable('toggleView');
+    $reObj.on('post-body.bs.table', (e) => {
+      const $trs = $(e.currentTarget).find('tbody tr')
+      if ($trs.length === 1) {
+        $.each($trs, function (key, tr) {
+          $reObj.bootstrapTable('expandRow', $(tr).data('index'));
+        })
+      }
+    })
   }
   var expandedRow = null;
   if ($('div.pswp').length < 1 && $('table#property').length > 0) {
