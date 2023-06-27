@@ -82,7 +82,7 @@
       {%- elsif slash.size == 3 and page.dir == main_region -%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
         {%- if preload_alljson == 'true' -%}
-        <link rel="preload" href="{{ preload_all_json | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="fetch" crossorigin="">
+        <link rel="preload" href="{{ preload_all_json | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="fetch" crossorigin="anonymous">
         {%- endif -%}
       {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
