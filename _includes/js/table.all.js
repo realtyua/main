@@ -12,6 +12,7 @@ $(function () {
       if ($trs.length === 1) {
         $.each($trs, function (key, tr) {
           $reObj.bootstrapTable('expandRow', $(tr).data('index'));
+          $(tr).addClass('active');
         })
       }
     })

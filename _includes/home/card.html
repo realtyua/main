@@ -60,9 +60,21 @@
             {%- include {{ data }} location=include.breadcrumb -%}
             <ul class="list-unstyled mb-1">
             {%- for offer in offers limit: 3 -%}
+              {%- assign type = offer.type | split: ' ' -%}
+              {%- capture offerType -%}
+                {%- if type.size >= 2 -%}
+                  {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
+                    {{ type | slice: 0,1 | join: ' ' }}
+                  {%- else -%}
+                    {{ type | slice: 0,2 | join: ' ' }}
+                  {%- endif -%}
+                {%- else -%}
+                  {{ type | slice: 0 }}
+                {%- endif -%}
+              {%- endcapture -%}
               <li class="card mb-2">
                 <article class="card-body p-2" role="presentation">
-                  <h4 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} #{{ offer.id }} - {{ offer.type }}</data></h4>
+                  <h4 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.lang-uk.re_object_rent }}{% else %}{{ site.data.lang-uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.lang-uk.re_cost }} {{ offer.price }}</data></h4>
                   {% include card/body.html %}
                 </article>
               </li>
