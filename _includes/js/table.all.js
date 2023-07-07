@@ -8,18 +8,22 @@ $(function () {
   let value = params.id;
   if (value && value !== '') {
     if (value.split('').length === 12) {
-      $tabpro.bootstrapTable('filterBy', { phone: value })
+      $tabpro.bootstrapTable('filterBy', { phone: value });
     } else {
       $tabpro.bootstrapTable('filterBy', { id: value });
       if ($('table[data-detail-formatter="htmlDetailFormatter"]').length === 1) {
-        $tabpro.bootstrapTable('toggleDetailView', 0)
-        $('tbody tr[data-index="0"]').addClass('active')
+        $tabpro.bootstrapTable('toggleDetailView', 0);
+        $('tbody tr[data-index="0"]').addClass('active');
       } else {
         $tabpro.on('post-body.bs.table', function () {
-          $tabpro.bootstrapTable('toggleDetailView', 0)
-          $('tbody tr[data-index="0"]').addClass('active')
+          $tabpro.bootstrapTable('toggleDetailView', 0);
+          $('tbody tr[data-index="0"]').addClass('active');
         })
       }
+      $('div[class="row justify-content-between"]').remove();
+      $('div.fixed-table-pagination').remove();
+      $('div[class="fixed-table-toolbar"]').replaceWith('<div class="float-right btn-group"><a class="my-2" href="' + location.protocol + '//' + location.host + location.pathname + '">' + 'Переглянути інші пропозиції' + '</a></div>');
+      $('h2[class="h3"]').remove();
     }
   }
   var expandedRow = null;
