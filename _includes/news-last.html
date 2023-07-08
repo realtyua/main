@@ -21,10 +21,8 @@
   {%- if forloop.last -%}
   </div>
   <hr>
-  <div class="row">
-    <div class="col-auto ml-auto">
-      <a href="{{page.dir}}news/" class="btn btn-sm btn-primary">{{ site.data.lang-uk.news_all }}</a>
-    </div>
+  <div class="float-right btn-group">
+    <a href="{{page.dir}}news/" class="btn btn-sm btn-primary">{{ site.data.lang-uk.news_all }}</a>
   </div>
   {%- endif -%}
 {%- else -%}

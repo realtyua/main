@@ -78,12 +78,10 @@
               {%- assign total = offers | size -%}
               {%- assign others = total | minus:9 -%}
               {%- if others > 0 -%}
-                <div class="row">
-                  <div class="col-auto ml-auto">
-                    <a class="btn btn-sm btn-primary" href="{{ page.dir | append: 'all' }}">
-                      {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_offers }}
-                    </a>
-                  </div>
+                <div class="float-right btn-group">
+                  <a class="btn btn-sm btn-primary" href="{{ page.dir | append: 'all' }}">
+                    {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_offers }}
+                  </a>
                 </div>
               {%- endif -%}
             {%- endif -%}
@@ -143,12 +141,10 @@
                     {%- assign total = offers | size -%}
                     {%- assign others = total | minus:9 -%}
                     {%- if others > 0 -%}
-                      <div class="row">
-                        <div class="col-auto ml-auto">
-                          <a class="btn btn-sm btn-primary" href="{{ content.url }}">
-                            {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_section }} {{ content.navtitle }}
-                          </a>
-                        </div>
+                      <div class="float-right btn-group">
+                        <a class="btn btn-sm btn-primary" href="{{ content.url }}">
+                          {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_section }} {{ content.navtitle }}
+                        </a>
                       </div>
                     {%- endif -%}
                   {%- endif -%}

@@ -41,7 +41,7 @@
           }
         }
         div.append();
-        document.getElementById("{{ region }}").insertAdjacentHTML('afterend', '<div class="row"><div class="col-auto ml-auto"> <a class="btn btn-primary btn-sm" href="{{ sr.url }}">Інші ' + count + ' пропозиції нерухомості </a></div></div>');
+        document.getElementById("{{ region }}").insertAdjacentHTML('afterend', '<div class="float-right btn-group"><a class="btn btn-primary btn-sm" href="{{ sr.url }}">Інші ' + count + ' пропозиції нерухомості </a></div>');
         while (counter < number) { var i = Math.floor(Math.random() * count); if (random.indexOf(i) == "-1") { if (counter == (number - 1)) { reAdsType(); } else { reAdsType(); } random.push(i); counter++; } }
       }).fail(function() {
         var div = $("#{{ region }}");

@@ -81,10 +81,8 @@
         </div>
       {%- if forloop.last -%}
       </div>
-      <div class="row">
-        <div class="col-auto ml-auto">
-          <a class="btn btn-sm btn-primary" href="{{include.dir}}">{{ site.data.lang-uk.others }} {{ title | downcase }}</a>
-        </div>
+      <div class="float-right btn-group">
+        <a class="btn btn-sm btn-primary" href="{{include.dir}}">{{ site.data.lang-uk.others }} {{ title | downcase }}</a>
       </div>
       {%- endif -%}
     {%- else -%}
