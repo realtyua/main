@@ -176,7 +176,7 @@
     {%- if offer.seller contains site.data.lang-uk.re_seller -%}
       {{ offer.seller | remove: site.data.lang-uk.re_seller }}
     {%- else -%}
-      {{ offer.seller }}
+      <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ site.data.lang-uk.offers }}">{{ offer.seller }}</a>
     {%- endif -%}
   </dd>
 {%- endif -%}

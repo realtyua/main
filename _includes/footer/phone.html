@@ -23,7 +23,7 @@
     <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_phoner }}{%- else -%}{{ site.data.lang-uk.re_phone }}{%- endif -%}">&phone;</span>
   </button>
   <div class="dropdown-menu px-2 dropdown-menu-right">
-    <span class="text-nowrap">{{ offer.seller | remove: site.data.lang-uk.re_seller }}</span><br>
+    <span class="text-nowrap"><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ site.data.lang-uk.offers }}">{{ offer.seller | remove: site.data.lang-uk.re_seller }}</a></span><br>
     <a href="tel:+{{ t }}" title="{{ site.data.lang-uk.re_tel | capitalize }}">{{ n }}</a>
   </div>
 </div>
