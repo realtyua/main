@@ -5,13 +5,9 @@
     <nav class="nav nav-masthead justify-content-end">
   {%- endif -%}
   {%- if tn.url == page.url -%}
-    <span class="nav-link{% if tn.url == page.url %} active{% endif %}">
-      {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-    </span>
+    <span class="nav-link{% if tn.url == page.url %} active{% endif %}">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</span>
   {%- else -%}
-    <a href="{{ tn.url }}" class="nav-link">
-      {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-    </a>
+    <a href="{{ tn.url }}" class="nav-link">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</a>
   {%- endif -%}
 {%- endfor -%}
 {%- assign tns = site.html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.url == '/add.html' and i.navhide != 1 and i.title != ''" -%}
@@ -23,29 +19,22 @@
   {%- comment -%}
     {%- if tn.url == page.url -%}
       <div class="col-auto order-1 order-lg-2 text-right">
-        <span class="btn btn-add btn-sm">
-          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-        </span>
+        <span class="btn btn-add btn-sm">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</span>
       </div>
     {%- else -%}
       <div class="col-auto order-1 order-lg-2 text-right">
-        <a href="{{ tn.url }}" class="btn btn-add btn-sm">
-          {%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}
-        </a>
+        <a href="{{ tn.url }}" class="btn btn-add btn-sm">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</a>
       </div>
     {%- endif -%}
   {%- endcomment -%}
   {%- if tn.url == page.url -%}
     <div class="col-auto order-1 order-lg-2 text-right">
-      <span class="btn btn-add btn-sm">
-        {{ site.data.lang-uk.add_realestate }}
-      </span>
+      <span class="btn btn-add btn-sm">{{ site.data.lang-uk.add_realestate }}</span>
     </div>
   {%- else -%}
     <div class="col-auto order-1 order-lg-2 text-right">
-      <a href="{{ site.addre }}" class="btn btn-add btn-sm">
-        {{ site.data.lang-uk.add_realestate }}
-      </a>
+      <a class="btn btn-success btn-sm mr-1" data-toggle="collapse" href="#collapseAreaSelect" role="button" aria-expanded="false" aria-controls="collapseAreaSelect" title="Місцевість де розташована нерухомість">Пошук місцевості</a>
+      <a href="{{ site.addre }}" class="btn btn-add btn-sm">{{ site.data.lang-uk.add_realestate }}</a>
     </div>
   {%- endif -%}
 {%- endfor -%}

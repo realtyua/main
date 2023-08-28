@@ -28,4 +28,21 @@
       {%- include header/navbar.html -%}
     {%- endif -%}
   </div>
+  <div class="bg-light">
+    <div class="container">
+      <div class="collapse" id="collapseAreaSelect">
+        <div class="bg-light pb-3 px-0 border-0 card card-body">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <select id="areaSelect">
+                <option value="">Введіть назву місцевості чи тип нерухомості</option>
+                {%- include select/tags.html -%}
+                {%- include select/regions.html -%}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

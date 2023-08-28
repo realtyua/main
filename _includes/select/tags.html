@@ -1,0 +1,29 @@
+{%- assign ones = site.html_pages | sort: 'path' | reverse -%}
+{%- for one in ones -%}
+  {%- assign path = one.url | split: '/' -%}
+  {%- assign part = path | size -%}
+  {%- assign slug = one.url | split: '/' | last -%}
+  {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+  {%- if '/' == current and one.navhide != 1 -%}
+    {%- if one.url == '/region/' -%}
+    {%- else -%}
+      {% if part >= 2 %}
+        {%- include select/optgroup.html current=one.url -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if one.url -%}
+      {%- assign twos = site.html_pages -%}
+      {%- for two in twos -%}
+        {%- assign path = two.url | split: '/' -%}
+        {%- assign part = path | size -%}
+        {%- assign slug = two.url | split: '/' | last -%}
+        {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
+        {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
+          {% if part >= 3 %}
+            {%- include select/optgroup.html current=two.url -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
