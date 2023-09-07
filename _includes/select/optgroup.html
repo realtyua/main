@@ -4,10 +4,13 @@
     {%- assign current = second.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and second.navhide != 1 -%}
         {%- assign options = site.html_pages | sort:"path" | where_exp: "i", "i.url contains second.url and i.name == 'index.html'" -%}
-        {%- if options.size > 1 -%}
-            <optgroup label="{{ second.navtitle }}">{%- include select/option.html current=second.url navtitle=second.navtitle -%}</optgroup>
-        {%- else -%}
-            <option value="{{ second.url }}">{{ second.navtitle }}</option>
-        {%- endif -%}
+        <option value="{{ second.url }}">
+            {%- if second.navtitle contains "місто" -%}
+                Нерухомість в {{ second.navtitle | replace_first: "місто", "місті" }}
+            {%- else -%}
+                Нерухомість в {{ second.navtitle | replace_first: "ий район", "ому районі" }}
+            {%- endif -%}
+        </option>
+        {%- include select/option.html current=second.url navtitle=second.navtitle -%}
     {%- endif -%}
 {%- endfor -%}

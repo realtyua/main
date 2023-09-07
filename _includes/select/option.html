@@ -4,7 +4,13 @@
     {%- assign slug = 3.url | split: "/" | last -%}
     {%- assign current = 3.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 3.navhide != 1 and 3.title != '' -%}
-    <option value="{{ 3.url }}">{{ 3.navtitle }} в {{ include.navtitle | replace_first: "місто", "місті"}}</option>
+    <option value="{{ 3.url }}">
+      {%- if second.navtitle contains "місто" -%}
+        {{ 3.navtitle }} в {{ include.navtitle | replace_first: "місто", "місті" }}
+      {%- else -%}
+        {{ 3.navtitle }} в {{ include.navtitle | replace_first: "ий район", "ому районі" }}
+      {%- endif -%}
+    </option>
     {%- endif -%}
   {%- endfor -%}
 {%- endif -%}
