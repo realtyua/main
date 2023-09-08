@@ -84,9 +84,9 @@
 		&:focus { outline: none !important; }
 	}
 
-	.has-items & > input{
-		margin: $select-caret-margin !important;
-	}
+	//.has-items & > input{
+	//	margin: $select-caret-margin !important;
+	//}
 
 	&.rtl {
 		text-align: right;
@@ -103,7 +103,7 @@
 		opacity: $select-opacity-disabled;
 		background-color: $select-color-disabled;
 	}
-	
+
 	.input-hidden & > input{
 		opacity: 0;
 		position: absolute;
