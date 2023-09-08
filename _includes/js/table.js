@@ -8,21 +8,39 @@ $(function () {
   let value = params.id;
   if (value && value !== '') {
     if (value.split('').length === 12) {
-      $tabpro.bootstrapTable('filterBy', { phone: value });
+      if ($('tbody > tr').length === 1) {
+        if ($('table[data-detail-formatter="htmlDetailFormatter"]').length === 1) {
+          $tabpro.bootstrapTable('toggleDetailView', 0);
+          $('tbody > tr[data-index="0"]').addClass('active');
+        } else if ($('table[data-detail-formatter="jsDetailFormatter"]').length === 1) {
+          $tabpro.on('post-body.bs.table', function () {
+            $tabpro.bootstrapTable('toggleDetailView', 0);
+            $('tbody > tr[data-index="0"]').addClass('active');
+          })
+        }
+        $('#realestate-map').remove();
+        $('div.fixed-table-pagination').remove();
+        $('div[class="fixed-table-toolbar"]').replaceWith('<div class="float-right btn-group"><a class="my-2" href="' + location.protocol + '//' + location.host + location.pathname + '">' + 'Переглянути інші пропозиції' + '</a></div>');
+      } else {
+        $('#realestate-map').remove();
+        $('h2[class="h3"]').remove();
+      }
     } else {
       $tabpro.bootstrapTable('filterBy', { id: value });
-      if ($('table[data-detail-formatter="htmlDetailFormatter"]').length === 1) {
-        $tabpro.bootstrapTable('toggleDetailView', 0);
-        $('tbody tr[data-index="0"]').addClass('active');
-      } else {
-        $tabpro.on('post-body.bs.table', function () {
+      if ($('tbody > tr').length === 1 || $('tbody > tr[data-index="0"]').length === 1) {
+        if ($('table[data-detail-formatter="htmlDetailFormatter"]').length === 1) {
           $tabpro.bootstrapTable('toggleDetailView', 0);
           $('tbody tr[data-index="0"]').addClass('active');
-        })
+        } else if ($('table[data-detail-formatter="jsDetailFormatter"]').length === 1) {
+          $tabpro.on('post-body.bs.table', function () {
+            $tabpro.bootstrapTable('toggleDetailView', 0);
+            $('tbody tr[data-index="0"]').addClass('active');
+          })
+        }
+        $('#realestate-map').remove();
+        $('div.fixed-table-pagination').remove();
+        $('div[class="fixed-table-toolbar"]').replaceWith('<div class="float-right btn-group"><a class="my-2" href="' + location.protocol + '//' + location.host + location.pathname + '">' + 'Переглянути інші пропозиції' + '</a></div>');
       }
-      $('#realestate-map').remove();
-      $('div.fixed-table-pagination').remove();
-      $('div[class="fixed-table-toolbar"]').replaceWith('<div class="float-right btn-group"><a class="my-2" href="' + location.protocol + '//' + location.host + location.pathname + '">' + 'Переглянути інші пропозиції' + '</a></div>');
     }
   }
   var expandedRow = null;
