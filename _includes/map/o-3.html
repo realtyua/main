@@ -1,0 +1,11 @@
+{%- assign 4s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
+{%- if 4s.size > 0 -%}
+  {%- for 4 in 4s -%}
+    {%- assign slug = 4.url | split: "/" | last -%}
+    {%- assign current = 4.url | remove: slug | remove: "//" | append: "/" -%}
+    {%- if include.current == current and 4.navhide != 1 and 4.title != '' -%}
+      <option value="{{ 4.url | prepend: site.url }}">{{ 4.navtitle }}</option>
+      {%- include map/o-4.html current=4.url -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
