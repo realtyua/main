@@ -1,0 +1,10 @@
+{%- assign 6s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
+{%- if 6s.size > 0 -%}
+  {%- for 6 in 6s -%}
+    {%- assign slug = 6.url | split: "/" | last -%}
+    {%- assign current = 6.url | remove: slug | remove: "//" | append: "/" -%}
+    {%- if include.current == current and 6.navhide != 1 and 6.title != '' -%}
+      <option value="{{ 6.url }}">{{ 6.navtitle }}</option>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

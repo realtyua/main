@@ -1,0 +1,5 @@
+{%- assign main_region = region_slug | prepend: '/region/' | append: '/map.html' -%}
+{%- assign rps1 = site.html_pages | sort: "path" | where_exp: "i", "i.dir == '/news/' or i.dir == '/articles/' or i.url == main_region" -%}
+{%- assign rps0 = site.html_pages | sort: "path" | where_exp: "i", "i.dir == '/' and i.name != '404.html' and i.name != 'index.html'" -%}
+{%- assign rps = rps0 | concat: rps1 -%}
+{%- assign 0s = site.html_pages | sort: 'path' | reverse -%}
