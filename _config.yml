@@ -97,6 +97,12 @@ defaults:
 plugins:
   - jekyll-sitemap
   - jekyll-paginate-v2
+  - jekyll-get-json
+
+jekyll_get_json:
+  - data: kyiv
+    json: 'https://www.realestate.kyiv.ua/region/data/options.json'
+    cache: true
 
 sass:
   style: compressed
