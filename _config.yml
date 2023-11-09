@@ -106,6 +106,27 @@ jekyll_get_json:
   - data: te
     json: 'https://www.realestate.te.ua/region/data/options.json'
     cache: true
+  - data: in
+    json: 'https://www.realestate.in.ua/region/data/options.json'
+    cache: true
+  - data: uz
+    json: 'https://www.realestate.uz.ua/region/data/options.json'
+    cache: true
+  - data: od
+    json: 'https://www.realestate.od.ua/region/data/options.json'
+    cache: true
+  - data: zp
+    json: 'https://www.realestate.zp.ua/region/data/options.json'
+    cache: true
+  - data: lt
+    json: 'https://www.realestate.lt.ua/region/data/options.json'
+    cache: true
+  - data: kh
+    json: 'https://www.realestate.kh.ua/region/data/options.json'
+    cache: true
+  - data: cv
+    json: 'https://www.realestate.cv.ua/region/data/options.json'
+    cache: true
 
 sass:
   style: compressed

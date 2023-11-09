@@ -1,21 +1,3 @@
-<option value="https://www.realestate.uz.ua/region/city/berehove/">місто Берегове</option>
-<option value="https://www.realestate.uz.ua/region/city/chop/">місто Чоп</option>
-<option value="https://www.realestate.uz.ua/region/city/khust/">місто Хуст</option>
-<option value="https://www.realestate.uz.ua/region/city/mukachevo/">місто Мукачево</option>
-<option value="https://www.realestate.uz.ua/region/city/uzhhorod/">місто Ужгород</option>
-<option value="https://www.realestate.uz.ua/region/city/uzhhorod/agency/">місто Ужгород - Агенції</option>
-<option value="https://www.realestate.uz.ua/region/city/uzhhorod/developer/">місто Ужгород - Забудовники</option>
-<option value="https://www.realestate.uz.ua/region/city/uzhhorod/realtor/">місто Ужгород - Продавці, агенти і рієлтори</option>
-<option value="https://www.realestate.uz.ua/district/berehivskyy/">Берегівський район</option>
-<option value="https://www.realestate.uz.ua/district/khustskyy/">Хустський район</option>
-<option value="https://www.realestate.uz.ua/district/mukachivskyy/">Мукачівський район</option>
-<option value="https://www.realestate.uz.ua/district/rakhivskyy/">Рахівський район</option>
-<option value="https://www.realestate.uz.ua/district/tyachivskyy/">Тячівський район</option>
-<option value="https://www.realestate.uz.ua/district/uzhhorodskyy/">Ужгородський район</option>
-<option value="https://www.realestate.uz.ua/district/town/irshava/">місто Іршава</option>
-<option value="https://www.realestate.uz.ua/district/town/perechyn/">місто Перечин</option>
-<option value="https://www.realestate.uz.ua/district/town/rakhiv/">місто Рахів</option>
-<option value="https://www.realestate.uz.ua/district/town/svaliava/">місто Свалява</option>
-<option value="https://www.realestate.uz.ua/district/town/tiachiv/">місто Тячів</option>
-<option value="https://www.realestate.uz.ua/district/town/vynohradiv/">місто Виноградів</option>
-<option value="https://www.realestate.uz.ua/region/zakarpatska/">Закарпатська область</option>
+{%- if site.data.uz -%}
+{%- for option in site.data.uz -%}<option value="{{ option.url }}">{{ option.title }}</option>{%- endfor -%}
+{%- endif -%}

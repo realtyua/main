@@ -1,31 +1,3 @@
-<option value="https://www.realestate.od.ua/region/city/balta/">місто Балта</option>
-<option value="https://www.realestate.od.ua/region/city/bilhorod-dnistrovskyi/">місто Білгород-Дністровський</option>
-<option value="https://www.realestate.od.ua/region/city/biliaivka/">місто Біляївка</option>
-<option value="https://www.realestate.od.ua/region/city/chornomorsk/">місто Чорноморськ</option>
-<option value="https://www.realestate.od.ua/region/city/izmail/">місто Ізмаїл</option>
-<option value="https://www.realestate.od.ua/region/city/odesa/">місто Одеса</option>
-<option value="https://www.realestate.od.ua/region/city/odesa/agency/">місто Одеса - Агенції</option>
-<option value="https://www.realestate.od.ua/region/city/odesa/developer/">місто Одеса - Забудовники</option>
-<option value="https://www.realestate.od.ua/region/city/odesa/realtor/">місто Одеса - Продавці, агенти і ріелтори</option>
-<option value="https://www.realestate.od.ua/region/city/podilsk/">місто Подільськ</option>
-<option value="https://www.realestate.od.ua/region/city/teplodar/">місто Теплодар</option>
-<option value="https://www.realestate.od.ua/region/city/yuzhne/">місто Южне</option>
-<option value="https://www.realestate.od.ua/district/berezivkyy/">Березівський район</option>
-<option value="https://www.realestate.od.ua/district/bilhorod-dnistrovskyy/">Білгород-Дністровський район</option>
-<option value="https://www.realestate.od.ua/district/bolhradkyy/">Болградський район</option>
-<option value="https://www.realestate.od.ua/district/izmailkyy/">Ізмаїльський район</option>
-<option value="https://www.realestate.od.ua/district/odeskyy/">Одеський район</option>
-<option value="https://www.realestate.od.ua/district/podilskyy/">Подільський район</option>
-<option value="https://www.realestate.od.ua/district/rozdilnyanskyy/">Роздільнянський район</option>
-<option value="https://www.realestate.od.ua/district/town/ananiv/">місто Ананьїв</option>
-<option value="https://www.realestate.od.ua/district/town/artsyz/">місто Арциз</option>
-<option value="https://www.realestate.od.ua/district/town/berezivka/">місто Березівка</option>
-<option value="https://www.realestate.od.ua/district/town/bolhrad/">місто Болград</option>
-<option value="https://www.realestate.od.ua/district/town/kiliia/">місто Кілія</option>
-<option value="https://www.realestate.od.ua/district/town/kodyma/">місто Кодима</option>
-<option value="https://www.realestate.od.ua/district/town/reni/">місто Рені</option>
-<option value="https://www.realestate.od.ua/district/town/rozdilna/">місто Роздільна</option>
-<option value="https://www.realestate.od.ua/district/town/tatarbunary/">місто Татарбунари</option>
-<option value="https://www.realestate.od.ua/district/town/vylkove/">місто Вилкове</option>
-<option value="https://www.realestate.od.ua/district/town/yuzhne/">місто Южне</option>
-<option value="https://www.realestate.od.ua/region/odeska/">Одеська область</option>
+{%- if site.data.od -%}
+{%- for option in site.data.od -%}<option value="{{ option.url }}">{{ option.title }}</option>{%- endfor -%}
+{%- endif -%}
