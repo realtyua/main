@@ -36,10 +36,13 @@
             <div class="col-md-6 offset-md-3">
               <select id="areaSelect">
                 <option value="">Введіть назву місцевості чи тип нерухомості</option>
-                {% comment %}{%- include select/tags.html -%}{% endcomment %}
                 {%- include select/options/0.html -%}
                 {%- include regions/kyiv.html -%}
-                {%- include select/regions.html -%}
+                {%- include regions/te.html -%}
+                {% comment %}
+                  {%- include select/tags.html -%}
+                  {%- include select/regions.html -%}
+                {% endcomment %}
               </select>
             </div>
           </div>

@@ -103,6 +103,9 @@ jekyll_get_json:
   - data: kyiv
     json: 'https://www.realestate.kyiv.ua/region/data/options.json'
     cache: true
+  - data: te
+    json: 'https://www.realestate.te.ua/region/data/options.json'
+    cache: true
 
 sass:
   style: compressed
