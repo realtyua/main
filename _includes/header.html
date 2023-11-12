@@ -34,31 +34,18 @@
         <div class="bg-light pb-3 px-0 border-0 card card-body">
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              <select id="areaSelect">
-                <option value="">Введіть назву місцевості чи тип нерухомості</option>
-                {%- include select/options/0.html -%}
-                {%- include regions/te.html -%}
-                {%- include regions/kyiv.html -%}
-                {%- include regions/in.html -%}
-                {%- include regions/uz.html -%}
-                {%- include regions/kh.html -%}
-                {%- include regions/od.html -%}
-                {%- include regions/zp.html -%}
-                {%- include regions/lt.html -%}
-                {%- include regions/cv.html -%}
-                {%- include regions/zt.html -%}
-                {%- include regions/vn.html -%}
-                {%- include regions/sm.html -%}
-                {%- include regions/rv.html -%}
-                {%- include regions/pl.html -%}
-                {%- include regions/mk.html -%}
-                {%- include regions/lg.html -%}
-                {%- include regions/ks.html -%}
-                {%- include regions/kr.html -%}
-                {%- include regions/km.html -%}
-                {%- include regions/ck.html -%}
-                {%- include regions/cn.html -%}
-                {%- include regions/crimea.html -%}
+              <label for="areaSelect" class="sr-only">Пошук місцевості:</label>
+              <select name="areas" id="areaSelect" aria-label="Виберіть найменування місцевості">
+                <option value="">Введіть назву міста або району чи області</option>
+                {%- for r in site.data.realestate -%}
+                  {%- if r.url == site.url and r.slug and r.slug != '' -%}
+                    {%- include select/options/0.html -%}
+                  {%- elsif r.slug and r.slug != '' and r.url contains 'https' -%}
+                    {%- include regions/{{ r.url | remove: 'https://www.realestate.' | remove: '.ua' }}.html -%}
+                  {%- else -%}
+                    <option value="{{ r.url }}">{{ r.small }}</option>
+                  {%- endif -%}
+                {%- endfor -%}
               </select>
             </div>
           </div>
