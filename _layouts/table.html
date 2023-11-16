@@ -76,6 +76,7 @@ layout: default
             <div class="col-12">{%- include table/html.html -%}</div>
           </div>
         {%- else -%}
+          {%- assign name = page.title | replace: 'Всі оголошення про ', '' -%}
           <div class="row">
             <div class="col-md-6 offset-md-3">{%- include none-advertisement.html title=name -%}</div>
           </div>

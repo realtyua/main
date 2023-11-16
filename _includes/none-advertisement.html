@@ -3,4 +3,4 @@
 {% when 'apartment'%}{{ include.title | replace_first: 'Оголошення про нерухомість', 'продаж квартири' }}
 {% when 'house' %}{{ include.title | replace_first: 'Оголошення про нерухомість', 'продаж будинку' }}
 {% when 'land' %}{{ include.title | replace_first: 'Оголошення про нерухомість', 'продаж землі' }}
-{% else %}{{ include.title | replace_first: 'Оголошення про', '' }}{% endcase %}.</div>
+{% else %}{{ include.title | replace_first: 'Оголошення про', '' | replace_first: 'Н', 'н' }}{% endcase %}.</div>
