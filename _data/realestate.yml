@@ -1,3 +1,9 @@
+- title: Нерухомість в Донецькій області
+  navtitle: місто Донецьк
+  subtitle: Нерухомість в Донецьку
+  small: Донецька область
+  url: http://www.realestate.dn.ua
+
 - title: Нерухомість в Запорізькій області
   navtitle: місто Запоріжжя
   subtitle: Нерухомість в Запоріжжі
@@ -71,7 +77,7 @@
 
 - title: Нерухомість в Івано-Франківській області
   navtitle: місто Івано-Франківськ
-  subtitle: Нерухомість в Івано-Франківсьу
+  subtitle: Нерухомість в Івано-Франківську
   small: Івано-Франківська область
   url: https://www.realestate.if.ua
   slug: ivano-frankivska
