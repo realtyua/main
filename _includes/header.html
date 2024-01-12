@@ -35,17 +35,8 @@
           <div class="row">
             <div class="col-md-6 offset-md-3">
               <label for="areaSelect" class="sr-only">Пошук місцевості:</label>
-              <select name="areas" id="areaSelect" aria-label="Виберіть найменування місцевості">
+              <select name="areas" id="rehiony" aria-label="Виберіть найменування місцевості">
                 <option value="">Введіть назву міста або району чи області</option>
-                {%- for r in site.data.realestate -%}
-                  {%- if r.url == site.url and r.slug and r.slug != '' -%}
-                    {%- include select/options/0.html -%}
-                  {%- elsif r.slug and r.slug != '' and r.url contains 'https' -%}
-                    {%- include regions/{{ r.url | remove: 'https://www.realestate.' | remove: '.ua' }}.html -%}
-                  {%- else -%}
-                    <option value="{{ r.url }}">{{ r.small }}</option>
-                  {%- endif -%}
-                {%- endfor -%}
               </select>
             </div>
           </div>

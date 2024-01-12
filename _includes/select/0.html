@@ -1,0 +1,23 @@
+{%- include select/var-options.html -%}
+{%- for 0 in 0s -%}
+    {%- assign slug = 0.dir | split: '/' | last -%}
+    {%- assign current = 0.url | remove: slug | remove: '//' | append: '/' -%}
+    {%- if '/' == current and 0.navhide != 1 -%}
+        {%- if 0.url == '/region/' -%}
+        {%- else -%}
+            {%- include select/1.html current=0.url -%}
+        {%- endif -%}
+        {%- if 0.url -%}
+            {%- assign 1s = site.html_pages -%}
+            {%- for 1 in 1s -%}
+                {%- if 1 -%}
+                    {%- assign slug = 1.dir | split: '/' | last -%}
+                    {%- assign current = 1.url | remove: slug | remove: '//' | append: '/' -%}
+                    {%- if 0.url == current and 1.url contains '/city/' or 1.url contains '/town/' -%}
+                        {%- include select/1.html current=1.url -%}
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}
