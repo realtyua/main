@@ -5,11 +5,9 @@
     {%- assign slug = three.url | split: '/' | last -%}
     {%- assign current = three.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and three.navhide != 1 and three.title != '' -%}
-
       {%- if three.url contains site.region_slug -%}
         {%- include home/main-card.html -%}
       {%- endif -%}
-
     {%- endif -%}
   {%- endfor -%}
 </div>

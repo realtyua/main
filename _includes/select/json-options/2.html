@@ -1,14 +1,19 @@
-{%- assign 3s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
-{%- if 3s.size > 0 -%}
+{%- assign 3s = site.pages | sort: 'path' | where_exp: 'i', 'i.dir contains include.current' -%}
+{%- if 3s.size > 3 -%}
   {%- for 3 in 3s -%}
-    {%- assign slug = 3.url | split: "/" | last -%}
-    {%- assign current = 3.url | remove: slug | remove: "//" | append: "/" -%}
-    {%- if include.current == current and 3.navhide != 1 and 3.title != '' -%}
+    {%- assign slug = 3.dir | split: '/' | last -%}
+    {%- assign current = 3.url | remove: slug | remove: '//' | append: '/' -%}
+    {%- assign 3_size = 3.dir | split: '/' | size -%}
+    {%- if 3.url contains '/index.html' and 3.navhide != 1 and 3.title != '' and 3_size < 6 -%}
+      {
+        "url":"{{ 3.url | remove: 'index.html' | prepend: site.url }}",
+        "title":"{{ include.navtitle }} - {{ 3.navtitle }}"
+      },
+    {%- elsif include.current == current and 3.navhide != 1 and 3.title != '' and 3_size < 6 -%}
       {
         "url":"{{ 3.url | prepend: site.url }}",
         "title":"{{ include.navtitle }} - {{ 3.navtitle }}"
       },
-      {%- include select/json-options/3.html current=3.url -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endif -%}

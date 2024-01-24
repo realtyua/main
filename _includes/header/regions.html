@@ -2,17 +2,17 @@
   <div id="navDropRealEstate" class="row row-cols-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 w-100 mt-mx-2 mt-md-3 mx-0 px-0">
     {%- assign regs = site.data.realestate | sort: 'navtitle' -%}
     {%- for reg in regs -%}
-    {%- if reg.url != site.url -%}
-    <div class="col mb-3">
-      <a href="{{ reg.url }}" target="_blank" class="dropdown-item">{{ reg.navtitle }}</a>
-      <small>{{ site.data.lang-uk.re_ta }} {{ reg.small }}</small>
-    </div>
-    {%- endif -%}
+      {%- if reg.url != site.url -%}
+        <div class="col mb-3">
+          <a href="{{ reg.url }}" target="_blank" class="dropdown-item">{{ reg.navtitle }}</a>
+          <small>{{ site.data.uk.re_ta }} {{ reg.small }}</small>
+        </div>
+      {%- endif -%}
     {%- endfor -%}
   </div>
   <div class="row w-100 mx-0 px-0">
     <div class="col-auto ml-auto">
-      <a href="http://www.realestate.net.ua/" class="dropdown-item" title="{{ site.data.lang-uk.ukr }}">{{ site.data.lang-uk.ua }}</a>
+      <a href="http://www.realestate.net.ua/" class="dropdown-item" title="{{ site.data.uk.ukr }}">{{ site.data.uk.ua }}</a>
     </div>
   </div>
 </div>

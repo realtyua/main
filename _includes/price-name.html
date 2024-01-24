@@ -1,0 +1,90 @@
+{%- if page.layout == 'property' -%}
+  {%- assign type = page.type | strip -%}
+  {%- assign rent = page.rent | strip -%}
+  {%- assign price_base = page.price | strip -%}
+  {%- assign price_sqmt = page.price_sqmt | strip -%}
+{%- else -%}
+  {%- assign type = offer.type | strip -%}
+  {%- assign rent = offer.rent | strip -%}
+  {%- assign price_base = offer.price | strip -%}
+  {%- assign price_sqmt = offer.price_sqmt | strip -%}
+{%- endif -%}
+{%- if rent == '1' and price_base != '' and price_sqmt == '' -%}
+    {%- if type contains 'Квартира' -%}
+        {%- assign word_sample = 'ціна оренди квартири за місяць,вартість оренди квартири за місяць,оренда квартири за місяць коштує,оренда квартира за місяць вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Частина квартири' -%}
+        {%- assign word_sample = 'ціна оренди частини квартири за місяць,вартість оренди частини квартири за місяць,оренда частини квартири за місяць коштує,оренда частини квартира за місяць вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Кімната' -%}
+        {%- assign word_sample = 'ціна оренди кімнати за місяць,вартість оренди кімнати за місяць,оренда кімнати за місяць коштує,оренда кімнати за місяць вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Будинок' -%}
+        {%- assign word_sample = 'ціна оренди будинку за місяць,вартість оренди будинку за місяць,оренда будинку за місяць коштує,оренда будинку за місяць вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Частина будинку' -%}
+        {%- assign word_sample = 'ціна оренди частини будинку за місяць,вартість оренди частини будинку за місяць,оренда частини будинку за місяць коштує,оренда частини будинку за місяць вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'приміщення' -%}
+        {%- assign word_sample = 'ціна оренди приміщення за місяць,вартість оренди приміщення за місяць,оренда приміщення за місяць коштує,оренда приміщення за місяць вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Земля' -%}
+        {%- assign word_sample = 'ціна оренди землі,ціна оренди земельної ділянки,вартість оренди земельної ділянки,оренда землі коштує,оренда земельної ділянки коштує,оренда землі вартує,оренда земельної ділянки вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- else -%}
+        {%- assign word_sample = 'ціна оренди за місяць,вартість оренди за місяць,оренда за місяць коштує,оренда за місяць вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- endif -%}
+{%- elsif rent == '1' and price_base == '' and price_sqmt != '' -%}
+    {%- if type contains 'Квартира' -%}
+        {%- assign word_sample = 'ціна оренди квартири за добу (24 години),вартість оренди квартири за добу (24 години),оренда квартири за добу (24 години) коштує,оренда квартира за добу (24 години) вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Частина квартири' -%}
+        {%- assign word_sample = 'ціна оренди частини квартири за добу (24 години),вартість оренди частини квартири за добу (24 години),оренда частини квартири за добу (24 години) коштує,оренда частини квартира за добу (24 години) вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Кімната' -%}
+        {%- assign word_sample = 'ціна оренди кімнати за добу (24 години),вартість оренди кімнати за добу (24 години),оренда кімнати за добу (24 години) коштує,оренда кімнати за добу (24 години) вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Будинок' -%}
+        {%- assign word_sample = 'ціна оренди будинку за добу (24 години),вартість оренди будинку за добу (24 години),оренда будинку за добу (24 години) коштує,оренда будинку за добу (24 години) вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Частина будинку' -%}
+        {%- assign word_sample = 'ціна оренди частини будинку за добу (24 години),вартість оренди частини будинку за добу (24 години),оренда частини будинку за добу (24 години) коштує,оренда частини будинку за добу (24 години) вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'приміщення' -%}
+        {%- assign word_sample = 'ціна оренди приміщення за добу (24 години),вартість оренди приміщення за добу (24 години),оренда приміщення за добу (24 години) коштує,оренда приміщення за добу (24 години) вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Земля' -%}
+        {%- assign word_sample = 'ціна оренди землі,ціна оренди земельної ділянки,вартість оренди земельної ділянки,оренда землі коштує,оренда земельної ділянки коштує,оренда землі вартує,оренда земельної ділянки вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- else -%}
+        {%- assign word_sample = 'ціна оренди за добу (24 години),вартість оренди за добу (24 години),оренда за добу (24 години) коштує,оренда за добу (24 години) вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- endif -%}
+{%- else -%}
+    {%- if type contains 'Квартира' -%}
+        {%- assign word_sample = 'ціна квартири,вартість квартири,квартира коштує,квартира вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Частина квартири' -%}
+        {%- assign word_sample = 'ціна частини квартири,вартість частини квартири,частина квартира коштує,частина квартира вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Кімната' -%}
+        {%- assign word_sample = 'ціна кімнати,вартість кімнати,кімната коштує,кімната вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Будинок' -%}
+        {%- assign word_sample = 'ціна будинку,вартість будинку,будинок коштує,будинок вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Частина будинку' -%}
+        {%- assign word_sample = 'ціна частини будинку,вартість частини будинку,частина будинку коштує,частина будинку вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'приміщення' -%}
+        {%- assign word_sample = 'ціна приміщення,вартість приміщення,приміщення коштує,приміщення вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- elsif type contains 'Земля' -%}
+        {%- assign word_sample = 'ціна землі,ціна земельної ділянки,вартість земельної ділянки,земля коштує,земельна ділянка коштує,земля вартує,земельна ділянка вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- else -%}
+        {%- assign word_sample = 'ціна,вартість,коштує,вартує' | split: ',' -%}
+        {%- assign price_name = word_sample | sample -%}
+    {%- endif -%}
+{%- endif -%}

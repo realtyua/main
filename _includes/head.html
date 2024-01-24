@@ -1,37 +1,48 @@
 {%- include location.html -%}
 
-{%- assign slash = back -%}
-
 {%- capture tlocation -%}
-  {%- if location and back.size > 4 and page.dir contains 'city' or page.dir contains 'town' -%}
-    {% unless back.size < 4 or page.url contains 'all.html' %}
-     · {{ site.data.lang-uk.city }} {{ location }}
+  {%- if location and slashd.size > 4 and paged contains '/city/' or paged contains '/town/' -%}
+    {% unless slashd.size < 4 or pageu contains '/all.html' %}
+     · {{ site.data.uk.city }} {{ location }}
     {% endunless %}
-  {%- elsif back.size > 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
-    {% unless back.size < 3 or page.url contains 'all.html' %}
-      {% unless back.size == 4 and page.url contains '/district/town/' %}
-       · {{ location }} {{ site.data.lang-uk.district }}
+  {%- elsif slashd.size > 3 and paged contains '/district/' and paged != '/district/town/' or slashd.size >= 4 and paged contains '/district/' -%}
+    {% unless slashd.size < 3 or pageu contains '/all.html' %}
+      {% unless slashd.size == 4 and pageu contains '/district/town/' %}
+       · {{ location }} {{ site.data.uk.district }}
       {% endunless %}
     {% endunless %}
-  {%- elsif page.url == '/district/town/' -%}
+  {%- elsif pageu == '/district/town/' -%}
   {%- endif -%}
 {%- endcapture -%}
 
-{%- assign pic = page.url | split: '/' | last -%}
+{%- assign pic = pageu | split: '/' | last -%}
 {%- include folder.html dir='/assets/images/locations/' slug=pic -%}
 {%- include folder.html dir='/assets/images/logo/' slug=pic -%}
 
+{% if slashd.size == 0 and pageu != '/' %}
+  {%- assign end_title = site.title | prepend: ' · ' -%}
+{% elsif slashd.size == 4 or slashd.size == 5 %}
+  {%- assign end_title = site.title | prepend: ' · ' -%}
+{% elsif slashd.size == 2 or slashd.size == 3 %}
+  {% unless paged contains site.region_slug or paged == '/region/' or paged == '/news/' or paged == '/docs/' or paged == '/articles/' or paged == '/laws/' %}
+    {%- assign end_title = site.region | prepend: ' · ' -%}
+  {% else %}
+    {%- assign end_title = site.title | prepend: ' · ' -%}
+  {% endunless %}
+{% endif %}
+
 {%- capture title -%}
   {%- if page.title -%}
-    {{ page.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.title | smartify }}
+    {{ page.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %}{{ end_title }}
   {%- else -%}
-    {{ site.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.name | smartify }}
+    {{ site.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.name }}
   {%- endif -%}
 {%- endcapture -%}
 
 {%- include meta-name.html -%}
+<link rel="preconnect" href="//fonts.gstatic.com">
 
-{%- if page.url contains 'map.html' and page.layout == 'map' -%}
+{%- if pageu contains '/map.html' and page.layout == 'map' -%}
   <link rel="preload" href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
   <link rel="preload" href="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   <link href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
@@ -44,33 +55,35 @@
   {%- assign main_region = site.region_slug | prepend: '/region/' | append: '/' -%}
 
   {%- if page.table == 1 or page.table == 2 -%}
-    {%- if page.url contains 'map.html' -%}
-    {%- elsif slash.size == 3 and page.dir == main_region -%}
+    {%- if pageu contains '/map.html' -%}
+    {%- elsif slashd.size == 3 and paged == main_region -%}
       <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
       <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- else -%}
       <link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- endif -%}
   {%- else -%}
-    {%- if page.url contains 'map.html' -%}
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+    {%- if pageu contains '/map.html' -%}
+    {%- elsif page.layout == 'property'-%}
       <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
-    {%- elsif page.dir != '/laws/' or page.dir != '/docs/' -%}
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+      <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+    {%- elsif paged != '/laws/' or paged != '/docs/' -%}
       <link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- else -%}
       <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- endif -%}
   {%- endif -%}
 
-  {%- if page.dir == '/' and page.url contains '/ukraine.html' -%}
+  {%- if paged == '/' and pageu contains '/ukraine.html' -%}
     <link rel="preload" href="{{ "/assets/js/main.ua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-  {%- elsif page.dir == '/' and page.url contains '/' -%}
+  {%- elsif paged == '/' and pageu contains '/' -%}
     <link rel="preload" href="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
   {%- else -%}
     {%- if page.table == 1 -%}
-      {%- if page.url contains 'map.html' -%}
-      {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      {%- if pageu contains '/map.html' -%}
+      {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- else -%}
         <link rel="preload" href="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
@@ -80,25 +93,27 @@
         {%- assign preload_all_json = main_region | append: 'data/all.json' -%}
         {%- capture preload_alljson -%}{%- file_exists {{ preload_all_json }} -%}{%- endcapture -%}
       {%- endcomment -%}
-      {%- if page.url contains 'map.html' -%}
-      {%- elsif slash.size == 3 and page.dir == main_region -%}
+      {%- if pageu contains '/map.html' -%}
+      {%- elsif slashd.size == 3 and paged == main_region -%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
         {%- comment -%}
           {%- if preload_alljson == 'true' -%}
           <link rel="preload" href="{{ preload_all_json | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="fetch" crossorigin="anonymous">
           {%- endif -%}
         {%- endcomment -%}
-      {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
         <meta name="{{ preload_alljson }}-0" content="{{ main_region }}">
       {%- else -%}
         <link rel="preload" href="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- endif -%}
     {%- else -%}
-      {%- if page.url contains 'map.html' -%}
-      {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+      {%- if pageu contains '/map.html' -%}
+      {%- elsif page.layout == 'property'-%}
         <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
-      {%- elsif page.dir != '/laws/' or page.dir != '/docs/' -%}
+      {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+        <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- elsif paged != '/laws/' or paged != '/docs/' -%}
         <link rel="preload" href="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- else -%}
         <link rel="preload" href="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
@@ -107,17 +122,19 @@
   {%- endif -%}
 
   {%- if page.table == 1 or page.table == 2 -%}
-    {%- if page.url contains 'map.html' -%}
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+    {%- if pageu contains '/map.html' -%}
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
       <link href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
     {%- else -%}
       <link href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
     {%- endif -%}
   {%- else -%}
-    {%- if page.url contains 'map.html' -%}
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+    {%- if pageu contains '/map.html' -%}
+    {%- elsif page.layout == 'property' -%}
       <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
-    {%- elsif page.dir != '/laws/' or page.dir != '/docs/' -%}
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+      <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+    {%- elsif paged != '/laws/' or paged != '/docs/' -%}
       <link href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
     {%- else -%}
       <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">

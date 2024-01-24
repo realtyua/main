@@ -1,49 +1,46 @@
-{%- assign lists = site.pages | sort: 'path' | reverse -%}
-{%- assign region = page.dir | split: "/" | last -%}
+{%- assign dirrs = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.dir != paged and i.url contains paged and i.navhide != 1" -%}
+{%- assign pirrs = '' | split: '' -%}{%- for dirr in dirrs -%}{%- assign ldirr = dirr.dir | split: '/' -%}{%- if ldirr.size == 4 or ldirr.size == 5 -%}{%- assign pirrs = pirrs | push: dirr -%}{%- endif -%}{%- endfor -%}
 <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
   <div class="navbar-brand d-lg-none p-0">
-    <span class="small">{{ site.data.lang-uk.brand_content }}</span>
+    <span class="small">{{ site.data.uk.brand_content }}</span>
     <span class="ml-1 float-right align-middle text-primary">→</span>
   </div>
   <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarTwoRealEstate" aria-controls="navbarTwoRealEstate" aria-expanded="false" aria-label="Toggle button">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarTwoRealEstate">
-    {%- assign mapPage = page.url | append: 'map.html' | remove_first: '/' -%}
+    {%- assign mapPage = pageu | remove_first: '/' | append: 'map.html' -%}
     {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
     {%- if isMap == 'true' -%}
-    <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-      <li class="nav-item">
-        <p class="m-lg-0 h5">
-          {%- if page.url contains mapPage -%}
-            &nbsp;
-          {%- else -%}
-            <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-              <span>{{ site.data.lang-uk.re_map }}</span>
-              <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-            </a>
-          {%- endif -%}
-        </p>
-      </li>
-    </ul>
+      <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+        <li class="nav-item">
+          <p class="m-lg-0 h5">
+            {%- if pageu contains mapPage -%}&nbsp;{%- else -%}
+              <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.uk.re_map_on }}">
+                <span>{{ site.data.uk.re_map }}</span>
+                <span class="d-lg-none">{{ site.data.uk.nerukhomisti }}</span>
+              </a>
+            {%- endif -%}
+          </p>
+        </li>
+      </ul>
     {%- endif -%}
     <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
       <li class="nav-item" role="presentation">
         <a class="nav-link border-0 active" href="#newly" id="newly-tab" data-toggle="tab" role="tab" aria-controls="newly" aria-selected="true">
-          <span>{{ site.data.lang-uk.newly_realestate }}</span>
+          <span>{{ site.data.uk.newly_realestate }}</span>
         </a>
       </li>
-      {%- for tab in lists -%}
-        {%- assign slug = tab.url | split: "/" | last -%}
-        {%- assign current = tab.url | remove: slug | remove: "//" | append: "/" -%}
-        {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
+      {%- for tab in pirrs -%}
+        {%- assign tslug = tab.dir | split: '/' | last -%}
+        {%- if tslug != '' and tab.title != '' or tab.navtitle != '' -%}
           <li class="nav-item" role="presentation">
-            <a{% if slug == 'commercial' %} title="{{ site.data.lang-uk.re_no_apartments }}"{% elsif slug == 'realtor' %} title="{{ site.data.lang-uk.agents }} {{ site.data.lang-uk.and }} {{ site.data.lang-uk.realtors }}"{% elsif slug == 'developer' %} title="{{ site.data.lang-uk.new_buildings }}"{% endif %} class="nav-link border-0" href="#{{ slug }}" id="{{ slug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ slug }}" aria-selected="true">
+            <a{% if tslug == 'commercial' %} title="{{ site.data.uk.re_no_apartments }}"{% elsif tslug == 'realtor' %} title="{{ site.data.uk.agents }} {{ site.data.uk.and }} {{ site.data.uk.realtors }}"{% elsif tslug == 'developer' %} title="{{ site.data.uk.new_buildings }}"{% endif %} class="nav-link border-0" href="#{{ tslug }}" id="{{ tslug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ tslug }}" aria-selected="true">
               <span>
-                {%- if slug == 'commercial' -%}
-                  {{ site.data.lang-uk.title_tab_commercial }}
-                {%- elsif slug == 'realtor' -%}
-                  {{ site.data.lang-uk.title_tab_realtor }}
+                {%- if tslug == 'commercial' -%}
+                  {{ site.data.uk.title_tab_commercial }}
+                {%- elsif tslug == 'realtor' -%}
+                  {{ site.data.uk.title_tab_realtor }}
                 {%- else -%}
                   {%- if tab.navtitle -%}{{ tab.navtitle }}{%- else -%}{{ tab.title }}{%- endif -%}
                 {%- endif -%}
@@ -51,7 +48,6 @@
             </a>
           </li>
         {%- endif -%}
-      {%- else -%}
       {%- endfor -%}
     </ul>
   </div>
@@ -62,107 +58,97 @@
   <div class="tab-pane fade show active" id="newly" role="tabpanel" aria-labelledby="newly-tab">
     <div class="row">
       <div class="col-12">
-        <h2 class="mb-3 mt-2">{{ site.data.lang-uk.vsya }} {{ page.title | replace_first: 'Нерухомість в', 'нерухомість у' }}</h2>
-        {%- capture data -%}data/{{ region }}/all.html{%- endcapture -%}
+        <h2 class="mb-3 mt-2">{{ site.data.uk.vsya }} {{ paget | replace_first: 'Н', 'н' | replace_first: ' у ', ' в ' }}</h2>
+        {%- capture data -%}data/{{ slugd }}/all.html{%- endcapture -%}
         {%- include {{ data }} -%}
         {%- if offers.size > 0 -%}
-
-          {%- for offer in offers limit:9 -%}
-
+          {%- for offer in offers limit: 9 -%}
+            {%- capture aid -%}1{%- increment counter -%}{%- endcapture -%}
             {%- if forloop.first -%}
               <ul class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 list-unstyled">
             {%- endif -%}
-                <li class="col px-2 mb-3">{%- include card.html offer=offer aid='0' -%}</li>
+                <li class="col px-2 mb-3">{%- include card.html offer=offer aid=aid -%}</li>
             {%- if forloop.last -%}
               </ul>
               {%- assign total = offers | size -%}
-              {%- assign others = total | minus:9 -%}
+              {%- assign others = total | minus: 9 -%}
               {%- if others > 0 -%}
                 <div class="float-right btn-group">
-                  <a class="btn btn-sm btn-primary" href="{{ page.dir | append: 'all' }}">
-                    {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_offers }}
+                  <a class="btn btn-sm btn-primary" href="{{ paged | append: 'all.html' }}">
+                    {{ site.data.uk.others }} <strong>{{ others }}</strong> {{ site.data.uk.others_offers }}
                   </a>
                 </div>
               {%- endif -%}
             {%- endif -%}
-
           {%- else -%}
-
             <div class="row">
               <div class="col-md-6 offset-md-3">
-                {%- include none-advertisement.html title=page.title -%}
+                <div class="alert alert-success mb-0" role="alert">
+                  {%- include none-advertisement.html title=paget -%}
+                </div>
               </div>
             </div>
-
           {%- endfor -%}
-
         {%- else -%}
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              {%- include none-advertisement.html title=page.title -%}
+              <div class="alert alert-success" role="alert">
+                {%- include none-advertisement.html title=paget -%}
+              </div>
             </div>
           </div>
         {%- endif -%}
       </div>
     </div>
   </div>
-  {%- for content in lists -%}
-    {%- if forloop.first -%}
-    {%- endif -%}
-      {%- assign slug = content.url | split: "/" | last -%}
-      {%- assign current = content.url | remove: slug | remove: "//" | append: "/" -%}
-      {%- capture title -%}{%- if content.navtitle -%}{{ content.navtitle }}{%- else -%}{{ content.title }}{%- endif -%}{%- endcapture -%}
-      {%- if page.dir == current and page.title != '' and page.navhide != 1 -%}
-        <div class="tab-pane fade" id="{{ slug }}" role="tabpanel" aria-labelledby="{{ slug }}-tab">
-          <div class="row">
-            <div class="col-12">
-              {%- assign addtitle = page.title | split: " " | slice: 1, 4 | join: " " -%}
-              {%- if slug == 'realtor' or slug == 'agency' or slug == 'developer' -%}
-                <h2 class="mb-3 mt-2">{{ title }} {{ site.data.lang-uk.nerukhomisti }} {{ addtitle }} </h2>
-                {%- assign dir = page.dir | append: slug | append: '/' -%}
-                {%- include subpages.html dir=dir page=slug title=title -%}
-              {%- else -%}
-                <h2 class="mb-3 mt-2">{{ title }} {{ addtitle }}</h2>
-                {%- capture data -%}data/{{ region }}/{{ slug }}.html{%- endcapture -%}
-                {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
-                {%- include {{ data }} -%}
-                {%- for offer in offers limit:9 -%}
-
-                  {%- if forloop.first -%}
-                    <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
-                  {%- endif -%}
-
-                      <div class="col px-2 mb-3">
-                        {%- include card.html offer=offer aid=aid -%}
-                      </div>
-
-                  {%- if forloop.last -%}
+  {%- for pane in pirrs -%}
+    {%- assign pslug = pane.dir | split: '/' | last -%}
+    {%- capture title -%}{%- if pane.navtitle -%}{{ pane.navtitle }}{%- else -%}{{ pane.title }}{%- endif -%}{%- endcapture -%}
+    {%- if pslug != "" and page.title != '' or pane.navtitle != '' -%}
+      <div class="tab-pane fade" id="{{ pslug }}" role="tabpanel" aria-labelledby="{{ pslug }}-tab">
+        <div class="row">
+          <div class="col-12">
+            {%- assign addtitle = paget | split: ' ' | slice: 1, 4 | join: ' ' -%}
+            {%- if pslug == 'realtor' or pslug == 'agency' or pslug == 'developer' -%}
+              <h2 class="mb-3 mt-2">{{ title }} {{ site.data.uk.nerukhomisti }} {{ addtitle }} </h2>
+              {%- assign pdir = paged | append: pslug | append: '/' -%}
+              {%- include subpages.html dir=pdir page=pslug title=title -%}
+            {%- else -%}
+              <h2 class="mb-3 mt-2">{{ title }} {{ addtitle }}</h2>
+              {%- capture data -%}data/{{ slugd }}/{{ pslug }}.html{%- endcapture -%}
+              {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
+              {%- include {{ data }} -%}
+              {%- for offer in offers limit: 9 -%}
+                {%- if forloop.first -%}
+                  <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+                {%- endif -%}
+                    <div class="col px-2 mb-3">{%- include card.html offer=offer aid=aid -%}</div>
+                {%- if forloop.last -%}
+                  </div>
+                  {%- assign total = offers | size -%}
+                  {%- assign others = total | minus: 9 -%}
+                  {%- if others > 0 -%}
+                    <div class="float-right btn-group">
+                      <a class="btn btn-sm btn-primary" href="{{ pane.url }}">
+                        {{ site.data.uk.others }} <strong>{{ others }}</strong> {{ site.data.uk.others_section }} {{ pane.navtitle }}
+                      </a>
                     </div>
-                    {%- assign total = offers | size -%}
-                    {%- assign others = total | minus:9 -%}
-                    {%- if others > 0 -%}
-                      <div class="float-right btn-group">
-                        <a class="btn btn-sm btn-primary" href="{{ content.url }}">
-                          {{ site.data.lang-uk.others }} <strong>{{ others }}</strong> {{ site.data.lang-uk.others_section }} {{ content.navtitle }}
-                        </a>
-                      </div>
-                    {%- endif -%}
                   {%- endif -%}
-
-                {%- else -%}
-                  <div class="row">
-                    <div class="col-md-6 offset-md-3">
-                      {%- include none-advertisement.html title=page.title -%}
+                {%- endif -%}
+              {%- else -%}
+                <div class="row">
+                  <div class="col-md-6 offset-md-3">
+                    {%- assign title = paget | replace_first: 'Н', 'н' -%}
+                    <div class="alert alert-success mb-0" role="alert">
+                      {%- include none-advertisement.html title=title -%}
                     </div>
                   </div>
-                {%- endfor -%}
-              {%- endif -%}
-            </div>
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
           </div>
         </div>
-      {%- endif -%}
-    {%- if forloop.last -%}
+      </div>
     {%- endif -%}
-  {%- else -%}
   {%- endfor -%}
 </div>

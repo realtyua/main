@@ -3,194 +3,94 @@
 {%- if offer.type and offer.type contains land -%}
 {%- else -%}
 
-  {%- if offer.type != site.data.lang-uk.re_house or offer.type != site.data.lang-uk.re_house_not -%}
+  {%- if offer.type != site.data.uk.re_house or offer.type != site.data.uk.re_house_not -%}
 
     {%- if isHouse == true -%}
     {%- elsif offer.floor and offer.floor != '' and offer.floors and offer.floors != '' and isHouse == false -%}
-      <dt>{{ site.data.lang-uk.re_floor }}</dt>
-      <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
+      <dt>{{ site.data.uk.re_floor }}</dt>
+      <dd>{{ offer.floor }} {{ site.data.uk.re_at }} {{ offer.floors }} {{ site.data.uk.re_floors }}</dd>
     {% elsif offer.floor and offer.floor != '' and offer.floors and offer.floors == '' %}
-      <dt>{{ site.data.lang-uk.re_floor }}</dt>
+      <dt>{{ site.data.uk.re_floor }}</dt>
       <dd>{{ offer.floor }}</dd>
     {% else %}
-      <dt>{{ site.data.lang-uk.re_floor }}</dt>
-      <dd>{{ offer.floor }} {{ site.data.lang-uk.re_at }} {{ offer.floors }} {{ site.data.lang-uk.re_floors }}</dd>
+      <dt>{{ site.data.uk.re_floor }}</dt>
+      <dd>{{ offer.floor }} {{ site.data.uk.re_at }} {{ offer.floors }} {{ site.data.uk.re_floors }}</dd>
     {%- endif -%}
 
   {%- endif -%}
 
   {%- if offer.parking and offer.parking != '' -%}
-    <dt>{{ site.data.lang-uk.re_parking }}</dt>
+    <dt>{{ site.data.uk.re_parking }}</dt>
     <dd>{{ offer.parking }}</dd>
   {%- endif -%}
 
   {%- if offer.object and offer.object != '' -%}
-    <dt>{{ site.data.lang-uk.re_object }}</dt>
+    <dt>{{ site.data.uk.re_object }}</dt>
     <dd>{{ offer.object }}</dd>
   {%- endif -%}
 
   {%- if offer.surface_land and offer.surface_land != '' -%}
-    <dt>{{ site.data.lang-uk.re_surface_land }}</dt>
-    <dd>{{ offer.surface_land }}&nbsp;{{ site.data.lang-uk.m }} ({{ offer.surface_land | divided_by: 10000.0000 | round: 4 }} га)</dd>
+    <dt>{{ site.data.uk.re_surface_land }}</dt>
+    <dd>{{ offer.surface_land }}&nbsp;{{ site.data.uk.m }} ({{ offer.surface_land | divided_by: 10000.0000 | round: 4 }} га)</dd>
   {%- endif -%}
 
 {%- endif -%}
 
 {%- if offer.price_sqmt -%}
 
-  {%- if offer.rent == '1' and offer.type contains site.data.lang-uk.re_roomsp -%}
-    <dt>{{ site.data.lang-uk.re_price_rent }} {{ site.data.lang-uk.m_za }}</dt>
+  {%- if offer.rent == '1' and offer.type contains site.data.uk.re_roomsp -%}
+    <dt>{{ site.data.uk.re_price_rent }} {{ site.data.uk.m_za }}</dt>
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price != '' -%}
-    <dt>{{ site.data.lang-uk.re_price_sqmtr }}</dt>
+    <dt>{{ site.data.uk.re_price_sqmtr }}</dt>
   {%- elsif offer.rent == '1' and offer.price_sqmt == '' and offer.price != '' -%}
 
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price == '' -%}
 
   {%- elsif offer.type contains land or offer.type contains landm -%}
-    <dt>{{ site.data.lang-uk.re_price_sqmtl }}&nbsp;{{ site.data.lang-uk.m_za }}</dt>
+    <dt>{{ site.data.uk.re_price_sqmtl }}&nbsp;{{ site.data.uk.m_za }}</dt>
   {%- else -%}
-    <dt>{{ site.data.lang-uk.re_price_sqmt }}&nbsp;{{ site.data.lang-uk.m_za }}</dt>
+    <dt>{{ site.data.uk.re_price_sqmt }}&nbsp;{{ site.data.uk.m_za }}</dt>
   {%- endif -%}
 
   <dd>
-    {%- if offer.rent == '1' -%}
-
-      {%- if offer.price_sqmt == '' and offer.price != '' -%}
-
-        {%- if offer.type contains site.data.lang-uk.re_roomsp -%}
-
-          {%- if offer.price_sqmt == '' and offer.price contains '$' -%}
-            <abbr data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | round: 2 }}">{{ pus | divided_by: offer.surface | times: site.usd | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}.
-          {%- elsif offer.price_sqmt == '' and offer.price contains '€' -%}
-            <abbr data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | round: 2 }}">{{ peu | divided_by: offer.surface | times: site.eur | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}.
-          {%- else -%}
-            <abbr data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | divided_by: site.nbu | round: 2 }}">{{ pua | divided_by: offer.surface | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}
-          {%- endif -%}
-
-        {%- endif -%}
-
-      {%- elsif offer.price_sqmt != '' and offer.price == '' -%}
-
-      {%- elsif offer.price_sqmt != '' and offer.price != '' -%}
-
-        {%- if offer.price_sqmt contains '$' -%}
-          <abbr data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}.
-        {%- elsif offer.price_sqmt contains '€' -%}
-          <abbr data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}.
-        {%- else -%}
-          <abbr data-toggle="tooltip" title="${{ offer.price_sqmt | divided_by: site.nbu | ceil }}">{{ offer.price_sqmt }}</abbr> {{ site.data.lang-uk.re_uah }}
-        {%- endif -%}
-
-      {%- else -%}
-
-        {%- if offer.price_sqmt == '' and offer.price contains '$' -%}
-          <abbr data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | round: 2 }}">{{ pus | divided_by: offer.surface | times: site.usd | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}.
-        {%- elsif offer.price_sqmt == '' and offer.price contains '€' -%}
-          <abbr data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | round: 2 }}">{{ peu | divided_by: offer.surface | times: site.eur | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}.
-        {%- else -%}
-          <abbr data-toggle="tooltip" title="${{ pua | divided_by: offer.surface | divided_by: site.nbu | round: 2 }}">{{ pua | divided_by: offer.surface | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}
-        {%- endif -%}
-
-      {% endif %}
-
-    {%- else -%}
-
-      {%- if offer.price_sqmt == '' and offer.price != '' and offer.price contains '$' -%}
-
-        {%- if offer.type contains land or offer.type contains landm -%}
-          <abbr data-toggle="tooltip" title="${{ pus | divided_by: offer.surface_land | round: 2 }}">
-          {{ pus | divided_by: offer.surface_land | times: site.usd | round: 2 }}
-          </abbr>
-        {%- else -%}
-          <abbr data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | round: 2 }}">
-          {{ pus | divided_by: offer.surface | times: site.usd | round: 2 }}
-          </abbr>
-        {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}
-
-      {%- elsif offer.price_sqmt == '' and offer.price != '' and offer.price contains '€' -%}
-
-        {%- if offer.type contains land or offer.type contains landm -%}
-          <abbr data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface_land | round: 2 }}">
-          {{ peu | divided_by: offer.surface_land | times: site.eur | round: 2 }}
-          </abbr>
-        {%- else -%}
-          <abbr data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | round: 2 }}">
-          {{ peu | divided_by: offer.surface | times: site.eur | round: 2 }}
-          </abbr>
-        {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}
-
-      {% elsif offer.price_sqmt == '' and offer.price != '' %}
-
-        {%- if offer.type contains land or offer.type contains landm -%}
-          <abbr data-toggle="tooltip" title="${{ pua | divided_by: offer.surface_land | divided_by: site.nbu | round: 2 }}">
-          {{ offer.price | divided_by: offer.surface_land | round: 2 }}
-          </abbr>
-        {%- else -%}
-          <abbr data-toggle="tooltip" title="${{ pua | divided_by: offer.surface | divided_by: site.nbu | round: 2 }}">
-          {{ offer.price | divided_by: offer.surface | round: 2 }}
-          </abbr>
-        {%- endif -%}&nbsp;{{ site.data.lang-uk.re_uah }}
-
-      {% else %}
-
-        {% if offer.price_sqmt and offer.price_sqmt != '' %}
-
-          {% if offer.price_sqmt contains '$' %}
-            <abbr data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}
-          {% elsif offer.price_sqmt contains '€' %}
-            <abbr data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}
-          {% else %}
-            <abbr data-toggle="tooltip" title="${{ offer.price_sqmt | divided_by: site.nbu | ceil }}">{{ offer.price_sqmt }}}</abbr> {{ site.data.lang-uk.re_uah }}
-          {% endif %}
-
-        {% else %}
-
-          {% if offer.price_sqmt == '' and offer.price contains '$' %}
-            <abbr data-toggle="tooltip" title="${{ pus | divided_by: offer.surface | round: 2 }}">{{ pus | divided_by: offer.surface | times: site.usd | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}
-          {% elsif offer.price_sqmt == '' and offer.price contains '€' %}
-            <abbr data-toggle="tooltip" title="€{{ peu | divided_by: offer.surface | round: 2 }}">{{ peu | divided_by: offer.surface | times: site.eur | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}
-          {% else %}
-            <abbr data-toggle="tooltip" title="${{ pua | divided_by: offer.surface | divided_by: site.nbu | round: 2 }}">{{ pua | divided_by: offer.surface | round: 2 }}</abbr> {{ site.data.lang-uk.re_uah }}
-          {% endif %}
-
-        {% endif %}
-
-      {% endif %}
-
-    {%- endif -%}
+    {%- assign surface = surface | default: surface_land | strip -%}
+    {% assign a_price = i_price | remove: '$' | remove: '€' | divided_by: surface %}
+    {% assign p_price = price | remove: '&nbsp;' | divided_by: surface %}
+    <abbr data-toggle="tooltip" title="{% if i_price contains '$' %}${% elsif i_price contains '€' %}€{% endif %}{%- include numf.html number=a_price ts='&nbsp;' decimals=0 -%}{% if i_price contains '$' or i_price contains '€' %}{% else %}₴{% endif %}">{%- include numf.html number=p_price ts='&nbsp;' decimals=0 -%}</abbr>&nbsp;₴
   </dd>
+
 {%- endif -%}
 
 {%- if offer.description and offer.description != '' -%}
-  <dt>{{ site.data.lang-uk.re_description }}</dt>
+  <dt>{{ site.data.uk.re_description }}</dt>
   <dd>{{ offer.description }}</dd>
 {%- endif -%}
 
 {%- if offer.seller and offer.seller != '' -%}
   {%- if offer.rent == '1' -%}
-    <dt>{{ site.data.lang-uk.re_sellerr }}</dt>
+    <dt>{{ site.data.uk.re_sellerr }}</dt>
   {%- else -%}
-    <dt>{{ site.data.lang-uk.re_seller }}</dt>
+    <dt>{{ site.data.uk.re_seller }}</dt>
   {%- endif -%}
   <dd>
-    {%- if offer.seller contains site.data.lang-uk.re_seller -%}
-      {{ offer.seller | remove: site.data.lang-uk.re_seller }}
+    {%- if offer.seller contains site.data.uk.re_seller -%}
+      {{ offer.seller | remove: site.data.uk.re_seller }}
     {%- else -%}
-      <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ site.data.lang-uk.offers }}">{{ offer.seller }}</a>
+      <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ site.data.uk.offers }}">{{ offer.seller }}</a>
     {%- endif -%}
   </dd>
 {%- endif -%}
 
 {%- if offer.phone and offer.phone != '' -%}
   {%- if offer.rent == '1' -%}
-    <dt>{{ site.data.lang-uk.re_phoner }}</dt>
+    <dt>{{ site.data.uk.re_phoner }}</dt>
   {%- else -%}
-    <dt>{{ site.data.lang-uk.re_phone }}</dt>
+    <dt>{{ site.data.uk.re_phone }}</dt>
   {%- endif -%}
   <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i></dd>
 {%- endif -%}
 
 {%- if offer.page and offer.page == '1' -%}
-  <dt>{{ site.data.lang-uk.re_page }}</dt>
-  <dd><a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.lang-uk.re_page }}">www.{{ site.domain }}/{{ offer.phone }}</a></dd>
+  <dt>{{ site.data.uk.re_page }}</dt>
+  <dd><a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.uk.re_page }}">www.{{ site.domain }}/{{ offer.phone }}</a></dd>
 {%- endif -%}

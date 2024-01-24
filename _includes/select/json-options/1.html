@@ -1,8 +1,8 @@
-{%- assign 2s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
-{%- if 2s.size > 0 -%}
+{%- assign 2s = site.html_pages | sort: 'path' | where_exp: 'i', 'i.dir contains include.current' -%}
+{%- if 2s.size >= 1 -%}
   {%- for 2 in 2s -%}
-    {%- assign slug = 2.url | split: "/" | last -%}
-    {%- assign current = 2.url | remove: slug | remove: "//" | append: "/" -%}
+    {%- assign slug = 2.dir | split: '/' | last -%}
+    {%- assign current = 2.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and 2.navhide != 1 and 2.title != '' -%}
       {
         "url":"{{ 2.url | prepend: site.url }}",

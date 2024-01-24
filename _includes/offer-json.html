@@ -1,1 +1,38 @@
-[{%- for offer in offers -%}{%- assign district = offer.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' -%}{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}{%- capture files -%}{%- for file in site.static_files -%}{%- if file.path contains folder and file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' or file.extname == '.png' or file.extname == '.PNG' -%}{{ file.path }}{%- endif -%}{%- endfor -%}{%- endcapture -%}{%- assign isImage = files | strip_newlines -%}{"id":"{{ offer.id }}","type":"{{ offer.type }}","page":"{{ offer.page }}","rent":"{{ offer.rent }}","rooms":"{{ offer.rooms }}","surface":"{{ offer.surface }}","surface_land":"{{ offer.surface_land }}","price":"{{ offer.price }}","price_sqmt":"{{ offer.price_sqmt }}","floor":"{{ offer.floor }}","floors":"{{ offer.floors }}","parking":"{{ offer.parking }}","region":"{{ offer.region }}","location":"{{ offer.location }}","address":"{{ offer.address }}","object":"{{ offer.object }}","coordinates":"{{ offer.coordinates }}","date":"{{ offer.date }}","seller":"{{ offer.seller }}","phone":"{{ offer.phone }}","description":"{{ offer.description }}",{%- if isImage != '' -%}"images":{%- capture img -%}[{%- for file in site.static_files -%}{%- if file.path contains folder and file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' or file.extname == '.png' or file.extname == '.PNG' -%}{"src":"{{ file.name }}","alt":"{{ offer.type }} {{ site.data.lang-uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.lang-uk.re_vul %}{{ site.data.lang-uk.re_po }} {{ offer.address }}{% else %}{{ site.data.lang-uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.lang-uk.re_in }} {{ offer.location }}{{ district }}"},{%- endif -%}{%- endfor -%}]{%- endcapture -%}{{ img | replace: ",]", "]" }}{%- else -%}"images":""{%- endif -%}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]
+[{%- for offer in offers -%}
+    {%- assign district = offer.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' -%}
+    {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+    {%- capture files -%}
+        {%- for file in site.static_files -%}
+            {%- if file.path contains folder and file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' or file.extname == '.png' or file.extname == '.PNG' -%}
+                {{ file.path }}
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endcapture -%}
+    {%- assign isImage = files | strip_newlines -%}
+    {
+        "id":"{{ offer.id }}",
+        "type":"{{ offer.type }}",
+        "page":"{{ offer.page }}",
+        "rent":"{{ offer.rent }}",
+        "rooms":"{{ offer.rooms }}",
+        "surface":"{{ offer.surface }}",
+        "surface_land":"{{ offer.surface_land }}",
+        "price":"{{ offer.price }}",
+        "price_sqmt":"{{ offer.price_sqmt }}",
+        "floor":"{{ offer.floor }}",
+        "floors":"{{ offer.floors }}",
+        "parking":"{{ offer.parking }}",
+        "region":"{{ offer.region }}",
+        "location":"{{ offer.location }}",
+        "address":"{{ offer.address }}",
+        "object":"{{ offer.object }}",
+        "coordinates":"{{ offer.coordinates }}",
+        "date":"{{ offer.date }}",
+        "seller":"{{ offer.seller }}",
+        "phone":"{{ offer.phone }}",
+        "description":"{{ offer.description }}",
+        "link":"{%- if offer.page == 1 -%}{%- else -%}{{ offer.link }}{%- endif -%}",
+        {%- if isImage != '' -%}"images":{%- capture img -%}[{%- for file in site.static_files -%}{%- if file.path contains folder and file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' or file.extname == '.png' or file.extname == '.PNG' -%}{"src":"{{ file.name }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},{%- endif -%}{%- endfor -%}]{%- endcapture -%}{{ img | replace: ',]', ']' }}{%- else -%}"images":""{%- endif -%}
+    }
+    {%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}]

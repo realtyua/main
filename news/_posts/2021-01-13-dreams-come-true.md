@@ -2,6 +2,7 @@
 title: Mрії здійснюються
 date: 2021-01-13
 #category: Кредит, Держава, Молодь
+layout: post
 source:
   title: Державний фонд сприяння молодіжному житловому будівництву
   url: https://www.molod-kredit.gov.ua

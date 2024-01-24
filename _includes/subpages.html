@@ -23,9 +23,9 @@
           <div class="card h-100">
             {%- include folder.html dir='/assets/images/logo/' slug=section -%}
             {%- if file == true -%}
-              <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+              <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
             {%- else -%}
-              <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+              <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
             {%- endif -%}
             <div class="card-body">
               <h3 class="card-title h5">
@@ -38,12 +38,12 @@
                   <ul class="nav nav-tabs" id="{{ region }}-{{ section }}-tab" role="tablist">
                     <li class="nav-item d-none" role="presentation">
                       <a class="nav-link active" id="{{ region }}-{{ section }}-offers-tab" data-toggle="tab" href="#{{ region }}-{{ section }}-offers" role="tab" aria-controls="{{ region }}-{{ section }}-offers" aria-selected="false">
-                        {{ site.data.lang-uk.offers }}
+                        {{ site.data.uk.offers }}
                       </a>
                     </li>
                     <li class="nav-item" role="presentation">
                       <a class="nav-link" id="{{ region }}-{{ section }}-actions-tab" data-toggle="tab" href="#{{ region }}-{{ section }}-actions" role="tab" aria-controls="{{ region }}-{{ section }}-actions" aria-selected="false">
-                        {{ site.data.lang-uk.actions }}
+                        {{ site.data.uk.actions }}
                       </a>
                     </li>
                   </ul>
@@ -60,7 +60,7 @@
                       {%- endfor -%}
                       {%- if others > 0 -%}
                         <div class="card-footer mt-n1 bg-white pr-3 pt-1 border-1 border-top-0 text-right">
-                          <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.lang-uk.others }} <strong>{{ others }}</strong>  {{ site.data.lang-uk.others_offers }}</a>
+                          <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.uk.others }} <strong>{{ others }}</strong>  {{ site.data.uk.others_offers }}</a>
                         </div>
                       {%- endif -%}
                     {%- else -%}
@@ -82,7 +82,7 @@
       {%- if forloop.last -%}
       </div>
       <div class="float-right btn-group">
-        <a class="btn btn-sm btn-primary" href="{{include.dir}}">{{ site.data.lang-uk.others }} {{ title | downcase }}</a>
+        <a class="btn btn-sm btn-primary" href="{{include.dir}}">{{ site.data.uk.others }} {{ title | downcase }}</a>
       </div>
       {%- endif -%}
     {%- else -%}
@@ -93,11 +93,11 @@
       <div class="col-md-8 offset-md-2">
         <div class="alert alert-info" role="alert">
           {% if include.page == 'realtor' %}
-          <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/realtor/agent/" class="alert-link">Демонстраційна сторінка продавця нерухомості</a></p>
+          <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.uk.main_city }}/realtor/agent/" class="alert-link">Демонстраційна сторінка продавця нерухомості</a></p>
           {%- elsif include.page == 'agency' -%}
-          <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/agency/ahentsiya/" class="alert-link">Демонстраційна сторінка агентства нерухомості</a></p>
+          <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.uk.main_city }}/agency/ahentsiya/" class="alert-link">Демонстраційна сторінка агентства нерухомості</a></p>
           {%- elsif include.page == 'developer' -%}
-          <p>Сторінки розділу призначені для поширення інформації про забудовника, його житлові комлекси та перелік нерухомого майна, яке продається або передається в оренду компанією забудовником. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.lang-uk.main_city }}/developer/builder/" class="alert-link">Демонстраційна сторінка забудовника нерухомості</a></p>
+          <p>Сторінки розділу призначені для поширення інформації про забудовника, його житлові комлекси та перелік нерухомого майна, яке продається або передається в оренду компанією забудовником. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.uk.main_city }}/developer/builder/" class="alert-link">Демонстраційна сторінка забудовника нерухомості</a></p>
           {%- else -%}
           <p>Сторінки розділу призначені для поширення інформації про тих хто займається будівництвом, продажем та орендою нерухомості. Вартість створення такого розділу ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}...</p>
           {%- endif -%}

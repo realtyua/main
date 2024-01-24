@@ -1,66 +1,59 @@
-<div class="row">
-  {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
-  {%- for one in ones -%}
-    {%- assign slug = one.url | split: '/' | last -%}
-    {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-    {%- if '/' == current and one.navhide != 1 -%}
-      {% if one.url contains '/region/' %}
-        {%- comment -%}
-          {%- include home/main-region.html -%}
-        {%- endcomment -%}
-      {% else %}
+
+{%- assign ones = site.html_pages | sort: 'path' | reverse -%}
+{%- for one in ones -%}
+  {%- assign slug = one.url | split: '/' | last -%}
+  {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+  {%- if '/' == current and one.navhide != 1 -%}
+    {% if one.url contains '/region/' %}
       {%- comment -%}
-      <div id="{{ slug }}" class="col-12">
-        <h2 class="mb-4">
-          <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
-          {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
-        </h2>
-      </div>
+        {%- include home/main-region.html -%}
       {%- endcomment -%}
-      <div id="{{ slug }}" class="col-12">
-        <h2 class="mb-4">
-          <a href="{{ one.url }}" title="Безкоштовні оголошення про {{ one.title | downcase }}">
-            {%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}
-          </a>
-          {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
-        </h2>
-        {%- include home/region.html current=one.url -%}
-      </div>
-      {% endif %}
-      {%- if one.url -%}
-        {%- assign twos = site.html_pages -%}
-        {%- for two in twos -%}
-          {%- if two -%}
-            {%- assign slug = two.url | split: '/' | last -%}
-            {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
-            {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
+    {% else %}
+      {%- comment -%}
+        <div id="{{ slug }}" class="col-12">
+          <h2 class="mb-4">
+            <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
+            {% if one.url contains "/district/" %} {{ site.data.uk.deck_region_in }} області{% endif %}
+          </h2>
+        </div>
+      {%- endcomment -%}
+      <h2 id="{{ slug }}" class="mb-4">
+        <a href="{{ one.url }}" title="Безкоштовні оголошення про {{ one.title | downcase }}">
+          {%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}
+        </a>
+        {% if one.url contains "/district/" %} {{ site.data.uk.deck_region_in }} області{% endif %}
+      </h2>
+      {%- include home/region.html current=one.url -%}
+    {% endif %}
+    {%- if one.url -%}
+      {%- assign twos = site.html_pages -%}
+      {%- for two in twos -%}
+        {%- if two -%}
+          {%- assign slug = two.url | split: '/' | last -%}
+          {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
+          {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
             {%- comment -%}
-            <div id="{{ slug }}" class="col-12">
-              <h2 class="mb-4">
-                <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
-                  {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
-                </a>
-                {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
-              </h2>
-            </div>
+              <div id="{{ slug }}" class="col-12">
+                <h2 class="mb-4">
+                  <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
+                    {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
+                  </a>
+                  {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.uk.deck_region_in }} області{% endif %}
+                </h2>
+              </div>
             {%- endcomment -%}
-            <div id="{{ slug }}" class="col-12">
-              <h2 class="mb-4">
-                <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
-                  {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
-                </a>
-                {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
-              </h2>
-              {%- include home/region.html current=two.url -%}
-            </div>
-            {%- endif -%}
+            <h2 id="{{ slug }}" class="mb-4">
+              <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
+                {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
+              </a>
+              {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.uk.deck_region_in }} області{% endif %}
+            </h2>
+            {%- include home/region.html current=two.url -%}
           {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     {%- endif -%}
-  {%- endfor -%}
-  <div class="col-12">
-    <h2 class="mb-4">Інші <a href="/amalgamated-hromades.html" title="Безкоштовні оголошення про продаж нерухомості місцевих громад">територіальні об'єднані громади</a> {{ site.data.lang-uk.deck_region_in }}</h2>
-     <p class="small">{{ site.data.lang-uk.local_communities }}</p>
-  </div>
-</div>
+  {%- endif -%}
+{%- endfor -%}
+<h2 class="mb-4">Інші <a href="/amalgamated-hromades.html" title="Безкоштовні оголошення про продаж нерухомості місцевих громад">територіальні об'єднані громади</a> {{ site.data.uk.deck_region_in }} області</h2>
+<p class="small">{{ site.data.uk.local_communities }}</p>

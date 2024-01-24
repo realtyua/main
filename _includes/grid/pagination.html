@@ -1,0 +1,116 @@
+{%- assign url = include.cat | replace: ',', '/' -%}
+{% if paginator.total_pages > 1 %}
+<nav aria-label="Посторінкова навігація">
+  <ul class="pagination float-right">
+    {% if paginator.previous_page %}
+      <li class="page-item">
+        <a class="page-link page-pre" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Попередня сторінка">
+          <span aria-hidden="true">❮</span>
+          <span class="sr-only">Попередня сторінка</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item">
+        <span class="page-link page-pre">
+          <span aria-hidden="true">❮</span>
+          <span class="sr-only">Попередня сторінка</span>
+        </span>
+      </li>
+    {% endif %}
+    {% for page in (1..paginator.total_pages) %}
+    {% assign last_five = forloop.length | minus: 4 %}
+    {% assign last_page = forloop.length %}
+    {% if forloop.length > 5 %}
+      {% if paginator.page <= 5 %}
+        {% if forloop.index <= 5 %}
+          {% if forloop.first and page == paginator.page %}
+            <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+          {% elsif forloop.first %}
+            <li class="page-item"><a class="page-link" href="/{{ url }}/">1</a></li>
+          {% elsif page == paginator.page %}
+            <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
+          {% endif %}
+        {% else %}
+          {% if paginator.page == 5 %}
+            <li class="page-item"><a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a></li>
+          {% endif %}
+            <li class="page-item"><span class="page-link">...</span></li>
+            <li class="page-item"><a class="page-link" href="/{{ url }}/{{ last_page }}/">{{ last_page }}</a></li>
+          {% break %}
+        {% endif %}
+      {% elsif paginator.page >= last_five %}
+        {% if forloop.index >= last_five %}
+          {% if forloop.index == last_five %}
+              <li class="page-item"><a class="page-link" href="/{{ url }}/">1</a></li>
+              <li class="page-item"><span class="page-link">...</span></li>
+            {% if page == last_five %}
+              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | minus: 1 }}/">{{ page | minus: 1 }}</a></li>
+            {% endif %}
+            {% if page == paginator.page %}
+              <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page }}/">{{ page }}</a></li>
+            {% endif %}
+            {% elsif forloop.last and page == paginator.page %}
+              <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+            {% elsif page == paginator.page %}
+              <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page }}/">{{ page }}</a></li>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          {% if forloop.first %}
+            <li class="page-item"><a class="page-link" href="/{{ url }}/">1</a></li>
+          {% endif %}
+          {% if forloop.index == paginator.page | minus: 2 %}
+            <li class="page-item"><span class="page-link">...</span></li>
+            <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | minus: 2 }}/">{{ page | minus: 2 }}</a></li>
+          {% endif %}
+          {% if forloop.index == paginator.page | minus: 1 %}
+            <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | minus: 1 }}/">{{ page | minus: 1 }}</a></li>
+          {% endif %}
+          {% if page == paginator.page %}
+            <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+          {% endif %}
+          {% if forloop.index == paginator.page | plus: 1 %}
+            <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | plus: 1 }}/">{{ page | plus: 1 }}</a></li>
+          {% endif %}
+          {% if forloop.index == paginator.page | plus: 2 %}
+            <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | plus: 2 }}/">{{ page | plus: 2 }}</a></li>
+            <li class="page-item"><span class="page-link">...</span></li>
+          {% endif %}
+          {% if forloop.last %}
+            <li class="page-item"><a class="page-link" href="/{{ url }}/{{ forloop.index }}/">{{ forloop.index }}</a></li>
+          {% endif %}
+        {% endif %}
+      {% else %}
+        {% if page == paginator.page %}
+          <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+        {% elsif page == 1 %}
+          <li class="page-item"><a class="page-link" href="/{{ url }}/">{{ page }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page }}/">{{ page }}</a></li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% if paginator.next_page %}
+      <li class="page-item">
+        <a class="page-link page-next" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Наступна сторінка">
+          <span aria-hidden="true">❯</span>
+          <span class="sr-only">Наступна сторінка</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item">
+        <span class="page-link page-next">
+          <span aria-hidden="true">❯</span>
+          <span class="sr-only">Наступна сторінка</span>
+        </span>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}

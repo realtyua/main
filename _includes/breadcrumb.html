@@ -1,4 +1,4 @@
-{%- if page.url == "/" -%}
+{%- if pageu == '/' -%}
 {%- else -%}
 <div class="row">
   <div class="col-md-12">
@@ -10,10 +10,10 @@
       </button>
     </div>
     <div class="main-breadcrumbs">
-      <p class="visually-hidden" id="breadcrumb">{{ site.data.lang-uk.you_are_here }}:</p>
+      <p class="visually-hidden" id="breadcrumb">{{ site.data.uk.you_are_here }}:</p>
       <ol class="breadcrumb mb-0 px-0 py-4 bg-white">
-        <li class="breadcrumb-item"><a href="{{ site.baseurl }}/"><span>{{ site.data.lang-uk.home }}</span></a></li>
-        {%- capture page_url_without_index_html -%}{{ page.url | remove: "/index.html" }}{%- endcapture -%}
+        <li class="breadcrumb-item"><a href="{{ site.baseurl }}/"><span>{{ site.data.uk.home }}</span></a></li>
+        {%- capture page_url_without_index_html -%}{{ pageu | remove: 'index.html' }}{%- endcapture -%}
         {%- assign splitted_url_parts = page_url_without_index_html | split: '/' -%}
         {%- capture forLoopMaxInt -%}{{ splitted_url_parts.size | minus:1 }}{%- endcapture -%}
         {%- for i in (1..forLoopMaxInt) -%}
@@ -24,7 +24,7 @@
             {%- if current_breadcrumb_url == breadcrumb_page.url or current_breadcrumb_md_url == breadcrumb_page.url -%}
               {%- capture breadcrumb_page_page_url_without_index_html -%}{{ breadcrumb_page.url | remove: "index.html" }}{%- endcapture -%}
               {%- assign j = forLoopMaxInt | plus: 0 -%}
-              {%- if breadcrumb_page.url contains "page" -%}
+              {%- if breadcrumb_page.url contains 'page'-%}
               {%- else -%}
               <li class="breadcrumb-item{% if i == j %} active" aria-current="page{% endif %}">
                 <a href="{{ site.baseurl }}{{breadcrumb_page_page_url_without_index_html}}">
@@ -35,18 +35,12 @@
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
-        {%- if page.layout == "post" -%}
+        {%- if page.layout == 'property' or page.layout == 'post' -%}
           <li class="breadcrumb-item active" aria-current="page">
             {{ page.title }}
           </li>
-        {%- elsif page.url contains ".html" -%}
-          <li class="breadcrumb-item active" aria-current="page">
-            {%- if page.url contains "map.html" -%}
-              {{ site.data.lang-uk.re_map_on }}
-            {%- else -%}
-              {%- if page.breadcrumb -%}{{ page.breadcrumb }}{%- elsif breadcrumb_page.navtitle -%}{{ page.navtitle }}{%- else -%}{{ page.title }}{%- endif -%}
-            {%- endif -%}
-          </li>
+        {%- elsif pageu contains '/map.html' -%}
+          <li class="breadcrumb-item active" aria-current="page">{{ site.data.uk.re_map_on }}</li>
         {%- endif -%}
       </ol>
     </div>

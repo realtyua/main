@@ -1,21 +1,14 @@
 ---
 layout: default
 ---
-
-{%- assign back = page.dir | split: "/" -%}
-{%- assign size = back | size | minus:1 -%}
-{%- assign dir = back | slice: 0, size | join: "/" | append: "/" -%}
-{%- assign index = site.html_pages | sort: "dir" | where_exp: "i", "i.url == dir" -%}
-{% assign i = index[0] %}
-{% assign addtitle = i.title | split: " " | slice: 1, 4 | join: " " %}
-
-
+{%- include vars/page-slash.html -%}
+{%- include back-title.html minus='1' so='1' st='4' data='title' -%}
 <div class="row">
   <div class="col-12">
-    <h1 class="h{%- if page.dir contains 'realtor' -%}3{%- else -%}2{%- endif -%}">{{ page.title }} {{ addtitle }}</h1>
+    <h1 class="h{%- if page.dir contains 'realtor' -%}3{%- else -%}2{%- endif -%}">{{ paget }} {{ idata }}</h1>
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
-    {%- assign level = back | size | plus:1 %}
+    {%- assign level = slashd | size | plus: 1 %}
     <h2 class="h3 md-3">{{ page.subtitle }}</h2>
     {%- include elements/list-pages.html l=level -%}
   </div>

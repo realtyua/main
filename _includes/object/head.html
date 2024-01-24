@@ -5,12 +5,12 @@
 {%- capture tlocation -%}
   {%- if location and back.size > 4 and page.dir contains 'city' or page.dir contains 'town' -%}
     {% unless back.size < 4 or page.url contains 'all.html' %}
-     · {{ site.data.lang-uk.city }} {{ location }}
+     · {{ site.data.uk.city }} {{ location }}
     {% endunless %}
   {%- elsif back.size > 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
     {% unless back.size < 3 or page.url contains 'all.html' %}
       {% unless back.size == 4 and page.url contains '/district/town/' %}
-       · {{ location }} {{ site.data.lang-uk.district }}
+       · {{ location }} {{ site.data.uk.district }}
       {% endunless %}
     {% endunless %}
   {%- elsif page.url == '/district/town/' -%}
@@ -47,9 +47,9 @@
 <meta name="country" content="{{ site.country }}" />
 <meta name="region" content="{{ site.region }}" />
 {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
-<meta name="locality" content="{{ site.data.lang-uk.city }} {{ location }}" />
+<meta name="locality" content="{{ site.data.uk.city }} {{ location }}" />
 {%- elsif back.size >= 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
-<meta name="locality" content="{{ location }} {{ site.data.lang-uk.district }}" />
+<meta name="locality" content="{{ location }} {{ site.data.uk.district }}" />
 {%- elsif page.url == '/district/town/' -%}
 {%- endif -%}
 <meta property="og:url" content="{{ page.url | absolute_url }}" />
@@ -63,7 +63,7 @@
 <meta property="og:image:url" content="{{ file.path | replace_first: '.', '_sm.' | url_decode | absolute_url }}" />
 <meta property="og:image:type" content="image/jpg" />
 <meta property="og:image:width" content="600" />
-<meta property="og:image:height" content="615" />
+<meta property="og:image:height" content="315" />
 {%- else -%}
 <meta property="og:image" content="{{ '/assets/images/locations/default_sm.jpg' | url_decode | absolute_url }}" />
 <meta property="og:image:width" content="600" />

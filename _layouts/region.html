@@ -1,22 +1,22 @@
 ---
 layout: default
 ---
-
+{%- include vars/page-slash.html -%}
 <div class="row">
   <div class="col-12">
     <h1>
-      {{ page.title | replace_first: ' в ', ' у ' }}
+      {{ paget | replace_first: ' в ', ' у ' }}
       {%- if page.community -%}
-      <button type="button" class="btn bg-transparent shadow-none border-0 dropdown-toggle dropdown-toggle-split" data-toggle="collapse" data-target="#collapseCommunity" aria-expanded="false" aria-controls="collapseCommunity">
-        <span class="visually-hidden">Об'єднана територіальна громада</span>
-      </button>
+        <button type="button" class="btn bg-transparent shadow-none border-0 dropdown-toggle dropdown-toggle-split" data-toggle="collapse" data-target="#collapseCommunity" aria-expanded="false" aria-controls="collapseCommunity">
+          <span class="visually-hidden">Об'єднана територіальна громада</span>
+        </button>
       {%- endif -%}
     </h1>
     {%- if page.community -%}
     <div class="collapse" id="collapseCommunity">
       <div class="card card-body">
-        <p class="mb-0">{%- capture isMapPdf -%}{%- file_exists {{ page.dir }}territorial_community_on_the_map.pdf -%}{%- endcapture -%}{{ page.community }}{% if isMapPdf == 'true' %} (<a href="{{ page.dir }}territorial_community_on_the_map.pdf" target="_blank">мапа меж територіальної громади)</a>{% endif %}</p>
-        <button type="button" class="close" data-toggle="collapse" data-target="#collapseCommunity" aria-expanded="false" aria-controls="collapseCommunity" aria-label="Close" title="{{ site.lang-uk.close }}">
+        <p class="mb-0">{%- capture isMapPdf -%}{%- file_exists {{ paged }}territorial_community_on_the_map.pdf -%}{%- endcapture -%}{{ page.community }}{% if isMapPdf == 'true' %} (<a href="{{ paged }}territorial_community_on_the_map.pdf" target="_blank">мапа меж територіальної громади)</a>{% endif %}</p>
+        <button type="button" class="close" data-toggle="collapse" data-target="#collapseCommunity" aria-expanded="false" aria-controls="collapseCommunity" aria-label="Close" title="{{ site.uk.close }}">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -27,8 +27,8 @@ layout: default
   {%- assign isContent = content | strip_newlines -%}
   {%- if isContent == "" -%}
   {%- else -%}
-  <div class="col-12 mt-4">
-    {{ content }}
-  </div>
+    <div class="col-12 mt-4">
+      {{ content }}
+    </div>
   {%- endif -%}
 </div>

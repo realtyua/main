@@ -2,6 +2,7 @@
 title: Вступають у дію нові положення щодо договорів оренди землі
 date: 2021-01-11
 #category: Кредит, Держава, Молодь
+layout: post
 source:
   title: Урядовий кур'єр
   url: https://ukurier.gov.ua/

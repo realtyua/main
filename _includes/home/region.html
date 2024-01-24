@@ -14,13 +14,13 @@
         <div class="card">
           {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/locations/' and i.basename == slug" -%}
           {%- if file[0] -%}
-            <img loading="lazy" src="{{ file[0].path | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}" title="Продаж і оренда об'єктів нерухомості {{ site.data.lang-uk[slug] }}">
+            <img src="{{ file[0].path | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.uk.realestate }} {{ site.data.uk[slug] }}" title="Продаж і оренда об'єктів нерухомості {{ site.data.uk[slug] }}">
           {%- else -%}
-            <img loading="lazy" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk[slug] }}" title="Продаж і оренда нерухомого майна {{ site.data.lang-uk[slug] }}">
+            <img src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.uk.realestate }} {{ site.data.uk[slug] }}" title="Продаж і оренда нерухомого майна {{ site.data.uk[slug] }}">
           {%- endif -%}
           <div class="card-body p-2">
             <h3 class="h5 card-title mb-2">
-              <a href="{{ three.url }}" title="Оголошення про продаж та оренду {{ three.title | replace: site.data.lang-uk.realestate, site.data.lang-uk.nerukhomisti }}">
+              <a href="{{ three.url }}" title="Оголошення про продаж та оренду {{ three.title | replace: site.data.uk.realestate, site.data.uk.nerukhomisti }}">
                 {%- if three.title -%}{{ three.title | replace_first: ' в ', ' у ' }}{%- else -%}{{ three.navtitle }}{%- endif -%}
               </a>
             </h3>

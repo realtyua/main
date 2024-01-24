@@ -1,54 +1,54 @@
 <div class="row">
   <div class="col-12 px-2 p-md-0 p-lg-0">
     <nav class="navbar navbar-expand-lg justify-content-between pb-1 pb-md-2 pb-lg-0 px-0 px-md-2 px-lg-2" aria-label="Main navigation">
-      <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarRealEstate" aria-controls="navbarRealEstate" aria-expanded="false" aria-label="Toggle button">
+      <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarRealEstate" aria-controls="navbarRealEstate" aria-expanded="false" aria-label="Кнопка перемикання">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-brand d-md-none">
         <span class="float-left align-middle text-white mr-1">←</span>
-        <span class="small">{{ site.data.lang-uk.brand_header }}</span>
+        <span class="small">{{ site.data.uk.brand_header }}</span>
       </div>
       <div class="collapse navbar-collapse" id="navbarRealEstate">
         <ul class="navbar-nav">
-          {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
-          {%- for one in ones -%}
-            {%- assign path = one.url | split: '/' -%}
-            {%- assign part = path | size -%}
-            {%- assign slug = one.url | split: '/' | last -%}
-            {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-            {%- if '/' == current and one.navhide != 1 -%}
-              {%- if one.url == '/region/' -%}
+          {%- assign nb1s = site.html_pages | sort: 'path' | reverse -%}
+          {%- for nb1 in nb1s -%}
+            {%- assign nb1_path = nb1.url | split: '/' -%}
+            {%- assign nb1_part = nb1_path | size -%}
+            {%- assign nb1_slug = nb1.url | split: '/' | last -%}
+            {%- assign nb1_current = nb1.url | remove: nb1_slug | remove: '//' | append: '/' -%}
+            {%- if '/' == nb1_current and nb1.navhide != 1 -%}
+              {%- if nb1.url == '/region/' -%}
                 {%- comment -%}
                   <li class="nav-item position-static">
-                    <a class="nav-link{% if page.url == one.url %} active{% endif %}" href="{{ one.url }}">
-                      {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+                    <a class="nav-link{% if pageu == nb1.url %} active{% endif %}" href="{{ nb1.url }}">
+                      {%- if nb1.navtitle -%}{{ nb1.navtitle }}{%- else -%}{{ nb1.title }}{%- endif -%}
                     </a>
                   </li>
                 {%- endcomment -%}
               {%- else -%}
-                <li class="nav-item position-static{% if part >= 2 %} dropdown{% endif %}">
-                  <a class="nav-link{% if part >= 2 %} dropdown-toggle{% endif %}{% if page.url == one.url %} active{% endif %}" href="{%- if part >= 2 -%}#{%- else -%}{{ one.url }}{%- endif -%}"{% if part >= 2 %} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
-                    {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
+                <li class="nav-item position-static{% if nb1_part >= 2 %} dropdown{% endif %}">
+                  <a class="nav-link{% if nb1_part >= 2 %} dropdown-toggle{% endif %}{% if pageu == nb1.url %} active{% endif %}" href="{%- if nb1_part >= 2 -%}#{%- else -%}{{ nb1.url }}{%- endif -%}"{% if nb1_part >= 2 %} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
+                    {%- if nb1.navtitle -%}{{ nb1.navtitle }}{%- else -%}{{ nb1.title }}{%- endif -%}
                   </a>
-                  {% if part >= 2 %}
-                    {%- include header/dropdown.html current=one.url title=one.title slug=slug -%}
+                  {% if nb1_part >= 2 %}
+                    {%- include header/dropdown.html current=nb1.url title=nb1.title slug=nb1_slug -%}
                   {%- endif -%}
                 </li>
               {%- endif -%}
-              {%- if one.url -%}
-                {%- assign twos = site.html_pages -%}
-                {%- for two in twos -%}
-                  {%- assign path = two.url | split: '/' -%}
-                  {%- assign part = path | size -%}
-                  {%- assign slug = two.url | split: '/' | last -%}
-                  {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
-                  {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
-                  <li class="nav-item position-static{% if part >= 3 %} dropdown{%- endif -%}">
-                    <a class="nav-link{% if part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if part >= 3 -%}#{%- else -%}{{ two.url }}{%- endif -%}"{% if part >= 3 %} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
-                      {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
+              {%- if nb1.url -%}
+                {%- assign nb2s = site.html_pages -%}
+                {%- for nb2 in nb2s -%}
+                  {%- assign nb2_path = nb2.url | split: '/' -%}
+                  {%- assign nb2_part = nb2_path | size -%}
+                  {%- assign nb2_slug = nb2.url | split: '/' | last -%}
+                  {%- assign nb2_current = nb2.url | remove: nb2_slug | remove: '//' | append: '/' -%}
+                  {%- if nb1.url == nb2_current and nb2.url contains '/city/' or nb2.url contains '/town/' -%}
+                  <li class="nav-item position-static{% if nb2_part >= 3 %} dropdown{%- endif -%}">
+                    <a class="nav-link{% if nb2_part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if nb2_part >= 3 -%}#{%- else -%}{{ nb2.url }}{%- endif -%}"{% if nb2_part >= 3 %} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
+                      {%- if nb2.navtitle -%}{{ nb2.navtitle }}{%- else -%}{{ nb2.title }}{%- endif -%}
                     </a>
-                    {% if part >= 3 %}
-                      {%- include header/dropdown.html current=two.url title=two.title slug=slug -%}
+                    {% if nb2_part >= 3 %}
+                      {%- include header/dropdown.html current=nb2.url title=nb2.title slug=nb2_slug -%}
                     {%- endif -%}
                   </li>
                   {%- endif -%}
@@ -57,8 +57,8 @@
             {%- endif -%}
           {%- endfor -%}
           <li class="nav-item position-static dropdown mr-0">
-            <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
-              {{ site.data.lang-uk.other_regions }}
+            <a class="nav-link dropdown-toggle{% if pageu == nb1.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.uk.other_regions_ua }}">
+              {{ site.data.uk.other_regions }}
             </a>
             {%- include header/regions.html -%}
           </li>
@@ -66,19 +66,11 @@
         <hr class="mt-1 mb-0 border-top-1 border-white d-lg-none">
         <ul class="navbar-nav ml-md-auto">
           <li class="nav-item position-static dropdown mr-0">
-            <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
+            <a class="nav-link dropdown-toggle{% if pageu == nb1.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.uk.other_regions_ua }}">
               Все для нерухомості
             </a>
             {%- include header/ads-dropdown.html -%}
           </li>
-          {%- comment -%}
-            <li class="nav-item position-static dropdown mr-0">
-              <a class="nav-link dropdown-toggle{% if page.url == one.url %} active{% endif %}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ site.data.lang-uk.other_regions_ua }}">
-                {{ site.data.lang-uk.other_regions }}
-              </a>
-              {%- include header/regions.html -%}
-            </li>
-          {%- endcomment -%}
         </ul>
       </div>
     </nav>

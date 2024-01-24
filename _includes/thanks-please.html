@@ -1,6 +1,31 @@
 <div class="row mb-1">
   <div class="col-12">
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-{%- if page.layout == 'grid' and pageu contains '/index.html' -%}between{%- elsif page.layout == 'table' and pageu contains '/list.html' -%}between{%- else -%}end{%- endif -%}">
+      {%- if pageu contains '/all.html' -%}
+      {%- else -%}
+        {%- if page.layout == 'table' and pageu contains '/list.html' -%}
+          <div class="nav">
+            <a class="nav-item border-0" href="{{ paged }}">
+              <span class="sr-only">Переглянути записи блоками:</span>
+              <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Записи блоками">
+                <img src="/assets/images/icons/grid.svg" alt="grid">
+              </span>
+            </a>
+          </div>
+        {%- endif -%}
+        {%- if page.layout == 'grid' and pageu contains '/index.html' -%}
+          {%- assign switch_size = slashd | size -%}
+          {%- if switch_size > 5 -%}{% assign switch_link = backd | append: 'list.html' %}{%- else -%}{% assign switch_link = paged | append: 'list.html' %}{%- endif -%}
+          <div class="nav">
+            <a class="nav-item border-0" href="{{ switch_link }}">
+              <span class="sr-only">Переглянути записи списком:</span>
+              <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Записи списком">
+                <img src="/assets/images/icons/list.svg" alt="list">
+              </span>
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
       <div class="h5 mb-0">
         <a class="badge badge-success mr-1" data-toggle="collapse" href="#thanks" role="button" aria-expanded="true" aria-controls="thanks" data-target=".thanks">Дякуємо!</a>
         <a class="badge badge-info mr-1" data-toggle="collapse" href="#please" role="button" aria-expanded="true" aria-controls="please" data-target=".please">Просимо!</a>
@@ -12,7 +37,7 @@
         <div class="col-md-6 offset-md-3">
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Заздалегідь дякуємо</strong> Вам <b>за рекомендації</b> всім кому потрібно <b>розмістити оголошення</b> про нерухомість на сторінці "<strong>{{ site.title }}</strong>" - {{ site.region }}. <u>Це&nbsp;безкоштовно</u>. <b>Дякуємо!</b>
-            <a class="close" data-toggle="collapse" href="#thanks" aria-expanded="true" aria-controls="thanks" data-target=".thanks" title="{{ site.data.lang-uk.close }}">
+            <a class="close" data-toggle="collapse" href="#thanks" aria-expanded="true" aria-controls="thanks" data-target=".thanks" title="{{ site.data.uk.close }}">
               <span aria-hidden="true">&times;</span>
             </a>
           </div>
@@ -24,7 +49,7 @@
         <div class="col-md-6 offset-md-3">
           <div class="alert alert-info alert-dismissible fade show" role="alert">
             <strong>Будь ласка!</strong> <u>Повідомте продавцю чи орендодавцю, що знайшли оголошення</u> на сторінці "<strong>{{ site.title }}</strong>" - {{ site.region }}. <b>Дякуємо!</b>
-            <a class="close" data-toggle="collapse" href="#please" aria-expanded="true" aria-controls="please" data-target=".please" title="{{ site.data.lang-uk.close }}">
+            <a class="close" data-toggle="collapse" href="#please" aria-expanded="true" aria-controls="please" data-target=".please" title="{{ site.data.uk.close }}">
               <span aria-hidden="true">&times;</span>
             </a>
           </div>
@@ -36,7 +61,7 @@
         <div class="col-md-6 offset-md-3">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Увага!</strong> Ніколи не поспішайте. Перед тим, як віддати гроші за нерухомість, сім раз перевірте чи все гаразд з нерухомістю, яку вирішили купити чи орендувати.
-            <a class="close" data-toggle="collapse" href="#attention" aria-expanded="true" aria-controls="attention" data-target=".attention" title="{{ site.data.lang-uk.close }}">
+            <a class="close" data-toggle="collapse" href="#attention" aria-expanded="true" aria-controls="attention" data-target=".attention" title="{{ site.data.uk.close }}">
               <span aria-hidden="true">&times;</span>
             </a>
           </div>

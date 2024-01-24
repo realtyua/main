@@ -1,19 +1,21 @@
 ---
 layout: default
 ---
-{%- include variables/sellers.html -%}
-{%- include variables/objects.html -%}
-{%- include variables/whois.html minus=1 -%}
+{%- include vars/page-slash.html -%}
+{%- include vars/sellers.html -%}
+{%- include vars/objects.html -%}
+{%- include vars/whois.html minus=1 -%}
+{%- include back-title.html minus='2' so='1' st='4' data='title' -%}
 <div class="row">
   <div class="col-12 {{ whois }}">
-    <h1 class="h2 mb-3">{{ page.title }}</h1>
+    <h1 class="h2 mb-3">{{ paget }} {{ idata }}</h1>
     <div class="row">
       <div class="col-md-4">
-        {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slug" -%}
+        {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slugu" -%}
         {%- if file[0] -%}
-          <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+          <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ paget | replace: '&nbsp;', ' ' | remove: '"' }}">
         {%- else -%}
-          <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.lang-uk.re_logo }} {{ page.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+          <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ paget | replace: '&nbsp;', ' ' | remove: '"' }}">
         {%- endif -%}
       </div>
       <div class="col-md-8 mt-3 mt-md-0">
@@ -23,18 +25,18 @@ layout: default
     {%- if isJson.size > 0 or stabs.size > 0 -%}
     <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
       <span class="navbar-brand d-md-none">
-        <span class="small">{{ site.data.lang-uk.re_select_section }}</span>
+        <span class="small">{{ site.data.uk.re_select_section }}</span>
         <span class="ml-1 float-right align-middle text-primary">→</span>
       </span>
-      <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slug | capitalize }}" aria-controls="navbar{{ slug | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slug | capitalize }}">
-        <ul class="navbar-nav nav nav-tabs border-0" id="{{ slug }}-nav">
+      <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slugu | capitalize }}" aria-controls="navbar{{ slug | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slugu | capitalize }}">
+        <ul class="navbar-nav nav nav-tabs border-0" id="{{ slugu }}-nav">
           {%- if isJson.size > 0 -%}
             {%- include elements/offer-tab.html -%}
           {%- endif -%}
           {%- if pp.size > 0 -%}
           <li class="nav-item" role="presentation">
-            <a class="nav-link border-0" href="#{{ index }}" id="{{ index }}-tab" data-toggle="tab" role="tab" aria-controls="{{ index }}" aria-selected="true">
+            <a class="nav-link border-0" href="#{{ ippld }}" id="{{ ippld }}-tab" data-toggle="tab" role="tab" aria-controls="{{ ippld }}" aria-selected="true">
               <span>{{ ipp[0].title }}</span>
             </a>
           </li>
@@ -46,13 +48,13 @@ layout: default
       </div>
     </nav>
     <hr class="mt-2 mt-md-0">
-    <div class="tab-content" id="{{ slug }}-content">
+    <div class="tab-content" id="{{ slugu }}-content">
       {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}
       {%- if pp.size > 0 -%}
-      <div class="tab-pane fade show" id="{{ index }}" role="tabpanel" aria-labelledby="{{ index }}-tab">
-        <h2 class="h3">{{ site.data.lang-uk.re_from_developer }} {{ page.title }}</h2>
+      <div class="tab-pane fade show" id="{{ ippld }}" role="tabpanel" aria-labelledby="{{ ippld }}-tab">
+        <h2 class="h3">{{ site.data.uk.re_from_developer }} {{ paget }}</h2>
         {%- for item in pp -%}
           {%- include elements/items-pages.html -%}
         {%- endfor -%}

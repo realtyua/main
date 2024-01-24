@@ -1,0 +1,42 @@
+{%- assign cdate = site.time | date: "%Y-%m-%d" -%}
+{%- assign slug = include.slug -%}
+{%- assign offer = include.offer -%}
+{%- assign date = offer.date | date: "%Y-%m-%d" -%}
+{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+{%- capture files -%}
+  {%- for file in site.static_files -%}
+    {%- if file.path contains folder and file.extname == '.png' or file.extname == '.PNG' or file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' -%}{{ file.path }}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign isImage = files | strip_newlines -%}
+{%- assign type = offer.type | split: ' ' -%}
+
+{%- capture offerType -%}
+  {%- if type.size >= 2 -%}
+    {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
+      {{ type | slice: 0,1 | join: ' ' }}
+    {%- else -%}
+      {{ type | slice: 0,2 | join: ' ' }}
+    {%- endif -%}
+  {%- else -%}
+    {{ type | slice: 0 }}
+  {%- endif -%}
+{%- endcapture -%}
+
+<article class="card h-100{% if slug == 'realtor' or slug == 'agency' or slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
+  <div class="card-body pb-0">
+    <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.uid }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}</data></h3>
+    <div class="mb-1">{% include card/body.html %}</div>
+    <div class="mb-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ cdate }}{%- else -%}{{ offer.date }}{%- endif -%}">{%- if date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=offer.date -%}{%- endif -%}</time></div>
+  </div>
+  {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
+  <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
+    {%- if offer.url and offer.url != '' -%}
+      <a href="{{ offer.url }}" aria-label="{{ more | capitalize }}">{{ more | capitalize }}</a>
+    {%- else -%}
+      <a href="{{ site.url }}/{{ offer.phone }}" aria-label="{{ site.data.uk.re_page }}">
+        <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.uk.re_page }}">{{ site.data.uk.re_page_ads | capitalize }}</span>
+      </a>
+    {%- endif -%}
+  </div>
+</article>

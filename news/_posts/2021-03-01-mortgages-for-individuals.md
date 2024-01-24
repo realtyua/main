@@ -1,6 +1,7 @@
 ---
 title: Доступна іпотека 7% для приватних осіб
 date: 2021-03-01
+layout: post
 source:
   title: Фонд розвитку підприємництва
   url: https://bdf.gov.ua/uk

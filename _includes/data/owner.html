@@ -1,17 +1,18 @@
-{%- assign split = page.dir | split: "/" -%}
+{%- assign split = page.dir | split: '/' -%}
 {%- if split.size <= 2 -%}
   {%- assign location = include.location -%}
-{%- elsif split.size <= 3 and page.dir contains 'city' or page.dir contains 'town' -%}
+{%- elsif split.size <= 3 and page.dir contains '/city/' or page.dir contains '/town/' -%}
   {%- assign location = include.location -%}
-{%- elsif split.size >= 3 and page.dir contains 'district' -%}
+{%- elsif split.size >= 3 and page.dir contains '/district/' -%}
   {%- include location.html -%}
 {%- else -%}
   {%- include location.html -%}
 {%- endif -%}
-{%- capture oa -%}{%- for ot in site.data.owners -%}{{ ot.phone }}|{%- endfor -%}{%- endcapture -%}
+{%- assign items = site.data.estates | concat: site.data.owners | sort: 'date' -%}
+{%- capture oa -%}{%- for ot in items -%}{{ ot.phone }}{%- if ot.skip -%}{%- increment one -%}{%- endif -%}|{%- endfor -%}{%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
-{%- for ot in site.data.owners -%}
-  {%- assign of = ot.phone | append: '|' -%}
+{%- for ot in items -%}
+  {%- capture of -%}{{ ot.phone }}{%- if ot.skip -%}{%- increment two -%}{%- endif -%}|{%- endcapture -%}
   {%- if oa contains of -%}
     {%- assign owners = owners | push: ot -%}
   {%- endif -%}

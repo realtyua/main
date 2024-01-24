@@ -2,6 +2,7 @@
 title: Новий вебсайт про нерухомість в Івано-Франківській області
 date: 2021-01-01
 #category: Кредит, Держава, Молодь
+layout: post
 source:
   title: Мережа Вебсайтів Нерухомості в Україні
   url: https://www.realestate.net.ua

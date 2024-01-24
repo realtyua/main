@@ -16,7 +16,7 @@ navhide: 1
       <div class="card">
         <img src="/assets/images/locations/{{ image }}" class="card-img-top" alt="Нерухомість у {{ r.navtitle | replace_first: "о", "і" }}">
         <div class="card-body p-2">
-          <h2 class="card-title h5">{{ r.subtitle }} {{ site.data.lang-uk.re_ta }} {{ title }}</h2>
+          <h2 class="card-title h5">{{ r.subtitle }} {{ site.data.uk.re_ta }} {{ title }}</h2>
           <div class="card-text">
             <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
               <div class="navbar-brand d-lg-none">
@@ -65,7 +65,7 @@ navhide: 1
                 <div id="{{ region }}"></div>
               </div>
               <div class="tab-pane pt-3 fade show{% if r.slug and r.slug != '' %}{% else %} active{% endif %}" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
-                <p>{{ site.data.lang-uk.www }} <strong>{{ r.url | remove: 'http://' | remove: 'https://' }}</strong> {{ site.data.lang-uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} {{ site.data.lang-uk.re_ta }} {{ title }}.</p>
+                <p>{{ site.data.uk.www }} <strong>{{ r.url | remove: 'http://' | remove: 'https://' }}</strong> {{ site.data.uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} {{ site.data.uk.re_ta }} {{ title }}.</p>
                 <p>Будь-хто, хто має нерухомість, чи професійно займається нерухомістю у цьому регіоні може безоплатно розмістити своє оголошення про купівлю-продаж і оренду нерухомості, яка знаходиться {{ title }}.</p>
                 <p>Якщо у вас є новини про нерухомість {{ title }} або ви пишете статті про нерухомість, <a href="#contacts">надсилайте нам</a> і ми залюбки їх опублікуємо на сторінці "<strong>{{ site.title }}</strong>" - <strong>{{ r.small }}</strong> - це безкоштовно.</p>
                 {%- if r.slug and r.slug !='' -%}<p><a href="{{ r.url }}/add">Подати безкоштовне оголошення</a> {{ title }}.</p>{%- endif -%}

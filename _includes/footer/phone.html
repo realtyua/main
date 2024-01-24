@@ -11,20 +11,30 @@
   {%- capture nn -%}+{{ tt | slice:0,2 }}&nbsp;{{ tt | slice:2,3 }}&nbsp;{{ tt | slice:5,3 }}&nbsp;{{ tt | slice:8,2 }}&nbsp;{{ tt | slice:10,12 }}{%- endcapture -%}
 {%- endif -%}
 {%- if tt -%}
-  <a href="tel:+{{ tt }}">{{ nn }}</a>
+  <a href="tel:+{{ tt }}" rel="nofollow">{{ nn }}</a>
 {%- elsif include.legal and include.type == 'icon' -%}
-  <a href="tel:+{{ t }}" class="card-link">
-    <span class="align-middle" data-toggle="tooltip" data-placement="left" title="{{ site.data.lang-uk.re_seller }} {{ n }}" style="font-size:large;">&phone;</span>
+  <a href="tel:+{{ t }}" rel="nofollow" class="card-link">
+    <span class="align-middle" data-toggle="tooltip" data-placement="left" title="{{ site.data.uk.re_seller }} {{ n }}" style="font-size:large;">&phone;</span>
   </a>
 {%- elsif include.legal and include.type == 'dropdown' -%}
 <div class="btn-group">
-  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-label="{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_phone }}{%- else -%}{{ site.data.lang-uk.re_phoner }}{%- endif -%} - {{ site.data.lang-uk.re_tel | capitalize }}">
-    <span class="sr-only">{{ site.data.lang-uk.re_tel | capitalize }}:</span>
-    <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{%- if offer.rent == '1' -%}{{ site.data.lang-uk.re_phoner }}{%- else -%}{{ site.data.lang-uk.re_phone }}{%- endif -%}">&phone;</span>
+  <button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-label="{%- if offer.rent == '1' -%}{{ site.data.uk.re_phone }}{%- else -%}{{ site.data.uk.re_phoner }}{%- endif -%} - {{ site.data.uk.re_tel | capitalize }}">
+    <span class="sr-only">{{ site.data.uk.re_tel | capitalize }}:</span>
+    <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{%- if offer.rent == '1' -%}{{ site.data.uk.re_phoner }}{%- else -%}{{ site.data.uk.re_phone }}{%- endif -%}">&phone;</span>
   </button>
   <div class="dropdown-menu px-2 dropdown-menu-right">
-    <span class="text-nowrap"><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ site.data.lang-uk.offers }}">{{ offer.seller | remove: site.data.lang-uk.re_seller }}</a></span><br>
-    <a href="tel:+{{ t }}" title="{{ site.data.lang-uk.re_tel | capitalize }}">{{ n }}</a>
+    <span class="text-nowrap"><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ site.data.uk.offers }}">{{ offer.seller | remove: site.data.uk.re_seller }}</a></span><br>
+    <a href="tel:+{{ t }}" title="{{ site.data.uk.re_tel | capitalize }}" rel="nofollow">{{ n }}</a>
+  </div>
+</div>
+{%- elsif include.legal and include.type == 'property' -%}
+<div class="btn-group">
+  <button type="button" class="btn btn-link p-0 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-label="{%- if offer.rent == '1' -%}{{ site.data.uk.re_phone }}{%- else -%}{{ site.data.uk.re_phoner }}{%- endif -%} - {{ site.data.uk.re_tel | capitalize }}">
+    <span class="sr-only">{{ site.data.uk.re_tel | capitalize }}:</span>
+    <span aria-hidden="true">+38&nbsp;XXX&nbsp;XXX&nbsp;XX&nbsp;XX</span>
+  </button>
+  <div class="dropdown-menu px-2 dropdown-menu-left">
+    <a href="tel:+{{ t }}" title="{{ site.data.uk.re_tel | capitalize }}" rel="nofollow">{{ n }}</a>
   </div>
 </div>
 {%- elsif include.legal and include.type == 'text' -%}
@@ -32,18 +42,18 @@
     {%- if include.name and include.name != '' -%}
       {{ include.name }}
     {%- else -%}
-      {% if include.legal == site.contact.phone_sms %}{{ site.data.lang-uk.phone_sent_ads }}{% elsif include.legal == site.contact.phone_hot %}{% else %}{{ site.data.lang-uk.re_seller }} {{ n }}{% endif %}
+      {% if include.legal == site.contact.phone_sms %}{{ site.data.uk.phone_sent_ads }}{% elsif include.legal == site.contact.phone_hot %}{% else %}{{ site.data.uk.re_seller }} {{ n }}{% endif %}
     {%- endif -%}
   {%- endcapture -%}
-  <a href="tel:+{{ t }}"{% if master != '' %} data-toggle="tooltip" title="{{ master }}"{% endif %}>{{ n }}</a>
+  <a href="tel:+{{ t }}"{% if master != '' %} data-toggle="tooltip" title="{{ master }}"{% endif %} rel="nofollow">{{ n }}</a>
 {%- elsif include.legal and include.type == 'number' -%}
   {{ n }}
 {%- else -%}
   {% if site.contact[include.legal] and site.contact[include.legal] != '' %}
     {%- assign t = site.contact[include.legal] -%}
     {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,2 }}&nbsp;{{ t | slice:7,2 }}&nbsp;{{ t | slice:9,1 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
-    <a href="tel:+{{ t }}">{{ n }}</a>
+    <a href="tel:+{{ t }}" rel="nofollow">{{ n }}</a>
   {% else %}
-    <span class="text-muted">{{ site.data.lang-uk.no_number }}</span>
+    <span class="text-muted">{{ site.data.uk.no_number }}</span>
   {% endif %}
 {%- endif -%}

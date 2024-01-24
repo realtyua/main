@@ -1,59 +1,51 @@
 ---
 layout: default
 ---
-{%- assign back = page.dir | split: '/' -%}
-{%- assign size = back | size | minus: 1 -%}
-{%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- assign index = site.html_pages | sort: 'dir' | where_exp: 'i', 'i.url == dir' -%}
-{% assign i = index[0] %}
-{% assign addtitle = i.title | split: ' ' | slice: 1, 4 | join: ' ' %}
+{%- include vars/page-slash.html -%}
+{%- include back-title.html minus='1' so='1' st='4' data='title' -%}
 <div class="row">
   <div class="col-12">
-    <h1 class="h{%- if page.dir contains 'realtor' -%}3{%- else -%}2{%- endif -%}">
-      {% if page.url contains "/index.html" %}
-        {{ page.title | replace_first: 'Всі оголошення про ', 'Вся ' }}
-      {% elsif page.url contains "/all.html" %}
-        {{ page.title | replace_first: 'Всі оголошення про ', 'Вся ' }}
-      {% elsif page.dir contains "/rent/" %}
-        {{ page.title | replace_first: 'Оголошення про оренду', 'Оренда' }} {{ addtitle }}
-      {% else %}
-        {{ page.title | replace_first: 'Оголошення про п', 'П' }} {{ addtitle }}
-      {% endif %}
+    <h1 class="h{%- if paged contains '/realtor/' -%}3{%- else -%}2{%- endif -%}">
+      {%- if pageu contains '/index.html' -%}
+        {{ paget | replace_first: 'Всі оголошення про', 'Вся' }}
+      {%- elsif pageu contains '/all.html' -%}
+        {{ paget | replace_first: 'Всі оголошення про', 'Вся' }}
+      {%- else -%}
+        {{ paget }} {{ idata }}
+      {% endif -%}
     </h1>
     {%- assign isContent = content | strip_newlines -%}{%- if isContent == '' -%}{%- else -%}{{ content }}{%- endif -%}
     {%- include nav-section.html -%}
-    <h2 class="h3">
-    {%- if page.dir contains 'rent' -%}
-      {{ site.data.lang-uk.re_rent_h2 }}
-    {%- elsif page.dir contains 'land' -%}
-      {{ site.data.lang-uk.re_land_h2 }}
-    {%- elsif page.dir contains 'house' -%}
-      {{ site.data.lang-uk.re_house_h2 }}
-    {%- elsif page.dir contains 'garage' -%}
-      {{ site.data.lang-uk.re_garage_h2 }}
-    {%- elsif page.dir contains 'commercial' -%}
-      {{ site.data.lang-uk.re_commercial_h2 }}
-    {%- elsif page.dir contains 'apartment' -%}
-      {{ site.data.lang-uk.re_apartment_h2 }}
-    {%- elsif page.url contains '/all.html' -%}
-      {{ site.data.lang-uk.re_all_h2 }}
-    {%- endif -%}
+    <h2 class="h3 my-3">
+      {%- if paged contains '/rent/' -%}
+        {{ site.data.uk.re_rent_h2 }}
+      {%- elsif paged contains '/land/' -%}
+        {{ site.data.uk.re_land_h2 }}
+      {%- elsif paged contains '/house/' -%}
+        {{ site.data.uk.re_house_h2 }}
+      {%- elsif paged contains '/garage/' -%}
+        {{ site.data.uk.re_garage_h2 }}
+      {%- elsif paged contains '/commercial/' -%}
+        {{ site.data.uk.re_commercial_h2 }}
+      {%- elsif paged contains '/apartment/' -%}
+        {{ site.data.uk.re_apartment_h2 }}
+      {%- elsif pageu contains '/all.html' -%}
+        {{ site.data.uk.re_all_h2 }}
+      {%- endif -%}
     </h2>
-    {%- assign slug = page.dir | split: '/' | last -%}
-    {%- assign l = page.url | split: '/' -%}
-    {%- if page.url contains '/all.html' -%}
-      {%- assign json = page.url | replace: 'all.html', 'data/all.json' -%}
-      {%- if l.size == 4 -%}
-        {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
-      {%- elsif l.size == 5 -%}
-        {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+    {%- if pageu contains '/all.html' -%}
+      {%- assign json = pageu | replace: 'all.html', 'data/all.json' -%}
+      {%- if slashu.size == 4 -%}
+        {%- assign data = pageu | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 5 -%}
+        {%- assign data = pageu | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
       {%- endif -%}
     {%- else -%}
-      {%- assign json = here | append: 'data/' | append: slug | append: '.json' -%}
-      {%- if l.size == 4 -%}
-        {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' | append: '.html' -%}
-      {%- elsif l.size == 5 -%}
-        {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' | append: '.html' -%}
+      {%- assign json = here | append: 'data/' | append: slugd | append: '.json' -%}
+      {%- if slashd.size == 4 -%}
+        {%- assign data = paged | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' | append: '.html' -%}
+      {%- elsif slashd.size == 5 -%}
+        {%- assign data = paged | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' | append: '.html' -%}
       {%- endif -%}
     {%- endif -%}
     {%- if data -%}
@@ -61,7 +53,7 @@ layout: default
       {%- if offers.size > 10 -%}
         <div class="row">
           <div class="col-12">
-            {%- if page.url contains 'all.html' -%}
+            {%- if pageu contains '/all.html' -%}
               <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 mt-2">
                 {%- include nav-section.html style='card' -%}
               </div>
@@ -76,9 +68,13 @@ layout: default
             <div class="col-12">{%- include table/html.html -%}</div>
           </div>
         {%- else -%}
-          {%- assign name = page.title | replace: 'Всі оголошення про ', '' -%}
+          {%- assign name = paget | replace: 'Всі оголошення про ', '' -%}
           <div class="row">
-            <div class="col-md-6 offset-md-3">{%- include none-advertisement.html title=name -%}</div>
+            <div class="col-md-6 offset-md-3">
+              <div class="alert alert-success mb-0" role="alert">
+                {%- include none-advertisement.html title=name -%}
+              </div>
+            </div>
           </div>
         {%- endfor -%}
       {%- endif -%}

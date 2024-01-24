@@ -2,6 +2,7 @@
 title: У дві тисячі двадцять перший зі сподіваннями на власну домівку
 date: 2021-01-15
 #category: Кредит, Держава, Молодь
+layout: post
 source:
   title: Урядовий кур'єр
   url: https://ukurier.gov.ua

@@ -47,8 +47,8 @@
   {% endfor %}
 </div>
 {%- else -%}
-<h6 class="mt-1">{{ site.data.lang-uk.sent_ads }}</h6>
-<ul class="list-inline social-link">
+<p class="h6 mt-1">{{ site.data.uk.sent_ads }}</p>
+<ul class="list-inline social-link" aria-label="Footer media social links">
   {% for sm in sms %}
     {% capture tooltip %}Додайте наш номер телефону <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
     {%- assign name = sm.name -%}

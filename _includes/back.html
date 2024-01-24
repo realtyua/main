@@ -1,18 +1,15 @@
+{%- assign sizeu = slashu | size | minus: 1 -%}
+{%- assign backu = slashu | slice: 0, sizeu | join: '/' | append: '/' -%}
+{%- assign idata = site.pages | sort: 'dir' | where_exp: 'i', "i.dir == backu and i.url contains '/index.html'" -%}
 <hr>
-{%- assign back = page.url | split: "/" -%}
-{%- if back contains "news" or back contains "articles" -%}
-  {%- assign minus = 4 -%}
-{%- else -%}
-  {%- assign minus = 1 -%}
-{%- endif -%}
-{%- assign size = back | size | minus:minus -%}
-<span class="mr-1">&larr;</span>
-<a href="{{ back | slice: 0, size | join: "/" }}/">
-  {%- if back contains "news" -%}
-    {{ site.data.lang-uk.news_back_list }}
-  {%- elsif back contains "articles" -%}
-    {{ site.data.lang-uk.articles_back_list }}
-  {%- else -%}
-    {{ site.data.lang-uk.back_list }}
-  {%- endif -%}
-</a>
+<div class="row">
+  <div class="col-10 pt-2">
+    <span class="mr-1">&larr;</span><a href="{{ backu }}">{{ site.data.uk.to_section }} {{ idata[0].title | downcase }}</a>
+  </div>
+  <div class="col-2">
+    {%- assign backs = site.posts | where_exp: 'i', 'i.url contains backu' -%}
+    {%- assign iloop = 0 -%}
+    {%- for item in backs %}{%- if item.url == pageu %}{%- assign iloop = forloop.index -%}{%- endif %}{%- endfor -%}
+    {%- include pagination-re.html -%}
+  </div>
+</div>

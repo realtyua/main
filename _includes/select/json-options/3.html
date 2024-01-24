@@ -4,10 +4,7 @@
     {%- assign slug = 4.url | split: "/" | last -%}
     {%- assign current = 4.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 4.navhide != 1 and 4.title != '' -%}
-      {
-        "url":"{{ 4.url | prepend: site.url }}",
-        "title":"{{ 4.navtitle }}"
-      },
+      {"url":"{{ 4.url | prepend: site.url }}","title":"{{ 4.navtitle }}"},
       {%- include select/json-options/4.html current=4.url -%}
     {%- endif -%}
   {%- endfor -%}

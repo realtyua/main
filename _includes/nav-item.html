@@ -1,63 +1,30 @@
 {%- capture navitemtitle -%}
-  {%- if slug == 'commercial' -%}
-    {{ site.data.lang-uk.title_tab_commercial }}
-  {%- elsif slug == 'realtor' -%}
-    {{ site.data.lang-uk.title_tab_realtor }}
+  {%- if ni_slug == 'commercial' -%}
+    {{ site.data.uk.title_tab_commercial }}
+  {%- elsif ni_slug == 'realtor' -%}
+    {{ site.data.uk.title_tab_realtor }}
   {%- else -%}
-    {%- if one.navtitle -%}
-      {{ one.navtitle }}
-    {%- elsif one.breadcrumb -%}
-      {{ one.breadcrumb }}
+    {%- if ni.navtitle -%}
+      {{ ni.navtitle }}
+    {%- elsif ni.breadcrumb -%}
+      {{ ni.breadcrumb }}
     {%- else -%}
-      {{ one.title }}
+      {{ ni.title }}
     {%- endif -%}
   {%- endif -%}
 {%- endcapture -%}
-{%- if page.url contains '/all.html' -%}
-  {%- if page.dir == current or one.url contains page.url and page.navhide != 1 -%}
-    {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
-    {%- else -%}
-      <li class="nav-item">
-        {%- if one.url == page.url -%}
-        <span class="nav-link border-0 active">
-          <span>{{ navitemtitle }}</span>
-        </span>
-        {%- else -%}
-        <a href="{{ one.url }}" class="nav-link border-0">
-          <span>{{ navitemtitle }}</span>
-        </a>
-        {%- endif -%}
-      </li>
-    {%- endif -%}
-  {%- endif -%}
-{%- else -%}
-  {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
-    {% comment %}
-      <li class="nav-item d-none">
-        {%- if one.url == page.url -%}
-        <span class="nav-link border-0 active">
-          <span>{{ navitemtitle }}</span>
-        </span>
-        {%- else -%}
-        <a href="{{ one.url }}" class="nav-link border-0">
-          <span>{{ navitemtitle }}</span>
-        </a>
-        {%- endif -%}
-      </li>
-    {% endcomment %}
+<li class="nav-item">
+  {%- if pageu contains '/map.html' -%}
+    <a href="{{ ni.dir }}" class="nav-link border-0">
+      <span>{{ navitemtitle }}</span>
+    </a>
+  {%- elsif ni.dir contains paged -%}
+    <span class="nav-link border-0 active">
+      <span>{{ navitemtitle }}</span>
+    </span>
   {%- else -%}
-    {%- if here == current and one.url contains here and one.navhide != 1 -%}
-    <li class="nav-item">
-      {%- if one.url == page.url -%}
-      <span class="nav-link border-0 active">
-        <span>{{ navitemtitle }}</span>
-      </span>
-      {%- else -%}
-      <a href="{{ one.url }}" class="nav-link border-0">
-        <span>{{ navitemtitle }}</span>
-      </a>
-      {%- endif -%}
-    </li>
-    {%- endif -%}
+    <a href="{{ ni.dir }}" class="nav-link border-0">
+      <span>{{ navitemtitle }}</span>
+    </a>
   {%- endif -%}
-{%- endif -%}
+</li>

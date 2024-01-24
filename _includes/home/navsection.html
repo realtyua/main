@@ -1,38 +1,34 @@
-
 {%- assign url = include.url -%}
 {%- assign region = include.region -%}
 {%- assign ss = '' | split:'' -%}
-{%- assign ps = site.html_pages | sort: 'path' | reverse -%}
+{%- assign ps = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.dir != url and i.url contains url and i.navhide != 1" -%}
 {%- for i in ps -%}
   {%- assign l = i.dir | split: '/' -%}
-  {%- if i.dir contains url and i.dir != url and i.title != '' and l.size == 4 or l.size == 5 -%}
+  {%- if l.size == 4 or l.size == 5 -%}
     {%- assign ss = ss | push: i -%}
   {%- endif -%}
 {%- endfor -%}
-{%- assign mapPage = include.url | append: 'map.html' | remove_first: '/' -%}
+{%- assign mapPage = url | append: 'map.html' | remove_first: '/' -%}
 {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
-{%- if ss.size > 0 -%}
+{%- if ss[0] -%}
 <div class="menu pt-1">
   <nav class="navbar p-0">
     {%- if three.last_modified_at and three.last_modified_at != '' -%}
-    <span class="cal" data-toggle="tooltip" data-html="true" data-original-title="Розділ оновлено<br/>{%- include date.html date=three.last_modified_at -%}">&#128197;</span>
+      <span class="cal" data-toggle="tooltip" data-html="true" data-original-title="Розділ оновлено<br/>{%- include date.html date=three.last_modified_at -%}">&#128197;</span>
     {%- endif -%}
     {%- if isMap == 'true' -%}
-    <a class="marker mr-2" href="{{ url }}map" title="{{ site.data.lang-uk.realestate }} {{ site.data.lang-uk.re_on_map }}">
-      <i class="d-none">{{ region }}</i>
-    </a>
+      <a class="marker mr-2" href="{{ url }}map" title="{{ site.data.uk.realestate }} {{ site.data.uk.re_on_map }}">
+        <i class="d-none">{{ region }}</i>
+      </a>
     {%- endif -%}
-    <button title="{{ site.data.lang-uk.sections }}" class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Toggle button">
+    <button title="{{ site.data.uk.sections }}" class="navbar-toggler shadow-none collapsed" type="button" data-toggle="collapse" data-target="#{{ region }}-realestate-section" aria-controls="{{ region }}-realestate-section" aria-expanded="false" aria-label="Кнопка перемикання">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="section px-2 collapse navbar-collapse" id="{{ region }}-realestate-section">
       <ul class="navbar-nav">
         {%- for s in ss -%}
-          {%- assign slug = s.url | split: '/' | last -%}
-          {%- assign current = s.url | remove: slug | remove: '//' | append: '/' -%}
-          {%- if url == current and s.navhide != 1 and s.title != '' -%}
-            {%- include home/navitem.html -%}
-          {%- endif -%}
+          {%- assign sslug = s.dir | split: '/' | last -%}
+          {%- include home/navitem.html -%}
         {%- endfor -%}
       </ul>
     </div>

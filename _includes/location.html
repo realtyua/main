@@ -1,25 +1,34 @@
-{%- assign back = page.dir | split: '/' -%}
-{%- if back.size == 4 and page.dir contains 'city' or page.dir contains 'town' -%}
-  {%- assign size = back | size | minus: 0 -%}
-{%- elsif back.size == 5 and page.dir contains 'city' or page.dir contains 'town' -%}
-  {%- assign size = back | size | minus: 1 -%}
-{%- elsif back.size == 6 and page.dir contains 'city' or page.dir contains 'town' -%}
-  {%- assign size = back | size | minus: 2 -%}
-{%- elsif back.size == 7 and page.dir contains 'city' or page.dir contains 'town' -%}
-  {%- assign size = back | size | minus: 3 -%}
-{%- elsif back.size == 8 and page.dir contains 'city' or page.dir contains 'town' -%}
-  {%- assign size = back | size | minus: 4 -%}
-{%- elsif back.size == 3 and page.dir contains 'district' -%}
-  {%- assign size = back | size -%}
-{%- elsif back.size == 3 -%}
-  {%- assign size = back | size -%}
-{%- elsif back.size == 4 -%}
-  {%- assign size = back | size | minus: 1 -%}
-{%- elsif back.size == 4 and page.dir contains 'district' -%}
-  {%- assign size = back | size | minus: 1 -%}
-{%- elsif back.size == 5 and page.dir contains 'district' -%}
-  {%- assign size = back | size | minus: 2 -%}
+{%- assign pd = page.dir -%}
+{%- if pd contains '/city/' or pd contains '/town/' -%}{%- assign ct = true -%}{%- else -%}{%- assign ct = false -%}{%- endif -%}
+{%- if pd contains '/district/' -%}{%- assign dt = true -%}{%- else -%}{%- assign cd = false -%}{%- endif -%}
+{%- assign sl = pd | split: '/' -%}
+{%- if sl.size == 4 and ct == true -%}
+  {%- assign sls = sl | size | minus: 0 -%}
+{%- elsif sl.size == 5 and ct == true -%}
+  {%- assign sls = sl | size | minus: 1 -%}
+{%- elsif sl.size == 6 and ct == true -%}
+  {%- assign sls = sl | size | minus: 2 -%}
+{%- elsif sl.size == 7 and ct == true -%}
+  {%- assign sls = sl | size | minus: 3 -%}
+{%- elsif sl.size == 8 and ct == true -%}
+  {%- assign sls = sl | size | minus: 4 -%}
+{%- elsif sl.size == 3 and dt == true -%}
+  {%- assign sls = sl | size -%}
+{%- elsif sl.size == 3 -%}
+  {%- assign sls = sl | size -%}
+{%- elsif sl.size == 4 -%}
+  {%- assign sls = sl | size | minus: 1 -%}
+{%- elsif sl.size == 4 and dt == true -%}
+  {%- assign sls = sl | size | minus: 1 -%}
+{%- elsif sl.size == 5 and dt == true -%}
+  {%- assign sls = sl | size | minus: 2 -%}
 {%- endif -%}
-{%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
-{%- for pb in ps limit:1 -%}{%- if pb.breadcrumb -%}{%- assign location = pb.breadcrumb -%}{%- else -%}{%- assign location = pb.navtitle -%}{%- endif -%}{%- endfor -%}
+{%- assign ld = sl | slice: 0, sls | join: '/' | append: '/' -%}
+{%- assign lps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains ld and i.url == ld' -%}
+{%- for lpb in lps limit: 1 -%}
+  {%- if lpb.breadcrumb -%}
+    {%- assign location = lpb.breadcrumb -%}
+  {%- else -%}
+    {%- assign location = lpb.navtitle -%}
+  {%- endif -%}
+{%- endfor -%}

@@ -1,151 +1,170 @@
-{%- capture navitemtitle -%}
-  {%- if slug == 'apartment' -%}
-    {{ one.navtitle }} і частини квартир та окремі кімнати у квартирі або гуртожитку
-  {%- elsif slug == 'commercial' -%}
-    Нежитлова і {{ one.navtitle | downcase }} для ведення підприємницької діяльності
-  {%- elsif slug == 'developer' -%}
-    Місцеві {{ one.navtitle | downcase }} нерухомості і новобудови та житлові комплекси
-  {%- elsif slug == 'garage' -%}
-    Окремі та спільні {{ one.navtitle | downcase }} і паркувальні місця над землею та під землею
-  {%- elsif slug == 'house' -%}
-    Великі і маленькі {{ one.navtitle | downcase }} їх окремі частини та відокремлені кімнати у будинку
-  {%- elsif slug == 'land' -%}
-    {{ one.navtitle }} для сільського господарства і земельні ділянки для будівництва
-  {%- elsif slug == 'realtor' -%}
-    Місцеві {{ one.navtitle | downcase }} з купівлі, продажу і оренди нерухомості
-  {%- elsif slug == 'agency' -%}
-    Місцеві {{ one.navtitle | downcase }} і агенства з купівлі, продажу і оренди нерухомості
-  {%- elsif slug == 'rent' -%}
-   Подобова і довгострокова {{ one.navtitle | downcase }} квартир, будинків, приміщень, земелі
-  {%- else -%}
-    {%- if one.navtitle -%}
-      {{ one.navtitle }}
-    {%- elsif one.breadcrumb -%}
-      {{ one.breadcrumb }}
-    {%- else -%}
-      {{ one.title }}
+{%- assign number = number | plus: 1 -%}
+{%- assign cint = ci.navtitle -%}
+{%- assign ciu = ci.url -%}
+{%- if ci_slug == 'developer' -%}
+  {%- capture navitemtitle -%}Місцеві {{ cint | downcase }} нерухомості і новобудови та житлові комплекси{%- endcapture -%}
+  {%- assign pages_developers = site.html_pages | where_exp: "i", "i.dir contains slugd and i.url contains '/developer/' and i.layout == 'developer' and i.navtitle != 'Будівельник'" -%}
+  {%- assign developers = offers | where_exp: 'i', "i.seller contains site.data.uk.building_company" -%}
+  {%- assign total_records = developers.size -%}
+  {%- assign average_price = 0 -%}
+  {%- if pages_developers.size > 0 -%}
+    {%- capture total_developers -%}
+      <span class="badge text-white p-0 m-1">
+        <span class="bg-primary py-1 px-2 rounded-left">Забудовників</span><span class="py-1 px-2 bg-info rounded-right">{{ pages_developers.size }}</span>
+      </span>
+    {%- endcapture -%}
+  {%- endif -%}
+  {%- assign objects = '' | split: '' -%}
+  {%- assign pages = site.html_pages -%}
+  {%- for ob in pages -%}
+    {%- if ob.dir contains slugd and ob.url contains 'object' and ob.layout == 'object' -%}
+      {%- unless ob.dir contains '/developer/builder/object/' -%}
+        {%- assign objects = objects | push: p -%}
+      {%- endunless -%}
     {%- endif -%}
+  {%- endfor -%}
+  {%- if objects.size > 0 -%}
+    {%- capture ncomplexes -%}
+      <span class="badge text-white p-0 m-1">
+        <span class="bg-primary py-1 px-2 rounded-left">Об'єктів</span><span class="py-1 px-2 bg-info rounded-right">{{ objects.size }}</span>
+      </span>
+    {%- endcapture -%}
   {%- endif -%}
-{%- endcapture -%}
-
-{%- capture ncomplexes -%}
-  {%- if slug == 'developer' -%}
-    {%- assign objects = '' | split: '' -%}
-    {%- assign pages = site.html_pages -%}
-    {%- for ob in pages -%}
-      {%- if ob.dir contains thehere and ob.url contains 'object' and ob.layout == 'object' -%}
-        {%- unless ob.dir contains '/developer/builder/object/' -%}
-          {%- assign objects = objects | push: p -%}
-        {%- endunless -%}
-      {%- endif -%}
-    {%- endfor -%}
-  {% comment %}
-    {%- assign demo_objects = site.region_slug | prepend: '/region/city/' | append: '/developer/builder/object/' -%}
-    {%- assign objects = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'object' and i.layout == 'object'" -%}
-  {% endcomment %}
-    <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Об'єктів</span><span class="py-1 px-2 bg-info rounded-right">{{ objects | size }}</span>
-    </span>
+  {%- elsif ci_slug == 'realtor' -%}
+  {%- capture navitemtitle -%}Місцеві {{ cint | downcase }} з купівлі, продажу і оренди нерухомості{%- endcapture -%}
+  {%- assign pages_realtors = site.html_pages | where_exp: 'i', "i.dir contains slugd and i.url contains '/realtor/' and i.layout == 'realtor' and i.navtitle != 'Агент Продавець'" -%}
+  {%- assign realtors = offers | where_exp: 'i', "i.seller contains site.data.uk.agent or i.seller contains site.data.uk.realtor or i.seller contains site.data.uk.manager or i.seller contains site.data.uk.re_seller" -%}
+  {%- assign total_records = realtors.size -%}
+  {%- assign average_price = 0 -%}
+  {%- if pages_realtors.size > 0 -%}
+    {%- capture total_realtors -%}
+      <span class="badge text-white p-0 m-1">
+        <span class="bg-primary py-1 px-2 rounded-left">Aгентів і рієлторів</span><span class="py-1 px-2 bg-info rounded-right">{{ pages_realtors.size }}</span>
+      </span>
+    {%- endcapture -%}
   {%- endif -%}
-{%- endcapture -%}
-
-{%- capture nsellers -%}
-  {%- if slug == 'developer' -%}
-    {%- assign developers = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'developer' and i.layout == 'developer' and i.navtitle != 'Будівельник'" -%}
-    <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Забудовників</span><span class="py-1 px-2 bg-info rounded-right">{{ developers | size }}</span>
-    </span>
-  {%- elsif slug == 'realtor' -%}
-    {%- assign realtors = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'realtor' and i.layout == 'realtor' and i.navtitle != 'Агент Продавець'" -%}
-    <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Aгентів і рієлторів</span><span class="py-1 px-2 bg-info rounded-right">{{ realtors | size }}</span>
-    </span>
-  {%- elsif slug == 'agency' -%}
-    {%- assign agencys = site.html_pages | where_exp: "i", "i.dir contains thehere and i.url contains 'agency' and i.layout == 'realtor' and i.navtitle != 'Агенція Продавець'" -%}
-    <span class="badge text-white p-0 m-1">
-      <span class="bg-primary py-1 px-2 rounded-left">Aгенцій і агенств</span><span class="py-1 px-2 bg-info rounded-right">{{ agencys | size }}</span>
-    </span>
+{%- elsif ci_slug == 'agency' -%}
+  {%- capture navitemtitle -%}Місцеві {{ cint | downcase }} і агенства з купівлі, продажу і оренди нерухомості{%- endcapture -%}
+  {%- assign pages_agencies = site.html_pages | where_exp: 'i', "i.dir contains slugd and i.url contains '/agency/' and i.layout == 'realtor' and i.navtitle != 'Агенція Продавець'" -%}
+  {%- assign agencies = offers | where_exp: 'i', "i.seller contains site.data.uk.agency or i.seller contains site.data.uk.ahentstvo" -%}
+  {%- assign total_records = agencies.size -%}
+  {%- assign average_price = 0 -%}
+  {%- if pages_agencies.size > 0 -%}
+    {%- capture total_agencies -%}
+      <span class="badge text-white p-0 m-1">
+        <span class="bg-primary py-1 px-2 rounded-left">Aгенцій і агенств</span><span class="py-1 px-2 bg-info rounded-right">{{ pages_agencies.size }}</span>
+      </span>
+    {%- endcapture -%}
   {%- endif -%}
-{%- endcapture -%}
-
-{%- capture records -%}
-  {%- if slug == 'apartment' -%}
-    {%- assign oapartment = offers | where_exp: "i", "i.rent != '1' and
-      i.type == site.data.lang-uk.re_apartment or i.type == site.data.lang-uk.re_apartment_part or i.type contains site.data.lang-uk.re_room
-    " -%}
-    {{ oapartment | size }}
-  {%- elsif slug == 'commercial' -%}
-    {%- assign ocommercial = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_roomsp" -%}
-    {{ ocommercial | size }}
-  {%- elsif slug == 'developer' -%}
-    {%- assign odeveloper = offers | where_exp: "i", "i.seller contains site.data.lang-uk.building_company" -%}
-    {{ odeveloper | size }}
-  {%- elsif slug == 'garage' -%}
-    {%- assign ogarage = offers | where_exp: "i", "i.rent != '1' and
-      i.type == site.data.lang-uk.re_garage or i.type contains site.data.lang-uk.re_place
-    " -%}
-    {{ ogarage | size }}
-  {%- elsif slug == 'house' -%}
-    {%- assign ohouse = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_house or i.type == site.data.lang-uk.re_house_part" -%}
-    {{ ohouse | size }}
-  {%- elsif slug == 'land' -%}
-    {%- assign oland = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.lang-uk.re_land" -%}
-    {{ oland | size }}
-  {%- elsif slug == 'realtor' -%}
-    {%- assign orealtor = offers | where_exp: "i", "
-      i.seller contains site.data.lang-uk.agent or
-      i.seller contains site.data.lang-uk.realtor or
-      i.seller contains site.data.lang-uk.manager or
-      i.seller contains site.data.lang-uk.re_seller
-    " -%}
-    {{ orealtor | size }}
-  {%- elsif slug == 'agency' -%}
-    {%- assign oagency = offers | where_exp: "i", "
-      i.seller contains site.data.lang-uk.agency or
-      i.seller contains site.data.lang-uk.ahentstvo
-    " -%}
-    {{ oagency | size }}
-  {%- elsif slug == 'rent' -%}
-    {%- assign orent = offers | where_exp: "i", "i.rent == '1'" -%}
-    {{ orent | size }}
-  {%- else -%}
+{%- elsif ci_slug == 'apartment' -%}
+  {%- capture navitemtitle -%}{{ cint }} і частини квартир та окремі кімнати у квартирі або гуртожитку{%- endcapture -%}
+  {%- assign apartments = offers | where_exp: 'i', "i.rent != '1' and i.type contains site.data.uk.re_apartment or i.type contains site.data.uk.re_apartment_part or i.type contains site.data.uk.re_room" -%}
+  {%- assign total_records = apartments.size -%}
+  {%- assign sum = 0 -%}
+  {%- for offer in apartments -%}
+    {%- include property/price.html -%}
+    {%- assign price = price | remove: '&nbsp;' | divided_by: offer.surface -%}
+    {%- assign sum = sum | plus: price -%}
+  {%- endfor -%}
+  {%- if total_records > 0 -%}
+    {%- assign average_price = sum | divided_by: total_records -%}
   {%- endif -%}
-{%- endcapture -%}
-
-{%- if page.url contains '/all.html' -%}
-  {%- if page.dir == current or one.url contains page.url and page.navhide != 1 -%}
-    {%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
-    {%- else -%}
-      {% assign number = number | plus: 1 %}
-      <div class="col px-2 mb-3">
-        <div class="card h-100 bg-{{ number }}">
-          <div class="card-body">
-            <h3 class="card-title h5"><a href="{{ one.url }}">{{ navitemtitle }}</a></h3>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 text-right px-2">
-            {%- if nsellers != '' -%}{{ nsellers }}{%- endif -%}
-            {%- if ncomplexes != '' -%}{{ ncomplexes }}{%- endif -%}
-            {%- if records != '0' -%}
-            <span class="badge text-white p-0 m-1">
-              <span class="bg-info py-1 px-2 rounded-left">{{ records }}</span><span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
-            </span>
-            {%- endif -%}
-          </div>
-        </div>
+{%- elsif ci_slug == 'commercial' -%}
+  {%- capture navitemtitle -%}Нежитлова і {{ cint | downcase }} для ведення підприємницької діяльності{%- endcapture -%}
+  {%- assign commercials = offers | where_exp: 'i', "i.rent != '1' and i.type contains site.data.uk.re_roomsp" -%}
+  {%- assign total_records = commercials.size -%}
+  {%- assign sum = 0 -%}
+  {%- for offer in commercials -%}
+    {%- include property/price.html -%}
+    {%- assign price = price | remove: '&nbsp;' | divided_by: offer.surface -%}
+    {%- assign sum = sum | plus: price -%}
+  {%- endfor -%}
+  {%- if total_records > 0 -%}
+    {%- assign average_price = sum | divided_by: total_records -%}
+  {%- endif -%}
+{%- elsif ci_slug == 'garage' -%}
+  {%- capture navitemtitle -%}Окремі та спільні {{ cint | downcase }} і паркувальні місця над землею та під землею{%- endcapture -%}
+  {%- assign garages = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.uk.re_garage or i.type contains site.data.uk.re_place" -%}
+  {%- assign total_records = garages.size -%}
+  {%- assign sum = 0 -%}
+  {%- for offer in garages -%}
+    {%- include property/price.html -%}
+    {%- assign price = price | remove: '&nbsp;' | divided_by: offer.surface -%}
+    {%- assign sum = sum | plus: price -%}
+  {%- endfor -%}
+  {%- if total_records > 0 -%}
+    {%- assign average_price = sum | divided_by: total_records -%}
+  {%- endif -%}
+{%- elsif ci_slug == 'house' -%}
+  {%- capture navitemtitle -%}Великі і маленькі {{ cint | downcase }} їх окремі частини та відокремлені кімнати у будинку{%- endcapture -%}
+  {%- assign houses = offers | where_exp: 'i', "i.rent != '1' and i.type contains site.data.uk.re_house or i.type contains site.data.uk.re_house_part" -%}
+  {%- assign total_records = houses.size -%}
+  {%- assign sum = 0 -%}
+  {%- for offer in houses -%}
+    {%- include property/price.html -%}
+    {%- assign price = price | remove: '&nbsp;' | divided_by: offer.surface -%}
+    {%- assign sum = sum | plus: price -%}
+  {%- endfor -%}
+  {%- if total_records > 0 -%}
+    {%- assign average_price = sum | divided_by: total_records -%}
+  {%- endif -%}
+{%- elsif ci_slug == 'land' -%}
+  {%- capture navitemtitle -%}{{ cint }} для сільського господарства і земельні ділянки для будівництва{%- endcapture -%}
+  {%- assign lands = offers | where_exp: 'i', "i.rent != '1' and i.type contains site.data.uk.re_land" -%}
+  {%- assign total_records = lands.size -%}
+  {%- assign sum = 0 -%}
+  {%- for offer in lands -%}
+    {%- include property/price.html -%}
+    {%- assign price = price | remove: '&nbsp;' | divided_by: offer.surface_land -%}
+    {%- assign sum = sum | plus: price -%}
+  {%- endfor -%}
+  {%- if total_records > 0 -%}
+    {%- assign average_price = sum | divided_by: total_records -%}
+  {%- endif -%}
+{%- elsif ci_slug == 'rent' -%}
+  {%- capture navitemtitle -%}Подобова і довгострокова {{ cint | downcase }} квартир, будинків, приміщень, земелі{%- endcapture -%}
+  {%- assign rents = offers | where_exp: 'i', "i.rent == '1'" -%}
+  {%- assign total_records = rents.size -%}
+  {%- assign sum = 0 -%}
+  {%- for offer in rents -%}
+    {%- include property/price.html -%}
+    {%- assign surface = offer.surface | default: offer.surface_land -%}
+    {%- assign price = price | remove: '&nbsp;' | divided_by: surface -%}
+    {%- assign sum = sum | plus: price -%}
+  {%- endfor -%}
+  {%- if total_records > 0 -%}
+    {%- assign average_price = sum | divided_by: total_records -%}
+  {%- endif -%}
+{%- else -%}
+  {%- capture navitemtitle -%}{%- if cint -%}{{ cint }}{%- elsif ci.breadcrumb -%}{{ ci.breadcrumb }}{%- else -%}{{ ci.title }}{%- endif -%}{%- endcapture -%}
+{%- endif -%}
+<div class="col px-2 mb-3">
+  <div class="card h-100 bg-{{ number }}">
+    <div class="card-body">
+      <h3 class="card-title h5"><a href="{{ ci.dir }}">{{ navitemtitle }}</a></h3>
+    </div>
+    {%- if average_price > 0 -%}
+      <div class="card-footer bg-transparent py-0 border-top-0 text-right px-2">
+          <span class="badge text-white p-0 m-1">
+            <span class="bg-primary py-1 px-2 rounded-left">Середня ціна</span><span class="bg-info py-1 px-2">
+              {%- assign usd_price = average_price | divided_by: site.nbu -%}
+              <abbr data-toggle="tooltip" title="${%- include numf.html number=usd_price ts='&nbsp;' decimals=0 -%}">
+                {%- include numf.html number=average_price ts='&nbsp;' decimals=0 -%}
+              </abbr>&nbsp;₴
+            </span><span class="py-1 px-2 bg-primary rounded-right">за 1 м²</span>
+          </span>
       </div>
     {%- endif -%}
-  {%- endif -%}
-{%- else -%}
-
-{%- if one.url contains here and one.url contains 'all.html' and one.navhide != 1 -%}
-{%- else -%}
-  {%- if here == current and one.url contains here and one.navhide != 1 -%}
-  <div class="col px-2 mb-3">
-    <a href="{{ one.url }}" class="nav-link border-0">
-      <span>{{ navitemtitle }}</span>
-    </a>
+    <div class="card-footer bg-transparent border-top-0 text-right px-2">
+      {%- if total_realtors != '' and ci.dir contains '/realtor/' -%}{{ total_realtors }}{%- endif -%}
+      {%- if total_agencies != '' and ci.dir contains '/agency/' -%}{{ total_agencies }}{%- endif -%}
+      {%- if total_developers != '' and ci.dir contains '/developer/' -%}{{ total_developers }}{%- endif -%}
+      {%- if ncomplexes != '' and ci.dir contains '/developer/' -%}{{ ncomplexes }}{%- endif -%}
+      {%- if total_records > 0 -%}
+        <span class="badge text-white p-0 m-1">
+          <span class="bg-info py-1 px-2 rounded-left">{{ total_records }}</span><span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
+        </span>
+      {%- endif -%}
+    </div>
   </div>
-  {%- endif -%}
-{%- endif -%}
-
-{%- endif -%}
+</div>

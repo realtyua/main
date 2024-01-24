@@ -1,19 +1,19 @@
 <hr>
+{%- include select/var-options.html -%}
 <div class="row mt-3">
-  {%- include select/var-options.html -%}
   {%- for 0 in 0s -%}
-    {%- assign slug = 0.url | split: "/" | last -%}
-    {%- assign current = 0.url | remove: slug | remove: "//" | append: "/" -%}
-    {%- if "/" == current and 0.navhide != 1 -%}
+    {%- assign 0slug = 0.dir | split: '/' | last -%}
+    {%- assign 0current = 0.url | remove: 0slug | remove: '//' | append: '/' -%}
+    {%- if '/' == 0current and 0.navhide != 1 -%}
       <div class="col-sm-6 col-md-3">
         {%- if 0.url == '/region/' -%}
-          <h6><a href="/">Головна</a></h6>
+          <p class="h6"><a href="/">Головна</a></p>
           <ul class="list-unstyled">
             {%- for rp in rps -%}
-              {%- if rp.url contains "new.html" or rp.url contains "add.html" -%}
+              {%- if rp.url contains '/new.html' or rp.url contains '/add.html' -%}
               {%- else -%}
                 <li class="mb-2">
-                  {%- if rp.url == page.url -%}
+                  {%- if rp.url == pageu -%}
                     <span>{%- if rp.navtitle -%}{{ rp.navtitle }}{%- else -%}{{ rp.title }}{%- endif -%}</span>
                   {%- else -%}
                     <a href="{{ rp.url }}">{%- if rp.navtitle -%}{{ rp.navtitle }}{%- else -%}{{ rp.title }}{%- endif -%}</a>
@@ -23,30 +23,28 @@
             {%- endfor -%}
           </ul>
         {%- else -%}
-          {%- if 0.url == page.url -%}
-            <h6>{%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}</h6>
+          {%- if 0.url == pageu -%}
+            <p class="h6">{%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}</p>
           {%- else -%}
-            <h6><a href="{{ 0.url }}">{%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}</a></h6>
+            <p class="h6"><a href="{{ 0.dir }}">{%- if 0.navtitle -%}{{ 0.navtitle }}{%- else -%}{{ 0.title }}{%- endif -%}</a></p>
           {%- endif -%}
-          {%- include map/1.html current=0.url -%}
+          {%- include map/1.html current=0.dir -%}
         {%- endif -%}
       </div>
       {%- if 0.url -%}
-        {%- assign 1s = site.html_pages -%}
+        {%- assign 1s = 0s -%}
         {%- for 1 in 1s -%}
-          {%- if 1 -%}
-            {%- assign slug = 1.url | split: "/" | last -%}
-            {%- assign current = 1.url | remove: slug | remove: "//" | append: "/" -%}
-            {%- if 0.url == current and 1.url contains "city" or 1.url contains "town" -%}
+          {%- assign 1slug = 1.dir | split: '/' | last -%}
+          {%- assign 1current = 1.url | remove: 1slug | remove: '//' | append: '/' -%}
+          {%- if 0.url == 1current and 1.url contains '/city/' or 1.url contains '/town/' -%}
             <div class="col-sm-6 col-md-3">
-              {%- if 1.url == page.url -%}
-                <h6>{%- if 1.navtitle -%}{{ 1.navtitle }}{%- else -%}{{ 1.title }}{%- endif -%}</h6>
+              {%- if 1.url == pageu -%}
+                <p class="h6">{%- if 1.navtitle -%}{{ 1.navtitle }}{%- else -%}{{ 1.title }}{%- endif -%}</p>
               {%- else -%}
-                <h6><a href="{{ 1.url }}">{%- if 1.navtitle -%}{{ 1.navtitle }}{%- else -%}{{ 1.title }}{%- endif -%}</a></h6>
+                <p class="h6"><a href="{{ 1.dir }}">{%- if 1.navtitle -%}{{ 1.navtitle }}{%- else -%}{{ 1.title }}{%- endif -%}</a></p>
               {%- endif -%}
-              {%- include map/1.html current=1.url -%}
+              {%- include map/1.html current=1.dir -%}
             </div>
-            {%- endif -%}
           {%- endif -%}
         {%- endfor -%}
       {%- endif -%}

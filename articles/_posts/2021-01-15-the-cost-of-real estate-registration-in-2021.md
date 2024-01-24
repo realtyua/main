@@ -1,6 +1,7 @@
 ---
 title: Вартість реєстрації нерухомості в 2021 році
 date: 2021-01-15
+layout: post
 source:
   title: Міністерство юстиції
   url: https://psjust.gov.ua

@@ -1,3 +1,3 @@
 {%- assign t = include.n -%}
 {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,2 }}&nbsp;{{ t | slice:7,2 }}&nbsp;{{ t | slice:9,1 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
-<a href="tel:+{{ t }}">{{ n }}</a>
+<a href="tel:+{{ t }}" rel="nofollow">{{ n }}</a>

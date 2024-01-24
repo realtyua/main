@@ -15,13 +15,15 @@
   data-detail-view-by-click="true"
   data-detail-formatter="jsDetailFormatter"
   data-pagination="true"
+  data-pagination-pre-text="❮"
+  data-pagination-next-text="❯"
   data-mobile-responsive="true"
   data-buttons-class="primary"
-  data-url="{{ json | absolute_url }}">
+  data-url="{{ json }}">
   <thead class="thead-re">
     <tr>
-      <th data-field="type" data-title="{{ site.data.lang-uk.re_offer }}" data-formatter="propertyFormatter">Property</th>
-      <th data-field="price" data-title="{{ site.data.lang-uk.re_cost | capitalize }}" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Price</th>
+      <th data-field="type" data-title="{{ site.data.uk.re_offer }}" data-formatter="propertyFormatter">Власність</th>
+      <th data-field="price" data-title="{{ site.data.uk.re_cost | capitalize }}" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Ціна</th>
     </tr>
   </thead>
 </table>

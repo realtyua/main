@@ -5,9 +5,9 @@
   {%- else -%}
     {%- capture n -%}+{{ t | slice:0,2 }}&nbsp;{{ t | slice:2,3 }}&nbsp;{{ t | slice:5,3 }}&nbsp;{{ t | slice:8,2 }}&nbsp;{{ t | slice:10,12 }}{%- endcapture -%}
   {%- endif -%}
-  <a href="tel:+{{ t }}">{{ n }}</a>
+  <a href="tel:+{{ t }}" rel="nofollow">{{ n }}</a>
 {%- elsif include.legal == "email" -%}
-  <a href="mailto:{{ site.contact[include.legal] }}">{{ site.contact[include.legal] }}</a>
+  <a href="mailto:{{ site.contact[include.legal] }}" rel="nofollow">{{ site.contact[include.legal] }}</a>
 {%- else -%}
   {{ site.contact[include.legal] }}
 {%- endif -%}

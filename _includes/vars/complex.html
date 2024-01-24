@@ -1,0 +1,4 @@
+
+{%- assign split = include.title | split: ' ' -%}
+{%- assign count = split | size -%}
+{%- assign complex = split | slice: include.slice, count | join: ' ' -%}

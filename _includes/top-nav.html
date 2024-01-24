@@ -4,8 +4,8 @@
   <div class="col-lg-4 order-2 order-lg-1 mt-3 mt-lg-1 mb-3 mb-lg-0 pr-lg-0">
     <nav class="nav nav-masthead justify-content-end">
   {%- endif -%}
-  {%- if tn.url == page.url -%}
-    <span class="nav-link{% if tn.url == page.url %} active{% endif %}">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</span>
+  {%- if tn.url == pageu -%}
+    <span class="nav-link{% if tn.url == pageu %} active{% endif %}">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</span>
   {%- else -%}
     <a href="{{ tn.url }}" class="nav-link">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</a>
   {%- endif -%}
@@ -16,25 +16,14 @@
     </nav>
   </div>
   {%- endif -%}
-  {%- comment -%}
-    {%- if tn.url == page.url -%}
-      <div class="col-auto order-1 order-lg-2 text-right">
-        <span class="btn btn-add btn-sm">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</span>
-      </div>
-    {%- else -%}
-      <div class="col-auto order-1 order-lg-2 text-right">
-        <a href="{{ tn.url }}" class="btn btn-add btn-sm">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</a>
-      </div>
-    {%- endif -%}
-  {%- endcomment -%}
-  {%- if tn.url == page.url -%}
+  {%- if tn.url == pageu -%}
     <div class="col-auto order-1 order-lg-2 text-right">
-      <span class="btn btn-add btn-sm">{{ site.data.lang-uk.add_realestate }}</span>
+      <span class="btn btn-add btn-sm">{{ site.data.uk.add_realestate }}</span>
     </div>
   {%- else -%}
     <div class="col-auto order-1 order-lg-2 text-right">
       <a class="btn btn-success btn-sm mr-1" data-toggle="collapse" href="#collapseAreaSelect" role="button" aria-expanded="false" aria-controls="collapseAreaSelect" title="Місцевість де розташована нерухомість">Пошук місцевості</a>
-      <a href="{{ site.addre }}" class="btn btn-add btn-sm">{{ site.data.lang-uk.add_realestate }}</a>
+      <a href="{{ site.addre }}" class="btn btn-add btn-sm">{{ site.data.uk.add_realestate }}</a>
     </div>
   {%- endif -%}
 {%- endfor -%}

@@ -1,5 +1,5 @@
 <header>
-  <div class="container bg-primary{% if page.url != '/' %} pt-3{% else %} py-3{% endif %}">
+  <div class="container bg-primary{% if pageu != '/' %} pt-3{% else %} py-3{% endif %}">
     <div class="row justify-content-end">{%- include top-nav.html -%}</div>
     <div class="row">
       <div class="col-lg-3">
@@ -7,7 +7,7 @@
           <div class="icon"></div>
           <div class="d-flex flex-column lh-1 ml-2">
             <span class="text-white mt-0 font-weight-bold">{{ site.region }}</span>
-            <span class="small mt-0 text-light">{{ site.data.lang-uk.flag_ua_net }}</span>
+            <span class="small mt-0 text-light">{{ site.data.uk.flag_ua_net }}</span>
           </div>
         </a>
       </div>
@@ -15,16 +15,14 @@
 
       </div>
       <div class="col-md-3">
-
         {% comment %}
         <div class="col-md-3 d-flex align-items-end justify-content-end">
           <span class="text-white mt-3"><b>Оновлено</b>: 05 квітня 2021 року</span>
         </div>
         {% endcomment %}
-
       </div>
     </div>
-    {%- if page.url != '/' -%}
+    {%- if pageu != '/' -%}
       {%- include header/navbar.html -%}
     {%- endif -%}
   </div>
@@ -35,8 +33,8 @@
           <div class="row">
             <div class="col-md-6 offset-md-3">
               <label for="areaSelect" class="sr-only">Пошук місцевості:</label>
-              <select name="areas" id="rehiony" aria-label="Виберіть найменування місцевості">
-                <option value="">Введіть назву міста або району чи області</option>
+              <select name="areas" id="rehiony" aria-label="Виберіть назву місцевості чи тип нерухомості">
+                <option value="">Введіть назву міста чи району або області</option>
               </select>
             </div>
           </div>

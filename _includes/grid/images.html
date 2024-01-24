@@ -1,0 +1,16 @@
+{% assign district = page.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' %}
+{%- for file in include.files -%}
+  {%- if forloop.first -%}
+  <h2>Фотознимки об'єкта нерухомості</h2>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">
+  {%- endif -%}
+    <div class="col px-1 mb-2 mb-md-0">
+      <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="{{ page.type }} {% if page.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ page.address }}{% else %}{{ site.data.uk.re_at }} {{ page.address }}{% endif %} {{ site.data.uk.re_in }} {{ page.location }}{{ district }}" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} {{ page.location }}{{ district }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="{{ page.uid }}">
+        <img src="{{ file.path | url_decode | relative_url }}" loading="lazy" class="img-fluid img-thumbnail" width="380" height="285" title="{{ page.type }} {% if page.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ page.address }}{% else %}{{ site.data.uk.re_at }} {{ page.address }}{% endif %} {{ site.data.uk.re_in }} {{ page.location }}{{ district }}" alt="{{ page.type }} {{ site.data.uk.re_in }} {{ page.location }}{{ district }}" intrinsicsize="800x600">
+      </a>
+    </div>
+  {%- if forloop.last -%}
+  </div>
+  <hr>
+  {%- endif -%}
+{%- endfor -%}

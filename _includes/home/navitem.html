@@ -1,9 +1,8 @@
-{%- assign slug = s.url | split: "/" | last -%}
 {%- capture navlink -%}
-  {%- if slug == 'commercial' -%}
-    {{ site.data.lang-uk.title_tab_commercial }}
-  {%- elsif slug == 'realtor' -%}
-    {{ site.data.lang-uk.title_tab_realtor }}
+  {%- if sslug == 'commercial' -%}
+    {{ site.data.uk.title_tab_commercial }}
+  {%- elsif sslug == 'realtor' -%}
+    {{ site.data.uk.title_tab_realtor }}
   {%- else -%}
     {%- if s.navtitle -%}
       {{ s.navtitle }}
@@ -15,5 +14,5 @@
   {%- endif -%}
 {%- endcapture -%}
 <li class="nav-item m-0">
-  <a class="nav-link border-0 px-2{% if forloop.last %} pt-1 pb-2{% else %} py-1{% endif %}" href="{{ s.url }}">{{ navlink }}</a>
+  <a class="nav-link border-0 px-2{% if forloop.last %} pt-1 pb-2{% else %} py-1{% endif %}" href="{{ s.dir }}">{{ navlink }}</a>
 </li>

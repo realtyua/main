@@ -1,12 +1,12 @@
 <footer id="contacts">
   <div class="container border-top-4 border-primary">
-    {%- if page.url != '/' -%}
+    {%- if pageu != '/' -%}
     <div class="row pt-4">
       <div class="col-12">
         <div class="d-flex justify-content-end">
           <div class="h5 mb-0">
-            {%- if page.url contains 'help.html' -%}{%- else -%}<a href="/help" class="badge badge-success mr-2">{{ site.data.lang-uk.help }}</a>{%- endif -%}
-            <a id="mapsite" class="badge badge-secondary collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">{{ site.data.lang-uk.map_site }}</a>
+            {%- if pageu contains '/help.html' -%}{%- else -%}<a href="/help" class="badge badge-success mr-2">{{ site.data.uk.help }}</a>{%- endif -%}
+            <a id="mapsite" class="badge badge-secondary collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">{{ site.data.uk.map_site }}</a>
           </div>
         </div>
         <div class="collapse multi-collapse website-map" id="websitemap">{%- include map/0.html -%}</div>
@@ -16,26 +16,26 @@
     <div class="row justify-content-md-center mt-4">
       <div class="col-md-6 col-lg-5">
         <div class="d-flex position-relative">
-          <a href="/ukraine" class="text-decoration-none border-0" aria-label="{{ site.data.lang-uk.ua }}">
+          <a href="/ukraine" class="text-decoration-none border-0" aria-label="{{ site.data.uk.ua }}">
             {%- include icons/trezub.svg width="27" height="45" class="flex-shrink-0 mr-3" -%}
           </a>
-          <div>
-            <h6 class="h5 my-0">{{ fname }}</h6>
-            <address>{%- include footer/contact.html legal="address" -%}</address>
-          </div>
+          <address>
+            <strong class="h5">{{ fname }}</strong><br>
+            {%- include footer/contact.html legal="address" -%}
+          </address>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
-        <h6 class="mt-1">{{ site.data.lang-uk.phone_main }}</h6>
+        <p class="h6 mt-1">{{ site.data.uk.phone_main }}</p>
         <p class="mb-0">{%- include footer/contact.html legal="phone_main" -%}</p>
-        <p>{{ site.data.lang-uk.phone_fax }}:&nbsp;{%- include footer/contact.html legal="phone_fax" -%}</p>
+        <p>{{ site.data.uk.phone_fax }}:&nbsp;{%- include footer/contact.html legal="phone_fax" -%}</p>
       </div>
       <div class="col-md-6 col-lg-2">
-        <h6 class="mt-1">{{ site.data.lang-uk.phone_hot }}</h6>
+        <p class="h6 mt-1">{{ site.data.uk.phone_hot }}</p>
         <p>{%- include footer/contact.html legal="phone_hot" -%}</p>
       </div>
       <div class="col-md-6 col-lg-2">
-        <h6 class="mt-1">{{ site.data.lang-uk.email }}</h6>
+        <p class="h6 mt-1">{{ site.data.uk.email }}</p>
         <p>{%- include footer/contact.html legal="email" -%}</p>
       </div>
     </div>
@@ -44,21 +44,15 @@
       <div class="col-lg-5 order-2 order-lg-1">
         <div class="d-flex position-relative">
           {%- include icons/beta.svg width="50" height="25" class="flex-shrink-0 mt-1 mr-3" -%}
-          <div>
-            <p>{{ site.data.lang-uk.footer_text_trial }} <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></p>
-          </div>
+          <p>{{ site.data.uk.footer_text_trial }} <a href="mailto:{{ site.author.email }}" rel="nofollow">{{ site.author.email }}</a></p>
         </div>
         <div class="d-flex position-relative">
           {%- include icons/cc.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3" -%}
-          <div>
-            <p>{{ site.data.lang-uk.footer_text_cc_1 }} <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/deed.uk" class="font-weight-bold" rel="nofollow">{{ site.data.lang-uk.footer_text_cc_2 }}</a>, {{ site.data.lang-uk.footer_text_cc_3 }}</p>
-          </div>
+          <p>{{ site.data.uk.footer_text_cc_1 }} <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/deed.uk" class="font-weight-bold" rel="nofollow">{{ site.data.uk.footer_text_cc_2 }}</a>, {{ site.data.uk.footer_text_cc_3 }}</p>
         </div>
         <div class="d-flex position-relative">
           {%- include icons/dev.svg width="50" height="50" class="flex-shrink-0 mt-1 mr-3 text-white" -%}
-          <div>
-            <p><a href="{{ site.developer.website }}" target="_blank" rel="nofollow">{{ site.developer.name }}</a> {{ site.data.lang-uk.footer_developer }}</p>
-          </div>
+          <p><a href="{{ site.developer.website }}" target="_blank" rel="nofollow">{{ site.developer.name }}</a> {{ site.data.uk.footer_developer }}</p>
         </div>
       </div>
       <div class="col-lg-7 order-1 order-lg-2">
@@ -69,7 +63,7 @@
           <div class="col-md-7 mb-3">
             <div class="row">
               <div class="col-md-7 pr-md-0 text-md-right">
-                <h6 class="mt-1">{{ site.data.lang-uk.phone_submit_ads }}:</h6>
+                <p class="h6 mt-1">{{ site.data.uk.phone_submit_ads }}:</p>
               </div>
               <div class="col-md-5">
                 {%- include phone-brand.html n=site.contact.phone_submit_ads -%}
@@ -77,7 +71,7 @@
             </div>
             <div class="row">
               <div class="col-md-7 pr-md-0 text-md-right">
-                <h6 class="mt-1">{{ site.data.lang-uk.phone_buy_sell }}:</h6>
+                <p class="h6 mt-1">{{ site.data.uk.phone_buy_sell }}:</p>
               </div>
               <div class="col-md-5">
                 {%- include phone-brand.html n=site.contact.phone_buy_sell -%}
@@ -85,7 +79,7 @@
             </div>
             <div class="row">
               <div class="col-md-7 pr-md-0 text-md-right">
-                <h6 class="mt-1">{{ site.data.lang-uk.phone_advert }}:</h6>
+                <p class="h6 mt-1">{{ site.data.uk.phone_advert }}:</p>
               </div>
               <div class="col-md-5">
                 {%- include phone-brand.html n=site.contact.phone_advert -%}

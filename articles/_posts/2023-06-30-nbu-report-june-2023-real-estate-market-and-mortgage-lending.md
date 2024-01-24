@@ -1,6 +1,7 @@
 ---
 title: Звіт про фінансову стабільність за червень 2023 року - Ринок нерухомості та іпотечне кредитування
 date: 2023-06-30
+layout: post
 source:
   title: Національний Банк України
   url: https://bank.gov.ua/ua/news/all/zvit-pro-finansovu-stabilnist-cherven-2023-roku

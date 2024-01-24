@@ -1,22 +1,17 @@
 ---
 layout: default
 ---
-
+{%- include vars/page-slash.html -%}
 <div class="row mb-lg-3">
   <div class="col-lg-auto ml-auto align-self-center order-1 order-lg-2 mb-2 mb-lg-0">
     {%- include navgroup.html -%}
   </div>
 </div>
-
 <div class="row mt-3 mt-lg-0">
   <div class="col-12">
-
     <p><span class="small text-muted">{%- include date.html date=page.date -%}</span></p>
-
-    <h1 class="mb-4">{{ page.title }}</h1>
-
+    <h1 class="mb-4">{{ paget }}</h1>
     {{ content }}
-
     {% if page.author == '' and page.source.title == '' %}
     {% else %}
       <div class="row">
@@ -41,8 +36,6 @@ layout: default
         {% endif %}
       </div>
     {% endif %}
-
     {%- include back.html -%}
-
   </div>
 </div>

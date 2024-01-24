@@ -7,7 +7,7 @@
       <div class="col-12">
         <h1 class="mb-4">
           {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
-          {% if one.url contains "/region/city/" or one.url contains "/district/town/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
+          {% if one.url contains "/region/city/" or one.url contains "/district/town/" %} {{ site.data.uk.deck_region_in }} області{% endif %}
         </h1>
       </div>
       <div class="col-12">{%- include home/region.html current=one.url -%}</div>

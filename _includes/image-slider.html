@@ -40,7 +40,7 @@
   <div class="carousel-inner">
   {%- endif -%}
   <div class="carousel-item px-0{% if forloop.first %} active{% endif %}" data-itemno="{%- increment counter -%}">
-    <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=1024&h=768&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ attribute_title }}" data-lightbox-width="1024" data-lightbox-height="768" data-lightbox-group="group-{{ include.group }}">
+    <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=800&h=600&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ attribute_title }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="group-{{ include.group }}">
       <img class="d-block w-100" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w={{ include.width }}&h={{ include.height }}&fit=cover&a=attention&output=jpg&q=50&t=square" alt="image-{{ attribute_alt }}" />
     </a>
   </div>
@@ -48,11 +48,11 @@
   </div>
   <a class="left carousel-control carousel-control-prev" href="#carousel{{include.group}}" role="button" data-slide="prev">
     <span class="carousel-control-icon carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">{{ site.data.lang-uk.previous }}</span>
+    <span class="sr-only">{{ site.data.uk.previous }}</span>
   </a>
   <a class="right carousel-control carousel-control-next" href="#carousel{{include.group}}" role="button" data-slide="next">
     <span class="carousel-control-icon carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">{{ site.data.lang-uk.next }}</span>
+    <span class="sr-only">{{ site.data.uk.next }}</span>
   </a>
 </div>
   {%- endif -%}

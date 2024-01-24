@@ -1,74 +1,33 @@
 ---
 layout: compress
 ---
-{%- capture fname -%}{%- include footer/contact.html legal="name" -%}{%- endcapture -%}
-{%- if page.url contains "city" or page.url contains "town" -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
-{%- if page.url contains "village" -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
-
+{%- include vars/page-slash.html -%}
+{%- include vars/fname-paged.html -%}
 <!doctype html>
-
 <html dir="ltr" lang="uk-UA">
   <head>
-
     {%- include head.html -%}
-
     <style>
       html, body, #map { height: 600px; width: 100%; }
       #map { position: relative; width: 100%; height: 800px; margin:0; padding:0; border: 1px solid #2d5ca6; }
     </style>
-
   </head>
-
   <body>
-
     <div id="top"></div>
-
     <div class="main">
-
       {%- include header.html -%}
-
-      <main{% if page.url == "/" %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
-
-        {% if page.url == "/" %}
-
-          <div class="container pb-1 lead-badge">
-            <a class="badge badge-primary" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea">Виберіть місцевіть</a> <span class="badge badge-light text-wrap text-left">де б ви хотіли <strong>знайти, купити чи продати нерухомість</strong> або</span>
-            <a class="badge badge-primary text-wrap text-left" data-toggle="collapse" href="#collapseAds" role="button" aria-expanded="false" aria-controls="collapseAds">побудувати чи просто зробити ремонт і облаштувати свою оселю</a>
-          </div>
-
-          <div class="bg-light mb-3">
-            <div class="container">
-              <div class="collapse" id="collapseArea">
-                <div class="bg-light pb-3 px-0 border-0 card card-body">
-                  {%- include home/anchor-link.html -%}
-                </div>
-              </div>
-              <div class="collapse" id="collapseAds">
-                <div class="bg-light pb-3 px-0 border-0 card card-body">
-                  <div class="row row-cols-1 row-cols-md-4">
-                    {%- include collapse-ads.html -%}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        {%- endif -%}
-
+      <main{% if pageu == '/' %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
         <div class="container">
           {%- include breadcrumb.html -%}
           <div class="row">
             <div class="col-12">
-
               {%- assign isContent = content | strip_newlines -%}
               {%- if isContent == '' -%}
                 {%- include info-visitors.html -%}
               {%- else -%}
                 {{ content }}
               {%- endif -%}
-
               {%- include nav-section.html -%}
-
               <h2>Об'єкти нерухомості на мапі</h2>
               <p>Клацніть на маркер щоб переглянути основні параметри об'єкта нерухомості і контакти продавця</p>
               <div class="row">
@@ -76,43 +35,32 @@ layout: compress
                   <div id="map"></div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-
       </main>
-
       {%- include footer.html -%}
-
     </div>
-
     {%- include scroll-top.html -%}
     {%- include java-script.html -%}
-
     {% include modals/net-realestate-modal.html %}
-
     {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
-    {%- assign slug = page.dir | split: "/" | last -%}
-    {%- assign l = page.url | split: '/' -%}
-
-    {%- if page.url contains 'map.html' -%}
-      {%- if l.size == 4 -%}
-        {%- assign data = page.url | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
-      {%- elsif l.size == 5 -%}
-        {%- assign data = page.url | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
-      {%- elsif l.size == 6 -%}
-        {%- assign data = page.url | split: '/' | slice: 3, 6 | join: '/' | prepend: 'data/' -%}
+    {%- if pageu contains '/map.html' -%}
+      {%- if slashu.size == 4 -%}
+        {%- assign data = pageu | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 5 and isCityTown == true -%}
+        {%- assign data = pageu | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 5 and pageu contains '/district/' and isCityTown == false -%}
+        {%- assign data = pageu | split: '/' | slice: 2, 5 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 6 -%}
+        {%- assign data = pageu | split: '/' | slice: 3, 6 | join: '/' | prepend: 'data/' -%}
       {%- endif -%}
     {%- endif -%}
-
     {%- if location != '' -%}
       {%- assign place = location -%}
     {%- else -%}
       {%- assign place = site.region -%}
     {%- endif -%}
-
     {%- include footer/data-map.html -%}
-
   </body>
 </html>

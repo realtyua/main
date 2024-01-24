@@ -1,23 +1,23 @@
 <div class="row">
-  {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
-  {%- for one in ones -%}
-    {%- assign slug = one.url | split: '/' | last -%}
-    {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-    {%- if '/' == current and one.navhide != 1 -%}
-      {% if one.url contains '/region/' %}
+  {%- assign alones = site.html_pages | sort: 'path' | reverse -%}
+  {%- for al in alones -%}
+    {%- assign al_slug = al.url | split: '/' | last -%}
+    {%- assign al_current = al.url | remove: al_slug | remove: '//' | append: '/' -%}
+    {%- if '/' == al_current and al.navhide != 1 -%}
+      {% if al.url contains '/region/' %}
       {% else %}
-      <div class="col-12"><h5 class="mb-2"><a href="#{{ slug }}">{{ one.navtitle }}</a></h5></div>
-      <div class="col-12">{%- include home/anchor-region.html current=one.url -%}</div>
+        <div class="col-12"><h5 class="mb-2"><a href="#{{ al_slug }}">{{ al.navtitle }}</a></h5></div>
+        <div class="col-12">{%- include home/anchor-region.html current=al.url -%}</div>
       {% endif %}
-      {%- if one.url -%}
-        {%- assign twos = site.html_pages -%}
-        {%- for two in twos -%}
-          {%- if two -%}
-            {%- assign slug = two.url | split: '/' | last -%}
-            {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
-            {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
-            <div class="col-12"><h5 class="mb-2"><a href="#{{ slug }}">{{ two.navtitle }}</a></h5></div>
-            <div class="col-12">{%- include home/anchor-region.html current=two.url -%}</div>
+      {%- if al.url -%}
+        {%- assign artwos = site.html_pages -%}
+        {%- for ar in artwos -%}
+          {%- if ar -%}
+            {%- assign ar_slug = ar.url | split: '/' | last -%}
+            {%- assign ar_current = ar.url | remove: ar_slug | remove: '//' | append: '/' -%}
+            {%- if al.url == ar_current and ar.url contains '/city/' or ar.url contains '/town/' -%}
+              <div class="col-12"><h5 class="mb-2"><a href="#{{ ar_slug }}">{{ ar.navtitle }}</a></h5></div>
+              <div class="col-12">{%- include home/anchor-region.html current=ar.url -%}</div>
             {%- endif -%}
           {%- endif -%}
         {%- endfor -%}
@@ -25,18 +25,18 @@
     {%- endif -%}
   {%- endfor -%}
   <div class="col-12">
-    <h5 class="mb-2"><a href="{{ site.main_url }}">{{ site.data.lang-uk.other_regions_ua }}</a></h5>
+    <h5 class="mb-2"><a href="{{ site.main_url }}">{{ site.data.uk.other_regions_ua }}</a></h5>
   </div>
   <div class="col-12">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
       {%- assign regs = site.data.realestate | sort: 'navtitle' -%}
       {%- for reg in regs -%}
-      {%- if reg.url != site.url -%}
-      <div class="col mb-2">
-        <a href="{{ reg.url }}" target="_blank">{{ reg.navtitle }}</a>
-        <small>{{ site.data.lang-uk.re_ta }} {{ reg.small }}</small>
-      </div>
-      {%- endif -%}
+        {%- if reg.url != site.url -%}
+          <div class="col mb-2">
+            <a href="{{ reg.url }}" target="_blank">{{ reg.navtitle }}</a>
+            <small>{{ site.data.uk.re_ta }} {{ reg.small }}</small>
+          </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>

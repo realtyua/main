@@ -1,92 +1,78 @@
-{%- assign back = page.dir | split: '/' -%}
-
-{%- if page.url contains '/map.html' -%}
-  {%- assign size = back | size | minus: 0 -%}
+{%- if pageu contains '/map.html' or pageu contains '/all.html' -%}
+  {%- assign sized = slashd | size | minus: 0 -%}
+{%- elsif sized > 4 and page.layout == 'grid' -%}
+  {%- assign sized = slashd | size | minus: 2 -%}
 {%- else -%}
-  {%- assign size = back | size | minus: 1 -%}
+  {%- assign sized = slashd | size | minus: 1 -%}
 {%- endif -%}
-
-{%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
-{%- assign ones = site.pages | sort: 'dir' | reverse -%}
-
+{%- assign here = slashd | slice: 0, sized | join: '/' | append: '/' -%}
+{%- assign ones = site.pages | sort: 'dir' | reverse | where_exp: 'i', 'i.dir != here and i.url contains here and i.navhide != 1' -%}
 {%- if include.style == "card" -%}
-
-  {%- assign thehere = page.dir | split: '/' | last -%}
   {% assign number = 0 %}
-
-  {%- for one in ones -%}
+  {%- for ci in ones -%}
     {%- assign isJson = false -%}
-    {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-    {%- assign slug = one.url | split: '/' | last -%}
-    {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-    {%- if one.title != '' and isJson == false -%}
+    {%- if ci.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+    {%- assign ci_slash = ci.dir | split: '/' -%}
+    {%- assign ci_slug = ci_slash | last -%}
+    {%- if isJson == false and ci_slash.size == 5 or ci_slash.size == 4 -%}
       {%- include card-item.html -%}
     {%- endif -%}
   {%- endfor -%}
-
   <div class="col px-2 mb-3">
     <div class="card h-100 bg-9">
       <div class="card-body">
         <h3 class="card-title h5">
-          <a href="{{ page.dir }}map.html">{{ page.title }} на мапі</a>
+          <a href="{{ paged }}map.html">{{ paget }} на мапі</a>
         </h3>
       </div>
       <div class="card-footer bg-transparent border-top-0 text-right px-2">
         <span class="badge text-white p-0 m-1">
-          <span class="bg-info py-1 px-2 rounded-left">{{ offers | size }}</span><span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
+          <span class="bg-info py-1 px-2 rounded-left">{{ offers.size }}</span><span class="py-1 px-2 bg-primary rounded-right">пропозицій</span>
         </span>
       </div>
     </div>
   </div>
-
 {%- else -%}
-
-  {%- if page.url contains '/all.html' -%}
+  {%- if pageu contains '/all.html' -%}
   {%- else -%}
-
     <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
       <div class="navbar-brand d-lg-none">
-        <span class="small">{{ site.data.lang-uk.brand_content }}</span>
+        <span class="small">{{ site.data.uk.brand_content }}</span>
         <span class="ml-1 float-right align-middle text-primary">→</span>
       </div>
       <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarThreeRealEstate" aria-controls="navbarThreeRealEstate" aria-expanded="false" aria-label="Toggle button">
         <span class="navbar-toggler-icon" aria-hidden="true"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarThreeRealEstate">
-        {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
+        {%- assign mapPage = paged | append: 'map.html' | remove_first: '/' -%}
         {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
-        {%- if isMap == 'true' and page.url contains '/all.html' -%}
-
-          {%- if page.url contains mapPage -%}
+        {%- if isMap == 'true' and pageu contains '/all.html' -%}
+          {%- if pageu contains mapPage -%}
           {%- else -%}
-          <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-            <li class="nav-item mb-2 h5">
-              <p class="m-lg-0">
-                <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-                  <span>{{ site.data.lang-uk.re_map }}</span>
-                  <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
-                </a>
-              </p>
-            </li>
-          </ul>
+            <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+              <li class="nav-item mb-2 h5">
+                <p class="m-lg-0">
+                  <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.uk.re_map_on }}">
+                    <span>{{ site.data.uk.re_map }}</span>
+                    <span class="d-lg-none">{{ site.data.uk.nerukhomisti }}</span>
+                  </a>
+                </p>
+              </li>
+            </ul>
           {%- endif -%}
-
         {%- else -%}
-
-          {%- assign l = page.url | split: '/' -%}
           {%- assign mapPage = here | append: 'map.html' | remove_first: '/' -%}
-          {%- if page.dir != here -%}
-            {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
+          {%- if paged != here -%}
+            {%- assign mapPage = paged | append: 'map.html' | remove_first: '/' -%}
           {%- endif -%}
           {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
-
-            {%- if page.url contains mapPage -%}
-              {%- if page.dir == here and l.size < 6 and l.size != 4 -%}
+            {%- if pageu contains mapPage -%}
+              {%- if paged == here and slashu.size < 6 and slashu.size != 4 -%}
                 <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
                   <li class="nav-item mb-2">
                     <p class="m-lg-0 h5">
-                      <a class="badge badge-primary border-0" href="{{ page.url | replace: 'map', 'index' }}">
-                        <span>{{ site.data.lang-uk.to_section }}</span>
+                      <a class="badge badge-primary border-0" href="{{ paged }}">
+                        <span>{{ site.data.uk.to_section }}</span>
                       </a>
                     </p>
                   </li>
@@ -98,9 +84,9 @@
                 <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
                   <li class="nav-item mb-2">
                     <p class="m-lg-0 h5">
-                      <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.lang-uk.re_map_on }}">
-                        <span>{{ site.data.lang-uk.re_map }}</span>
-                        <span class="d-lg-none">{{ site.data.lang-uk.nerukhomisti }}</span>
+                      <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.uk.re_map_on }}">
+                        <span>{{ site.data.uk.re_map }}</span>
+                        <span class="d-lg-none">{{ site.data.uk.nerukhomisti }}</span>
                       </a>
                     </p>
                   </li>
@@ -108,42 +94,35 @@
               {%- else -%}
               {%- endif -%}
             {%- endif -%}
-
         {%- endif -%}
-
           <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
-            {%- for one in ones -%}
+            {%- for ni in ones -%}
               {%- assign isJson = false -%}
-              {%- if one.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-              {%- assign slug = one.dir | split: '/' | last -%}
-              {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
-              {%- if one.title != '' and isJson == false -%}
+              {%- if ni.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
+              {%- assign ni_slash = ni.dir | split: '/' -%}
+              {%- assign ni_slug = ni_slash | last -%}
+              {%- if isJson == false and ni_slash.size == 5 or ni_slash.size == 4 -%}
                 {%- include nav-item.html -%}
               {%- endif -%}
             {%- endfor -%}
-
             {%- assign mapRegion = site.region_slug | append: '/map.html' -%}
-            {%- if page.url contains mapRegion -%}
+            {%- if pageu contains mapRegion -%}
               <li class="nav-item" role="presentation">
-                <a class="nav-link border-0" href="{{ page.url | replace: 'map', 'index' }}">
-                  <span>Перейти&nbsp;до&nbsp;списоку</span>
+                <a class="nav-link border-0" href="{{ paged }}">
+                  <span>Перейти&nbsp;до&nbsp;списку</span>
                 </a>
               </li>
-            {%- elsif page.url contains 'map.html' and l.size > 5 -%}
+            {%- elsif pageu contains '/map.html' and slashu.size > 5 -%}
               <li class="nav-item" role="presentation">
-                <a class="nav-link border-0" href="{{ page.url | replace: 'map', 'index' }}">
+                <a class="nav-link border-0" href="{{ paged }}">
                   <span>Назад&nbsp;до&nbsp;списку</span>
                 </a>
               </li>
             {%- endif -%}
           </ul>
-
       </div>
     </nav>
-
   {%- endif -%}
-
   <hr class="mb-2 mt-2 mt-md-0 mt-lg-0" style="position:relative;">
   {%- include thanks-please.html -%}
-
 {%- endif -%}

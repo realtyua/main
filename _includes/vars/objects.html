@@ -1,0 +1,12 @@
+{%- assign gauge = slashd | size | plus: 1 -%}
+{%- assign backd = slashd | slice: 0, gauge | join: '/' | append: '/' -%}
+{%- assign pp = '' | split:'' -%}
+{%- assign pages = site.pages | sort: 'dir' | reverse -%}
+{%- for i in pages -%}
+  {%- assign lid = i.dir | split: '/' -%}
+  {%- if i.url contains backd and i.url != backd and lid.size == 8 -%}
+    {%- assign pp = pp | push: i -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign ipp = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains backd and i.url != backd' -%}
+{%- assign ippld = ipp[0].dir | split: '/' | last -%}

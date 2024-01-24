@@ -1,44 +1,12 @@
-{%- assign house_downcase = site.data.lang-uk.re_house | downcase -%}
-{%- if offer.type contains site.data.lang-uk.re_house or offer.type contains house_downcase -%}
-  {%- assign isHouse = true -%}
-{%- else -%}
-  {%- assign isHouse = false -%}
+{%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
+{% capture linkPage %}, <a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.uk.re_page_ads }}"><span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.uk.re_page }}">{{ site.data.uk.re_page_ads }}</span></a>{% endcapture %}
+{% capture linkPost %}, <a href="{{ offer.link }}" aria-label="{{ more }}">{{ more }}</a>{% endcapture %}
+{%- include price-name.html -%}
+{%- include price.html -%}
+{%- include start-ads.html -%}
+{%- include body-ads.html -%}
+{%- if split.size <= 2 or split.size == 3 and page.dir contains '/city/' or page.dir contains '/town/' -%}
+    {%- if offer.page and offer.page == '1' -%}{{ linkPage }}.
+    {%- elsif offer.link and offer.link != '' -%}{{ linkPost }}.
+    {%- else -%},&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}{%- endif -%}
 {%- endif -%}
-{%- assign kimnaty = site.data.lang-uk.re_kimnaty -%}
-{%- assign land = site.data.lang-uk.re_land -%}
-{%- assign word_land = "земля,земельна ділянка" | split: "," -%}
-{%- assign landm = site.data.lang-uk.re_land | downcase -%}
-{%- assign ssland = offer.surface_land | size -%}
-{% capture set_type %}
-  {%- if offer.type contains land -%}
-    {{ word_land | sample }}
-  {%- else -%}
-    {{ offer.type | downcase }}
-  {%- endif -%}
-{% endcapture %}
-{% if offer.price contains '$' %}{%- assign pus = offer.price | remove: '$' -%}{% elsif offer.price contains '€' %}{%- assign peu = offer.price | remove: '€' -%}{% else %}{%- assign pua = offer.price -%}{% endif %}
-{% if offer.type %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_for_rent }}{% elsif offer.rent == '1' and offer.price == '' %}{{ site.data.lang-uk.re_for_rentd }}{% else %}{% if offer.type contains site.data.lang-uk.re_house or offer.type contains site.data.lang-uk.re_kvartyru or offer.type contains site.data.lang-uk.re_roomsp or offer.type contains site.data.lang-uk.re_garage %}{{ site.data.lang-uk.re_sell }}{% else %}{{ site.data.lang-uk.re_for_sale }}{% endif %}{% endif %} <strong>{{ set_type }}</strong>, {% endif %}
-{% if offer.type contains land %} {{ site.data.lang-uk.re_surface }} <b>{{ offer.surface_land }}</b>&nbsp;{{ site.data.lang-uk.m }} ({{ offer.surface_land | divided_by: 10000.0000 | round: 4 }} га), {% else %}
-{% if offer.surface %}{{ site.data.lang-uk.re_surface }} <b><abbr data-toggle="tooltip" title="{{ site.data.lang-uk.re_total }}">{{ offer.surface }}</abbr></b>&nbsp;{{ site.data.lang-uk.m }}, {% endif %}{% if offer.rooms and offer.rooms != '' %}{% if offer.type contains kimnaty and offer.rooms == '1' %}{{ site.data.lang-uk.re_roomsp }}{% elsif offer.type contains kimnaty and offer.rooms > '1' %}{{ site.data.lang-uk.re_roomsps }}{% else %}{{ site.data.lang-uk.re_rooms }}{% endif %} <b>{{ offer.rooms }}</b>, {% endif %}{% if offer.floor and offer.floor != '' and isHouse == false %}{{ site.data.lang-uk.re_na }} <b>{{ offer.floor }}</b>{{ site.data.lang-uk.re_mu }} {{ site.data.lang-uk.re_floorci }}, {% endif %}{% if offer.floors and offer.floors != '' and isHouse == true %}{{ site.data.lang-uk.re_floorss }} <b>{{ offer.floors }}</b>, {% endif %}
-{% endif %}
-{% if offer.location and offer.location != '' %}{{ site.data.lang-uk.re_location }} {{ site.data.lang-uk.re_at }} <strong>{{ offer.location }}</strong> {% endif %}
-{% if offer.address and offer.address != '' %}{{ site.data.lang-uk.re_address }} <strong>{{ offer.address }}</strong>{% if offer.object and offer.object != '' and page.url == '/' %} ({{ site.data.lang-uk.re_rc }}&nbsp;{{ offer.object }}){% endif %}, {% endif %}{% if offer.region and offer.region != '' %}<strong>{{ offer.region }}</strong>, {% endif %}
-{% if offer.price %}{% if offer.rent == '1' and offer.price != '' %}{{ site.data.lang-uk.re_pricer }} {% elsif offer.rent == '1' and offer.price == '' and offer.price_sqmt != '' %}{{ site.data.lang-uk.re_price_sqmtr | downcase }} {% elsif offer.type contains site.data.lang-uk.re_land %}{{ site.data.lang-uk.re_pricel }} {% else %}{% if offer.type contains site.data.lang-uk.re_house %}{{ site.data.lang-uk.re_price_house }}{% elsif offer.type contains site.data.lang-uk.re_apartment %}{{ site.data.lang-uk.re_price_apartment }}{% else %}{{ site.data.lang-uk.re_price }}{% endif %} {% endif %}
-{%- if offer.price != '' -%}
-  {% if offer.price contains '$' %}
-    <abbr data-toggle="tooltip" title="{{ offer.price }}">{{ offer.price | remove: '$' | times: site.usd | ceil }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
-  {% elsif offer.price contains '€' %}
-    <abbr data-toggle="tooltip" title="{{ offer.price }}">{{ offer.price | remove: '€' | times: site.eur | ceil }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
-  {% else %}
-    <abbr data-toggle="tooltip" title="${{ offer.price | divided_by: site.nbu | ceil }}">{{ offer.price }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
-  {% endif %}
-{%- elsif offer.price == '' and offer.price_sqmt != '' -%}
-  {% if offer.price_sqmt contains '$' %}
-    <abbr data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
-  {% elsif offer.price_sqmt contains '€' %}
-    <abbr data-toggle="tooltip" title="{{ offer.price_sqmt }}">{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
-  {% else %}
-    <abbr data-toggle="tooltip" title="${{ offer.price | divided_by: site.nbu | ceil }}">{{ offer.price_sqmt }}</abbr>&nbsp;{{ site.data.lang-uk.re_uah }}.
-  {% endif %}
-{%- endif -%}
-{% endif %}{%- if split.size <= 2 -%}{%- if offer.page and offer.page == '1' -%}&nbsp;<a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.lang-uk.re_page }}"><span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.lang-uk.re_page }}">{{ site.data.lang-uk.re_page_ads }}</span></a>{%- endif -%}&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}{%- elsif split.size == 3 and page.dir contains 'city' or page.dir contains 'town' -%}{%- if offer.page and offer.page == '1' -%}&nbsp;<a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.lang-uk.re_page }}"><span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.lang-uk.re_page }}">{{ site.data.lang-uk.re_page_ads }}</span></a>{%- endif -%}&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}{%- endif -%}

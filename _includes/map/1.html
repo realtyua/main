@@ -1,19 +1,19 @@
-{%- assign 2s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
-{%- if 2s.size > 0 -%}
-<ul class="list-unstyled">
-  {%- for 2 in 2s -%}
-    {%- assign slug = 2.url | split: "/" | last -%}
-    {%- assign current = 2.url | remove: slug | remove: "//" | append: "/" -%}
-    {%- if include.current == current and 2.navhide != 1 and 2.title != '' -%}
-    <li class="mb-2">
-      {%- if 2.url == page.url -%}
-        <span>{%- if 2.navtitle -%}{{ 2.navtitle }}{%- else -%}{{ 2.title }}{%- endif -%}</span>
-      {%- else -%}
-        <a href="{{ 2.url }}">{%- if 2.navtitle -%}{{ 2.navtitle }}{%- else -%}{{ 2.title }}{%- endif -%}</a>
+{%- assign 2s = site.html_pages | sort: 'dir' | where_exp: 'i', 'i.dir contains include.current' -%}
+{%- if 2s.size >= 1 -%}
+  <ul class="list-unstyled">
+    {%- for 2 in 2s -%}
+      {%- assign 2slug = 2.dir | split: '/' | last -%}
+      {%- assign 2current = 2.url | remove: 2slug | remove: '//' | append: '/' -%}
+      {%- if include.current == 2current and 2.navhide != 1 and 2.title != '' -%}
+        <li class="mb-2">
+          {%- if 2.url == pageu -%}
+            <span>{{ 2.navtitle }}</span>
+          {%- else -%}
+            <a href="{{ 2.dir }}">{{ 2.navtitle }}</a>
+          {%- endif -%}
+          {%- include map/2.html current=2.dir -%}
+        </li>
       {%- endif -%}
-      {%- include map/2.html current=2.url -%}
-    </li>
-    {%- endif -%}
-  {%- endfor -%}
-</ul>
+    {%- endfor -%}
+  </ul>
 {%- endif -%}

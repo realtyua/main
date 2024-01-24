@@ -4,10 +4,7 @@
     {%- assign slug = 6.url | split: "/" | last -%}
     {%- assign current = 6.url | remove: slug | remove: "//" | append: "/" -%}
     {%- if include.current == current and 6.navhide != 1 and 6.title != '' -%}
-      {
-        "url":"{{ 6.url | prepend: site.url }}",
-        "title":"{{ 6.navtitle }}"
-      },
+      {"url":"{{ 6.url | prepend: site.url }}","title":"{{ 6.navtitle }}"},
     {%- endif -%}
   {%- endfor -%}
 {%- endif -%}

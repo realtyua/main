@@ -1,12 +1,6 @@
-{%- assign slash = page.dir | split: '/' -%}
-{% comment %}
-{%- if page.url contains '/add.html' -%}
-  <script src="{{ "/assets/js/main.re.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-{%- endif -%}
-{% endcomment %}
-{%- if page.dir == '/' and page.url contains '/ukraine.html' -%}
+{%- if paged == '/' and pageu contains '/ukraine.html' -%}
   <script src="{{ "/assets/js/main.ua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-{%- elsif page.dir == '/' and page.url contains '/' -%}
+{%- elsif paged == '/' and pageu contains '/' -%}
   {%- if page.lightbox == 1 -%}
     <script src="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
   {%- else -%}
@@ -14,29 +8,26 @@
   {%- endif -%}
 {%- else -%}
   {%- if page.table == 1 -%}
-    {%- if page.url contains 'map_.html' -%}
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+    {%- if slashd.size >= 3 and paged != '/region/city/' or paged != '/district/town/'-%}
       <script src="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- else -%}
-      <script src="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- endif -%}
   {%- elsif page.table == 2 -%}
-    {%- if page.url contains 'map_.html' -%}
     {%- assign main_region = region_slug | prepend: '/region/' | append: '/' -%}
-    {%- elsif slash.size == 3 and page.dir == main_region -%}
+    {%- if slashd.size == 3 and paged == main_region -%}
       <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
       <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- else -%}
       <script src="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- endif -%}
   {%- else -%}
-    {%- if page.url contains 'map_.html' -%}
-    {%- elsif page.url contains 'map.html' -%}
+    {%- if pageu contains '/map.html' -%}
       <script src="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- elsif slash.size >= 3 and page.dir != '/region/city/' and page.dir != '/district/town/'-%}
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/' -%}
       <script src="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-    {%- elsif page.dir != '/laws/' or page.dir != '/docs/' -%}
+    {%- elsif page.layout == 'property' -%}
+      <script src="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- elsif paged != '/laws/' or paged != '/docs/' -%}
       <script src="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- else -%}
       <script src="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>

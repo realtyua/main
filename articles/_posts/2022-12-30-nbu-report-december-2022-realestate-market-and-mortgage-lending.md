@@ -1,6 +1,7 @@
 ---
 title: Звіт про фінансову стабільність за грудень 2022 року - Ринок нерухомості та іпотечне кредитування
 date: 2022-12-30
+layout: post
 source:
   title: Національний Банк України
   url: https://bank.gov.ua/ua/news/all/zvit-pro-finansovu-stabilnist-gruden-2022-roku

@@ -37,13 +37,13 @@
       {%- else -%}
         <div class="col-12">
           <h1 class="mb-4">
-            {% if one.url contains "/region/" %}{{ site.data.lang-uk.deck_region }} {% endif %}
+            {% if one.url contains "/region/" %}{{ site.data.uk.deck_region }} {% endif %}
             {%- if one.url contains "/region/" -%}
               {%- if one.navtitle -%}{{ one.navtitle | downcase }}{%- else -%}{{ one.title | downcase }}{%- endif -%}
             {%- else -%}
               {%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}
             {%- endif -%}
-            {% if one.url contains "/district/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
+            {% if one.url contains "/district/" %} {{ site.data.uk.deck_region_in }} області{% endif %}
           </h1>
         </div>
         <div class="col-12">{%- include home/region.html current=one.url -%}</div>
@@ -60,7 +60,7 @@
                 <a href="{{ two.url }}">
                   {%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}
                 </a>
-                {% if two.url contains "/region/city/" or two.url contains "/district/town/" %} {{ site.data.lang-uk.deck_region_in }}{% endif %}
+                {% if two.url contains "/region/city/" or two.url contains "/district/town/" %} {{ site.data.uk.deck_region_in }} області{% endif %}
               </h2>
             </div>
             <div class="col-12">{%- include home/region.html current=two.url -%}</div>
