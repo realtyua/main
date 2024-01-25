@@ -43,7 +43,7 @@
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price != '' -%}
     <dt>{{ site.data.uk.re_price_sqmtr }}</dt>
   {%- elsif offer.rent == '1' and offer.price_sqmt == '' and offer.price != '' -%}
-
+    <dt>{{ site.data.uk.re_price_rent }}&nbsp;{{ site.data.uk.m_za }}</dt>
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price == '' -%}
 
   {%- elsif offer.type contains land or offer.type contains landm -%}
@@ -52,16 +52,12 @@
     <dt>{{ site.data.uk.re_price_sqmt }}&nbsp;{{ site.data.uk.m_za }}</dt>
   {%- endif -%}
 
-  {%- if offer.rent == '1' and offer.price_sqmt == '' and offer.price != '' -%}
-  {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price == '' -%}
-  {%- else -%}
-    <dd>
-      {%- assign surface = surface | default: surface_land | strip -%}
-      {% assign a_price = i_price | remove: '$' | remove: '€' | divided_by: surface %}
-      {% assign p_price = price | remove: '&nbsp;' | divided_by: surface %}
-      <abbr data-toggle="tooltip" title="{% if i_price contains '$' %}${% elsif i_price contains '€' %}€{% endif %}{%- include numf.html number=a_price ts='&nbsp;' decimals=0 -%}{% if i_price contains '$' or i_price contains '€' %}{% else %}₴{% endif %}">{%- include numf.html number=p_price ts='&nbsp;' decimals=0 -%}</abbr>&nbsp;₴
-    </dd>
-  {%- endif -%}
+  <dd>
+    {%- assign surface = surface | default: surface_land | strip -%}
+    {% assign a_price = i_price | remove: '$' | remove: '€' | divided_by: surface %}
+    {% assign p_price = price | remove: '&nbsp;' | divided_by: surface %}
+    <abbr data-toggle="tooltip" title="{% if i_price contains '$' %}${% elsif i_price contains '€' %}€{% endif %}{%- include numf.html number=a_price ts='&nbsp;' decimals=0 -%}{% if i_price contains '$' or i_price contains '€' %}{% else %}₴{% endif %}">{%- include numf.html number=p_price ts='&nbsp;' decimals=0 -%}</abbr>&nbsp;₴
+  </dd>
 
 {%- endif -%}
 
