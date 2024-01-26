@@ -43,9 +43,9 @@
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price != '' -%}
     <dt>{{ site.data.uk.re_price_sqmtr }}</dt>
   {%- elsif offer.rent == '1' and offer.price_sqmt == '' and offer.price != '' -%}
-    <dt>{{ site.data.uk.re_price_rent }}&nbsp;{{ site.data.uk.m_za }}</dt>
+    <dt class="month">{{ site.data.uk.re_price_rent }}&nbsp;{{ site.data.uk.m_za }}</dt>
   {%- elsif offer.rent == '1' and offer.price_sqmt != '' and offer.price == '' -%}
-
+    <dt class="day">{{ site.data.uk.re_price_rent }}&nbsp;{{ site.data.uk.m_za }}</dt>
   {%- elsif offer.type contains land or offer.type contains landm -%}
     <dt>{{ site.data.uk.re_price_sqmtl }}&nbsp;{{ site.data.uk.m_za }}</dt>
   {%- else -%}
