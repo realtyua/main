@@ -102,17 +102,17 @@
       {%- endfor -%}
     </div>
     {% comment %}
-      <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">
+      <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1-tab" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">
         Нещодавно додані статті
       </div>
     {% endcomment %}
     {%- if hasNews == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
+    <div class="tab-pane pt-3 fade" id="{{ region }}-news-tab" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
       {% comment %}{%- include home/news-last.html cat=region url=include.url num='3'-%}{% endcomment %}
     </div>
     {%- endif -%}
     {%- if hasArticles == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-articles" role="tabpanel" aria-labelledby="{{ region }}-articles-tab">
+    <div class="tab-pane pt-3 fade" id="{{ region }}-articles-tab" role="tabpanel" aria-labelledby="{{ region }}-articles-tab">
       {% comment %}{%- include home/articles-last.html cat=region url=include.url num='3' -%}{% endcomment %}
     </div>
     {%- endif -%}

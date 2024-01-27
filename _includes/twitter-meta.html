@@ -2,7 +2,7 @@
 <meta name="twitter:creator" content="@realestate_ua">
 <meta name="twitter:title" content="{{ title | remove: ' · Мережа Вебсайтів Нерухомості' }}">
 {%- if page.layout == 'property' -%}
-  <meta name="twitter:description" content="{{ name_description | remove: '&nbsp;' | strip_html }}{%- if seo_description != '' -%}, {{ seo_description }}{%- endif -%}" />
+  <meta name="twitter:description" content="{{ name_description | remove: '&nbsp;' | strip_html }}{%- if seo_description != '' -%}, {{ seo_description }}{%- endif -%}">
 {%- else -%}
   <meta name="twitter:description" content="{{ page.description | default: site.description | smartify }}">
 {%- endif -%}
@@ -11,9 +11,9 @@
   {%- if files[0] -%}
     <meta name="twitter:image" content="{{ files[0].path | default: default_image | absolute_url }}">
   {%- else -%}
-    <meta name="twitter:image" content="{{ imageid | default: default_image | absolute_url }}" />
+    <meta name="twitter:image" content="{{ imageid | default: default_image | absolute_url }}">
   {%- endif -%}
-  <meta name="twitter:image:alt" content="{{ page.type }}" />
+  <meta name="twitter:image:alt" content="{{ page.type }}">
 {%- else -%}
   {%- if file -%}
     <meta name="twitter:image" content="{{ picture | replace_first: '.', '_sm.' | prepend: site.url }}">
@@ -24,5 +24,5 @@
       <meta name="twitter:image" content="{{ '/assets/images/locations/default_sm.jpg' | url_decode | relative_url | prepend: site.url }}">
     {%- endif -%}
   {%- endif -%}
-  <meta name="twitter:image:alt" content="Real estate" />
+  <meta name="twitter:image:alt" content="Real estate">
 {%- endif -%}

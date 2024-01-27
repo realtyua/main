@@ -26,7 +26,7 @@
   <div class="card-body pb-0">
     <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}</data></h3>
     <div class="mb-1">{% include property/body.html %}</div>
-    <div class="mb-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ cdate }}{%- else -%}{{ date }}{%- endif -%}">{%- if date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=date -%}{%- endif -%}</time></div>
+    <div class="mb-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ cdate | date: '%Y-%m-%d' }}{%- else -%}{{ date | date: '%Y-%m-%d' }}{%- endif -%}">{%- if date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=date -%}{%- endif -%}</time></div>
   </div>
   {%- if offer.page and offer.page == '1' or offer.link and offer.link != '' -%}
     {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}

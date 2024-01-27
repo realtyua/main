@@ -30,47 +30,47 @@
   {%- endif -%}
 {%- endcapture -%}
 
-<meta charset="utf-8" />
-<meta name="robots" content="index, follow" />
-<meta name="language" content="Українська" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta charset="utf-8">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Українська">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>{{ title }}</title>
-<link rel="shortlink" href="{{ site.url }}" />
-<link rel="canonical" href="{{ page.url | absolute_url }}" />
+<link rel="shortlink" href="{{ site.url }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
 {%- if file -%}
-<link rel="image_src" href="{{ file.path | replace_first: '.', '_sm.' | url_decode | relative_url }}" />
+<link rel="image_src" href="{{ file.path | replace_first: '.', '_sm.' | url_decode | relative_url }}">
 {%- else -%}
-<link rel="image_src" href="{{ '/assets/images/locations/default_sm.jpg' | url_decode | relative_url }}" />
+<link rel="image_src" href="{{ '/assets/images/locations/default_sm.jpg' | url_decode | relative_url }}">
 {%- endif -%}
-<meta name="keywords" content="{{ page.keywords | default: site.keywords | smartify }}" />
-<meta name="description" content="{{ page.description | default: site.description | smartify }}" />
-<meta name="country" content="{{ site.country }}" />
-<meta name="region" content="{{ site.region }}" />
+<meta name="keywords" content="{{ page.keywords | default: site.keywords | smartify }}">
+<meta name="description" content="{{ page.description | default: site.description | smartify }}">
+<meta name="country" content="{{ site.country }}">
+<meta name="region" content="{{ site.region }}">
 {%- if location and back.size >= 4 and page.dir contains 'city' or page.dir contains 'town' -%}
-<meta name="locality" content="{{ site.data.uk.city }} {{ location }}" />
+<meta name="locality" content="{{ site.data.uk.city }} {{ location }}">
 {%- elsif back.size >= 3 and page.dir contains 'district' and page.dir != '/district/town/' or back.size >= 4 and page.dir contains 'district' -%}
-<meta name="locality" content="{{ location }} {{ site.data.uk.district }}" />
+<meta name="locality" content="{{ location }} {{ site.data.uk.district }}">
 {%- elsif page.url == '/district/town/' -%}
 {%- endif -%}
-<meta property="og:url" content="{{ page.url | absolute_url }}" />
-<meta property="og:locale" content="uk_UA" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="{{ site.title | smartify }}" />
-<meta property="og:title" content="{{ title | remove: ' · Мережа Вебсайтів Нерухомості' }}" />
-<meta property="og:description" content="{{ page.description | default: site.description | smartify }}" />
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.title | smartify }}">
+<meta property="og:title" content="{{ title | remove: ' · Мережа Вебсайтів Нерухомості' }}">
+<meta property="og:description" content="{{ page.description | default: site.description | smartify }}">
 {%- if file -%}
-<meta property="og:image" content="{{ file.path | replace_first: '.', '_sm.' | url_decode | absolute_url }}" />
-<meta property="og:image:url" content="{{ file.path | replace_first: '.', '_sm.' | url_decode | absolute_url }}" />
-<meta property="og:image:type" content="image/jpg" />
-<meta property="og:image:width" content="600" />
-<meta property="og:image:height" content="315" />
+<meta property="og:image" content="{{ file.path | replace_first: '.', '_sm.' | url_decode | absolute_url }}">
+<meta property="og:image:url" content="{{ file.path | replace_first: '.', '_sm.' | url_decode | absolute_url }}">
+<meta property="og:image:type" content="image/jpg">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="315">
 {%- else -%}
-<meta property="og:image" content="{{ '/assets/images/locations/default_sm.jpg' | url_decode | absolute_url }}" />
-<meta property="og:image:width" content="600" />
-<meta property="og:image:height" content="315" />
+<meta property="og:image" content="{{ '/assets/images/locations/default_sm.jpg' | url_decode | absolute_url }}">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="315">
 {%- endif -%}
-<meta name="author" content="{{ site.developer.name }}" />
-<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="{{ site.developer.name }}">
+<meta name="format-detection" content="telephone=no">
 <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | relative_url }}">
 
 {%- if page.table == 1 or page.table == 2 -%}
