@@ -2,13 +2,13 @@
 {% if paginator.total_pages > 1 %}
 <nav class="row" aria-label="Посторінкова навігація">
   <div class="col-md-6">
-    <div class="pagination float-left">
-      <span class="pagination-info">Показано {{page.pagination_info.curr_page}} з {{page.pagination_info.total_pages}}</span>
-      <span class="page-list"> 9 записів на сторінку</span>
+    <div class="my-2 float-left">
+      <span class="pagination-info">Показано {{ page.pagination_info.curr_page }} з {{ page.pagination_info.total_pages }}.</span>
+      <span class="page-list">Всього {{ properties.size }}, виведено 9 записів на сторінку</span>
     </div>
   </div>
   <div class="col-md-6">
-    <ul class="pagination float-right">
+    <ul class="pagination float-right mb-0">
       {% if paginator.previous_page %}
         <li class="page-item">
           <a class="page-link page-pre" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Попередня сторінка">
