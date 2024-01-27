@@ -1,9 +1,0 @@
-{%- assign slash = page.dir | split: "/" -%}
-{%- assign gauge = slash | size | minus:2 -%}
-{%- assign piece = slash | slice: 0, gauge | join: '/' | append: '/data/'-%}
-{%- assign slug = page.url | split: "/" | last -%}
-{%- assign json = piece | append: slug | append: '.json' -%}
-{%- assign jsonFile = json | remove_first: '/' -%}
-{%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
-{%- assign isJson = site.data[slug] -%}
-{%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slug' -%}
