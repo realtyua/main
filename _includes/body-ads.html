@@ -56,4 +56,4 @@
 
 {% if i_region != '' %} <b>{{ i_region }}</b>,{% endif %}
 
-{{ price_name }} <abbr data-toggle="tooltip" title="{% if i_price contains '$' %}${% elsif i_price contains '€' %}€{% endif %}{%- include numf.html number=a_price ts='&nbsp;' decimals=0 -%}{% if i_price contains '$' or i_price contains '€' %}{% else %}₴{% endif %}">{{ price }}</abbr>&nbsp;₴{%- if type -%}{%- endif -%}
+{{ price_name }} <abbr data-toggle="tooltip" title="{% if i_price contains '$' %}${% elsif i_price contains '€' %}€{% endif %}{%- include numf.html number=a_price ts='&nbsp;' decimals=0 -%}{% if i_price contains '$' or i_price contains '€' %}{% else %}₴{% endif %}"><b>{{ price }}</b></abbr>&nbsp;₴{%- if type -%}{%- endif -%}

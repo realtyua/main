@@ -46,13 +46,13 @@
 {% endif %}
 
 {% if i_location != '' %}
-    {{ site.data.uk.re_location }} {{ site.data.uk.re_at }} <strong>{{ i_location }}</strong>
+    {{ site.data.uk.re_location }} {{ site.data.uk.re_at }} <b>{{ i_location }}</b>
 {% endif %}
 
 {%- if address -%}
-    {{ site.data.uk.re_address }} <strong>{{ address }}</strong>{% if object != '' %}, ({{ site.data.uk.re_rc }} {{ object }}){% endif %},
+    {{ site.data.uk.re_address }} <b>{{ address }}</b>{% if object != '' %}, ({{ site.data.uk.re_rc }} {{ object }}){% endif %},
 {%- endif -%}
 
-{% if i_region != '' %} <strong>{{ i_region }}</strong>,{% endif %}
+{% if i_region != '' %} <b>{{ i_region }}</b>,{% endif %}
 
-{{ price_name }} <abbr data-toggle="tooltip" title="{% if i_price contains '$' %}${% elsif i_price contains '€' %}€{% endif %}{%- include numf.html number=a_price ts='&nbsp;' decimals=0 -%}{% if i_price contains '$' or i_price contains '€' %}{% else %}₴{% endif %}">{{ price }}</abbr>&nbsp;₴{%- if type -%}{%- endif -%}
+{{ price_name }} <abbr data-toggle="tooltip" title="{% if i_price contains '$' %}${% elsif i_price contains '€' %}€{% endif %}{%- include numf.html number=a_price ts='&nbsp;' decimals=0 -%}{% if i_price contains '$' or i_price contains '€' %}{% else %}₴{% endif %}"><b>{{ price }}</b></abbr>&nbsp;₴{%- if type -%}{%- endif -%}

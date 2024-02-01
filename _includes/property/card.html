@@ -9,7 +9,7 @@
 {%- endcapture -%}
 {%- assign isImage = files | strip_newlines -%}
 {%- assign type = offer.type | split: ' ' -%}
-
+{%- assign c_location = offer.location | default: offer.region -%}
 {%- capture offerType -%}
   {%- if type.size >= 2 -%}
     {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
@@ -21,24 +21,26 @@
     {{ type | slice: 0 }}
   {%- endif -%}
 {%- endcapture -%}
-
+{%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
 <article class="card h-100{% if total > 1 %} border-bottom-0{% endif %}" role="presentation">
-  <div class="card-body pb-0">
-    <h3 class="sr-only m-0 p-0 h6"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}</data></h3>
-    <div class="mb-1">{% include property/body.html %}</div>
-    <div class="mb-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ cdate | date: '%Y-%m-%d' }}{%- else -%}{{ date | date: '%Y-%m-%d' }}{%- endif -%}">{%- if date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=date -%}{%- endif -%}</time></div>
+  <div class="card-body{% if offer.page and offer.page == '1' or offer.link and offer.link != '' %}{% else %} pb-1{% endif %}">
+    <span class="sr-only"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
+    <h3 class="font-weight-normal m-0 p-0 h6">
+      {%- if offer.link and offer.link != '' -%}
+        <a href="{{ offer.link }}" aria-label="{{ more | capitalize }}">
+          {% include property/body.html %}
+        </a>
+      {%- elsif offer.page and offer.page == '1' -%}
+        <a href="{{ site.url }}/{{ offer.phone }}" aria-label="{{ site.data.uk.re_page_ads | capitalize }}">
+          {% include property/body.html %}
+        </a>
+      {%- else -%}
+        {% include property/body.html %}
+      {%- endif -%}
+    </h3>
+    <div class="my-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ cdate | date: '%Y-%m-%d' }}{%- else -%}{{ date | date: '%Y-%m-%d' }}{%- endif -%}">{%- if date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=date -%}{%- endif -%}</time></div>
   </div>
   {%- if offer.page and offer.page == '1' or offer.link and offer.link != '' -%}
-    {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
-    <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
-      {%- if offer.link and offer.link != '' -%}
-        <a href="{{ offer.link }}" aria-label="{{ more | capitalize }}">{{ more | capitalize }}</a>
-      {%- else -%}
-        <a href="{{ site.url }}/{{ offer.phone }}" aria-label="{{ site.data.uk.re_page_ads | capitalize }}">
-          <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.uk.re_page }}">{{ site.data.uk.re_page_ads | capitalize }}</span>
-        </a>
-      {%- endif -%}
-    </div>
   {%- else -%}
     <div class="card-footer border-top-0 bg-white pt-0 pb-2 px-3 text-right">
       <div class="row row-cols-auto justify-content-end">

@@ -1,6 +1,3 @@
-{%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
-{% capture linkPage %}, <a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.uk.re_page_ads }}"><span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ site.data.uk.re_page }}">{{ site.data.uk.re_page_ads }}</span></a>{% endcapture %}
-{% capture linkPost %}, <a href="{{ offer.link }}" aria-label="{{ more }}">{{ more }}</a>{% endcapture %}
 {%- include property/price-name.html -%}
 {%- include property/price.html -%}
 {%- include property/start-ads.html -%}

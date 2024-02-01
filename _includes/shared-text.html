@@ -1,5 +1,0 @@
----
-layout: compress
----
-{%- capture text -%}{% include start-ads.html %}{%- include price-name.html -%}{% include price.html %}{% include body-ads.html -%}{%- endcapture -%}
-{%- assign text = text | remove: '&nbsp;' | strip_html | strip | strip_newlines | replace: '. ','.' | replace: ', ',',' | url_encode -%}
