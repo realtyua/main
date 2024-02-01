@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content net-realestate">
       <div class="modal-header border-0">
-        <h4 class="modal-title h5 pl-2 text-white">{{ site.data.uk.realestate }} {{ site.data.uk.re_on_map }}</h4>
+        <h3 class="h5 modal-title pl-2 text-white">{{ site.data.uk.realestate }} {{ site.data.uk.re_on_map }}</h3>
         <button type="button" class="close py-1 px-2" data-dismiss="modal" aria-label="Close" title="{{ site.data.uk.close }}">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,7 +15,6 @@
 </div>
 
 <script>
-
   var modal = $('#mapa');
   var map = null;
   $(document).on('click', 'a.marker', function () {
@@ -36,28 +35,4 @@
     map.off();
     map.remove();
   });
-
-{%- comment -%}
-  {%- include map/page-exists.html -%}
-  {%- capture url -%}{%- if page.url contains '/all' -%}{{ page.url | replace: '/all', '/map' }}{%- endif -%}{%- endcapture -%}
-  {%- if page.url contains '/all' and isMap == 'true' -%}
-    function buttons () {
-      return {
-        openMap: {
-          text: 'Map',
-          icon: 're-map',
-          event: {
-            'click': () => {
-              window.open('{{ url }}', '_blank');
-            }
-          },
-          attributes: {
-            title: '{{ site.data.uk.realestate }} {{ site.data.uk.re_on_map }}'
-          }
-        }
-      }
-    }
-  {%- endif -%}
-{%- endcomment -%}
-
 </script>

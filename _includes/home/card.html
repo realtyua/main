@@ -61,59 +61,57 @@
           {%- if data -%}
             {%- include {{ data }} location=include.breadcrumb -%}
             <ul class="list-unstyled mb-0">
-            {%- for offer in offers limit: 3 -%}
-              {%- assign total = offers | size -%}
-              {%- assign others = total | minus: 3 -%}
-              {%- assign type = offer.type | split: ' ' -%}
-              {%- assign c_location = offer.location | default: offer.region -%}
-              {%- capture offerType -%}
-                {%- if type.size >= 2 -%}
-                  {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
-                    {{ type | slice: 0,1 | join: ' ' }}
+              {%- for offer in offers limit: 3 -%}
+                {%- assign total = offers | size -%}
+                {%- assign others = total | minus: 3 -%}
+                {%- assign type = offer.type | split: ' ' -%}
+                {%- assign c_location = offer.location | default: offer.region -%}
+                {%- capture offerType -%}
+                  {%- if type.size >= 2 -%}
+                    {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
+                      {{ type | slice: 0,1 | join: ' ' }}
+                    {%- else -%}
+                      {{ type | slice: 0,2 | join: ' ' }}
+                    {%- endif -%}
                   {%- else -%}
-                    {{ type | slice: 0,2 | join: ' ' }}
+                    {{ type | slice: 0 }}
                   {%- endif -%}
-                {%- else -%}
-                  {{ type | slice: 0 }}
+                {%- endcapture -%}
+                <li class="card{% if forloop.last %}{% if others > 0 %} mb-2{% else %} mb-0{%- endif -%}{% else %} mb-2{%- endif -%}">
+                  <article class="card-body p-2" role="presentation">
+                    <span class="sr-only"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
+                    <h4 class="font-weight-normal m-0 p-0 h6">{% include card/body.html %}</h4>
+                  </article>
+                </li>
+                {%- if forloop.last -%}
+                  {%- if others > 0 -%}
+                    <li class="float-right btn-group">
+                      <a class="btn btn-sm btn-primary" href="{{ d.url }}" title="Інші оголошення про продаж і оренду об'єктів нерухомості">
+                        {{ site.data.uk.others }} <b>{{ others }}</b> {{ site.data.uk.others_offers }}
+                      </a>
+                    </li>
+                  {%- endif -%}
                 {%- endif -%}
-              {%- endcapture -%}
-              <li class="card{% if forloop.last %}{% if others > 0 %} mb-2{% else %} mb-0{%- endif -%}{% else %} mb-2{%- endif -%}">
-                <article class="card-body p-2" role="presentation">
-                  <span class="sr-only"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
-                  <h4 class="font-weight-normal m-0 p-0 h6">{% include card/body.html %}</h4>
-                </article>
-              </li>
-              {%- if forloop.last -%}
+              {%- else -%}
+                <li class="alert alert-success mb-0">{% include none-advertisement.html %}</li>
+              {%- endfor -%}
             </ul>
-                {%- if others > 0 -%}
-                  <div class="float-right btn-group">
-                    <a class="btn btn-sm btn-primary" href="{{ d.url }}" title="Інші оголошення про продаж і оренду об'єктів нерухомості">
-                      {{ site.data.uk.others }} <b>{{ others }}</b> {{ site.data.uk.others_offers }}
-                    </a>
-                  </div>
-                {%- endif -%}
-              {%- endif -%}
-            {%- else -%}
-              <li class="alert alert-success mb-0">
-                {% include none-advertisement.html %}
-              </li>
-            {%- endfor -%}
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
     </div>
     {% comment %}
-      <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1-tab">
+      <div class="tab-pane pt-3 fade show" id="{{ region }}-recently1" role="tabpanel" aria-labelledby="{{ region }}-recently1">
         Нещодавно додані статті
       </div>
     {% endcomment %}
     {%- if hasNews == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news-tab">
+    <div class="tab-pane pt-3 fade" id="{{ region }}-news" role="tabpanel" aria-labelledby="{{ region }}-news">
       {% comment %}{%- include home/news-last.html cat=region url=include.url num='3'-%}{% endcomment %}
     </div>
     {%- endif -%}
     {%- if hasArticles == true -%}
-    <div class="tab-pane pt-3 fade" id="{{ region }}-articles" role="tabpanel" aria-labelledby="{{ region }}-articles-tab">
+    <div class="tab-pane pt-3 fade" id="{{ region }}-articles" role="tabpanel" aria-labelledby="{{ region }}-articles">
       {% comment %}{%- include home/articles-last.html cat=region url=include.url num='3' -%}{% endcomment %}
     </div>
     {%- endif -%}

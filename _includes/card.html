@@ -52,7 +52,7 @@
           </div>
         {%- else -%}
           <div class="col-auto">
-            <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" href="#more" data-target=".collapse0{{ offer.id }}{{ include.aid }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-0{{ offer.id }}{{ include.aid }}">
+            <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" id="more-0{{ offer.id }}{{ include.aid }}" href="#more" data-target=".collapse0{{ offer.id }}{{ include.aid }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-0{{ offer.id }}{{ include.aid }}">
               <span class="sr-only">{{ site.data.uk.re_description }}:</span>
               <span class="d-block h-100 w-100" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{ site.data.uk.re_more }}">
                 <span class="navbar-toggler-icon"></span>

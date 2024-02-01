@@ -4,17 +4,17 @@
 {%- include start-ads.html -%}
 {%- if split.size <= 2 or split.size == 3 and page.dir contains '/city/' or page.dir contains '/town/' -%}
     {%- if offer.page and offer.page == '1' -%}
-        <a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.uk.re_page_ads }}">{%- include body-ads.html -%}</a>
+        <a href="{{ site.url }}/{{ offer.phone }}" target="_blank" title="{{ site.data.uk.re_page_ads | capitalize }}" aria-label="{{ site.data.uk.re_page_ads | capitalize }}">{%- include body-ads.html -%}</a>
     {%- elsif offer.link and offer.link != '' -%}
-        <a href="{{ offer.link }}" aria-label="{{ more }}">{%- include body-ads.html -%}</a>
+        <a href="{{ offer.link }}" title="{{ more | capitalize }}" aria-label="{{ more | capitalize }}">{%- include body-ads.html -%}</a>
     {%- else -%}
-        {%- include body-ads.html -%},&nbsp;{%- include footer/phone.html legal=offer.phone type='dropdown' -%}
+        <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ more | capitalize }}" aria-label="{{ more | capitalize }}">{%- include body-ads.html -%}</a>
     {%- endif -%}
 {%- else -%}
     {%- if offer.page and offer.page == '1' -%}
-        <a href="{{ site.url }}/{{ offer.phone }}" target="_blank" aria-label="{{ site.data.uk.re_page_ads }}">{%- include body-ads.html -%}</a>
+        <a href="{{ site.url }}/{{ offer.phone }}" target="_blank" title="{{ site.data.uk.re_page_ads | capitalize }}" aria-label="{{ site.data.uk.re_page_ads | capitalize }}">{%- include body-ads.html -%}</a>
     {%- elsif offer.link and offer.link != '' -%}
-        <a href="{{ offer.link }}" aria-label="{{ more }}">{%- include body-ads.html -%}</a>
+        <a href="{{ offer.link }}" title="{{ more | capitalize }}" aria-label="{{ more | capitalize }}">{%- include body-ads.html -%}</a>
     {%- else -%}
         {%- include body-ads.html -%}
     {%- endif -%}

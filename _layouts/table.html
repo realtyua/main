@@ -64,9 +64,59 @@ layout: default
         </div>
       {%- else -%}
         {%- for offer in offers -%}
-          <div class="row">
-            <div class="col-12">{%- include table/html.html -%}</div>
-          </div>
+          {%- if forloop.first -%}
+            <div class="row">
+              <div class="col-12">
+                <table
+                    id="property"
+                    data-locale="{{ site.lang | replace: '_', '-' }}"
+                    data-toggle="table"
+                    data-search="true"
+                    data-show-print="true"
+                    data-pagination="true"
+                    data-pagination-pre-text="❮"
+                    data-pagination-next-text="❯"
+                    data-detail-view="true"
+                    data-detail-view-icon="false"
+                    data-detail-view-by-click="true"
+                    data-mobile-responsive="true"
+                    data-buttons-class="primary"
+                    data-detail-formatter="htmlDetailFormatter">
+                  <thead class="thead-re">
+                    <tr>
+                      <th data-field="id" data-visible="false">Ідентифікатор</th>
+                      <th data-field="type" data-title="{{ site.data.uk.re_offer }}" data-formatter="propertyFormatter">Тип нерухомості</th>
+                      <th data-field="rent" data-visible="false">Оренда</th>
+                      <th data-field="page" data-visible="false">Сторінка</th>
+                      <th data-field="rooms" data-visible="false">Кімнат</th>
+                      <th data-field="surface" data-visible="false">Площа</th>
+                      <th data-field="surface_land" data-visible="false">Площа землі</th>
+                      <th data-field="price" data-formatter="priceFormatter" data-title="{{ site.data.uk.re_cost | capitalize }}" data-sortable="true" data-sorter="priceSorter">Ціна</th>
+                      <th data-field="price_sqmt" data-visible="false">Ціна за м²</th>
+                      <th data-field="floor" data-visible="false">Поверх</th>
+                      <th data-field="floors" data-visible="false">Поверхів</th>
+                      <th data-field="parking" data-visible="false">Паркування</th>
+                      <th data-field="region" data-visible="false">Район</th>
+                      <th data-field="location" data-visible="false">Місто</th>
+                      <th data-field="address" data-visible="false">Адреса</th>
+                      <th data-field="coordinates" data-visible="false">Координати</th>
+                      <th data-field="date" data-visible="false">Дата</th>
+                      <th data-field="seller" data-visible="false">Продавець</th>
+                      <th data-field="phone" data-visible="false">Телефон</th>
+                      <th data-field="description" data-visible="false">Опис</th>
+                      <th data-field="link" data-visible="false">Посилання</th>
+                      <th data-field="images" data-visible="false">Фото</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+          {%- endif -%}
+            {% include table/html.html %}
+          {%- if forloop.last -%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          {%- endif -%}
         {%- else -%}
           {%- assign name = paget | replace: 'Всі оголошення про ', '' -%}
           <div class="row">
