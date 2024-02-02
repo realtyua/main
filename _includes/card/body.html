@@ -8,7 +8,7 @@
     {%- elsif offer.link and offer.link != '' -%}
         <a href="{{ offer.link }}" title="{{ more | capitalize }}" aria-label="{{ more | capitalize }}">{%- include body-ads.html -%}</a>
     {%- else -%}
-        <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ more | capitalize }}" aria-label="{{ more | capitalize }}">{%- include body-ads.html -%}</a>
+        <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.id }}" title="{{ more | capitalize }}" aria-label="{{ more | capitalize }}">{%- include body-ads.html -%}</a>
     {%- endif -%}
 {%- else -%}
     {%- if offer.page and offer.page == '1' -%}

@@ -68,11 +68,11 @@
         {%- include card/additionally.html -%}
         <dd class="mb-0 text-right">
           {%- if isImage != '' -%}
-          <a class="card-link" data-toggle="collapse" data-target=".collapse1{{ offer.id }}{{ include.aid }}" href="#photo" role="button" aria-expanded="false" aria-controls="photo-1{{ offer.id }}{{ include.aid }}">
+          <a class="card-link" id="photo-1{{ offer.id }}{{ include.aid }}" data-toggle="collapse" data-target=".collapse1{{ offer.id }}{{ include.aid }}" href="#photo" role="button" aria-expanded="false" aria-controls="photo-1{{ offer.id }}{{ include.aid }}">
             {{ site.data.uk.re_images }}
           </a>
           {%- endif -%}
-          <a class="card-link" data-toggle="collapse" data-target=".collapse0{{ offer.id }}{{ include.aid }}" href="#close" role="button" aria-expanded="false" aria-controls="more-0{{ offer.id }}{{ include.aid }}{% if isImage != '' %} photo-1{{ offer.id }}{{ include.aid }}{% endif %}">
+          <a class="card-link" id="close-1{{ offer.id }}{{ include.aid }}" data-toggle="collapse" data-target=".collapse0{{ offer.id }}{{ include.aid }}" href="#close" role="button" aria-expanded="false" aria-controls="close-1{{ offer.id }}{{ include.aid }}">
             {{ site.data.uk.re_collapse }}
           </a>
         </dd>
