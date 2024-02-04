@@ -35,7 +35,8 @@
         {%- assign tslug = tab.dir | split: '/' | last -%}
         {%- if tslug != '' and tab.title != '' or tab.navtitle != '' -%}
           <li class="nav-item" role="presentation">
-            <a{% if tslug == 'commercial' %} title="{{ site.data.uk.re_no_apartments }}"{% elsif tslug == 'realtor' %} title="{{ site.data.uk.agents }} {{ site.data.uk.and }} {{ site.data.uk.realtors }}"{% elsif tslug == 'developer' %} title="{{ site.data.uk.new_buildings }}"{% endif %} class="nav-link border-0" href="#{{ tslug }}" id="{{ tslug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ tslug }}" aria-selected="true">
+            {%- comment -%}<a{% if tslug == 'commercial' %} title="{{ site.data.uk.re_no_apartments }}"{% elsif tslug == 'realtor' %} title="{{ site.data.uk.agents }} {{ site.data.uk.and }} {{ site.data.uk.realtors }}"{% elsif tslug == 'developer' %} title="{{ site.data.uk.new_buildings }}"{% endif %} class="nav-link border-0" href="#{{ tslug }}" id="{{ tslug }}-tab" data-toggle="tab" role="tab" aria-controls="{{ tslug }}" aria-selected="true"></a>{%- endcomment -%}
+            <a{% if tslug == 'commercial' %} title="{{ site.data.uk.re_no_apartments }}"{% elsif tslug == 'realtor' %} title="{{ site.data.uk.agents }} {{ site.data.uk.and }} {{ site.data.uk.realtors }}"{% elsif tslug == 'developer' %} title="{{ site.data.uk.new_buildings }}"{% endif %} class="nav-link border-0" href="{{ tab.dir }}" id="{{ tslug }}" aria-controls="{{ tslug }}">
               <span>
                 {%- if tslug == 'commercial' -%}
                   {{ site.data.uk.title_tab_commercial }}
@@ -101,6 +102,7 @@
       </div>
     </div>
   </div>
+{%- comment -%}
   {%- for pane in pirrs -%}
     {%- assign pslug = pane.dir | split: '/' | last -%}
     {%- capture title -%}{%- if pane.navtitle -%}{{ pane.navtitle }}{%- else -%}{{ pane.title }}{%- endif -%}{%- endcapture -%}
@@ -151,4 +153,5 @@
       </div>
     {%- endif -%}
   {%- endfor -%}
+{%- endcomment -%}
 </div>
