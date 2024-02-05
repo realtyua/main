@@ -43,7 +43,7 @@
 
     {%- if floor and isHouse == false -%}{{ site.data.uk.re_na }} {{ floor }}{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }}, {% endif %}
 
-    {%- if type contains 'приміщення' or type == 'Гараж' -%}у споруди {%- else -%}у будинку {% endif %}
+    {%- if type contains 'приміщення' or type == 'Гараж' -%}у споруди {% else %}у будинку {% endif %}
 
     {%- include floors.html floors=floors %},
 {% endif %}

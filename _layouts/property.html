@@ -31,8 +31,8 @@ layout: default
     <hr>
     {% include thanks-please.html %}
     {%- capture folder -%}/assets/images/{{ page.phone }}/{{ page.uid }}/{%- endcapture -%}
-    {%- assign files = site.static_files | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.jpeg'" -%}
-    {%- if files[0] -%}{%- include grid/images.html files=files folder=folder -%}{%- endif -%}
+    {%- assign images = site.static_files | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.jpeg'" -%}
+    {%- if images[0] -%}{%- include grid/images.html files=images folder=folder -%}{%- endif -%}
     {%- assign surface = page.surface | default: page.surface_land -%}
     <h2 class="mt-2">Основні характеристики</h2>
     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
