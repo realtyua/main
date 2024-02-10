@@ -66,7 +66,7 @@ layout: default
 
           {%- if page.floor -%}
             <dt>Поверх на якому знаходиться об'єкт нерухомості</dt>
-            <dd>Розташовано на {{ page.floor }}-му поверсі {% if page.type contains 'приміщення' or page.type contains 'Гараж' %}споруди{% else %}будинку{%- endif -%}</dd>
+            <dd>{% if page.floor contains 'Г' %}Розташовано на горищі{% elsif page.floor == '0' %}Розташовано у підвалі{% else %}Розташовано на {{ page.floor }}-му поверсі{% endif %} {% if page.type contains 'приміщення' or page.type contains 'Гараж' %}споруди{% else %}будинку{%- endif -%}</dd>
           {%- endif -%}
 
           {%- if page.floors -%}

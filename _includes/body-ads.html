@@ -41,7 +41,7 @@
 
     {%- if rooms -%}{%- include rooms.html rooms=rooms type=type %}, {% endif %}
 
-    {%- if floor and isHouse == false -%}{{ site.data.uk.re_na }} {{ floor }}{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }}, {% elsif floor and floor == '0' and isHouse == false %}{{ site.data.uk.re_at }} {{ site.data.uk.re_basement }}, {% endif %}
+    {% if floor and floor contains 'Г' and isHouse == false %}{{ site.data.uk.re_na }} горищі, {% elsif floor and floor == '0' and isHouse == false %}{{ site.data.uk.re_at }} {{ site.data.uk.re_basement }}, {%- elsif floor and isHouse == false -%}{{ site.data.uk.re_na }} {{ floor }}{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }}, {% endif %}
 
     {%- if type contains 'приміщення' or type == 'Гараж' -%}у споруди {% else %}у будинку {% endif %}
 
