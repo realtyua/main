@@ -1,5 +1,5 @@
 {% assign district = page.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' %}
-{%- for file in include.files -%}
+{%- for file in include.files limit: 12 -%}
   {%- if forloop.first -%}
   <h2>Фотознимки об'єкта нерухомості</h2>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">

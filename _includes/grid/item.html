@@ -1,7 +1,7 @@
-{%- assign cdate = site.time | date: "%Y-%m-%d" -%}
+{%- assign cdate = site.time | date: '%Y%m%d' -%}
 {%- assign slug = include.slug -%}
 {%- assign offer = include.offer -%}
-{%- assign date = offer.date | date: "%Y-%m-%d" -%}
+{%- assign date = offer.date | date: '%Y%m%d' -%}
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
 {%- capture files -%}
   {%- for file in site.static_files -%}
@@ -37,6 +37,8 @@
         </a>
       {%- endif -%}
     </h3>
-    <div class="my-1 small text-muted date">{%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ cdate | date: '%Y-%m-%d' }}{%- else -%}{{ offer.date | date: '%Y-%m-%d' }}{%- endif -%}">{%- if date > cdate -%}{%- include date.html date=cdate -%}{%- else -%}{%- include date.html date=offer.date -%}{%- endif -%}</time></div>
+    <div class="my-1 small text-muted date">
+      {%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ site.time | date: '%Y-%m-%d' }}{%- else -%}{{ offer.date | date: '%Y-%m-%d' }}{%- endif -%}">{%- if date > cdate -%}{%- assign cdate = site.time | date: "%Y-%m-%d" -%}{%- include date.html date=cdate -%}{%- else -%}{%- assign date = offer.date | date: "%Y-%m-%d" -%}{%- include date.html date=date -%}{%- endif -%}</time>
+    </div>
   </div>
 </article>

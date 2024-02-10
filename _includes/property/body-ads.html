@@ -34,6 +34,8 @@
 
     {% if floor and isHouse == false %}
         {{ site.data.uk.re_na }} {{ floor }}{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }},
+    {% elsif floor and floor == '0' and isHouse == false %}
+        {{ site.data.uk.re_at }} {{ site.data.uk.re_basement }},
     {% endif %}
 
     {% if type contains 'приміщення' or type == 'Гараж' %}
