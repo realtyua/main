@@ -3,7 +3,7 @@
 {%- assign ciu = ci.url -%}
 {%- if ci_slug == 'developer' -%}
   {%- capture navitemtitle -%}Місцеві {{ cint | downcase }} нерухомості і новобудови та житлові комплекси{%- endcapture -%}
-  {%- assign pages_developers = site.html_pages | where_exp: "i", "i.dir contains slugd and i.url contains '/developer/' and i.layout == 'developer' and i.navtitle != 'Будівельник'" -%}
+  {%- assign pages_developers = site.html_pages | where_exp: 'i', "i.dir contains slugd and i.url contains '/developer/' and i.layout == 'developer' and i.navtitle != 'Будівельник'" -%}
   {%- assign developers = offers | where_exp: 'i', "i.seller contains site.data.uk.building_company" -%}
   {%- assign total_records = developers.size -%}
   {%- assign average_price = 0 -%}
@@ -84,7 +84,7 @@
   {%- endif -%}
 {%- elsif ci_slug == 'garage' -%}
   {%- capture navitemtitle -%}Окремі та спільні {{ cint | downcase }} і паркувальні місця над землею та під землею{%- endcapture -%}
-  {%- assign garages = offers | where_exp: "i", "i.rent != '1' and i.type contains site.data.uk.re_garage or i.type contains site.data.uk.re_place" -%}
+  {%- assign garages = offers | where_exp: 'i', "i.rent != '1' and i.type contains site.data.uk.re_garage or i.type contains site.data.uk.re_place" -%}
   {%- assign total_records = garages.size -%}
   {%- assign sum = 0 -%}
   {%- for offer in garages -%}

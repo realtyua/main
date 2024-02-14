@@ -1,7 +1,7 @@
 {%- assign seconds = site.html_pages | sort: 'path' -%}
 <ul class="list-unstyled">
 {%- for second in seconds -%}
-  {%- assign maps = site.html_pages | sort: "dir" | where_exp: "i", "i.url contains '/map.html' and i.dir contains second.dir" -%}
+  {%- assign maps = site.html_pages | sort: "dir" | where_exp: 'i', "i.url contains '/map.html' and i.dir contains second.dir" -%}
   {%- assign title = second.title | replace: "'", "&prime;" -%}
   {%- assign navtitle = second.navtitle | replace: "'", "&prime;" -%}
   {%- assign slug = second.dir | split: '/' | last -%}

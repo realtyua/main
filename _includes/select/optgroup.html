@@ -3,7 +3,7 @@
     {%- assign slug = second.url | split: '/' | last -%}
     {%- assign current = second.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and second.navhide != 1 -%}
-        {%- assign options = site.html_pages | sort:"path" | where_exp: "i", "i.url contains second.url and i.name == 'index.html'" -%}
+        {%- assign options = site.html_pages | sort:"path" | where_exp: 'i', "i.url contains second.url and i.name == 'index.html'" -%}
         <option value="{{ second.url }}">
             {%- if second.navtitle contains "місто" -%}
                 Нерухомість в {{ second.navtitle | replace_first: "місто", "місті" }}

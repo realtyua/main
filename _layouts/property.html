@@ -151,7 +151,7 @@ layout: default
     {%- assign location = page.location | default: page.region | strip -%}
     {%- assign address = page.address | strip -%}
 
-    {%- assign on_address = offers | where_exp: "i", "i.location == location and i.address == address and i.id != uid" -%}
+    {%- assign on_address = offers | where_exp: 'i', "i.location == location and i.address == address and i.id != uid" -%}
     {%- if on_address.size > 0 -%}
       {%- for offer in on_address limit: 3 -%}
         {%- capture aid -%}1{%- increment counter -%}{%- endcapture -%}
@@ -168,7 +168,7 @@ layout: default
     {%- endif -%}
 
     {%- assign street = address | split: ',' | first -%}
-    {%- assign on_street = offers | where_exp: "i", "i.location == location and i.address contains street and i.id != uid" -%}
+    {%- assign on_street = offers | where_exp: 'i', "i.location == location and i.address contains street and i.id != uid" -%}
     {%- if on_street.size > 0 -%}
       {%- for offer in on_street limit: 3 -%}
         {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
@@ -186,7 +186,7 @@ layout: default
 
     {%- assign phone = page.phone | strip -%}
     {%- assign seller = page.seller | strip -%}
-    {%- assign in_seller = offers | where_exp: "i", "i.id != uid and i.phone == phone and i.seller == seller" -%}
+    {%- assign in_seller = offers | where_exp: 'i', "i.id != uid and i.phone == phone and i.seller == seller" -%}
     {%- if in_seller.size > 0 -%}
       {%- for offer in in_seller limit: 3 -%}
         {%- capture aid -%}3{%- increment counter -%}{%- endcapture -%}

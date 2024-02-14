@@ -9,7 +9,7 @@
     {%- assign ps = ps | push: i -%}
   {%- endif -%}
 {%- endfor -%}
-{%- assign index = site.pages | sort: "dir" | where_exp: "i", "i.url contains dir and i.url == dir" -%}
+{%- assign index = site.pages | sort: "dir" | where_exp: 'i', "i.url contains dir and i.url == dir" -%}
 <div class="col-12 mt-4">
   <div class="row">
     <div class="col-md-2 offset-md-5 text-center">&uarr;</div>

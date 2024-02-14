@@ -1,4 +1,4 @@
-{%- assign 4s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
+{%- assign 4s = site.html_pages | sort:"path" | where_exp: 'i', "i.url contains include.current or i.url != include.current" -%}
 {%- if 4s.size > 0 -%}
 <ul class="list-unstyled border-left border-primary mt-1 ml-1 pl-2">
   {%- for 4 in 4s -%}

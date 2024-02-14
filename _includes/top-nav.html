@@ -1,4 +1,4 @@
-{%- assign tns = site.html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.url != '/add.html' and i.navhide != 1 and i.title != ''" -%}
+{%- assign tns = site.html_pages | sort:"path" | where_exp: 'i', "i.dir == '/' and i.url != '/' and i.url != '/add.html' and i.navhide != 1 and i.title != ''" -%}
 {%- for tn in tns -%}
   {%- if forloop.first -%}
   <div class="col-lg-4 order-2 order-lg-1 mt-3 mt-lg-1 mb-3 mb-lg-0 pr-lg-0">
@@ -10,7 +10,7 @@
     <a href="{{ tn.url }}" class="nav-link">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</a>
   {%- endif -%}
 {%- endfor -%}
-{%- assign tns = site.html_pages | sort:"path" | where_exp: "i", "i.dir == '/' and i.url != '/' and i.url == '/add.html' and i.navhide != 1 and i.title != ''" -%}
+{%- assign tns = site.html_pages | sort:"path" | where_exp: 'i', "i.dir == '/' and i.url != '/' and i.url == '/add.html' and i.navhide != 1 and i.title != ''" -%}
 {%- for tn in tns -%}
   {%- if forloop.first -%}
     </nav>

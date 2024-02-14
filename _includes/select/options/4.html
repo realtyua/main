@@ -1,4 +1,4 @@
-{%- assign 5s = site.html_pages | sort:"path" | where_exp: "i", "i.url contains include.current or i.url != include.current" -%}
+{%- assign 5s = site.html_pages | sort:"path" | where_exp: 'i', "i.url contains include.current or i.url != include.current" -%}
 {%- if 5s.size > 0 -%}
   {%- for 5 in 5s -%}
     {%- assign slug = 5.url | split: "/" | last -%}

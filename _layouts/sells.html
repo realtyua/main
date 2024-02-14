@@ -22,7 +22,7 @@ layout: default
     <div class="row seller-list mx-n2">
     {%- endif -%}
       {%- assign slug = s.i | append: s.p -%}
-      {%- assign file = site.static_files | where_exp: "i", "i.path contains '/assets/images/client/' and i.basename == slug" -%}
+      {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/client/' and i.basename == slug" -%}
       <div class="col-sm-6 col-lg-4 px-2 mb-3">
         <div class="card">
           {%- if file[0] -%}
