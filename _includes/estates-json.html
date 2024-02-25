@@ -28,6 +28,7 @@
       "date":"{%- if date > cdate -%}{{- site.time | date: "%Y-%m-%d" -}}{%- else -%}{{- offer.date | date: "%Y-%m-%d" -}}{%- endif -%}",
       "seller":"{{ offer.seller }}",
       "phone":"{{ offer.phone }}",
+      {%- if offer.skip -%}"skip":{{ offer.skip }},{%- endif -%}
       "description":"{{ offer.description }}",
       "link":"{%- if offer.page == 1 -%}{%- else -%}{{ offer.url }}{%- endif -%}",
       {%- if images.size > 0 -%}"images":{%- capture img -%}[{%- for file in images limit: 4 -%}{"src":"{{ file.name }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},{%- endfor -%}]{%- endcapture -%}{{ img | replace: ',]', ']' }}{%- else -%}"images":""{%- endif -%}

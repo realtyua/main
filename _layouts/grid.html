@@ -34,7 +34,7 @@ layout: default
     {%- endif -%}
     {%- if data -%}
       {%- include {{ data }} -%}
-      {%- if offers.size > paginator.posts.size -%}
+      {%- if offers.size > paginator.total_posts -%}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <strong>Увага!</strong> У зв'язку з оновленням, частину оголошень, що не містять власної окремої сторінки можна переглянути тільки у <a href="{{ switch_link }}" class="alert-link">режимі списку, ось тут...</a>
           <button title="Закрити" type="button" class="close" data-dismiss="alert" aria-label="Закрити">
