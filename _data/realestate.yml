@@ -34,7 +34,8 @@
   navtitle: місто Вінниця
   subtitle: Нерухомість в Вінниці
   small: Вінницька область
-  url: http://www.realestate.vn.ua
+  url: httpі://www.realestate.vn.ua
+  slug: vinnytska
 
 - title: Нерухомість в Рівненській області
   navtitle: місто Рівне
