@@ -1,15 +1,15 @@
 #
 # Region
 #
-- type: region
-  item: ivano-frankivska
-  # name: Нерухомість у Івано-Франківській області
-  # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  # phone_main: 380974949649
-  # phone_hot: 380974949649
-  # phone_fax: 380974949649
-  email: info@realestate.if.ua
-  www: https://www.realestate.if.ua/
+# - type: region
+#   item: ivano-frankivska
+#   # name: Нерухомість у Івано-Франківській області
+#   # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+#   # phone_main: 380974949649
+#   # phone_hot: 380974949649
+#   # phone_fax: 380974949649
+#   email: info@realestate.if.ua
+#   www: https://www.realestate.if.ua/
 
 #
 # District
@@ -110,6 +110,13 @@
 - type: developer
   item: builder
   name: Будівельна компанія "Будівельник"
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Степана&nbsp;Бандери,&nbsp;0
+  phone_main: 380000000000
+  phone_hot: 380000000000
+  phone_fax: 380000000000
+  phone_buy: 380000000000
+  email: builder@realestate.if.ua
+  www: https://www.realestate.if.ua/
 
 #
 # Realtor / Agent
@@ -121,6 +128,7 @@
   phone_main: 380675571844
   phone_hot: 380675571844
   phone_fax: 380675571844
+  phone_buy: 380675571844
   email: anuamir702@gmail.com
   www: https://www.realestate.if.ua/
 
@@ -131,18 +139,19 @@
   phone_main: 380974949649
   phone_hot: 380974949649
   phone_fax: 380974949649
+  phone_buy: 380974949649
   email: vova@realestate.net.ua
   www: https://www.realestate.if.ua/
 
-- type: realtor
-  item: mosiychuk
-  name: Продаж нерухомості
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: 380504949649
-  phone_hot: 380504949649
-  phone_fax: 380504949649
-  email: info@realestate.if.ua
-  www: https://www.realestate.if.ua/
+# - type: realtor
+#   item: mosiychuk
+#   name: Продаж нерухомості
+#   address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+#   phone_main: 380504949649
+#   phone_hot: 380504949649
+#   phone_fax: 380504949649
+#   email: info@realestate.if.ua
+#   www: https://www.realestate.if.ua/
 
 # - type: realtor
 #   item: pashchak
@@ -157,10 +166,11 @@
 - type: realtor
   item: agent
   name: Нерухомість від Агента Продавця
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: 380504949649
-  phone_hot: 380504949649
-  phone_fax: 380504949649
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Степана&nbsp;Бандери,&nbsp;0
+  phone_main: 380000000000
+  phone_hot: 380000000000
+  phone_fax: 380000000000
+  phone_buy: 380000000000
   email: agent@realestate.if.ua
   www: https://www.realestate.if.ua/
 
@@ -170,9 +180,10 @@
 - type: agency
   item: ahentsiya
   name: Нерухомість від Агенції Продавця
-  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
-  phone_main: 380504949649
-  phone_hot: 380504949649
-  phone_fax: 380504949649
-  email: agent@realestate.if.ua
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Степана&nbsp;Бандери,&nbsp;0
+  phone_main: 380000000000
+  phone_hot: 380000000000
+  phone_fax: 380000000000
+  phone_buy: 380000000000
+  email: agency@realestate.if.ua
   www: https://www.realestate.if.ua/
