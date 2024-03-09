@@ -4,7 +4,11 @@ layout: default
 {%- include vars/page-slash.html -%}
 {%- include vars/sellers.html -%}
 {%- include vars/whois.html minus=1 -%}
-{%- include back-title.html minus='1' so='1' st='4' data='title' -%}
+{%- if paged contains '/realtor/' -%}
+{%- include back-title.html minus='1' so='4' st='9' data='title' -%}
+{%- else -%}
+{%- include back-title.html minus='1' so='1' st='6' data='title' -%}
+{%- endif -%}
 <div class="row">
   <div class="col-12 {{ whois }}">
     <h1 class="h2 mb-3">{{ paget }} {{ idata }}</h1>
