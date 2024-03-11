@@ -7,7 +7,7 @@ Disallow: /*/data/
 Disallow: /*/data/*.json
 Disallow: *.json
 Disallow: *.yml
-Disallow: *CNAME
+Disallow: CNAME
 Disallow: /404.html
 Disallow: /add.html
 Disallow: /new.html
