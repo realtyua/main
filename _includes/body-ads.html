@@ -35,7 +35,7 @@
 <strong>{{- start_ads -}}</strong>
 
 {% if type contains site.data.uk.re_land %}
-    {{- site.data.uk.re_surface }} <abbr data-toggle="tooltip" title="{{ site.data.uk.re_total }}"><b>{{ surface_land }}</b></abbr>&nbsp;м² ({{ surface_land | divided_by: 10000.0000 | round: 4 }} га),
+    {{ site.data.uk.re_surface }} <abbr data-toggle="tooltip" title="{{ site.data.uk.re_total }}"><b>{{ surface_land }}</b></abbr>&nbsp;м² ({{ surface_land | divided_by: 10000.0000 | round: 4 }} га),
 {%- else -%}
     {%- if surface %} {{ site.data.uk.re_surface }} <abbr data-toggle="tooltip" title="{{ site.data.uk.re_total }}"><b>{{ surface }}</b></abbr> м², {% endif %}
 
