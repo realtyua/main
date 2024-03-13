@@ -53,7 +53,7 @@
   <meta name="keywords" content="{{ page.keywords | default: site.keywords | smartify }}">
   <meta name="description" content="{{ page.description | default: site.description | smartify }}">
 {%- endif -%}
-<meta name="Classification" content="Нерухомість">
+{% comment %}<meta name="Classification" content="Нерухомість">{% endcomment %}
 <meta name="subject" content="Нерухомість {{ site.data.uk.deck_region_in }} області">
 <meta name="country" content="{{ site.country }}">
 <meta name="region" content="{{ site.region }}">
@@ -125,7 +125,8 @@
 {%- include twitter-meta.html -%}
 {%- if pageu == '/' -%}
   {%- assign cdate = site.time | date: "%Y-%m-%d" -%}
-  <meta name="date" content="{%- include date.html date=cdate -%}">
+  {% comment %}<meta name="date" content="{%- include date.html date=cdate -%}">{% endcomment %}
+  <meta name="date" content="{{ site.time }}">
 {%- elsif page.layout == 'property' -%}
   {%- assign date = page.date | date: "%Y-%m-%d" -%}
   {%- assign ldate = page.last_modified_at | date: "%Y-%m-%d" -%}
