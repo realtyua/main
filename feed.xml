@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Новини · Мережа Вебсайтів Нерухомості · Івано-Франківська область</title>
+    <description>Купівля, продаж і тривала та подобова оренда квартир, будинків, землі, комерційної нежитлової нерухомості в Івано-Франківську і області, Прикарпаття і Карпати</description>
+    <link>https://www.realestate.if.ua/</link>
+    <atom:link href="https://www.realestate.if.ua/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 23 Mar 2024 20:36:52 +0200</pubDate>
+    <lastBuildDate>Sat, 23 Mar 2024 20:36:52 +0200</lastBuildDate>
+    <generator>Мережа Вебсайтів Нерухомості</generator>
+    
+      <item>
+        <title>Про тенденції та перспективи ринку нерухомості в місті Івано-Франківськ</title>
+        <description>В четвер, 28 липня 2022 року Асоціація фахівців з нерухомості (рієлторів) України (АФНУ) за підтримки Конфедерації будівельників України ...</description>
+        <pubDate>Fri, 29 Jul 2022 00:00:00 +0300</pubDate>
+        <link>https://www.realestate.if.ua/news/about-trends-and-prospects-of-the-real-estate-market.html</link>
+        <guid isPermaLink="true">https://www.realestate.if.ua/news/about-trends-and-prospects-of-the-real-estate-market.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
+    
+      <item>
+        <title>Доступна іпотека 7% для приватних осіб</title>
+        <description>Програма &quot;Доступна іпотека 7%&quot; з 01.03.2021 р. реалізується Фондом розвитку підприємництва за ініціативи Президента та Уряду України згід...</description>
+        <pubDate>Mon, 01 Mar 2021 00:00:00 +0200</pubDate>
+        <link>https://www.realestate.if.ua/news/mortgages-for-individuals.html</link>
+        <guid isPermaLink="true">https://www.realestate.if.ua/news/mortgages-for-individuals.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
+    
+      <item>
+        <title>Будинок у якому працював видатний художник Опанас Заливаха виставлено на аукціон</title>
+        <description>Департамент комунальних ресурсів Івано-Франківської міської ради виставив на аукціон нежитлове приміщення по вулиці Незалежності, будинок...</description>
+        <pubDate>Thu, 21 Jan 2021 00:00:00 +0200</pubDate>
+        <link>https://www.realestate.if.ua/news/the-house-where-the-outstanding-artist-opanas-zalivakha-worked-has-been-put-up-for-auction.html</link>
+        <guid isPermaLink="true">https://www.realestate.if.ua/news/the-house-where-the-outstanding-artist-opanas-zalivakha-worked-has-been-put-up-for-auction.html</guid>
+        
+        
+        <category>news</category>
+        
+      </item>
+    
+  </channel>
+</rss>
