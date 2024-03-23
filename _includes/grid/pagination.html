@@ -1,124 +1,133 @@
 {%- assign url = include.cat | replace: ',', '/' -%}
-{% if paginator.total_pages > 1 %}
-<nav class="row" aria-label="Посторінкова навігація">
-  <div class="col-md-6">
-    <div class="my-2 float-left">
-      <span class="pagination-info">Показано {{ page.pagination_info.curr_page }} з {{ page.pagination_info.total_pages }}.</span>
-      <span class="page-list">Виведено 9 записів на сторінку з {{ paginator.total_posts }}</span>
+{% capture spaceless %}
+  {%- assign total_pages = paginator.total_pages -%}
+{% endcapture %}
+{%- if total_pages > 1 -%}
+  <nav class="row" aria-label="Посторінкова навігація">
+    <div class="col-md-12 col-lg-6">
+      <div class="my-2 float-left">
+        <span class="pagination-info">Показано {{ page.pagination_info.curr_page }} сторінку з {{ page.pagination_info.total_pages }}.</span>
+        <span class="page-list">Виведено {{ site.pagination.per_page }} записів на сторінку з {{ paginator.total_posts }}</span>
+      </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <ul class="pagination float-right mb-0">
-      {% if paginator.previous_page %}
-        <li class="page-item">
-          <a class="page-link page-pre" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Попередня сторінка">
-            <span aria-hidden="true">❮</span>
-            <span class="sr-only">Попередня сторінка</span>
+    <div class="col-md-12 col-lg-6">
+      {% capture spaceless %}
+        {%- assign page_current = paginator.page -%}
+        {%- assign link_offset = 2 -%}  
+        {%- assign link_max = link_offset | times: 2 | plus: 1 -%}  
+        {%- assign limit_lower= link_offset | plus: 1 -%}
+        {%- assign limit_upper = total_pages | minus: link_offset -%}
+        {%- assign min_lower = link_max -%}  
+        {%- assign max_upper = total_pages | minus: link_max -%}
+        {%- assign lower_offset = page_current | minus: link_offset -%}  
+        {%- assign upper_offset = page_current | plus: link_offset -%}  
+        {%- assign lower_indicator = 2 -%}
+        {%- assign upper_indicator = total_pages | minus: 1 -%}
+      {% endcapture %}
+      <ul class="pagination float-right mb-0">
+      {%- unless paginator.page == 1 -%}
+        <li class="page-item icon-first">
+          <a class="page-link hoverable" href="/{{ url }}/" title="Поерша сторінка" rel="first">
+            <span aria-hidden="true" class="text-nowrap">❙❮</span>
+            <span class="sr-only">Перша</span>
           </a>
         </li>
-      {% else %}
+      {%- endunless -%}
+      {%- if paginator.previous_page -%}
+        {%- assign p_prev = paginator.previous_page_path | prepend: site.baseurl -%}
         <li class="page-item">
-          <span class="page-link page-pre">
+          <a class="page-link hoverable" href="{{ p_prev }}" title="Попередня сторінка" rel="prev">
             <span aria-hidden="true">❮</span>
-            <span class="sr-only">Попередня сторінка</span>
-          </span>
+            <span class="sr-only">Попередня</span>
+          </a>
         </li>
-      {% endif %}
-      {% for page in (1..paginator.total_pages) %}
-      {% assign last_five = forloop.length | minus: 4 %}
-      {% assign last_page = forloop.length %}
-      {% if forloop.length > 5 %}
-        {% if paginator.page <= 5 %}
-          {% if forloop.index <= 5 %}
-            {% if forloop.first and page == paginator.page %}
-              <li class="page-item active"><span class="page-link">{{ page }}</span></li>
-            {% elsif forloop.first %}
-              <li class="page-item"><a class="page-link" href="/{{ url }}/">1</a></li>
-            {% elsif page == paginator.page %}
-              <li class="page-item active"><span class="page-link">{{ page }}</span></li>
-            {% else %}
-              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page }}/">{{ page }}</a></li>
+      {%- endif -%}
+    {%- if total_pages > link_max -%}
+      {%- if lower_offset > 1 -%}
+        <li class="page-item first">
+          <a class="page-link hoverable" href="/{{ url }}/" aria-label="Перейти до сторінки 1">1</a>
+        </li>
+      {%- endif -%}
+      {%- if lower_offset > lower_indicator -%}
+        <li class="pages-indicator first disabled">
+          <span class="page-link">&hellip;</span>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+    {%- for page in (1..total_pages) -%}
+      {% capture spaceless %}
+        {% assign page_current_flag = false %}
+        {% if total_pages > link_max %}
+          {% if page_current <= limit_lower %}
+            {% if page <= min_lower %}
+              {% assign page_current_flag = true %}
+            {% endif %}
+          {% elsif page_current >= limit_upper %}
+            {% if page > max_upper %}
+              {% assign page_current_flag = true %}
             {% endif %}
           {% else %}
-            {% if paginator.page == 5 %}
-              <li class="page-item"><a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a></li>
-            {% endif %}
-              <li class="page-item"><span class="page-link">...</span></li>
-              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ last_page }}/">{{ last_page }}</a></li>
-            {% break %}
-          {% endif %}
-        {% elsif paginator.page >= last_five %}
-          {% if forloop.index >= last_five %}
-            {% if forloop.index == last_five %}
-                <li class="page-item"><a class="page-link" href="/{{ url }}/">1</a></li>
-                <li class="page-item"><span class="page-link">...</span></li>
-              {% if page == last_five %}
-                <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | minus: 1 }}/">{{ page | minus: 1 }}</a></li>
-              {% endif %}
-              {% if page == paginator.page %}
-                <li class="page-item active"><span class="page-link">{{ page }}</span></li>
-              {% else %}
-                <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page }}/">{{ page }}</a></li>
-              {% endif %}
-              {% elsif forloop.last and page == paginator.page %}
-                <li class="page-item active"><span class="page-link">{{ page }}</span></li>
-              {% elsif page == paginator.page %}
-                <li class="page-item active"><span class="page-link">{{ page }}</span></li>
-              {% else %}
-                <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page }}/">{{ page }}</a></li>
-              {% endif %}
-            {% endif %}
-          {% else %}
-            {% if forloop.first %}
-              <li class="page-item"><a class="page-link" href="/{{ url }}/">1</a></li>
-            {% endif %}
-            {% if forloop.index == paginator.page | minus: 2 %}
-              <li class="page-item"><span class="page-link">...</span></li>
-              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | minus: 2 }}/">{{ page | minus: 2 }}</a></li>
-            {% endif %}
-            {% if forloop.index == paginator.page | minus: 1 %}
-              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | minus: 1 }}/">{{ page | minus: 1 }}</a></li>
-            {% endif %}
-            {% if page == paginator.page %}
-              <li class="page-item active"><span class="page-link">{{ page }}</span></li>
-            {% endif %}
-            {% if forloop.index == paginator.page | plus: 1 %}
-              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | plus: 1 }}/">{{ page | plus: 1 }}</a></li>
-            {% endif %}
-            {% if forloop.index == paginator.page | plus: 2 %}
-              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page | plus: 2 }}/">{{ page | plus: 2 }}</a></li>
-              <li class="page-item"><span class="page-link">...</span></li>
-            {% endif %}
-            {% if forloop.last %}
-              <li class="page-item"><a class="page-link" href="/{{ url }}/{{ forloop.index }}/">{{ forloop.index }}</a></li>
+            {% if (page >= lower_offset) and (page <= upper_offset) %}
+              {% assign page_current_flag = true %}
             {% endif %}
           {% endif %}
         {% else %}
-          {% if page == paginator.page %}
-            <li class="page-item active"><span class="page-link">{{ page }}</span></li>
-          {% elsif page == 1 %}
-            <li class="page-item"><a class="page-link" href="/{{ url }}/">{{ page }}</a></li>
-          {% else %}
-            <li class="page-item"><a class="page-link" href="/{{ url }}/{{ page }}/">{{ page }}</a></li>
-          {% endif %}
+          {% assign page_current_flag = true %}
         {% endif %}
-      {% endfor %}
-      {% if paginator.next_page %}
-        <li class="page-item">
-          <a class="page-link page-next" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Наступна сторінка">
-            <span aria-hidden="true">❯</span>
-            <span class="sr-only">Наступна сторінка</span>
+        {% if page_current_flag == true %}
+          {% assign diff_offset = page | minus: page_current | abs %}
+        {% endif %}
+      {% endcapture %}
+      {% if page_current_flag == true %}
+        {%- if page == page_current -%}
+          <li class="page-item active pagination--offset-{{ diff_offset }}">
+            <span class="page-link" aria-label="Сторінка {{ page }}">
+              {{ page }}
+            </span>
+          </li>
+        {%- else -%}
+          <li class="page-item pagination--offset-{{ diff_offset }}">
+            <a class="page-link hoverable" href="{%- if page == 1 -%}/{{ url }}/{%- else -%}/{{ url }}/{{ page }}/{%- endif -%}" aria-label="Перейти до сторінки {{ page }}">
+              <span class="sr-only">Сторінка {{ page_cursor }}</span>
+              {{ page }}
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if total_pages > link_max -%}
+      {%- if upper_offset < upper_indicator -%}
+        <li class="pages-indicator last disabled">
+          <span class="page-link">&hellip;</span>
+        </li>
+      {%- endif -%}
+      {%- if upper_offset < total_pages -%}
+        <li class="page-item last">
+          <a class="page-link hoverable" href="/{{ url }}/{{ total_pages }}/" aria-label="Перейти до сторінки {{ total_pages }}">
+            <span class="sr-only">{{ total_pages }} сторінок</span>
+            {{ total_pages }}
           </a>
         </li>
-      {% else %}
+      {%- endif -%}
+    {% endif %}
+      {%- if paginator.next_page -%}
+        {%- assign p_next = paginator.next_page_path | prepend: site.baseurl -%}
         <li class="page-item">
-          <span class="page-link page-next">
+          <a class="page-link hoverable" href="{{ p_next }}" title="Наступна сторінка" rel="next">
             <span aria-hidden="true">❯</span>
-            <span class="sr-only">Наступна сторінка</span>
-          </span>
+            <span class="sr-only">Наступна</span>
+          </a>
         </li>
-      {% endif %}
-    </ul>
-  </div>
-</nav>
-{% endif %}
+      {%- endif -%}
+      {%- unless paginator.page == total_pages -%}
+        <li class="page-item icon-last">
+          <a class="page-link hoverable" href="/{{ url }}/{{ total_pages }}/" title="Остання сторінка" rel="last">
+            <span aria-hidden="true" class="text-nowrap">❯❙</span>
+            <span class="sr-only">Остання</span>
+          </a>
+        </li>
+      {%- endunless -%}
+      </ul>
+    </div>
+  </nav>
+{%- endif -%}
