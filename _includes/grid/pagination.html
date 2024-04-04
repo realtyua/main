@@ -13,14 +13,14 @@
     <div class="col-md-12 col-lg-6">
       {% capture spaceless %}
         {%- assign page_current = paginator.page -%}
-        {%- assign link_offset = 2 -%}  
-        {%- assign link_max = link_offset | times: 2 | plus: 1 -%}  
+        {%- assign link_offset = 2 -%}
+        {%- assign link_max = link_offset | times: 2 | plus: 1 -%}
         {%- assign limit_lower= link_offset | plus: 1 -%}
         {%- assign limit_upper = total_pages | minus: link_offset -%}
-        {%- assign min_lower = link_max -%}  
+        {%- assign min_lower = link_max -%}
         {%- assign max_upper = total_pages | minus: link_max -%}
-        {%- assign lower_offset = page_current | minus: link_offset -%}  
-        {%- assign upper_offset = page_current | plus: link_offset -%}  
+        {%- assign lower_offset = page_current | minus: link_offset -%}
+        {%- assign upper_offset = page_current | plus: link_offset -%}
         {%- assign lower_indicator = 2 -%}
         {%- assign upper_indicator = total_pages | minus: 1 -%}
       {% endcapture %}
@@ -81,9 +81,7 @@
       {% if page_current_flag == true %}
         {%- if page == page_current -%}
           <li class="page-item active pagination--offset-{{ diff_offset }}">
-            <span class="page-link" aria-label="Сторінка {{ page }}">
-              {{ page }}
-            </span>
+            <span class="page-link">{{ page }}</span>
           </li>
         {%- else -%}
           <li class="page-item pagination--offset-{{ diff_offset }}">
