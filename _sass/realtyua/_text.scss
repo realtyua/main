@@ -7,3 +7,17 @@
     .font#{$infix}-weight-bold  { font-weight: 700!important; }
   }
 }
+
+.text-sm { font-size: ($font-size-base); }
+
+@include media-breakpoint-only(xs) {
+  .text-sm { font-size: .996rem; }
+}
+
+@include media-breakpoint-only(sm) {
+  .text-sm { font-size: .996rem; }
+}
+
+@include media-breakpoint-only(md) {
+  .text-sm { font-size: .996rem; }
+}
