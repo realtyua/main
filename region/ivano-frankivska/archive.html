@@ -11,32 +11,9 @@ table: 2
   <div class="col-12">
 
     <h1 class="h2">Архів продажу і оренди нерухомості в {{ site.data.uk.deck_region_at }} області</h1>
-    <p>Перелік архівних записів про нерухомість, яка була продана або передана в оренду чи то зната з продажу і оренди.</p>
+    <p>Перелік архівних записів про нерухомість, яка була продана або передана в оренду чи то знята з продажу і з пропозицій оренди.</p>
 
-    <div class="row justify-content-between">
-      {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
-      {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
-      {%- if isMap == 'true' -%}
-      <div class="col-lg-1 align-self-center">
-        <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
-          <li class="nav-item">
-            <h5 class="m-lg-0">
-              {%- if page.url contains mapPage -%}
-                <span class="badge badge-primary border-0" title="{{ site.data.uk.re_map_on }}">
-                  <span>{{ site.data.uk.re_map }}</span>
-                  <span class="d-lg-none">{{ site.data.uk.nerukhomisti }}</span>
-                </span>
-              {%- else -%}
-                <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.uk.re_map_on }}">
-                  <span>{{ site.data.uk.re_map }}</span>
-                  <span class="d-lg-none">{{ site.data.uk.nerukhomisti }}</span>
-                </a>
-              {%- endif -%}
-            </h5>
-          </li>
-        </ul>
-      </div>
-      {%- endif -%}
+    <div class="row justify-content-end">
       <div class="col-lg-2">
         <select id="data" class="custom-select custom-select-sm mb-lg-2">
           <option value="all" selected>Вся нерухомість</option>
@@ -84,8 +61,8 @@ table: 2
             </tr>
           </thead>
         </table>
-
       </div>
     </div>
+    
   </div>
 </div>
