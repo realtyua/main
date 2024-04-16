@@ -22,7 +22,7 @@
 {% if slashd.size == 0 and pageu != '/' %}
   {%- assign end_title = site.title | prepend: ' · ' -%}
 {% elsif slashd.size == 4 or slashd.size == 5 %}
-  {%- assign end_title = site.title | prepend: ' · ' -%}
+  {%- assign end_title = page.title_seo | default: site.title | prepend: ' · ' -%}
 {% elsif slashd.size == 2 or slashd.size == 3 %}
   {% unless paged contains site.region_slug or paged == '/region/' or paged == '/news/' or paged == '/docs/' or paged == '/articles/' or paged == '/laws/' %}
     {%- assign end_title = site.region | prepend: ' · ' -%}
