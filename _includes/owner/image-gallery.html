@@ -1,7 +1,7 @@
 {%- assign folder = page.dir | append: 'images/gallery/' | append: include.folder | append: '/' -%}
 {%- assign w = include.size | split: 'x' | first -%}
 {%- assign h = include.size | split: 'x' | last -%}
-<!-- ### {{ folder }} ### -->
+<!-- ### {{ dir }} || {{ page.dir }} || {{ folder }} || {{ page.name }} ### -->
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{{ include.cols }} mt-1">
 {%- for file in site.static_files -%}
   {%- if file.path contains folder -%}

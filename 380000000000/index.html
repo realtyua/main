@@ -13,6 +13,10 @@ coordinates: 48.911778,24.716818
 marker: <b>Продаю Житло<br/>Однокімнатна квартира</b><br/>по вулиці Степана Бандери<br/>місто Івано-Франківськ<br/>Україна.
 ---
 
+{%- assign dir = page.dir -%}
+
+<!-- ### dir = {{ dir }} || page.dir = {{ page.dir }} || page.name = {{ page.name }} || page.path = {{ page.path }} ### -->
+
 {%- include owner/header-image.html
   re='apartment'
   h1='Однокімнатна квартира'
