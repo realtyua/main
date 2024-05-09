@@ -1,0 +1,31 @@
+---
+title: Ціна
+class:
+sitemap: false
+---
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 mb-md-5">
+
+      <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        {% comment %}<h2 class="display-4">Продано</h2>{% endcomment %}
+        <h2 class="display-4">Ціна квартири</h2>
+        <p class="lead">Станом на 01&nbsp;січня&nbsp;2024&nbsp;року</p>
+        <h3 class="display-3">{{ 250000 | times: site.usd | round }}&nbsp;гривень</h3>
+        <p>Вартість у доларах США складатиме у перерахунку за ринковим курсом ({{ site.usd }} гривень),<br/>станом на момент укладання угоди купівлі-продажу</p>
+        <p>За попередніми мешканцями наявний борг, десь приблизно до сорока тисяч гривень (побачити це можна у запитах банку на оплату комунальних послуг).</p>
+        <p>Продається як є.</p>
+        <p>Залюбки відповім на всі ваші запитання, які стосуються квартири.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{%- include owner/parallax-image.html
+  my=''
+  src='/380000000000/images/apartment.jpg'
+  s='2'
+  h='Контакти продавця квартири в '
+-%}
