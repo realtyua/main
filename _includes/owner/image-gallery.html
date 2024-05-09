@@ -1,4 +1,4 @@
-{%- assign folder = page.dir | append: 'images/gallery/' | append: include.folder | append: '/' -%}
+{%- assign folder = include.owner | append: 'images/gallery/' | append: include.folder | append: '/' -%}
 {%- assign w = include.size | split: 'x' | first -%}
 {%- assign h = include.size | split: 'x' | last -%}
 <!-- ### {{ dir }} || {{ page.dir }} || {{ folder }} || {{ page.name }} ### -->
