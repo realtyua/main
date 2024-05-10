@@ -3,6 +3,7 @@ title: Фото
 class: pt-3
 sitemap: false
 ---
+{%- assign dir = page.path | replace_first: '.html', '/' | split: '/' | last -%}
 
 <div class="container-fluid">
 
@@ -13,7 +14,6 @@ sitemap: false
     </div>
   </div>
 
-  {%- assign dir = page.path | replace_first: '.html', '/' | split: '/' | last -%}
   {%- include owner/image-gallery.html dir=dir folder='apartment' size='300x300' cols='4' -%}
 
 </div>

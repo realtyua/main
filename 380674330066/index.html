@@ -12,7 +12,7 @@ sitemap: true
 coordinates: 48.92585,24.74187
 marker: <b>Продано житлову приватну<br/>однокімнатну квартиру</b><br/>по вулиці Володимира Івасюка, будинок № 50<br/>місто Івано-Франківськ
 ---
-
+{%- assign dir = page.path | replace_first: '.html', '/' | split: '/' | last -%}
 {%- include owner/header-image.html
   re='apartment'
   h1='Однокімнатна квартира'
