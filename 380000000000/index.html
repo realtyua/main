@@ -14,9 +14,6 @@ marker: <b>Продаю Житло<br/>Однокімнатна квартира
 ---
 
 {%- assign dir = page.path | replace_first: '.html', '/' | split: '/' | last -%}
-{%- assign owner = page.name | remove: '.html' -%}
-
-<!-- ### dir = {{ dir }} || page.dir = {{ page.dir }} || page.name = {{ page.name }} || page.path = {{ page.path }} ### -->
 
 {%- include owner/header-image.html
   re='apartment'

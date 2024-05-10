@@ -14,11 +14,7 @@ sitemap: false
   </div>
 
   {%- assign dir = page.path | replace_first: '.html', '/' | split: '/' | last -%}
-  {%- assign owner = page.name | remove: '.html' -%}
-
-  <!-- ### dir = {{ dir }} || owner {{ owner }} || page.dir = {{ page.dir }} || page.name = {{ page.name }} || page.path = {{ page.path }} ### -->
-
-  {%- include owner/image-gallery.html owner=owner folder='apartment' size='300x300' cols='4' -%}
+  {%- include owner/image-gallery.html dir=dir folder='apartment' size='300x300' cols='4' -%}
 
 </div>
 
