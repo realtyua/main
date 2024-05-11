@@ -4,6 +4,7 @@
     {%- assign sizename = section | size -%}
     {%- assign id = section | slice: 3, sizename -%}
     <section id="{{ id }}"{% if sn.class and sn.class != '' %} class="{{ sn.class }}"{% endif %}>
+      <!-- ### {{ owner }} ### -->
       {{ sn.content }}
     </section>
   {%- endfor -%}
