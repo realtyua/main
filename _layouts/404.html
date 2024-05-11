@@ -15,7 +15,8 @@ layout: compress
                 {%- assign file = "assets/images/404.jpg" -%}
                 <img src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file | url_decode | relative_url }}&w=1100&h=619&fit=cover&a=attention&output=jpg&q=50&t=square" class="card-img-top" alt="404 error">
                 <div class="card-img-overlay">
-                  <h5 class="card-title">Довелося довго шукали, але нажаль не вдалося знайти запитувану сторінку.</h5>
+                  <h2 class="card-title h5">Довелося довго шукали, але нажаль не вдалося знайти запитувану сторінку.</h2>
+                  <h3 class="card-title h6">Додати нове оголошення можна ось <a href="{{ site.addre }}" class="text-white">тут...</a></h3>
                   <div class="card-text">
                     Спробуйте зазирнути у <a id="mapsite" class="text-white collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map"><u>{{ site.data.uk.map_site }}</u></a> або розпочніть перегляд з <a class="text-white" href="{{ site.url }}" title="Головна сторінка сайту"><u>головної сторінки</u></a>.
                     <div class="bg-white px-3 collapse multi-collapse website-map" id="websitemap">{%- include map/0.html -%}</div>
