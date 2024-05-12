@@ -3,7 +3,7 @@ title: Ціна
 class:
 sitemap: false
 ---
-
+{%- assign dir = page.path | remove: '.html' | split: '/' | last -%}
 <div class="container">
   <div class="row">
     <div class="col-12 mb-md-5">
@@ -25,7 +25,7 @@ sitemap: false
 
 {%- include owner/parallax-image.html
   my=''
-  src='/380000000000/images/apartment.jpg'
+  src='/{{ dir }}/images/apartment.jpg'
   s='2'
   h='Контакти продавця квартири в Івано-Франківськ'
 -%}

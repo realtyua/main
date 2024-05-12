@@ -3,7 +3,7 @@ title: Ціна
 class:
 sitemap: false
 ---
-
+{%- assign dir = page.path | remove: '.html' | split: '/' | last -%}
 <div class="container">
   <div class="row">
     <div class="col-12 mb-md-5">
@@ -23,7 +23,7 @@ sitemap: false
 
 {%- include owner/parallax-image.html
   my=''
-  src='/380504949649/images/home_front.jpg'
+  src='/{{ dir }}/images/home_front.jpg'
   s='2'
   h='Контакти продавця будинку в Тисмениці'
 -%}
