@@ -4,11 +4,9 @@ title: Ціна
 class:
 sitemap: false
 ---
-{%- assign dir = page.path | remove: '.html' | split: '/' | last -%}
 <div class="container">
   <div class="row">
     <div class="col-12 mb-md-5">
-
       <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h2 class="display-4">Продано</h2>
         {% comment %}
@@ -21,14 +19,12 @@ sitemap: false
           <p>Залюбки відповім на всі ваші запитання, які стосуються квартири.</p>
         {% endcomment %}
       </div>
-
     </div>
   </div>
 </div>
-
 {%- include owner/parallax-image.html
   my=''
-  src='/{{ dir }}/images/apartment.jpg'
+  src='/380674330066/images/apartment.jpg'
   s='2'
   h='Контакти продавця квартири в Івано-Франківську'
 -%}

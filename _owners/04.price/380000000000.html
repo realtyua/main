@@ -3,11 +3,9 @@ title: Ціна
 class:
 sitemap: false
 ---
-{%- assign dir = page.path | remove: '.html' | split: '/' | last -%}
 <div class="container">
   <div class="row">
     <div class="col-12 mb-md-5">
-
       <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         {% comment %}<h2 class="display-4">Продано</h2>{% endcomment %}
         <h2 class="display-4">Ціна квартири</h2>
@@ -18,14 +16,12 @@ sitemap: false
         <p>Продається як є.</p>
         <p>Залюбки відповім на всі ваші запитання, які стосуються квартири.</p>
       </div>
-
     </div>
   </div>
 </div>
-
 {%- include owner/parallax-image.html
   my=''
-  src='/{{ dir }}/images/apartment.jpg'
+  src='/380000000000/images/apartment.jpg'
   s='2'
   h='Контакти продавця квартири в Івано-Франківськ'
 -%}
