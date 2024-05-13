@@ -14,5 +14,5 @@ img: apartment.jpg
     p2='Каартира у місті , неподалік центру, по вулиці Степана Бандери, будинок номер 0 (позаду Краївки), поруч вулиця Василя Стуса та майдану Незалежності'
   -%}
 </div>
-{%- assign src = dir | append: '/images/' | append: page.img -%}
+{%- assign src = dir | prepend: '/' | append: '/images/' | append: page.img -%}
 {%- include owner/parallax-image.html my='5' src=src s='2' h='Продається' p='Квартира у місті Івано-Франківськ' -%}

@@ -21,5 +21,5 @@ img: apartment.jpg
     </div>
   </div>
 </div>
-{%- assign src = dir | append: '/images/' | append: page.img -%}
+{%- assign src = dir | prepend: '/' | append: '/images/' | append: page.img -%}
 {%- include owner/parallax-image.html my='' src=src s='2' h='Контакти продавця квартири в Івано-Франківськ' -%}
