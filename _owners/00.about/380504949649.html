@@ -2,7 +2,9 @@
 title: Про будинок
 class: py-3 py-md-5
 sitemap: false
+img: house_from_road.jpg
 ---
+{%- assign dir = page.path | remove: '.html' | split: '/' | last -%}
 <div class="container">
   {%- include owner/text.html
     s='2'
@@ -33,10 +35,5 @@ sitemap: false
   </div>
 {% endcomment %}
 </div>
-{%- include owner/parallax-image.html
-  my='5'
-  src='/380504949649/images/house_from_road.jpg'
-  s='2'
-  h='Продається'
-  p='Невеличкий житловий будиночок у місті Тисмениця'
--%}
+{%- assign src = dir | prepend: '/' | append: '/images/' | append: page.img -%}
+{%- include owner/parallax-image.html my='5' src=src s='2' h='Продається' p='Невеличкий житловий будиночок у місті Тисмениця'-%}

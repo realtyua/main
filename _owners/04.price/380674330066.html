@@ -3,7 +3,9 @@ last_modified_at: 2023-02-07T20:58:58+02:00
 title: Ціна
 class:
 sitemap: false
+img: apartment.jpg
 ---
+{%- assign dir = page.path | remove: '.html' | split: '/' | last -%}
 <div class="container">
   <div class="row">
     <div class="col-12 mb-md-5">
@@ -22,9 +24,5 @@ sitemap: false
     </div>
   </div>
 </div>
-{%- include owner/parallax-image.html
-  my=''
-  src='/380674330066/images/apartment.jpg'
-  s='2'
-  h='Контакти продавця квартири в Івано-Франківську'
--%}
+{%- assign src = dir | prepend: '/' | append: '/images/' | append: page.img -%}
+{%- include owner/parallax-image.html my='' src=src s='2' h='Контакти продавця квартири в Івано-Франківську' -%}
