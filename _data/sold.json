@@ -1,5 +1,27 @@
 [
   {
+    "id": "622",
+    "type": "Квартира",
+    "rent": "",
+    "rooms": "3",
+    "surface": "64",
+    "surface_land": "",
+    "price": "$35000",
+    "price_sqmt": "",
+    "floor": "2",
+    "floors": "5",
+    "parking": "Прибудинкова територія",
+    "region": "",
+    "location": "м. Івано-Франківськ",
+    "address": "вул. Бельведерська, 12",
+    "object": "",
+    "coordinates": "48.92273,24.70618",
+    "date": "2021-08-19",
+    "seller": "Леся Скоропад",
+    "phone": "380953317722",
+    "description": ""
+  },
+  {
     "id": "232",
     "type": "Будинок",
     "rent": "",
