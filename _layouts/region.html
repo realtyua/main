@@ -22,6 +22,7 @@ layout: default
       </div>
     </div>
     {%- endif -%}
+    {%- if page.about_city -%}<p class="small">{{ page.about_city }}</p>{%- endif -%}
     {%- include subnavtab.html -%}
   </div>
   {%- assign isContent = content | strip_newlines -%}
