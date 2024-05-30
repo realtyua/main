@@ -74,6 +74,11 @@ layout: default
             <dd>У {% if page.type contains 'приміщення' or page.type contains 'Гараж' %}споруди{% else %}будинку{% endif %} {% include floors.html floors=page.floors %}</dd>
           {%- endif -%}
 
+          {%- if page.parking -%}
+            <dt>Паркування транспотрних засобів</dt>
+            <dd>{{ page.parking }}</dd>
+          {%- endif -%}
+
           {%- if page.address or page.location or page.region -%}
           <dt>Адреса</dt>
           <dd{% if page.object %} class="mb-0"{% endif %}>
