@@ -1,8 +1,0 @@
-{%- if paged contains '/realtor/' or paged contains '/agency/' or paged contains '/developer/' -%}{%- assign isSeller = true -%}{%- else -%}{%- assign isSeller = false -%}{%- endif -%}
-{%- if isSeller == true and isCityTown == false and slashd.size > 4 -%}
-  {%- include footers.html -%}
-{%- elsif isSeller == true and isCityTown == true and slashd.size > 5 -%}
-  {%- include footers.html -%}
-{%- else -%}
-  {%- include footerb.html -%}
-{%- endif -%}

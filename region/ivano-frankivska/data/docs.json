@@ -1,7 +1,0 @@
----
-layout: null
-sitemap: false
-navhide: 1
----
-{%- assign type = page.name | remove: '.json' -%}
-{{ site.data[type] | jsonify }}
