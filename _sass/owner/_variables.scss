@@ -1,0 +1,32 @@
+$blue: #2d5ca6 !default;
+
+$gray-300: #dee2e6 !default;
+$gray-700: #495057 !default;
+$black: #000000 !default;
+
+$grays: () !default;
+$grays: map-merge(
+  (
+    "300": $gray-300
+  ),
+  $grays
+);
+
+$primary: $blue;
+$navbar-height: 4.5rem;
+$enable-responsive-font-sizes:  true !default;
+$enable-negative-margins: true !default;
+$enable-gradients: true !default;
+
+$font-size-base: 1rem !default;
+
+$border-width: 1px !default;
+$border-color: $gray-300 !default;
+
+$card-spacer-y: .75rem !default;
+$card-spacer-x: 1.25rem !default;
+$card-border-width: $border-width !default;
+$card-border-color:  rgba($black, .125) !default;
+
+$grid-gutter-width: 30px !default;
+$zindex-sticky: 1020 !default;

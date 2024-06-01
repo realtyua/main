@@ -1,0 +1,42 @@
+---
+title: Документи
+navtitle:
+subtitle:
+navhide: 1
+---
+
+<div class="row justify-content-end">
+  <div class="col-lg-auto mb-2">
+    {%- include navgroup.html -%}
+  </div>
+  <div class="col-12">
+    <h1>Зразки документів</h1>
+    <p class="mb-1">Ми зібрали для вас каталог посилань на сторінки де містяться зразки документів та зробили підбірку файлів з необхідними зразками різноманітних документів, які стануть вам у пригоді під час купівлі-продажу чи будь-яких інших операцій з нерухомістю в Україні</p>
+    <p>Тут ви зможете знайти, преглянути або завантажити розноманітні зразки заяв, угод, типових та не типових договорів, анкет, форм тощо.</p>
+  </div>
+  <div class="col-12">
+    <table
+      id="laws"
+      data-locale="{{ site.lang | replace: '_', '-' }}"
+      data-toggle="table"
+      data-search="true"
+      data-search-accent-neutralise="true"
+      data-pagination="true"
+      data-mobile-responsive="true"
+      data-buttons-class="primary"
+      data-url="/docs/data/docs.json">
+      <thead class="thead-re">
+        <tr>
+          <th data-field="t" data-title="Короткий опис">t</th>
+          <th data-field="l" data-formatter="linkFormatter" data-title="Посилання">l</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<script>
+  function linkFormatter(value) {
+    return '<a href="' + value + '" target="_blank" rel="noopener">Переглянути</a>'
+  }
+</script>

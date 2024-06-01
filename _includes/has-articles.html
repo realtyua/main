@@ -1,0 +1,12 @@
+{%- assign articles = '' | split:'' -%}
+{%- for i in site.categories[include.cat] -%}
+  {%- unless i.url contains "news" -%}
+    {%- assign articles = articles | push:i -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+{%- for article in articles -%}
+  {%- assign hasArticles = true -%}
+{%- else -%}
+  {%- assign hasArticles = false -%}
+{%- endfor -%}

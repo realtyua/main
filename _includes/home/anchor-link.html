@@ -1,0 +1,43 @@
+<div class="row">
+  {%- assign alones = site.html_pages | sort: 'path' | reverse -%}
+  {%- for al in alones -%}
+    {%- assign al_slug = al.url | split: '/' | last -%}
+    {%- assign al_current = al.url | remove: al_slug | remove: '//' | append: '/' -%}
+    {%- if '/' == al_current and al.navhide != 1 -%}
+      {% if al.url contains '/region/' %}
+      {% else %}
+        <div class="col-12"><h2 class="h5 mb-2"><a href="#{{ al_slug }}">{{ al.navtitle }}</a></h2></div>
+        <div class="col-12">{%- include home/anchor-region.html current=al.url -%}</div>
+      {% endif %}
+      {%- if al.url -%}
+        {%- assign artwos = site.html_pages -%}
+        {%- for ar in artwos -%}
+          {%- if ar -%}
+            {%- assign ar_slug = ar.url | split: '/' | last -%}
+            {%- assign ar_current = ar.url | remove: ar_slug | remove: '//' | append: '/' -%}
+            {%- if al.url == ar_current and ar.url contains '/city/' or ar.url contains '/town/' -%}
+              <div class="col-12"><h2 class="h5 mb-2"><a href="#{{ ar_slug }}">{{ ar.navtitle }}</a></h2></div>
+              <div class="col-12">{%- include home/anchor-region.html current=ar.url -%}</div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  <div class="col-12">
+    <h3 class="h5 mb-2"><a href="{{ site.main_url }}">{{ site.data.uk.other_regions_ua }}</a></h3>
+  </div>
+  <div class="col-12">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
+      {%- assign regs = site.data.realestate | sort: 'navtitle' -%}
+      {%- for reg in regs -%}
+        {%- if reg.url != site.url -%}
+          <div class="col mb-2">
+            <a href="{{ reg.url }}" target="_blank">{{ reg.navtitle }}</a>
+            <small>{{ site.data.uk.re_ta }} {{ reg.small }}</small>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

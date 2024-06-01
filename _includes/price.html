@@ -1,0 +1,19 @@
+{%- if page.layout == 'property' -%}
+    {%- assign in_price = page.price_sqmt | default: page.price -%}
+{%- else -%}
+    {%- assign in_price = offer.price_sqmt | default: offer.price -%}
+{%- endif -%}
+{%- if in_price contains '$' -%}
+    {% assign symbol = '$' %}
+    {% assign rate = site.usd %}
+    {% assign price_uah = in_price | remove: '$' | times: rate %}
+{%- elsif in_price contains '€' -%}
+    {% assign symbol = '€' %}
+    {% assign rate = site.eur %}
+    {% assign price_uah = in_price | remove: '€' | times: rate %}
+{%- else -%}
+    {% assign symbol = '₴' %}
+    {% assign rate = site.nbu %}
+    {% assign price_uah = in_price %}
+{%- endif -%}
+{%- capture price -%}{%- include numf.html number=price_uah ts='&nbsp;' decimals=0 -%}{%- endcapture -%}

@@ -1,0 +1,44 @@
+//
+// Color system
+//
+$primary:                     #2d5ca6 !default;
+//
+// Fonts system
+//
+$font-family-sans:            -apple-system, "Source Sans Pro", 'Open Sans', sans-serif !default;
+$font-family-base:            $font-family-sans !default;
+//
+// Link
+//
+$link-decoration:             none !default;
+$link-hover-decoration:       none !default;
+//
+// Font weight
+//
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            600 !default;
+$headings-font-weight:        700 !default;
+//
+// Set a specific jump point for requesting color jumps
+//
+$theme-color-interval: 8% !default;
+//
+// fusv-disable
+//
+$blue: #0d6efd !default;
+$blue-100: tint-color($blue, 8) !default;
+$blue-200: tint-color($blue, 6) !default;
+$blue-300: tint-color($blue, 4) !default;
+$blue-400: tint-color($blue, 2) !default;
+$blue-500: $blue !default;
+$blue-600: shade-color($blue, 2) !default;
+$blue-700: shade-color($blue, 4) !default;
+$blue-800: shade-color($blue, 6) !default;
+$blue-900: shade-color($blue, 8) !default;
+//
+// Responsive font sizes
+//
+$enable-responsive-font-sizes:  true !default;
+$enable-negative-margins: true !default;
+//$enable-gradients: true !default;

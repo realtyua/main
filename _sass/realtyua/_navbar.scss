@@ -1,0 +1,530 @@
+.nav-masthead .nav-link {
+  padding: .05rem 0;
+  font-weight: 600;
+  color: #fff;
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: #ffe358;
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #ffe358;
+}
+
+$bgDefault      : #2d5ca6;
+$bgHighlight    : #2d5ca6;
+$colHighlight   : #ffe358;
+$dropDown       : true;
+.dropdown-menu .dropdown-item > li > a:hover {
+    background-image: none;
+    background-color: transparent;
+}
+.dropdown-menu a:hover {
+    background-color: transparent;
+}
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: transparent;
+}
+
+.content {
+    .card-text .navbar .navbar-nav .nav-link {
+        padding: .55rem;
+    }
+    .navbar {
+        .section {
+            .navbar-nav {
+                .nav-link:hover, .nav-link:focus {
+                    color: #000000;
+                }
+            }
+        }
+        background-color: $white;
+        .navbar-brand {
+            color: $black;
+        }
+        .navbar-nav {
+            .nav-link {
+                color: $primary;
+                padding: .30rem .25rem .55rem .25rem;
+            }
+            .nav-link:last-child {
+                padding-right: 0;
+            }
+        }
+        .nav-tabs {
+            .nav-item {
+                font-weight: 600;
+                margin-bottom: 0;
+            }
+            .nav-item:last-child {
+                margin-right: 0;
+            }
+            .nav-link span {
+                color: #2d5ca6;
+                border: none;
+                border-bottom: 4px solid #ffffff;
+                background: transparent;
+                padding: .35rem 0rem;
+            }
+            .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                color: #000000;
+                border: none;
+                background: transparent;
+                border-bottom: 4px solid #2d5ca6;
+            }
+            .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                color: #000000;
+                border: none;
+                background: transparent;
+                border-bottom: 4px solid #2d5ca6;
+            }
+        }
+    }
+    .navbar-toggler-icon:after,
+    .navbar-toggler-icon,
+    .navbar-toggler-icon:before {
+        background-color: $primary;
+    }
+}
+.navbar {
+    background-color: $primary;
+    .navbar-brand {
+        color: $white;
+        &:hover,
+        &:focus {
+            color: $colHighlight;
+        }
+    }
+    .navbar-text {
+        color: $white;
+        a {
+            color: $colHighlight;
+            &:hover,
+            &:focus {
+                color: $colHighlight;
+            }
+        }
+    }
+    .navbar-nav {
+        .nav-item {
+            margin-right: 0;
+        }
+        .nav-link {
+            color: $white;
+            font-weight: 600;
+            padding: .5rem;
+            &:not(.disabled) {
+                &:hover,
+                &:focus,
+                &.active {
+                    color: $colHighlight;
+                }
+            }
+        }
+        .dropdown-toggle::after {
+            display: inline-block;
+            margin-left: unset;
+            vertical-align: unset;
+            content: unset;
+            border-top: unset;
+            border-right: unset;
+            border-bottom: unset;
+            border-left: unset;
+        }
+        @if ($dropDown) {
+            .dropdown-menu {
+                background-color: $blue-800;
+                border-color: $blue-800;
+                .dropdown-item {
+                    color: $white;
+                    font-weight: 600;
+                    padding: .2rem;
+                    &:hover,
+                    &:focus,
+                    &.active {
+                        color: $colHighlight;
+                        background-color: $blue-800;
+                    }
+                }
+                .dropdown-divider {
+                    border-top-color: $bgHighlight;
+                }
+            }
+        }
+        .show > .nav-link {
+            color: $colHighlight;
+            background-color: $blue-800;
+        }
+    }
+    .navbar-toggle {
+        border-color: $bgHighlight;
+        &:hover,
+        &:focus {
+            background-color: $bgHighlight;
+        }
+        .navbar-toggler-icon {
+            color: $white;
+        }
+    }
+    .navbar-collapse,
+    .navbar-form {
+        border-color: $white;
+    }
+    .navbar-link {
+        color: $white;
+
+        &:hover {
+            color: $colHighlight;
+        }
+    }
+}
+@media (max-width: 280px) {
+  .content {
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 10px;
+    }
+  }
+}
+@media (max-width: 320px) {
+  .content {
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 10px;
+    }
+  }
+}
+@media (max-width: 360px) {
+  .content {
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 10px;
+    }
+  }
+}
+@include media-breakpoint-down(sm) {
+  .navbar {
+    .navbar-brand {
+      .small {
+        font-size: 72%;
+      }
+    }
+  }
+  .content {
+    .navbar {
+      .navbar-brand {
+        margin-right: 0;
+      }
+      .navbar-brand {
+        .small {
+          font-size: 72%;
+        }
+      }
+      .nav-tabs {
+        .nav-link {
+          padding: .25rem 0;
+        }
+        .nav-link:last-child {
+          padding-right: 0;
+        }
+        .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link span:hover, .nav-tabs .nav-link span:focus {
+          border-bottom: 4px solid $white;
+        }
+      }
+    }
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 10px;
+    }
+  }
+}
+@include media-breakpoint-up(sm) {
+  .navbar {
+    .navbar-nav {
+      .nav-item {
+        margin-right: 0;
+      }
+    }
+  }
+  .navbar-expend-sm .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $white;
+      &:hover,
+      &:focus {
+        color: $colHighlight;
+      }
+    }
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight;
+    }
+  }
+}
+@include media-breakpoint-between(sm, md) {
+  .content {
+    ul#realestate-nav {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      column-gap: 10px;
+    }
+  }
+}
+@include media-breakpoint-down(md) {
+  .navbar {
+    .navbar-brand {
+      .small {
+        font-size: 72%;
+      }
+    }
+  }
+  .content {
+    .navbar {
+      .navbar-brand {
+        margin-right: 0;
+      }
+      .navbar-brand {
+        .small {
+          font-size: 72%;
+        }
+      }
+      .nav-tabs {
+        .nav-link {
+          padding: .25rem 0;
+        }
+        .nav-link:last-child {
+          padding-right: 0;
+        }
+        .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+          border-bottom: 4px solid $white;
+        }
+        .nav-link span:hover, .nav-tabs .nav-link span:focus {
+          border-bottom: 4px solid $white;
+        }
+      }
+    }
+  }
+}
+@include media-breakpoint-up(md) {
+    .navbar {
+        .navbar-nav {
+            .nav-item {
+                margin-right: 0;
+            }
+            .nav-link {
+                padding: .55rem .75rem;
+            }
+        }
+    }
+    .navbar-expend-md .navbar-nav .show .dropdown-menu {
+        .dropdown-item {
+            color: $white;
+            &:hover,
+            &:focus {
+                color: $colHighlight;
+            }
+        }
+        .dropdown-item.active {
+            color: $colHighlight;
+            background-color: $bgHighlight;
+        }
+    }
+}
+@include media-breakpoint-down(lg) {
+    .navbar {
+        .navbar-brand {
+            .small {
+                font-size: 72%;
+            }
+        }
+    }
+    .content {
+        .navbar {
+            .navbar-brand {
+                margin-right: 0;
+            }
+            .navbar-brand {
+                .small {
+                    font-size: 72%;
+                }
+            }
+            .nav-tabs {
+                .nav-link {
+                    //padding: .5rem 0;
+                    padding: .25rem 0;
+                }
+                .nav-link:last-child {
+                    padding-right: 0;
+                }
+                .nav-link span {
+                    border-bottom: 4px solid $white;
+                }
+
+                .nav-link.active span, .nav-tabs .nav-item.show .nav-link span {
+                    border-bottom: 4px solid $white;
+                }
+
+                .nav-link span:hover, .nav-tabs .nav-link span:focus {
+                    border-bottom: 4px solid $white;
+                }
+            }
+        }
+    }
+}
+@include media-breakpoint-up(lg) {
+    .navbar {
+        .navbar-nav {
+            .nav-item {
+                margin-right: .85rem;
+            }
+            .nav-link {
+                padding: 0.75rem 0.65rem;
+            }
+        }
+    }
+    .navbar-expend-lg .navbar-nav .show .dropdown-menu {
+        .dropdown-item {
+            color: $white;
+
+            &:hover,
+            &:focus {
+                color: $colHighlight;
+            }
+        }
+        .dropdown-item.active {
+            color: $colHighlight;
+            background-color: $bgHighlight;
+        }
+    }
+}
+@include media-breakpoint-up(xl) {
+    .navbar {
+        .navbar-nav {
+            .nav-item {
+                margin-right: .85rem;
+            }
+            .nav-link {
+                padding: .65rem;
+            }
+        }
+    }
+    .navbar-expend-xl .navbar-nav .show .dropdown-menu {
+        .dropdown-item {
+            color: $white;
+            &:hover,
+            &:focus {
+                color: $colHighlight;
+            }
+        }
+        .dropdown-item.active {
+            color: $colHighlight;
+            background-color: $bgHighlight;
+        }
+    }
+}
+.navbar-expend .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+        color: $white;
+        &:hover,
+        &:focus {
+            color: $colHighlight;
+        }
+    }
+    .dropdown-item.active {
+        color: $colHighlight;
+        background-color: $bgHighlight;
+    }
+}
+//
+// Toggler
+//
+.navbar-toggler {
+  padding: 0;
+  height: 34px;
+  width: 34px;
+  position: relative;
+  border: 0;
+  &:focus {
+    outline: 0;
+  }
+}
+.navbar-toggler-icon:after,
+.navbar-toggler-icon,
+.navbar-toggler-icon:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: none !important;
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background-color: $white;
+    transition: all .3s ease-in;
+}
+.navbar-toggler-icon {
+    top: 50%;
+    left: 50%;
+    height: 0;
+    transform: translate(-50%, -50%);
+}
+.navbar-toggler-icon:before {
+    transition-delay: .1s;
+    transform: rotate(-45deg);
+    top: 0;
+}
+.navbar-toggler-icon:after {
+    transition-delay: .1s;
+    transform: rotate(45deg);
+    top: 0;
+}
+.navbar-toggler.collapsed {
+    .navbar-toggler-icon {
+        transition-delay: .2s;
+        height: 2px;
+    }
+    .navbar-toggler-icon:before {
+        transition-delay: 0;
+        transform: rotate(0);
+        top: -6px;
+    }
+    .navbar-toggler-icon:after {
+        transition-delay: 0;
+        transform: rotate(0);
+        top: 6px;
+    }
+}
+.card {
+    .card-footer {
+        .navbar-toggler { height: 24px; width: 24px; }
+    }
+}
+
+// .realtor .navbar .navbar-nav .nav-link { padding-bottom: .48rem; }
+.developer .navbar .navbar-nav .nav-link { padding: .35rem .25rem .5rem .25rem; }
+//.object .navbar .navbar-nav .nav-link { padding-bottom: .5rem; }
+
+ #navbarRealEstate .dropdown-menu { z-index: 10000; }
+ .menu .cal { margin-right: 8px; cursor: pointer; }

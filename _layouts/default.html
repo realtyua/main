@@ -1,0 +1,76 @@
+---
+layout: compress
+---
+{%- include vars/page-slash.html -%}
+{%- include start-ads.html -%}
+{%- include price.html -%}
+{%- include price-name.html -%}
+{%- include vars/fname-paged.html -%}
+<!doctype html>
+<html dir="ltr" lang="uk-UA" prefix="og: http://ogp.me/ns#">
+  <head>
+    {%- include head.html -%}
+  </head>
+  <body>
+    <div id="top"></div>
+    <div class="main">
+      {%- include header.html -%}
+      <main{% if pageu == '/' %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
+        {% if pageu == '/' %}
+          <div class="container pb-1 lead-badge">
+            <h1 class="h4">Оголошення про продаж і оренду нерухомого майна в містах та районах <a href="/region/{{ site.region_slug }}/" title="Всі оголошення та об'єкти нерухомісті області">{{ site.data.uk.deck_region_in }} області</a></h1>
+            <a class="badge badge-primary" data-toggle="collapse" href="#collapseArea" role="button" aria-expanded="false" aria-controls="collapseArea" title="Місцевість де розташована нерухомість">Виберіть місцевість</a> <span class="badge badge-light text-wrap text-left px-0">де б ви хотіли <strong>знайти, купити чи продати нерухомість</strong> або</span>
+            <a class="badge badge-primary text-wrap text-left" data-toggle="collapse" href="#collapseAds" role="button" aria-expanded="false" aria-controls="collapseAds" title="Послуги що можуть зацікавити">побудувати чи просто зробити ремонт і облаштувати свою оселю</a>
+          </div>
+          <div class="bg-light mb-3">
+            <div class="container">
+              <div class="collapse" id="collapseArea">
+                <div class="bg-light pb-3 px-0 border-0 card card-body">
+                  {%- include home/anchor-link.html -%}
+                </div>
+              </div>
+              <div class="collapse" id="collapseAds">
+                <div class="bg-light pb-3 px-0 border-0 card card-body">
+                  <div class="row row-cols-1 row-cols-md-4">
+                    {%- include collapse-ads.html -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="container">
+          {%- include breadcrumb.html -%}
+          {%- assign isContent = content | strip_newlines -%}
+          {%- if isContent == '' -%}
+            {%- include info-visitors.html -%}
+          {%- else -%}
+            {{ content }}
+          {%- endif -%}
+        </div>
+      </main>
+      {%- include footer.html -%}
+    </div>
+    {%- include scroll-top.html -%}
+    {%- include java-script.html -%}
+    {%- if pageu contains '/realtor/' and pageu contains '/region/' and back.size == 4 and page.table != 1 or page.table != 2 -%}
+      {%- include pagination-js.html -%}
+    {%- elsif pageu contains '/realtor/' and pageu contains '/district/' and back.size == 5 and page.table != 1 or page.table != 2 -%}
+    {%- elsif pageu contains '/developer/' and pageu contains '/region/' and back.size == 4 and page.table != 1 or page.table != 2 -%}
+      {%- include pagination-js.html -%}
+    {%- elsif pageu contains '/developer/' and pageu contains '/district/' and back.size == 5 and page.table != 1 or page.table != 2 -%}
+    {%- elsif pageu contains '/agency/' and pageu contains '/region/' and back.size == 4 and page.table != 1 or page.table != 2 -%}
+      {%- include pagination-js.html -%}
+    {%- elsif pageu contains '/agency/' and pageu contains '/district/' and back.size == 5 and page.table != 1 or page.table != 2 -%}
+    {%- elsif pageu contains '/building-materials.html' and page.table != 1 or page.table != 2 -%}
+      {%- include pagination-js.html -%}
+    {%- endif -%}
+    {% include modals/net-realestate-modal.html %}
+    {%- if pageu contains '/map.html' -%}
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' or paged != '/district/town/'-%}
+      {% include modals/re-map-modal.html %}
+    {%- elsif slashu.size == 5 or slashu.size == 6 and page.layout == 'property' -%}
+      {% include modals/re-map-modal.html %}
+    {%- endif -%}
+  </body>
+</html>

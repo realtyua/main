@@ -1,0 +1,91 @@
+---
+layout: default
+---
+{%- include vars/page-slash.html -%}
+{%- include vars/sellers.html -%}
+{%- include vars/whois.html minus=1 -%}
+{%- if paged contains '/realtor/' -%}
+{%- include back-title.html minus='1' so='4' st='9' data='title' -%}
+{%- else -%}
+{%- include back-title.html minus='1' so='1' st='6' data='title' -%}
+{%- endif -%}
+<div class="row">
+  <div class="col-12 {{ whois }}">
+    <h1 class="h2 mb-3">{{ paget }} {{ idata }}</h1>
+    <div class="row">
+      <div class="col-md-4">
+        {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slugd" -%}
+        {%- if file[0] -%}
+          <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.uk.re_logo }} - {{ page.breadcrumb }}">
+        {%- else -%}
+          <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.uk.re_logo }} - {{ page.breadcrumb }}">
+        {%- endif -%}
+      </div>
+      <div class="col-md-8 mt-3 mt-md-0">
+        {%- assign isContent = content | strip_newlines -%}{%- if isContent == "" -%}{%- else -%}{{ content }}{%- endif -%}
+      </div>
+    </div>
+    {%- if fJson == 'true' or stabs[0] -%}
+    <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+      <div class="navbar-brand d-md-none">
+        <span class="small">{{ site.data.uk.re_select_section }}</span>
+        <span class="ml-1 float-right align-middle text-primary">→</span>
+      </div>
+      <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slugu | capitalize }}" aria-controls="navbar{{ slugu | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slugu | capitalize }}">
+        <ul class="navbar-nav nav nav-tabs border-0" id="{{ slugu }}-nav">
+          {%- if fJson == 'true' and isJson[0] -%}
+            {%- include elements/offer-tab.html -%}
+          {%- else -%}
+            {%- include elements/offer-tab.html hide=1 -%}
+          {%- endif -%}
+          {%- if stabs[0] -%}
+            {%- include elements/others-tab.html tabs=stabs -%}
+          {%- endif -%}
+          {% comment %}
+          <li class="nav-item" role="presentation">
+            <a class="nav-link border-0" href="#map" id="map-tab" data-toggle="tab" role="tab" aria-controls="map" aria-selected="true">
+              <span>Мапа</span>
+            </a>
+          </li>
+          {% endcomment %}
+        </ul>
+      </div>
+    </nav>
+    <hr class="mt-2 mt-md-0">
+    <div class="tab-content" id="{{ slugu }}-content">
+      {% comment %}
+      <div class="tab-pane fade show" id="map" role="tabpanel" aria-labelledby="map-tab">
+        <div class="row">
+          <div class="col-12">
+            <h2>Мапа</h2>
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
+      {% endcomment %}
+      {%- if fJson == 'true' and isJson[0] -%}
+        {%- include elements/offer-pane.html -%}
+      {%- else -%}
+        <div class="tab-pane fade show active" id="offer" role="tabpanel" aria-labelledby="offer-tab">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="alert alert-info" role="alert">
+                {%- if whois == 'realtor' -%}
+                  {{ site.data.uk.realtor_offer_text }}
+                {%- else -%}
+                  {{ site.data.uk.company_offer_text }}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if stabs[0] -%}
+        {%- include elements/others-pane.html tabs=stabs -%}
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+  </div>
+  {%- include elements/pager.html l=6 -%}
+</div>

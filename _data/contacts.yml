@@ -1,0 +1,189 @@
+#
+# Region
+#
+# - type: region
+#   item: ivano-frankivska
+#   # name: Нерухомість у Івано-Франківській області
+#   # address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+#   # phone_main: 380974949649
+#   # phone_hot: 380974949649
+#   # phone_fax: 380974949649
+#   email: info@realestate.if.ua
+#   www: https://www.realestate.if.ua/
+
+#
+# District
+#
+# - type: district
+#   item: ivano-frankivskyy
+#   name: Нерухомість у Івано-Франківському районі
+#
+# - type: district
+#   item: kolomyyskyy
+#   name: Нерухомість у Коломийському районі
+#
+# - type: district
+#   item: nadvirnyanskyy
+#   name: Нерухомість у Надвірнянському районі
+#
+# - type: district
+#   item: verkhovynskyy
+#   name: Нерухомість в Верховинському районі
+#
+# - type: district
+#   item: kosivskyy
+#   name: Нерухомість в Косівському районі
+#
+# - type: district
+#   item: kaluskyy
+#   name: Нерухомість в Калуському районі
+
+#
+# District / Town
+#
+# - type: town
+#   item: tysmenytsya
+#   name: Нерухомість в місті Тисмениця
+#
+# - type: town
+#   item: sniatyn
+#   name: Нерухомість в місті Снятин
+#
+# - type: town
+#   item: tlumach
+#   name: Нерухомість в місті Тлумач
+#
+# - type: town
+#   item: dolyna
+#   name: Нерухомість в місті Долина
+#
+# - type: town
+#   item: halych
+#   name: Нерухомість в місті Галич
+#
+# - type: town
+#   item: horodenka
+#   name: Нерухомість в місті Городенка
+#
+# - type: town
+#   item: kosiv
+#   name: Нерухомість в місті Косів
+#
+# - type: town
+#   item: nadvirna
+#   name: Нерухомість в місті Надвірна
+#
+# - type: town
+#   item: rohatyn
+#   name: Нерухомість в місті Рогатин
+
+#
+# Region / City
+#
+# - type: city
+#   item: bolekhiv
+#   name: Нерухомість у місті Болехів
+#
+# - type: city
+#   item: burshtyn
+#   name: Нерухомість у місті Бурштин
+#
+# - type: city
+#   item: kolomyia
+#   name: Нерухомість у місті Коломия
+#
+# - type: city
+#   item: ivano-frankivsk
+#   name: Нерухомість у місті Івано-Франківськ
+#
+# - type: city
+#   item: kalush
+#   name: Нерухомість у місті Калуш
+#
+# - type: city
+#   item: yaremche
+#   name: Нерухомість у місті Яремче
+
+#
+# Developers / Company
+#
+- type: developer
+  item: builder
+  name: Будівельна компанія "Будівельник"
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Степана&nbsp;Бандери,&nbsp;0
+  phone_main: 380000000001
+  phone_hot: 380000000002
+  phone_fax: 380000000003
+  phone_buy: 380000000004
+  email: builder@realestate.if.ua
+  www: https://www.realestate.if.ua/
+
+#
+# Realtor / Agent
+#
+- type: realtor
+  item: myronyuk
+  name: Нерухомість в Карпатах - Аня Миронюк
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380675571844
+  phone_hot: 380675571844
+  phone_fax: 380675571844
+  phone_buy: 380675571844
+  email: anuamir702@gmail.com
+  www: https://www.realestate.if.ua/
+
+- type: realtor
+  item: mykhalchuk
+  name: Менеджер Володимир&nbsp;Михальчук
+  address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380974949649
+  phone_hot: 380974949649
+  phone_fax: 380974949649
+  phone_buy: 380974949649
+  email: vova@realestate.net.ua
+  www: https://www.realestate.if.ua/
+
+# - type: realtor
+#   item: mosiychuk
+#   name: Продаж нерухомості
+#   address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+#   phone_main: 380504949649
+#   phone_hot: 380504949649
+#   phone_fax: 380504949649
+#   email: info@realestate.if.ua
+#   www: https://www.realestate.if.ua/
+
+# - type: realtor
+#   item: pashchak
+#   name: Агент з нерухомості Олег&nbsp;Пащак
+#   address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+#   phone_main: 380979483355
+#   phone_hot: 380979483355
+#   phone_fax: 380979483355
+#   email: info@realestate.if.ua
+#   www: https://www.realestate.if.ua/
+
+- type: realtor
+  item: agent
+  name: Нерухомість від Агента Продавця
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Степана&nbsp;Бандери,&nbsp;0
+  phone_main: 38000000005
+  phone_hot: 380000000006
+  phone_fax: 380000000007
+  phone_buy: 380000000008
+  email: agent@realestate.if.ua
+  www: https://www.realestate.if.ua/
+
+#
+# Agency / ahentsiya
+#
+- type: agency
+  item: ahentsiya
+  name: Нерухомість від Агенції Продавця
+  address: 76000, м. Івано-Франківськ, вул.&nbsp;Степана&nbsp;Бандери,&nbsp;0
+  phone_main: 380000000004
+  phone_hot: 380000000003
+  phone_fax: 380000000002
+  phone_buy: 380000000001
+  email: agency@realestate.if.ua
+  www: https://www.realestate.if.ua/

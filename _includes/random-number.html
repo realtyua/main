@@ -1,0 +1,9 @@
+{%- assign min = include.min -%}
+{%- assign max = include.max -%}
+{%- assign diff = max | minus: min -%}
+{%- assign randomNumber = "now" | date: "%N" | modulo: diff | plus: min -%}
+
+{%- comment -%}
+  {%- include random-number.html min=1 max=10 -%}
+  {{ randomNumber }} or {{ site.data.text[randomNumber] }}
+{%- endcomment -%}

@@ -1,0 +1,8 @@
+<div class="col-12">
+  <h1 class="mb-4">
+    <a href="{{ one.url }}">{%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}</a>
+  </h1>
+</div>
+<div class="col-12">
+  {%- include home/region-main.html current=one.url -%}
+</div>

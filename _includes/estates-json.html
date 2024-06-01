@@ -1,0 +1,39 @@
+{%- assign cdate = site.time | date: '%Y%m%d' -%}
+{%- capture re -%}
+[
+  {%- for offer in include.estates -%}
+    {%- assign date = offer.date | date: '%Y%m%d' -%}
+    {%- assign district = offer.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' -%}
+    {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.uid }}/{%- endcapture -%}
+    {%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
+    {%- assign isImage = files | strip_newlines -%}
+    {
+      "id":"{{ offer.uid }}",
+      "type":"{{ offer.type }}",
+      "page":"{{ offer.page }}",
+      "rent":"{{ offer.rent }}",
+      "rooms":"{{ offer.rooms }}",
+      "surface":"{{ offer.surface }}",
+      "surface_land":"{{ offer.surface_land }}",
+      "price":"{{ offer.price }}",
+      "price_sqmt":"{{ offer.price_sqmt }}",
+      "floor":"{{ offer.floor }}",
+      "floors":"{{ offer.floors }}",
+      "parking":"{{ offer.parking }}",
+      "region":"{{ offer.region }}",
+      "location":"{{ offer.location }}",
+      "address":"{{ offer.address }}",
+      "object":"{{ offer.object }}",
+      "coordinates":"{{ offer.coordinates }}",
+      "date":"{%- if date > cdate -%}{{- site.time | date: "%Y-%m-%d" -}}{%- else -%}{{- offer.date | date: "%Y-%m-%d" -}}{%- endif -%}",
+      "seller":"{{ offer.seller }}",
+      "phone":"{{ offer.phone }}",
+      {%- if offer.skip -%}"skip":{{ offer.skip }},{%- endif -%}
+      "description":"{{ offer.description }}",
+      "link":"{%- if offer.page == 1 -%}{%- else -%}{{ offer.url }}{%- endif -%}",
+      {%- if images.size > 0 -%}"images":{%- capture img -%}[{%- for file in images limit: 4 -%}{"src":"{{ file.name }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},{%- endfor -%}]{%- endcapture -%}{{ img | replace: ',]', ']' }}{%- else -%}"images":""{%- endif -%}
+    }
+    {%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]
+{%- endcapture -%}

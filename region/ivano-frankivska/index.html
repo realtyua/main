@@ -1,0 +1,90 @@
+---
+last_modified_at: 2024-05-30T17:16:37+02:00
+title: Нерухомість у Івано-Франківській області
+breadcrumb: Івано-Франківська
+description: Продаж і оренда квартир, будинків, землі та комерційних нежитлових приміщень на ринку нерухомості містах і селах Івано-Франківської області
+table: 2
+---
+
+<div class="row">
+  <div class="col-12">
+
+    <h1 class="h2">Продаж і оренда нерухомості в {{ site.data.uk.deck_region_at }} області</h1>
+
+    <div class="row justify-content-between">
+      {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
+      {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
+      {%- if isMap == 'true' -%}
+      <div class="col-lg-1 align-self-center">
+        <ul class="navbar-nav nav nav-tabs border-0 mr-md-auto" id="realestate-map">
+          <li class="nav-item">
+            <h5 class="m-lg-0">
+              {%- if page.url contains mapPage -%}
+                <span class="badge badge-primary border-0" title="{{ site.data.uk.re_map_on }}">
+                  <span>{{ site.data.uk.re_map }}</span>
+                  <span class="d-lg-none">{{ site.data.uk.nerukhomisti }}</span>
+                </span>
+              {%- else -%}
+                <a class="badge badge-primary border-0" href="/{{ mapPage }}" title="{{ site.data.uk.re_map_on }}">
+                  <span>{{ site.data.uk.re_map }}</span>
+                  <span class="d-lg-none">{{ site.data.uk.nerukhomisti }}</span>
+                </a>
+              {%- endif -%}
+            </h5>
+          </li>
+        </ul>
+      </div>
+      {%- endif -%}
+      <div class="col-lg-2">
+        <select id="data" class="custom-select custom-select-sm mb-lg-2">
+          <option value="all" selected>Вся нерухомість</option>
+          <option value="apartment">Квартири</option>
+          <option value="house">Будинки</option>
+          <option value="commercial">Комерція</option>
+          <option value="rent">Оренда</option>
+          <option value="land">Земля</option>
+          <option value="garage">Гаражі</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="mb-2 mt-2 mt-md-0 mt-lg-0">
+
+    {%- include thanks-please.html -%}
+
+    <h2 class="h3">Всі оголошення про продаж та оренду нерухомості</h2>
+    <p><a rel="nofollow" href="/region/ivano-frankivska/archive.html">Архів не актуальних оголошень</a></p>
+
+    <div class="row">
+      <div class="col-12">
+
+        <table
+          id="property"
+          data-locale="{{ site.lang | replace: '_', '-' }}"
+          data-toggle="table"
+          data-search="true"
+          data-search-accent-neutralise="true"
+          data-sort-class="table-active"
+          data-sortable="true"
+          data-detail-view="true"
+          data-detail-view-icon="false"
+          data-detail-view-by-click="true"
+          data-detail-formatter="jsDetailFormatter"
+          data-pagination="true"
+          data-pagination-pre-text="❮"
+          data-pagination-next-text="❯"
+          data-mobile-responsive="true"
+          data-buttons-class="primary"
+          data-url="data/all.json">
+          <thead class="thead-re">
+            <tr>
+              <th data-field="type" data-title="{{ site.data.uk.re_offer }}" data-formatter="propertyFormatter">Нерухомість</th>
+              <th data-field="price" data-title="{{ site.data.uk.re_cost | capitalize }}" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Ціна</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

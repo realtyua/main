@@ -1,0 +1,105 @@
+{%- assign back = page.dir | split: '/' -%}
+{%- assign logos = '/assets/images/logo/' -%}
+{%- assign file = site.static_files | where_exp: 'i', "i.path contains logos and i.basename == section" -%}
+{%- if back.size == 5 -%}
+  {%- assign section = item.dir | split: '/' | last -%}
+  {%- assign file = site.static_files | where_exp: 'i', "i.path contains logos and i.basename == section" -%}
+{%- elsif back.size == 6 -%}
+  {%- assign size = back | size | minus: 2 -%}
+  {%- assign section = back | last -%}
+  {%- assign object = item.dir | split: '/' | last -%}
+  {%- assign file = site.static_files | where_exp: 'i', "i.path contains logos and i.basename == object" -%}
+{%- elsif back.size == 7 -%}
+  {%- assign size = back | size | minus: 3 -%}
+  {%- assign gauge = back | size | minus: 1 -%}
+  {%- assign piece = back | slice: 0, gauge | join: '/' -%}
+  {%- assign section = piece | split: '/' | last -%}
+  {%- assign object = item.dir | split: '/' | last -%}
+  {%- assign file = site.static_files | where_exp: 'i', "i.path contains logos and i.basename == object" -%}
+{%- else -%}
+  {%- assign size = back | size | minus: 1 -%}
+{%- endif -%}
+{%- assign dir = back | slice: 0, size | join: '/' | append: '/' -%}
+{%- assign region = dir | split: '/' | last -%}
+{%- assign ps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains dir and i.url == dir' -%}
+{%- for lo in ps limit: 1 -%}{%- if lo.breadcrumb -%}{%- assign location = lo.breadcrumb -%}{%- else -%}{%- assign location = lo.navtitle -%}{%- endif -%}{%- endfor -%}
+{%- capture aid -%}6{%- increment counter -%}{%- endcapture -%}
+{%- if forloop.first -%}
+<div{% if page.url contains '/realtor/' or page.url contains '/developer/' or page.url contains '/agency/' and back.size == 4 or back.size == 5 %} id="list-seller"{% endif %} class="row mt-4 mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+{%- endif -%}
+  <div class="col px-2 mb-3">
+    <div class="card h-100">
+      {%- if file[0] -%}
+        <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+      {%- else -%}
+        <img loading="lazy" src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+      {%- endif -%}
+      <div class="card-body">
+        <h3 class="card-title h5">
+          <a href="{{ item.url }}">
+            {%- if item.title -%}{{ item.title }}{%- else -%}{{ item.navtitle }}{%- endif -%}
+          </a>
+        </h3>
+        <div class="card-text mb-1">
+          <nav>
+            <ul class="nav nav-tabs" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-tab" role="tablist">
+              <li class="nav-item d-none" role="presentation">
+                <a class="nav-link active" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab" data-toggle="tab" href="#{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tab" aria-controls="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" aria-selected="false">
+                  {{ site.data.uk.offers }}
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{object}}{%- endif -%}-actions-tab" data-toggle="tab" href="#{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions" role="tab" aria-controls="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions" aria-selected="false">
+                  {{ site.data.uk.actions }}
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="tab-content" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-content">
+            <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-offers-tab">
+              {% if back.size >= 6 %}
+                {%- include vars/complex.html title=item.title slice=2 -%}
+                {%- assign records = site.data[section] | where_exp: 'i', "i.object contains item.breadcrumb" -%}
+                {% comment %}
+                  {%- assign records = site.data[section] | where_exp: 'i', "i.location contains location and i.object contains item.breadcrumb" -%}
+                {% endcomment %}
+              {% else %}
+                {%- assign records = site.data[section] -%}
+                {% comment %}
+                  {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
+                {% endcomment %}
+              {% endif %}
+              {%- if records.size > 0 -%}
+                {%- assign offers = records | sort: 'date' | reverse -%}
+                {%- assign total = offers | size -%}
+                {%- assign others = total | minus: 1 -%}
+                {%- for offer in offers limit: 1 -%}
+                  {%- include card.html offer=offer aid=aid others=others -%}
+                {%- endfor -%}
+                {%- if others > 0 -%}
+                <div class="card-footer mt-n1 bg-white pr-3 pt-1 border-1 border-top-0 text-right">
+                  <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.uk.others }} <strong>{{ others }}</strong> {{ site.data.uk.others_offers }}</a>
+                </div>
+                {%- endif -%}
+              {%- else -%}
+                <div class="alert alert-primary" role="alert">
+                  <p>Поки що тут жодної нерухомості, але ви можете виправити це додавши свої пропозиції, а ми залюбки опублікуємо їх тут.</p>
+                  <hr>
+                  <p class="mb-0">Про те, як це зробити ви можете дізнатись перейшовши за цим посиланням '<a href="{{ site.addre }}" class="alert-link">додати свою нерухомість</a>'.</p>
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}{%- if back.size >= 6 -%}-{{ object }}{%- endif -%}-actions-tab">
+              <p>Акційні пропозиції від...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- if forloop.last -%}
+</div>
+{%- if page.url contains '/realtor/' or page.url contains '/developer/' or page.url contains '/agency/' and back.size == 4 or back.size == 5 -%}
+<div id="pagination"></div>
+{%- endif -%}
+{%- endif -%}

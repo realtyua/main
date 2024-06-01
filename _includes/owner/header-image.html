@@ -1,0 +1,26 @@
+{%- if include.re and include.h1 or include.p or include.href and include.button -%}
+<section class="masthead" style="background-image: url('{{ page.dir }}images/{{ include.re }}.jpg');">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center text-center">
+      {%- if include.h1 -%}
+      <div class="col-md-10 offset-md-1">
+        {%- if include.sold and include.sold == '1' -%}
+          <h1 class="bg-gradient-danger p-4 mb-3 mb-md-5 text-uppercase text-white display-4">Продано!</h1>
+          <h2 class="bg-gradient-primary p-4 mb-3 mb-md-5 text-uppercase text-white display-4">{{ include.h1 }}</h2>
+        {%- else -%}
+          <h1 class="bg-gradient-primary p-4 mb-3 mb-md-5 text-uppercase text-white display-4">{{ include.h1 }}</h1>
+        {%- endif -%}
+        {%- if include.p or include.href and include.button -%}
+          {%- if include.p -%}
+            <p class="lead bg-gradient-primary text-white p-4 mb-md-5 mx-3 mx-md-5">{{ include.p }}</p>
+          {%- endif -%}
+          {%- if include.href and include.button -%}
+            <a class="btn btn-success btn-lg js-scroll-trigger" href="#{{ include.href }}">{{ include.button }}</a>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}

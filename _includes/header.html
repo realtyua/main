@@ -1,0 +1,45 @@
+<header>
+  <div class="container bg-primary{% if pageu != '/' %} pt-3{% else %} py-3{% endif %}">
+    <div class="row justify-content-end">{%- include top-nav.html -%}</div>
+    <div class="row">
+      <div class="col-lg-3">
+        <a class="flag-ua ml-1" data-toggle="modal" data-target="#netRealEstate" href="#netRealEstate" aria-haspopup="true" aria-expanded="false">
+          <div class="icon"></div>
+          <div class="d-flex flex-column lh-1 ml-2">
+            <span class="text-white mt-0 font-weight-bold">{{ site.region }}</span>
+            <span class="small mt-0 text-light">{{ site.data.uk.flag_ua_net }}</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-6">
+
+      </div>
+      <div class="col-md-3">
+        {% comment %}
+        <div class="col-md-3 d-flex align-items-end justify-content-end">
+          <span class="text-white mt-3"><b>Оновлено</b>: 05 квітня 2021 року</span>
+        </div>
+        {% endcomment %}
+      </div>
+    </div>
+    {%- if pageu != '/' -%}
+      {%- include header/navbar.html -%}
+    {%- endif -%}
+  </div>
+  <div class="bg-light">
+    <div class="container">
+      <div class="collapse" id="collapseAreaSelect">
+        <div class="bg-light pb-3 px-0 border-0 card card-body">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <label for="rehiony" class="sr-only">Пошук місцевості:</label>
+              <select name="areas" id="rehiony" aria-label="Виберіть назву місцевості чи тип нерухомості">
+                <option value="">Введіть назву міста чи району або області</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

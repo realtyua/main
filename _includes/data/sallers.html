@@ -1,0 +1,14 @@
+{%- assign mykhalchuk = site.data.mykhalchuk -%}
+{%- assign matsalak = site.data.matsalak -%}
+{%- assign myronyuk = site.data.myronyuk -%}
+{%- assign gergelyuk = site.data.gergelyuk -%}
+{%- assign moskalyuk = site.data.moskalyuk -%}
+{%- assign bihun = site.data.bihun -%}
+{%- assign records = owners
+  | concat: mykhalchuk
+  | concat: matsalak
+  | concat: myronyuk
+  | concat: gergelyuk
+  | concat: moskalyuk
+  | concat: bihun
+-%}

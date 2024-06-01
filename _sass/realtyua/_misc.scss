@@ -1,0 +1,159 @@
+//
+// Scrolltop
+//
+.scroll-top {
+    overflow: hidden;
+    @include transition(all .3s ease-in-out);
+    z-index: $zindex-sticky;
+    background-color: $gray-700;
+    color: #ffffff;
+    bottom: ($grid-gutter-width / 2);
+    right: ($grid-gutter-width / 2);
+    position: fixed;
+    opacity: 0;
+    width: 3em;
+    height: 3em;
+    &:active,
+    &:focus,
+    &:hover {
+        color: #ffe358;
+        background-color: $primary;
+    }
+    .scroll-top-icon {
+        @extend .css-arrow;
+    }
+    &.scroll-top-visible {
+        opacity: 1;
+    }
+}
+.css-arrow {
+    transform: rotate(45deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    &:before {
+        content: '';
+        position: absolute;
+        height: 30%;
+        width: 30%;
+        border-top: 1px solid;
+        border-left: 1px solid;
+        top: 55%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.section .list-group-item { padding: .25rem 0.75rem; }
+.fixed-table-toolbar .btn { border-radius: unset; padding: 5px 5px 2px 5px; }
+.lead-badge { font-size: 1.365rem; font-weight: 300; }
+table#property tr:not(.detail-view) { cursor: pointer; }
+
+.dropdown-menu small {
+  display: block;
+  color: #ffffff;
+  margin-left: 3px;
+  margin-right: 3px;
+  line-height: 1;
+}
+
+#collapseArea small {
+  display: block;
+  color: #000000;
+  line-height: 1;
+}
+
+.flag-ua .d-flex span:first-child { font-size: .9rem; }
+#list-offer .col { display: none; }
+#add-form label { font-weight: 600; }
+.accordion .btn:focus, .accordion .btn.focus { box-shadow: none; }
+.multi-collapse button:focus { outline: 0; outline: 0; }
+
+main a.list-group-item:hover, footer a.list-group-item:hover, .text-shadow a.text-white:hover {
+  transition: unset;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
+}
+
+.badge-add {
+  color: #fff;
+  background-color: #ed7600;
+}
+a.badge-add:hover, a.badge-add:focus {
+  color: #fff;
+  background-color: #ed7600;
+}
+
+main .leaflet-menu {
+  border-right: 1px solid rgb(45, 92, 166);
+}
+
+#uvaga {
+  height: 24px;
+  width: 24px;
+  margin: 0 auto;
+  animation-name: attention;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+  animation-play-state: running;
+}
+
+@keyframes attention {
+  0% { transform: scale(.8); border-radius: 100%; }
+  100% { transform: scale(1); }
+}
+
+.card-footer a.marker, .navbar a.marker  {
+  display: block;
+  text-indent: -9999px;
+  margin-top: 5px;
+  width: 12px;
+  height: 18px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTIiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAzNjUgNTYwIj48Zz48cGF0aCBmaWxsPSIjMmQ1Y2E2IiBkPSJNMTgyLjksNTUxLjdjMCwwLjEsMC4yLDAuMywwLjIsMC4zUzM1OC4zLDI4MywzNTguMywxOTQuNmMwLTEzMC4xLTg4LjgtMTg2LjctMTc1LjQtMTg2LjkgQzk2LjMsNy45LDcuNSw2NC41LDcuNSwxOTQuNmMwLDg4LjQsMTc1LjMsMzU3LjQsMTc1LjMsMzU3LjRTMTgyLjksNTUxLjcsMTgyLjksNTUxLjd6IE0xMjIuMiwxODcuMmMwLTMzLjYsMjcuMi02MC44LDYwLjgtNjAuOCBjMzMuNiwwLDYwLjgsMjcuMiw2MC44LDYwLjhTMjE2LjUsMjQ4LDE4Mi45LDI0OEMxNDkuNCwyNDgsMTIyLjIsMjIwLjgsMTIyLjIsMTg3LjJ6Ij48L3BhdGg+PC9nPjwvc3ZnPg==");
+  background-size: 12px 18px;
+  transition: unset;
+  border-bottom: 0px;
+}
+
+.navbar a.marker { margin-top: 0; }
+
+.card {
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: .05rem .35rem;
+    color: inherit;
+  }
+}
+
+.multi-collapse {
+  .alert-dismissible {
+    .close { padding: .05rem .35rem; }
+    padding-right: 1.25rem;
+  }
+}
+
+.card-footer {
+  .dropdown-toggle::after { margin-left: 0; vertical-align: .155em; }
+  button.dropdown-toggle:focus { outline: none; }
+  // button.dropdown-toggle:focus::after { outline: 1px solid red; }
+}
+
+.card {
+  .btn-group, .btn-group-vertical {
+    vertical-align: unset;
+  }
+}
+
+.properties dd { padding-left: 10px; }
+.properties dd .btn:focus, .btn.focus { box-shadow: none; }
+
+.page-item .page-pre { padding-top: 0.45rem }
+.page-item .page-next { padding-top: 0.45rem }

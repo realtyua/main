@@ -1,0 +1,131 @@
+{%- assign url = page.url -%}
+{%- assign dir = page.dir -%}
+{%- assign region = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'region' -%}{%- assign region = region | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign district = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'district' -%}{%- assign district = district | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign city = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'city' -%}{%- assign city = city | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign town = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'town' -%}{%- assign town = town | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign village = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'village' -%}{%- assign village = village | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign developer = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'developer' -%}{%- assign developer = developer | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign realtor = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'realtor' -%}{%- assign realtor = realtor | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign agency = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'agency' -%}{%- assign agency = agency | push:i -%}{%- endif -%}{%- endfor -%}
+{%- assign cosa = dir | split: '/' -%}
+{%- assign size = cosa | size -%}
+{%- if url contains '/village/' -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
+{%- if url contains '/developer/' -%}{%- assign isDeveloper = true -%}{%- else -%}{%- assign isDeveloper = false -%}{%- endif -%}
+{%- if url contains '/realtor/' -%}{%- assign isRealtor = true -%}{%- else -%}{%- assign isRealtor = false -%}{%- endif -%}
+{%- if url contains '/agency/' -%}{%- assign isAgency = true -%}{%- else -%}{%- assign isAgency = false -%}{%- endif -%}
+
+{%- if size != 9 -%}
+  {%- for contact in region -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- if include.legal contains 'phone' -%}
+        {%- include footer/phone.html legal=include.legal -%}
+      {%- elsif include.legal == 'email' -%}
+        {%- include footer/email.html legal=include.legal -%}
+      {%- else -%}
+        {%- include footer/text.html legal=include.legal -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if isDeveloper == true or isRealtor == true or isAgency == true -%}
+{%- else -%}
+  {%- for contact in city -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- if include.legal contains 'phone' -%}
+        {%- include footer/phone.html legal=include.legal -%}
+      {%- elsif include.legal == 'email' -%}
+        {%- include footer/email.html legal=include.legal -%}
+      {%- else -%}
+        {%- include footer/text.html legal=include.legal -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if isDeveloper == true or isRealtor == true or isAgency == true -%}
+{%- else -%}
+  {%- for contact in district -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- if size == 5 and url contains 'village' -%}
+      {%- elsif include.legal contains 'phone' -%}
+        {%- include footer/phone.html legal=include.legal -%}
+      {%- elsif include.legal == 'email' -%}
+        {%- include footer/email.html legal=include.legal -%}
+      {%- else -%}
+        {%- include footer/text.html legal=include.legal -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- for contact in town -%}
+  {%- if url contains contact.type and url contains contact.item -%}
+    {%- if include.legal contains 'phone' -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == 'email' -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for contact in village -%}
+  {%- if url contains contact.type and url contains contact.item -%}
+    {%- if include.legal contains 'phone' -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == 'email' -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign back = dir | split: '/' -%}
+{%- assign dev = back | last -%}
+{%- if back.size == 7 -%}
+{%- assign size = back | size | minus:1 -%}
+{%- elsif back.size == 8 -%}
+{%- assign size = back | size | minus:2 -%}
+{%- endif -%}
+{%- assign dir_back = back | slice: 0, size | join: '/' | append: '/' -%}
+{%- assign dev = dir_back | split: '/' | last -%}
+
+{%- for contact in developer -%}
+  {%- if url contains contact.type and url contains contact.item and dev == contact.item -%}
+    {%- if include.legal contains 'phone' -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == 'email' -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for contact in realtor -%}
+  {%- if url contains contact.type and url contains contact.item -%}
+    {%- if include.legal contains 'phone' -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == 'email' -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for contact in agency -%}
+  {%- if url contains contact.type and url contains contact.item -%}
+    {%- if include.legal contains 'phone' -%}
+      {%- include footer/phone.html legal=include.legal -%}
+    {%- elsif include.legal == 'email' -%}
+      {%- include footer/email.html legal=include.legal -%}
+    {%- else -%}
+      {%- include footer/text.html legal=include.legal -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,46 @@
+{%- assign ads = site.html_pages | where_exp: 'i', "i.ads == 1" -%}
+{%- if ads[0] -%}
+  {%- for ad in ads -%}
+  <div class="col mb-3 mb-md-0">
+    <div class="card h-100">
+      <div class="card-body">
+        <p class="card-text"><a href="{{ ad.url }}">{{ ad.subtitle }}</a></p>
+      </div>
+    </div>
+  </div>
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%}
+<div class="col mb-3 mb-md-0">
+  <div class="card h-100">
+    <div class="card-body">
+      <p class="card-text"><a href="/construction">Будуємо житлові та не житлові будинки, квартири, гаражі</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="col mb-3 mb-md-0">
+  <div class="card h-100">
+    <div class="card-body">
+      <p class="card-text"><a href="/repairing">Ремонтуємо житлові і не житлові приміщення та іншу нерухомість</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="col mb-3 mb-md-0">
+  <div class="card h-100">
+    <div class="card-body">
+      <p class="card-text"><a href="/services-provider">Послуги встановлення, монтажу і демонтажу та оздоблення</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="col mb-3 mb-md-0">
+  <div class="card h-100">
+    <div class="card-body">
+      <p class="card-text"><a href="/building-materials">Продаємо будівельні матеріали для ремонту та будівництва</a></p>
+    </div>
+  </div>
+</div>
+{%- endcomment -%}

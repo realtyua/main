@@ -1,0 +1,164 @@
+---
+layout: compress
+---
+{%- include vars/page-slash.html -%}
+{%- include vars/fname-paged.html -%}
+{%- include vars/object.html -%}
+{%- include vars/whois.html minus=1 -%}
+{%- include location.html -%}
+<!doctype html>
+<html dir="ltr" lang="uk-UA">
+  <head>
+    {%- capture tlocation -%}
+      {%- if location and slashd.size > 4 and paged contains '/city/' or paged contains '/town/' -%}
+        {% unless slashd.size < 4 or pageu contains '/all.html' %}
+         · {{ site.data.uk.city }} {{ location }}
+        {% endunless %}
+      {%- elsif slashd.size > 3 and paged contains '/district/' and paged != '/district/town/' or slashd.size >= 4 and paged contains '/district/' -%}
+        {% unless slashd.size < 3 or pageu contains '/all.html' %}
+          {% unless slashd.size == 4 and pageu contains '/district/town/' %}
+           · {{ location }} {{ site.data.uk.district }}
+          {% endunless %}
+        {% endunless %}
+      {%- elsif pageu == '/district/town/' -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- assign ledge = pageu | split: '/' | last -%}
+    {%- assign ldir = '/assets/images/locations/' -%}
+    {%- assign lpath = ledge | prepend: ldir | append: '.jpg' | relative_url -%}
+    {%- assign file = site.static_files | where: 'path', lpath | first -%}
+    {%- capture title -%}
+      {%- if paget -%}
+        {{ paget | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.title | smartify }}
+      {%- else -%}
+        {{ site.title | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.name | smartify }}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- include meta-name.html -%}
+    {%- if page.table == 1 or page.table == 2 -%}
+      {%- if pageu contains '/map.html' -%}
+      {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+        <link rel="preload" href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+      {%- else -%}
+        <link rel="preload" href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+      {%- endif -%}
+    {%- else -%}
+      {%- if pageu contains '/map.html' -%}
+      {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+        <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+      {%- else -%}
+        <link rel="preload" href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+      {%- endif -%}
+    {%- endif -%}
+    {%- if data.size > 10 -%}
+      {%- if page.table == 1 -%}
+        <link rel="preload" href="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- elsif page.table == 2 -%}
+        <link rel="preload" href="{{ "/assets/js/main.tmodl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- endif -%}
+    {%- else -%}
+      {%- if page.table == 1 -%}
+        <link rel="preload" href="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- elsif page.table == 2 -%}
+        <link rel="preload" href="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- endif -%}
+    {%- endif -%}
+    {%- if page.table == 1 or page.table == 2 -%}
+      {%- if pageu contains '/map.html' -%}
+      {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+        <link href="{{ "/assets/css/main.tl.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+      {%- else -%}
+        <link href="{{ "/assets/css/main.t.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+      {%- endif -%}
+    {%- else -%}
+      {%- if pageu contains '/map.html' -%}
+      {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+        <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+      {%- else -%}
+        <link href="{{ "/assets/css/main.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+      {%- endif -%}
+    {%- endif -%}
+  </head>
+  <body>
+    <div id="top"></div>
+    <div class="main">
+      {%- include header.html -%}
+      <main class="content mb-4">
+        <div class="container">
+          {%- include breadcrumb.html -%}
+          {%- include back-title.html minus='4' so='1' st='4' data='title' -%}
+          <div class="row mb-3">
+            <div class="col-12">
+              <h1>{{ paget }} {{ idata }}</h1>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-5">
+              {%- include image-slider.html folder=folder group='main' width='480' height='260' -%}
+            </div>
+            <div class="col-md-7 mt-3 mt-md-0">
+              {%- assign isContent = content | strip_newlines -%}
+              {%- if isContent == '' -%}
+                {%- include info-visitors.html -%}
+              {%- else -%}
+                {{ content }}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 {{ whois }}">
+              {%- if fJson == 'true' or otabs[0] or data[0] -%}
+              <nav class="navbar navbar-expand-md navbar-light bg-white p-0">
+                <div class="navbar-brand d-md-none">
+                  <span class="small">{{ site.data.uk.re_about_object }}</span>
+                  <span class="ml-1 float-right align-middle text-primary">→</span>
+                </div>
+                <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbarObject" aria-controls="navbarObject" aria-expanded="false" aria-label="Toggle button">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarObject">
+                  <ul class="navbar-nav nav nav-tabs border-0" id="object-nav">
+                    {%- if fJson == 'true' and isJson[0] or data[0] -%}
+                      {%- include elements/offer-tab.html -%}
+                    {%- endif -%}
+                    {%- if otabs[0] -%}
+                      {%- include elements/others-tab.html tabs=otabs -%}
+                    {%- endif -%}
+                  </ul>
+                </div>
+              </nav>
+              <hr class="mt-2 mt-md-0">
+              <div class="tab-content" id="object-content">
+                {%- if fJson == 'true' and isJson[0] or data[0] -%}
+                  {%- include elements/offer-pane.html -%}
+                {%- endif -%}
+                {%- if otabs[0] -%}
+                  {%- include elements/others-pane.html tabs=otabs -%}
+                {%- endif -%}
+              </div>
+              {%- endif -%}
+            </div>
+            {%- include elements/pager.html l=8 -%}
+          </div>
+        </div>
+      </main>
+      {%- include footer.html -%}
+    </div>
+    {%- include scroll-top.html -%}
+    {%- if data.size > 10 -%}
+      {%- if page.table == 1 -%}
+        <script src="{{ "/assets/js/main.todl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+      {%- elsif page.table == 2 -%}
+        <script src="{{ "/assets/js/main.tmodl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+      {%- endif -%}
+      {%- include object/js-middle.html -%}
+    {%- else -%}
+      {%- if page.table == 1 -%}
+        <script src="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+      {%- elsif page.table == 2 -%}
+        <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+      {%- endif -%}
+    {%- endif -%}
+    {% include modals/net-realestate-modal.html %}
+  </body>
+</html>

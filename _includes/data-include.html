@@ -1,0 +1,5 @@
+{%- assign back = page.dir | split: '/' -%}
+{%- assign size = back | size | minus: 1 -%}
+{%- assign here = back | slice: 0, size | join: '/' | append: '/' -%}
+{%- assign zone = here | split: '/' | last -%}
+{%- assign incl = zone | prepend: 'data/' | append: include.appe -%}

@@ -1,0 +1,30 @@
+{%- capture navitemtitle -%}
+  {%- if ni_slug == 'commercial' -%}
+    {{ site.data.uk.title_tab_commercial }}
+  {%- elsif ni_slug == 'realtor' -%}
+    {{ site.data.uk.title_tab_realtor }}
+  {%- else -%}
+    {%- if ni.navtitle -%}
+      {{ ni.navtitle }}
+    {%- elsif ni.breadcrumb -%}
+      {{ ni.breadcrumb }}
+    {%- else -%}
+      {{ ni.title }}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+<li class="nav-item">
+  {%- if pageu contains '/map.html' -%}
+    <a href="{{ ni.dir }}" class="nav-link border-0">
+      <span>{{ navitemtitle }}</span>
+    </a>
+  {%- elsif ni.dir contains paged -%}
+    <span class="nav-link border-0 active">
+      <span>{{ navitemtitle }}</span>
+    </span>
+  {%- else -%}
+    <a href="{{ ni.dir }}" class="nav-link border-0">
+      <span>{{ navitemtitle }}</span>
+    </a>
+  {%- endif -%}
+</li>

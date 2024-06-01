@@ -1,0 +1,42 @@
+{%- assign slash = page.dir | split: "/" -%}
+{%- assign gauge = slash | size | minus:1 -%}
+{%- assign dir = slash | slice: 0, gauge | join: "/" | append: '/' -%}
+{%- assign ps = '' | split:'' -%}
+{%- assign pages = site.pages | sort: 'dir' | reverse -%}
+{%- for i in pages -%}
+  {%- assign l = i.dir | split: '/' -%}
+  {%- if i.url contains dir and i.url != dir and l.size == include.l -%}
+    {%- assign ps = ps | push: i -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign index = site.pages | sort: "dir" | where_exp: 'i', "i.url contains dir and i.url == dir" -%}
+<div class="col-12 mt-4">
+  <div class="row">
+    <div class="col-md-2 offset-md-5 text-center">&uarr;</div>
+  </div>
+  <div class="row mb-3 mb-md-0">
+    <div class="col-md-6 offset-md-3 text-center">
+      <a href="{{ index[0].url }}">{{ site.data.uk.others }} {{ index[0].title | downcase }}</a>
+    </div>
+  </div>
+  <div class="row">
+  {%- for p in ps -%}
+    {%- if p.url == page.url -%}
+      {%- if forloop.first == false -%}
+      {%- assign prev = forloop.index0 | minus:1 -%}
+      <div class="col-2 col-md-1 text-right align-top">&larr;</div>
+      <div class="col-10 col-md-5 text-left"><a href="{{ ps[prev].url }}">{{ ps[prev].title }}</a></div>
+      {%- else -%}
+      <div class="d-none d-md-block col-md-6">&nbsp;</div>
+      {%- endif -%}
+      {%- if forloop.last == false -%}
+      {%- assign next = forloop.index0 | plus:1 -%}
+      <div class="col-10 col-md-5 mt-3 mt-md-0 text-right"><a href="{{ ps[next].url }}">{{ ps[next].title }}</a></div>
+      <div class="col-2 col-md-1 mt-3 mt-md-0 text-left align-top">&rarr;</div>
+      {%- else -%}
+      <div class="d-none d-md-block col-md-6">&nbsp;</div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  </div>
+</div>

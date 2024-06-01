@@ -1,0 +1,109 @@
+{%- if include.dir != page.dir and include.dir contains page.dir -%}
+  {%- assign back = include.dir | split: '/' -%}
+  {%- assign level = back | size | plus:1 %}
+  {%- assign items = '' | split: '' -%}
+  {%- assign pages = site.html_pages | sort: 'date' | reverse -%}
+  {%- for p in pages -%}
+    {%- assign l = p.dir | split: '/' -%}
+    {%- if p.dir contains include.dir and p.dir != include.dir and l.size == level -%}
+      {%- unless p.dir contains '/realtor/agent/' or p.dir contains '/agency/ahentsiya/' or p.dir contains '/developer/builder/' -%}
+        {%- assign items = items | push: p -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if items.size > 0 -%}
+
+    {%- for item in items limit: 6 -%}
+      {%- assign section = item.url | split: '/' | last -%}
+      {%- if forloop.first -%}
+      <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2">
+      {%- endif -%}
+        <div class="col px-2 mb-3">
+          <div class="card h-100">
+            {%- include folder.html dir='/assets/images/logo/' slug=section -%}
+            {%- if file == true -%}
+              <img loading="lazy" src="{{ picture }}" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+            {%- else -%}
+              <img loading="lazy" src="https://picsum.photos/400/200?random=2" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ item.title | replace: '&nbsp;', ' ' | remove: '"' }}">
+            {%- endif -%}
+            <div class="card-body">
+              <h3 class="card-title h5">
+                <a href="{{ item.url }}">
+                  {%- if item.title -%}{{ item.title }}{%- else -%}{{ item.navtitle }}{%- endif -%}
+                </a>
+              </h3>
+              <div class="card-text mb-1">
+                <nav>
+                  <ul class="nav nav-tabs" id="{{ region }}-{{ section }}-tab" role="tablist">
+                    <li class="nav-item d-none" role="presentation">
+                      <a class="nav-link active" id="{{ region }}-{{ section }}-offers-tab" data-toggle="tab" href="#{{ region }}-{{ section }}-offers" role="tab" aria-controls="{{ region }}-{{ section }}-offers" aria-selected="false">
+                        {{ site.data.uk.offers }}
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="{{ region }}-{{ section }}-actions-tab" data-toggle="tab" href="#{{ region }}-{{ section }}-actions" role="tab" aria-controls="{{ region }}-{{ section }}-actions" aria-selected="false">
+                        {{ site.data.uk.actions }}
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+                <div class="tab-content" id="{{ region }}-{{ section }}-content">
+                  <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
+                    {%- assign records = site.data[section] -%}
+                    {%- if records.size > 0 -%}
+                      {%- assign offers = records | sort: 'date' | reverse -%}
+                      {%- assign total = offers | size -%}
+                      {%- assign others = total | minus: 1 -%}
+                      {%- for offer in offers limit: 1 -%}
+                        {%- include card.html offer=offer aid='1' slug=include.page others=others -%}
+                      {%- endfor -%}
+                      {%- if others > 0 -%}
+                        <div class="card-footer mt-n1 bg-white pr-3 pt-1 border-1 border-top-0 text-right">
+                          <a href="{{ item.url }}" class="btn btn-sm btn-primary">{{ site.data.uk.others }} <strong>{{ others }}</strong>  {{ site.data.uk.others_offers }}</a>
+                        </div>
+                      {%- endif -%}
+                    {%- else -%}
+                      <div class="alert alert-primary" role="alert">
+                        <p>Поки що тут жодної нерухомості, але ви можете виправити це додавши свої пропозиції, а ми залюбки опублікуємо їх тут.</p>
+                        <hr>
+                        <p class="mb-0">Про те, як це зробити ви можете дізнатись перейшовши за цим посиланням '<a href="#" class="alert-link">додати свою нерухомість</a>'.</p>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  <div class="tab-pane pt-3 fade" id="{{ region }}-{{ section }}-actions" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-actions-tab">
+                    ...Акції
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- if forloop.last -%}
+      </div>
+      <div class="float-right btn-group">
+        <a class="btn btn-sm btn-primary" href="{{include.dir}}">{{ site.data.uk.others }} {{ title | downcase }}</a>
+      </div>
+      {%- endif -%}
+    {%- else -%}
+    {%- endfor -%}
+
+  {%- else -%}
+    <div class="row mt-4">
+      <div class="col-md-8 offset-md-2">
+        <div class="alert alert-info" role="alert">
+          {% if include.page == 'realtor' %}
+            <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.uk.main_city }}/realtor/agent/" class="alert-link">Демонстраційна сторінка продавця нерухомості</a></p>
+          {%- elsif include.page == 'agency' -%}
+            <p>Сторінки розділу призначені для поширення інформації про продавця нерухомості та перелік пропонованого продавцем нерухомого майна, яке продається або передається в оренду продавцем. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.uk.main_city }}/agency/ahentsiya/" class="alert-link">Демонстраційна сторінка агентства нерухомості</a></p>
+          {%- elsif include.page == 'developer' -%}
+            <p>Сторінки розділу призначені для поширення інформації про забудовника, його житлові комлекси та перелік нерухомого майна, яке продається або передається в оренду компанією забудовником. Вартість створення такого розділу з відповідними сторінками, ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}. <a href="/region/city/{{ site.data.uk.main_city }}/developer/builder/" class="alert-link">Демонстраційна сторінка забудовника нерухомості</a></p>
+          {%- else -%}
+            <p>Сторінки розділу призначені для поширення інформації про тих хто займається будівництвом, продажем та орендою нерухомості. Вартість створення такого розділу ви можете переглянути на сторінці "<a href="/pricing.html" class="alert-link">Тарифні плани</a>". Щодо питання розміщення ваших пропозицій на цьому вебсайті телефонуйте на&nbsp;{%- include phone-brand.html n=site.contact.phone_advert -%}...</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+{%- endif -%}

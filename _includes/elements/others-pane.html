@@ -1,0 +1,8 @@
+{%- for ct in include.tabs -%}
+  {%- assign pane = ct.url | split: "/" | slice: 2 | last -%}
+  {%- assign sizename = pane | size -%}
+  {%- assign p = pane | slice: 3, sizename -%}
+  <div class="tab-pane fade show{% if isJson %}{% else %} active{% endif %}" id="{{ p }}" role="tabpanel" aria-labelledby="{{ p }}-tab">
+    {{ ct.content }}
+  </div>
+{%- endfor -%}

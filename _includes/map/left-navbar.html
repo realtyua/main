@@ -1,0 +1,31 @@
+{%- assign ones = site.html_pages | sort: 'path' | reverse -%}
+{%- for one in ones -%}
+  {%- assign path = one.url | split: '/' -%}
+  {%- assign part = path | size -%}
+  {%- assign slug = one.url | split: '/' | last -%}
+  {%- assign current = one.url | remove: slug | remove: '//' | append: '/' -%}
+  {%- if '/' == current and one.navhide != 1 -%}
+    {%- if one.url == '/region/' -%}
+    {%- else -%}
+    <details>
+      <summary>{%- if one.navtitle -%}{{ one.navtitle }}{%- else -%}{{ one.title }}{%- endif -%}</summary>
+      {% if part >= 2 %}{%- include map/left-subpage.html current=one.url title=one.title -%}{%- endif -%}
+    </details>
+    {%- endif -%}
+    {%- if one.url -%}
+      {%- assign twos = site.html_pages -%}
+      {%- for two in twos -%}
+        {%- assign path = two.url | split: '/' -%}
+        {%- assign part = path | size -%}
+        {%- assign slug = two.url | split: '/' | last -%}
+        {%- assign current = two.url | remove: slug | remove: '//' | append: '/' -%}
+        {%- if one.url == current and two.url contains 'city' or two.url contains 'town' -%}
+        <details>
+          <summary>{%- if two.navtitle -%}{{ two.navtitle }}{%- else -%}{{ two.title }}{%- endif -%}</summary>
+          {% if part >= 3 %}{%- include map/left-subpage.html current=two.url title=two.title -%}{%- endif -%}
+        </details>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

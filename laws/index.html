@@ -1,0 +1,41 @@
+---
+title: Законодавство
+navtitle:
+subtitle:
+navhide: 1
+---
+
+<div class="row justify-content-end">
+  <div class="col-lg-auto mb-2">
+    {%- include navgroup.html -%}
+  </div>
+  <div class="col-12">
+    <h1>Законодавство Україні на ринку нерухомості</h1>
+    <p class="mb-1">Ми зібрали для вас каталог посилань на закони, кодекси, постанови, укази, розпорядження і законодавчі та нормативно-правові акти, які регулюють ринок нерухомості в Україні</p>
+  </div>
+  <div class="col-12">
+    <table
+      id="laws"
+      data-locale="{{ site.lang | replace: '_', '-' }}"
+      data-toggle="table"
+      data-search="true"
+      data-search-accent-neutralise="true"
+      data-pagination="true"
+      data-mobile-responsive="true"
+      data-buttons-class="primary"
+      data-url="/laws/data/laws.json">
+      <thead class="thead-re">
+        <tr>
+          <th data-field="t" data-title="Короткий опис">t</th>
+          <th data-field="l" data-formatter="linkFormatter" data-title="Посилання">l</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<script>
+  function linkFormatter(value) {
+    return '<a href="' + value + '" target="_blank" rel="noopener">Переглянути</a>'
+  }
+</script>

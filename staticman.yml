@@ -1,0 +1,25 @@
+comments:
+  allowedFields: ["are", "tre", "surface", "sland", "rooms", "floor", "floors", "taddress", "address", "number", "tlocation", "location", "region", "description", "currency", "price", "phone", "fn", "ln", "agreed"]
+  requiredFields: ["are", "tre", "surface", "sland", "rooms", "floor", "floors", "taddress", "address", "number", "tlocation", "location", "region", "currency", "price", "phone", "fn", "ln", "agreed"]
+  allowedOrigins: ["localhost", "realestate.if.ua", "www.realestate.if.ua"]
+  branch: master
+  commitMessage: "Property from {fields.date} - {options.slug}"
+  filename: "entry{@timestamp}"
+  format: "yaml"
+  generatedFields:
+    date:
+      type: date
+      options:
+        format: "timestamp-seconds"
+  moderation: true
+  name: "Add New Property"
+  path: "_data/comments/{options.slug}"
+  pullRequestBody: It is new record.
+  transforms:
+    email: md5
+  notifications:
+    enabled: false
+  reCaptcha:
+    enabled: true
+    siteKey: 6LdKdRkaAAAAAANwi81j7jDqLF9gUxhsMb4-Tq8t
+    secret: ByhNs6NxIJxxLWSJ3YGTd5ud4Y/dh/4DhlIIWpQmD4/r9aTjJKFkn83gbJkwn7+AnFFoNk8eSXtghuk4VNf534Z3GdnUDNpHegQsA2OcC6bY7rO2qEkf4Z+QURaiV5lsW5tJ4TRrI/VCUP3Bu4oHdNpaowCEh8jYR/P5anz9+c8FjKZ7ch28T7NJZw/4grYl8eb3rO+BIguUWC2OXICLYiIYsmxNNiHkXJ7QBPcFPnfva9TNl+DVmvCH5nX/1AD3OW3LY/K9IF6rD4wQYumkxsA8fjnx3ULMEIO0aKn+5gJZSLpLVpw0QsBj+Qfp+DyC2W6ModaP9xqvce+wPfsEBPqZZmG2ZQcB2Ca5ioHYSxG+xfKh2gtedoonhL7UIGm/DAD5E/annU6szA1uQqlXb7JXUBskh9AOYm+utyZxZTNC3+ctXhQTfZGV+I0AMp4yfRJ/2gBv8pT52r9jxXVBSpUKw8Ex49At1VPdn+2Q+zr7NmdFKIHgvXRxyfq/IB0ygr3tKQKceuvYXAPlXrJF9q9RUX6BaMtOcK1uzF63wIv+L0htKvE7i4ig8nv5o5FMwfyAZ0FsabiKUtABn85hYrCi6L0najgWR1WER87TOnewsY0VW5/NlULkVB7FiPUy4NsUb3lhhfaYPDS+8ysqZCoREkUdGghdK7gWRORVwtQ=

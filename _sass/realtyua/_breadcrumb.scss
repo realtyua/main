@@ -1,0 +1,69 @@
+.main-breadcrumbs .breadcrumb {
+    flex-wrap: nowrap
+}
+
+.main-breadcrumbs .breadcrumb {
+    background-color: transparent;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.main-breadcrumbs .breadcrumb > li {
+    display: inline-block
+}
+
+@media screen and (max-width:768px) {
+    .main-breadcrumbs {
+        padding-bottom: 0
+    }
+
+    .main-breadcrumbs .breadcrumb > li {
+        display: none
+    }
+
+    .main-breadcrumbs .breadcrumb > li:nth-last-child(2) {
+        display: block;
+        padding-left: unset
+    }
+
+    .main-breadcrumbs .breadcrumb > li:nth-last-child(2):before {
+        display: inline-block;
+        content: "\2190";
+        color: #2669e3;
+        padding-left: 0;
+        padding-right: 10px
+    }
+
+    .main-breadcrumbs .breadcrumb > li + li:before {
+        display: none
+    }
+}
+
+.main-breadcrumbs .breadcrumb > li > a {
+    font-weight: 600;
+}
+
+.main-breadcrumbs .breadcrumb > li + li:before {
+    color: #a7a9af
+}
+
+@media screen and (max-width:576px) {
+    .main-breadcrumbs .breadcrumb > li + li:before {
+        padding: 0;
+        padding-right: 10px
+    }
+}
+
+.main-breadcrumbs .breadcrumb > li.active {
+    max-width: 750px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.breadcrumb-item.active a:last-child {
+    color: #6c757d;
+    font-weight: 400 !important;
+}

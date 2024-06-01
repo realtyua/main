@@ -1,0 +1,61 @@
+.card-body {
+  .phone {
+    position: relative;
+  }
+  :focus {
+    border: 1px solid transparent;
+    outline: none !important;
+    -moz-appearance: none !important;
+  }
+}
+.card-body .date { line-height: 1; }
+.card-footer {
+  .col-auto {
+    .btn-group { display: inline; }
+  }
+}
+//
+// Custom Card
+//
+.card {
+    > div.more {
+      position: absolute;
+      top: 100%;
+      right: -1px;
+      z-index: 1;
+      width: 100.6%;
+      background-color: rgb(255, 255, 255);
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-top: 0;
+    }
+}
+.navbar {
+  > div.section {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    border-color: rgba(0, 0, 0, 0.15);
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+  }
+}
+.menu {
+  .navbar {
+    .navbar-toggler { width: 24px; }
+  }
+}
+.bg-0 { background-color: #f8f9fa; }
+.bg-1 { background-color: #f0e7fe; }
+.bg-2 { background-color: #fcedee; }
+.bg-3 { background-color: #e2f0e9; }
+.bg-4 { background-color: #fbebf3; }
+.bg-5 { background-color: #e9f1ff; }
+.bg-6 { background-color: #fff3ea; }
+.bg-7 { background-color: #f1ecf9; }
+.bg-8 { background-color: #fff9e7; }
+.bg-9 { background-color: #e6f9f4; }
+.bg-10 { background-color: #e7fafe; }

@@ -1,0 +1,133 @@
+---
+layout: default
+---
+{%- include vars/page-slash.html -%}
+{%- include back-title.html minus='1' so='1' st='4' data='title' -%}
+<div class="row">
+  <div class="col-12">
+    <h1 class="h{%- if paged contains '/realtor/' -%}3{%- else -%}2{%- endif -%}">
+      {%- if pageu contains '/index.html' -%}
+        {{ paget | replace_first: 'Всі оголошення про', 'Вся' }}
+      {%- elsif pageu contains '/all.html' -%}
+        {{ paget | replace_first: 'Всі оголошення про', 'Вся' }}
+      {%- else -%}
+        {{ paget }} {{ idata }}
+      {% endif -%}
+    </h1>
+    {%- assign isContent = content | strip_newlines -%}{%- if isContent == '' -%}{%- else -%}{{ content }}{%- endif -%}
+    {%- include nav-section.html -%}
+    <h2 class="h3 my-3">
+      {%- if paged contains '/rent/' -%}
+        {{ site.data.uk.re_rent_h2 }}
+      {%- elsif paged contains '/land/' -%}
+        {{ site.data.uk.re_land_h2 }}
+      {%- elsif paged contains '/house/' -%}
+        {{ site.data.uk.re_house_h2 }}
+      {%- elsif paged contains '/garage/' -%}
+        {{ site.data.uk.re_garage_h2 }}
+      {%- elsif paged contains '/commercial/' -%}
+        {{ site.data.uk.re_commercial_h2 }}
+      {%- elsif paged contains '/apartment/' -%}
+        {{ site.data.uk.re_apartment_h2 }}
+      {%- elsif pageu contains '/all.html' -%}
+        {{ site.data.uk.re_all_h2 }}
+      {%- endif -%}
+    </h2>
+    {%- if pageu contains '/all.html' -%}
+      {%- assign json = pageu | replace: 'all.html', 'data/all.json' -%}
+      {%- if slashu.size == 4 -%}
+        {%- assign data = pageu | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 5 -%}
+        {%- assign data = pageu | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- assign json = here | append: 'data/' | append: slugd | append: '.json' -%}
+      {%- if slashd.size == 4 -%}
+        {%- assign data = paged | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' | append: '.html' -%}
+      {%- elsif slashd.size == 5 -%}
+        {%- assign data = paged | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' | append: '.html' -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if data -%}
+      {%- include {{ data }} -%}
+      {%- if offers.size > 10 -%}
+        <div class="row">
+          <div class="col-12">
+            {%- if pageu contains '/all.html' -%}
+              <div class="row mx-n2 row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 mt-2">
+                {%- include nav-section.html style='card' -%}
+              </div>
+            {%- else -%}
+              {%- include table/js.html -%}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- else -%}
+        {%- for offer in offers -%}
+          {%- if forloop.first -%}
+            <div class="row">
+              <div class="col-12">
+                <table
+                    id="property"
+                    data-locale="{{ site.lang | replace: '_', '-' }}"
+                    data-toggle="table"
+                    data-search="true"
+                    data-show-print="true"
+                    data-pagination="true"
+                    data-pagination-pre-text="❮"
+                    data-pagination-next-text="❯"
+                    data-detail-view="true"
+                    data-detail-view-icon="false"
+                    data-detail-view-by-click="true"
+                    data-mobile-responsive="true"
+                    data-buttons-class="primary"
+                    data-detail-formatter="htmlDetailFormatter">
+                  <thead class="thead-re">
+                    <tr>
+                      <th data-field="id" data-visible="false">Ідентифікатор</th>
+                      <th data-field="type" data-title="{{ site.data.uk.re_offer }}" data-formatter="propertyFormatter">Тип нерухомості</th>
+                      <th data-field="rent" data-visible="false">Оренда</th>
+                      <th data-field="page" data-visible="false">Сторінка</th>
+                      <th data-field="rooms" data-visible="false">Кімнат</th>
+                      <th data-field="surface" data-visible="false">Площа</th>
+                      <th data-field="surface_land" data-visible="false">Площа землі</th>
+                      <th data-field="price" data-formatter="priceFormatter" data-title="{{ site.data.uk.re_cost | capitalize }}" data-sortable="true" data-sorter="priceSorter">Ціна</th>
+                      <th data-field="price_sqmt" data-visible="false">Ціна за м²</th>
+                      <th data-field="floor" data-visible="false">Поверх</th>
+                      <th data-field="floors" data-visible="false">Поверхів</th>
+                      <th data-field="parking" data-visible="false">Паркування</th>
+                      <th data-field="region" data-visible="false">Район</th>
+                      <th data-field="location" data-visible="false">Місто</th>
+                      <th data-field="address" data-visible="false">Адреса</th>
+                      <th data-field="coordinates" data-visible="false">Координати</th>
+                      <th data-field="date" data-visible="false">Дата</th>
+                      <th data-field="seller" data-visible="false">Продавець</th>
+                      <th data-field="phone" data-visible="false">Телефон</th>
+                      <th data-field="description" data-visible="false">Опис</th>
+                      <th data-field="link" data-visible="false">Посилання</th>
+                      <th data-field="images" data-visible="false">Фото</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+          {%- endif -%}
+            {% include table/html.html %}
+          {%- if forloop.last -%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          {%- assign name = paget | replace: 'Всі оголошення про ', '' -%}
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="alert alert-success mb-0" role="alert">
+                {%- include none-advertisement.html title=name -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>

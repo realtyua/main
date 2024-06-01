@@ -1,0 +1,37 @@
+{%- if paged == '/' and pageu contains '/ukraine.html' -%}
+  <script src="{{ "/assets/js/main.ua.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+{%- elsif paged == '/' and pageu contains '/' -%}
+  {%- if page.lightbox == 1 -%}
+    <script src="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  {%- else -%}
+    <script src="{{ "/assets/js/main.h.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+  {%- endif -%}
+{%- else -%}
+  {%- if page.table == 1 -%}
+    {%- if slashd.size >= 3 and paged != '/region/city/' or paged != '/district/town/'-%}
+      <script src="{{ "/assets/js/main.tl.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- endif -%}
+  {%- elsif page.table == 2 -%}
+    {%- assign main_region = region_slug | prepend: '/region/' | append: '/' -%}
+    {%- if slashd.size == 3 and paged == main_region -%}
+      <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
+      <script src="{{ "/assets/js/main.tml.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- else -%}
+      <script src="{{ "/assets/js/main.tm.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- endif -%}
+  {%- else -%}
+    {%- if pageu contains '/map.html' -%}
+      <script src="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/' -%}
+      <script src="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- elsif page.layout == 'property' -%}
+      <script src="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- elsif paged != '/laws/' or paged != '/docs/' -%}
+      <script src="{{ "/assets/js/main.t.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- else -%}
+      <script src="{{ "/assets/js/main.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+<script data-goatcounter="https://reifua.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
