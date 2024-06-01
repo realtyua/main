@@ -1,2 +1,0 @@
-{%- assign mapPage = page.url | replace: 'all.html', 'map.html' | remove_first: '/' -%}
-{%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
