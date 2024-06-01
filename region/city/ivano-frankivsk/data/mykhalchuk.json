@@ -1,0 +1,9 @@
+---
+layout: null
+sitemap: false
+navhide: 1
+---
+{%- assign name = page.name | remove: '.json' -%}
+{%- assign data = site.data[name] -%}
+{%- assign offers = data | sort: 'date' | reverse -%}
+{%- include offer-json.html -%}

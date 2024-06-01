@@ -1,0 +1,37 @@
+main a, footer a, dd a.card-link, .alert .social-link a.alert-link, .accordion .social-link a.alert-link {
+  background-color: transparent;
+  border-bottom: $border-width solid #ffcc00;
+  transition: 0.4s ease-in-out;
+  &:hover {
+    transition: .4s ease-in-out;
+    border-bottom: $border-width solid $link-color;
+  }
+}
+
+.social-link a, a.badge, .lightbox a, li.active a, a.card-link {
+  border-bottom: 0;
+  transition: none;
+  &:hover {
+    transition: none;
+    border-bottom: 0;
+  }
+}
+
+.net-realestate a {
+  color: $white;
+  border-bottom: $border-width solid transparent;
+  transition: 0.4s ease-in-out;
+  &:hover {
+    transition: .4s ease-in-out;
+    border-bottom: $border-width solid $white;
+  }
+}
+
+.card {
+  span.mark {
+    cursor: pointer;
+  }
+  strong.mark {
+    cursor: pointer;
+  }
+}

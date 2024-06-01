@@ -1,0 +1,17 @@
+{{ property.date | date: "%-d" }}&nbsp;
+{%- assign m = property.date | date: "%-m" -%}
+{%- case m -%}
+  {%- when '1' -%}{{ site.data.uk.m_01 }}
+  {%- when '2' -%}{{ site.data.uk.m_02 }}
+  {%- when '3' -%}{{ site.data.uk.m_03 }}
+  {%- when '4' -%}{{ site.data.uk.m_04 }}
+  {%- when '5' -%}{{ site.data.uk.m_05 }}
+  {%- when '6' -%}{{ site.data.uk.m_06 }}
+  {%- when '7' -%}{{ site.data.uk.m_07 }}
+  {%- when '8' -%}{{ site.data.uk.m_08 }}
+  {%- when '9' -%}{{ site.data.uk.m_09 }}
+  {%- when '10' -%}{{ site.data.uk.m_10 }}
+  {%- when '11' -%}{{ site.data.uk.m_11 }}
+  {%- when '12' -%}{{ site.data.uk.m_12 }}
+{%- endcase -%}
+&nbsp;{{ property.date | date: "%Y" }}&nbsp;{{ site.data.uk.roku }}

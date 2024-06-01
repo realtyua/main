@@ -1,0 +1,30 @@
+<div class="modal fade realestate" id="netRealEstate" tabindex="-1" role="dialog" aria-labelledby="netRealEstate" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content net-realestate">
+      <div class="modal-header border-0">
+        <h3 class="h5 modal-title pl-2 text-white">
+          <a href="https://www.realestate.net.ua">
+            {{ site.data.uk.ua }}
+          </a>
+        </h3>
+        <button type="button" class="close py-1 px-2" data-dismiss="modal" aria-label="Close" title="{{ site.data.uk.close }}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pt-0 pb-4 px-4">
+        <ul class="list-unstyled mb-0 row row-cols-1 row-cols-sm-2 g-3">
+          {%- assign res = site.data.realestate | sort: 'title' -%}
+          {%- for re in res -%}
+            {%- if re.url != site.url -%}
+              <li class="col mb-1">
+                  <a href="{{ re.url }}" target="_blank">
+                    {{ re.title }}
+                  </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

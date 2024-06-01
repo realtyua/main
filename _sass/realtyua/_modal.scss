@@ -1,0 +1,32 @@
+.modal.realestate .net-realestate {
+  background-color: #31486c;
+  border-radius: 0;
+}
+.modal.realestate .net-realestate .close {
+  color: #ffffff;
+}
+.modal.realestate .net-realestate .modal-footer {
+  justify-content: left;
+}
+.modal.realestate .net-realestate .outer-links {
+  float: left;
+  color: #ffffff;
+  line-height: 30px;
+  margin-right: 65px;
+  list-style: none;
+}
+.modal.realestate .net-realestate .outer-links li {
+  line-height: 17px;
+  margin-bottom: 10px;
+}
+.modal.realestate .net-realestate .outer-links a span {
+  -webkit-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  -ms-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  border-bottom: 1px solid transparent;
+}
+.modal.realestate .net-realestate .outer-links a {
+  color: #ffffff;
+}

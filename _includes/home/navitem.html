@@ -1,0 +1,18 @@
+{%- capture navlink -%}
+  {%- if sslug == 'commercial' -%}
+    {{ site.data.uk.title_tab_commercial }}
+  {%- elsif sslug == 'realtor' -%}
+    {{ site.data.uk.title_tab_realtor }}
+  {%- else -%}
+    {%- if s.navtitle -%}
+      {{ s.navtitle }}
+    {%- elsif s.breadcrumb -%}
+      {{ s.breadcrumb }}
+    {%- else -%}
+      {{ s.title }}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+<li class="nav-item m-0">
+  <a class="nav-link border-0 px-2{% if forloop.last %} pt-1 pb-2{% else %} py-1{% endif %}" href="{{ s.dir }}">{{ navlink }}</a>
+</li>

@@ -1,0 +1,66 @@
+---
+layout: compress
+---
+{%- include vars/page-slash.html -%}
+{%- include vars/fname-paged.html -%}
+<!doctype html>
+<html dir="ltr" lang="uk-UA">
+  <head>
+    {%- include head.html -%}
+    <style>
+      html, body, #map { height: 600px; width: 100%; }
+      #map { position: relative; width: 100%; height: 800px; margin:0; padding:0; border: 1px solid #2d5ca6; }
+    </style>
+  </head>
+  <body>
+    <div id="top"></div>
+    <div class="main">
+      {%- include header.html -%}
+      <main{% if pageu == '/' %} class="content my-4"{% else %} class="content mb-4"{% endif %}>
+        <div class="container">
+          {%- include breadcrumb.html -%}
+          <div class="row">
+            <div class="col-12">
+              {%- assign isContent = content | strip_newlines -%}
+              {%- if isContent == '' -%}
+                {%- include info-visitors.html -%}
+              {%- else -%}
+                {{ content }}
+              {%- endif -%}
+              {%- include nav-section.html -%}
+              <h2>Об'єкти нерухомості на мапі</h2>
+              <p>Клацніть на маркер щоб переглянути основні параметри об'єкта нерухомості і контакти продавця</p>
+              <div class="row">
+                <div class="col-12">
+                  <div id="map"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      {%- include footer.html -%}
+    </div>
+    {%- include scroll-top.html -%}
+    {%- include java-script.html -%}
+    {% include modals/net-realestate-modal.html %}
+    {%- capture name -%}{%- include footer/contact.html legal='name' -%}{%- endcapture -%}
+    {%- if pageu contains '/map.html' -%}
+      {%- if slashu.size == 4 -%}
+        {%- assign data = pageu | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 5 and isCityTown == true -%}
+        {%- assign data = pageu | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 5 and pageu contains '/district/' and isCityTown == false -%}
+        {%- assign data = pageu | split: '/' | slice: 2, 5 | join: '/' | prepend: 'data/' -%}
+      {%- elsif slashu.size == 6 -%}
+        {%- assign data = pageu | split: '/' | slice: 3, 6 | join: '/' | prepend: 'data/' -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if location != '' -%}
+      {%- assign place = location -%}
+    {%- else -%}
+      {%- assign place = site.region -%}
+    {%- endif -%}
+    {%- include footer/data-map.html -%}
+  </body>
+</html>

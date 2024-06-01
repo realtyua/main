@@ -1,0 +1,80 @@
+---
+last_modified_at: 2024-05-30T19:23:18+02:00
+title: Нерухомість в інших регіонах України
+navhide: 1
+---
+<h1>Українська нерухомість у всіх регіонах України</h1>
+<p>Кожен українець може безкоштовно подати запит та розмістити своє оголошення про продаж чи передачу в оренду своєї квартири, свого будинку чи будь-яку іншу нерухомість, яка знаходиться в межах України у одному із нижче вказаних регіонів України.</p>
+{%- assign rs = site.data.realestate | sort: 'navtitle' -%}
+<div class="row row-cols-1 row-cols-md-2">
+  {%- for r in rs -%}
+    {%- assign title = r.title | split: " " | slice: 1, 4 | join: " " -%}
+    {%- assign region = r.url | split: "." | slice: 2, 4 | join: "." | replace: ".", "-" -%}
+    {%- assign image = region | append: ".jpg" -%}
+    {%- if r.url != site.url -%}
+    <div class="col mb-4">
+      <div class="card">
+        <img src="/assets/images/locations/{{ image }}" class="card-img-top" alt="Нерухомість у {{ r.navtitle | replace_first: "о", "і" }}">
+        <div class="card-body p-2">
+          <h2 class="card-title h5">{{ r.subtitle }} {{ site.data.uk.re_ta }} {{ title }}</h2>
+          <div class="card-text">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+              <div class="navbar-brand d-lg-none">
+                <span class="small">Виберіть розділ</span>
+                <span class="ml-1 float-right align-middle text-primary">→</span>
+              </div>
+              <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar-{{ region }}-realEstate" aria-controls="navbar-{{ region }}-realEstate" aria-expanded="false" aria-label="Toggle button">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="navbar-collapse justify-content-end collapse" id="navbar-{{ region }}-realEstate">
+                <ul class="navbar-nav nav nav-tabs border-0" id="{{ region }}-realestate-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link pl-0 pr-1 border-0{% if r.slug and r.slug != '' %} active{% else %}{% endif %}" id="{{ region }}-recently-tab" data-toggle="tab" href="#{{ region }}-recently" role="tab" aria-controls="{{ region }}-recently" aria-selected="true">
+                      <span>Оголошення</span>
+                    </a>
+                  </li>
+                  {%- if r.slug and r.slug !='' -%}
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link pl-0 pr-1 border-0" href="{{ r.url }}/news/" target="_blank" title="Новини про нерухомость - {{ r.small }}">
+                      <span>Новини</span>
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link pl-0 pr-1 border-0" href="{{ r.url }}/articles/" target="_blank" title="Статті про нерухомость - {{ r.small }}">
+                      <span>Статті</span>
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link pl-0 pr-1 border-0" href="{{ r.url }}/region/{{ r.slug }}/map.html" target="_blank" title="Мапа нерухомості - {{ r.small }}">
+                      <span>Мапа</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link pl-0 border-0{% if r.slug and r.slug != '' %}{% else %} active{% endif %}" id="{{ region }}-about-tab" data-toggle="tab" href="#{{ region }}-about" role="tab" aria-controls="{{ region }}-about" aria-selected="true">
+                      <span>Про вебсайт</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <hr class="m-0" style="position:relative;">
+            <div class="tab-content" id="{{ region }}-realestate-content">
+              <div class="tab-pane pt-2 fade show{% if r.slug and r.slug != '' %} active{% else %}{% endif %}" id="{{ region }}-recently" role="tabpanel" aria-labelledby="{{ region }}-recently-tab">
+                <h3 class="h6">{{ r.small | remove: "область" }} нерухомість</h3>
+                <div id="{{ region }}"></div>
+              </div>
+              <div class="tab-pane pt-3 fade show{% if r.slug and r.slug != '' %}{% else %} active{% endif %}" id="{{ region }}-about" role="tabpanel" aria-labelledby="{{ region }}-about-tab">
+                <p>{{ site.data.uk.www }} <strong>{{ r.url | remove: 'http://' | remove: 'https://' }}</strong> {{ site.data.uk.description_site }} {{ r.navtitle | replace_first: 'о', 'і' }} {{ site.data.uk.re_ta }} {{ title }}.</p>
+                <p>Будь-хто, хто має нерухомість, чи професійно займається нерухомістю у цьому регіоні може безоплатно розмістити своє оголошення про купівлю-продаж і оренду нерухомості, яка знаходиться {{ title }}.</p>
+                <p>Якщо у вас є новини про нерухомість {{ title }} або ви пишете статті про нерухомість, <a href="#contacts">надсилайте нам</a> і ми залюбки їх опублікуємо на сторінці "<strong>{{ site.title }}</strong>" - <strong>{{ r.small }}</strong> - це безкоштовно.</p>
+                {%- if r.slug and r.slug !='' -%}<p><a href="{{ r.url }}/add">Подати безкоштовне оголошення</a> {{ title }}.</p>{%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

@@ -1,0 +1,24 @@
+{%- assign slug = dir | split: '/' | last -%}
+{%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
+{%- assign properties = paginator.posts -%}
+{%- for property in properties -%}
+  {%- if forloop.first -%}
+  <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 mx-n2">
+  {%- endif -%}
+    <div class="col px-2 mb-3">
+        {%- include grid/item.html offer=property slug=slug aid=aid -%}
+    </div>
+  {%- if forloop.last -%}
+  </div>
+  {%- endif -%}
+{%- else -%}
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="alert alert-info" role="alert">
+        {{ site.data.uk.property_list_empty }}
+        <p>Для перегляду інших записів <a href="{{ page.dir }}list.html" class="alert-link">перейдіть у режим списку</a>.</p>
+      </div>
+    </div>
+  </div>
+{%- endfor -%}
+{%- include grid/pagination.html cat=page.pagination.category -%}

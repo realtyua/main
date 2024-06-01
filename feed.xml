@@ -1,0 +1,39 @@
+---
+layout: null
+---
+
+{%- assign name = "news" -%}
+{%- assign news = '' | split:'' -%}
+{%- for i in site.categories[name] -%}
+  {%- unless i.url contains "articles" -%}
+    {%- assign news = news | push:i -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ "Новини" | xml_escape }} · {{ site.title | xml_escape }} · {{ site.region }}</title>
+    <description>{{ site.description | replace: 'Безкоштовні оголошення', 'Новини вебсайту безкоштовних оголошень' | xml_escape }}</description>
+    <link>{{ site.url }}{{ site.baseurl }}/</link>
+    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
+    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <generator>{{ site.title | xml_escape }}</generator>
+    {% for a in news limit:3 %}
+      <item>
+        <title>{{ a.title | xml_escape }}</title>
+        <description>{{ a.content | strip_html | truncate: 140 | xml_escape }}</description>
+        <pubDate>{{ a.date | date_to_rfc822 }}</pubDate>
+        <link>{{ a.url | prepend: site.baseurl | prepend: site.url }}</link>
+        <guid isPermaLink="true">{{ a.url | prepend: site.baseurl | prepend: site.url }}</guid>
+        {% for tag in a.tags %}
+        <category>{{ tag | xml_escape }}</category>
+        {% endfor %}
+        {% for cat in a.categories %}
+        <category>{{ cat | xml_escape }}</category>
+        {% endfor %}
+      </item>
+    {% endfor %}
+  </channel>
+</rss>

@@ -1,0 +1,6 @@
+{%- if include.src and include.h and include.s -%}
+<div class="px-3 px-md-5 pt-3 pb-2 py-md-5{% if include.my and include.my != '' %} my-{{ include.my }}{% endif %} bg-transparent jarallax" data-jarallax data-speed="0.2" data-img-src="{{ include.src }}">
+  {%- if include.h and include.s -%}<h{{ include.s }} class="mx-md-5 text-white">{{ include.h }}</h{{ include.s }}>{%- endif -%}
+  {%- if include.p -%}<p class="lead mx-md-5 text-white">{{ include.p }}</p>{%- endif -%}
+</div>
+{%- endif -%}

@@ -1,0 +1,13 @@
+---
+layout: null
+sitemap: false
+navhide: 1
+---
+{%- assign posts = '' | split: '' -%}
+{%- for i in site.posts -%}
+  {%- unless i.url contains '/news/' or i.url contains '/articles/' -%}
+    {%- assign posts = posts | push: i -%}
+  {%- endunless -%}
+{%- endfor -%}
+{%- include estates-json.html estates=posts -%}
+{{ re }}

@@ -1,0 +1,27 @@
+{%- assign gauge = slashd | size %}
+{%- assign piece = slashd | slice: 6, gauge | join: '/' -%}
+{%- assign folder = piece | prepend: '/assets/images/' | append: '/' -%}
+
+{%- assign gauge = slashd | size | minus: 2 -%}
+{%- assign piece = slashd | slice: 0, gauge | join: '/' -%}
+{%- assign slugp = piece | split: '/' | last -%}
+
+{%- assign gauge = slashd | size | minus: 4 -%}
+{%- assign piece = slashd | slice: 0, gauge | join: '/' | append: '/data/'-%}
+{%- assign json = piece | append: slugp | append: '.json' -%}
+{%- assign jsonFile = json | remove_first: '/' -%}
+{%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
+{%- assign isJson = site.data[slugp] -%}
+
+{%- if slashd.size == 8 and paged contains '/city/' or paged contains '/town/' -%}
+  {%- assign gauge = slashd | size | minus: 4 -%}
+{%- endif -%}
+{%- assign backd = slashd | slice: 0, gauge | join: '/' | append: '/' -%}
+{%- assign cities = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains backd and i.url == backd' -%}
+{%- for city in cities limit: 1 -%}
+  {%- assign location = city.breadcrumb -%}
+{%- endfor -%}
+{%- assign data = site.data[slugp] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
+
+{%- assign object = paged | split: '/' | last -%}
+{%- assign otabs = site.otabs | where_exp: 'i', 'i.path contains object' -%}

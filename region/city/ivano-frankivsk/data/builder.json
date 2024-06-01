@@ -1,0 +1,15 @@
+---
+layout: null
+sitemap: false
+navhide: 1
+---
+{%- assign level = page.dir | split: '/' -%}
+{%- if level.size == 0 -%}
+  {%- assign location = include.location -%}
+{%- else -%}
+  {%- include location.html -%}
+{%- endif -%}
+{%- assign name = page.name | remove: '.json' -%}
+{%- assign data = site.data[name] -%}
+{%- assign offers = data | sort: 'date' | reverse | where_exp: 'i', 'i.location contains location' -%}
+{%- include offer-json.html -%}

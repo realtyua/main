@@ -1,0 +1,11 @@
+{%- if include.du == 'url' -%}
+    {%- assign sizeu = slashu | size | minus: include.minus -%}
+    {%- assign backu = slashu | slice: 0, sizeu | join: '/' | append: '/' -%}
+    {%- assign datai = site.html_pages | sort: 'dir' | where_exp: 'i', 'i.url == backu' -%}
+    {%- assign idata = datai[0][include.data] | split: ' ' | slice: include.so, include.st | join: ' ' -%}
+{%- else -%}
+    {%- assign sized = slashd | size | minus: include.minus -%}
+    {%- assign backd = slashd | slice: 0, sized | join: '/' | append: '/' -%}
+    {%- assign datai = site.html_pages | sort: 'dir' | where_exp: 'i', 'i.url == backd' -%}
+    {%- assign idata = datai[0][include.data] | split: ' ' | slice: include.so, include.st | join: ' ' -%}
+{%- endif -%}

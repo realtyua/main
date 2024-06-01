@@ -1,0 +1,15 @@
+{%- for ng in site.data.navgroup -%}
+  {%- if forloop.first -%}
+  <div class="list-group list-group-horizontal-sm section">
+  {%- endif -%}
+    {%- if ng.title != '' and ng.url != '' -%}
+      {%- if page.dir == ng.url or page.url contains ng.url -%}
+        <span class="list-group-item list-group-item-action active">{{ ng.title }}</span>
+      {%- else -%}
+        <a href="{{ ng.url }}" class="list-group-item list-group-item-action">{{ ng.title }}</a>
+      {%- endif -%}
+    {%- endif -%}
+  {%- if forloop.last -%}
+  </div>
+  {%- endif -%}
+{%- endfor -%}

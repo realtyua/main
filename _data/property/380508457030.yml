@@ -1,0 +1,20 @@
+id: 0-np
+type: Квартира
+rent:
+rooms: 1
+surface: 50
+surface_land:
+price: $100000
+price_sqmt:
+floor: 9
+floors: 6
+parking: Прибудинкова територія
+region: м. Івано-Франківськ
+location:
+address: вул. Володимира Івасюка, 50А
+object:
+coordinates: 48.925593,24.741273
+date: 2021-04-01
+seller: Василь Мосійчук
+phone: 380508457030
+description:

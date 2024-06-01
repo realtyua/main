@@ -1,0 +1,30 @@
+{%- assign ads = site.html_pages | where_exp: 'i', "i.ads == 1" -%}
+{%- if ads[0] -%}
+<div class="dropdown-menu mt-n1 w-100 border-top-0 rounded-0 mb-1" aria-labelledby="navDropRealEstateAds">
+  <div id="navDropRealEstateAds" class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 w-100 mt-mx-2 mt-md-3 mx-0 px-0">
+    {%- for ad in ads -%}
+    <div class="col mb-3">
+      {%- if pageu == ad.url -%}
+        <span class="dropdown-item active">{{ ad.navtitle }}</span>
+      {%- else -%}
+        <a href="{{ ad.url }}" class="dropdown-item">{{ ad.navtitle }}</a>
+      {%- endif -%}
+      <small>{{ ad.subtitle }}</small>
+    </div>
+    {%- endfor -%}
+    <div class="col-md-12 col-lg-12"><hr class="border-top mb-2 mt-1"></div>
+    {%- for ng in site.data.navgroup -%}
+    <div class="col mb-3">
+      {%- if ng.title != '' and ng.url != '' -%}
+        {%- if paged == ng.url or pageu contains ng.url -%}
+          <span class="dropdown-item active">{{ ng.title }}</span>
+        {%- else -%}
+          <a href="{{ ng.url }}" class="dropdown-item">{{ ng.title }}</a>
+        {%- endif -%}
+        <small>{{ ng.subtitle }}</small>
+      {%- endif -%}
+    </div>
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}

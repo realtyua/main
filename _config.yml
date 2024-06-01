@@ -1,0 +1,153 @@
+baseurl: ''
+domain: realestate.if.ua
+url: 'https://www.realestate.if.ua'
+addre: 'https://add.realestate.if.ua'
+
+encoding: UTF-8
+lang: uk_UA
+language: Українська
+timezone: Europe/Helsinki
+country: Україна
+region: Івано-Франківська область
+region_slug: ivano-frankivska
+region_size: .89rem
+
+usd: 40.97
+eur: 44.45
+nbu: 40.4832
+
+title: Мережа Вебсайтів Нерухомості
+keywords: будинки, квартири, земля, житло, нежитлові приміщення, кімнати, оренда, частини квартири, частини будинку, гаражі, місця паркування, ділянки
+description: Продаж, тривала і подобова оренда та купівля квартир, будинків, землі, комерційних нежитлових приміщень, нерухомість в містах і селах Івано-Франківської області на Прикарпатті і в горах Карпати
+name: Регіональна нерухомість
+brand: Нерухомість
+logo: '/assets/images/logo.svg'
+
+author:
+  name: Vasyl&nbsp;Mosiychuk
+  website: http://www.vasyl.net
+  email: info@vasyl.net
+developer:
+  name: vasyl.net
+  website: http://www.vasyl.net
+  email: info@vasyl.net
+
+contact:
+  name: Мережа Вебсайтів Нерухомості
+  address: Лише продаж, оренда нерухомого майна
+  #name: Мережа Вебсайтів Нерухомості в&nbsp;Україні
+  #address: 76018, м. Івано-Франківськ, вул.&nbsp;Січових&nbsp;Стрільців,&nbsp;56
+  phone_main: 380974949649
+  phone_hot: 380974949649
+  phone_fax: 380974949649
+  phone_sms: 380504949649
+  phone_advert: 380504949649
+  phone_buy_sell: 380974949649
+  phone_add_ads: 380504949649
+  phone_submit_ads: 380504949649
+  phone_support: 380504949649
+  phone_buy: 380974949649
+  phone_sell: 380974949649
+  email: info@realestate.if.ua
+  www: https://www.realestate.if.ua/
+
+markdown: kramdown
+kramdown:
+  auto_ids: false
+
+collections:
+  help:
+    output: true
+  stabs:
+    output: true
+  otabs:
+    output: true
+  owners:
+    output: true
+
+defaults:
+  - scope:
+      path: /*/data/*.json
+    values:
+      layout: "null"
+      sitemap: false
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "property"
+      permalink: /:categories/:title:output_ext
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate-v2
+  - jekyll-get-json
+
+pagination:
+  enabled: true
+  per_page: 9
+  permalink: '/:num/'
+  title: ' - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+
+jekyll_get_json:
+  - data: estates
+    json: 'https://www.realestate.if.ua/region/data/estates.json'
+    cache: true
+  - data: kyiv
+    json: 'https://www.realestate.kyiv.ua/region/data/options.json'
+    cache: true
+  - data: te
+    json: 'https://www.realestate.te.ua/region/data/options.json'
+    cache: true
+  - data: in
+    json: 'https://www.realestate.in.ua/region/data/options.json'
+    cache: true
+  - data: uz
+    json: 'https://www.realestate.uz.ua/region/data/options.json'
+    cache: true
+  - data: od
+    json: 'https://www.realestate.od.ua/region/data/options.json'
+    cache: true
+  - data: zp
+    json: 'https://www.realestate.zp.ua/region/data/options.json'
+    cache: true
+  - data: lt
+    json: 'https://www.realestate.lt.ua/region/data/options.json'
+    cache: true
+  - data: kh
+    json: 'https://www.realestate.kh.ua/region/data/options.json'
+    cache: true
+  - data: cv
+    json: 'https://www.realestate.cv.ua/region/data/options.json'
+    cache: true
+  - data: vn
+    json: 'https://www.realestate.vn.ua/region/data/options.json'
+    cache: true
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: [""]
+  endings: []
+  ignore:
+    envs: []
+  blanklines: false
+  profile: false
+  startings: []
+
+main_url: https://www.realestate.net.ua

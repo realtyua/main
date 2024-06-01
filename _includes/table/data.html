@@ -1,0 +1,24 @@
+{%- include map/page-exists.html -%}
+<table
+  id="property"
+  data-locale="{{ site.lang | replace: '_', '-' }}"
+  data-search="true"
+  data-show-print="true"
+  data-sort-class="table-active"
+  data-sortable="true"
+  data-detail-view="true"
+  data-detail-view-icon="false"
+  data-detail-view-by-click="true"
+  data-detail-formatter="jsDetailFormatter"
+  data-pagination="true"
+  data-pagination-pre-text="❮"
+  data-pagination-next-text="❯"
+  data-buttons-class="primary"
+  data-mobile-responsive="true">
+  <thead class="thead-re">
+    <tr>
+      <th data-field="type" data-title="{{ site.data.uk.re_offer }}" data-formatter="propertyFormatter">Нерухомість</th>
+      <th data-field="price" data-title="{{ site.data.uk.re_cost | capitalize }}" data-formatter="priceFormatter" data-sortable="true" data-sorter="priceSorter">Ціна</th>
+    </tr>
+  </thead>
+</table>

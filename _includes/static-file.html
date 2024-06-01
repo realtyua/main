@@ -1,0 +1,6 @@
+{%- assign file = false -%}
+{%- for f in site.static_files -%}
+  {%- if f.path == include.file -%}
+    {%- assign file = true -%}
+  {%- endif -%}
+{%- endfor -%}

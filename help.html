@@ -1,0 +1,36 @@
+---
+title: Відповіді на ваші запитання
+navhide: 1
+lightbox: 1
+---
+
+<h1 class="mb-3">Ви запитуєте, ми відповідаємо</h1>
+
+{%- for h in site.help -%}
+
+  {%- assign name = h.url | remove_first: '/' | split: '/' | first -%}
+  {%- assign namber = h.url | split: '/' | last | remove: '.html' -%}
+
+  {%- if forloop.first -%}
+  <div class="accordion" id="accordion-{{ name }}">
+  {%- endif -%}
+
+  <div class="card mb-2 border-bottom">
+
+    <div class="card-header p-2" id="{{ name }}-{{ namber }}">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left border-0" type="button" data-toggle="collapse" data-target="#collapse-{{ namber }}" aria-expanded="true" aria-controls="collapse-{{ namber }}">{{ h.title }}</button>
+      </h2>
+    </div>
+
+    <div id="collapse-{{ namber }}" class="collapse" aria-labelledby="{{ name }}-{{ namber }}" data-parent="#accordion-{{ name }}">
+      <div class="card-body">{{ h.content }}</div>
+    </div>
+
+  </div>
+
+  {%- if forloop.last -%}
+  </div>
+  {%- endif -%}
+
+{%- endfor -%}

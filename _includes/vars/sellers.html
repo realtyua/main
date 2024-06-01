@@ -1,0 +1,7 @@
+{%- assign gauge = slashd | size | minus: 2 -%}
+{%- assign piece = slashd | slice: 0, gauge | join: '/' | append: '/data/'-%}
+{%- assign json = piece | append: slugu | append: '.json' -%}
+{%- assign jsonFile = json | remove_first: '/' -%}
+{%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
+{%- assign isJson = site.data[slugu] -%}
+{%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slugu' -%}

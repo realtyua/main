@@ -1,0 +1,74 @@
+{%- assign sms = site.data.social-media -%}
+{%- if include.type == "text" -%}
+<ul class="list-inline social-link">
+  {% for sm in sms %}
+    {% capture tooltip %}Додайте наш номер телефону <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
+    {%- assign name = sm.name -%}
+    {%- if include[name] == 1 -%}
+    <li class="list-inline-item">
+      {%- if sm.url and sm.url != '' -%}
+      <a class="alert-link" href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
+        <span>{{ sm.title }}</span>
+      </a>
+      {%- else -%}
+      <span class="alert-link" data-toggle="tooltip" data-html="true" title="{{ tooltip }}">
+        <span>{{ sm.title }}</span>
+      </span>
+      {%- endif -%}
+    </li>
+    {%- endif -%}
+  {% endfor %}
+</ul>
+{%- elsif include.type == "card" -%}
+<div class="row row-cols-1 row-cols-md-3">
+  {% for sm in sms %}
+    {%- assign name = sm.name -%}
+    {%- if include[name] == 1 -%}
+    <div class="col mb-3 px-2">
+      <div class="card h-100">
+        <div class="card-body">
+          {%- if sm.url and sm.url != '' -%}
+          <h5 class="card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></h5>
+          <div class="card-text"></div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0">Додати оголошення через <a href="{%- if sm.links.chat and sm.links.chat != '' -%}{{ sm.links.chat }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></li>
+            <li class="list-group-item px-0">Залишити голосове повідомлення у <a href="{%- if sm.links.voicemail and sm.links.voicemail != '' -%}{{ sm.links.voicemail }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></li>
+            <li class="list-group-item px-0">Зателефоновати нам на <a href="{%- if sm.links.call and sm.links.call != '' -%}{{ sm.links.call }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></li>
+            <li class="list-group-item px-0">Додати наші контакти до <a href="{%- if sm.links.add and sm.links.add != '' -%}{{ sm.links.add }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></li>
+          </ul>
+          {%- else -%}
+          <h5 class="card-title">Програмний додаток <b>{{ sm.title }}</b></h5>
+          <div class="card-text">Додайте наш номер телефону <b>{% include phone-brand.html n=site.contact.phone_submit_ads %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+    {%- endif -%}
+  {% endfor %}
+</div>
+{%- else -%}
+<p class="h6 mt-1">{{ site.data.uk.sent_ads }}</p>
+<ul class="list-inline social-link" aria-label="Footer media social links">
+  {% for sm in sms %}
+    {% capture tooltip %}Додайте наш номер телефону <b>{% include footer/phone.html legal=site.contact.phone_submit_ads type='number' %}</b> до ваших <b>{{ sm.title }}</b> контактів та надішліть нам своє безкоштовне оголошення про нерухомість використовуючи <b>{{ sm.title }}</b>.{% endcapture %}
+    {%- assign name = sm.name -%}
+    {%- capture width -%}{%- if sm.w and sm.w != '' -%}{{ sm.w }}{%- else -%}24{%- endif -%}{%- endcapture -%}
+    {%- capture height -%}{%- if sm.h and sm.h != '' -%}{{ sm.h }}{%- else -%}24{%- endif -%}{%- endcapture -%}
+    {%- if include[name] == 1 -%}
+      {%- if sm.url and sm.url != '' -%}
+      <li class="list-inline-item">
+        <a href="{{ sm.url }}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">
+          <span>{%- include icons/{{ sm.name }}.svg width=width height=height -%}</span>
+        </a>
+      </li>
+      {%- else -%}
+      <li class="list-inline-item">
+        <span data-toggle="tooltip" data-html="true" title="{{ tooltip }}">
+          <span>{%- include icons/{{ sm.name }}.svg width=width height=height -%}</span>
+        </span>
+      </li>
+      {%- endif -%}
+    {%- endif -%}
+  {% endfor %}
+</ul>
+{%- endif -%}

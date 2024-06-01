@@ -1,0 +1,15 @@
+<script src="{{ "/assets/js/jquery.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/popper.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/bootstrap.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/photoswipe.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/photoswipe-ui-default.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/bootstrap.lightbox.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/bootstrap.smoothscroll.min.js" | relative_url }}"></script>
+{%- if page.table == 1 -%}
+  <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
+{%- elsif page.table == 2 -%}
+  <script src="{{ "/assets/js/bootstrap-table.min.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table-uk-UA.min.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/bootstrap-table-mobile.min.js" | relative_url }}"></script>
+{%- endif -%}

@@ -1,0 +1,65 @@
+{% assign type = include.type %}{% assign rent = include.rent %}<p class="small">
+{%- if type contains site.data.uk.re_house and rent != 1 -%}
+<span class="pr-1">продаю будинок,</span>
+<span class="px-1">продаж будинків,</span>
+<span class="pr-1">купити будинок,</span>
+<span class="px-1">продаж будинку,</span>
+<span class="pr-1">куплю будинок,</span>
+<span class="px-1">продам будинок,</span>
+<span class="px-1">продається будинок,</span>
+{%- elsif type contains site.data.uk.re_house and rent == 1 -%}
+<span class="pr-1">оренда будинку,</span>
+<span class="px-1">передам в оренду будинок,</span>
+<span class="px-1">здам будинок,</span>
+<span class="px-1">орендую будинок,</span>
+<span class="px-1">оренда нерухомості,</span>
+<span class="px-1">здається будинок,</span>
+<span class="px-1">оренда будинків,</span>
+<span class="px-1">орендувати будинок,</span>
+{%- endif -%}
+{%- if type contains site.data.uk.re_apartment and rent != 1 -%}
+<span class="pr-1">квартира продається,</span>
+<span class="px-1">продаю квартиру,</span>
+<span class="px-1">продаж квартири,</span>
+<span class="px-1">продам квартиру,</span>
+{%- elsif type contains site.data.uk.re_apartment and rent == 1 -%}
+<span class="pr-1">оренда квартири,</span>
+<span class="px-1">передам в оренду квартиру,</span>
+<span class="px-1">здам квартиру,</span>
+<span class="px-1">здається квартира,</span>
+{%- endif -%}
+{%- if type contains 'приміщення' and rent != 1 -%}
+<span class="pr-1">продаж нежитлової нерухомості,</span>
+<span class="px-1">продам нежитлову нерухомість,</span>
+<span class="px-1">продаж комерції,</span>
+<span class="px-1">продається комерційна нерухомість,</span>
+<span class="px-1">продаж комерційної нерухомості,</span>
+<span class="px-1">продам комерцію,</span>
+<span class="px-1">продам комерційну нерухомість,</span>
+{%- elsif type contains 'приміщення' and rent == 1 -%}
+<span class="pr-1">оренда нежитлової нерухомості,</span>
+<span class="px-1">здам нежитлову нерухомість,</span>
+<span class="px-1">оренда комерції,</span>
+<span class="px-1">здається комерційна нерухомість,</span>
+<span class="px-1">оренда комерційної нерухомості,</span>
+<span class="px-1">здаю комерцію,</span>
+<span class="px-1">здам комерційну нерухомість,</span>
+{%- endif -%}
+{%- if type contains 'Гараж' and rent != 1 -%}
+<span class="pr-1">продаж гаража,</span>
+<span class="px-1">продам паркомісце,</span>
+<span class="px-1">продаж пакомісця,</span>
+<span class="px-1">продається гараж,</span>
+<span class="px-1">продам нерухомість,</span>
+{%- elsif type contains 'Гараж' and rent == 1 -%}
+<span class="pr-1">оренда гаража,</span>
+<span class="px-1">здам гараж,</span>
+<span class="px-1">оренда паркомісця,</span>
+<span class="px-1">здається гараж,</span>
+<span class="px-1">здаю місце для авто,</span>
+<span class="px-1">здам нерухомість,</span>
+{%- endif -%}
+<span class="pl-1">продаж,</span>
+<span class="pl-1">оренда,</span>
+<span class="pl-1">нерухомість</span>
+</p>

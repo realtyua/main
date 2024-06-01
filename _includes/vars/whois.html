@@ -1,0 +1,3 @@
+{%- assign minus = slashd | size | minus: include.minus -%}
+{%- assign iswho = slashd | slice: 0, minus | join: '/'-%}
+{%- assign whois = iswho | split: '/' | last -%}

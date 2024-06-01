@@ -1,0 +1,76 @@
+[
+  {
+    "id": "0",
+    "type": "Власність",
+    "rent": "",
+    "rooms": "3",
+    "surface": "65",
+    "surface_land": "1000",
+    "price": "$15000",
+    "price_sqmt": "$300",
+    "floor": "3",
+    "floors": "6",
+    "parking": "Прибудинкова територія",
+    "region": "",
+    "location": "м. Україна",
+    "address": "вул. Українська",
+    "date": "2020-02-22",
+    "seller": "Тарас Григорович Шевченко",
+    "phone": "380000000000",
+    "description": "",
+    "images": [
+      {
+        "src":"image1.jpg",
+        "alt":"image1 alt",
+        "title":"image1 title"
+      },
+      {
+        "src":"image2.jpg",
+        "alt":"image2 alt",
+        "title":"image2 title"
+      },
+      {
+        "src":"image3.png",
+        "alt":"image3 alt",
+        "title":"image3 title"
+      }
+    ]
+  },
+  {
+    "id": "0",
+    "type": "Власність",
+    "rent": "1",
+    "rooms": "2",
+    "surface": "50",
+    "surface_land": "",
+    "price": "$100",
+    "price_sqmt": "",
+    "floor": "3",
+    "floors": "6",
+    "parking": "Гараж",
+    "region": "",
+    "location": "м. Місто",
+    "address": "вул. Вулиця",
+    "date": "2020-02-24",
+    "seller": "Степан Бандера",
+    "phone": "380000000001",
+    "description": "",
+    "images": [
+      {
+        "src":"image1.jpg",
+        "alt":"image1 alt",
+        "title":"image1 title"
+      },
+      {
+        "src":"image2.jpg",
+        "alt":"image2 alt",
+        "title":"image2 title"
+      },
+      {
+        "src":"image3.png",
+        "alt":"image3 alt",
+        "title":"image3 title"
+      }
+    ]
+  }
+]

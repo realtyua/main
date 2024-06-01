@@ -1,0 +1,29 @@
+{%- assign tns = site.html_pages | sort:"path" | where_exp: 'i', "i.dir == '/' and i.url != '/' and i.url != '/add.html' and i.navhide != 1 and i.title != ''" -%}
+{%- for tn in tns -%}
+  {%- if forloop.first -%}
+  <div class="col-lg-4 order-2 order-lg-1 mt-3 mt-lg-1 mb-3 mb-lg-0 pr-lg-0">
+    <nav class="nav nav-masthead justify-content-end">
+  {%- endif -%}
+  {%- if tn.url == pageu -%}
+    <span class="nav-link{% if tn.url == pageu %} active{% endif %}">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</span>
+  {%- else -%}
+    <a href="{{ tn.url }}" class="nav-link">{%- if tn.navtitle -%}{{ tn.navtitle }}{%- else -%}{{ tn.title }}{%- endif -%}</a>
+  {%- endif -%}
+{%- endfor -%}
+{%- assign tns = site.html_pages | sort:"path" | where_exp: 'i', "i.dir == '/' and i.url != '/' and i.url == '/add.html' and i.navhide != 1 and i.title != ''" -%}
+{%- for tn in tns -%}
+  {%- if forloop.first -%}
+    </nav>
+  </div>
+  {%- endif -%}
+  {%- if tn.url == pageu -%}
+    <div class="col-auto order-1 order-lg-2 text-right">
+      <span class="btn btn-add btn-sm">{{ site.data.uk.add_realestate }}</span>
+    </div>
+  {%- else -%}
+    <div class="col-auto order-1 order-lg-2 text-right">
+      <a class="btn btn-success btn-sm mr-1 font-weight-bold" data-toggle="collapse" href="#collapseAreaSelect" role="button" aria-expanded="false" aria-controls="collapseAreaSelect" title="Місцевість де розташована нерухомість">Пошук місцевості</a>
+      <a href="{{ site.addre }}" class="btn btn-add btn-sm">{{ site.data.uk.add_realestate }}</a>
+    </div>
+  {%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,89 @@
+$primary: #2d5ca6 !default;
+.bootstrap-table {
+  table thead {
+    border: 2px double #2d5ca6;
+  }
+  .dropdown-item:hover, .dropdown-item:focus {
+      background-color: #f8f9fa;
+      transition: none;
+      border-bottom: none;
+  }
+  .dropdown-item.active, .dropdown-item:active {
+      background-color: #004bc1;
+      transition: none;
+      border-bottom: none;
+  }
+  .table .thead-re th {
+    color: #fff;
+    background-color: $primary;
+    border-color: #fff;
+  }
+  .fixed-table-container {
+    .table {
+      thead th .th-inner {
+        white-space: unset;
+      }
+      thead th {
+        vertical-align: top;
+      }
+    }
+  }
+  .detail-view {
+    border: 1px double $primary;
+    background-color: #f5f7fa;
+  }
+  // .table .row span:first-child {
+  //   display: none;
+  // }
+  .table-hover tbody tr.detail-view:hover {
+    color: #000;
+    border: 1px double $primary;
+    background-color: #f5f7fa;
+  }
+  .table-hover tbody tr:hover {
+      color: $primary;
+      border: 1px double $primary;
+      background-color: transparent;
+  }
+  .table .active {
+    color: $primary;
+    border: 1px double $primary;
+  }
+  .search .form-control {
+    border-radius: unset;
+  }
+  .page-list .btn {
+    border-radius: unset;
+  }
+}
+
+#property .card-views .card-view .card-view-title, #laws .card-views .card-view .card-view-title { display: none; }
+#property .card-views .card-view:nth-child(2) { text-align: right; }
+#property .card-views div:nth-child(2) .card-view-value {
+  background: #2d5ca6;
+  padding-left: 6px;
+  padding-right: 6px;
+  color: #ffffff;
+  margin-top: 6px;
+}
+
+#laws .card-view-value:nth-child(2) a::after {
+  content: "\21E2";
+  margin-left: .2rem;
+}
+
+#property .card-views .card-view:nth-child(2)::after {
+  content: "\2193";
+  font-size: 1.2rem;
+  position: relative;
+  width: 100%;
+}
+
+.detail-view td { border: 1px double #2d5ca6 }
+
+// #property tr.active .card-views .card-view:nth-child(2)::after {
+//   content: "\2191";
+//   font-size: 1.2rem;
+//   position: relative;
+//   width: 100%;
+// }

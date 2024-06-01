@@ -1,0 +1,22 @@
+{%- if include.id and include.i and include.title -%}
+<div class="accordion-item card">
+  <div class="accordion-header card-header" id="accordion-heading-{{ include.id }}-{{ include.i }}">
+    <h4 class="accordion-title">
+      <a href="#accordion-{{ include.id }}-{{ include.i }}" class="accordion-title-link collapsed" data-toggle="collapse" data-parent="#accordion-{{ include.id }}" aria-expanded="false" aria-controls="accordion-{{ include.id }}-{{ include.i }}">
+        <span class="accordion-title-link-text">{{ include.title }}</span>
+        <span class="accordion-title-link-state"></span>
+      </a>
+    </h4>
+  </div>
+  <div id="accordion-{{ include.id }}-{{ include.i }}" class="accordion-collapse collapse" aria-labelledby="accordion-heading-{{ include.id }}-{{ include.i }}" data-parent="#accordion-{{ include.id }}">
+    <div class="accordion-body card-body">
+      <div class="accordion-content accordion-content-left">
+        <div class="accordion-content-item accordion-content-text">
+          <p>{{ include.p1 }}</p>
+          <p>{{ include.p2 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
