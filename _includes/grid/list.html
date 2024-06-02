@@ -1,12 +1,11 @@
 {%- assign slug = dir | split: '/' | last -%}
-{%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
 {%- assign properties = paginator.posts -%}
 {%- for property in properties -%}
   {%- if forloop.first -%}
   <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 mx-n2">
   {%- endif -%}
     <div class="col px-2 mb-3">
-        {%- include grid/item.html offer=property slug=slug aid=aid -%}
+      {%- include grid/item.html offer=property slug=slug -%}
     </div>
   {%- if forloop.last -%}
   </div>
