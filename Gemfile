@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'jekyll', '4.2.2'
+gem update --system '>= 3.3.22'
 
-gem 'jekyll-sass-converter'
+gem 'jekyll', '4.2.2'
 
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
