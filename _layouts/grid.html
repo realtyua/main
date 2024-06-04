@@ -2,6 +2,7 @@
 layout: default
 ---
 {%- include vars/page-slash.html -%}
+{%- if pageu contains '/city/' or pageu contains '/town/' -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- include back-title.html minus='1' so='1' st='4' data='title' -%}
 <div class="row">
   <div class="col-12">
