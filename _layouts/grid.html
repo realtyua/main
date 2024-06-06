@@ -2,7 +2,6 @@
 layout: default
 ---
 {%- include vars/page-slash.html -%}
-{%- if pageu contains '/city/' or pageu contains '/town/' -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- include back-title.html minus='1' so='1' st='4' data='title' -%}
 <div class="row">
   <div class="col-12">
@@ -26,13 +25,16 @@ layout: default
         {{ site.data.uk.re_all_h2 }}
       {%- endif -%}
     </h2>
-    {%- if slashd.size == 4 -%}
-      {%- assign data = paged | split: '/' | slice: 2, 4 | join: '/' | prepend: 'data/' | append: '.html' -%}
-    {%- elsif slashd.size == 5 -%}
-      {%- assign data = paged | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' | append: '.html' -%}
-    {%- elsif slashd.size > 5 -%}
-      {% assign data = backd | split: '/' | slice: 3, 5 | join: '/' | prepend: 'data/' | append: '.html' %}
+    {%- if slashd.size == 4 and isCityTown == false -%}
+      {%- assign data = paged | split: '/' | slice: 2, 4 -%}
+    {%- elsif slashd.size == 5 and isCityTown == false -%}
+      {%- assign data = backd | split: '/' | slice: 2, 4 -%}
+    {%- elsif slashd.size == 5 and isCityTown == true -%}
+      {%- assign data = paged | split: '/' | slice: 3, 5 -%}
+    {%- elsif slashd.size == 6 and isCityTown == true -%}
+      {%- assign data = backd | split: '/' | slice: 3, 5 -%}
     {%- endif -%}
+    {%- assign data = data | join: '/' | prepend: 'data/' | append: '.html' -%}
     {%- if data -%}
       {%- include {{ data }} -%}
       {%- if offers.size > paginator.total_posts -%}

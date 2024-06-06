@@ -1,22 +1,28 @@
 {%- if pageu contains '/map.html' or pageu contains '/all.html' -%}
   {%- assign sized = slashd | size | minus: 0 -%}
-{%- elsif sized > 4 and page.layout == 'grid' -%}
+{%- elsif sized > 3 and isCityTown == false -%}
+  {%- assign sized = slashd | size | minus: 2 -%}
+{%- elsif sized > 4 and isCityTown == true -%}
   {%- assign sized = slashd | size | minus: 2 -%}
 {%- else -%}
   {%- assign sized = slashd | size | minus: 1 -%}
 {%- endif -%}
 {%- assign here = slashd | slice: 0, sized | join: '/' | append: '/' -%}
-{%- assign ones = site.pages | sort: 'dir' | reverse | where_exp: 'i', 'i.dir != here and i.url contains here and i.navhide != 1' -%}
-{%- if include.style == "card" -%}
+{%- assign cats = site.pages | sort: 'dir' | reverse | where_exp: 'i', 'i.dir != here and i.url contains here and i.navhide != 1' -%}
+{%- assign ones = '' | split: '' -%}
+{%- for cat in cats -%}
+  {%- assign lcat = cat.dir | split: '/' | size -%}
+  {%- if lcat == 4 and isCityTown == false -%}
+    {%- assign ones = ones | push: cat -%}
+  {%- elsif lcat == 5 and isCityTown == true -%}
+    {%- assign ones = ones | push: cat -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if include.style == 'card' -%}
   {% assign number = 0 %}
   {%- for ci in ones -%}
-    {%- assign isJson = false -%}
-    {%- if ci.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-    {%- assign ci_slash = ci.dir | split: '/' -%}
-    {%- assign ci_slug = ci_slash | last -%}
-    {%- if isJson == false and ci_slash.size == 5 or ci_slash.size == 4 -%}
-      {%- include card-item.html -%}
-    {%- endif -%}
+    {%- assign ci_slug = ci.dir | split: '/' | last -%}
+    {%- include card-item.html -%}
   {%- endfor -%}
   <div class="col px-2 mb-3">
     <div class="card h-100 bg-9">
@@ -97,13 +103,8 @@
         {%- endif -%}
           <ul class="navbar-nav nav nav-tabs border-0" id="realestate-nav">
             {%- for ni in ones -%}
-              {%- assign isJson = false -%}
-              {%- if ni.url contains '.json' -%}{%- assign isJson = true -%}{%- endif -%}
-              {%- assign ni_slash = ni.dir | split: '/' -%}
-              {%- assign ni_slug = ni_slash | last -%}
-              {%- if isJson == false and ni_slash.size == 5 or ni_slash.size == 4 -%}
-                {%- include nav-item.html -%}
-              {%- endif -%}
+              {%- assign ni_slug = ni.dir | split: '/' | last -%}
+              {%- include nav-item.html -%}
             {%- endfor -%}
             {%- assign mapRegion = site.region_slug | append: '/map.html' -%}
             {%- if pageu contains mapRegion -%}

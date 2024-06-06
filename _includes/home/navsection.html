@@ -1,10 +1,13 @@
 {%- assign url = include.url -%}
+{%- if url contains '/city/' or url contains '/town/' -%}{%- assign isCityTown = true -%}{%- else -%}{%- assign isCityTown = false -%}{%- endif -%}
 {%- assign region = include.region -%}
 {%- assign ss = '' | split:'' -%}
-{%- assign ps = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.dir != url and i.url contains url and i.navhide != 1" -%}
+{%- assign ps = site.pages | sort: 'dir' | reverse | where_exp: 'i', 'i.dir != url and i.url contains url and i.navhide != 1' -%}
 {%- for i in ps -%}
-  {%- assign l = i.dir | split: '/' -%}
-  {%- if l.size == 4 or l.size == 5 -%}
+  {%- assign l = i.dir | split: '/' | size -%}
+  {%- if l == 4 and isCityTown == false -%}
+    {%- assign ss = ss | push: i -%}
+  {%- elsif l == 5 and isCityTown == true -%}
     {%- assign ss = ss | push: i -%}
   {%- endif -%}
 {%- endfor -%}

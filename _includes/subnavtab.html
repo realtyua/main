@@ -1,10 +1,10 @@
-{%- assign dirrs = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.dir != paged and i.url contains paged and i.navhide != 1" -%}
+{%- assign dirrs = site.pages | sort: 'dir' | reverse | where_exp: 'i', 'i.dir != paged and i.url contains paged and i.navhide != 1' -%}
 {%- assign pirrs = '' | split: '' -%}
 {%- for dirr in dirrs -%}
-  {%- assign ldirr = dirr.dir | split: '/' -%}
-  {%- if ldirr.size == 4 and isCityTown == false -%}
+  {%- assign ldirr = dirr.dir | split: '/' | size -%}
+  {%- if ldirr == 4 and isCityTown == false -%}
     {%- assign pirrs = pirrs | push: dirr -%}
-  {%- elsif ldirr.size == 5 and isCityTown == true -%}
+  {%- elsif ldirr == 5 and isCityTown == true -%}
     {%- assign pirrs = pirrs | push: dirr -%}
   {%- endif -%}
 {%- endfor -%}

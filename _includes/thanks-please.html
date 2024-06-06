@@ -14,8 +14,16 @@
           </div>
         {%- endif -%}
         {%- if page.layout == 'grid' and pageu contains '/index.html' -%}
-          {%- assign switch_size = slashd | size -%}
-          {%- if switch_size > 5 -%}{% assign switch_link = backd | append: 'list.html' %}{%- else -%}{% assign switch_link = paged | append: 'list.html' %}{%- endif -%}
+          {%- if slashd.size == 4 and isCityTown == false -%}
+            {%- assign switch_link = paged -%}
+          {%- elsif slashd.size == 5 and isCityTown == false -%}
+            {%- assign switch_link = backd -%}
+          {%- elsif slashd.size == 5 and isCityTown == true -%}
+            {%- assign switch_link = paged -%}
+          {%- elsif slashd.size == 6 and isCityTown == true -%}
+            {%- assign switch_link = backd -%}
+          {%- endif -%}
+          {%- assign switch_link = switch_link | append: 'list.html' -%}
           <div class="nav">
             <a class="nav-item border-0" href="{{ switch_link }}">
               <span class="sr-only">Переглянути записи списком:</span>
