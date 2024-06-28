@@ -8,7 +8,8 @@
 {%- else -%}
   {%- include location.html -%}
 {%- endif -%}
-{%- assign items = site.data.estates | concat: site.data.owners | sort: 'date' -%}
+{%- assign es = site.data.estates | where_exp: 'i', 'i.hidden != true' -%}
+{%- assign items = es | concat: site.data.owners | sort: 'date' -%}
 {%- capture oa -%}{%- for ot in items -%}{{ ot.phone }}{%- if ot.skip -%}{%- increment one -%}{%- endif -%}|{%- endfor -%}{%- endcapture -%}
 {%- assign owners = '' | split: '' -%}
 {%- for ot in items -%}

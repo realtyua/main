@@ -3,8 +3,9 @@ layout: null
 sitemap: false
 navhide: 1
 ---
+{%- assign es = site.posts | where_exp: 'i', 'i.hidden != true' -%}
 {%- assign posts = '' | split: '' -%}
-{%- for i in site.posts -%}
+{%- for i in es -%}
   {%- unless i.url contains '/news/' or i.url contains '/articles/' -%}
     {%- assign posts = posts | push: i -%}
   {%- endunless -%}
