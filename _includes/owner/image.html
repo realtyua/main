@@ -1,5 +1,4 @@
 {%- assign folder = page.dir | append: 'images/' -%}
-<!-- folder = {{ folder }} -->
 {%- assign image = include.image | prepend: folder -%}
 {%- assign w = include.size | split: 'x' | first -%}
 {%- assign h = include.size | split: 'x' | last -%}
