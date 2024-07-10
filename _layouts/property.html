@@ -43,7 +43,7 @@ layout: default
           {%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
           <dd>
             {%- if idimage == 'true' and page.hidden != true -%}
-              <a href="{{ imageid | url_decode | relative_url }}" class="lightbox" title="{{ page.type }} {% if page.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ page.address }}{% else %}{{ site.data.uk.re_at }} {{ page.address }}{% endif %} {{ site.data.uk.re_in }} {{ page.location }}{{ district }}" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} {{ page.location }}{{ district }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="{{ page.uid }}">{{ page.type }} (фото)</a>
+              <a href="{{ imageid | url_decode | relative_url }}" class="lightbox" title="{{ page.type }} {% if page.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ page.address }}{% else %}{{ site.data.uk.re_at }} {{ page.address }}{% endif %} {{ site.data.uk.re_in }} {{ page.location }}{{ district }}" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} {{ page.location }}{{ district }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="{{ page.uid }}0">{{ page.type }} (фото)</a>
             {%- else -%}
               {{ page.type }}
             {%- endif -%}
@@ -159,15 +159,36 @@ layout: default
       </div>
     </div>
     {%- assign isContent = content | strip_newlines -%}
-    {%- if isContent == '' -%}
-      <hr>
-      <h2>Опис</h2>
-      <p>{{ page.description }}</p>
+    <hr>
+    <h2>Опис</h2>
+    {%- if idimage == 'true' and page.hidden != true -%}
+      <div class="row">
+        <div class="col-12 py-3">
+          <div class="clearfix">
+            <div class="col-md-3 float-left pl-0">
+              <figure class="figure">
+                <a href="{{ imageid | url_decode | relative_url }}" class="lightbox" title="{{ page.type }} {% if page.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ page.address }}{% else %}{{ site.data.uk.re_at }} {{ page.address }}{% endif %} {{ site.data.uk.re_in }} {{ page.location }}{{ district }}" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} {{ page.location }}{{ district }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="{{ page.uid }}1">
+                  <img src="{{ imageid | url_decode | relative_url }}" class="img-fluid img-thumbnail" alt="{{ page.type }}">
+                </a>
+                <figcaption class="figure-caption">{% if page.rent %}Здається в оренду {% else %}Продається {% endif %}{{ page.type | downcase }}</figcaption>
+              </figure>
+            </div>
+            {%- if isContent == '' -%}
+              <p>{{ page.description }}</p>
+            {%- else -%}
+              {% if page.description != '' %}<p>{{ page.description }}.</p>{% endif %}
+              {{ content }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
     {%- else -%}
-      <hr>
-      <h2>Опис</h2>
-      {% if page.description != '' %}<p>{{ page.description }}.</p>{% endif %}
-      {{ content }}
+      {%- if isContent == '' -%}
+        <p>{{ page.description }}</p>
+      {%- else -%}
+        {% if page.description != '' %}<p>{{ page.description }}.</p>{% endif %}
+        {{ content }}
+      {%- endif -%}
     {%- endif -%}
 
     {%- include data/{{ site.region_slug }}/all.html -%}
