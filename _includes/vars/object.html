@@ -1,4 +1,4 @@
-{%- assign gauge = slashd | size %}
+{%- assign gauge = slashd | size -%}
 {%- assign piece = slashd | slice: 6, gauge | join: '/' -%}
 {%- assign folder = piece | prepend: '/assets/images/' | append: '/' -%}
 
