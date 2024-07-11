@@ -168,7 +168,7 @@ layout: default
             <div class="col-md-3 float-left pl-0">
               <figure class="figure">
                 <a href="{{ imageid | url_decode | relative_url }}" class="lightbox" title="{{ page.type }} {% if page.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ page.address }}{% else %}{{ site.data.uk.re_at }} {{ page.address }}{% endif %} {{ site.data.uk.re_in }} {{ page.location }}{{ district }}" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} {{ page.location }}{{ district }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="{{ page.uid }}1">
-                  <img src="{{ imageid | url_decode | relative_url }}" class="img-fluid img-thumbnail" alt="{{ page.type }}">
+                  <img src="{{ imageid | url_decode | relative_url }}" width="380" height="285" class="img-fluid img-thumbnail" alt="{{ page.type }}">
                 </a>
                 <figcaption class="figure-caption">{% if page.rent %}Здається в оренду {% else %}Продається {% endif %}{{ page.type | downcase }}</figcaption>
               </figure>

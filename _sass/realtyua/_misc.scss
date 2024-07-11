@@ -158,4 +158,31 @@ main .leaflet-menu {
 .page-item .page-pre { padding-top: 0.45rem; }
 .page-item .page-next { padding-top: 0.45rem; }
 
-.textarea ul, .textarea ol { list-style-position: inside; }
+// https://jsfiddle.net/egeo/zgf4un7d/1/
+// https://jsfiddle.net/gQZ3F/12/
+// @include media-breakpoint-only(md) {
+//   .textarea ul, .textarea ol {
+//     position: relative;
+//     list-style-position: inside;
+//     left: 20px;
+//   }
+// }
+@include media-breakpoint-up(md) {
+  .textarea ul, .textarea ol {
+    position: relative;
+    list-style-position: inside;
+    left: 20px;
+  }
+}
+
+// https://stackoverflow.com/questions/14142378/how-can-i-fill-a-div-with-an-image-while-keeping-it-proportional
+// https://medium.com/@primozcigler/neat-trick-for-css-object-fit-fallback-on-edge-and-other-browsers-afbc53bbb2c3
+// <img src="/assets/images/380993316973/1699486229/3_kitchen.jpg" loading="lazy" width="380" height="285" title="Квартира у бульвар Південний, 24Б в м. Івано-Франківськ" alt="Квартира в м. Івано-Франківськ" style="object-fit: cover;/*! width: 50px; */height: 120px;" class="card-img-top">
+
+// .card .fill {
+//   object-fit: cover;
+//   width: auto;
+//   height: 8em;
+//   overflow: hidden;
+//   object-position: 50% 50%;
+// }
