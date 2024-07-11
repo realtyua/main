@@ -2,7 +2,8 @@
 {%- assign slug = include.slug -%}
 {%- assign offer = include.offer -%}
 {%- assign date = offer.date | date: '%Y%m%d' -%}
-{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
+{%- assign uid = offer.uid -%}
+{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
 {%- assign images = site.static_files | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.jpeg'" -%}
 {%- assign type = offer.type | split: ' ' -%}
 {%- assign c_location = offer.location | default: offer.region -%}
@@ -18,16 +19,16 @@
   {%- endif -%}
 {%- endcapture -%}
 {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
+{%- capture imageid -%}/assets/images/re/{{ uid }}.jpg{%- endcapture -%}
+{%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
 <article class="card h-100{% if slug == 'realtor' or slug == 'agency' or slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
-  {%- if images[0].path -%}
-    <img src="{{ images[0].path | url_decode | relative_url }}" width="380" height="285" alt="{{ offer.type }} в {{ c_location }}" class="card-img-top fill">
-  {%- else -%}
-    {%- capture imageid -%}/assets/images/re/{{ offer.uid }}.jpg{%- endcapture -%}
-    {%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
+  {%- if idimage == true -%}
     <img src="{{ imageid | url_decode | relative_url }}" width="380" height="285" alt="{{ offer.type }} в {{ c_location }}" class="card-img-top fill">
+  {%- else -%}
+    <img src="{{ images[0].path | url_decode | relative_url }}" width="380" height="285" alt="{{ offer.type }} в {{ c_location }}" class="card-img-top fill">
   {%- endif -%}
   <div class="card-body">
-    <span class="sr-only"><data value="{{ offer.uid }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
+    <span class="sr-only"><data value="{{ uid }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
     <h3 class="font-weight-normal m-0 p-0 h6">
       {%- if offer.url and offer.url != '' -%}
         <a href="{{ offer.url }}" aria-label="{{ more | capitalize }}">
