@@ -173,12 +173,14 @@ layout: default
                 <figcaption class="figure-caption">{% if page.rent %}Здається в оренду {% else %}Продається {% endif %}{{ page.type | downcase }}</figcaption>
               </figure>
             </div>
-            {%- if isContent == '' -%}
-              <p>{{ page.description }}</p>
-            {%- else -%}
-              {% if page.description != '' %}<p>{{ page.description }}.</p>{% endif %}
-              {{ content }}
-            {%- endif -%}
+            <div class="textarea">
+              {%- if isContent == '' -%}
+                <p>{{ page.description }}</p>
+              {%- else -%}
+                {% if page.description != '' %}<p>{{ page.description }}.</p>{% endif %}
+                {{ content }}
+              {%- endif -%}
+            </div>
           </div>
         </div>
       </div>
