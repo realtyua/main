@@ -23,9 +23,9 @@
 {%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
 <article class="card h-100{% if slug == 'realtor' or slug == 'agency' or slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
   {%- if idimage == 'true' -%}
-    <img src="{{ imageid | url_decode | relative_url }}" width="380" height="285" alt="{{ offer.type }} в {{ c_location }}" class="card-img-top fill">
+    <img loading="lazy" src="{{ imageid | url_decode | relative_url }}" width="360" height="270" alt="{{ offer.type }} в {{ c_location }}" class="card-img-top fill">
   {%- else -%}
-    <img src="{{ images[0].path | url_decode | relative_url }}" width="380" height="285" alt="{{ offer.type }} в {{ c_location }}" class="card-img-top fill">
+    <img loading="lazy" src="{{ images[0].path | url_decode | relative_url }}" width="360" height="270" alt="{{ offer.type }} в {{ c_location }}" class="card-img-top fill">
   {%- endif -%}
   <div class="card-body">
     <span class="sr-only"><data value="{{ uid }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
