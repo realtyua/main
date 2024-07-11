@@ -171,7 +171,7 @@ main .leaflet-menu {
   .textarea ul, .textarea ol {
     position: relative;
     list-style-position: inside;
-    left: 20px;
+    left: 15px;
   }
 }
 
@@ -179,10 +179,10 @@ main .leaflet-menu {
 // https://medium.com/@primozcigler/neat-trick-for-css-object-fit-fallback-on-edge-and-other-browsers-afbc53bbb2c3
 // <img src="/assets/images/380993316973/1699486229/3_kitchen.jpg" loading="lazy" width="380" height="285" title="Квартира у бульвар Південний, 24Б в м. Івано-Франківськ" alt="Квартира в м. Івано-Франківськ" style="object-fit: cover;/*! width: 50px; */height: 120px;" class="card-img-top">
 
-// .card .fill {
-//   object-fit: cover;
-//   width: auto;
-//   height: 8em;
-//   overflow: hidden;
-//   object-position: 50% 50%;
-// }
+.card .fill {
+  object-fit: cover;
+  width: auto;
+  height: 8em;
+  overflow: hidden;
+  object-position: 50% 50%;
+}
