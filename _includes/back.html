@@ -7,7 +7,7 @@
     <span class="mr-1">&larr;</span><a href="{{ backu }}">{{ site.data.uk.to_section }} {{ idata[0].title | downcase }}</a>
   </div>
   <div class="col-2">
-    {%- assign backs = site.posts | where_exp: 'i', 'i.url contains backu' -%}
+    {%- assign backs = site.posts | where_exp: 'i', 'i.url contains backu and i.hidden != true' -%}
     {%- assign iloop = 0 -%}
     {%- for item in backs %}{%- if item.url == pageu %}{%- assign iloop = forloop.index -%}{%- endif %}{%- endfor -%}
     {%- include pagination-re.html -%}
