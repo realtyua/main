@@ -1,25 +1,40 @@
-{%- assign cdate = site.time | date: '%Y%m%d' -%}
-{%- assign date = offer.date | date: '%Y%m%d' -%}
-{%- assign offer = include.offer -%}
-{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
-{%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
-{%- assign type = offer.type | split: ' ' -%}
-{%- assign c_location = offer.location | default: offer.region -%}
-{%- capture offerType -%}
-  {%- if type.size >= 2 -%}
-    {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
-      {{ type | slice: 0, 1 | join: ' ' }}
+{%- capture variables_card -%}
+  {%- assign cdate = site.time | date: '%Y%m%d' -%}
+  {%- assign date = offer.date | date: '%Y%m%d' -%}
+  {%- assign offer = include.offer -%}
+  {%- assign uid = offer.id -%}
+  {%- assign type = offer.type | split: ' ' -%}
+  {%- assign c_location = offer.location | default: offer.region -%}
+  {%- capture offerType -%}
+    {%- if type.size >= 2 -%}
+      {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
+        {{ type | slice: 0,1 | join: ' ' }}
+      {%- else -%}
+        {{ type | slice: 0,2 | join: ' ' }}
+      {%- endif -%}
     {%- else -%}
-      {{ type | slice: 0, 2 | join: ' ' }}
+      {{ type | slice: 0 }}
     {%- endif -%}
-  {%- else -%}
-    {{ type | slice: 0 }}
-  {%- endif -%}
+  {%- endcapture -%}
+  {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
+  {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
+  {%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
+  {%- capture imageid -%}/assets/images/re/{{uid }}.jpg{%- endcapture -%}
+  {%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
+  {%- capture sellRent -%}{% if offer.rent == '1' %}Здається в оренду {% else %}Продається {% endif %}{{ offer.type | downcase }} в {{ c_location }}{%- endcapture -%}
+  {%- assign randColor = '#F0D7DF,#F9E0E2,#F8EAEC,#F7DDD9,#F7E6DA,#E3E9DD,#C4DBD9,#D4E5E3,#CAE0E4,#C8C7D6' | split: ',' | sample -%}
 {%- endcapture -%}
-{%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
 <article class="card h-100{% if include.others > 0 %} border-bottom-0{% endif %}" role="presentation">
+  {%- if idimage == 'true' -%}
+    <img loading="lazy" src="{{ images[0].path | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill" style="background-color:{{ randColor }};">
+  {%- elsif images[0].path -%}
+    <img loading="lazy" src="{{ imageid | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill" style="background-color:{{ randColor }};">
+  {%- else -%}
+    {%- capture descLabel -%}Зображення-заповнювач для об'єкта нерухомості - {{ offer.type | downcase }} що {% if offer.rent == '1' %}здається в оренду {% else %}продається {% endif %}в {{ c_location }}{%- endcapture -%}
+    <svg class="card-img-top bd-placeholder-img" width="360" height="130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ descLabel }}" preserveAspectRatio="xMidYMid slice" focusable="false"><title>{{ {{ descLabel }} }}</title><rect x="0" y="0" width="360" height="130" fill="{{ randColor }}"></rect><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" dy=".3em" fill="#000000">{{ sellRent }}</text></svg>
+  {%- endif -%}
   <div class="card-body{% if offer.page and offer.page == '1' or offer.link and offer.link != '' %}{% else %} pb-1{% endif %}">
-    <span class="sr-only"><data value="{{ offer.id }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
+    <span class="sr-only"><data value="{{ uid }}">{% if offer.rent == '1' %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
     <h3 class="font-weight-normal m-0 p-0 h6">{% include card/body.html %}</h3>
     <div class="my-1 small text-muted date">
       {%- if offer.rent == '1' -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ site.time | date: '%Y-%m-%d' }}{%- else -%}{{ offer.date | date: '%Y-%m-%d' }}{%- endif -%}">{%- if date > cdate -%}{%- assign cdate = site.time | date: "%Y-%m-%d" -%}{%- include date.html date=cdate -%}{%- else -%}{%- assign date = offer.date | date: "%Y-%m-%d" -%}{%- include date.html date=date -%}{%- endif -%}</time>
@@ -49,7 +64,7 @@
           </div>
         {%- else -%}
           <div class="col-auto">
-            <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" id="more-0{{ offer.id }}{{ include.aid }}" href="#more" data-target=".collapse0{{ offer.id }}{{ include.aid }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-0{{ offer.id }}{{ include.aid }}">
+            <a class="navbar-toggler align-middle d-inline-block border-0 shadow-none collapsed" id="more-0{{ uid }}{{ include.aid }}" href="#more" data-target=".collapse0{{ uid }}{{ include.aid }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-0{{ uid }}{{ include.aid }}">
               <span class="sr-only">{{ site.data.uk.re_description }}:</span>
               <span class="d-block h-100 w-100" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{ site.data.uk.re_more }}">
                 <span class="navbar-toggler-icon"></span>
@@ -59,17 +74,17 @@
         {%- endif -%}
       </div>
     </div>
-    <div class="collapse multi-collapse more mt-0 collapse0{{ offer.id }}{{ include.aid }}">
+    <div class="collapse multi-collapse more mt-0 collapse0{{ uid }}{{ include.aid }}">
       <hr class="mt-0 mx-3">
       <dl class="mx-3 mb-2">
         {%- include card/additionally.html -%}
         <dd class="mb-0 text-right">
           {%- if images.size > 0 -%}
-          <a class="card-link" id="photo-1{{ offer.id }}{{ include.aid }}" data-toggle="collapse" data-target=".collapse1{{ offer.id }}{{ include.aid }}" href="#photo" role="button" aria-expanded="false" aria-controls="photo-1{{ offer.id }}{{ include.aid }}">
+          <a class="card-link" id="photo-1{{ uid }}{{ include.aid }}" data-toggle="collapse" data-target=".collapse1{{ uid }}{{ include.aid }}" href="#photo" role="button" aria-expanded="false" aria-controls="photo-1{{ uid }}{{ include.aid }}">
             {{ site.data.uk.re_images }}
           </a>
           {%- endif -%}
-          <a class="card-link" id="close-1{{ offer.id }}{{ include.aid }}" data-toggle="collapse" data-target=".collapse0{{ offer.id }}{{ include.aid }}" href="#close" role="button" aria-expanded="false" aria-controls="close-1{{ offer.id }}{{ include.aid }}">
+          <a class="card-link" id="close-1{{ uid }}{{ include.aid }}" data-toggle="collapse" data-target=".collapse0{{ uid }}{{ include.aid }}" href="#close" role="button" aria-expanded="false" aria-controls="close-1{{ uid }}{{ include.aid }}">
             {{ site.data.uk.re_collapse }}
           </a>
         </dd>

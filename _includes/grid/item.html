@@ -1,35 +1,37 @@
-{%- assign cdate = site.time | date: '%Y%m%d' -%}
-{%- assign slug = include.slug -%}
-{%- assign offer = include.offer -%}
-{%- assign date = offer.date | date: '%Y%m%d' -%}
-{%- assign uid = offer.uid -%}
-{%- assign type = offer.type | split: ' ' -%}
-{%- assign c_location = offer.location | default: offer.region -%}
-{%- capture offerType -%}
-  {%- if type.size >= 2 -%}
-    {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
-      {{ type | slice: 0,1 | join: ' ' }}
+{%- capture variables_item -%}
+  {%- assign cdate = site.time | date: '%Y%m%d' -%}
+  {%- assign slug = include.slug -%}
+  {%- assign offer = include.offer -%}
+  {%- assign date = offer.date | date: '%Y%m%d' -%}
+  {%- assign uid = offer.id -%}
+  {%- assign type = offer.type | split: ' ' -%}
+  {%- assign c_location = offer.location | default: offer.region -%}
+  {%- capture offerType -%}
+    {%- if type.size >= 2 -%}
+      {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
+        {{ type | slice: 0,1 | join: ' ' }}
+      {%- else -%}
+        {{ type | slice: 0,2 | join: ' ' }}
+      {%- endif -%}
     {%- else -%}
-      {{ type | slice: 0,2 | join: ' ' }}
+      {{ type | slice: 0 }}
     {%- endif -%}
-  {%- else -%}
-    {{ type | slice: 0 }}
-  {%- endif -%}
+  {%- endcapture -%}
+  {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
+  {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
+  {%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.jpeg'" -%}
+  {%- capture imageid -%}/assets/images/re/{{ uid }}.jpg{%- endcapture -%}
+  {%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
+  {%- capture sellRent -%}{% if offer.rent == '1' %}Здається в оренду {% else %}Продається {% endif %}{{ offer.type | downcase }} в {{ c_location }}{%- endcapture -%}
+  {%- assign randColor = '#F0D7DF,#F9E0E2,#F8EAEC,#F7DDD9,#F7E6DA,#E3E9DD,#C4DBD9,#D4E5E3,#CAE0E4,#C8C7D6' | split: ',' | sample -%}
 {%- endcapture -%}
-{%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
-{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
-{%- assign images = site.static_files | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.jpeg'" -%}
-{%- capture imageid -%}/assets/images/re/{{ uid }}.jpg{%- endcapture -%}
-{%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
-{%- capture sellRent -%}{% if offer.rent %}Здається в оренду {% else %}Продається {% endif %}{{ offer.type }} в {{ c_location }}{%- endcapture -%}
 <article class="card h-100{% if slug == 'realtor' or slug == 'agency' or slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
   {%- if idimage == 'true' -%}
-    <img loading="lazy" src="{{ imageid | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill">
+    <img loading="lazy" src="{{ imageid | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill" style="background-color:{{ randColor }};">
   {%- elsif images[0].path -%}
-    <img loading="lazy" src="{{ images[0].path | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill">
+    <img loading="lazy" src="{{ images[0].path | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill" style="background-color:{{ randColor }};">
   {%- else -%}
-    {%- assign randColor = '#F0D7DF,#F9E0E2,#F8EAEC,#F7DDD9,#F7E6DA,#E3E9DD,#C4DBD9,#D4E5E3,#CAE0E4,#C8C7D6' | split: ',' | sample -%}
-    {%- capture descLabel -%}Зображення-заповнювач для об'єкта нерухоості - {{ offer.type }} що {% if offer.rent %}здається в оренду {% else %}продається {% endif %}в {{ c_location }}{%- endcapture -%}
+    {%- capture descLabel -%}Зображення-заповнювач для об'єкта нерухомості - {{ offer.type | downcase }} що {% if offer.rent %}здається в оренду {% else %}продається {% endif %}в {{ c_location }}{%- endcapture -%}
     <svg class="card-img-top bd-placeholder-img" width="360" height="130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ descLabel }}" preserveAspectRatio="xMidYMid slice" focusable="false"><title>{{ descLabel }}</title><rect x="0" y="0" width="360" height="130" fill="{{ randColor }}"></rect><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" dy=".3em" fill="#000000">{{ sellRent }}</text></svg>
   {%- endif -%}
   <div class="card-body">

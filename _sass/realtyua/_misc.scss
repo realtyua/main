@@ -181,9 +181,9 @@ main .leaflet-menu {
 
 .card .fill {
   display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  text-align: center !important;
+  align-items: center !important;
+  justify-content: center !important;
   object-fit: cover;
   width: auto;
   height: 8em;
