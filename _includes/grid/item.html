@@ -3,7 +3,7 @@
   {%- assign slug = include.slug -%}
   {%- assign offer = include.offer -%}
   {%- assign date = offer.date | date: '%Y%m%d' -%}
-  {%- assign uid = offer.id -%}
+  {%- assign uid = offer.uid -%}
   {%- assign type = offer.type | split: ' ' -%}
   {%- assign c_location = offer.location | default: offer.region -%}
   {%- capture offerType -%}
