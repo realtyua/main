@@ -67,6 +67,8 @@
     {%- if pageu contains '/map.html' -%}
     {%- elsif page.layout == 'property'-%}
       <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
+    {%- elsif page.layout == 'grid'-%}
+      <link rel="preload" href="{{ "/assets/css/main.g.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
       <link rel="preload" href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
     {%- elsif paged != '/laws/' or paged != '/docs/' -%}
@@ -111,6 +113,8 @@
       {%- if pageu contains '/map.html' -%}
       {%- elsif page.layout == 'property'-%}
         <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
+      {%- elsif page.layout == 'grid'-%}
+        <link rel="preload" href="{{ "/assets/js/main.g.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
         <link rel="preload" href="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="script">
       {%- elsif paged != '/laws/' or paged != '/docs/' -%}
@@ -132,6 +136,8 @@
     {%- if pageu contains '/map.html' -%}
     {%- elsif page.layout == 'property' -%}
       <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
+    {%- elsif page.layout == 'grid' -%}
+      <link href="{{ "/assets/css/main.g.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
     {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/'-%}
       <link href="{{ "/assets/css/main.l.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" rel="stylesheet">
     {%- elsif paged != '/laws/' or paged != '/docs/' -%}

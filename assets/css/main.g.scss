@@ -2,7 +2,6 @@
 ---
 @charset 'utf-8';
 @import "realtyua/base";
-@import "realtyua/leaflet";
 
 {%- assign randColor = '#F0D7DF,#F9E0E2,#F8EAEC,#F7DDD9,#F7E6DA,#E3E9DD,#C4DBD9,#D4E5E3,#CAE0E4,#C8C7D6' | split: ',' | sample -%}
 

@@ -23,6 +23,8 @@
   {%- else -%}
     {%- if pageu contains '/map.html' -%}
       <script src="{{ "/assets/js/main.m.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+    {%- elsif page.layout == 'grid' -%}
+      <script src="{{ "/assets/js/main.g.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- elsif slashd.size >= 3 and paged != '/region/city/' and paged != '/district/town/' -%}
       <script src="{{ "/assets/js/main.l.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
     {%- elsif page.layout == 'property' -%}
