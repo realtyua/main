@@ -4,7 +4,7 @@
   {%- assign offer = include.offer -%}
   {%- assign uid = offer.id -%}
   {%- assign type = offer.type | split: ' ' -%}
-  {%- assign c_location = offer.location | default: offer.region -%}
+  {%- assign c_location = offer.location | default: offer.region | replace_first: 'кий район', 'кому районі'-%}
   {%- capture offerType -%}
     {%- if type.size >= 2 -%}
       {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
