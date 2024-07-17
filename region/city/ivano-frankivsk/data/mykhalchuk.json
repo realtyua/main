@@ -4,6 +4,15 @@ sitemap: false
 navhide: 1
 ---
 {%- assign name = page.name | remove: '.json' -%}
-{%- assign data = site.data[name] -%}
-{%- assign offers = data | sort: 'date' | reverse -%}
+{%- assign seller_data = site.data[name] -%}
+{% if seller_data.size > 0 %}
+  {%- assign estates = site.data.estates | where_exp: 'i', 'i.phone == seller_data[0].phone' -%}
+  {%- assign data = estates | concat: seller_data -%}
+  {%- assign offers = data | sort: 'date' | reverse -%}
+{% else %}
+  {%- assign contact = site.data.contacts | where: 'item', name -%}
+  {%- assign seller_phone = contact[0].phone_main | strip -%}
+  {%- assign data = site.data.estates | where_exp: 'i', 'i.phone == seller_phone' -%}
+  {%- assign offers = data -%}
+{% endif %}
 {%- include offer-json.html -%}

@@ -69,6 +69,14 @@
                   {%- assign records = site.data[section] | where_exp: 'i', 'i.location contains location' -%}
                 {% endcomment %}
               {% endif %}
+              {% if records.size > 0 %}
+                {%- assign estates = site.data.estates | where_exp: 'i', "i.phone == seller_phone" -%}
+              {% else %}
+                {%- assign contact = site.data.contacts | where: 'item', section -%}
+                {%- assign seller_phone = contact[0].phone_main | strip -%}
+                {%- assign estates = site.data.estates | where_exp: 'i', "i.phone == seller_phone" -%}
+              {% endif %}
+              {%- assign records = estates | concat: records -%}
               {%- if records.size > 0 -%}
                 {%- assign offers = records | sort: 'date' | reverse -%}
                 {%- assign total = offers | size -%}

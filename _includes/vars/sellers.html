@@ -3,5 +3,14 @@
 {%- assign json = piece | append: slugu | append: '.json' -%}
 {%- assign jsonFile = json | remove_first: '/' -%}
 {%- capture fJson -%}{%- file_exists {{ jsonFile }} -%}{%- endcapture -%}
-{%- assign isJson = site.data[slugu] -%}
 {%- assign stabs = site.stabs | where_exp: 'i', 'i.path contains slugu' -%}
+{%- assign seller_data = site.data[slugu] -%}
+{% if seller_data.size > 0 %}
+  {%- assign estates = site.data.estates | where_exp: 'i', 'i.phone == seller_data[0].phone' -%}
+  {%- assign data = estates | concat: seller_data -%}
+{% else %}
+  {%- assign contact = site.data.contacts | where: 'item', slugu -%}
+  {%- assign seller_phone = contact[0].phone_main | strip -%}
+  {%- assign data = site.data.estates | where_exp: 'i', 'i.phone == seller_phone' -%}
+{% endif %}
+{%- assign isJson = data -%}
