@@ -70,7 +70,7 @@
                 {% endcomment %}
               {% endif %}
               {% if records.size > 0 %}
-                {%- assign estates = site.data.estates | where_exp: 'i', "i.phone == seller_phone" -%}
+                {%- assign estates = site.data.estates | where_exp: 'i', "i.phone == records[0].phone" -%}
               {% else %}
                 {%- assign contact = site.data.contacts | where: 'item', section -%}
                 {%- assign seller_phone = contact[0].phone_main | strip -%}
