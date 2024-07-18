@@ -1,13 +1,8 @@
 {%- assign cdate = site.time | date: '%Y%m%d' -%}
 {%- assign date = offer.date | date: '%Y%m%d' -%}
-{%- assign district = offer.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' -%}
+{%- assign district = offer.region | replace_first: 'кий район', 'кому районі' -%}
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
-{%- capture files -%}
-  {%- for file in site.static_files -%}
-    {%- if file.path contains folder and file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' or file.extname == '.png' or file.extname == '.PNG' -%}{{ file.path }}{%- endif -%}
-  {%- endfor -%}
-{%- endcapture -%}
-{%- assign isImage = files | strip_newlines -%}
+{%- assign files = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
 {%- include map/page-exists.html -%}
 <tr>
   <td>{{ offer.id }}</td>
@@ -29,20 +24,19 @@
   <td>{%- if date > cdate -%}{{ site.time | date: "%Y-%m-%d" }}{%- else -%}{{ offer.date | date: "%Y-%m-%d" }}{%- endif -%}</td>
   <td>{{ offer.seller }}</td>
   <td>{{ offer.phone }}</td>
+  {%- if offer.skip -%}<td>{{ offer.skip }}</td>{%- endif -%}
   <td>{{ offer.description }}</td>
-  <td>{{ offer.link }}</td>
-  {%- if isImage != '' -%}
+  <td>{%- if offer.page == 1 -%}{%- else -%}{{ offer.link }}{%- endif -%}</td>
+  {%- if files.size > 0 -%}
     <td>
       <hr>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">
-      {%- for file in site.static_files -%}
-        {%- if file.path contains folder and file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' or file.extname == '.png' or file.extname == '.PNG' -%}
+      {%- for file in files limit: 4 -%}
         <figure class="col px-1">
           <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} {{ offer.location }}{{ district }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="2{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
             <img src="{{ file.path | url_decode | relative_url }}" loading="lazy" class="img-fluid img-thumbnail" title="{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ offer.address }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}" alt="{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}">
           </a>
         </figure>
-        {%- endif -%}
       {%- endfor -%}
       </div>
     </td>

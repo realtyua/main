@@ -2,18 +2,15 @@
 {%- assign w = include.size | split: 'x' | first -%}
 {%- assign h = include.size | split: 'x' | last -%}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{{ include.cols }} mt-1">
-{%- for file in site.static_files -%}
-  {%- if file.path contains folder -%}
-    {%- if file.extname == '.png' or file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.PNG' or file.extname == '.JPG' or file.extname == '.JPEG' -%}
-      {%- assign sizename = file.basename | size -%}
-      {%- assign alt = file.basename | slice: 2, sizename -%}
-      {%- assign title = alt | replace: '-', ' ' | capitalize -%}
-      <div class="col px-0">
-        <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=800&h=600&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ title }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="lightbox-group-{{ include.folder }}">
-          <img class="card-img-top" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w={{ w }}&h={{ h }}&fit=cover&a=attention&output=jpg&q=50&t=square" alt="image-{{ alt }}">
-        </a>
-      </div>
-    {%- endif -%}
-  {%- endif -%}
+{%- assign files = site.static_files | where_exp: 'i', "i.path contains folder and i.extname == '.png' or i.extname == '.jpg' or i.extname == '.jpeg' or i.extname == '.PNG' or i.extname == '.JPG' or i.extname == '.JPEG'" -%}
+{%- for file in files -%}
+  {%- assign sizename = file.basename | size -%}
+  {%- assign alt = file.basename | slice: 2, sizename -%}
+  {%- assign title = alt | replace: '-', ' ' | capitalize -%}
+  <div class="col px-0">
+    <a href="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w=800&h=600&fit=cover&a=attention&output=jpg&q=50&t=square" class="lightbox" title="{{ title }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="lightbox-group-{{ include.folder }}">
+      <img class="card-img-top" loading="lazy" src="//images.weserv.nl/?url={{ site.url | replace: 'http://','' | replace: 'https://','' }}{{ file.path | url_decode | relative_url }}&w={{ w }}&h={{ h }}&fit=cover&a=attention&output=jpg&q=50&t=square" alt="image-{{ alt }}">
+    </a>
+  </div>
 {%- endfor -%}
 </div>

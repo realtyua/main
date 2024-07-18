@@ -2,9 +2,9 @@
 [
   {%- for offer in offers -%}
     {%- assign date = offer.date | date: '%Y%m%d' -%}
-    {%- assign district = offer.region | replace_first: 'кий', 'кому' | replace: 'район', 'районі' -%}
+    {%- assign district = offer.region | replace_first: 'кий район', 'кому районі' -%}
     {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
-    {%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
+    {%- assign files = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
     {
       "id":"{{ offer.id }}",
       "type":"{{ offer.type }}",
@@ -29,7 +29,7 @@
       {%- if offer.skip -%}"skip":{{ offer.skip }},{%- endif -%}
       "description":"{{ offer.description }}",
       "link":"{%- if offer.page == 1 -%}{%- else -%}{{ offer.link }}{%- endif -%}",
-      {%- if images.size > 0 -%}"images":{%- capture img -%}[{%- for file in images limit: 4 -%}{"src":"{{ file.name }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},{%- endfor -%}]{%- endcapture -%}{{ img | replace: ',]', ']' }}{%- else -%}"images":""{%- endif -%}
+      {%- if files.size > 0 -%}"images":{%- capture img -%}[{%- for file in files limit: 4 -%}{"src":"{{ file.name }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},{%- endfor -%}]{%- endcapture -%}{{ img | replace: ',]', ']' }}{%- else -%}"images":""{%- endif -%}
     }
     {%- unless forloop.last -%},{%- endunless -%}
   {%- endfor -%}

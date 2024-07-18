@@ -1,14 +1,13 @@
 {%- assign folder = include.dir -%}
 {%- assign slug = include.slug -%}
-{%- for file in site.static_files -%}
-  {%- if file.path contains folder and file.basename contains slug and file.extname == '.png' or file.extname == '.PNG' or file.extname == '.jpg' or file.extname == '.JPG' or file.extname == '.jpeg' or file.extname == '.JPEG' -%}
-    {%- if folder contains '/logo/' -%}
-      {%- assign picture = folder | append: slug | append: file.extname | relative_url -%}
-    {%- elsif folder contains '/locations/' -%}
-      {%- assign picture = slug | prepend: folder | append: file.extname | relative_url -%}
-    {%- else -%}
-      {%- assign picture = file.path | relative_url -%}
-    {%- endif -%}
+{%- assign files = site.static_files | where_exp: 'i', "i.path contains folder and i.basename contains slug and i.extname == '.png' or i.extname == '.PNG' or i.extname == '.jpg' or i.extname == '.JPG' or i.extname == '.jpeg' or i.extname == '.JPEG'" -%}
+{%- for file in files -%}
+  {%- if folder contains '/logo/' -%}
+    {%- assign picture = folder | append: slug | append: file.extname | relative_url -%}
+  {%- elsif folder contains '/locations/' -%}
+    {%- assign picture = slug | prepend: folder | append: file.extname | relative_url -%}
+  {%- else -%}
+    {%- assign picture = file.path | relative_url -%}
   {%- endif -%}
 {%- endfor -%}
 {%- include static-file.html file=picture -%}
