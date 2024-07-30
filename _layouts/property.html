@@ -56,12 +56,12 @@ layout: default
 
           {%- if page.surface -%}
             <dt>Загальна площа об'єкта нерухомості</dt>
-            <dd>{{ surface }} метрів квадратних (<abbr title="Один метр квадратний">1 м²</abbr>)</dd>
+            <dd>{{ surface }} метрів квадратних (<abbr title="Один метр квадратний це площа квадрату зі стороною в 1 метр">1 м²</abbr>)</dd>
           {%- endif -%}
 
           {%- if page.surface_land -%}
             <dt>Загальна площа земельної ділянки</dt>
-            <dd>{{ page.surface_land }} метрів квадратних (<abbr title="Один метр квадратний">1 м²</abbr>) ({{ page.surface_land | divided_by: 10000.0000 | round: 4 }} га)</dd>
+            <dd>{{ page.surface_land }} метрів квадратних (<abbr title="Один метр квадратний це площа квадрату зі стороною в 1 метр">1 м²</abbr>) або {{ page.surface_land | divided_by: 10000.0000 | round: 4 }} га</dd>
           {%- endif -%}
 
           {%- if page.floor -%}
@@ -111,7 +111,7 @@ layout: default
             </dt>
             <dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ page.phone }}" title="{{ site.data.uk.offers }} у списку">{{ page.seller }}</a></dd>
             <dt>Контакти {% if page.rent %}орендодавця{% else %}продавця{% endif %}</dt>
-            <dd>{%- include footer/phone.html legal=page.phone type='property' -%}</dd>
+            <dd><a tabindex="0" class="link" data-toggle="popover" data-trigger="focus" data-placement="top" data-html="true" data-content="{%- include footer/phone.html legal=page.phone type='property' -%}" role="button" rel="nofollow">+38&nbsp;XXX&nbsp;XXX&nbsp;XX&nbsp;XX</a></dd>
           {%- endif -%}
 
           <dt>Розміщено у <a href="{{ site.main_url }}" target="_blank">Мережі Вебсайтів Нерухомості</a></dt>

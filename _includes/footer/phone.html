@@ -28,15 +28,7 @@
   </div>
 </div>
 {%- elsif include.legal and include.type == 'property' -%}
-<div class="btn-group">
-  <button type="button" class="btn btn-link p-0 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-label="{%- if offer.rent == '1' -%}{{ site.data.uk.re_phone }}{%- else -%}{{ site.data.uk.re_phoner }}{%- endif -%} - {{ site.data.uk.re_tel | capitalize }}">
-    <span class="sr-only">{{ site.data.uk.re_tel | capitalize }}:</span>
-    <span aria-hidden="true">+38&nbsp;XXX&nbsp;XXX&nbsp;XX&nbsp;XX</span>
-  </button>
-  <div class="dropdown-menu px-2 dropdown-menu-left">
-    <a href="tel:+{{ t }}" title="{{ site.data.uk.re_tel | capitalize }}" rel="nofollow">{{ n }}</a>
-  </div>
-</div>
+  <a href='tel:+{{ t }}' title='{{ site.data.uk.re_tel | capitalize }}' rel='nofollow'>{{ n }}</a>
 {%- elsif include.legal and include.type == 'text' -%}
   {%- capture master -%}
     {%- if include.name and include.name != '' -%}
