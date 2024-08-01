@@ -3,6 +3,8 @@
 {%- assign district = offer.region | replace_first: 'кий район', 'кому районі' -%}
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
 {%- assign files = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
+{%- capture imageid -%}/assets/images/re/{{ offer.id }}.jpg{%- endcapture -%}
+{%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
 {%- include map/page-exists.html -%}
 <tr>
   <td>{{ offer.id }}</td>
@@ -27,19 +29,12 @@
   {%- if offer.skip -%}<td>{{ offer.skip }}</td>{%- endif -%}
   <td>{{ offer.description }}</td>
   <td>{%- if offer.page == 1 -%}{%- else -%}{{ offer.link }}{%- endif -%}</td>
-  {%- if files.size > 0 -%}
-    <td>
-      <hr>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">
-      {%- for file in files limit: 4 -%}
-        <figure class="col px-1">
-          <a href="{{ file.path | url_decode | relative_url }}" class="lightbox" title="{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} {{ offer.location }}{{ district }}" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="2{{ offer.id }}{{ offer.phone }}{{ include.aid }}">
-            <img src="{{ file.path | url_decode | relative_url }}" loading="lazy" class="img-fluid img-thumbnail" title="{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ offer.address }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}" alt="{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}">
-          </a>
-        </figure>
-      {%- endfor -%}
-      </div>
-    </td>
+  {%- if idimage == 'true' and files.size == 0 -%}
+    <td><ul><li class="pic"><a href="{{ imageid | url_decode | relative_url }}" class="item">1</a></li></ul></td>
+  {%- elsif files.size == 1 and idimage == 'false' -%}
+    <td><ul><li class="pic"><a href="{{ files[0].path | url_decode | relative_url }}" class="item">1</a></li></ul></td>
+  {%- elsif files.size > 1 and idimage == 'false' -%}
+    <td><ul>{%- for file in files -%}<li class="pic"><a href="{{ file.path | url_decode | relative_url }}" class="item">{{ forloop.index }}</a></li>{%- endfor -%}</ul></td>
   {%- else -%}
     <td></td>
   {%- endif -%}

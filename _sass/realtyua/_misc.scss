@@ -193,3 +193,7 @@ main .leaflet-menu {
 
 .col-md-3 .float-left { z-index: 1; }
 .textarea ul, ol { z-index: -1; }
+
+.tel { font-size: 1rem; border: 0; margin-bottom: 0.0063rem; }
+.tel .arrow { display: none; }
+.tel .popover-body { padding: 0 1px 0 1px; }
