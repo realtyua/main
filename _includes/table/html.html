@@ -26,7 +26,6 @@
   <td>{%- if date > cdate -%}{{ site.time | date: "%Y-%m-%d" }}{%- else -%}{{ offer.date | date: "%Y-%m-%d" }}{%- endif -%}</td>
   <td>{{ offer.seller }}</td>
   <td>{{ offer.phone }}</td>
-  {%- if offer.skip -%}<td>{{ offer.skip }}</td>{%- endif -%}
   <td>{{ offer.description }}</td>
   <td>{%- if offer.page == 1 -%}{%- else -%}{{ offer.link }}{%- endif -%}</td>
   {%- if idimage == 'true' and files.size == 0 -%}

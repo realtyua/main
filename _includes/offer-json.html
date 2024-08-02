@@ -28,7 +28,6 @@
       "date":"{%- if date > cdate -%}{{- site.time | date: "%Y-%m-%d" -}}{%- else -%}{{- offer.date | date: "%Y-%m-%d" -}}{%- endif -%}",
       "seller":"{{ offer.seller }}",
       "phone":"{{ offer.phone }}",
-      {%- if offer.skip -%}"skip":{{ offer.skip }},{%- endif -%}
       "description":"{{ offer.description }}",
       "link":"{%- if offer.page == 1 -%}{%- else -%}{{ offer.link }}{%- endif -%}",
       {%- if idimage == 'true' and files.size == 0 -%}
