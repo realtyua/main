@@ -156,7 +156,11 @@ function jsDetailFormatter(index, row, $detail) {
 	};
   const images = Object.values(row.images || {});
   var reFooter = function() {
-    if (row.seller && row.seller !== '') { html.push('<div class="col px-1"><dl><dt>' + reSelleOrSeller + '</dt><dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id=' + row.phone + '" title="{{ site.data.uk.offers }}">' + row.seller.replace('{{ site.data.uk.re_seller }} ','') + '</a></dd></dl></div>'), html.push('<div class="col px-1"><dl><dt>' + rePhoneOrPhoner + '</dt><dd><a href="tel:+' + row.phone + '" rel="nofollow">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></div>'), html.push('</div>') }
+    if (row.seller && row.seller !== '') {
+			html.push('<div class="col px-1"><dl><dt>' + reSelleOrSeller + '</dt><dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id=' + row.phone + '" title="{{ site.data.uk.offers }}">' + row.seller.replace('{{ site.data.uk.re_seller }} ','') + '</a></dd></dl></div>'),
+			html.push('<div class="col px-1"><dl><dt>' + rePhoneOrPhoner + '</dt><dd><a href="tel:+' + row.phone + '" rel="nofollow">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></div>'),
+			html.push('</div>')
+		}
     if (row.description && row.description !== '' && (images.length > 1 || images.length == 0)) { html.push('<div class="row mx-n1">'), html.push('<div class="col-12 px-1"><dl><dt>{{ site.data.uk.re_description }}</dt><dd>' + row.description + '</dd></dl></div>'), html.push('</div>') }
   };
   $.each(row, function (key, value) { if (key !== 'images' || key !== 'id' && value !== '') { reHeader(); rePriceSqmt(); reDate(); reFooter(); } })
@@ -243,10 +247,22 @@ function htmlDetailFormatter(index, row, $detail) {
     }
   };
   var reFooter = function() {
-    if (row.coordinates && row.coordinates !== '') { html.push('<div class="col px-1"><dl><dt>' + reKvartyra + ' {{ site.data.uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#mapa" href="#mapa" aria-haspopup="true" aria-expanded="false">{{ site.data.uk.re_show_map }}</a></dd></dl></div>') }
-    if (row.date && row.date !== '') { html.push('<div class="col px-1"><dl><dt>' + reDateOrDater + '</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.uk.roku }}</dd></dl></div>') }
-    if (row.phone && row.phone !== '') { '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></div>'), html.push('</div>') }
-    if (row.description && row.description !== '' && (images.length > 1 || images.length == 0)) { html.push('<div class="row mx-n1">'), html.push('<div class="col-12 px-1"><dl><dt>{{ site.data.uk.re_description }}</dt><dd>' + row.description + '</dd></dl></div>'), html.push('</div>') }
+    if (row.coordinates && row.coordinates !== '') {
+      html.push('<div class="col px-1"><dl><dt>' + reKvartyra + ' {{ site.data.uk.re_on_map }}</dt><dd><a class="marker" data-coord="' + row.coordinates + '" data-toggle="modal" data-target="#mapa" href="#mapa" aria-haspopup="true" aria-expanded="false">{{ site.data.uk.re_show_map }}</a></dd></dl></div>')
+    }
+    if (row.date && row.date !== '') {
+      html.push('<div class="col px-1"><dl><dt>' + reDateOrDater + '</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.uk.roku }}</dd></dl></div>')
+    }
+    if (row.phone && row.phone !== '') {
+      html.push('<div class="col px-1"><dl><dt>' + reSelleOrSeller + '</dt><dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id=' + row.phone + '" title="{{ site.data.uk.offers }}">' + row.seller.replace('{{ site.data.uk.re_seller }} ','') + '</a></dd></dl></div>'),
+      html.push('<div class="col px-1"><dl><dt>' + rePhoneOrPhoner + '</dt><dd><a href="tel:+' + row.phone + '" rel="nofollow">+' + row.phone.substr(0, 2) + '&nbsp;' + row.phone.substr(2, 3) + '&nbsp;' + row.phone.substr(5, 3) + '&nbsp;' + row.phone.substr(8, 2) + '&nbsp;' + row.phone.substr(10, 2) + '</a><i class="d-none">' + row.id + '</i></dd></dl></div>'),
+      html.push('</div>')
+    }
+    if (row.description && row.description !== '' && (images.length > 1 || images.length == 0)) {
+      html.push('<div class="row mx-n1">'),
+      html.push('<div class="col-12 px-1"><dl><dt>{{ site.data.uk.re_description }}</dt><dd>' + row.description + '</dd></dl></div>'),
+      html.push('</div>')
+    }
   };
   $.each(row, function (key, value) { if (key !== 'images' || key !== 'id' && value !== '') { reHeader(); rePriceSqmt(); reFooter(); } })
   if (images.length == 1) { html.push('<hr class="mt-0"><div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 mx-n1">'), html.push(images.map(function (image) { return '<figure class="col-md-2 order-2 order-md-1 px-1 mb-0"><a href="' + image + '" class="lightbox" title="' + row.type + '' + address + ' {{ site.data.uk.re_in }} ' + row.location + '' + district + '" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} ' + row.location + '' + district + '" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' {{ site.data.uk.re_po }} ' + row.address + ' {{ site.data.uk.re_in }} ' + row.location + '' + district + '" alt="' + row.type + ' {{ site.data.uk.re_in }} ' + row.location + '' + district + '" class="img-fluid img-thumbnail" width="170" height="130"></a></figure>' }).join('')), html.push('<div class="col-md-10 order-md-2 px-1"><dl><dt>{{ site.data.uk.re_description }}</td><dd>' + row.description + '</dd></dl></div>'), html.push('</div>') } else if (images.length > 1) { html.push('<hr class="mt-0"><div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-n1">'), html.push(images.map(function (image) { return '<figure class="col px-1 mb-0"><a href="' + image + '" class="lightbox" title="' + row.type + '' + address + ' {{ site.data.uk.re_in }} ' + row.location + '' + district + '" data-lightbox-caption="{{ site.data.uk.re_free_ads_in }} ' + row.location + '' + district + '" data-lightbox-width="800" data-lightbox-height="600" data-lightbox-group="re-' + row.id + '4' + row.phone + '"><img src="' + image + '" loading="lazy" title="' + row.type + ' {{ site.data.uk.re_po }} ' + row.address + ' {{ site.data.uk.re_in }} ' + row.location + '' + district + '" alt="' + row.type + ' {{ site.data.uk.re_in }} ' + row.location + '' + district + '" class="img-fluid img-thumbnail" width="380" height="285"></a></figure>' }).join('')), html.push('</div>') }
