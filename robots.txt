@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /*/data/*
+Disallow: /*/data/
+Disallow: /*/data/*.json
+Disallow: /assets/css/*
+Disallow: /assets/js/*
+Disallow: /assets/images/logo/
+Disallow: /assets/images/staff/
+Disallow: *.json
+Disallow: *.yml
+Disallow: /404.html
+Disallow: /add.html
+Disallow: /new.html
+Sitemap: https://www.realestate.if.ua/sitemap.xml
