@@ -91,6 +91,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate-v2
   - jekyll-get-json
+  - jekyll-include-cache
 
 pagination:
   enabled: true

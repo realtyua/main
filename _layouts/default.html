@@ -51,19 +51,19 @@ layout: compress
       </main>
       {%- include footer.html -%}
     </div>
-    {%- include scroll-top.html -%}
+    {%- include_cached scroll-top.html -%}
     {%- include java-script.html -%}
     {%- if pageu contains '/realtor/' and pageu contains '/region/' and back.size == 4 and page.table != 1 or page.table != 2 -%}
-      {%- include pagination-js.html -%}
+      {%- include_cached pagination-js.html -%}
     {%- elsif pageu contains '/realtor/' and pageu contains '/district/' and back.size == 5 and page.table != 1 or page.table != 2 -%}
     {%- elsif pageu contains '/developer/' and pageu contains '/region/' and back.size == 4 and page.table != 1 or page.table != 2 -%}
-      {%- include pagination-js.html -%}
+      {%- include_cached pagination-js.html -%}
     {%- elsif pageu contains '/developer/' and pageu contains '/district/' and back.size == 5 and page.table != 1 or page.table != 2 -%}
     {%- elsif pageu contains '/agency/' and pageu contains '/region/' and back.size == 4 and page.table != 1 or page.table != 2 -%}
-      {%- include pagination-js.html -%}
+      {%- include_cached pagination-js.html -%}
     {%- elsif pageu contains '/agency/' and pageu contains '/district/' and back.size == 5 and page.table != 1 or page.table != 2 -%}
     {%- elsif pageu contains '/building-materials.html' and page.table != 1 or page.table != 2 -%}
-      {%- include pagination-js.html -%}
+      {%- include_cached pagination-js.html -%}
     {%- endif -%}
     {% include modals/net-realestate-modal.html %}
     {%- if pageu contains '/map.html' -%}
