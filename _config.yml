@@ -89,6 +89,7 @@ defaults:
 
 plugins:
   - jekyll-sitemap
+  - jekyll-redirect-from
   - jekyll-paginate-v2
   - jekyll-get-json
   - jekyll-include-cache
