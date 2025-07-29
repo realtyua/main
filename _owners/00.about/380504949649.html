@@ -4,7 +4,7 @@ class: py-3 py-md-5
 sitemap: false
 img: house_from_road.jpg
 ---
-{%- assign dir = page.path | remove: '.html' | split: '/' | last -%}
+{%- assign dir = page.slug -%}
 <div class="container">
   {%- include owner/text.html
     s='2'
