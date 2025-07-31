@@ -43,8 +43,7 @@ jobs:
           cache-version: 1 # Increment this number if you need to re-download cached gems
       - uses: actions/cache@v4
         with:
-            vendor/bundle
-            .bundle
+          path: vendor/bundle
           key: ${{ runner.os }}-jekyll-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-jekyll-
