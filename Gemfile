@@ -7,5 +7,4 @@ group :jekyll_plugins do
   gem 'jekyll-redirect-from', '0.16.0'
   gem 'jekyll-paginate-v2', '3.0.0'
   gem 'jekyll-get-json', '1.0.0'
-  gem 'jekyll-include-cache', '~> 0.2.1'
 end
