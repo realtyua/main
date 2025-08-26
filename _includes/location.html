@@ -24,7 +24,7 @@
   {%- assign sls = sl | size | minus: 2 -%}
 {%- endif -%}
 {%- assign ld = sl | slice: 0, sls | join: '/' | append: '/' -%}
-{%- assign lps = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains ld and i.url == ld' -%}
+{%- assign lps = site.pages | where: 'url', ld -%}
 {%- for lpb in lps limit: 1 -%}
   {%- if lpb.breadcrumb -%}
     {%- assign location = lpb.breadcrumb -%}
