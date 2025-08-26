@@ -8,14 +8,7 @@
 {%- else -%}
   {%- include location.html -%}
 {%- endif -%}
-{%- assign es = site.data.estates | where_exp: 'i', 'i.hidden != true' -%}
-{%- assign items = es | concat: site.data.owners | sort: 'date' -%}
-{%- capture oa -%}{%- for ot in items -%}{{ ot.phone }}{%- if ot.skip -%}{%- increment one -%}{%- endif -%}|{%- endfor -%}{%- endcapture -%}
-{%- assign owners = '' | split: '' -%}
-{%- for ot in items -%}
-  {%- capture of -%}{{ ot.phone }}{%- if ot.skip -%}{%- increment two -%}{%- endif -%}|{%- endcapture -%}
-  {%- if oa contains of -%}
-    {%- assign owners = owners | push: ot -%}
-  {%- endif -%}
-  {%- assign oa = oa | remove: of -%}
-{%- endfor -%}
+
+{%- assign estates = site.data.estates | where_exp: 'i', 'i.hidden != true' -%}
+{%- assign all_items = estates | concat: site.data.owners -%}
+{%- assign owners = all_items | unique_owners_with_phone -%}

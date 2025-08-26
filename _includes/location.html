@@ -1,6 +1,6 @@
 {%- assign pd = page.dir -%}
 {%- if pd contains '/city/' or pd contains '/town/' -%}{%- assign ct = true -%}{%- else -%}{%- assign ct = false -%}{%- endif -%}
-{%- if pd contains '/district/' -%}{%- assign dt = true -%}{%- else -%}{%- assign cd = false -%}{%- endif -%}
+{%- if pd contains '/district/' -%}{%- assign dt = true -%}{%- else -%}{%- assign dt = false -%}{%- endif -%}
 {%- assign sl = pd | split: '/' -%}
 {%- if sl.size == 4 and ct == true -%}
   {%- assign sls = sl | size | minus: 0 -%}
