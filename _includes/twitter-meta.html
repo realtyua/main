@@ -11,7 +11,11 @@
   {%- if files[0] -%}
     <meta name="twitter:image" content="{{ files[0].path | default: default_image | absolute_url }}">
   {%- else -%}
-    <meta name="twitter:image" content="{{ imageid | default: default_image | absolute_url }}">
+    {%- if idimage == 'true' -%}
+      <meta name="twitter:image" content="{{ imageid | default: default_image | absolute_url }}">
+    {%- else -%}
+      <meta name="twitter:image" content="{{ default_image | absolute_url }}">
+    {%- endif -%}
   {%- endif -%}
   <meta name="twitter:image:alt" content="{{ page.type }}">
 {%- else -%}
