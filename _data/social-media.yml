@@ -12,15 +12,17 @@
   w: 23
   h: 23
 
-- name: skype
-  title: Skype
-  url: skype:live:.cid.f6f06c675b2b479c?chat
-  links:
-    - userinfo: skype:live:.cid.f6f06c675b2b479c?userinfo
-      chat: skype:live:.cid.f6f06c675b2b479c?chat
-      voicemail: skype:live:.cid.f6f06c675b2b479c?voicemail
-      call: skype:live:.cid.f6f06c675b2b479c?call
-      add: skype:live:.cid.f6f06c675b2b479c?add
+#
+#- name: skype
+#  title: Skype
+#  url: skype:live:.cid.f6f06c675b2b479c?chat
+#  links:
+#    - userinfo: skype:live:.cid.f6f06c675b2b479c?userinfo
+#      chat: skype:live:.cid.f6f06c675b2b479c?chat
+#      voicemail: skype:live:.cid.f6f06c675b2b479c?voicemail
+#      call: skype:live:.cid.f6f06c675b2b479c?call
+#      add: skype:live:.cid.f6f06c675b2b479c?add
+#
 
 - name: whatsapp
   title: WhatsApp
@@ -28,17 +30,25 @@
   w: 28
   h: 28
 
-- name: messenger
-  title: Messenger
-  url: https://m.me/realestate.net.ua
+- name: signal
+  title: Signal
+  url: https://signal.me/#p/+380504949649
+
+#
+#- name: messenger
+#  title: Messenger
+#  url: https://m.me/realestate.net.ua
+#
 
 - name: viber
   title: Viber
   url:
 
-- name: telegram
-  title: Telegram
-  url: https://t.me/realestate_net
+#
+#- name: telegram
+#  title: Telegram
+#  url: https://t.me/realestate_net
+#
 
 - name: website
   title: Вебсайт

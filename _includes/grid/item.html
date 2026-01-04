@@ -1,54 +1,98 @@
-{%- capture variables_item -%}
-  {%- assign cdate = site.time | date: '%Y%m%d' -%}
-  {%- assign slug = include.slug -%}
-  {%- assign offer = include.offer -%}
-  {%- assign date = offer.date | date: '%Y%m%d' -%}
-  {%- assign uid = offer.uid -%}
-  {%- assign type = offer.type | split: ' ' -%}
-  {%- assign c_location = offer.location | default: offer.region | replace_first: 'кий район', 'кому районі'-%}
-  {%- capture offerType -%}
-    {%- if type.size >= 2 -%}
-      {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
-        {{ type | slice: 0,1 | join: ' ' }}
-      {%- else -%}
-        {{ type | slice: 0,2 | join: ' ' }}
-      {%- endif -%}
-    {%- else -%}
-      {{ type | slice: 0 }}
-    {%- endif -%}
-  {%- endcapture -%}
-  {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
-  {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
-  {%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.jpeg'" -%}
-  {%- capture imageid -%}/assets/images/re/{{ uid }}.jpg{%- endcapture -%}
-  {%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
-  {%- capture sellRent -%}{% if offer.rent %}Здається в оренду {% else %}Продається {% endif %}{{ offer.type | downcase }} в {{ c_location }}{%- endcapture -%}
-  {%- assign randColor = '#F0D7DF,#F9E0E2,#F8EAEC,#F7DDD9,#F7E6DA,#E3E9DD,#C4DBD9,#D4E5E3,#CAE0E4,#C8C7D6' | split: ',' | sample -%}
-{%- endcapture -%}
+{%- assign slug = include.slug -%}
+{%- assign offer = include.offer -%}
+
+{%- assign today_ymd = site.time | date: '%Y%m%d' -%}
+{%- assign offer_ymd = offer.date | default: '1970-01-01' | date: '%Y%m%d' -%}
+
+{%- assign today_num = today_ymd | plus: 0 -%}
+{%- assign offer_num = offer_ymd | plus: 0 -%}
+
+{%- if offer_num > today_num -%}
+  {%- assign display_date_iso = site.time | date: '%Y-%m-%d' -%}
+{%- else -%}
+  {%- assign display_date_iso = offer.date | date: '%Y-%m-%d' -%}
+{%- endif -%}
+
+{%- assign uid = offer.uid -%}
+{%- assign type_parts = offer.type | split: ' ' -%}
+
+{%- if type_parts.size >= 2 -%}
+  {%- if offer.type contains ' в ' or offer.type contains ' від ' -%}
+    {%- assign offerType = type_parts | slice: 0,1 | join: ' ' -%}
+  {%- else -%}
+    {%- assign offerType = type_parts | slice: 0,2 | join: ' ' -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign offerType = type_parts | first -%}
+{%- endif -%}
+
+{%- assign c_location = offer.location | default: offer.region | replace_first: 'кий район', 'кому районі' -%}
+{%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
+{%- assign randColor = '#F0D7DF,#F9E0E2,#F8EAEC,#F7DDD9,#F7E6DA,#E3E9DD,#C4DBD9,#D4E5E3,#CAE0E4,#C8C7D6' | split: ',' | sample -%}
+
+{%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
+
+{%- assign jpgs = site.static_files | where: "image", true | where_exp: "f", "f.path contains folder" | where: "extname", ".jpg" -%}
+{%- assign jpegs = site.static_files | where: "image", true | where_exp: "f", "f.path contains folder" | where: "extname", ".jpeg" -%}
+{%- assign images = jpgs | concat: jpegs -%}
+
+{%- capture imageid -%}/assets/images/re/{{ uid }}.jpg{%- endcapture -%}
+{%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
+
+{%- if offer.rent -%}
+  {%- assign sellRentPrefix = 'Здається в оренду' -%}
+  {%- assign objectLabel = site.data.uk.re_object_rent -%}
+  {%- assign dateLabel = site.data.uk.re_dater -%}
+{%- else -%}
+  {%- assign sellRentPrefix = 'Продається' -%}
+  {%- assign objectLabel = site.data.uk.re_object_sell -%}
+  {%- assign dateLabel = site.data.uk.re_date -%}
+{%- endif -%}
+
+{%- assign sellRent = sellRentPrefix | append: ' ' | append: offer.type | downcase | append: ' в ' | append: c_location -%}
+
 <article class="card h-100{% if slug == 'realtor' or slug == 'agency' or slug == 'developer' %} border-bottom-0{% endif %}" role="presentation">
   {%- if idimage == 'true' -%}
     <img loading="lazy" src="{{ imageid | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill" style="background-color:{{ randColor }};">
-  {%- elsif images[0].path -%}
-    <img loading="lazy" src="{{ images[0].path | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill" style="background-color:{{ randColor }};">
+  {%- elsif images.first.path -%}
+    <img loading="lazy" src="{{ images.first.path | url_decode | relative_url }}" width="360" height="270" alt="{{ sellRent }}" class="card-img-top fill" style="background-color:{{ randColor }};">
   {%- else -%}
-    {%- capture descLabel -%}Зображення-заповнювач - {{ offer.type | downcase }} що {{ sellRent | downcase }}{%- endcapture -%}
-    <svg class="card-img-top bd-placeholder-img" width="360" height="130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ descLabel }}" preserveAspectRatio="xMidYMid slice" focusable="false"><title>{{ descLabel }}</title><rect x="0" y="0" width="100%" height="130" fill="{{ randColor }}"></rect><g><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"><tspan x="50%" y="33%">{% if offer.rent %}Здається в оренду {% else %}Продається {% endif %}</tspan><tspan x="50%" y="50%">{{ offer.type | downcase }}</tspan><tspan x="50%" y="68%">в {{ c_location }}</tspan></text></g></svg>
+    {%- assign descLabel = 'Зображення-заповнювач - ' | append: offer.type | downcase | append: ' що ' | append: sellRent | downcase -%}
+    <svg class="card-img-top bd-placeholder-img" width="360" height="130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ descLabel }}" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <title>{{ descLabel }}</title>
+      <rect x="0" y="0" width="100%" height="130" fill="{{ randColor }}"></rect>
+      <g>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
+          <tspan x="50%" y="33%">{{ sellRentPrefix }}</tspan>
+          <tspan x="50%" y="50%">{{ offer.type | downcase }}</tspan>
+          <tspan x="50%" y="68%">в {{ c_location }}</tspan>
+        </text>
+      </g>
+    </svg>
   {%- endif -%}
   <div class="card-body">
-    <span class="sr-only"><data value="{{ uid }}">{% if offer.rent %}{{ site.data.uk.re_object_rent }}{% else %}{{ site.data.uk.re_object_sell }}{% endif %} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location }}</data></span>
+    <span class="sr-only">
+      <data value="{{ uid }}">
+        {{- objectLabel }} - {{ offerType }}, {{ site.data.uk.re_cost }} {{ offer.price }}, {{ c_location -}}
+      </data>
+    </span>
     <h3 class="font-weight-normal m-0 p-0 h6">
       {%- if offer.url and offer.url != '' -%}
-        <a href="{{ offer.url }}" aria-label="{{ more | capitalize }}">
-          {% include card/body.html %}
-        </a>
+        {%- assign targetUrl = offer.url -%}
+        {%- assign ariaLabel = more | capitalize -%}
       {%- else -%}
-        <a href="{{ site.url }}/{{ offer.phone }}" aria-label="{{ site.data.uk.re_page }}">
-          {% include card/body.html %}
-        </a>
+        {%- assign targetUrl = site.url | append: '/' | append: offer.phone -%}
+        {%- assign ariaLabel = site.data.uk.re_page -%}
       {%- endif -%}
+      <a href="{{ targetUrl }}" aria-label="{{- ariaLabel -}}">
+        {% include card/body.html %}
+      </a>
     </h3>
     <div class="my-1 small text-muted date">
-      {%- if offer.rent -%}{{ site.data.uk.re_dater }}{%- else -%}{{ site.data.uk.re_date }}{%- endif -%}&nbsp;<time datetime="{%- if date > cdate -%}{{ site.time | date: '%Y-%m-%d' }}{%- else -%}{{ offer.date | date: '%Y-%m-%d' }}{%- endif -%}">{%- if date > cdate -%}{%- assign cdate = site.time | date: "%Y-%m-%d" -%}{%- include date.html date=cdate -%}{%- else -%}{%- assign date = offer.date | date: "%Y-%m-%d" -%}{%- include date.html date=date -%}{%- endif -%}</time>
+      {{- dateLabel }} 
+      <time datetime="{{ display_date_iso }}">
+        {%- include date.html date=display_date_iso -%}
+      </time>
     </div>
   </div>
 </article>

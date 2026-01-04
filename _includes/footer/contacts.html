@@ -1,131 +1,133 @@
 {%- assign url = page.url -%}
 {%- assign dir = page.dir -%}
-{%- assign region = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'region' -%}{%- assign region = region | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign district = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'district' -%}{%- assign district = district | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign city = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'city' -%}{%- assign city = city | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign town = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'town' -%}{%- assign town = town | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign village = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'village' -%}{%- assign village = village | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign developer = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'developer' -%}{%- assign developer = developer | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign realtor = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'realtor' -%}{%- assign realtor = realtor | push:i -%}{%- endif -%}{%- endfor -%}
-{%- assign agency = '' | split: '' -%}{%- for i in site.data.contacts -%}{%- if i.type contains 'agency' -%}{%- assign agency = agency | push:i -%}{%- endif -%}{%- endfor -%}
 {%- assign cosa = dir | split: '/' -%}
 {%- assign size = cosa | size -%}
-{%- if url contains '/village/' -%}{%- assign isVillage = true -%}{%- else -%}{%- assign isVillage = false -%}{%- endif -%}
-{%- if url contains '/developer/' -%}{%- assign isDeveloper = true -%}{%- else -%}{%- assign isDeveloper = false -%}{%- endif -%}
-{%- if url contains '/realtor/' -%}{%- assign isRealtor = true -%}{%- else -%}{%- assign isRealtor = false -%}{%- endif -%}
-{%- if url contains '/agency/' -%}{%- assign isAgency = true -%}{%- else -%}{%- assign isAgency = false -%}{%- endif -%}
 
-{%- if size != 9 -%}
-  {%- for contact in region -%}
-    {%- if url contains contact.type and url contains contact.item -%}
-      {%- if include.legal contains 'phone' -%}
-        {%- include footer/phone.html legal=include.legal -%}
-      {%- elsif include.legal == 'email' -%}
-        {%- include footer/email.html legal=include.legal -%}
-      {%- else -%}
-        {%- include footer/text.html legal=include.legal -%}
-      {%- endif -%}
-    {%- endif -%}
-  {%- endfor -%}
-{%- endif -%}
+{%- assign isVillage = false -%}
+{%- assign isDeveloper = false -%}
+{%- assign isRealtor = false -%}
+{%- assign isAgency = false -%}
+{%- if url contains '/village/' -%}{%- assign isVillage = true -%}{%- endif -%}
+{%- if url contains '/developer/' -%}{%- assign isDeveloper = true -%}{%- endif -%}
+{%- if url contains '/realtor/' -%}{%- assign isRealtor = true -%}{%- endif -%}
+{%- if url contains '/agency/' -%}{%- assign isAgency = true -%}{%- endif -%}
 
-{%- if isDeveloper == true or isRealtor == true or isAgency == true -%}
-{%- else -%}
-  {%- for contact in city -%}
-    {%- if url contains contact.type and url contains contact.item -%}
-      {%- if include.legal contains 'phone' -%}
-        {%- include footer/phone.html legal=include.legal -%}
-      {%- elsif include.legal == 'email' -%}
-        {%- include footer/email.html legal=include.legal -%}
-      {%- else -%}
-        {%- include footer/text.html legal=include.legal -%}
-      {%- endif -%}
-    {%- endif -%}
-  {%- endfor -%}
-{%- endif -%}
+{%- assign region = '' | split: '' -%}
+{%- assign district = '' | split: '' -%}
+{%- assign city = '' | split: '' -%}
+{%- assign town = '' | split: '' -%}
+{%- assign village = '' | split: '' -%}
+{%- assign developer = '' | split: '' -%}
+{%- assign realtor = '' | split: '' -%}
+{%- assign agency = '' | split: '' -%}
 
-{%- if isDeveloper == true or isRealtor == true or isAgency == true -%}
-{%- else -%}
-  {%- for contact in district -%}
-    {%- if url contains contact.type and url contains contact.item -%}
-      {%- if size == 5 and url contains 'village' -%}
-      {%- elsif include.legal contains 'phone' -%}
-        {%- include footer/phone.html legal=include.legal -%}
-      {%- elsif include.legal == 'email' -%}
-        {%- include footer/email.html legal=include.legal -%}
-      {%- else -%}
-        {%- include footer/text.html legal=include.legal -%}
-      {%- endif -%}
-    {%- endif -%}
-  {%- endfor -%}
-{%- endif -%}
-
-{%- for contact in town -%}
-  {%- if url contains contact.type and url contains contact.item -%}
-    {%- if include.legal contains 'phone' -%}
-      {%- include footer/phone.html legal=include.legal -%}
-    {%- elsif include.legal == 'email' -%}
-      {%- include footer/email.html legal=include.legal -%}
-    {%- else -%}
-      {%- include footer/text.html legal=include.legal -%}
-    {%- endif -%}
-  {%- endif -%}
-{%- endfor -%}
-
-{%- for contact in village -%}
-  {%- if url contains contact.type and url contains contact.item -%}
-    {%- if include.legal contains 'phone' -%}
-      {%- include footer/phone.html legal=include.legal -%}
-    {%- elsif include.legal == 'email' -%}
-      {%- include footer/email.html legal=include.legal -%}
-    {%- else -%}
-      {%- include footer/text.html legal=include.legal -%}
-    {%- endif -%}
-  {%- endif -%}
+{%- for i in site.data.contacts -%}
+  {%- if i.type contains 'region' -%}{%- assign region = region | push: i -%}{%- endif -%}
+  {%- if i.type contains 'district' -%}{%- assign district = district | push: i -%}{%- endif -%}
+  {%- if i.type contains 'city' -%}{%- assign city = city | push: i -%}{%- endif -%}
+  {%- if i.type contains 'town' -%}{%- assign town = town | push: i -%}{%- endif -%}
+  {%- if i.type contains 'village' -%}{%- assign village = village | push: i -%}{%- endif -%}
+  {%- if i.type contains 'developer' -%}{%- assign developer = developer | push: i -%}{%- endif -%}
+  {%- if i.type contains 'realtor' -%}{%- assign realtor = realtor | push: i -%}{%- endif -%}
+  {%- if i.type contains 'agency' -%}{%- assign agency = agency | push: i -%}{%- endif -%}
 {%- endfor -%}
 
 {%- assign back = dir | split: '/' -%}
-{%- assign dev = back | last -%}
+{%- assign dev = '' -%}
 {%- if back.size == 7 -%}
-{%- assign size = back | size | minus:1 -%}
+  {%- assign size = back.size | minus: 1 -%}
 {%- elsif back.size == 8 -%}
-{%- assign size = back | size | minus:2 -%}
+  {%- assign size = back.size | minus: 2 -%}
 {%- endif -%}
 {%- assign dir_back = back | slice: 0, size | join: '/' | append: '/' -%}
 {%- assign dev = dir_back | split: '/' | last -%}
 
-{%- for contact in developer -%}
-  {%- if url contains contact.type and url contains contact.item and dev == contact.item -%}
-    {%- if include.legal contains 'phone' -%}
-      {%- include footer/phone.html legal=include.legal -%}
-    {%- elsif include.legal == 'email' -%}
-      {%- include footer/email.html legal=include.legal -%}
-    {%- else -%}
-      {%- include footer/text.html legal=include.legal -%}
-    {%- endif -%}
-  {%- endif -%}
-{%- endfor -%}
+{%- capture output -%}{%- endcapture -%}
 
-{%- for contact in realtor -%}
-  {%- if url contains contact.type and url contains contact.item -%}
-    {%- if include.legal contains 'phone' -%}
-      {%- include footer/phone.html legal=include.legal -%}
-    {%- elsif include.legal == 'email' -%}
-      {%- include footer/email.html legal=include.legal -%}
-    {%- else -%}
-      {%- include footer/text.html legal=include.legal -%}
+{%- if size != 9 -%}
+  {%- for contact in region -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- assign output = 'region' -%}{%- break -%}
     {%- endif -%}
-  {%- endif -%}
-{%- endfor -%}
+  {%- endfor -%}
+{%- endif -%}
 
-{%- for contact in agency -%}
-  {%- if url contains contact.type and url contains contact.item -%}
-    {%- if include.legal contains 'phone' -%}
-      {%- include footer/phone.html legal=include.legal -%}
-    {%- elsif include.legal == 'email' -%}
-      {%- include footer/email.html legal=include.legal -%}
-    {%- else -%}
-      {%- include footer/text.html legal=include.legal -%}
+{%- if output == '' and isDeveloper == false and isRealtor == false and isAgency == false -%}
+  {%- for contact in city -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- assign output = 'city' -%}{%- break -%}
     {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if output == '' and isDeveloper == false and isRealtor == false and isAgency == false -%}
+  {%- for contact in district -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- if size == 5 and url contains 'village' -%}
+      {%- else -%}
+        {%- assign output = 'district' -%}{%- break -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if output == '' -%}
+  {%- for contact in town -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- assign output = 'town' -%}{%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if output == '' -%}
+  {%- for contact in village -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- assign output = 'village' -%}{%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if output == '' -%}
+  {%- for contact in developer -%}
+    {%- if url contains contact.type and url contains contact.item and dev == contact.item -%}
+      {%- assign output = 'developer' -%}{%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if output == '' -%}
+  {%- for contact in realtor -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- assign output = 'realtor' -%}{%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if output == '' -%}
+  {%- for contact in agency -%}
+    {%- if url contains contact.type and url contains contact.item -%}
+      {%- assign output = 'agency' -%}{%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if output != '' -%}
+  {%- case output -%}
+    {%- when 'region' -%}{%- for c in region -%}{%- if url contains c.type and url contains c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- when 'district' -%}{%- for c in district -%}{%- if url contains c.type and url contains c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- when 'city' -%}{%- for c in city -%}{%- if url contains c.type and url contains c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- when 'town' -%}{%- for c in town -%}{%- if url contains c.type and url contains c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- when 'village' -%}{%- for c in village -%}{%- if url contains c.type and url contains c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- when 'developer' -%}{%- for c in developer -%}{%- if url contains c.type and url contains c.item and dev == c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- when 'realtor' -%}{%- for c in realtor -%}{%- if url contains c.type and url contains c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- when 'agency' -%}{%- for c in agency -%}{%- if url contains c.type and url contains c.item -%}{%- assign contact = c -%}{%- break -%}{%- endif -%}{%- endfor -%}
+  {%- endcase -%}
+
+  {%- if include.legal contains 'phone' -%}
+    {%- include footer/phone.html legal=include.legal contact=contact -%}
+  {%- elsif include.legal == 'email' -%}
+    {%- include footer/email.html legal=include.legal contact=contact -%}
+  {%- else -%}
+    {%- include footer/text.html legal=include.legal contact=contact -%}
   {%- endif -%}
-{%- endfor -%}
+{%- endif -%}
