@@ -33,7 +33,7 @@ layout: default
       </div>
       <button class="navbar-toggler ml-1 shadow-none collapsed" type="button" data-toggle="collapse" data-target="#navbar{{ slugu | capitalize }}" aria-controls="navbar{{ slugu | capitalize }}" aria-expanded="false" aria-label="Toggle button"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse justify-content-end" id="navbar{{ slugu | capitalize }}">
-        <ul class="navbar-nav nav nav-tabs border-0" id="{{ slugu }}-nav">
+        <ul class="navbar-nav nav nav-tabs border-0" id="{{ slugu }}-nav" role="tablist">
           {%- if fJson == 'true' and isJson[0] -%}
             {%- include elements/offer-tab.html -%}
           {%- else -%}
