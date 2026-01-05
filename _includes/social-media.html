@@ -28,7 +28,7 @@
       <div class="card h-100">
         <div class="card-body">
           {%- if sm.url and sm.url != '' -%}
-          <h5 class="card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></h5>
+          <h3 class="h5 card-title">Програмний додаток <a href="{%- if sm.links.userinfo and sm.links.userinfo != '' -%}{{ sm.links.userinfo }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></h3>
           <div class="card-text"></div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item px-0">Додати оголошення через <a href="{%- if sm.links.chat and sm.links.chat != '' -%}{{ sm.links.chat }}{%- else -%}{{ sm.url }}{%- endif -%}" target="_blank" rel="noopener" aria-label="{{ sm.title }}">{{ sm.title }}</a></li>
