@@ -26,7 +26,8 @@
                 {%- if three.title -%}{{ three.title | replace_first: ' в ', ' у ' }}{%- else -%}{{ three.navtitle }}{%- endif -%}
               </a>
             </h{{ isTH }}>
-            {%- include home/card.html region=slug url=three.url title=three.title breadcrumb=three.breadcrumb -%}
+            {%- if slashu == 3 or page.url == '/district/' -%}{%- assign isTH = 3 -%}{%- else -%}{%- assign isTH = 4 -%}{%- endif -%}
+            {%- include home/card.html slashu=slashu region=slug url=three.url title=three.title breadcrumb=three.breadcrumb -%}
           </div>
         </div>
       </div>
