@@ -111,7 +111,7 @@ layout: default
             </dt>
             <dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ page.phone }}" title="{{ site.data.uk.offers }} у списку">{{ page.seller }}</a></dd>
             <dt>Контакти {% if page.rent %}орендодавця{% else %}продавця{% endif %}</dt>
-            <dd><button type="button" tabindex="0" class="btn btn-link p-0 m-0" data-custom-class="tel" data-toggle="popover" data-trigger="focus" data-offset="1,-128" data-placement="right" data-html="true" data-content="{%- include footer/phone.html legal=page.phone type='property' escape_for_attr=true -%}">+38&nbsp;XXX&nbsp;XXX&nbsp;XX&nbsp;XX</button></dd>
+            <dd><button type="button" tabindex="0" class="btn btn-link p-0 m-0" data-custom-class="tel" data-toggle="popover" data-trigger="focus click" data-offset="1,-128" data-placement="right" data-html="true" data-content="{%- include footer/phone.html legal=page.phone type='property' escape_for_attr=true -%}">+38&nbsp;XXX&nbsp;XXX&nbsp;XX&nbsp;XX</button></dd>
           {%- endif -%}
 
           <dt>Розміщено у <a href="{{ site.main_url }}" target="_blank">Мережі Вебсайтів Нерухомості</a></dt>
