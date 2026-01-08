@@ -197,3 +197,9 @@ main .leaflet-menu {
 .tel { font-size: 1.03rem; border: 0; margin-bottom: 0.025rem; }
 .tel .arrow { display: none; }
 .tel .popover-body { font-size: 1.03rem; padding: 0 1px 0 1px; }
+
+.tel.popover .popover-body {
+  display: block;
+  text-align: center;
+  padding: 2px 0;
+}
