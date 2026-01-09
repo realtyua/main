@@ -199,11 +199,15 @@ main .leaflet-menu {
 .tel.popover { border: 0; }
 .tel.popover .popover-body { display: block; font-size: 1.03rem; text-align: center; padding: 0; }
 
-/* A CSS hack to target only Safari 16+ using the unique hanging-punctuation property */
 @supports (-webkit-appearance: none) and (hanging-punctuation: first) {
   .tel {
-    /* your safari-specific styles here */
-    left: 25px;
+    left: 35px !important;
     padding-right: 10px;
   }
+}
+
+_::-webkit-:host,
+.tel {
+  left: 35px !important;
+  padding-right: 10px;
 }
