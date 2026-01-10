@@ -201,13 +201,21 @@ main .leaflet-menu {
 
 @supports (-webkit-appearance: none) and (hanging-punctuation: first) {
   .tel {
-    left: 35px !important;
+    left: 33px !important;
     padding-right: 10px;
   }
 }
 
 _::-webkit-:host,
 .tel {
-  left: 35px !important;
+  left: 33px !important;
   padding-right: 10px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  _::-webkit-:host,
+  .tel {
+    left: 22px !important;
+    padding-right: 10px;
+  }
 }
