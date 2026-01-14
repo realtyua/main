@@ -4,7 +4,12 @@
     {%- assign slug = 3.dir | split: '/' | last -%}
     {%- assign current = 3.url | remove: slug | remove: '//' | append: '/' -%}
     {%- assign 3_size = 3.dir | split: '/' | size -%}
-    {%- if 3.url contains '/index.html' and 3.navhide != 1 and 3.title != '' and 3_size < 6 -%}
+    {%- if 3.url contains '/index.html' and 3.navhide != 1 and 3.title != '' and 3_size < 6 and (3.url contains '/city/' or 3.url contains '/town/') -%}
+      {
+        "url":"{{ 3.url | remove: 'index.html' | prepend: site.url }}",
+        "title":"{{ include.navtitle }} - {{ 3.navtitle }}"
+      },
+    {%- elsif 3.url contains '/index.html' and 3.navhide != 1 and 3.title != '' and 3_size < 5 and 3.url contains '/district/' -%}
       {
         "url":"{{ 3.url | remove: 'index.html' | prepend: site.url }}",
         "title":"{{ include.navtitle }} - {{ 3.navtitle }}"

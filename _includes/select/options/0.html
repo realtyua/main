@@ -1,4 +1,4 @@
-{%- include select/var-options.html -%}
+{%- assign 0s = site.html_pages | sort: 'path' | reverse -%}
 {%- for 0 in 0s -%}
   {%- assign slug = 0.dir | split: '/' | last -%}
   {%- assign current = 0.url | remove: slug | remove: '//' | append: '/' -%}
@@ -8,8 +8,7 @@
         {%- include select/options/1.html current=0.url -%}
       {%- endif -%}
     {%- if 0.url -%}
-      {%- assign 1s = site.html_pages -%}
-      {%- for 1 in 1s -%}
+      {%- for 1 in 0s -%}
         {%- if 1 -%}
           {%- assign slug = 1.dir | split: '/' | last -%}
           {%- assign current = 1.url | remove: slug | remove: '//' | append: '/' -%}
