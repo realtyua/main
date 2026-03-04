@@ -33,6 +33,51 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Update exchange rates in _config.yml
+        run: |
+          CURRENT_USD=$(grep '^usd:' _config.yml | awk '{print $2}')
+          CURRENT_EUR=$(grep '^eur:' _config.yml | awk '{print $2}')
+          CURRENT_NBU=$(grep '^nbu:' _config.yml | awk '{print $2}')
+          USD="" EUR="" NBU=""
+
+          echo "Спроба НБУ API..."
+          NBU_DATA=$(curl -sf --max-time 10 "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json" || echo "")
+          if [ -n "$NBU_DATA" ]; then
+            USD=$(echo "$NBU_DATA" | python3 -c "import sys,json; data=json.load(sys.stdin); [print(round(r['rate'],2)) for r in data if r['cc']=='USD']" 2>/dev/null | head -1)
+            EUR=$(echo "$NBU_DATA" | python3 -c "import sys,json; data=json.load(sys.stdin); [print(round(r['rate'],2)) for r in data if r['cc']=='EUR']" 2>/dev/null | head -1)
+            NBU="$USD" && echo "✅ НБУ: USD=$USD EUR=$EUR"
+          fi
+
+          if [ -z "$USD" ] || [ -z "$EUR" ]; then
+            echo "НБУ недоступний. Спроба PrivatBank..."
+            PRIVAT_DATA=$(curl -sf --max-time 10 "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5" || echo "")
+            if [ -n "$PRIVAT_DATA" ]; then
+              USD=$(echo "$PRIVAT_DATA" | python3 -c "import sys,json; data=json.load(sys.stdin); [print(round(float(r['sale']),2)) for r in data if r['ccy']=='USD']" 2>/dev/null | head -1)
+              EUR=$(echo "$PRIVAT_DATA" | python3 -c "import sys,json; data=json.load(sys.stdin); [print(round(float(r['sale']),2)) for r in data if r['ccy']=='EUR']" 2>/dev/null | head -1)
+              NBU="$USD" && echo "✅ PrivatBank: USD=$USD EUR=$EUR"
+            fi
+          fi
+
+          if [ -z "$USD" ] || [ -z "$EUR" ]; then
+            echo "PrivatBank недоступний. Спроба Monobank..."
+            MONO_DATA=$(curl -sf --max-time 10 "https://api.monobank.ua/bank/currency" || echo "")
+            if [ -n "$MONO_DATA" ]; then
+              USD=$(echo "$MONO_DATA" | python3 -c "import sys,json; data=json.load(sys.stdin); [print(round(r.get('rateSell',r.get('rateCross',0)),2)) for r in data if r.get('currencyCodeA')==840 and r.get('currencyCodeB')==980]" 2>/dev/null | head -1)
+              EUR=$(echo "$MONO_DATA" | python3 -c "import sys,json; data=json.load(sys.stdin); [print(round(r.get('rateSell',r.get('rateCross',0)),2)) for r in data if r.get('currencyCodeA')==978 and r.get('currencyCodeB')==980]" 2>/dev/null | head -1)
+              NBU="$USD" && echo "✅ Monobank: USD=$USD EUR=$EUR"
+            fi
+          fi
+
+          if [ -z "$USD" ] || [ -z "$EUR" ]; then
+            echo "⚠️ Всі API недоступні! Залишаємо: USD=$CURRENT_USD EUR=$CURRENT_EUR"
+            USD="$CURRENT_USD" EUR="$CURRENT_EUR" NBU="$CURRENT_NBU"
+          fi
+
+          sed -i "s/^usd: .*/usd: $USD/" _config.yml
+          sed -i "s/^eur: .*/eur: $EUR/" _config.yml
+          sed -i "s/^nbu: .*/nbu: $NBU/" _config.yml
+          echo "✅ _config.yml оновлено: USD=$USD EUR=$EUR NBU=$NBU"
+
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         # uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
