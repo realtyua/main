@@ -9,7 +9,7 @@
                             <a id="mapsite" class="badge badge-secondary collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map">{{ site.data.uk.map_site }}</a>
                         </div>
                     </div>
-                    <div class="collapse multi-collapse website-map" id="websitemap">{%- include map/0.html -%}</div>
+                    <div class="collapse multi-collapse website-map" id="websitemap">{% sitemap %}</div>
                 </div>
             </div>
         {%- endif -%}

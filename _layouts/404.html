@@ -19,7 +19,7 @@ layout: compress
                   <h3 class="card-title h6">Додати нове оголошення можна ось <a href="{{ site.addre }}" class="text-white">тут...</a></h3>
                   <div class="card-text">
                     Спробуйте зазирнути у <a id="mapsite" class="text-white collapsed" data-toggle="collapse" href="#websitemap" role="button" aria-expanded="false" aria-controls="websitemap" data-target=".website-map"><u>{{ site.data.uk.map_site }}</u></a> або розпочніть перегляд з <a class="text-white" href="{{ site.url }}" title="Головна сторінка сайту"><u>головної сторінки</u></a>.
-                    <div class="bg-white px-3 collapse multi-collapse website-map" id="websitemap">{%- include map/0.html -%}</div>
+                    <div class="bg-white px-3 collapse multi-collapse website-map" id="websitemap">{% sitemap %}</div>
                   </div>
                 </div>
               </div>
