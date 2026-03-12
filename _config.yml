@@ -140,6 +140,7 @@ jekyll_get_json:
 sass:
   sass_dir: _sass
   style: compressed
+  quiet_deps: true
 
 compress_html:
   clippings: all

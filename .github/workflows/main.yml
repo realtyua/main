@@ -27,6 +27,60 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Update last_modified_atl
+  update-timestamps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # required for git push
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2  # required to compare against previous commit
+
+      - name: Update last_modified_at
+        run: |
+          # Format current time as ISO 8601 with colon in timezone offset (e.g. +02:00)
+          NOW=$(date +"%Y-%m-%dT%H:%M:%S%z" | sed 's/\([+-][0-9][0-9]\)\([0-9][0-9]\)$/\1:\2/')
+
+          # Get list of changed .md files in district/ or region/ only
+          CHANGED_MD=$(git diff --name-only HEAD~1 HEAD | grep '\.md$' | grep -E '^(district|region)/')
+
+          if [ -z "$CHANGED_MD" ]; then
+            echo "No .md changes found in district/ or region/, skipping."
+            exit 0
+          fi
+
+          UPDATED_DISTRICT=false
+          UPDATED_REGION=false
+
+          while IFS= read -r file; do
+            # Update all .html files in district/ if any .md changed there
+            if [[ "$file" == district/* ]] && [ "$UPDATED_DISTRICT" = false ]; then
+              echo "📁 Updating district/*.html..."
+              find district -maxdepth 1 -name "*.html" -exec sed -i "s|^last_modified_at:.*|last_modified_at: $NOW|" {} \;
+              UPDATED_DISTRICT=true
+            fi
+            # Update all .html files in region/ if any .md changed there
+            if [[ "$file" == region/* ]] && [ "$UPDATED_REGION" = false ]; then
+              echo "📁 Updating region/*.html..."
+              find region -maxdepth 1 -name "*.html" -exec sed -i "s|^last_modified_at:.*|last_modified_at: $NOW|" {} \;
+              UPDATED_REGION=true
+            fi
+          done <<< "$CHANGED_MD"
+
+          # Always update index.html if any .md changed in district/ or region/
+          echo "📄 Updating index.html..."
+          sed -i "s|^last_modified_at:.*|last_modified_at: $NOW|" index.html
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          # [skip ci] prevents this commit from triggering the workflow again
+          git diff --staged --quiet || git commit -m "chore: update last_modified_at [skip ci]"
+          git push
+
   # Build job
   build:
     runs-on: ubuntu-latest
