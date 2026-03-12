@@ -31,7 +31,7 @@ jobs:
   update-timestamps:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # required for git push
+      contents: write
     steps:
       - uses: actions/checkout@v5
         with:
@@ -50,25 +50,34 @@ jobs:
             exit 0
           fi
 
-          UPDATED_DISTRICT=false
-          UPDATED_REGION=false
+          # Collect all unique directories that need .html updates.
+          # For each changed .md, bubble up through every parent directory.
+          # Example: region/city/ivano-frankivsk/apartment/_posts/file.md
+          #   → region/city/ivano-frankivsk/apartment/
+          #   → region/city/ivano-frankivsk/
+          #   → region/city/
+          #   → region/
+          declare -A DIRS_TO_UPDATE
 
           while IFS= read -r file; do
-            # Update all .html files in district/ if any .md changed there
-            if [[ "$file" == district/* ]] && [ "$UPDATED_DISTRICT" = false ]; then
-              echo "📁 Updating district/*.html..."
-              find district -maxdepth 1 -name "*.html" -exec sed -i "s|^last_modified_at:.*|last_modified_at: $NOW|" {} \;
-              UPDATED_DISTRICT=true
-            fi
-            # Update all .html files in region/ if any .md changed there
-            if [[ "$file" == region/* ]] && [ "$UPDATED_REGION" = false ]; then
-              echo "📁 Updating region/*.html..."
-              find region -maxdepth 1 -name "*.html" -exec sed -i "s|^last_modified_at:.*|last_modified_at: $NOW|" {} \;
-              UPDATED_REGION=true
-            fi
+            dir=$(dirname "$file")
+            # Walk up the directory tree until we reach the repo root
+            while [[ "$dir" != "." ]]; do
+              DIRS_TO_UPDATE["$dir"]=1
+              dir=$(dirname "$dir")
+            done
           done <<< "$CHANGED_MD"
 
-          # Always update index.html if any .md changed in district/ or region/
+          # Update all *.html files in each collected directory (non-recursive)
+          for dir in "${!DIRS_TO_UPDATE[@]}"; do
+            html_files=$(find "$dir" -maxdepth 1 -name "*.html")
+            if [ -n "$html_files" ]; then
+              echo "📁 Updating $dir/*.html..."
+              echo "$html_files" | xargs sed -i "s|^last_modified_at:.*|last_modified_at: $NOW|"
+            fi
+          done
+
+          # Always update root index.html if any .md changed in district/ or region/
           echo "📄 Updating index.html..."
           sed -i "s|^last_modified_at:.*|last_modified_at: $NOW|" index.html
 
