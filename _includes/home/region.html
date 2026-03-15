@@ -12,7 +12,7 @@
     {% endcomment %}
       <div id="{{ slug }}" class="col mb-4">
         <div class="card">
-          {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/locations/' and i.basename == slug" -%}
+          {%- assign file = site.data._static_images | where_exp: 'i', "i.path contains '/assets/images/locations/' and i.basename == slug" -%}
           {%- if file[0] -%}
             <img src="{{ file[0].path | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.uk.realestate }} {{ site.data.uk[slug] }}" title="Продаж і оренда об'єктів нерухомості {{ site.data.uk[slug] }}">
           {%- else -%}

@@ -2,7 +2,7 @@
 {%- assign w = include.size | split: 'x' | first -%}
 {%- assign h = include.size | split: 'x' | last -%}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{{ include.cols }} mt-1">
-{%- assign files = site.static_files | where_exp: 'i', "i.path contains folder and i.extname == '.png' or i.extname == '.jpg' or i.extname == '.jpeg' or i.extname == '.PNG' or i.extname == '.JPG' or i.extname == '.JPEG'" -%}
+{%- assign files = site.data._static_images | where_exp: 'i', "i.path contains folder and i.extname == '.png' or i.extname == '.jpg' or i.extname == '.jpeg' or i.extname == '.PNG' or i.extname == '.JPG' or i.extname == '.JPEG'" -%}
 {%- for file in files -%}
   {%- assign sizename = file.basename | size -%}
   {%- assign alt = file.basename | slice: 2, sizename -%}

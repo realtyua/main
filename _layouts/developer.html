@@ -11,7 +11,7 @@ layout: default
     <h1 class="h2 mb-3">{{ paget }} {{ idata }}</h1>
     <div class="row">
       <div class="col-md-4">
-        {%- assign file = site.static_files | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slugu" -%}
+        {%- assign file = site.data._static_images | where_exp: 'i', "i.path contains '/assets/images/logo/' and i.basename == slugu" -%}
         {%- if file[0] -%}
           <img loading="lazy" src="{{ file[0].path | relative_url }}" class="card-img-top" alt="{{ site.data.uk.re_logo }} {{ paget | replace: '&nbsp;', ' ' | remove: '"' }}">
         {%- else -%}

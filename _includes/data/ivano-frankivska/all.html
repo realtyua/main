@@ -1,3 +1,2 @@
 {%- include data/owner.html -%}
-{%- include data/sallers.html -%}
-{%- assign offers = records | sort: 'date' | reverse -%}
+{%- assign offers = site.data._cached_records -%}

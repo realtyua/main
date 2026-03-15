@@ -24,11 +24,11 @@
   {%- assign sls = sl | size | minus: 2 -%}
 {%- endif -%}
 {%- assign ld = sl | slice: 0, sls | join: '/' | append: '/' -%}
-{%- assign lps = site.pages | where: 'url', ld -%}
-{%- for lpb in lps limit: 1 -%}
+{%- assign lpb = site.data._pages_by_url[ld] -%}
+{%- if lpb -%}
   {%- if lpb.breadcrumb -%}
     {%- assign location = lpb.breadcrumb -%}
   {%- else -%}
     {%- assign location = lpb.navtitle -%}
   {%- endif -%}
-{%- endfor -%}
+{%- endif -%}

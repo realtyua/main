@@ -18,7 +18,7 @@
   {%- endcapture -%}
   {%- assign more = site.data.uk.re_more_ads | split: ',' | sample | append: site.data.uk.re_ads -%}
   {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
-  {%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
+  {%- assign images = site.data._static_images | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
   {%- capture imageid -%}/assets/images/re/{{ uid }}.jpg{%- endcapture -%}
   {%- capture idimage -%}{%- file_exists {{ imageid }} -%}{%- endcapture -%}
   {%- capture sellRent -%}{% if offer.rent == '1' %}Здається в оренду {% else %}Продається {% endif %}{{ offer.type | downcase }} в {{ c_location }}{%- endcapture -%}

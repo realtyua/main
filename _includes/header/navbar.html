@@ -10,7 +10,7 @@
       </div>
       <div class="collapse navbar-collapse" id="navbarRealEstate">
         <ul class="navbar-nav" role="menu">
-          {%- assign nb1s = site.html_pages | sort: 'path' | reverse -%}
+          {%- assign nb1s = site.data._html_pages_sorted_desc -%}
           {%- for nb1 in nb1s -%}
             {%- assign nb1_path = nb1.url | split: '/' -%}
             {%- assign nb1_part = nb1_path | size -%}
@@ -35,14 +35,13 @@
                   {%- endif -%}
                 </li>
               {%- endif -%}
-              {%- if nb1.url -%}
-                {%- assign nb2s = site.html_pages -%}
-                {%- for nb2 in nb2s -%}
+              {%- comment -%} nb2: міста та містечка — беремо з кешу по батьківському URL {%- endcomment -%}
+              {%- assign nb2s = site.data._html_pages_by_parent[nb1.url] -%}
+              {%- for nb2 in nb2s -%}
+                {%- if nb2.url contains '/city/' or nb2.url contains '/town/' -%}
                   {%- assign nb2_path = nb2.url | split: '/' -%}
                   {%- assign nb2_part = nb2_path | size -%}
                   {%- assign nb2_slug = nb2.url | split: '/' | last -%}
-                  {%- assign nb2_current = nb2.url | remove: nb2_slug | remove: '//' | append: '/' -%}
-                  {%- if nb1.url == nb2_current and nb2.url contains '/city/' or nb2.url contains '/town/' -%}
                   <li class="nav-item position-static{% if nb2_part >= 3 %} dropdown{%- endif -%}">
                     <a class="nav-link{% if nb2_part >= 3 %} dropdown-toggle{%- endif -%}" href="{%- if nb2_part >= 3 -%}#{%- else -%}{{ nb2.url }}{%- endif -%}"{% if nb2_part >= 3 %} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{%- endif -%}>
                       {%- if nb2.navtitle -%}{{ nb2.navtitle }}{%- else -%}{{ nb2.title }}{%- endif -%}
@@ -51,9 +50,8 @@
                       {%- include header/dropdown.html current=nb2.url title=nb2.title slug=nb2_slug -%}
                     {%- endif -%}
                   </li>
-                  {%- endif -%}
-                {%- endfor -%}
-              {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
             {%- endif -%}
           {%- endfor -%}
           <li class="nav-item position-static dropdown mr-0">

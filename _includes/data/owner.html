@@ -8,7 +8,4 @@
 {%- else -%}
   {%- include location.html -%}
 {%- endif -%}
-
-{%- assign estates = site.data.estates | where_exp: 'i', 'i.hidden != true' -%}
-{%- assign all_items = estates | concat: site.data.owners -%}
-{%- assign owners = all_items | unique_owners_with_phone -%}
+{%- assign owners = site.data._cached_owners -%}

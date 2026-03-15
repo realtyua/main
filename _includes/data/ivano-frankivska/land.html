@@ -1,3 +1,2 @@
 {%- include data/owner.html -%}
-{%- include data/sallers.html -%}
-{%- assign offers = records | sort: 'date' | reverse | where_exp: 'i', "i.rent != '1' and i.type contains site.data.uk.re_land" -%}
+{%- assign offers = site.data._cached_records | where_exp: 'i', "i.rent != '1' and i.type contains site.data.uk.re_land" -%}

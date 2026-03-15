@@ -23,10 +23,13 @@ layout: compress
       {%- elsif pageu == '/district/town/' -%}
       {%- endif -%}
     {%- endcapture -%}
-    {%- assign ledge = pageu | split: '/' | last -%}
-    {%- assign ldir = '/assets/images/locations/' -%}
-    {%- assign lpath = ledge | prepend: ldir | append: '.jpg' | relative_url -%}
-    {%- assign file = site.static_files | where: 'path', lpath | first -%}
+    {% comment %}
+      {%- assign ledge = pageu | split: '/' | last -%}
+      {%- assign ldir = '/assets/images/locations/' -%}
+      {%- assign lpath = ledge | prepend: ldir | append: '.jpg' | relative_url -%}
+      {%- assign file = site.static_files | where: 'path', lpath | first -%}
+    {% endcomment %}
+    {%- include folder.html dir='/assets/images/logo/' slug=object -%}
     {%- capture title -%}
       {%- if paget -%}
         {{ paget | smartify }}{% if tlocation != '' %}{{ tlocation }}{% endif %} · {{ site.title | smartify }}

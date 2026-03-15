@@ -32,8 +32,8 @@
 
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ uid }}/{%- endcapture -%}
 
-{%- assign jpgs = site.static_files | where: "image", true | where_exp: "f", "f.path contains folder" | where: "extname", ".jpg" -%}
-{%- assign jpegs = site.static_files | where: "image", true | where_exp: "f", "f.path contains folder" | where: "extname", ".jpeg" -%}
+{%- assign jpgs = site.data._static_images | where: "image", true | where_exp: "f", "f.path contains folder" | where: "extname", ".jpg" -%}
+{%- assign jpegs = site.data._static_images | where: "image", true | where_exp: "f", "f.path contains folder" | where: "extname", ".jpeg" -%}
 {%- assign images = jpgs | concat: jpegs -%}
 
 {%- capture imageid -%}/assets/images/re/{{ uid }}.jpg{%- endcapture -%}

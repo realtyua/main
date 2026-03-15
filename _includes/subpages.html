@@ -52,7 +52,7 @@
                   <div class="tab-pane pt-3 fade active show" id="{{ region }}-{{ section }}-offers" role="tabpanel" aria-labelledby="{{ region }}-{{ section }}-offers-tab">
                     {%- assign records = site.data[section] -%}
                     {%- if records.size > 0 -%}
-                      {%- assign offers = records | sort: 'date' | reverse -%}
+                      {%- assign offers = site.data._cached_records -%}
                       {%- assign total = offers | size -%}
                       {%- assign others = total | minus: 1 -%}
                       {%- for offer in offers limit: 1 -%}

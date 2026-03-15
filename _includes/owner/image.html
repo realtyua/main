@@ -2,7 +2,7 @@
 {%- assign image = include.image | prepend: folder -%}
 {%- assign w = include.size | split: 'x' | first -%}
 {%- assign h = include.size | split: 'x' | last -%}
-{%- assign files = site.static_files | where_exp: 'i', "i.path contains image and i.extname == '.png' or i.extname == '.jpg' or i.extname == '.jpeg' or i.extname == '.PNG' or i.extname == '.JPG' or i.extname == '.JPEG'" -%}
+{%- assign files = site.data._static_images | where_exp: 'i', "i.path contains image and i.extname == '.png' or i.extname == '.jpg' or i.extname == '.jpeg' or i.extname == '.PNG' or i.extname == '.JPG' or i.extname == '.JPEG'" -%}
 {%- for file in files -%}
   {%- assign sizename = file.basename | size -%}
   {%- assign alt = file.basename | slice: 2, sizename -%}

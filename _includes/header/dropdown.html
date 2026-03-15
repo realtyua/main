@@ -1,15 +1,13 @@
 <div class="dropdown-menu mt-n1 w-100 border-top-0 rounded-0" role="listbox" aria-labelledby="navDropRealEstate{{ include.slug | capitalize }}">
   <div id="navDropRealEstate{{ include.slug | capitalize }}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3{% if include.current contains '/city/' or include.current contains '/town/' %} row-cols-lg-5{% else %} row-cols-lg-4{% endif %} w-100 mt-mx-2 mt-md-3 mx-0 px-0">
-  {%- assign nb3s = site.html_pages | sort: 'path' -%}
+  {%- assign nb3s = site.data._html_pages_by_parent[include.current] -%}
   {%- for nb3 in nb3s -%}
-    {%- assign nb3_slug = nb3.url | split: '/' | last -%}
-    {%- assign nb3_current = nb3.url | remove: nb3_slug | remove: '//' | append: '/' -%}
-    {%- if include.current == nb3_current and nb3.navhide != 1 -%}
+    {%- if nb3.navhide != 1 and nb3.navtitle -%}
     <div class="col mb-3">
       {%- if pageu == nb3.url -%}
-        {%- if nb3.navtitle -%}<span class="dropdown-item active">{{ nb3.navtitle }}</span>{%- endif -%}
+        <span class="dropdown-item active">{{ nb3.navtitle }}</span>
       {%- else -%}
-        {%- if nb3.navtitle -%}<a href="{{ nb3.url }}" class="dropdown-item">{{ nb3.navtitle }}</a>{%- endif -%}
+        <a href="{{ nb3.url }}" class="dropdown-item">{{ nb3.navtitle }}</a>
       {%- endif -%}
       {%- if nb3.subtitle -%}<small>{{ nb3.subtitle | replace_first: " терит", "<br>терит" }}</small>{%- endif -%}
     </div>

@@ -10,9 +10,8 @@
   {%- endif -%}
   {%- capture default -%}/assets/images/default{{ group }}.png{%- endcapture -%}
 {%- endif -%}
-
 {%- assign files = '' | split:'' -%}
-{%- for i in site.static_files -%}
+{%- for i in site.data._static_images -%}
   {%- if i.path contains folder -%}
     {%- if i.extname == '.jpg' or i.extname == '.JPG' or i.extname == '.jpeg' or i.extname == '.JPEG' or i.extname == '.png' or i.extname == '.PNG' -%}
       {%- assign sizename = i.basename | size -%}
@@ -22,7 +21,6 @@
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
-
 {%- for file in files -%}
   {%- if forloop.first -%}
 <div id="carousel{{ include.group }}" class="carousel carousel-small carousel-fade slide" data-interval="5000" data-wrap="true" data-ride="carousel">

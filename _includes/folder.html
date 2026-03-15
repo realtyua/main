@@ -1,6 +1,6 @@
 {%- assign folder = include.dir -%}
 {%- assign slug = include.slug -%}
-{%- assign files = site.static_files | where_exp: 'i', "i.path contains folder and i.basename contains slug and i.extname == '.png' or i.extname == '.PNG' or i.extname == '.jpg' or i.extname == '.JPG' or i.extname == '.jpeg' or i.extname == '.JPEG'" -%}
+{%- assign files = site.data._static_images | where_exp: 'i', 'i.path contains folder' | where_exp: 'i', 'i.basename contains slug' -%}
 {%- for file in files -%}
   {%- if folder contains '/logo/' -%}
     {%- assign picture = folder | append: slug | append: file.extname | relative_url -%}

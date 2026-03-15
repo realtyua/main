@@ -5,14 +5,12 @@ require 'json'
 Jekyll::Hooks.register :site, :post_read do |site|
   to_string = ->(val) { val.nil? || val == "" ? "" : val.to_s }
 
-  # --- 1. Фільтрація постів ---
   raw_offers = site.posts.docs.select do |post|
     !post.data['hidden'] &&
     !post.url.include?('/news/') &&
     !post.url.include?('/articles/')
   end
 
-  # --- 2. Попередження про дублікати uid (швидко) ---
   uid_set = Set.new
   duplicate_uids = Set.new
   raw_offers.each do |offer|
@@ -29,16 +27,13 @@ Jekyll::Hooks.register :site, :post_read do |site|
     Jekyll.logger.warn "Estates", "⚠️ #{duplicate_uids.size} duplicate uid(s) detected (all included in output)"
   end
 
-  # --- 3. Підготовка індексу зображень (лише один раз) ---
   image_map = {}
   site.static_files.each do |file|
     next unless file.path.start_with?('/assets/images/') && [".jpg", ".jpeg"].include?(file.extname.downcase)
-    # Нормалізація шляху
     web_path = file.path.gsub('\\', '/')
     image_map[web_path] = web_path
   end
 
-  # --- 4. Групування за phone ---
   phone_groups = {}
   raw_offers.each do |offer|
     phone = to_string[offer.data['phone']]
@@ -46,7 +41,6 @@ Jekyll::Hooks.register :site, :post_read do |site|
     (phone_groups[phone] ||= []) << offer
   end
 
-  # --- 5. Вибір записів ---
   selected_offers = []
 
   phone_groups.each do |phone, group|
@@ -65,13 +59,11 @@ Jekyll::Hooks.register :site, :post_read do |site|
     end
   end
 
-  # --- 6. Генерація даних ---
   site_time = site.time
   cdate_ymd = site_time.strftime('%Y%m%d')
   cdate_iso = site_time.strftime('%Y-%m-%dT00:00:00.000Z')
 
   result = selected_offers.map do |offer|
-    # Дата
     offer_date = offer.date
     date_ymd = offer_date&.strftime('%Y%m%d')
     display_date = if date_ymd && date_ymd > cdate_ymd
@@ -82,16 +74,13 @@ Jekyll::Hooks.register :site, :post_read do |site|
       ""
     end
 
-    # District
     region = to_string[offer.data['region']]
     district = region.sub('кий район', 'кому районі')
 
-    # Зображення
     phone = to_string[offer.data['phone']]
     uid = to_string[offer.data['uid']]
     images = []
 
-    # Спроба 1: папка
     if phone != "" && uid != ""
       base_path = "/assets/images/#{phone}/#{uid}/"
       site.static_files.each do |file|
@@ -102,7 +91,6 @@ Jekyll::Hooks.register :site, :post_read do |site|
       end
     end
 
-    # Спроба 2: fallback
     if images.empty? && uid != ""
       fallback_path = "/assets/images/re/#{uid}.jpg"
       if image_map.key?(fallback_path)
@@ -110,7 +98,6 @@ Jekyll::Hooks.register :site, :post_read do |site|
       end
     end
 
-    # Формування alt/title (лише якщо потрібно)
     if images.any?
       uk = site.data['uk'] || {}
       images = images.map do |img|
@@ -125,7 +112,6 @@ Jekyll::Hooks.register :site, :post_read do |site|
       end
     end
 
-    # Основний об'єкт
     item = {
       "id" => uid,
       "type" => to_string[offer.data['type']],
@@ -160,5 +146,5 @@ Jekyll::Hooks.register :site, :post_read do |site|
   end
 
   site.data['estates'] = result
-  Jekyll.logger.info "Estates", "✅ Generated #{result.size} offers (optimized, production-ready)"
+  Jekyll.logger.info "Estates:", "✓ Generated #{result.size} offers (optimized, production-ready)"
 end

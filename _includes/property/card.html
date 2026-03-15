@@ -2,7 +2,7 @@
 {%- assign date = offer.date | date: '%Y%m%d' -%}
 {%- assign offer = include.offer -%}
 {%- capture folder -%}/assets/images/{{ offer.phone }}/{{ offer.id }}/{%- endcapture -%}
-{%- assign images = site.static_files | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
+{%- assign images = site.data._static_images | where: 'image', true | where_exp: 'i', "i.path contains folder and i.extname == '.jpg' or i.extname == '.JPG'" -%}
 {%- assign type = offer.type | split: ' ' -%}
 {%- assign c_location = offer.location | default: offer.region -%}
 {%- capture offerType -%}
