@@ -1,6 +1,6 @@
 {%- assign gauge = slashd | size -%}
 {%- assign piece = slashd | slice: 6, gauge | join: '/' -%}
-{%- assign folder = piece | prepend: '/assets/images/' | append: '/' -%}
+{%- assign folderSlider = piece | prepend: '/assets/images/' | append: '/' -%}
 
 {%- assign gauge = slashd | size | minus: 2 -%}
 {%- assign piece = slashd | slice: 0, gauge | join: '/' -%}

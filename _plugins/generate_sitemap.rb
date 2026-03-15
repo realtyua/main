@@ -99,7 +99,7 @@ module Jekyll
       return '/' unless url
       url = url.to_s.gsub(/index\.html$/, '')
       url = url.gsub(%r{/+}, '/')
-      url = url.chomp('/') + '/'
+      url = url.end_with?('.html') ? url : url.chomp('/') + '/'
       url == '//' ? '/' : url
     end
 
