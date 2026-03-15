@@ -43,7 +43,7 @@ jobs:
           NOW=$(date +"%Y-%m-%dT%H:%M:%S%z" | sed 's/\([+-][0-9][0-9]\)\([0-9][0-9]\)$/\1:\2/')
 
           # Get list of changed .md files in district/ or region/ only
-          CHANGED_MD=$(git diff --name-only HEAD~1 HEAD | grep '\.md$' | grep -E '^(district|region)/')
+          CHANGED_MD=$(git diff --name-only HEAD~1 HEAD | grep '\.md$' | grep -E '^(district|region)/' || true)
 
           if [ -z "$CHANGED_MD" ]; then
             echo "No .md changes found in district/ or region/, skipping."
