@@ -1,11 +1,13 @@
 {%- assign iurl = include.url -%}
 {%- assign iregion = include.region -%}
 {%- assign ss = '' | split:'' -%}
-{%- assign ps = site.pages | sort: 'dir' | reverse | where_exp: 'i', "i.dir != iurl and i.url contains iurl and i.navhide != 1"-%}
+{%- assign ps = site.data._html_pages_by_parent[iurl] -%}
 {%- for i in ps -%}
-  {%- assign il = i.dir | split: '/' -%}
-  {%- if il.size == 4 or il.size == 5 -%}
-    {%- assign ss = ss | push: i -%}
+  {%- if i.navhide != 1 and i.url != iurl -%}
+    {%- assign il = i.dir | split: '/' -%}
+    {%- if il.size == 4 or il.size == 5 -%}
+      {%- assign ss = ss | push: i -%}
+    {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
 {%- if ss[0] -%}

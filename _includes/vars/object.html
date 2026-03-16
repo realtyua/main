@@ -17,10 +17,10 @@
   {%- assign gauge = slashd | size | minus: 4 -%}
 {%- endif -%}
 {%- assign backd = slashd | slice: 0, gauge | join: '/' | append: '/' -%}
-{%- assign cities = site.pages | sort: 'dir' | where_exp: 'i', 'i.url contains backd and i.url == backd' -%}
-{%- for city in cities limit: 1 -%}
-  {%- assign location = city.breadcrumb -%}
-{%- endfor -%}
+{%- assign cities = site.data._pages_by_url[backd] -%}
+{%- if cities -%}
+  {%- assign location = cities.breadcrumb -%}
+{%- endif -%}
 {%- assign data = site.data[slugp] | where_exp: 'i', 'i.location contains location and i.object contains page.breadcrumb' -%}
 
 {%- assign object = paged | split: '/' | last -%}
