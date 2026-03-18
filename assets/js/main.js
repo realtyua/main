@@ -10,4 +10,5 @@ sitemap: false
 {%- include js/bootstrap.lightbox.min.js -%}
 {%- include js/bootstrap.smoothscroll.min.js -%}
 {%- include js/tom-select.base.min.js -%}
+{%- include js/itemsjs.min.js -%}
 {%- include js/realtyua.js -%}
