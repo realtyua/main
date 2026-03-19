@@ -1,4 +1,4 @@
-// realtyua.v0.11.js
+// realtyua.v0.12.js
 // v0.1  — базовий Tom Select + Bootstrap
 // v0.2  — перемикач режимів пошуку
 // v0.3  — ItemsJS + loadSearchEngine
@@ -10,6 +10,7 @@
 // v0.9  — виправлено фільтри: type/loc/price через includes() + AND логіка
 // v0.10 — кнопки Продаж/Оренда взаємовиключні + фікс placeholder + фікс collapse на тегах
 // v0.11 — фокус після пагінації + ціна за добу + відображення цін у гривнях + setTimeout фокус
+// v0.12 — стилі кнопок/тегів + картка з фото/без + виправлення фільтру ціни у гривнях
 
 "use strict";
 
@@ -171,34 +172,29 @@ function inputPriceToUAH(val) {
   return parseFloat(val);
 }
 
-// форматує ціну для відображення у картці
 function formatPrice(item) {
-  var price    = String(item.price || '').trim();
+  var price    = String(item.price     || '').trim();
   var priceSqm = String(item.price_sqmt || '').trim();
   var isRent   = item.rent === '1';
 
-  // добова оренда — ціна за добу у гривнях
   if (isRent && !price && priceSqm) {
     var num = parseInt(priceSqm);
     if (!isNaN(num)) {
-      return '<span>' + num.toLocaleString('uk-UA') + '₴/доба</span>';
+      return '<span class="d-block badge badge-primary">' + num.toLocaleString('uk-UA') + '&nbsp;₴/доба</span>';
     }
   }
 
   if (!price) return '';
 
   var uah    = 0;
-  var symbol = '';
   var orig   = '';
 
   if (price.startsWith('$')) {
-    uah    = parseInt(price.slice(1)) * nbuRates.USD;
-    symbol = '$';
-    orig   = price;
+    uah  = parseInt(price.slice(1)) * nbuRates.USD;
+    orig = price;
   } else if (price.startsWith('€')) {
-    uah    = parseInt(price.slice(1)) * nbuRates.EUR;
-    symbol = '€';
-    orig   = price;
+    uah  = parseInt(price.slice(1)) * nbuRates.EUR;
+    orig = price;
   } else {
     uah  = parseInt(price);
     orig = '';
@@ -206,12 +202,12 @@ function formatPrice(item) {
 
   if (isNaN(uah) || uah === 0) return '';
 
-  var uahStr = Math.round(uah).toLocaleString('uk-UA') + '₴';
-
+  var uahStr = Math.round(uah).toLocaleString('uk-UA').replace(/,/g, '&nbsp;') + '₴';
+  var result = '<span class="d-block badge badge-primary">' + uahStr + '</span>';
   if (orig) {
-    return '<span>' + uahStr + '</span><br><small class="text-muted">(' + orig + ')</small>';
+    result += '<small class="d-block text-muted">(' + orig + ')</small>';
   }
-  return '<span>' + uahStr + '</span>';
+  return result;
 }
 
 function updateSearchPlaceholder() {
@@ -376,7 +372,7 @@ function searchRangeLabel(v, unit, prefix) {
 
 function renderSearchTags() {
   var html = Object.keys(searchState.f).map(function (k) {
-    return '<span class="badge badge-info mr-1 mb-1" style="font-size:12px;font-weight:400;padding:4px 8px;">' +
+    return '<span class="badge badge-success mr-1 mb-1" style="font-size:12px;font-weight:400;padding:4px 8px;">' +
       searchTagLabel(k, searchState.f[k]) +
       ' <span style="cursor:pointer;margin-left:4px;" onclick="removeSearchTag(event,\'' + k + '\')">×</span>' +
     '</span>';
@@ -415,7 +411,7 @@ function renderSearchChips() {
   var html = keys.map(function (k) {
     if (k === 'rent') return renderRentChip();
     var active = searchState.f[k] !== undefined;
-    return '<span class="btn btn-sm mr-1 mb-1 ' + (active ? 'btn-info' : 'btn-outline-secondary') + '" ' +
+    return '<span class="btn btn-sm mr-1 mb-1 ' + (active ? 'btn-primary' : 'btn-outline-primary') + '" ' +
       'onclick="toggleSearchChip(\'' + k + '\')">' +
       (active ? '✓ ' : '+ ') + CHIP_LABELS[k] +
       (active ? ' <span onclick="removeSearchChip(event,\'' + k + '\')">×</span>' : '') +
@@ -428,12 +424,12 @@ function renderRentChip() {
   var rent      = searchState.f.rent;
   var saleActive = rent === '';
   var rentActive = rent === '1';
-  return '<span class="btn btn-sm mr-1 mb-1 ' + (saleActive ? 'btn-info' : 'btn-outline-secondary') + '" ' +
+  return '<span class="btn btn-sm mr-1 mb-1 ' + (saleActive ? 'btn-primary' : 'btn-outline-primary') + '" ' +
     'onclick="applyRent(event,\'\')">' +
     (saleActive ? '✓ ' : '') + 'Продаж' +
     (saleActive ? ' <span onclick="removeSearchChip(event,\'rent\')">×</span>' : '') +
     '</span>' +
-    '<span class="btn btn-sm mr-1 mb-1 ' + (rentActive ? 'btn-info' : 'btn-outline-secondary') + '" ' +
+    '<span class="btn btn-sm mr-1 mb-1 ' + (rentActive ? 'btn-primary' : 'btn-outline-primary') + '" ' +
     'onclick="applyRent(event,\'1\')">' +
     (rentActive ? '✓ ' : '') + 'Оренда' +
     (rentActive ? ' <span onclick="removeSearchChip(event,\'rent\')">×</span>' : '') +
@@ -506,7 +502,7 @@ function renderSearchPanel(k) {
   } else if (k === 'floors') {
     $panel.html(searchRangePanel('floors',  searchState.f.floors  || {}, '',    1,  50));
   } else if (k === 'price') {
-    $panel.html(searchRangePanel('price',   searchState.f.price   || {}, '₴',   0,  10000000));
+    $panel.html(searchRangePanel('price',   searchState.f.price   || {}, '₴',  0,  10000000));
   }
 }
 
@@ -562,15 +558,29 @@ function renderResults(items, pagination) {
                   : (item.floors_int ? item.floors_int + ' пов.' : '');
     var meta  = [rooms, surf, land, floor].filter(Boolean).join(' · ');
 
+    var img = '';
+    if (item.images && item.images.length > 0 && item.images[0].src) {
+      img = '<div class="pt-2 pr-1">' +
+        '<img src="{{ site.url }}' + item.images[0].src + '" ' +
+        'alt="' + (item.images[0].alt || '') + '" ' +
+        'width="50" height="50" style="object-fit:cover;border-radius:4px;">' +
+        '</div>';
+    }
+
     return '<a href="' + url + '" class="d-block text-decoration-none border-bottom py-2 px-1 search-result-item">' +
-      '<div class="d-flex justify-content-between align-items-start">' +
-        '<div class="mr-2">' +
-          '<span class="badge badge-secondary mr-1">' + item.type + '</span>' +
-          '<small class="text-muted">' + addr + '</small>' +
+      '<div class="d-flex">' +
+        img +
+        '<div class="p-2 flex-grow-1">' +
+          '<p class="m-0">' +
+            '<span class="badge badge-primary mr-1">' + item.type + '</span>' +
+            '<small class="text-primary">' + addr + '</small>' +
+          '</p>' +
+          (meta ? '<span class="d-block"><small class="text-monospace text-body">' + meta + '</small></span>' : '') +
         '</div>' +
-        '<div class="text-right">' + formatPrice(item) + '</div>' +
+        '<div class="pl-1 py-2 text-center" style="min-width:90px;">' +
+          formatPrice(item) +
+        '</div>' +
       '</div>' +
-      (meta ? '<div class="mt-1"><small class="text-muted">' + meta + '</small></div>' : '') +
     '</a>';
   }).join('');
 
@@ -580,10 +590,10 @@ function renderResults(items, pagination) {
     '<small class="text-muted">Знайдено: ' + total + '</small>' +
     '<div>';
   if (searchPage > 1) {
-    pager += '<button class="btn btn-sm btn-outline-secondary mr-1" id="btnPrevPage">← Назад</button>';
+    pager += '<button class="btn btn-sm btn-outline-primary mr-1" id="btnPrevPage">← Назад</button>';
   }
   if (searchPage < pages) {
-    pager += '<button class="btn btn-sm btn-outline-secondary" id="btnNextPage">Далі →</button>';
+    pager += '<button class="btn btn-sm btn-outline-primary" id="btnNextPage">Далі →</button>';
   }
   pager += '</div></div>';
 
