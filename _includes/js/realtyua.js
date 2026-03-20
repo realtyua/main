@@ -1,4 +1,4 @@
-// realtyua.v0.12.js
+// realtyua.v0.13.js
 // v0.1  — базовий Tom Select + Bootstrap
 // v0.2  — перемикач режимів пошуку
 // v0.3  — ItemsJS + loadSearchEngine
@@ -11,6 +11,7 @@
 // v0.10 — кнопки Продаж/Оренда взаємовиключні + фікс placeholder + фікс collapse на тегах
 // v0.11 — фокус після пагінації + ціна за добу + відображення цін у гривнях + setTimeout фокус
 // v0.12 — стилі кнопок/тегів + картка з фото/без + виправлення фільтру ціни у гривнях
+// v0.13 — клас rounded для фото + фільтр Адреса + великі букви міст/районів + скид сторінки при зміні фільтра
 
 "use strict";
 
@@ -133,23 +134,25 @@ var searchLocations   = [];
 var searchRegions     = [];
 var searchTypes       = [];
 var searchPlaces      = [];
+var searchStreets     = [];
 var searchPage        = 1;
 var searchPerPage     = 10;
 var searchLastFilters = {};
 var nbuRates = { USD: {{ site.usd }}, EUR: {{ site.eur }} };
 
 var CHIPS_BY_TYPE = {
-  'будинок':              ['rent','loc','rooms','surface','land','floors','price'],
-  'квартира':             ['rent','loc','rooms','surface','floor','floors','price'],
-  'земля':                ['rent','loc','land','price'],
-  'нежитлове приміщення': ['rent','loc','surface','land','floor','price'],
-  'гараж':                ['rent','loc','surface','price'],
-  'default':              ['rent','loc','surface','land','price'],
+  'будинок':              ['rent','loc','addr','rooms','surface','land','floors','price'],
+  'квартира':             ['rent','loc','addr','rooms','surface','floor','floors','price'],
+  'земля':                ['rent','loc','addr','land','price'],
+  'нежитлове приміщення': ['rent','loc','addr','surface','land','floor','price'],
+  'гараж':                ['rent','loc','addr','surface','price'],
+  'default':              ['rent','loc','addr','surface','land','price'],
 };
 
 var CHIP_LABELS = {
   rent:    'Оренда/Продаж',
   loc:     'Населений пункт',
+  addr:    'Адреса',
   rooms:   'Кімнати',
   surface: 'Площа м²',
   land:    'Ділянка',
@@ -158,7 +161,12 @@ var CHIP_LABELS = {
   price:   'Ціна',
 };
 
-var searchState = { type: null, activeChip: null, f: {}, tsLoc: null };
+var searchState = { type: null, activeChip: null, f: {}, tsLoc: null, tsAddr: null };
+
+function capitalize(str) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 function priceToUAH(priceStr) {
   if (!priceStr) return 0;
@@ -186,8 +194,8 @@ function formatPrice(item) {
 
   if (!price) return '';
 
-  var uah    = 0;
-  var orig   = '';
+  var uah  = 0;
+  var orig = '';
 
   if (price.startsWith('$')) {
     uah  = parseInt(price.slice(1)) * nbuRates.USD;
@@ -230,8 +238,11 @@ function loadSearchEngine(callback) {
         item.rooms_int      = parseInt(item.rooms)  || 0;
         item.surface_f      = parseFloat(item.surface)      || 0;
         item.surface_land_f = parseFloat(item.surface_land) || 0;
+        // витягуємо частину адреси до першої коми
+        item.street = (item.address || '').split(',')[0].trim();
       });
 
+      // міста з великої букви
       searchLocations = [...new Set(
         data.map(function (i) {
           return i.location
@@ -240,6 +251,7 @@ function loadSearchEngine(callback) {
         }).filter(Boolean)
       )];
 
+      // райони з великої букви
       searchRegions = [...new Set(
         data.map(function (i) {
           return i.region
@@ -252,6 +264,11 @@ function loadSearchEngine(callback) {
         data.map(function (i) { return (i.type || '').toLowerCase().trim(); }).filter(Boolean)
       )];
 
+      // вулиці — унікальні значення до першої коми
+      searchStreets = [...new Set(
+        data.map(function (i) { return i.street; }).filter(Boolean)
+      )].sort(function (a, b) { return a.localeCompare(b, 'uk'); });
+
       var villages = [];
       data.forEach(function (item) {
         var matches = (item.address || '').match(/с\.м?\.?т?\.?\s+[^,]+/g);
@@ -261,12 +278,13 @@ function loadSearchEngine(callback) {
       });
       var searchVillages = [...new Set(villages)];
 
+      // міста і райони з великої букви у списку
       searchPlaces = [].concat(
         searchLocations.map(function (l) {
-          return { value: l, text: 'м. ' + l, group: 'Міста' };
+          return { value: l, text: 'м. ' + capitalize(l), group: 'Міста' };
         }),
         searchRegions.map(function (r) {
-          return { value: r, text: r + ' район', group: 'Райони' };
+          return { value: r, text: capitalize(r) + ' район', group: 'Райони' };
         }),
         searchVillages.map(function (v) {
           return { value: v, text: v, group: 'Села/Селища' };
@@ -306,6 +324,11 @@ function runSearchWithState() {
       var inReg  = (item.region   || '').toLowerCase().includes(locVal);
       var inAddr = (item.address  || '').toLowerCase().includes(locVal);
       if (!inLoc && !inReg && !inAddr) return false;
+    }
+
+    // фільтр по адресі — точний збіг вулиці до коми
+    if (searchState.f.addr) {
+      if (item.street !== searchState.f.addr) return false;
     }
 
     if (searchState.f.rooms) {
@@ -350,7 +373,8 @@ function runSearchWithState() {
 function searchTagLabel(k, v) {
   if (k === 'type')    return v;
   if (k === 'rent')    return v === '1' ? 'Оренда' : 'Продаж';
-  if (k === 'loc')     return v;
+  if (k === 'loc')     return capitalize(v);
+  if (k === 'addr')    return v;
   if (k === 'rooms')   return searchRangeLabel(v, 'кімн.', '');
   if (k === 'surface') return searchRangeLabel(v, 'м²', '');
   if (k === 'land')    return searchRangeLabel(v, 'м² ділянка', '');
@@ -389,7 +413,12 @@ function removeSearchTag(e, k) {
     searchState.tsLoc.destroy();
     searchState.tsLoc = null;
   }
+  if (k === 'addr' && searchState.tsAddr) {
+    searchState.tsAddr.destroy();
+    searchState.tsAddr = null;
+  }
   searchState.activeChip = null;
+  searchPage = 1;
   renderSearchTags();
   renderSearchChips();
   renderSearchPanel(null);
@@ -421,7 +450,7 @@ function renderSearchChips() {
 }
 
 function renderRentChip() {
-  var rent      = searchState.f.rent;
+  var rent       = searchState.f.rent;
   var saleActive = rent === '';
   var rentActive = rent === '1';
   return '<span class="btn btn-sm mr-1 mb-1 ' + (saleActive ? 'btn-primary' : 'btn-outline-primary') + '" ' +
@@ -443,6 +472,7 @@ function applyRent(e, val) {
   } else {
     searchState.f.rent = val;
   }
+  searchPage = 1;
   renderSearchTags();
   renderSearchChips();
   runSearchWithState();
@@ -462,7 +492,8 @@ function renderSearchPanel(k) {
   var $panel = $('#searchFilterPanel');
   if (!k) {
     $panel.addClass('d-none').css('display', 'none').html('');
-    if (searchState.tsLoc) { searchState.tsLoc.destroy(); searchState.tsLoc = null; }
+    if (searchState.tsLoc)  { searchState.tsLoc.destroy();  searchState.tsLoc  = null; }
+    if (searchState.tsAddr) { searchState.tsAddr.destroy(); searchState.tsAddr = null; }
     return;
   }
   $panel.removeClass('d-none').css('display', 'block');
@@ -485,10 +516,28 @@ function renderSearchPanel(k) {
         placeholder:   'Введіть назву...',
         maxOptions:    30,
         onChange: function (val) {
-          if (val) applySearchSimple('loc', val);
+          if (val) { searchPage = 1; applySearchSimple('loc', val); }
         }
       });
       if (searchState.f.loc) searchState.tsLoc.setValue(searchState.f.loc, true);
+    }, 50);
+
+  } else if (k === 'addr') {
+    $panel.html('<select id="tsAddrSelect" class="form-control form-control-sm"><option value="">Почніть вводити...</option></select>');
+    setTimeout(function () {
+      if (searchState.tsAddr) { searchState.tsAddr.destroy(); searchState.tsAddr = null; }
+      searchState.tsAddr = new TomSelect('#tsAddrSelect', {
+        options: searchStreets.map(function (s) { return { value: s, text: s }; }),
+        labelField:  'text',
+        valueField:  'value',
+        searchField: 'text',
+        placeholder: 'Введіть вулицю...',
+        maxOptions:  30,
+        onChange: function (val) {
+          if (val) { searchPage = 1; applySearchSimple('addr', val); }
+        }
+      });
+      if (searchState.f.addr) searchState.tsAddr.setValue(searchState.f.addr, true);
     }, 50);
 
   } else if (k === 'rooms') {
@@ -502,7 +551,7 @@ function renderSearchPanel(k) {
   } else if (k === 'floors') {
     $panel.html(searchRangePanel('floors',  searchState.f.floors  || {}, '',    1,  50));
   } else if (k === 'price') {
-    $panel.html(searchRangePanel('price',   searchState.f.price   || {}, '₴',  0,  10000000));
+    $panel.html(searchRangePanel('price',   searchState.f.price   || {}, '₴',   0,  100000000));
   }
 }
 
@@ -519,6 +568,7 @@ function searchRangePanel(key, v, unit, mn, mx) {
 function applySearchSimple(k, v) {
   if (v !== '') searchState.f[k] = v;
   else delete searchState.f[k];
+  searchPage = 1;
   renderSearchTags();
   renderSearchChips();
   runSearchWithState();
@@ -529,6 +579,7 @@ function applySearchRange(k, side, v) {
   if (v) searchState.f[k][side] = parseFloat(v);
   else   delete searchState.f[k][side];
   if (!searchState.f[k].min && !searchState.f[k].max) delete searchState.f[k];
+  searchPage = 1;
   renderSearchTags();
   renderSearchChips();
   runSearchWithState();
@@ -547,7 +598,7 @@ function renderResults(items, pagination) {
   var html = items.map(function (item) {
     var url   = '{{ site.url }}' + item.link;
     var loc   = item.location_clean
-                  ? item.location_clean.charAt(0).toUpperCase() + item.location_clean.slice(1)
+                  ? capitalize(item.location_clean)
                   : '';
     var addr  = [loc, item.address].filter(Boolean).join(', ');
     var rooms = item.rooms        ? item.rooms + ' кімн.'             : '';
@@ -563,7 +614,7 @@ function renderResults(items, pagination) {
       img = '<div class="pt-2 pr-1">' +
         '<img src="{{ site.url }}' + item.images[0].src + '" ' +
         'alt="' + (item.images[0].alt || '') + '" ' +
-        'width="50" height="50" style="object-fit:cover;border-radius:4px;">' +
+        'width="50" height="50" class="rounded">' +
         '</div>';
     }
 

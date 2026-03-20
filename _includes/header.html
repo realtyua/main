@@ -36,7 +36,7 @@
 
               <div id="searchLoc" class="form-group">
                 <label for="rehiony" class="sr-only">Пошук місцевості:</label>
-                <select name="areas" id="rehiony" aria-label="Виберіть назву місцевості чи тип нерухомості">
+                <select name="areas" id="rehiony" class="form-control" aria-label="Виберіть назву місцевості чи тип нерухомості">
                   <option value="">Введіть назву міста чи району або області</option>
                 </select>
               </div>
@@ -46,9 +46,9 @@
 
                 <div id="searchTagsBox" class="form-control d-flex flex-wrap align-items-center p-1" style="height:auto; min-height:38px; cursor:text;" onclick="document.getElementById('searchListings').focus()">
                   <span id="searchTags"></span>
-                  <input type="text" id="searchListings" placeholder="Що шукаєте, будинок, квартира, земля...?" 
-                    style="border:none; outline:none; flex:1; min-width:120px; padding:2px 6px; background:transparent;">
+                  <input type="text" id="searchListings" placeholder="Що шукаєте, будинок, квартира, земля...?" style="border:none; outline:none; flex:1; min-width:120px; padding:2px 6px; background:transparent;">
                 </div>
+                <small class="form-text text-muted">Введіть тип нерухомості і додайте уточнюючі пошукові параметри для більш точно результату</small>
 
                 <div id="searchChips" class="mt-2 d-none" style="display:none;"></div>
 
@@ -58,15 +58,11 @@
               <div class="mt-2 d-flex justify-content-center" id="searchModeRadios">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="searchMode" id="modeLoc" value="loc" checked>
-                  <label class="form-check-label small text-primary" for="modeLoc">
-                    Пошук місцевості
-                  </label>
+                  <label class="form-check-label small text-primary" for="modeLoc">Пошук місцевості</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="searchMode" id="modeObj" value="obj">
-                  <label class="form-check-label small text-primary" for="modeObj">
-                    Пошук в оголошеннях
-                  </label>
+                  <label class="form-check-label small text-primary" for="modeObj">Пошук в оголошеннях</label>
                 </div>
               </div>
 
