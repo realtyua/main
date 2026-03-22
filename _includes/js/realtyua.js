@@ -1,4 +1,4 @@
-// realtyua.v0.13.js
+// realtyua.v0.15.js
 // v0.1  — базовий Tom Select + Bootstrap
 // v0.2  — перемикач режимів пошуку
 // v0.3  — ItemsJS + loadSearchEngine
@@ -11,7 +11,9 @@
 // v0.10 — кнопки Продаж/Оренда взаємовиключні + фікс placeholder + фікс collapse на тегах
 // v0.11 — фокус після пагінації + ціна за добу + відображення цін у гривнях + setTimeout фокус
 // v0.12 — стилі кнопок/тегів + картка з фото/без + виправлення фільтру ціни у гривнях
-// v0.13 — клас rounded для фото + фільтр Адреса + великі букви міст/районів + скид сторінки при зміні фільтра
+// v0.13 — клас rounded для фото + фільтр Адреса + великі букви міст/районів + скид сторінки
+// v0.14 — точний збіг loc для міст/районів + префікс м./район у картці + фільтр вулиць від сіл
+// v0.15 — розширений список non-street префіксів: присілок/урочище/масив/мікрорайон тощо
 
 "use strict";
 
@@ -138,7 +140,17 @@ var searchStreets     = [];
 var searchPage        = 1;
 var searchPerPage     = 10;
 var searchLastFilters = {};
+var searchPlaceTypes  = {};
 var nbuRates = { USD: {{ site.usd }}, EUR: {{ site.eur }} };
+
+// префікси що НЕ є вулицями — не потрапляють в [+ Адреса]
+var NON_STREET_PREFIXES = [
+  'с.', 'с.м.т.', 'смт', 'село ', 'селище ',
+  'c.', 'C.',
+  'присілок', 'урочище', 'масив ', 'мікрорайон', 'мікро район',
+  'садове товариство', 'садівниче товариство',
+  'дачне селище', 'поселення '
+];
 
 var CHIPS_BY_TYPE = {
   'будинок':              ['rent','loc','addr','rooms','surface','land','floors','price'],
@@ -166,6 +178,14 @@ var searchState = { type: null, activeChip: null, f: {}, tsLoc: null, tsAddr: nu
 function capitalize(str) {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function isNonStreet(str) {
+  var s = str.trim();
+  for (var i = 0; i < NON_STREET_PREFIXES.length; i++) {
+    if (s.toLowerCase().startsWith(NON_STREET_PREFIXES[i].toLowerCase())) return true;
+  }
+  return false;
 }
 
 function priceToUAH(priceStr) {
@@ -238,11 +258,11 @@ function loadSearchEngine(callback) {
         item.rooms_int      = parseInt(item.rooms)  || 0;
         item.surface_f      = parseFloat(item.surface)      || 0;
         item.surface_land_f = parseFloat(item.surface_land) || 0;
-        // витягуємо частину адреси до першої коми
-        item.street = (item.address || '').split(',')[0].trim();
+        // вулиця — перша частина address до коми, тільки якщо це справді вулиця
+        var firstPart = (item.address || '').split(',')[0].trim();
+        item.street = isNonStreet(firstPart) ? '' : firstPart;
       });
 
-      // міста з великої букви
       searchLocations = [...new Set(
         data.map(function (i) {
           return i.location
@@ -251,7 +271,6 @@ function loadSearchEngine(callback) {
         }).filter(Boolean)
       )];
 
-      // райони з великої букви
       searchRegions = [...new Set(
         data.map(function (i) {
           return i.region
@@ -264,21 +283,30 @@ function loadSearchEngine(callback) {
         data.map(function (i) { return (i.type || '').toLowerCase().trim(); }).filter(Boolean)
       )];
 
-      // вулиці — унікальні значення до першої коми
+      // вулиці — без non-street префіксів
       searchStreets = [...new Set(
         data.map(function (i) { return i.street; }).filter(Boolean)
       )].sort(function (a, b) { return a.localeCompare(b, 'uk'); });
 
+      // села/селища з address через regex
       var villages = [];
       data.forEach(function (item) {
-        var matches = (item.address || '').match(/с\.м?\.?т?\.?\s+[^,]+/g);
+        var addr = item.address || '';
+        // також ловимо латинську c. як кириличну с.
+        var normalized = addr.replace(/\bc\./g, 'с.');
+        var matches = normalized.match(/с\.м?\.?т?\.?\s+[^,]+/g);
         if (matches) {
           villages = villages.concat(matches.map(function (v) { return v.trim(); }));
         }
       });
       var searchVillages = [...new Set(villages)];
 
-      // міста і райони з великої букви у списку
+      // зберігаємо тип кожного place
+      searchPlaceTypes = {};
+      searchLocations.forEach(function (l) { searchPlaceTypes[l] = 'city'; });
+      searchRegions.forEach(function (r)   { searchPlaceTypes[r] = 'region'; });
+      searchVillages.forEach(function (v)  { searchPlaceTypes[v] = 'village'; });
+
       searchPlaces = [].concat(
         searchLocations.map(function (l) {
           return { value: l, text: 'м. ' + capitalize(l), group: 'Міста' };
@@ -303,6 +331,40 @@ function loadSearchEngine(callback) {
     .catch(function (e) { console.error('JSON load error', e); });
 }
 
+function matchLoc(item, locVal) {
+  var placeType = searchPlaceTypes[locVal] || 'city';
+
+  if (placeType === 'city') {
+    var cityClean = (item.location || '').replace('м. ', '').toLowerCase().trim();
+    return cityClean === locVal;
+  }
+
+  if (placeType === 'region') {
+    var regClean = (item.region || '').replace(' район', '').toLowerCase().trim();
+    return regClean === locVal;
+  }
+
+  // село — шукаємо в address (з урахуванням латинської c.)
+  var addr = (item.address || '').replace(/\bc\./g, 'с.').toLowerCase();
+  return addr.includes(locVal.toLowerCase());
+}
+
+function buildAddr(item) {
+  var parts = [];
+
+  if (item.location) {
+    parts.push('м. ' + capitalize(item.location.replace('м. ', '').trim()));
+  } else if (item.region) {
+    parts.push(capitalize(item.region.replace(' район', '').trim()) + ' район');
+  }
+
+  if (item.address) {
+    parts.push(item.address);
+  }
+
+  return parts.join(', ');
+}
+
 function runSearchWithState() {
   if (!searchEngine) return;
 
@@ -319,14 +381,9 @@ function runSearchWithState() {
     }
 
     if (searchState.f.loc) {
-      var locVal = searchState.f.loc.toLowerCase();
-      var inLoc  = (item.location || '').toLowerCase().includes(locVal);
-      var inReg  = (item.region   || '').toLowerCase().includes(locVal);
-      var inAddr = (item.address  || '').toLowerCase().includes(locVal);
-      if (!inLoc && !inReg && !inAddr) return false;
+      if (!matchLoc(item, searchState.f.loc)) return false;
     }
 
-    // фільтр по адресі — точний збіг вулиці до коми
     if (searchState.f.addr) {
       if (item.street !== searchState.f.addr) return false;
     }
@@ -373,7 +430,12 @@ function runSearchWithState() {
 function searchTagLabel(k, v) {
   if (k === 'type')    return v;
   if (k === 'rent')    return v === '1' ? 'Оренда' : 'Продаж';
-  if (k === 'loc')     return capitalize(v);
+  if (k === 'loc') {
+    var pt = searchPlaceTypes[v] || 'city';
+    if (pt === 'city')   return 'м. ' + capitalize(v);
+    if (pt === 'region') return capitalize(v) + ' район';
+    return v;
+  }
   if (k === 'addr')    return v;
   if (k === 'rooms')   return searchRangeLabel(v, 'кімн.', '');
   if (k === 'surface') return searchRangeLabel(v, 'м²', '');
@@ -597,10 +659,7 @@ function renderResults(items, pagination) {
 
   var html = items.map(function (item) {
     var url   = '{{ site.url }}' + item.link;
-    var loc   = item.location_clean
-                  ? capitalize(item.location_clean)
-                  : '';
-    var addr  = [loc, item.address].filter(Boolean).join(', ');
+    var addr  = buildAddr(item);
     var rooms = item.rooms        ? item.rooms + ' кімн.'             : '';
     var surf  = item.surface      ? item.surface + ' м²'              : '';
     var land  = item.surface_land ? item.surface_land + ' м² ділянка' : '';
