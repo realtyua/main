@@ -1,4 +1,4 @@
-// realtyua.v0.15.js
+// realtyua.v0.16.js
 // v0.1  — базовий Tom Select + Bootstrap
 // v0.2  — перемикач режимів пошуку
 // v0.3  — ItemsJS + loadSearchEngine
@@ -14,6 +14,7 @@
 // v0.13 — клас rounded для фото + фільтр Адреса + великі букви міст/районів + скид сторінки
 // v0.14 — точний збіг loc для міст/районів + префікс м./район у картці + фільтр вулиць від сіл
 // v0.15 — розширений список non-street префіксів: присілок/урочище/масив/мікрорайон тощо
+// v0.16 — TYPE_GROUPS (синоніми типів) + спільний no_results для всіх Tom Select
 
 "use strict";
 
@@ -90,23 +91,31 @@ $(document).ready(function () {
   });
 
   $('#searchListings').on('input', function () {
-    var query = $(this).val().trim();
+    var query = $(this).val().trim().toLowerCase();
     if (query.length < 1) return;
 
     loadSearchEngine(function () {
-      for (var i = 0; i < searchTypes.length; i++) {
-        if (query.toLowerCase().includes(searchTypes[i])) {
-          var typeName = searchTypes[i].charAt(0).toUpperCase() + searchTypes[i].slice(1);
-          if (searchState.type !== typeName) {
-            searchState.type      = typeName;
-            searchState.f['type'] = typeName;
-            $('#searchListings').val('');
-            renderSearchTags();
-            renderSearchChips();
+      // шукаємо групу типу за тригерами
+      var matched = null;
+      for (var i = 0; i < TYPE_GROUPS.length; i++) {
+        var group = TYPE_GROUPS[i];
+        for (var j = 0; j < group.triggers.length; j++) {
+          if (query.includes(group.triggers[j])) {
+            matched = group;
+            break;
           }
-          break;
         }
+        if (matched) break;
       }
+
+      if (matched && searchState.f['type'] !== matched.tag) {
+        searchState.type      = matched.tag;
+        searchState.f['type'] = matched.tag;
+        $('#searchListings').val('');
+        renderSearchTags();
+        renderSearchChips();
+      }
+
       if (Object.keys(searchState.f).length > 0) {
         searchPage = 1;
         runSearchWithState();
@@ -131,35 +140,48 @@ var sShare = {
   }
 };
 
-var searchEngine      = null;
-var searchLocations   = [];
-var searchRegions     = [];
-var searchTypes       = [];
-var searchPlaces      = [];
-var searchStreets     = [];
-var searchPage        = 1;
-var searchPerPage     = 10;
-var searchLastFilters = {};
-var searchPlaceTypes  = {};
-var nbuRates = { USD: {{ site.usd }}, EUR: {{ site.eur }} };
+// спільний render для Tom Select
+var TS_RENDER = {
+  no_results: function (data, escape) {
+    return '<div class="no-results">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
+  }
+};
 
-// префікси що НЕ є вулицями — не потрапляють в [+ Адреса]
-var NON_STREET_PREFIXES = [
-  'с.', 'с.м.т.', 'смт', 'село ', 'селище ',
-  'c.', 'C.',
-  'присілок', 'урочище', 'масив ', 'мікрорайон', 'мікро район',
-  'садове товариство', 'садівниче товариство',
-  'дачне селище', 'поселення '
+// групи типів нерухомості
+var TYPE_GROUPS = [
+  {
+    tag:      'Будинок',
+    triggers: ['будинок', 'частина будинку'],
+    filters:  ['будинок'],
+    chips:    ['rent','loc','addr','rooms','surface','land','floors','price'],
+  },
+  {
+    tag:      'Квартира',
+    triggers: ['квартира', 'частина квартири', 'кімната'],
+    filters:  ['квартира', 'кімнат'],
+    chips:    ['rent','loc','addr','rooms','surface','floor','floors','price'],
+  },
+  {
+    tag:      'Гараж',
+    triggers: ['гараж', 'паркомісце', 'місце для паркування'],
+    filters:  ['гараж', 'паркування'],
+    chips:    ['rent','loc','addr','surface','price'],
+  },
+  {
+    tag:      'Нежитлове приміщення',
+    triggers: ['нежитлове приміщення', 'комерційне приміщення', 'приміщення'],
+    filters:  ['нежитлове приміщення'],
+    chips:    ['rent','loc','addr','surface','land','floor','price'],
+  },
+  {
+    tag:      'Земля',
+    triggers: ['земля', 'ділянка', 'ділянка землі', 'земельна ділянка'],
+    filters:  ['земля'],
+    chips:    ['rent','loc','addr','land','price'],
+  },
 ];
 
-var CHIPS_BY_TYPE = {
-  'будинок':              ['rent','loc','addr','rooms','surface','land','floors','price'],
-  'квартира':             ['rent','loc','addr','rooms','surface','floor','floors','price'],
-  'земля':                ['rent','loc','addr','land','price'],
-  'нежитлове приміщення': ['rent','loc','addr','surface','land','floor','price'],
-  'гараж':                ['rent','loc','addr','surface','price'],
-  'default':              ['rent','loc','addr','surface','land','price'],
-};
+var DEFAULT_CHIPS = ['rent','loc','addr','surface','land','price'];
 
 var CHIP_LABELS = {
   rent:    'Оренда/Продаж',
@@ -172,6 +194,26 @@ var CHIP_LABELS = {
   floors:  'Поверхів',
   price:   'Ціна',
 };
+
+var searchEngine      = null;
+var searchLocations   = [];
+var searchRegions     = [];
+var searchTypes       = [];
+var searchPlaces      = [];
+var searchStreets     = [];
+var searchPage        = 1;
+var searchPerPage     = 10;
+var searchLastFilters = {};
+var searchPlaceTypes  = {};
+var nbuRates = { USD: {{ site.usd }}, EUR: {{ site.eur }} };
+
+var NON_STREET_PREFIXES = [
+  'с.', 'с.м.т.', 'смт', 'село ', 'селище ',
+  'c.', 'C.',
+  'присілок', 'урочище', 'масив ', 'мікрорайон', 'мікро район',
+  'садове товариство', 'садівниче товариство',
+  'дачне селище', 'поселення '
+];
 
 var searchState = { type: null, activeChip: null, f: {}, tsLoc: null, tsAddr: null };
 
@@ -186,6 +228,13 @@ function isNonStreet(str) {
     if (s.toLowerCase().startsWith(NON_STREET_PREFIXES[i].toLowerCase())) return true;
   }
   return false;
+}
+
+function getTypeGroup(tag) {
+  for (var i = 0; i < TYPE_GROUPS.length; i++) {
+    if (TYPE_GROUPS[i].tag === tag) return TYPE_GROUPS[i];
+  }
+  return null;
 }
 
 function priceToUAH(priceStr) {
@@ -258,7 +307,6 @@ function loadSearchEngine(callback) {
         item.rooms_int      = parseInt(item.rooms)  || 0;
         item.surface_f      = parseFloat(item.surface)      || 0;
         item.surface_land_f = parseFloat(item.surface_land) || 0;
-        // вулиця — перша частина address до коми, тільки якщо це справді вулиця
         var firstPart = (item.address || '').split(',')[0].trim();
         item.street = isNonStreet(firstPart) ? '' : firstPart;
       });
@@ -283,16 +331,13 @@ function loadSearchEngine(callback) {
         data.map(function (i) { return (i.type || '').toLowerCase().trim(); }).filter(Boolean)
       )];
 
-      // вулиці — без non-street префіксів
       searchStreets = [...new Set(
         data.map(function (i) { return i.street; }).filter(Boolean)
       )].sort(function (a, b) { return a.localeCompare(b, 'uk'); });
 
-      // села/селища з address через regex
       var villages = [];
       data.forEach(function (item) {
         var addr = item.address || '';
-        // також ловимо латинську c. як кириличну с.
         var normalized = addr.replace(/\bc\./g, 'с.');
         var matches = normalized.match(/с\.м?\.?т?\.?\s+[^,]+/g);
         if (matches) {
@@ -301,7 +346,6 @@ function loadSearchEngine(callback) {
       });
       var searchVillages = [...new Set(villages)];
 
-      // зберігаємо тип кожного place
       searchPlaceTypes = {};
       searchLocations.forEach(function (l) { searchPlaceTypes[l] = 'city'; });
       searchRegions.forEach(function (r)   { searchPlaceTypes[r] = 'region'; });
@@ -331,37 +375,38 @@ function loadSearchEngine(callback) {
     .catch(function (e) { console.error('JSON load error', e); });
 }
 
+function matchType(itemType, tag) {
+  var group = getTypeGroup(tag);
+  if (!group) return false;
+  var t = (itemType || '').toLowerCase();
+  for (var i = 0; i < group.filters.length; i++) {
+    if (t.includes(group.filters[i].toLowerCase())) return true;
+  }
+  return false;
+}
+
 function matchLoc(item, locVal) {
   var placeType = searchPlaceTypes[locVal] || 'city';
-
   if (placeType === 'city') {
     var cityClean = (item.location || '').replace('м. ', '').toLowerCase().trim();
     return cityClean === locVal;
   }
-
   if (placeType === 'region') {
     var regClean = (item.region || '').replace(' район', '').toLowerCase().trim();
     return regClean === locVal;
   }
-
-  // село — шукаємо в address (з урахуванням латинської c.)
   var addr = (item.address || '').replace(/\bc\./g, 'с.').toLowerCase();
   return addr.includes(locVal.toLowerCase());
 }
 
 function buildAddr(item) {
   var parts = [];
-
   if (item.location) {
     parts.push('м. ' + capitalize(item.location.replace('м. ', '').trim()));
   } else if (item.region) {
     parts.push(capitalize(item.region.replace(' район', '').trim()) + ' район');
   }
-
-  if (item.address) {
-    parts.push(item.address);
-  }
-
+  if (item.address) parts.push(item.address);
   return parts.join(', ');
 }
 
@@ -373,7 +418,7 @@ function runSearchWithState() {
   var items = allItems.filter(function (item) {
 
     if (searchState.f.type) {
-      if (!(item.type || '').toLowerCase().includes(searchState.f.type.toLowerCase())) return false;
+      if (!matchType(item.type, searchState.f.type)) return false;
     }
 
     if (searchState.f.rent !== undefined) {
@@ -493,13 +538,9 @@ function renderSearchChips() {
     $chips.addClass('d-none').css('display', 'none');
     return;
   }
-  var typeKey  = searchState.type ? searchState.type.toLowerCase() : 'default';
-  var chipsKey = 'default';
-  Object.keys(CHIPS_BY_TYPE).forEach(function (k) {
-    if (k !== 'default' && typeKey.includes(k)) chipsKey = k;
-  });
-  var keys = CHIPS_BY_TYPE[chipsKey];
-  var html = keys.map(function (k) {
+  var group = getTypeGroup(searchState.type);
+  var keys  = group ? group.chips : DEFAULT_CHIPS;
+  var html  = keys.map(function (k) {
     if (k === 'rent') return renderRentChip();
     var active = searchState.f[k] !== undefined;
     return '<span class="btn btn-sm mr-1 mb-1 ' + (active ? 'btn-primary' : 'btn-outline-primary') + '" ' +
@@ -565,7 +606,7 @@ function renderSearchPanel(k) {
     setTimeout(function () {
       if (searchState.tsLoc) { searchState.tsLoc.destroy(); searchState.tsLoc = null; }
       searchState.tsLoc = new TomSelect('#tsLocSelect', {
-        options: searchPlaces,
+        options:      searchPlaces,
         optgroups: [
           { value: 'Міста',       label: 'Міста' },
           { value: 'Райони',      label: 'Райони' },
@@ -577,6 +618,7 @@ function renderSearchPanel(k) {
         searchField:   'text',
         placeholder:   'Введіть назву...',
         maxOptions:    30,
+        render:        TS_RENDER,
         onChange: function (val) {
           if (val) { searchPage = 1; applySearchSimple('loc', val); }
         }
@@ -589,12 +631,13 @@ function renderSearchPanel(k) {
     setTimeout(function () {
       if (searchState.tsAddr) { searchState.tsAddr.destroy(); searchState.tsAddr = null; }
       searchState.tsAddr = new TomSelect('#tsAddrSelect', {
-        options: searchStreets.map(function (s) { return { value: s, text: s }; }),
+        options:     searchStreets.map(function (s) { return { value: s, text: s }; }),
         labelField:  'text',
         valueField:  'value',
         searchField: 'text',
         placeholder: 'Введіть вулицю...',
         maxOptions:  30,
+        render:      TS_RENDER,
         onChange: function (val) {
           if (val) { searchPage = 1; applySearchSimple('addr', val); }
         }
@@ -728,23 +771,16 @@ function parseQuery(raw) {
   var q = raw.toLowerCase().trim();
   var filters = {};
 
-  for (var i = 0; i < searchTypes.length; i++) {
-    if (q.includes(searchTypes[i])) {
-      filters.type = [searchTypes[i].charAt(0).toUpperCase() + searchTypes[i].slice(1)];
+  for (var i = 0; i < searchLocations.length; i++) {
+    if (q.includes(searchLocations[i])) {
+      filters.location_clean = [searchLocations[i]];
       break;
     }
   }
 
-  for (var j = 0; j < searchLocations.length; j++) {
-    if (q.includes(searchLocations[j])) {
-      filters.location_clean = [searchLocations[j]];
-      break;
-    }
-  }
-
-  for (var k = 0; k < searchRegions.length; k++) {
-    if (q.includes(searchRegions[k])) {
-      filters.region = [searchRegions[k] + ' район'];
+  for (var j = 0; j < searchRegions.length; j++) {
+    if (q.includes(searchRegions[j])) {
+      filters.region = [searchRegions[j] + ' район'];
       break;
     }
   }
