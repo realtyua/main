@@ -1,4 +1,4 @@
-// realtyua.v0.16.js
+// realtyua.v0.19.js
 // v0.1  — базовий Tom Select + Bootstrap
 // v0.2  — перемикач режимів пошуку
 // v0.3  — ItemsJS + loadSearchEngine
@@ -15,18 +15,16 @@
 // v0.14 — точний збіг loc для міст/районів + префікс м./район у картці + фільтр вулиць від сіл
 // v0.15 — розширений список non-street префіксів: присілок/урочище/масив/мікрорайон тощо
 // v0.16 — TYPE_GROUPS (синоніми типів) + спільний no_results для всіх Tom Select
-
+// v0.17 — результати у main .container + новий Bootstrap card шаблон
+// v0.18 — Зміна структури: main.content замість main .container + обгортки container/row/col для пошуку
+// v0.19 — Фікс Tom Select (destroy перед init) + пагінація тільки текст зверху + скрол до #collapseAreaSelect
 "use strict";
-
 $(document).ready(function () {
-
   $("body").tooltip({ selector: '[data-toggle="tooltip"]' });
   $('[data-toggle="popover"]').popover();
-
   $('.nav-tabs>li>a.nav-link').on('click', function () {
     $('.navbar-collapse').collapse('hide');
   });
-
   $(document).on('click', function (e) {
     if ($(e.target).closest(".card").length === 0 &&
         $(e.target).closest("#searchResults").length === 0 &&
@@ -35,53 +33,88 @@ $(document).ready(function () {
       $('.collapse').collapse('hide');
     }
   });
-
   $('.toast').toast('show');
   $('.alert').alert();
 
-  var tomSelectInstance = new TomSelect('#rehiony', {
-    create: false,
-    maxOptions: 10,
-    maxItems: 1,
-    valueField: 'url',
-    labelField: 'title',
-    searchField: 'title',
-    sortField: 'title',
-    options: [
-      {%- for r in site.data.realestate -%}
-        {%- if r.url == site.url and r.slug and r.slug != '' -%}
-          {%- include select/0.html -%}
-        {%- elsif r.slug and r.slug != '' and r.url contains 'https' -%}
-          {%- assign d = r.url | remove: 'https://www.realestate.' | remove: '.ua' -%}
-          {%- if site.data[d] -%}
-            {%- for o in site.data[d] -%}
-              {url:"{{ o.url }}",title:"{{ o.title }}"},
-            {%- endfor -%}
-          {%- endif -%}
-        {%- else -%}
-          {url:"{{ r.url }}",title:"{{ r.small }}"},
-        {%- endif -%}
-      {%- endfor -%}
-      {url:"{{ site.url }}/region/{{ site.region_slug }}/",title:"{{ site.region }}"}
-    ],
-    render: {
-      no_results: function (data, escape) {
-        return '<div class="no-results">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
-      }
-    },
-    onChange: function (value) {
-      if (value !== '') {
-        window.location = value;
-      }
+  // ЗБЕРІГАЄМО ОРИГІНАЛЬНИЙ ВМІСТ main.content (не .container)
+  var $mainContainer   = $('main.content');
+  var originalMainHtml = $mainContainer.html();
+  var tomSelectInstance = null;
+
+  function initTomSelect() {
+    // Знищуємо існуючий інстанс перед новою ініціалізацією
+    if (tomSelectInstance) {
+      tomSelectInstance.destroy();
+      tomSelectInstance = null;
     }
-  });
+    var $el = document.getElementById('rehiony');
+    if (!$el) return;
+    tomSelectInstance = new TomSelect('#rehiony', {
+      create: false,
+      maxOptions: 10,
+      maxItems: 1,
+      valueField: 'url',
+      labelField: 'title',
+      searchField: 'title',
+      sortField: 'title',
+      options: [
+        {%- for r in site.data.realestate -%}
+          {%- if r.url == site.url and r.slug and r.slug != '' -%}
+            {%- include select/0.html -%}
+          {%- elsif r.slug and r.slug != '' and r.url contains 'https' -%}
+            {%- assign d = r.url | remove: 'https://www.realestate.' | remove: '.ua' -%}
+            {%- if site.data[d] -%}
+              {%- for o in site.data[d] -%}
+                {url:"{{ o.url }}",title:"{{ o.title }}"},
+              {%- endfor -%}
+            {%- endif -%}
+          {%- else -%}
+            {url:"{{ r.url }}",title:"{{ r.small }}"},
+          {%- endif -%}
+        {%- endfor -%}
+        {url:"{{ site.url }}/region/{{ site.region_slug }}/",title:"{{ site.region }}"}
+      ],
+      render: {
+        no_results: function (data, escape) {
+          return '<div class="dropdown-item">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
+        }
+      },
+      onChange: function (value) {
+        if (value !== '') {
+          window.location = value;
+        }
+      }
+    });
+  }
+
+  // Ініціалізуємо Tom Select при завантаженні
+  initTomSelect();
 
   $('input[name="searchMode"]').on('change', function () {
     if ($(this).val() === 'loc') {
+      // відновлюємо оригінальний вміст main.content
+      $mainContainer.html(originalMainHtml);
       $('#searchLoc').removeClass('d-none').css('display', 'block');
       $('#searchObj').addClass('d-none').css('display', 'none');
       $('#searchResults').addClass('d-none').css('display', 'none');
+
+      // перепідключаємо Tom Select після відновлення DOM (з правильним destroy)
+      initTomSelect();
     } else {
+      // очищаємо main.content і вставляємо блок результатів з обгортками
+      $mainContainer.html(
+        '<div class="container">' +
+          '<div class="row">' +
+            '<div class="col-md-8 offset-md-2">' +
+              '<div id="searchObj" class="mb-4"></div>' +
+              '<div id="searchResults" class="d-none"></div>' +
+              '<div id="searchFilterPanel" class="d-none mb-3"></div>' +
+              '<div id="searchTags" class="mb-2"></div>' +
+              '<div id="searchChips" class="d-none mb-3"></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
       $('#searchLoc').addClass('d-none').css('display', 'none');
       $('#searchObj').removeClass('d-none').css('display', 'block');
       setTimeout(function () {
@@ -93,9 +126,7 @@ $(document).ready(function () {
   $('#searchListings').on('input', function () {
     var query = $(this).val().trim().toLowerCase();
     if (query.length < 1) return;
-
     loadSearchEngine(function () {
-      // шукаємо групу типу за тригерами
       var matched = null;
       for (var i = 0; i < TYPE_GROUPS.length; i++) {
         var group = TYPE_GROUPS[i];
@@ -122,7 +153,6 @@ $(document).ready(function () {
       }
     });
   });
-
 });
 
 var sShare = {
@@ -140,30 +170,28 @@ var sShare = {
   }
 };
 
-// спільний render для Tom Select
 var TS_RENDER = {
   no_results: function (data, escape) {
-    return '<div class="no-results">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
+    return '<div class="dropdown-item">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
   }
 };
 
-// групи типів нерухомості
 var TYPE_GROUPS = [
   {
     tag:      'Будинок',
-    triggers: ['будинок', 'частина будинку'],
+    triggers: ['частина будинку', 'будинок'],
     filters:  ['будинок'],
     chips:    ['rent','loc','addr','rooms','surface','land','floors','price'],
   },
   {
     tag:      'Квартира',
-    triggers: ['квартира', 'частина квартири', 'кімната'],
+    triggers: ['частина квартири', 'квартира', 'кімната'],
     filters:  ['квартира', 'кімнат'],
     chips:    ['rent','loc','addr','rooms','surface','floor','floors','price'],
   },
   {
     tag:      'Гараж',
-    triggers: ['гараж', 'паркомісце', 'місце для паркування'],
+    triggers: ['місце для паркування', 'паркомісце', 'гараж'],
     filters:  ['гараж', 'паркування'],
     chips:    ['rent','loc','addr','surface','price'],
   },
@@ -175,7 +203,7 @@ var TYPE_GROUPS = [
   },
   {
     tag:      'Земля',
-    triggers: ['земля', 'ділянка', 'ділянка землі', 'земельна ділянка'],
+    triggers: ['земельна ділянка', 'ділянка землі', 'земля', 'ділянка'],
     filters:  ['земля'],
     chips:    ['rent','loc','addr','land','price'],
   },
@@ -249,23 +277,22 @@ function inputPriceToUAH(val) {
   return parseFloat(val);
 }
 
-function formatPrice(item) {
+function formatPriceUAH(item) {
   var price    = String(item.price     || '').trim();
   var priceSqm = String(item.price_sqmt || '').trim();
   var isRent   = item.rent === '1';
-
   if (isRent && !price && priceSqm) {
     var num = parseInt(priceSqm);
     if (!isNaN(num)) {
-      return '<span class="d-block badge badge-primary">' + num.toLocaleString('uk-UA') + '&nbsp;₴/доба</span>';
+      return {
+        uah:  num.toLocaleString('uk-UA') + '₴/доба',
+        orig: ''
+      };
     }
   }
-
-  if (!price) return '';
-
+  if (!price) return null;
   var uah  = 0;
   var orig = '';
-
   if (price.startsWith('$')) {
     uah  = parseInt(price.slice(1)) * nbuRates.USD;
     orig = price;
@@ -276,15 +303,11 @@ function formatPrice(item) {
     uah  = parseInt(price);
     orig = '';
   }
-
-  if (isNaN(uah) || uah === 0) return '';
-
-  var uahStr = Math.round(uah).toLocaleString('uk-UA').replace(/,/g, '&nbsp;') + '₴';
-  var result = '<span class="d-block badge badge-primary">' + uahStr + '</span>';
-  if (orig) {
-    result += '<small class="d-block text-muted">(' + orig + ')</small>';
-  }
-  return result;
+  if (isNaN(uah) || uah === 0) return null;
+  return {
+    uah:  Math.round(uah).toLocaleString('uk-UA').replace(/,/g, '\u00a0') + '₴',
+    orig: orig
+  };
 }
 
 function updateSearchPlaceholder() {
@@ -301,7 +324,7 @@ function loadSearchEngine(callback) {
       data.forEach(function (item) {
         item.price_uah      = priceToUAH(item.price);
         item.location_clean = (item.location || item.region || '')
-                               .replace('м. ', '').replace(' район', '').toLowerCase().trim();
+          .replace('м. ', '').replace(' район', '').toLowerCase().trim();
         item.floors_int     = parseInt(item.floors) || 0;
         item.floor_int      = parseInt(item.floor)  || 0;
         item.rooms_int      = parseInt(item.rooms)  || 0;
@@ -395,7 +418,7 @@ function matchLoc(item, locVal) {
     var regClean = (item.region || '').replace(' район', '').toLowerCase().trim();
     return regClean === locVal;
   }
-  var addr = (item.address || '').replace(/\bc\./g, 'с.').toLowerCase();
+  var addr = (item.address || '').replace(/\bc./g, 'с.').toLowerCase();
   return addr.includes(locVal.toLowerCase());
 }
 
@@ -412,60 +435,46 @@ function buildAddr(item) {
 
 function runSearchWithState() {
   if (!searchEngine) return;
-
   var allItems = searchEngine.search({ filters: {}, per_page: 9999, page: 1 }).data.items;
-
   var items = allItems.filter(function (item) {
-
     if (searchState.f.type) {
       if (!matchType(item.type, searchState.f.type)) return false;
     }
-
     if (searchState.f.rent !== undefined) {
       if (item.rent !== searchState.f.rent) return false;
     }
-
     if (searchState.f.loc) {
       if (!matchLoc(item, searchState.f.loc)) return false;
     }
-
     if (searchState.f.addr) {
       if (item.street !== searchState.f.addr) return false;
     }
-
     if (searchState.f.rooms) {
       if (searchState.f.rooms.min && item.rooms_int < searchState.f.rooms.min) return false;
       if (searchState.f.rooms.max && item.rooms_int > searchState.f.rooms.max) return false;
     }
-
     if (searchState.f.surface) {
       if (searchState.f.surface.min && item.surface_f < searchState.f.surface.min) return false;
       if (searchState.f.surface.max && item.surface_f > searchState.f.surface.max) return false;
     }
-
     if (searchState.f.land) {
       if (searchState.f.land.min && item.surface_land_f < searchState.f.land.min) return false;
       if (searchState.f.land.max && item.surface_land_f > searchState.f.land.max) return false;
     }
-
     if (searchState.f.floor) {
       if (searchState.f.floor.min && item.floor_int < searchState.f.floor.min) return false;
       if (searchState.f.floor.max && item.floor_int > searchState.f.floor.max) return false;
     }
-
     if (searchState.f.floors) {
       if (searchState.f.floors.min && item.floors_int < searchState.f.floors.min) return false;
       if (searchState.f.floors.max && item.floors_int > searchState.f.floors.max) return false;
     }
-
     if (searchState.f.price) {
       if (searchState.f.price.min && item.price_uah < inputPriceToUAH(searchState.f.price.min)) return false;
       if (searchState.f.price.max && item.price_uah > inputPriceToUAH(searchState.f.price.max)) return false;
     }
-
     return true;
   });
-
   var total     = items.length;
   var start     = (searchPage - 1) * searchPerPage;
   var pageItems = items.slice(start, start + searchPerPage);
@@ -503,9 +512,9 @@ function searchRangeLabel(v, unit, prefix) {
 
 function renderSearchTags() {
   var html = Object.keys(searchState.f).map(function (k) {
-    return '<span class="badge badge-success mr-1 mb-1" style="font-size:12px;font-weight:400;padding:4px 8px;">' +
+    return '<span class="badge badge-primary mr-1 mb-1" style="cursor:pointer;" onclick="removeSearchTag(event,\'' + k + '\')">' +
       searchTagLabel(k, searchState.f[k]) +
-      ' <span style="cursor:pointer;margin-left:4px;" onclick="removeSearchTag(event,\'' + k + '\')">×</span>' +
+      ' ×' +
     '</span>';
   }).join('');
   document.getElementById('searchTags').innerHTML = html;
@@ -546,7 +555,7 @@ function renderSearchChips() {
     return '<span class="btn btn-sm mr-1 mb-1 ' + (active ? 'btn-primary' : 'btn-outline-primary') + '" ' +
       'onclick="toggleSearchChip(\'' + k + '\')">' +
       (active ? '✓ ' : '+ ') + CHIP_LABELS[k] +
-      (active ? ' <span onclick="removeSearchChip(event,\'' + k + '\')">×</span>' : '') +
+      (active ? ' ×' : '') +
     '</span>';
   }).join('');
   $chips.html(html).removeClass('d-none').css('display', 'block');
@@ -559,13 +568,13 @@ function renderRentChip() {
   return '<span class="btn btn-sm mr-1 mb-1 ' + (saleActive ? 'btn-primary' : 'btn-outline-primary') + '" ' +
     'onclick="applyRent(event,\'\')">' +
     (saleActive ? '✓ ' : '') + 'Продаж' +
-    (saleActive ? ' <span onclick="removeSearchChip(event,\'rent\')">×</span>' : '') +
-    '</span>' +
-    '<span class="btn btn-sm mr-1 mb-1 ' + (rentActive ? 'btn-primary' : 'btn-outline-primary') + '" ' +
+    (saleActive ? '  × ' : '') +
+  '</span>' +
+  '<span class="btn btn-sm mr-1 mb-1 ' + (rentActive ? 'btn-primary' : 'btn-outline-primary') + '" ' +
     'onclick="applyRent(event,\'1\')">' +
     (rentActive ? '✓ ' : '') + 'Оренда' +
-    (rentActive ? ' <span onclick="removeSearchChip(event,\'rent\')">×</span>' : '') +
-    '</span>';
+    (rentActive ? '  × ' : '') +
+  '</span>';
 }
 
 function applyRent(e, val) {
@@ -600,9 +609,8 @@ function renderSearchPanel(k) {
     return;
   }
   $panel.removeClass('d-none').css('display', 'block');
-
   if (k === 'loc') {
-    $panel.html('<select id="tsLocSelect" class="form-control form-control-sm"><option value="">Почніть вводити...</option></select>');
+    $panel.html('<select id="tsLocSelect" placeholder="Введіть назву..."></select>');
     setTimeout(function () {
       if (searchState.tsLoc) { searchState.tsLoc.destroy(); searchState.tsLoc = null; }
       searchState.tsLoc = new TomSelect('#tsLocSelect', {
@@ -625,9 +633,8 @@ function renderSearchPanel(k) {
       });
       if (searchState.f.loc) searchState.tsLoc.setValue(searchState.f.loc, true);
     }, 50);
-
   } else if (k === 'addr') {
-    $panel.html('<select id="tsAddrSelect" class="form-control form-control-sm"><option value="">Почніть вводити...</option></select>');
+    $panel.html('<select id="tsAddrSelect" placeholder="Введіть вулицю..."></select>');
     setTimeout(function () {
       if (searchState.tsAddr) { searchState.tsAddr.destroy(); searchState.tsAddr = null; }
       searchState.tsAddr = new TomSelect('#tsAddrSelect', {
@@ -644,7 +651,6 @@ function renderSearchPanel(k) {
       });
       if (searchState.f.addr) searchState.tsAddr.setValue(searchState.f.addr, true);
     }, 50);
-
   } else if (k === 'rooms') {
     $panel.html(searchRangePanel('rooms',   searchState.f.rooms   || {}, '',    1,  20));
   } else if (k === 'surface') {
@@ -661,12 +667,16 @@ function renderSearchPanel(k) {
 }
 
 function searchRangePanel(key, v, unit, mn, mx) {
-  return '<div class="d-flex align-items-center flex-wrap">' +
-    '<small class="text-muted mr-1">від</small>' +
-    '<input type="number" class="form-control form-control-sm mr-2" style="width:100px" min="' + mn + '" max="' + mx + '" placeholder="мін" value="' + (v.min || '') + '" oninput="applySearchRange(\'' + key + '\',\'min\',this.value)">' +
-    '<small class="text-muted mr-1">до</small>' +
-    '<input type="number" class="form-control form-control-sm mr-2" style="width:100px" min="' + mn + '" max="' + mx + '" placeholder="макс" value="' + (v.max || '') + '" oninput="applySearchRange(\'' + key + '\',\'max\',this.value)">' +
-    (unit ? '<small class="text-muted">' + unit + '</small>' : '') +
+  return '<div class="form-row">' +
+    '<div class="col">' +
+      '<input type="number" class="form-control form-control-sm" placeholder="від" ' +
+        'oninput="applySearchRange(\'' + key + '\', \'min\', this.value)" value="' + (v.min || '') + '">' +
+    '</div>' +
+    '<div class="col">' +
+      '<input type="number" class="form-control form-control-sm" placeholder="до" ' +
+        'oninput="applySearchRange(\'' + key + '\', \'max\', this.value)" value="' + (v.max || '') + '">' +
+    '</div>' +
+    (unit ? '<div class="col-auto"><span class="form-control-plaintext">' + unit + '</span></div>' : '') +
   '</div>';
 }
 
@@ -693,13 +703,11 @@ function applySearchRange(k, side, v) {
 function renderResults(items, pagination) {
   var $list = $('#searchResultsList');
   var $wrap = $('#searchResults');
-
   if (!items.length) {
-    $list.html('<p class="text-muted small p-2 mb-0">Нічого не знайдено</p>');
+    $list.html('<div class="alert alert-info">Нічого не знайдено</div>');
     $wrap.removeClass('d-none').css('display', 'block');
     return;
   }
-
   var html = items.map(function (item) {
     var url   = '{{ site.url }}' + item.link;
     var addr  = buildAddr(item);
@@ -707,86 +715,131 @@ function renderResults(items, pagination) {
     var surf  = item.surface      ? item.surface + ' м²'              : '';
     var land  = item.surface_land ? item.surface_land + ' м² ділянка' : '';
     var floor = (item.floor_int && item.floors_int)
-                  ? item.floor_int + '/' + item.floors_int + ' пов.'
-                  : (item.floors_int ? item.floors_int + ' пов.' : '');
+      ? item.floor_int + '/' + item.floors_int + ' пов.'
+      : (item.floors_int ? item.floors_int + ' пов.' : '');
     var meta  = [rooms, surf, land, floor].filter(Boolean).join(' · ');
-
-    var img = '';
-    if (item.images && item.images.length > 0 && item.images[0].src) {
-      img = '<div class="pt-2 pr-1">' +
-        '<img src="{{ site.url }}' + item.images[0].src + '" ' +
-        'alt="' + (item.images[0].alt || '') + '" ' +
-        'width="50" height="50" class="rounded">' +
-        '</div>';
+    var priceData = formatPriceUAH(item);
+    var priceHtml = '';
+    if (priceData) {
+      priceHtml =
+        '<p class="card-text h5 mb-0 text-right">' +
+          '<span class="badge badge-primary">' + priceData.uah + '</span>' +
+        '</p>';
+      if (priceData.orig) {
+        priceHtml +=
+          '<p class="card-text mb-1 text-right">' +
+            '<small class="text-muted">(' + priceData.orig + ')</small>' +
+          '</p>';
+      }
     }
 
-    return '<a href="' + url + '" class="d-block text-decoration-none border-bottom py-2 px-1 search-result-item">' +
-      '<div class="d-flex">' +
-        img +
-        '<div class="p-2 flex-grow-1">' +
-          '<p class="m-0">' +
-            '<span class="badge badge-primary mr-1">' + item.type + '</span>' +
-            '<small class="text-primary">' + addr + '</small>' +
-          '</p>' +
-          (meta ? '<span class="d-block"><small class="text-monospace text-body">' + meta + '</small></span>' : '') +
-        '</div>' +
-        '<div class="pl-1 py-2 text-center" style="min-width:90px;">' +
-          formatPrice(item) +
-        '</div>' +
-      '</div>' +
-    '</a>';
-  }).join('');
+    var hasImg = item.images && item.images.length > 0 && item.images[0].src;
 
+    if (hasImg) {
+      return '<div class="card mb-3">' +
+        '<div class="row no-gutters">' +
+          '<div class="col-auto col-md-4">' +
+            '<img loading="lazy" src="{{ site.url }}' + item.images[0].src + '" ' +
+            'width="100%" height="100%" ' +
+            'alt="' + (item.images[0].alt || '') + '" ' +
+            'style="object-fit:cover;">' +
+          '</div>' +
+          '<div class="col-md">' +
+            '<div class="card-body">' +
+              '<p class="card-title h5 mb-1 font-weight-bold">' +
+                '<a href="' + url + '" class="stretched-link">' + item.type + '</a>' +
+              '</p>' +
+              '<p class="card-text mb-1">' + addr + '</p>' +
+              (meta ? '<p class="card-text mb-1 text-monospace">' + meta + '</p>' : '') +
+              priceHtml +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    } else {
+      return '<div class="card mb-3">' +
+        '<div class="row no-gutters">' +
+          '<div class="col-md">' +
+            '<div class="card-body">' +
+              '<p class="card-title h5 mb-1 font-weight-bold">' +
+                '<a href="' + url + '" class="stretched-link">' + item.type + '</a>' +
+              '</p>' +
+              '<p class="card-text mb-1">' + addr + '</p>' +
+              (meta ? '<p class="card-text mb-1 text-monospace">' + meta + '</p>' : '') +
+              priceHtml +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+  }).join('');
   var total = pagination.total;
   var pages = Math.ceil(total / searchPerPage);
-  var pager = '<div class="d-flex justify-content-between align-items-center mt-2 px-1">' +
-    '<small class="text-muted">Знайдено: ' + total + '</small>' +
+  
+  // ВЕРХНЯ ПАГІНАЦІЯ - ТІЛЬКИ ТЕКСТ (без кнопок)
+  var topPager = '<div class="d-flex justify-content-between align-items-center mb-3">' +
+    '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
+    '<span>Знайдено: ' + total + '</span>' +
+  '</div>';
+  
+  // НИЖНЯ ПАГІНАЦІЯ - З КНОПКАМИ
+  var bottomPager = '<div class="d-flex justify-content-between align-items-center mb-3 mt-3">' +
+    '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
     '<div>';
   if (searchPage > 1) {
-    pager += '<button class="btn btn-sm btn-outline-primary mr-1" id="btnPrevPage">← Назад</button>';
+    bottomPager += '<button id="btnPrevPage" class="btn btn-sm btn-outline-primary mr-2">← Назад</button>';
   }
   if (searchPage < pages) {
-    pager += '<button class="btn btn-sm btn-outline-primary" id="btnNextPage">Далі →</button>';
+    bottomPager += '<button id="btnNextPage" class="btn btn-sm btn-outline-primary">Далі →</button>';
   }
-  pager += '</div></div>';
-
-  $list.html(html + pager);
+  bottomPager += '</div></div>';
+  
+  $list.html(topPager + html + (pages > 1 ? bottomPager : ''));
   $wrap.removeClass('d-none').css('display', 'block');
-
-  $('#btnNextPage').on('click', function (e) {
+  
+  // ВИКОРИСТОВУЄМО EVENT DELEGATION ДЛЯ КНОПОК ПАГІНАЦІЇ
+  $(document).off('click', '#btnNextPage');
+  $(document).off('click', '#btnPrevPage');
+  
+  $(document).on('click', '#btnNextPage', function (e) {
     e.stopPropagation();
     searchPage++;
     runSearchWithState();
-    $('html, body').animate({ scrollTop: $('#searchResults').offset().top - 20 }, 300);
+    // СКРОЛ ДО #collapseAreaSelect
+    var $target = $('#collapseAreaSelect');
+    if ($target.length) {
+      $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
+    }
   });
-  $('#btnPrevPage').on('click', function (e) {
+  
+  $(document).on('click', '#btnPrevPage', function (e) {
     e.stopPropagation();
     searchPage--;
     runSearchWithState();
-    $('html, body').animate({ scrollTop: $('#searchResults').offset().top - 20 }, 300);
+    // СКРОЛ ДО #collapseAreaSelect
+    var $target = $('#collapseAreaSelect');
+    if ($target.length) {
+      $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
+    }
   });
 }
 
 function parseQuery(raw) {
   var q = raw.toLowerCase().trim();
   var filters = {};
-
   for (var i = 0; i < searchLocations.length; i++) {
     if (q.includes(searchLocations[i])) {
       filters.location_clean = [searchLocations[i]];
       break;
     }
   }
-
   for (var j = 0; j < searchRegions.length; j++) {
     if (q.includes(searchRegions[j])) {
       filters.region = [searchRegions[j] + ' район'];
       break;
     }
   }
-
   if (/оренда|здам|зніму/.test(q))  filters.rent = ['1'];
   if (/продаж|продам|куплю/.test(q)) filters.rent = [''];
-
   return filters;
 }

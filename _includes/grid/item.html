@@ -84,7 +84,7 @@
         {%- assign targetUrl = site.url | append: '/' | append: offer.phone -%}
         {%- assign ariaLabel = site.data.uk.re_page -%}
       {%- endif -%}
-      <a href="{{ targetUrl }}" aria-label="{{- ariaLabel -}}">
+      <a href="{{ targetUrl }}" aria-label="{{- ariaLabel -}}" class="stretched-link">
         {% include card/body.html %}
       </a>
     </h3>
