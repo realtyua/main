@@ -1,23 +1,3 @@
-// realtyua.v0.19.js
-// v0.1  — базовий Tom Select + Bootstrap
-// v0.2  — перемикач режимів пошуку
-// v0.3  — ItemsJS + loadSearchEngine
-// v0.4  — parseQuery (парсер запитів)
-// v0.5  — renderResults + пагінація
-// v0.6  — searchPlaces (міста+райони+села)
-// v0.7  — фікс collapse пагінації + розділення міст/районів + покращений regex сіл
-// v0.8  — теги в полі пошуку + кнопки фільтрів + Tom Select для населеного пункту
-// v0.9  — виправлено фільтри: type/loc/price через includes() + AND логіка
-// v0.10 — кнопки Продаж/Оренда взаємовиключні + фікс placeholder + фікс collapse на тегах
-// v0.11 — фокус після пагінації + ціна за добу + відображення цін у гривнях + setTimeout фокус
-// v0.12 — стилі кнопок/тегів + картка з фото/без + виправлення фільтру ціни у гривнях
-// v0.13 — клас rounded для фото + фільтр Адреса + великі букви міст/районів + скид сторінки
-// v0.14 — точний збіг loc для міст/районів + префікс м./район у картці + фільтр вулиць від сіл
-// v0.15 — розширений список non-street префіксів: присілок/урочище/масив/мікрорайон тощо
-// v0.16 — TYPE_GROUPS (синоніми типів) + спільний no_results для всіх Tom Select
-// v0.17 — результати у main .container + новий Bootstrap card шаблон
-// v0.18 — Зміна структури: main.content замість main .container + обгортки container/row/col для пошуку
-// v0.19 — Фікс Tom Select (destroy перед init) + пагінація тільки текст зверху + скрол до #collapseAreaSelect
 "use strict";
 $(document).ready(function () {
   $("body").tooltip({ selector: '[data-toggle="tooltip"]' });
@@ -35,14 +15,39 @@ $(document).ready(function () {
   });
   $('.toast').toast('show');
   $('.alert').alert();
-
-  // ЗБЕРІГАЄМО ОРИГІНАЛЬНИЙ ВМІСТ main.content (не .container)
-  var $mainContainer   = $('main.content');
-  var originalMainHtml = $mainContainer.html();
+  var $mainContainer = $('main.content');
+  var $originalContent = null;
+  var $searchContent = null;
   var tomSelectInstance = null;
-
+  function wrapOriginalContent() {
+    var $container = $mainContainer.find('.container').first();
+    if ($container.length && !$container.parent().hasClass('original-content-wrapper')) {
+      $container.wrap('<div class="original-content-wrapper"></div>');
+      $originalContent = $mainContainer.find('.original-content-wrapper');
+    } else {
+      $originalContent = $mainContainer.find('.original-content-wrapper');
+    }
+  }
+  function createSearchContent() {
+    if ($searchContent && $searchContent.length) return;
+    $searchContent = $(
+      '<div class="search-content-wrapper d-none">' +
+        '<div class="container">' +
+          '<div class="row">' +
+            '<div class="col-md-8 offset-md-2">' +
+              '<div id="searchResults" class="d-none mt-3">' +
+                '<div id="searchResultsList"></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+    $mainContainer.append($searchContent);
+  }
+  wrapOriginalContent();
+  createSearchContent();
   function initTomSelect() {
-    // Знищуємо існуючий інстанс перед новою ініціалізацією
     if (tomSelectInstance) {
       tomSelectInstance.destroy();
       tomSelectInstance = null;
@@ -86,35 +91,17 @@ $(document).ready(function () {
       }
     });
   }
-
-  // Ініціалізуємо Tom Select при завантаженні
   initTomSelect();
-
   $('input[name="searchMode"]').on('change', function () {
     if ($(this).val() === 'loc') {
-      // відновлюємо оригінальний вміст main.content
-      $mainContainer.html(originalMainHtml);
+      $originalContent.removeClass('d-none').css('display', 'block');
+      $searchContent.addClass('d-none').css('display', 'none');
       $('#searchLoc').removeClass('d-none').css('display', 'block');
       $('#searchObj').addClass('d-none').css('display', 'none');
       $('#searchResults').addClass('d-none').css('display', 'none');
-
-      // перепідключаємо Tom Select після відновлення DOM (з правильним destroy)
-      initTomSelect();
     } else {
-      // очищаємо main.content і вставляємо блок результатів з обгортками
-      $mainContainer.html(
-        '<div class="container">' +
-          '<div class="row">' +
-            '<div class="col-md-8 offset-md-2">' +
-              '<div id="searchObj" class="mb-4"></div>' +
-              '<div id="searchResults" class="d-none"></div>' +
-              '<div id="searchFilterPanel" class="d-none mb-3"></div>' +
-              '<div id="searchTags" class="mb-2"></div>' +
-              '<div id="searchChips" class="d-none mb-3"></div>' +
-            '</div>' +
-          '</div>' +
-        '</div>'
-      );
+      $originalContent.addClass('d-none').css('display', 'none');
+      $searchContent.removeClass('d-none').css('display', 'block');
       $('#searchLoc').addClass('d-none').css('display', 'none');
       $('#searchObj').removeClass('d-none').css('display', 'block');
       setTimeout(function () {
@@ -122,7 +109,6 @@ $(document).ready(function () {
       }, 50);
     }
   });
-
   $('#searchListings').on('input', function () {
     var query = $(this).val().trim().toLowerCase();
     if (query.length < 1) return;
@@ -138,7 +124,6 @@ $(document).ready(function () {
         }
         if (matched) break;
       }
-
       if (matched && searchState.f['type'] !== matched.tag) {
         searchState.type      = matched.tag;
         searchState.f['type'] = matched.tag;
@@ -146,7 +131,6 @@ $(document).ready(function () {
         renderSearchTags();
         renderSearchChips();
       }
-
       if (Object.keys(searchState.f).length > 0) {
         searchPage = 1;
         runSearchWithState();
@@ -154,7 +138,6 @@ $(document).ready(function () {
     });
   });
 });
-
 var sShare = {
   show: function (url, windowHeight, windowWidth) {
     var height = windowHeight || 420;
@@ -169,13 +152,11 @@ var sShare = {
     );
   }
 };
-
 var TS_RENDER = {
   no_results: function (data, escape) {
     return '<div class="dropdown-item">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
   }
 };
-
 var TYPE_GROUPS = [
   {
     tag:      'Будинок',
@@ -208,9 +189,7 @@ var TYPE_GROUPS = [
     chips:    ['rent','loc','addr','land','price'],
   },
 ];
-
 var DEFAULT_CHIPS = ['rent','loc','addr','surface','land','price'];
-
 var CHIP_LABELS = {
   rent:    'Оренда/Продаж',
   loc:     'Населений пункт',
@@ -222,7 +201,6 @@ var CHIP_LABELS = {
   floors:  'Поверхів',
   price:   'Ціна',
 };
-
 var searchEngine      = null;
 var searchLocations   = [];
 var searchRegions     = [];
@@ -234,7 +212,6 @@ var searchPerPage     = 10;
 var searchLastFilters = {};
 var searchPlaceTypes  = {};
 var nbuRates = { USD: {{ site.usd }}, EUR: {{ site.eur }} };
-
 var NON_STREET_PREFIXES = [
   'с.', 'с.м.т.', 'смт', 'село ', 'селище ',
   'c.', 'C.',
@@ -242,14 +219,11 @@ var NON_STREET_PREFIXES = [
   'садове товариство', 'садівниче товариство',
   'дачне селище', 'поселення '
 ];
-
 var searchState = { type: null, activeChip: null, f: {}, tsLoc: null, tsAddr: null };
-
 function capitalize(str) {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
-
 function isNonStreet(str) {
   var s = str.trim();
   for (var i = 0; i < NON_STREET_PREFIXES.length; i++) {
@@ -257,14 +231,12 @@ function isNonStreet(str) {
   }
   return false;
 }
-
 function getTypeGroup(tag) {
   for (var i = 0; i < TYPE_GROUPS.length; i++) {
     if (TYPE_GROUPS[i].tag === tag) return TYPE_GROUPS[i];
   }
   return null;
 }
-
 function priceToUAH(priceStr) {
   if (!priceStr) return 0;
   var s = String(priceStr).trim();
@@ -272,11 +244,9 @@ function priceToUAH(priceStr) {
   if (s.startsWith('€')) return parseInt(s.slice(1)) * nbuRates.EUR;
   return parseInt(s) || 0;
 }
-
 function inputPriceToUAH(val) {
   return parseFloat(val);
 }
-
 function formatPriceUAH(item) {
   var price    = String(item.price     || '').trim();
   var priceSqm = String(item.price_sqmt || '').trim();
@@ -309,13 +279,11 @@ function formatPriceUAH(item) {
     orig: orig
   };
 }
-
 function updateSearchPlaceholder() {
   var input   = document.getElementById('searchListings');
   var hasTags = Object.keys(searchState.f).length > 0;
   input.placeholder = hasTags ? '' : 'будинок, квартира, земля...';
 }
-
 function loadSearchEngine(callback) {
   if (searchEngine) { callback(); return; }
   fetch('{{ site.url }}/region/{{ site.region_slug }}/data/all.json')
@@ -333,7 +301,6 @@ function loadSearchEngine(callback) {
         var firstPart = (item.address || '').split(',')[0].trim();
         item.street = isNonStreet(firstPart) ? '' : firstPart;
       });
-
       searchLocations = [...new Set(
         data.map(function (i) {
           return i.location
@@ -341,7 +308,6 @@ function loadSearchEngine(callback) {
             : null;
         }).filter(Boolean)
       )];
-
       searchRegions = [...new Set(
         data.map(function (i) {
           return i.region
@@ -349,11 +315,9 @@ function loadSearchEngine(callback) {
             : null;
         }).filter(Boolean)
       )];
-
       searchTypes = [...new Set(
         data.map(function (i) { return (i.type || '').toLowerCase().trim(); }).filter(Boolean)
       )];
-
       searchStreets = [...new Set(
         data.map(function (i) { return i.street; }).filter(Boolean)
       )].sort(function (a, b) { return a.localeCompare(b, 'uk'); });
@@ -368,7 +332,6 @@ function loadSearchEngine(callback) {
         }
       });
       var searchVillages = [...new Set(villages)];
-
       searchPlaceTypes = {};
       searchLocations.forEach(function (l) { searchPlaceTypes[l] = 'city'; });
       searchRegions.forEach(function (r)   { searchPlaceTypes[r] = 'region'; });
@@ -397,7 +360,6 @@ function loadSearchEngine(callback) {
     })
     .catch(function (e) { console.error('JSON load error', e); });
 }
-
 function matchType(itemType, tag) {
   var group = getTypeGroup(tag);
   if (!group) return false;
@@ -407,7 +369,6 @@ function matchType(itemType, tag) {
   }
   return false;
 }
-
 function matchLoc(item, locVal) {
   var placeType = searchPlaceTypes[locVal] || 'city';
   if (placeType === 'city') {
@@ -421,7 +382,6 @@ function matchLoc(item, locVal) {
   var addr = (item.address || '').replace(/\bc./g, 'с.').toLowerCase();
   return addr.includes(locVal.toLowerCase());
 }
-
 function buildAddr(item) {
   var parts = [];
   if (item.location) {
@@ -432,7 +392,6 @@ function buildAddr(item) {
   if (item.address) parts.push(item.address);
   return parts.join(', ');
 }
-
 function runSearchWithState() {
   if (!searchEngine) return;
   var allItems = searchEngine.search({ filters: {}, per_page: 9999, page: 1 }).data.items;
@@ -480,7 +439,6 @@ function runSearchWithState() {
   var pageItems = items.slice(start, start + searchPerPage);
   renderResults(pageItems, { total: total });
 }
-
 function searchTagLabel(k, v) {
   if (k === 'type')    return v;
   if (k === 'rent')    return v === '1' ? 'Оренда' : 'Продаж';
@@ -499,7 +457,6 @@ function searchTagLabel(k, v) {
   if (k === 'price')   return searchRangeLabel(v, '₴', '');
   return String(v);
 }
-
 function searchRangeLabel(v, unit, prefix) {
   if (typeof v === 'string') return v;
   var p = prefix || '';
@@ -509,7 +466,6 @@ function searchRangeLabel(v, unit, prefix) {
   if (v.max)          return 'до '  + p + v.max + u;
   return unit || '';
 }
-
 function renderSearchTags() {
   var html = Object.keys(searchState.f).map(function (k) {
     return '<span class="badge badge-primary mr-1 mb-1" style="cursor:pointer;" onclick="removeSearchTag(event,\'' + k + '\')">' +
@@ -520,7 +476,6 @@ function renderSearchTags() {
   document.getElementById('searchTags').innerHTML = html;
   updateSearchPlaceholder();
 }
-
 function removeSearchTag(e, k) {
   e.stopPropagation();
   if (k === 'type') searchState.type = null;
@@ -540,7 +495,6 @@ function removeSearchTag(e, k) {
   renderSearchPanel(null);
   runSearchWithState();
 }
-
 function renderSearchChips() {
   var $chips = $('#searchChips');
   if (!searchState.type && !Object.keys(searchState.f).length) {
@@ -560,7 +514,6 @@ function renderSearchChips() {
   }).join('');
   $chips.html(html).removeClass('d-none').css('display', 'block');
 }
-
 function renderRentChip() {
   var rent       = searchState.f.rent;
   var saleActive = rent === '';
@@ -576,7 +529,6 @@ function renderRentChip() {
     (rentActive ? '  × ' : '') +
   '</span>';
 }
-
 function applyRent(e, val) {
   e.stopPropagation();
   if (searchState.f.rent === val) {
@@ -589,17 +541,14 @@ function applyRent(e, val) {
   renderSearchChips();
   runSearchWithState();
 }
-
 function removeSearchChip(e, k) {
   e.stopPropagation();
   removeSearchTag(e, k);
 }
-
 function toggleSearchChip(k) {
   searchState.activeChip = (searchState.activeChip === k) ? null : k;
   renderSearchPanel(searchState.activeChip);
 }
-
 function renderSearchPanel(k) {
   var $panel = $('#searchFilterPanel');
   if (!k) {
@@ -665,7 +614,6 @@ function renderSearchPanel(k) {
     $panel.html(searchRangePanel('price',   searchState.f.price   || {}, '₴',   0,  100000000));
   }
 }
-
 function searchRangePanel(key, v, unit, mn, mx) {
   return '<div class="form-row">' +
     '<div class="col">' +
@@ -679,7 +627,6 @@ function searchRangePanel(key, v, unit, mn, mx) {
     (unit ? '<div class="col-auto"><span class="form-control-plaintext">' + unit + '</span></div>' : '') +
   '</div>';
 }
-
 function applySearchSimple(k, v) {
   if (v !== '') searchState.f[k] = v;
   else delete searchState.f[k];
@@ -688,7 +635,6 @@ function applySearchSimple(k, v) {
   renderSearchChips();
   runSearchWithState();
 }
-
 function applySearchRange(k, side, v) {
   if (!searchState.f[k] || typeof searchState.f[k] !== 'object') searchState.f[k] = {};
   if (v) searchState.f[k][side] = parseFloat(v);
@@ -699,7 +645,6 @@ function applySearchRange(k, side, v) {
   renderSearchChips();
   runSearchWithState();
 }
-
 function renderResults(items, pagination) {
   var $list = $('#searchResultsList');
   var $wrap = $('#searchResults');
@@ -732,9 +677,7 @@ function renderResults(items, pagination) {
           '</p>';
       }
     }
-
     var hasImg = item.images && item.images.length > 0 && item.images[0].src;
-
     if (hasImg) {
       return '<div class="card mb-3">' +
         '<div class="row no-gutters">' +
@@ -775,14 +718,10 @@ function renderResults(items, pagination) {
   }).join('');
   var total = pagination.total;
   var pages = Math.ceil(total / searchPerPage);
-  
-  // ВЕРХНЯ ПАГІНАЦІЯ - ТІЛЬКИ ТЕКСТ (без кнопок)
   var topPager = '<div class="d-flex justify-content-between align-items-center mb-3">' +
     '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
     '<span>Знайдено: ' + total + '</span>' +
   '</div>';
-  
-  // НИЖНЯ ПАГІНАЦІЯ - З КНОПКАМИ
   var bottomPager = '<div class="d-flex justify-content-between align-items-center mb-3 mt-3">' +
     '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
     '<div>';
@@ -793,37 +732,29 @@ function renderResults(items, pagination) {
     bottomPager += '<button id="btnNextPage" class="btn btn-sm btn-outline-primary">Далі →</button>';
   }
   bottomPager += '</div></div>';
-  
   $list.html(topPager + html + (pages > 1 ? bottomPager : ''));
   $wrap.removeClass('d-none').css('display', 'block');
-  
-  // ВИКОРИСТОВУЄМО EVENT DELEGATION ДЛЯ КНОПОК ПАГІНАЦІЇ
   $(document).off('click', '#btnNextPage');
   $(document).off('click', '#btnPrevPage');
-  
   $(document).on('click', '#btnNextPage', function (e) {
     e.stopPropagation();
     searchPage++;
     runSearchWithState();
-    // СКРОЛ ДО #collapseAreaSelect
     var $target = $('#collapseAreaSelect');
     if ($target.length) {
       $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
     }
   });
-  
   $(document).on('click', '#btnPrevPage', function (e) {
     e.stopPropagation();
     searchPage--;
     runSearchWithState();
-    // СКРОЛ ДО #collapseAreaSelect
     var $target = $('#collapseAreaSelect');
     if ($target.length) {
       $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
     }
   });
 }
-
 function parseQuery(raw) {
   var q = raw.toLowerCase().trim();
   var filters = {};
