@@ -77,7 +77,7 @@ $(document).ready(function () {
             {url:"{{ r.url }}",title:"{{ r.small }}"},
           {%- endif -%}
         {%- endfor -%}
-        {url:"{{ site.url }}/region/{{ site.region_slug }}/",title:"{{ site.region }}"}
+        {url:"/region/{{ site.region_slug }}/",title:"{{ site.region }}"}
       ],
       render: {
         no_results: function (data, escape) {
@@ -286,7 +286,7 @@ function updateSearchPlaceholder() {
 }
 function loadSearchEngine(callback) {
   if (searchEngine) { callback(); return; }
-  fetch('{{ site.url }}/region/{{ site.region_slug }}/data/all.json')
+    fetch('/region/{{ site.region_slug }}/data/all.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       data.forEach(function (item) {
@@ -654,7 +654,7 @@ function renderResults(items, pagination) {
     return;
   }
   var html = items.map(function (item) {
-    var url   = '{{ site.url }}' + item.link;
+    var url   = item.link;
     var addr  = buildAddr(item);
     var rooms = item.rooms        ? item.rooms + ' кімн.'             : '';
     var surf  = item.surface      ? item.surface + ' м²'              : '';
@@ -682,7 +682,7 @@ function renderResults(items, pagination) {
       return '<div class="card mb-3">' +
         '<div class="row no-gutters">' +
           '<div class="col-auto col-md-4">' +
-            '<img loading="lazy" src="{{ site.url }}' + item.images[0].src + '" ' +
+            '<img loading="lazy" src="' + item.images[0].src + '" ' +
             'width="100%" height="100%" ' +
             'alt="' + (item.images[0].alt || '') + '" ' +
             'style="object-fit:cover;">' +
