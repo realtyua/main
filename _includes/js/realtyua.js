@@ -19,15 +19,17 @@ $(document).ready(function () {
   var $originalContent = null;
   var $searchContent = null;
   var tomSelectInstance = null;
-  function wrapOriginalContent() {
-    var $container = $mainContainer.find('.container').first();
-    if ($container.length && !$container.parent().hasClass('original-content-wrapper')) {
-      $container.wrap('<div class="original-content-wrapper"></div>');
-      $originalContent = $mainContainer.find('.original-content-wrapper');
-    } else {
-      $originalContent = $mainContainer.find('.original-content-wrapper');
-    }
+function wrapOriginalContent() {
+  if ($mainContainer.children('.original-content-wrapper').length) {
+    $originalContent = $mainContainer.children('.original-content-wrapper');
+    return;
   }
+  var $wrapper = $('<div class="original-content-wrapper"></div>');
+  var $children = $mainContainer.children();
+  $wrapper.insertBefore($children.first());
+  $wrapper.append($children);
+  $originalContent = $wrapper;
+}
   function createSearchContent() {
     if ($searchContent && $searchContent.length) return;
     $searchContent = $(
@@ -107,6 +109,15 @@ $(document).ready(function () {
       setTimeout(function () {
         $('#searchListings').focus();
       }, 50);
+      loadSearchEngine(function () {
+        searchState.f = {};
+        searchState.type = null;
+        searchState.sort = null;
+        searchPage = 1;
+        renderSearchTags();
+        renderSearchChips();
+        runSearchWithState();
+      });
     }
   });
   $('#searchListings').on('input', function () {
@@ -219,7 +230,7 @@ var NON_STREET_PREFIXES = [
   'садове товариство', 'садівниче товариство',
   'дачне селище', 'поселення '
 ];
-var searchState = { type: null, activeChip: null, f: {}, tsLoc: null, tsAddr: null };
+var searchState = { type: null, activeChip: null, f: {}, tsLoc: null, tsAddr: null, sort: null };
 function capitalize(str) {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -434,6 +445,11 @@ function runSearchWithState() {
     }
     return true;
   });
+  if (searchState.sort === 'desc') {
+    items.sort(function (a, b) { return (b.price_uah || 0) - (a.price_uah || 0); });
+  } else if (searchState.sort === 'asc') {
+    items.sort(function (a, b) { return (a.price_uah || 0) - (b.price_uah || 0); });
+  }
   var total     = items.length;
   var start     = (searchPage - 1) * searchPerPage;
   var pageItems = items.slice(start, start + searchPerPage);
@@ -691,6 +707,7 @@ function renderResults(items, pagination) {
             '<div class="card-body">' +
               '<p class="card-title h5 mb-1 font-weight-bold">' +
                 '<a href="' + url + '" class="stretched-link">' + item.type + '</a>' +
+                ' → <span class="text-muted">' + (item.rent === '1' ? 'оренда' : 'продаж') + '</span>' +
               '</p>' +
               '<p class="card-text mb-1">' + addr + '</p>' +
               (meta ? '<p class="card-text mb-1 text-monospace">' + meta + '</p>' : '') +
@@ -706,6 +723,7 @@ function renderResults(items, pagination) {
             '<div class="card-body">' +
               '<p class="card-title h5 mb-1 font-weight-bold">' +
                 '<a href="' + url + '" class="stretched-link">' + item.type + '</a>' +
+                ' → <span class="text-muted">' + (item.rent === '1' ? 'оренда' : 'продаж') + '</span>' +
               '</p>' +
               '<p class="card-text mb-1">' + addr + '</p>' +
               (meta ? '<p class="card-text mb-1 text-monospace">' + meta + '</p>' : '') +
@@ -718,9 +736,13 @@ function renderResults(items, pagination) {
   }).join('');
   var total = pagination.total;
   var pages = Math.ceil(total / searchPerPage);
+  var sortButtons = '<div class="btn-group btn-group-sm" role="group">' +
+    '<button type="button" class="btn btn-outline-secondary' + (searchState.sort === 'desc' ? ' active' : '') + '" onclick="setSortPrice(\'desc\', event)">Ціна ↓</button>' +
+    '<button type="button" class="btn btn-outline-secondary' + (searchState.sort === 'asc' ? ' active' : '') + '" onclick="setSortPrice(\'asc\', event)">Ціна ↑</button>' +
+  '</div>';
   var topPager = '<div class="d-flex justify-content-between align-items-center mb-3">' +
     '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
-    '<span>Знайдено: ' + total + '</span>' +
+    '<div class="d-flex align-items-center"><span class="mr-2">Знайдено: ' + total + '</span>' + sortButtons + '</div>' +
   '</div>';
   var bottomPager = '<div class="d-flex justify-content-between align-items-center mb-3 mt-3">' +
     '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
@@ -773,4 +795,18 @@ function parseQuery(raw) {
   if (/оренда|здам|зніму/.test(q))  filters.rent = ['1'];
   if (/продаж|продам|куплю/.test(q)) filters.rent = [''];
   return filters;
+}
+function setSortPrice(order, e) {
+  if (e) e.stopPropagation();
+  if (searchState.sort === order) {
+    searchState.sort = null;
+  } else {
+    searchState.sort = order;
+  }
+  searchPage = 1;
+  runSearchWithState();
+  var $target = $('#collapseAreaSelect');
+  if ($target.length) {
+    $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
+  }
 }
