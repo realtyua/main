@@ -5,12 +5,9 @@ breadcrumb: Івано-Франківська
 description: Продаж і оренда квартир, будинків, землі та комерційних нежитлових приміщень на ринку нерухомості містах і селах Івано-Франківської області
 table: 2
 ---
-
 <div class="row">
   <div class="col-12">
-
     <h1 class="h2">Продаж і оренда нерухомості в {{ site.data.uk.deck_region_at }} області</h1>
-
     <div class="row justify-content-between">
       {%- assign mapPage = page.dir | append: 'map.html' | remove_first: '/' -%}
       {%- capture isMap -%}{%- file_exists {{ mapPage }} -%}{%- endcapture -%}
@@ -35,29 +32,68 @@ table: 2
         </ul>
       </div>
       {%- endif -%}
-      <div class="col-lg-2">
-        <select id="data" class="custom-select custom-select-sm mb-lg-2">
-          <option value="all" selected>Вся нерухомість</option>
-          <option value="apartment">Квартири</option>
-          <option value="house">Будинки</option>
-          <option value="commercial">Комерція</option>
-          <option value="rent">Оренда</option>
-          <option value="land">Земля</option>
-          <option value="garage">Гаражі</option>
-        </select>
+      <div class="col-md-auto">
+        <div class="form-row">
+          <div class="col-md-auto form-group mb-0">
+            <select id="data" class="form-control form-control-sm mb-md-2">
+              <option value="all" selected>Вся нерухомість</option>
+              <option value="apartment">Квартири</option>
+              <option value="house">Будинки</option>
+              <option value="commercial">Комерція</option>
+              <option value="rent">Оренда</option>
+              <option value="land">Земля</option>
+              <option value="garage">Гаражі</option>
+            </select>
+          </div>
+          <div class="col-md-auto form-group mb-0">
+            <select id="filterRooms" class="form-control form-control-sm mb-md-2">
+              <option value="">Кімнат</option>
+              <option value="1">1 кімната</option>
+              <option value="2">2 кімнати</option>
+              <option value="3">3 кімнати</option>
+              <option value="4">4 кімнати</option>
+              <option value="5">5+ кімнат</option>
+            </select>
+          </div>
+          <div class="col-md-auto form-group mb-0">
+            <select id="filterSurface" class="form-control form-control-sm mb-md-2">
+              <option value="">Площа м²</option>
+              <option value="0-30">до 30 м²</option>
+              <option value="30-50">30-50 м²</option>
+              <option value="50-80">50-80 м²</option>
+              <option value="80-100">80-100 м²</option>
+              <option value="100-150">100-150 м²</option>
+              <option value="150-">150+ м²</option>
+            </select>
+          </div>
+          <div class="col-md-auto form-group mb-0">
+            <select id="filterFloor" class="form-control form-control-sm mb-md-2">
+              <option value="">Поверх</option>
+              <option value="1">1 поверх</option>
+              <option value="2-5">2-5 поверхів</option>
+              <option value="6-9">6-9 поверхів</option>
+              <option value="10-">10+ поверхів</option>
+            </select>
+          </div>
+          <div class="col-md-auto form-group mb-0">
+            <select id="filterFloors" class="form-control form-control-sm mb-md-2">
+              <option value="">Поверхів</option>
+              <option value="1">1 поверх</option>
+              <option value="2">2 поверхи</option>
+              <option value="3">3 поверхи</option>
+              <option value="4-5">4-5 поверхів</option>
+              <option value="6-">6+ поверхів</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
-
     <hr class="mb-2 mt-2 mt-md-0 mt-lg-0">
-
     {%- include thanks-please.html -%}
-
     <h2 class="h3">Всі оголошення про продаж та оренду нерухомості</h2>
     <p><a rel="nofollow" href="/region/ivano-frankivska/archive.html">Архів не актуальних оголошень</a></p>
-
     <div class="row">
       <div class="col-12">
-
         <table
           id="property"
           data-locale="{{ site.lang | replace: '_', '-' }}"
@@ -83,7 +119,6 @@ table: 2
             </tr>
           </thead>
         </table>
-
       </div>
     </div>
   </div>

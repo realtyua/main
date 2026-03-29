@@ -66,7 +66,116 @@ $(function () {
   }
   $tabpro.on('expand-row.bs.table', function (event, index) { if (expandedRow !== index) { $('table').bootstrapTable('collapseRow', expandedRow); } expandedRow = index; });
   $tabpro.on('click-row.bs.table', function (e, row, $element) { $($element).siblings().removeClass('active'); $($element).addClass('active'); });
-  $("select#data").change(function(){$tabpro.bootstrapTable("refresh",{url:"data/"+$(this).val()+".json"})});
+  $tabpro.on('load-success.bs.table', function (e, data) {
+    window.tableAllOriginalData = data;
+    setTimeout(applyTableFilters, 100);
+  });
+  function updateFilterVisibility() {
+    var type = $("#data").val();
+    var $filterRooms = $("#filterRooms").closest("div.col-md-auto");
+    var $filterSurface = $("#filterSurface").closest("div.col-md-auto");
+    var $filterFloor = $("#filterFloor").closest("div.col-md-auto");
+    var $filterFloors = $("#filterFloors").closest("div.col-md-auto");
+    
+    $filterRooms.hide();
+    $filterSurface.hide();
+    $filterFloor.hide();
+    $filterFloors.hide();
+    
+    if (type === "apartment") {
+      $filterRooms.show();
+      $filterSurface.show();
+      $filterFloor.show();
+      $filterFloors.show();
+    } else if (type === "house") {
+      $filterRooms.show();
+      $filterSurface.show();
+      $filterFloors.show();
+    } else if (type === "commercial" || type === "garage") {
+      $filterSurface.show();
+    } else if (type === "land") {
+      $filterSurface.show();
+    }
+    
+    $("#filterRooms, #filterSurface, #filterFloor, #filterFloors").val("");
+  }
+  
+  updateFilterVisibility();
+  
+  $("#data").change(function(){
+    updateFilterVisibility();
+    $tabpro.bootstrapTable("refresh",{url:"data/"+$(this).val()+".json"});
+  });
+
+  function applyTableFilters() {
+    var data = window.tableAllOriginalData || $tabpro.bootstrapTable('getData');
+    var $rooms = $("select#filterRooms");
+    var $surface = $("select#filterSurface");
+    var $floor = $("select#filterFloor");
+    var $floors = $("select#filterFloors");
+    
+    var filteredData = data.filter(function(row) {
+      if ($rooms.val()) {
+        var roomsVal = parseInt($rooms.val());
+        var rowRooms = parseInt(row.rooms) || 0;
+        if (roomsVal === 5) {
+          if (rowRooms < 5) return false;
+        } else {
+          if (rowRooms !== roomsVal) return false;
+        }
+      }
+      
+      if ($surface.val()) {
+        var surfVal = $surface.val();
+        var range = surfVal.split('-');
+        var type = $("#data").val();
+        var rowSurf = type === "land" ? (parseFloat(row.surface_land) || 0) : (parseFloat(row.surface) || 0);
+        if (range[0] === '') {
+          if (rowSurf < parseFloat(range[1])) return false;
+        } else if (range[1] === '') {
+          if (rowSurf < parseFloat(range[0])) return false;
+        } else {
+          if (rowSurf < parseFloat(range[0]) || rowSurf >= parseFloat(range[1])) return false;
+        }
+      }
+      
+      if ($floor.val()) {
+        var floorVal = $floor.val();
+        var floorRange = floorVal.split('-');
+        var rowFloor = parseInt(row.floor) || 0;
+        if (floorRange[0] === '') {
+          if (rowFloor < parseInt(floorRange[1])) return false;
+        } else if (floorRange[1] === '') {
+          if (rowFloor < parseInt(floorRange[0])) return false;
+        } else {
+          if (rowFloor < parseInt(floorRange[0]) || rowFloor >= parseInt(floorRange[1])) return false;
+        }
+      }
+      
+      if ($floors.val()) {
+        var floorsVal = $floors.val();
+        var floorsRange = floorsVal.split('-');
+        var rowFloors = parseInt(row.floors) || 0;
+        if (floorsRange[0] === '') {
+          if (rowFloors < parseInt(floorsRange[1])) return false;
+        } else if (floorsRange[1] === '') {
+          if (rowFloors < parseInt(floorsRange[0])) return false;
+        } else {
+          if (rowFloors < parseInt(floorsRange[0]) || rowFloors >= parseInt(floorsRange[1])) return false;
+        }
+      }
+      
+      return true;
+    });
+    
+    $tabpro.bootstrapTable('load', filteredData);
+  }
+  
+  $("select#filterRooms, select#filterSurface, select#filterFloor, select#filterFloors").change(function() {
+    if (window.tableAllOriginalData && window.tableAllOriginalData.length > 0) {
+      applyTableFilters();
+    }
+  });
 });
 
 var month = ["{{ site.data.uk.m_01 }}","{{ site.data.uk.m_02 }}","{{ site.data.uk.m_03 }}","{{ site.data.uk.m_04 }}","{{ site.data.uk.m_05 }}","{{ site.data.uk.m_06 }}","{{ site.data.uk.m_07 }}","{{ site.data.uk.m_08 }}","{{ site.data.uk.m_09 }}","{{ site.data.uk.m_10 }}","{{ site.data.uk.m_11 }}","{{ site.data.uk.m_12 }}"], usd = {{ site.usd }}, eur = {{ site.eur }}, nbu = {{ site.nbu }}, items = [], html = [], isArchive = window.location.pathname.includes('/archive');
