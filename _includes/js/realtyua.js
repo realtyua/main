@@ -736,17 +736,27 @@ function renderResults(items, pagination) {
   }).join('');
   var total = pagination.total;
   var pages = Math.ceil(total / searchPerPage);
-  var sortButtons = '<div class="btn-group btn-group-sm" role="group">' +
-    '<button type="button" class="btn btn-outline-secondary' + (searchState.sort === 'desc' ? ' active' : '') + '" onclick="setSortPrice(\'desc\', event)">Ціна ↓</button>' +
-    '<button type="button" class="btn btn-outline-secondary' + (searchState.sort === 'asc' ? ' active' : '') + '" onclick="setSortPrice(\'asc\', event)">Ціна ↑</button>' +
+  var topPager = '<div class="row justify-content-between mb-3">' +
+    '<div class="col-md-auto align-self-center">' +
+      '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
+    '</div>' +
+    '<div class="col-md-auto">' +
+      '<div class="row justify-content-between">' +
+        '<div class="col-5 col-md-auto align-self-center">Знайдено: ' + total + '</div>' +
+        '<div class="col-auto">' +
+          '<div class="btn-group btn-group-sm" role="group">' +
+            '<button type="button" class="btn btn-outline-secondary' + (searchState.sort === 'desc' ? ' active' : '') + '" onclick="setSortPrice(\'desc\', event)">Ціна ↓</button>' +
+            '<button type="button" class="btn btn-outline-secondary' + (searchState.sort === 'asc' ? ' active' : '') + '" onclick="setSortPrice(\'asc\', event)">Ціна ↑</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
   '</div>';
-  var topPager = '<div class="d-flex justify-content-between align-items-center mb-3">' +
-    '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
-    '<div class="d-flex align-items-center"><span class="mr-2">Знайдено: ' + total + '</span>' + sortButtons + '</div>' +
-  '</div>';
-  var bottomPager = '<div class="d-flex justify-content-between align-items-center mb-3 mt-3">' +
-    '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
-    '<div>';
+  var bottomPager = '<div class="row justify-content-between mb-3 mt-3">' +
+    '<div class="col-md-auto align-self-center">' +
+      '<span class="text-muted">Показано ' + searchPage + ' сторінку з ' + pages + '</span>' +
+    '</div>' +
+    '<div class="col-md-auto">';
   if (searchPage > 1) {
     bottomPager += '<button id="btnPrevPage" class="btn btn-sm btn-outline-primary mr-2">← Назад</button>';
   }

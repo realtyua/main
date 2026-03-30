@@ -48,37 +48,30 @@ layout: default
               {{ page.type }}
             {%- endif -%}
           </dd>
-
           {%- if page.rooms -%}
             <dt>Кількість {% if page.type contains 'приміщення' or page.type contains 'Гараж' %}приміщень{%- else -%}кімнат{%- endif -%}</dt>
             <dd>У об'єкта {% include rooms.html type=page.type rooms=page.rooms -%}</dd>
           {%- endif -%}
-
           {%- if page.surface -%}
             <dt>Загальна площа об'єкта нерухомості</dt>
             <dd>{{ surface }} метрів квадратних (<abbr title="Один метр квадратний це площа квадрату зі стороною в 1 метр">1 м²</abbr>)</dd>
           {%- endif -%}
-
           {%- if page.surface_land -%}
             <dt>Загальна площа земельної ділянки</dt>
             <dd>{{ page.surface_land }} метрів квадратних (<abbr title="Один метр квадратний це площа квадрату зі стороною в 1 метр">1 м²</abbr>) або {{ page.surface_land | divided_by: 10000.0000 | round: 4 }} га</dd>
           {%- endif -%}
-
           {%- if page.floor -%}
             <dt>Поверх на якому знаходиться об'єкт нерухомості</dt>
             <dd>{% if page.floor contains 'Г' %}Розташовано на горищі{% elsif page.floor == '0' %}Розташовано у підвалі{% else %}Розташовано на {{ page.floor }}-му поверсі{% endif %} {% if page.type contains 'приміщення' or page.type contains 'Гараж' %}споруди{% else %}будинку{%- endif -%}</dd>
           {%- endif -%}
-
           {%- if page.floors -%}
             <dt>Кількість поверхів у об'єкта нерухомості</dt>
             <dd>У {% if page.type contains 'приміщення' or page.type contains 'Гараж' %}споруди{% else %}будинку{% endif %} {% include floors.html floors=page.floors %}</dd>
           {%- endif -%}
-
           {%- if page.parking -%}
             <dt>Паркування транспотрних засобів</dt>
             <dd>{{ page.parking }}</dd>
           {%- endif -%}
-
           {%- if page.address or page.location or page.region -%}
             <dt>Адреса</dt>
             <dd{% if page.object %} class="mb-0"{% endif %}>
@@ -90,12 +83,10 @@ layout: default
             </dd>
             {% if page.object %}<dd>Житловий комплекс "{{ page.object }}"</dd>{% endif %}
           {%- endif -%}
-
         </dl>
       </div>
       <div class="col">
         <dl class="properties">
-
           {%- if page.hidden == true -%}
             <dt>{% if page.rent %}Орендодавець{% else %}Продавець{% endif %}</dt>
             <dd>
@@ -113,10 +104,8 @@ layout: default
             <dt>Контакти {% if page.rent %}орендодавця{% else %}продавця{% endif %}</dt>
             <dd><button type="button" tabindex="0" class="btn btn-link p-0 m-0" data-custom-class="tel" data-toggle="popover" data-trigger="focus click" data-offset="1,-128" data-placement="right" data-html="true" data-content="{%- include footer/phone.html legal=page.phone type='property' escape_for_attr=true -%}">+38&nbsp;XXX&nbsp;XXX&nbsp;XX&nbsp;XX</button></dd>
           {%- endif -%}
-
           <dt>Розміщено у <a href="{{ site.main_url }}" target="_blank">Мережі Вебсайтів Нерухомості</a></dt>
           <dd>{%- include date.html date=page.date -%}</dd>
-
           {%- if page.last_modified_at -%}
             {%- if page.hidden != true -%}
               <dt>Останнє оновлення оголошення</dt>
@@ -125,7 +114,6 @@ layout: default
             {%- endif -%}
             <dd>{%- include date.html date=page.last_modified_at -%}</dd>
           {%- endif -%}
-
           {%- if page.price or page.price_sqmt -%}
             <dt>Вартість {% if page.rent %}оренди{% else %}продажу{% endif %} нерухомості{% if page.rent and page.price %} за місяць{% elsif page.rent and page.price_sqmt %} за добу (24 години){% endif %}{%- if page.hidden == true %} на момент видалення{%- endif -%}</dt>
             {%- if page.hidden != true -%}
@@ -154,7 +142,6 @@ layout: default
               <dd>Конвертовано за курсом {% if in_price contains '$' %}{{ rate }}{% elsif in_price contains '€' %}{{ rate }}{% else %}{{ rate }}{% endif %} гривень за {% if in_price contains '$' %}<abbr title="Один долар Сполучених Штатів Америки">{{ symbol }}1</abbr>{% elsif in_price contains '€' %}<abbr title="Один євро (валюта Європейського Союзу)">{{ symbol }}1</abbr>{% else %}<abbr title="Один долар Сполучених Штатів Америки">$1</abbr>{% endif %}</dd>
             {%- endif -%}
           {%- endif -%}
-
         </dl>
       </div>
     </div>
@@ -192,14 +179,11 @@ layout: default
         {{ content }}
       {%- endif -%}
     {%- endif -%}
-
     {%- include data/{{ site.region_slug }}/all.html -%}
-
     {%- assign uid = page.uid | strip -%}
     {%- assign location = page.location | default: page.region | strip -%}
     {%- assign address = page.address | strip -%}
-
-    {%- assign on_address = offers | where_exp: 'i', "i.location == location and i.address == address and i.id != uid" -%}
+    {%- assign on_address = site.data._cached_records | where_exp: 'i', "i.location == location and i.address == address and i.id != uid" -%}
     {%- if on_address.size > 0 -%}
       {%- for offer in on_address limit: 3 -%}
         {%- capture aid -%}1{%- increment counter -%}{%- endcapture -%}
@@ -214,9 +198,8 @@ layout: default
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
-
     {%- assign street = address | split: ',' | first -%}
-    {%- assign on_street = offers | where_exp: 'i', "i.location == location and i.address contains street and i.id != uid" -%}
+    {%- assign on_street = site.data._cached_records | where_exp: 'i', "i.location == location and i.address contains street and i.id != uid" -%}
     {%- if on_street.size > 0 -%}
       {%- for offer in on_street limit: 3 -%}
         {%- capture aid -%}2{%- increment counter -%}{%- endcapture -%}
@@ -231,10 +214,9 @@ layout: default
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
-
     {%- assign phone = page.phone | strip -%}
     {%- assign seller = page.seller | strip -%}
-    {%- assign in_seller = offers | where_exp: 'i', "i.id != uid and i.phone == phone and i.seller == seller" -%}
+    {%- assign in_seller = site.data._cached_records | where_exp: 'i', "i.id != uid and i.phone == phone and i.seller == seller" -%}
     {%- if in_seller.size > 0 -%}
       {%- for offer in in_seller limit: 3 -%}
         {%- capture aid -%}3{%- increment counter -%}{%- endcapture -%}
@@ -249,7 +231,6 @@ layout: default
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
-
     {%- include back.html -%}
   </div>
 </div>
