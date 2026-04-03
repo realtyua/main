@@ -2,6 +2,121 @@
 $(document).ready(function () {
   $("body").tooltip({ selector: '[data-toggle="tooltip"]' });
   $('[data-toggle="popover"]').popover();
+
+  var phoneCache = null;
+  function drawPlaceholder(canvas) {
+    var ctx = canvas.getContext('2d');
+    var fontSize = 16;
+    ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+    var text = '+38 XXX XXX XX XX';
+    var metrics = ctx.measureText(text);
+    var textWidth = metrics.width;
+    var padding = 0;
+    canvas.width = Math.ceil(textWidth) + (padding * 2);
+    canvas.height = fontSize + 10;
+    ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#2d5ca6';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillText(text, padding, fontSize - 1);
+  }
+  function getBasePathForData() {
+    var path = window.location.pathname;
+    var parts = path.split('/').filter(Boolean);
+    if (parts.length < 2) return null;
+    if (parts[0] === 'region' && parts[1] === 'city' && parts[2]) {
+      return '/' + parts.slice(0, 3).join('/');
+    }
+    if (parts[0] === 'region' && parts[1] && parts[1] !== 'city') {
+      return '/' + parts.slice(0, 2).join('/');
+    }
+    if (parts[0] === 'district' && parts[1] === 'town' && parts[2]) {
+      return '/' + parts.slice(0, 3).join('/');
+    }
+    if (parts[0] === 'district' && parts[1] && parts[1] !== 'town') {
+      return '/' + parts.slice(0, 2).join('/');
+    }
+    return null;
+  }
+  function decryptPhone(encrypted) {
+    if (!encrypted) return '';
+    var clean = encrypted.replace(/\D/g, '');
+    var prefix = clean.slice(0, 3);
+    var encPart = clean.slice(3);
+    var decryptedPart = encPart.split('').map(function(c) {
+      var n = parseInt(c, 10) - 1;
+      return n < 0 ? 9 : n;
+    }).join('');
+    return prefix + decryptedPart;
+  }
+  function formatPhone(phone) {
+    return '+' + phone.slice(0, 2) + ' ' + phone.slice(2, 5) + ' ' + phone.slice(5, 8) + ' ' + phone.slice(8, 10) + ' ' + phone.slice(10);
+  }
+
+  function loadPhoneData(callback) {
+    if (phoneCache) { callback(phoneCache); return; }
+    var basePath = getBasePathForData();
+    if (!basePath) {
+      console.warn('Не вдалося визначити шлях до *.json');
+      callback({});
+      return;
+    }
+    var jsonUrl = basePath + '/data/all.json';
+    fetch(jsonUrl)
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        phoneCache = {};
+        (data || []).forEach(function(item) {
+          if (item.id && item.phone) {
+            phoneCache[item.id] = item.phone;
+          }
+        });
+        callback(phoneCache);
+      })
+      .catch(function(e) {
+        console.error('Phone load error:', e);
+        callback({});
+      });
+  }
+
+  $(document).on('click', '.tel-btn', function() {
+    var $btn = $(this);
+    var $canvas = $btn.find('canvas');
+    if ($btn.data('revealed')) return;
+    var id = $btn.data('id');
+    
+    loadPhoneData(function(phones) {
+      var encrypted = phones[id];
+      var decrypted = decryptPhone(encrypted);
+      if (!decrypted) return;
+      var canvasEl = $canvas[0];
+      var ctx = canvasEl.getContext('2d');
+      var fontSize = 16;
+      ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+      var phoneText = formatPhone(decrypted);
+      var metrics = ctx.measureText(phoneText);
+      var textWidth = metrics.width;
+      var padding = 0;
+      canvasEl.width = Math.ceil(textWidth) + (padding * 2);
+      canvasEl.height = fontSize + 10;
+      ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#2d5ca6';
+      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+      ctx.fillText(phoneText, padding, fontSize - 1);
+      var $link = $('<a>',{href: 'tel:' + decrypted, title: 'Телефон'});
+      $btn.wrap($link).parent();
+      $btn.data('revealed', true);
+    });
+  });
+
+  $(document).ready(function() {
+    $('.tel-canvas').each(function() {drawPlaceholder(this);});
+  });
+
   $('.nav-tabs>li>a.nav-link').on('click', function () {
     $('.navbar-collapse').collapse('hide');
   });

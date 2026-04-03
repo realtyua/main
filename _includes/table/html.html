@@ -25,7 +25,19 @@
   <td>{{ offer.coordinates }}</td>
   <td>{%- if date > cdate -%}{{ site.time | date: "%Y-%m-%d" }}{%- else -%}{{ offer.date | date: "%Y-%m-%d" }}{%- endif -%}</td>
   <td>{{ offer.seller }}</td>
-  <td>{{ offer.phone }}</td>
+  {%- assign phone = offer.phone -%}
+  {%- assign prefix = phone | slice: 0, 3 -%}
+  {%- assign suffix = phone | slice: 3, 9 -%}
+  {%- assign digits = suffix | split: "" -%}
+  {%- assign transformed_suffix = "" -%}
+  {%- for digit in digits -%}
+    {%- assign num = digit | plus: 0 -%}
+    {%- assign new_num = num | plus: 1 %}
+    {%- if new_num == 10 -%}{%- assign new_num = 0 -%}{%- endif -%}
+    {%- assign transformed_suffix = transformed_suffix | append: new_num -%}
+  {%- endfor -%}
+  {% assign encrypted = prefix | append: transformed_suffix %}
+  <td>{{ encrypted }}</td>
   <td>{{ offer.description }}</td>
   <td>{%- if offer.page == 1 -%}{%- else -%}{{ offer.link }}{%- endif -%}</td>
   {%- if idimage == 'true' and files.size == 0 -%}

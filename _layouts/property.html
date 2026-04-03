@@ -100,9 +100,21 @@ layout: default
                 {% if page.rent %}Орендодавець{% else %}Продавець{% endif %}
               </a>
             </dt>
-            <dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ page.phone }}" title="{{ site.data.uk.offers }} у списку">{{ page.seller }}</a></dd>
+            {%- assign phone = page.phone -%}
+            {%- assign prefix = phone | slice: 0, 3 -%}
+            {%- assign suffix = phone | slice: 3, 9 -%}
+            {%- assign digits = suffix | split: "" -%}
+            {%- assign transformed_suffix = "" -%}
+            {%- for digit in digits -%}
+              {%- assign num = digit | plus: 0 -%}
+              {%- assign new_num = num | plus: 1 %}
+              {%- if new_num == 10 -%}{%- assign new_num = 0 -%}{%- endif -%}
+              {%- assign transformed_suffix = transformed_suffix | append: new_num -%}
+            {%- endfor -%}
+            {%- assign encrypted = prefix | append: transformed_suffix -%}
+            <dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ encrypted }}" title="{{ site.data.uk.offers }} у списку">{{ page.seller }}</a></dd>
             <dt>Контакти {% if page.rent %}орендодавця{% else %}продавця{% endif %}</dt>
-            <dd><button type="button" tabindex="0" class="btn btn-link p-0 m-0" data-custom-class="tel" data-toggle="popover" data-trigger="focus click" data-offset="1,-128" data-placement="right" data-html="true" data-content="{%- include footer/phone.html legal=page.phone type='property' escape_for_attr=true -%}">+38&nbsp;XXX&nbsp;XXX&nbsp;XX&nbsp;XX</button></dd>
+            <dd><button type="button" class="btn btn-link tel-btn p-0 m-0" data-id="{{ page.uid }}" title="Клікніть для перегляду телефону"><canvas class="tel-canvas">На жаль, ваш браузер не підтримує Canvas.</canvas></button></dd>
           {%- endif -%}
           <dt>Розміщено у <a href="{{ site.main_url }}" target="_blank">Мережі Вебсайтів Нерухомості</a></dt>
           <dd>{%- include date.html date=page.date -%}</dd>
