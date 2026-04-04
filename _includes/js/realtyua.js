@@ -680,6 +680,30 @@ function toggleSearchChip(k) {
   searchState.activeChip = (searchState.activeChip === k) ? null : k;
   renderSearchPanel(searchState.activeChip);
 }
+function addClearButton(ts) {
+  if (!ts || !ts.control) return;
+  try {
+    var button = document.createElement('div');
+    button.className = 'clear-button';
+    button.innerHTML = '&times;';
+    button.title = 'Очистити';
+    button.style.cssText = 'position:absolute;right:10px;;top:50%;transform:translateY(-50%);cursor:pointer;padding:0 6px;font-size:18px;color:#999;display:none;';
+    button.addEventListener('click', function(evt) {
+      if (ts.isLocked) return;
+      ts.clear();
+      ts.refreshOptions(false);
+      evt.preventDefault();
+      evt.stopPropagation();
+    });
+    ts.control.style.position = 'relative';
+    ts.control.appendChild(button);
+    
+    ts.on('change', function() {
+      button.style.display = ts.items && ts.items.length > 0 ? 'block' : 'none';
+    });
+    button.style.display = ts.items && ts.items.length > 0 ? 'block' : 'none';
+  } catch(e) {}
+}
 function renderSearchPanel(k) {
   var $panel = $('#searchFilterPanel');
   if (!k) {
@@ -709,7 +733,8 @@ function renderSearchPanel(k) {
         render:        TS_RENDER,
         onChange: function (val) {
           if (val) { searchPage = 1; applySearchSimple('loc', val); }
-        }
+        },
+        onInitialize: function() { addClearButton(this); }
       });
       if (searchState.f.loc) searchState.tsLoc.setValue(searchState.f.loc, true);
     }, 50);
@@ -727,7 +752,8 @@ function renderSearchPanel(k) {
         render:      TS_RENDER,
         onChange: function (val) {
           if (val) { searchPage = 1; applySearchSimple('addr', val); }
-        }
+        },
+        onInitialize: function() { addClearButton(this); }
       });
       if (searchState.f.addr) searchState.tsAddr.setValue(searchState.f.addr, true);
     }, 50);
