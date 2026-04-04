@@ -134,17 +134,17 @@ $(document).ready(function () {
   var $originalContent = null;
   var $searchContent = null;
   var tomSelectInstance = null;
-function wrapOriginalContent() {
-  if ($mainContainer.children('.original-content-wrapper').length) {
-    $originalContent = $mainContainer.children('.original-content-wrapper');
-    return;
+  function wrapOriginalContent() {
+    if ($mainContainer.children('.original-content-wrapper').length) {
+      $originalContent = $mainContainer.children('.original-content-wrapper');
+      return;
+    }
+    var $wrapper = $('<div class="original-content-wrapper"></div>');
+    var $children = $mainContainer.children();
+    $wrapper.insertBefore($children.first());
+    $wrapper.append($children);
+    $originalContent = $wrapper;
   }
-  var $wrapper = $('<div class="original-content-wrapper"></div>');
-  var $children = $mainContainer.children();
-  $wrapper.insertBefore($children.first());
-  $wrapper.append($children);
-  $originalContent = $wrapper;
-}
   function createSearchContent() {
     if ($searchContent && $searchContent.length) return;
     $searchContent = $(
@@ -152,7 +152,7 @@ function wrapOriginalContent() {
         '<div class="container">' +
           '<div class="row">' +
             '<div class="col-md-8 offset-md-2">' +
-              '<div id="searchResults" class="d-none mt-3">' +
+              '<div id="searchResults" class="d-none d-flex justify-content-center mt-3">' +
                 '<div id="searchResultsList"></div>' +
               '</div>' +
             '</div>' +
@@ -286,7 +286,7 @@ var TS_RENDER = {
 var TYPE_GROUPS = [
   {
     tag:      'Будинок',
-    triggers: ['частина будинку', 'будинок'],
+    triggers: ['частина будинку', 'будинок', 'хата'],
     filters:  ['будинок'],
     chips:    ['rent','loc','addr','rooms','surface','land','floors','price'],
   },
@@ -334,7 +334,7 @@ var searchTypes       = [];
 var searchPlaces      = [];
 var searchStreets     = [];
 var searchPage        = 1;
-var searchPerPage     = 10;
+var searchPerPage     = 9;
 var searchLastFilters = {};
 var searchPlaceTypes  = {};
 var nbuRates = { USD: {{ site.usd }}, EUR: {{ site.eur }} };
@@ -424,7 +424,7 @@ function loadSearchEngine(callback) {
         item.rooms_int      = parseInt(item.rooms)  || 0;
         item.surface_f      = parseFloat(item.surface)      || 0;
         item.surface_land_f = parseFloat(item.surface_land) || 0;
-        var firstPart = (item.address || '').split(',')[0].replace(/\s*\(неподалік\)/gi, '').trim();
+        var firstPart = (item.address || '').split(',')[0].replace(/\s*\(неподалік\)|\s*\(поруч\)/gi, '').trim();
         item.street = isNonStreet(firstPart) ? '' : firstPart;
       });
       searchLocations = [...new Set(
