@@ -152,7 +152,7 @@ $(document).ready(function () {
         '<div class="container">' +
           '<div class="row">' +
             '<div class="col-md-8 offset-md-2">' +
-              '<div id="searchResults" class="d-none d-flex justify-content-center mt-3">' +
+              '<div id="searchResults" class="d-none mt-3">' +
                 '<div id="searchResultsList"></div>' +
               '</div>' +
             '</div>' +
@@ -687,7 +687,6 @@ function addClearButton(ts) {
     button.className = 'clear-button';
     button.innerHTML = '&times;';
     button.title = 'Очистити';
-    button.style.cssText = 'position:absolute;right:10px;;top:50%;transform:translateY(-50%);cursor:pointer;padding:0 6px;font-size:18px;color:#999;display:none;';
     button.addEventListener('click', function(evt) {
       if (ts.isLocked) return;
       ts.clear();
@@ -806,7 +805,7 @@ function renderResults(items, pagination) {
   var $list = $('#searchResultsList');
   var $wrap = $('#searchResults');
   if (!items.length) {
-    $list.html('<div class="alert alert-info">Нічого не знайдено</div>');
+    $list.html('<div class="alert alert-info">Нічого не знайдено. Будь ласка спробуйте ще раз, не поспішаючи.</div>');
     $wrap.removeClass('d-none').css('display', 'block');
     return;
   }

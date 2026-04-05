@@ -114,7 +114,7 @@ layout: default
             {%- assign encrypted = prefix | append: transformed_suffix -%}
             <dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ encrypted }}" title="{{ site.data.uk.offers }} у списку">{{ page.seller }}</a></dd>
             <dt>Контакти {% if page.rent %}орендодавця{% else %}продавця{% endif %}</dt>
-            <dd><button type="button" class="btn btn-link tel-btn p-0 m-0" data-id="{{ page.uid }}" title="Клікніть для перегляду телефону"><canvas class="tel-canvas">На жаль, ваш браузер не підтримує Canvas.</canvas></button></dd>
+            <dd class="mb-0"><button type="button" class="btn btn-link tel-btn p-0 m-0" data-id="{{ page.uid }}" title="Клікніть для перегляду телефону"><canvas class="tel-canvas">На жаль, ваш браузер не підтримує Canvas.</canvas></button></dd>
           {%- endif -%}
           <dt>Розміщено у <a href="{{ site.main_url }}" target="_blank">Мережі Вебсайтів Нерухомості</a></dt>
           <dd>{%- include date.html date=page.date -%}</dd>

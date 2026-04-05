@@ -222,3 +222,4 @@ _::-webkit-:host,
 
 #searchResultsList .search-result-item { line-height: 1; }
 .tel-btn:focus, .tel-btn.focus { box-shadow: none; }
+.clear-button { position: absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer; padding:0 6px; font-size:20px; color:#999; display:none; }
