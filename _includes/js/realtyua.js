@@ -522,18 +522,10 @@ function runSearchWithState() {
   if (!searchEngine) return;
   var allItems = searchEngine.search({ filters: {}, per_page: 9999, page: 1 }).data.items;
   var items = allItems.filter(function (item) {
-    if (searchState.f.type) {
-      if (!matchType(item.type, searchState.f.type)) return false;
-    }
-    if (searchState.f.rent !== undefined) {
-      if (item.rent !== searchState.f.rent) return false;
-    }
-    if (searchState.f.loc) {
-      if (!matchLoc(item, searchState.f.loc)) return false;
-    }
-    if (searchState.f.addr) {
-      if (item.street !== searchState.f.addr) return false;
-    }
+    if (searchState.f.type && !matchType(item.type, searchState.f.type)) return false;
+    if (searchState.f.rent !== undefined && item.rent !== searchState.f.rent) return false;
+    if (searchState.f.loc && !matchLoc(item, searchState.f.loc)) return false;
+    if (searchState.f.addr && item.street !== searchState.f.addr) return false;
     if (searchState.f.rooms) {
       if (searchState.f.rooms.min && item.rooms_int < searchState.f.rooms.min) return false;
       if (searchState.f.rooms.max && item.rooms_int > searchState.f.rooms.max) return false;
@@ -566,7 +558,7 @@ function runSearchWithState() {
     items.sort(function (a, b) { return (a.price_uah || 0) - (b.price_uah || 0); });
   }
   var total     = items.length;
-  var start     = (searchPage - 1) * searchPerPage;
+  var start      = (searchPage - 1) * searchPerPage;
   var pageItems = items.slice(start, start + searchPerPage);
   renderResults(pageItems, { total: total });
 }
@@ -682,26 +674,23 @@ function toggleSearchChip(k) {
 }
 function addClearButton(ts) {
   if (!ts || !ts.control) return;
-  try {
-    var button = document.createElement('div');
-    button.className = 'clear-button';
-    button.innerHTML = '&times;';
-    button.title = 'Очистити';
-    button.addEventListener('click', function(evt) {
-      if (ts.isLocked) return;
-      ts.clear();
-      ts.refreshOptions(false);
-      evt.preventDefault();
-      evt.stopPropagation();
-    });
-    ts.control.style.position = 'relative';
-    ts.control.appendChild(button);
-    
-    ts.on('change', function() {
-      button.style.display = ts.items && ts.items.length > 0 ? 'block' : 'none';
-    });
-    button.style.display = ts.items && ts.items.length > 0 ? 'block' : 'none';
-  } catch(e) {}
+  if (!document.getElementById('ts-clear-btn-fix')) {
+    var style = document.createElement('style');
+    style.id = 'ts-clear-btn-fix';
+    style.textContent = `.clear-button { display:none; position:absolute;right:10px;top:50%;transform:translateY(-50%); width:20px;height:20px;line-height:20px;text-align:center; cursor:pointer;font-size:18px;color:#666;z-index:5; } .ts-wrapper.has-items .ts-control .clear-button{display:block!important;}`;
+    document.head.appendChild(style);
+  }
+  var button = document.createElement('div');
+  button.className = 'clear-button';
+  button.innerHTML = '×';
+  button.title = 'Очистити';
+  button.addEventListener('click', function(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    ts.clear();
+  });
+  ts.control.style.position = 'relative';
+  ts.control.appendChild(button);
 }
 function renderSearchPanel(k) {
   var $panel = $('#searchFilterPanel');

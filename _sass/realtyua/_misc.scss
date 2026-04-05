@@ -1,6 +1,3 @@
-//
-// Scrolltop
-//
 .scroll-top {
     overflow: hidden;
     @include transition(all .3s ease-in-out);
@@ -45,12 +42,10 @@
         transform: translate(-50%, -50%);
     }
 }
-
 .section .list-group-item { padding: .25rem 0.75rem; }
 .fixed-table-toolbar .btn { border-radius: unset; padding: 5px 5px 2px 5px; }
 .lead-badge { font-size: 1.365rem; font-weight: 300; }
 table#property tr:not(.detail-view) { cursor: pointer; }
-
 .dropdown-menu small {
   display: block;
   color: #ffffff;
@@ -58,24 +53,20 @@ table#property tr:not(.detail-view) { cursor: pointer; }
   margin-right: 3px;
   line-height: 1;
 }
-
 #collapseArea small {
   display: block;
   color: #000000;
   line-height: 1;
 }
-
 .flag-ua .d-flex span:first-child { font-size: .9rem; }
 #list-offer .col { display: none; }
 #add-form label { font-weight: 600; }
 .accordion .btn:focus, .accordion .btn.focus { box-shadow: none; }
 .multi-collapse button:focus { outline: 0; outline: 0; }
-
 main a.list-group-item:hover, footer a.list-group-item:hover, .text-shadow a.text-white:hover {
   transition: unset;
   border-bottom: 1px solid rgba(0,0,0,0.125);
 }
-
 .badge-add {
   color: #fff;
   background-color: #ed7600;
@@ -84,11 +75,9 @@ a.badge-add:hover, a.badge-add:focus {
   color: #fff;
   background-color: #ed7600;
 }
-
 main .leaflet-menu {
   border-right: 1px solid rgb(45, 92, 166);
 }
-
 #uvaga {
   height: 24px;
   width: 24px;
@@ -102,12 +91,10 @@ main .leaflet-menu {
   animation-fill-mode: none;
   animation-play-state: running;
 }
-
 @keyframes attention {
   0% { transform: scale(.8); border-radius: 100%; }
   100% { transform: scale(1); }
 }
-
 .card-footer a.marker, .navbar a.marker  {
   display: block;
   text-indent: -9999px;
@@ -119,9 +106,7 @@ main .leaflet-menu {
   transition: unset;
   border-bottom: 0px;
 }
-
 .navbar a.marker { margin-top: 0; }
-
 .card {
   .close {
     position: absolute;
@@ -132,41 +117,25 @@ main .leaflet-menu {
     color: inherit;
   }
 }
-
 .multi-collapse {
   .alert-dismissible {
     .close { padding: .05rem .35rem; }
     padding-right: 1.25rem;
   }
 }
-
 .card-footer {
   .dropdown-toggle::after { margin-left: 0; vertical-align: .155em; }
   button.dropdown-toggle:focus { outline: none; }
-  // button.dropdown-toggle:focus::after { outline: 1px solid red; }
 }
-
 .card {
   .btn-group, .btn-group-vertical {
     vertical-align: unset;
   }
 }
-
 .properties dd { padding-left: 10px; }
 .properties dd .btn:focus, .btn.focus { box-shadow: none; }
-
 .page-item .page-pre { padding-top: 0.45rem; }
 .page-item .page-next { padding-top: 0.45rem; }
-
-// https://jsfiddle.net/egeo/zgf4un7d/1/
-// https://jsfiddle.net/gQZ3F/12/
-// @include media-breakpoint-only(md) {
-//   .textarea ul, .textarea ol {
-//     position: relative;
-//     list-style-position: inside;
-//     left: 20px;
-//   }
-// }
 @include media-breakpoint-up(md) {
   .textarea ul, .textarea ol {
     position: relative;
@@ -174,11 +143,6 @@ main .leaflet-menu {
     left: 15px;
   }
 }
-
-// https://stackoverflow.com/questions/14142378/how-can-i-fill-a-div-with-an-image-while-keeping-it-proportional
-// https://medium.com/@primozcigler/neat-trick-for-css-object-fit-fallback-on-edge-and-other-browsers-afbc53bbb2c3
-// <img src="/assets/images/380993316973/1699486229/3_kitchen.jpg" loading="lazy" width="380" height="285" title="Квартира у бульвар Південний, 24Б в м. Івано-Франківськ" alt="Квартира в м. Івано-Франківськ" style="object-fit: cover;/*! width: 50px; */height: 120px;" class="card-img-top">
-
 .card .fill {
   display: flex;
   text-align: center !important;
@@ -190,28 +154,23 @@ main .leaflet-menu {
   overflow: hidden;
   object-position: 50% 50%;
 }
-
 .col-md-3 .float-left { z-index: 1; }
 .textarea ul, ol { z-index: -1; }
-
 .tel { top: -1px !important; }
 .tel .arrow { display: none; }
 .tel.popover { border: 0; }
 .tel.popover .popover-body { display: block; font-size: 1.03rem; text-align: center; padding: 0; }
-
 @supports (-webkit-appearance: none) and (hanging-punctuation: first) {
   .tel {
     left: 33px !important;
     padding-right: 10px;
   }
 }
-
 _::-webkit-:host,
 .tel {
   left: 33px !important;
   padding-right: 10px;
 }
-
 @supports (-webkit-touch-callout: none) {
   _::-webkit-:host,
   .tel {
@@ -219,7 +178,5 @@ _::-webkit-:host,
     padding-right: 10px;
   }
 }
-
 #searchResultsList .search-result-item { line-height: 1; }
 .tel-btn:focus, .tel-btn.focus { box-shadow: none; }
-.clear-button { position: absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer; padding:0 6px; font-size:20px; color:#999; display:none; }
