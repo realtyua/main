@@ -162,6 +162,9 @@ jobs:
 
       - name: Minify JS files
         run: |
+          # Install terser gem
+          gem install terser -v '~> 1.2'
+          
           # Read files from _data/minify.json
           FILES=$(python3 -c "import json; print(' '.join(json.load(open('_data/minify.json'))['files']))")
           
@@ -170,7 +173,7 @@ jobs:
             output="_includes/js/${file%.js}.min.js"
             if [ -f "$input" ]; then
               echo "Minifying: $file -> ${file%.js}.min.js"
-              ruby -S terser "$input" -o "$output" --compress --mangle
+              terser "$input" -o "$output" --compress --mangle
             else
               echo "⚠️ File not found: $input, skipping"
             fi
