@@ -1,1 +1,9 @@
-{" files\: [\realtyua.js\, \owner.js\, \table.js\, \table.all.js\, \ua.home.js\]}
+{
+  "files": [
+    "realtyua.js",
+    "owner.js",
+    "table.js",
+    "table.all.js",
+    "ua.home.js"
+  ]
+}
