@@ -3,4 +3,6 @@ layout: null
 sitemap: false
 navhide: 1
 ---
-{{ site.data.top | jsonify }}
+{%- assign offers = site.data.top -%}
+{%- capture json_output -%}{%- include offer-json.html -%}{%- endcapture -%}
+{{ json_output | json_minify }}

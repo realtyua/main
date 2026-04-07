@@ -6,4 +6,5 @@ navhide: 1
 {%- assign type = page.name | replace: '.json', '.html' | prepend: '/' -%}
 {%- include data-include.html appe=type -%}
 {%- include {{ incl }} -%}
-{%- include offer-json.html -%}
+{%- capture json_output -%}{%- include offer-json.html -%}{%- endcapture -%}
+{{ json_output | json_minify }}

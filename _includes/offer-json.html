@@ -27,21 +27,10 @@
       "coordinates":"{{ offer.coordinates }}",
       "date":"{%- if date > cdate -%}{{- site.time | date: "%Y-%m-%d" -}}{%- else -%}{{- offer.date | date: "%Y-%m-%d" -}}{%- endif -%}",
       "seller":"{{ offer.seller }}",
-      {%- assign phone = offer.phone -%}
-      {%- assign prefix = phone | slice: 0, 3 -%}
-      {%- assign suffix = phone | slice: 3, 9 -%}
-      {%- assign digits = suffix | split: "" -%}
-      {%- assign transformed_suffix = "" -%}
-      {%- for digit in digits -%}
-        {%- assign num = digit | plus: 0 -%}
-        {%- assign new_num = num | plus: 1 %}
-        {%- if new_num == 10 -%}{%- assign new_num = 0 -%}{%- endif -%}
-        {%- assign transformed_suffix = transformed_suffix | append: new_num -%}
-      {%- endfor -%}
-      {% assign encrypted = prefix | append: transformed_suffix %}
+      {%- include pencrypted.html phone=offer.phone -%}
       "phone":"{{ encrypted }}",
       "description":"{{ offer.description }}",
-      "link":"{%- if offer.page == 1 -%}{%- elsif offer.link -%}{{ offer.link }}{%- else -%}/region/{{ site.region_slug }}/?id={{ offer.phone }}{%- endif -%}",
+      "link":"{%- if offer.page == 1 -%}{%- elsif offer.link -%}{{ offer.link }}{%- else -%}/region/{{ site.region_slug }}/?id={{ encrypted }}{%- endif -%}",
       {%- if idimage == 'true' and files.size == 0 -%}
         "images":{%- capture img -%}[{"src":"{{ imageid | url_decode | relative_url }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},]{%- endcapture -%}{{ img | replace: ',]', ']' }}
       {%- elsif files.size == 1 and idimage == 'false' -%}

@@ -82,7 +82,8 @@ $(document).ready(function () {
       });
   }
 
-  $(document).on('click', '.tel-btn', function() {
+  $(document).on('click', '.tel-btn', function(e) {
+    e.stopPropagation();
     var $btn = $(this);
     var $canvas = $btn.find('canvas');
     if ($btn.data('revealed')) return;
@@ -108,6 +109,7 @@ $(document).ready(function () {
       ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
       ctx.fillText(phoneText, padding, fontSize - 1);
       var $link = $('<a>',{href: 'tel:' + decrypted, title: 'Телефон'});
+      $link.on('click', function(e) { e.stopPropagation(); });
       $btn.wrap($link).parent();
       $btn.data('revealed', true);
     });

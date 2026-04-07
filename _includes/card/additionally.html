@@ -78,7 +78,8 @@
     {%- if offer.seller contains site.data.uk.re_seller -%}
       {{ offer.seller | remove: site.data.uk.re_seller }}
     {%- else -%}
-      <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ offer.phone }}" title="{{ site.data.uk.offers }}">{{ offer.seller }}</a>
+      {%- include pencrypted.html phone=offer.phone -%}
+      <a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ encrypted }}" title="{{ site.data.uk.offers }}">{{ offer.seller }}</a>
     {%- endif -%}
   </dd>
 {%- endif -%}
@@ -89,7 +90,7 @@
   {%- else -%}
     <dt>{{ site.data.uk.re_phone }}</dt>
   {%- endif -%}
-  <dd>{%- include footer/phone.html legal=offer.phone type='text' -%}<i class="d-none">{{ offer.id }}</i></dd>
+  <dd><button type="button" class="btn btn-link tel-btn p-0 m-0" data-id="{{ offer.id }}" title="Клікніть для перегляду телефону"><canvas class="tel-canvas">На жаль, ваш браузер не підтримує Canvas.</canvas></button></dd>
 {%- endif -%}
 
 {%- if offer.page and offer.page == '1' -%}

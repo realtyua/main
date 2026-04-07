@@ -100,18 +100,7 @@ layout: default
                 {% if page.rent %}Орендодавець{% else %}Продавець{% endif %}
               </a>
             </dt>
-            {%- assign phone = page.phone -%}
-            {%- assign prefix = phone | slice: 0, 3 -%}
-            {%- assign suffix = phone | slice: 3, 9 -%}
-            {%- assign digits = suffix | split: "" -%}
-            {%- assign transformed_suffix = "" -%}
-            {%- for digit in digits -%}
-              {%- assign num = digit | plus: 0 -%}
-              {%- assign new_num = num | plus: 1 %}
-              {%- if new_num == 10 -%}{%- assign new_num = 0 -%}{%- endif -%}
-              {%- assign transformed_suffix = transformed_suffix | append: new_num -%}
-            {%- endfor -%}
-            {%- assign encrypted = prefix | append: transformed_suffix -%}
+            {%- include pencrypted.html phone=page.phone -%}
             <dd><a href="{{ site.url }}/region/{{ site.region_slug }}/?id={{ encrypted }}" title="{{ site.data.uk.offers }} у списку">{{ page.seller }}</a></dd>
             <dt>Контакти {% if page.rent %}орендодавця{% else %}продавця{% endif %}</dt>
             <dd class="mb-0"><button type="button" class="btn btn-link tel-btn p-0 m-0" data-id="{{ page.uid }}" title="Клікніть для перегляду телефону"><canvas class="tel-canvas">На жаль, ваш браузер не підтримує Canvas.</canvas></button></dd>

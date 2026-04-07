@@ -11,4 +11,4 @@ navhide: 1
   {%- endunless -%}
 {%- endfor -%}
 {%- include estates-json.html estates=posts -%}
-{{ re }}
+{{ re | json_minify }}
