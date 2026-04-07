@@ -151,32 +151,6 @@ jobs:
           sed -i "s/^nbu: .*/nbu: $NBU/" _config.yml
           echo "✅ _config.yml оновлено: USD=$USD EUR=$EUR NBU=$NBU"
 
-      - name: Install terser gem
-        run: gem install terser -v '~> 1.2'
-
-      - name: Minify JS files
-        run: |
-          # Read files from _data/minify.json
-          FILES=$(python3 -c "import json; print(' '.join(json.load(open('_data/minify.json'))['files']))")
-          
-          for file in $FILES; do
-            input="_includes/js/$file"
-            output="_includes/js/${file%.js}.min.js"
-            if [ -f "$input" ]; then
-              echo "Minifying: $file -> ${file%.js}.min.js"
-              terser "$input" -o "$output" --compress --mangle
-            else
-              echo "⚠️ File not found: $input, skipping"
-            fi
-          done
-          
-          # Update includes in assets/js/*.js files
-          for file in $FILES; do
-            min_file="${file%.js}.min.js"
-            sed -i "s|include js/$file|include js/$min_file|g" assets/js/*.js
-            echo "Updated includes: $file -> $min_file"
-          done
-
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         # uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
