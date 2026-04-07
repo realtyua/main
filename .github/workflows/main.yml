@@ -173,7 +173,7 @@ jobs:
             output="_includes/js/${file%.js}.min.js"
             if [ -f "$input" ]; then
               echo "Minifying: $file -> ${file%.js}.min.js"
-              terser "$input" -o "$output" --compress --mangle
+              ruby -e "require 'terser'; Terser.new(filename: '$input').minify.write_to('$output')"
             else
               echo "⚠️ File not found: $input, skipping"
             fi
