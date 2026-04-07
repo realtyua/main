@@ -170,7 +170,7 @@ jobs:
             output="_includes/js/${file%.js}.min.js"
             if [ -f "$input" ]; then
               echo "Minifying: $file -> ${file%.js}.min.js"
-              bundle exec terser "$input" -o "$output" --compress --mangle
+              ruby -S terser "$input" -o "$output" --compress --mangle
             else
               echo "⚠️ File not found: $input, skipping"
             fi
