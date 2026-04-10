@@ -15,7 +15,7 @@
 	var enc = encodeURIComponent
 
 	window.goatcounter.get_data = function(vars) {
-		vars = vars || {}
+		vars = vars || {};
 		var data = {
 			p: (vars.path     === undefined ? goatcounter.path     : vars.path),
 			r: (vars.referrer === undefined ? goatcounter.referrer : vars.referrer),
@@ -24,7 +24,7 @@
 			s: window.screen.width,
 			b: is_bot(),
 			q: location.search,
-		}
+		};
 
 		var rcb, pcb, tcb
 		if (typeof(data.r) === 'function') rcb = data.r
@@ -108,7 +108,7 @@
 	}
 
 	window.goatcounter.url = function(vars) {
-		var data = window.goatcounter.get_data(vars || {})
+		var data = window.goatcounter.get_data(vars || {});
 		if (data.p === null)
 			return
 		data.rnd = Math.random().toString(36).substr(2, 5)
@@ -191,7 +191,7 @@
 			if (opt.start)       opt.attr['src'] += '&start=' + enc(opt.start)
 			if (opt.end)         opt.attr['src'] += '&end='   + enc(opt.end)
 
-			var tag = {png: 'img', svg: 'img', html: 'iframe'}[opt.type]
+			var tag = {png: 'img', svg: 'img', html: 'iframe'}[opt.type];
 			if (!tag)
 				return warn('visit_count: unknown type: ' + opt.type)
 
