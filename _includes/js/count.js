@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	window.goatcounter = window.goatcounter || {}
+	window.goatcounter = window.goatcounter || {};
 
 	var s = document.querySelector('script[data-goatcounter]')
 	if (s && s.dataset.goatcounterSettings) {
