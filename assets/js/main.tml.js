@@ -14,6 +14,8 @@ sitemap: false
 {%- include js/bootstrap-table-mobile.min.js -%}
 {%- include js/tom-select.base.min.js -%}
 {%- include js/itemsjs.min.js -%}
-{%- include js/table.all.js -%}
-{%- include js/realtyua.js -%}
+{%- capture table_all_js -%}{%- include js/table.all.js -%}{%- endcapture -%}
+{{- table_all_js | js_minify -}}
+{%- capture realtyua_js -%}{%- include js/realtyua.js -%}{%- endcapture -%}
+{{- realtyua_js | js_minify -}}
 {%- include js/leaflet.js -%}

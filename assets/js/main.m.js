@@ -7,7 +7,9 @@ sitemap: false
 {%- include js/bootstrap.min.js -%}
 {%- include js/leaflet.js -%}
 {%- include js/leaflet.markercluster.js -%}
-{%- include js/L.Control.SlideMenu.js -%}
+{%- capture slideMenu_js -%}{%- include js/L.Control.SlideMenu.js -%}{%- endcapture -%}
+{{- slideMenu_js | js_minify -}}
 {%- include js/tom-select.base.min.js -%}
 {%- include js/itemsjs.min.js -%}
-{%- include js/realtyua.js -%}
+{%- capture realtyua_js -%}{%- include js/realtyua.js -%}{%- endcapture -%}
+{{- realtyua_js | js_minify -}}

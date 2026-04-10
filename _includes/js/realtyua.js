@@ -108,7 +108,7 @@ $(document).ready(function () {
       ctx.fillStyle = '#2d5ca6';
       ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
       ctx.fillText(phoneText, padding, fontSize - 1);
-      var $link = $('<a>',{href: 'tel:' + decrypted, title: 'Телефон'});
+      var $link = $('<a>',{href: 'tel:+' + decrypted, title: 'Зателефонуйте мені'});
       $link.on('click', function(e) { e.stopPropagation(); });
       $btn.wrap($link).parent();
       $btn.data('revealed', true);

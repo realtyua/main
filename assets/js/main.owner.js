@@ -12,4 +12,5 @@ sitemap: false
 {%- include js/leaflet.js -%}
 {%- include js/bootstrap.smoothscroll.min.js -%}
 {%- include js/jarallax.min.js -%}
-{%- include js/owner.js -%}
+{%- capture owner_js -%}{%- include js/owner.js -%}{%- endcapture -%}
+{{- owner_js | js_minify -}}

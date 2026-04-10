@@ -1,10 +1,10 @@
 L.Control.SlideMenu = L.Control.extend({
     options: {
         position: 'topleft',
-        menuposition: 'topleft', // topleft,topright,bottomleft,bottomright
+        menuposition: 'topleft',
         width: '300px',
         height: '100%',
-        direction: 'horizontal', // vertical or horizontal
+        direction: 'horizontal',
         changeperc: '10',
         delay: '10',
         icon: 'fa-bars',
@@ -105,12 +105,10 @@ L.Control.SlideMenu = L.Control.extend({
         L.DomEvent
             .on(link, 'click', L.DomEvent.stopPropagation)
             .on(link, 'click', function(){
-                // Open
                 this._animate(this._menu, frominit, 0, true, ispx, unit);
             }, this)
             .on(closeButton, 'click', L.DomEvent.stopPropagation)
             .on(closeButton, 'click', function(){
-                // Close
                 this._animate(this._menu, 0, frominit, false, ispx, unit);
             }, this);
         L.DomEvent.on(this._menu, 'mouseover', function(){
@@ -128,7 +126,6 @@ L.Control.SlideMenu = L.Control.extend({
     },
 
     onRemove: function(map){
-        //Remove sliding menu from DOM
         map._container.removeChild(this._menu);
         delete this._menu;
     },

@@ -15,6 +15,8 @@ sitemap: false
 {%- include js/tom-select.base.min.js -%}
 {%- include js/itemsjs.min.js -%}
 {%- include object/js-middle.html -%}
-{%- include js/table.js -%}
-{%- include js/realtyua.js -%}
+{%- capture table_js -%}{%- include js/table.js -%}{%- endcapture -%}
+{{- table_js | js_minify -}}
+{%- capture realtyua_js -%}{%- include js/realtyua.js -%}{%- endcapture -%}
+{{- realtyua_js | js_minify -}}
 {%- include js/leaflet.js -%}
