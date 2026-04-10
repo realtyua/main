@@ -44,34 +44,34 @@
 	var is_empty = function(v) { return v === null || v === undefined || typeof(v) === 'function' };
 
 	var is_bot = function() {
-		var w = window, d = document
+		var w = window, d = document;
 		if (w.callPhantom || w._phantom || w.phantom)
-			return 150
+			return 150;
 		if (w.__nightmare)
-			return 151
+			return 151;
 		if (d.__selenium_unwrapped || d.__webdriver_evaluate || d.__driver_evaluate)
-			return 152
+			return 152;
 		if (navigator.webdriver)
-			return 153
-		return 0
+			return 153;
+		return 0;
 	};
 
 	var urlencode = function(obj) {
 		var p = [];
 		for (var k in obj)
 			if (obj[k] !== '' && obj[k] !== null && obj[k] !== undefined && obj[k] !== false)
-				p.push(enc(k) + '=' + enc(obj[k]))
-		return '?' + p.join('&')
+				p.push(enc(k) + '=' + enc(obj[k]));
+		return '?' + p.join('&');
 	};
 
 	var warn = function(msg) {
 		if (console && 'warn' in console)
-			console.warn('goatcounter: ' + msg)
+			console.warn('goatcounter: ' + msg);
 	};
 
 	var get_endpoint = function() {
 		var s = document.querySelector('script[data-goatcounter]');
-		return (s && s.dataset.goatcounter) ? s.dataset.goatcounter : goatcounter.endpoint
+		return (s && s.dataset.goatcounter) ? s.dataset.goatcounter : goatcounter.endpoint;
 	};
 
 	var get_path = function() {
