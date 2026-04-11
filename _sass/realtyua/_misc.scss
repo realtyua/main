@@ -180,3 +180,8 @@ _::-webkit-:host,
 }
 #searchResultsList .search-result-item { line-height: 1; }
 .tel-btn:focus, .tel-btn.focus { box-shadow: none; }
+
+.btn-search {
+  @extend .btn-primary;
+  background-color: #1e7e34;
+}
