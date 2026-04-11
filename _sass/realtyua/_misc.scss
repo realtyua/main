@@ -180,3 +180,8 @@ _::-webkit-:host,
 }
 #searchResultsList .search-result-item { line-height: 1; }
 .tel-btn:focus, .tel-btn.focus { box-shadow: none; }
+img.card-img-top {
+  aspect-ratio: 8 / 3;
+  width: 100%;
+  height: auto;
+}

@@ -1,4 +1,4 @@
-<script src="{{ "/assets/js/main.owner.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+<script src="{{ "/assets/js/main.owner.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script>
  var t{{ owner }} = L.map('location').setView([{{ page.coordinates }}], 17);
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

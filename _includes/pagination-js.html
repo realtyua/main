@@ -1,4 +1,4 @@
-<script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+<script src="{{ "/assets/js/pagination.min.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script>
    $(function() {
         let rows = [];
@@ -6,8 +6,6 @@
         $('#pagination').pagination({
             dataSource:rows,
             pageSize:6,
-            //prevText:'&lsaquo;',
-            //nextText:'&rsaquo;',
             prevText:'❮',
             nextText:'❯',
             autoHidePrevious:true,
