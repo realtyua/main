@@ -41,6 +41,9 @@ $(function () {
     $($element).siblings().removeClass('active');
     $($element).addClass('active');
   });
+  $('#property').on('post-body.bs.table', function() {
+    $('.page-link[href="javascript:void(0)"]').attr('href', '#');
+  });
 });
 
 function drawPlaceholder(canvas) {

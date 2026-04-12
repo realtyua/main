@@ -175,6 +175,9 @@ $(function () {
       applyTableFilters();
     }
   });
+  $('#property').on('post-body.bs.table', function() {
+    $('.page-link[href="javascript:void(0)"]').attr('href', '#');
+  });
 });
 
 function drawPlaceholder(canvas) {
@@ -483,3 +486,5 @@ function priceSorter(a, b) {
   var bb = b.replace(s, '');
   return aa - bb;
 }
+
+$('.page-link[href="javascript:void(0)"]').attr('href', '#');
