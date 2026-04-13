@@ -5,7 +5,7 @@
       {%- else -%}
         {%- if page.layout == 'table' and pageu contains '/list.html' -%}
           <div class="nav">
-            <a class="nav-item border-0 mr-2 mr-md-0" href="{{ paged }}">
+            <a class="nav-item border-0 mr-3 mr-md-0" href="{{ paged }}">
               <span class="sr-only">Переглянути записи блоками:</span>
               <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Записи блоками">
                 <img src="/assets/images/icons/grid.svg" alt="grid">
@@ -25,7 +25,7 @@
           {%- endif -%}
           {%- assign switch_link = switch_link | append: 'list.html' -%}
           <div class="nav">
-            <a class="nav-item border-0 mr-2 mr-md-0" href="{{ switch_link }}">
+            <a class="nav-item border-0 mr-3 mr-md-0" href="{{ switch_link }}">
               <span class="sr-only">Переглянути записи списком:</span>
               <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Записи списком">
                 <img src="/assets/images/icons/list.svg" alt="list">

@@ -14,9 +14,9 @@
         <div class="card">
           {%- assign file = site.data._static_images | where_exp: 'i', "i.path contains '/assets/images/locations/' and i.basename == slug" -%}
           {%- if file[0] -%}
-            <img loading="lazy" src="{{ file[0].path | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.uk.realestate }} {{ site.data.uk[slug] }}" title="Продаж і оренда об'єктів нерухомості {{ site.data.uk[slug] }}">
+            <img loading="eager" src="{{ file[0].path | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.uk.realestate }} {{ site.data.uk[slug] }}" title="Продаж і оренда об'єктів нерухомості {{ site.data.uk[slug] }}">
           {%- else -%}
-            <img loading="lazy" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.uk.realestate }} {{ site.data.uk[slug] }}" title="Продаж і оренда нерухомого майна {{ site.data.uk[slug] }}">
+            <img loading="eager" src="{{ '/assets/images/locations/default.jpg' | url_decode | relative_url }}" height="200" width="540" class="img-fluid card-img-top" alt="{{ site.data.uk.realestate }} {{ site.data.uk[slug] }}" title="Продаж і оренда нерухомого майна {{ site.data.uk[slug] }}">
           {%- endif -%}
           <div class="card-body p-2">
             {%- assign slashu = page.url | split: '/' | size -%}
