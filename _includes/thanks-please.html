@@ -5,7 +5,7 @@
       {%- else -%}
         {%- if page.layout == 'table' and pageu contains '/list.html' -%}
           <div class="nav">
-            <a class="nav-item border-0" href="{{ paged }}">
+            <a class="nav-item border-0 mr-2 mr-md-0" href="{{ paged }}">
               <span class="sr-only">Переглянути записи блоками:</span>
               <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Записи блоками">
                 <img src="/assets/images/icons/grid.svg" alt="grid">
@@ -25,7 +25,7 @@
           {%- endif -%}
           {%- assign switch_link = switch_link | append: 'list.html' -%}
           <div class="nav">
-            <a class="nav-item border-0" href="{{ switch_link }}">
+            <a class="nav-item border-0 mr-2 mr-md-0" href="{{ switch_link }}">
               <span class="sr-only">Переглянути записи списком:</span>
               <span aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Записи списком">
                 <img src="/assets/images/icons/list.svg" alt="list">
@@ -35,7 +35,7 @@
         {%- endif -%}
       {%- endif -%}
       <div class="h5 mb-0">
-        <a class="badge badge-success badge-success-link mr-1" data-toggle="collapse" href="#thanks" role="button" aria-expanded="true" aria-controls="thanks" data-target=".thanks">Дякуємо!</a>
+        <a class="badge badge-success badge-success-link mr-1 mb-1 mb-md-0" data-toggle="collapse" href="#thanks" role="button" aria-expanded="true" aria-controls="thanks" data-target=".thanks">Дякуємо!</a>
         <a class="badge badge-info badge-info-link mr-1" data-toggle="collapse" href="#please" role="button" aria-expanded="true" aria-controls="please" data-target=".please">Просимо!</a>
         <a class="badge badge-danger" data-toggle="collapse" href="#attention" role="button" aria-expanded="true" aria-controls="attention" data-target=".attention">Застерігаємо!</a>
       </div>
