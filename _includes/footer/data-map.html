@@ -3,8 +3,137 @@
 {%- if data and pageu contains '/map.html' -%}
   {%- include {{ data }} -%}
   {%- if offers.size > 0 -%}
-    <script>var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:8,zoom:8}).setView([{{ page.coordinates }}],{{ zoom }}); var markers = [{%- for offer in offers -%}{%- assign names = offer.seller | replace: "'", "&prime;" -%}[{{ offer.coordinates | split: ',' | first }},{{ offer.coordinates | split: ',' | last }},'{%- if offer.rent and offer.rent == "1" -%}{{ site.data.uk.re_for_rent }}{%- else -%}{{ site.data.uk.re_for_sale }}{%- endif -%}','{{ offer.type | downcase }}',{%- if offer.surface and offer.surface != '' -%}{{ offer.surface }}{%- else -%}{{ offer.surface_land }}{%- endif -%},{{ offer.rooms | default: '0' }},'{%- include footer/floor.html floor=offer.floor floors=offer.floors -%}',{%- if offer.rent == '1' and offer.price_sqmt != '' -%}{%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price_sqmt }}{%- endif -%}{%- else -%}{%- if offer.price contains '$' and offer.price != '' -%}{{ offer.price | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price contains '€' and offer.price != '' -%}{{ offer.price | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price }} {%- endif -%}{%- endif -%},'{%- include footer/phone.html legal=offer.phone name=names type="text" -%}','{{ offer.link }}']{%- if forloop.last -%}{%- else -%},{%- endif -%}{%- endfor -%}]; L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}',tileSize:512,zoomOffset:-1,subdomains:['a','b','c']}).addTo(map); map.attributionControl.setPrefix(''); {%- include map/left-menu-map.html -%} var markersClusters = L.markerClusterGroup(); for (var i = 0; i < markers.length; i++) { var re = markers[i]; var title = (re[2] || re[3]) ? re[2] + ' ' + re[3] : ''; var titleLink = (re[9] && re[9] != '') ? '<a href="' + re[9] + '">' + re[2] + ' ' + re[3] + '</a>' : re[2] + ' ' + re[3]; var rooms = (re[5] && re[5] != '') ? ', {{ site.data.uk.re_rooms }} ' + re[5] : ''; var description = ',<br/>{{ site.data.uk.re_surface }} ' + re[4] + ' {{ site.data.uk.m }}' + rooms + ',' + re[6] + '<br/>{{ site.data.uk.re_cost }} ' + re[7] + ' {{ site.data.uk.re_uah }},<br/>{{ site.data.uk.re_tel }} ' + re[8]; var marker = L.marker(new L.LatLng(re[0],re[1]),{title:title}); marker.bindPopup(titleLink + description); markersClusters.addLayer(marker); } map.addLayer(markersClusters);setTimeout(function(){map.fitBounds(markersClusters.getBounds());},5);</script>
+    <script>
+      var map = L.map('map', { center: [{{ page.coordinates }}], minZoom: 8, zoom: 8 }).setView([{{ page.coordinates }}], {{ zoom }});
+      var markers = [
+        {%- for offer in offers -%}
+        {%- assign names = offer.seller | replace: "'", "&prime;" -%}
+        [
+          {{ offer.coordinates | split: ',' | first }},
+          {{ offer.coordinates | split: ',' | last }},
+          '{%- if offer.rent and offer.rent == "1" -%}{{ site.data.uk.re_for_rent }}{%- else -%}{{ site.data.uk.re_for_sale }}{%- endif -%}',
+          '{{ offer.type | downcase }}',
+          {%- if offer.surface and offer.surface != '' -%}{{ offer.surface }}{%- else -%}{{ offer.surface_land }}{%- endif -%},
+          {{ offer.rooms | default: '0' }},
+          '{%- include footer/floor.html floor=offer.floor floors=offer.floors -%}',
+          {%- if offer.rent == '1' and offer.price_sqmt != '' -%}
+            {%- if offer.price_sqmt contains '$' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price_sqmt contains '€' and offer.price_sqmt != '' -%}{{ offer.price_sqmt | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price_sqmt }}{%- endif -%}
+          {%- else -%}
+            {%- if offer.price contains '$' and offer.price != '' -%}{{ offer.price | remove: '$' | times: site.usd | ceil }}{%- elsif offer.price contains '€' and offer.price != '' -%}{{ offer.price | remove: '€' | times: site.eur | ceil }}{%- else -%}{{ offer.price }}{%- endif -%}
+          {%- endif -%},
+          '{%- include pencrypted.html phone=offer.phone -%}{{ encrypted }}',
+          '{{ offer.link }}',
+          '{{ offer.id }}'
+        ]{%- if forloop.last -%}{%- else -%},{%- endif -%}
+        {%- endfor -%}
+      ];
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 17, attribution: '<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}', tileSize: 512, zoomOffset: -1, subdomains: ['a', 'b', 'c'] }).addTo(map);
+      map.attributionControl.setPrefix('');
+      {%- include map/left-menu-map.html -%}
+      var markersClusters = L.markerClusterGroup();
+      for (var i = 0; i < markers.length; i++) {
+        var re = markers[i];
+        var title = (re[2] || re[3]) ? re[2] + ' ' + re[3] : '';
+        var titleLink = (re[9] && re[9] != '') ? '<a href="' + re[9] + '">' + re[2] + ' ' + re[3] + '</a>' : re[2] + ' ' + re[3];
+        var rooms = (re[5] && re[5] != '') ? ', {{ site.data.uk.re_rooms }} ' + re[5] : '';
+        var description = '<div class="map-popup-img" data-offer-id="' + re[10] + '"></div>' + titleLink + ',<br/>{{ site.data.uk.re_surface }} ' + re[4] + ' {{ site.data.uk.m }}' + rooms + ',' + re[6] + '<br/>{{ site.data.uk.re_cost }} ' + re[7] + ' {{ site.data.uk.re_uah }},<br/>{{ site.data.uk.re_tel }} <span class="tel-reveal" data-id="' + re[10] + '">+38 XXX XXX XX XX</span>';
+        var marker = L.marker(new L.LatLng(re[0], re[1]), { title: title, offerId: re[10] });
+        marker.bindPopup(description);
+        markersClusters.addLayer(marker);
+      }
+      map.addLayer(markersClusters);
+      setTimeout(function() { map.fitBounds(markersClusters.getBounds()); }, 5);
+      var allDataCache = null;
+      function getAllData(callback) {
+        if (allDataCache) { callback(allDataCache); return; }
+        var basePath = getBasePathForData();
+        if (!basePath) { callback(null); return; }
+        fetch(basePath + '/data/all.json')
+          .then(function(r) { return r.json(); })
+          .then(function(data) { allDataCache = data; callback(data); })
+          .catch(function() { callback(null); });
+      }
+      function decryptPhone(encrypted) {
+        if (!encrypted) return '';
+        var clean = encrypted.replace(/\D/g, '');
+        var prefix = clean.slice(0, 3);
+        var encPart = clean.slice(3);
+        var decryptedPart = encPart.split('').map(function(c) {
+          var n = parseInt(c, 10) - 1;
+          return n < 0 ? 9 : n;
+        }).join('');
+        return prefix + decryptedPart;
+      }
+      function formatPhone(phone) {
+        return '+' + phone.slice(0, 2) + ' ' + phone.slice(2, 5) + ' ' + phone.slice(5, 8) + ' ' + phone.slice(8, 10) + ' ' + phone.slice(10);
+      }
+      function getBasePathForData() {
+        var path = window.location.pathname;
+        var parts = path.split('/').filter(Boolean);
+        if (parts.length < 2) return null;
+        if (parts[0] === 'region' && parts[1] === 'city' && parts[2]) {
+          return '/' + parts.slice(0, 3).join('/');
+        }
+        if (parts[0] === 'region' && parts[1] && parts[1] !== 'city') {
+          return '/' + parts.slice(0, 2).join('/');
+        }
+        if (parts[0] === 'district' && parts[1] === 'town' && parts[2]) {
+          return '/' + parts.slice(0, 3).join('/');
+        }
+        if (parts[0] === 'district' && parts[1] && parts[1] !== 'town') {
+          return '/' + parts.slice(0, 2).join('/');
+        }
+        return null;
+      }
+      $(document).on('click', '.tel-reveal', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $el = $(this);
+        if ($el.data('revealed')) return;
+        var id = $el.data('id');
+        getAllData(function(data) {
+          if (!data) return;
+          var phones = {};
+          (data || []).forEach(function(item) {
+            if (item.id && item.phone) phones[item.id] = item.phone;
+          });
+          var encrypted = phones[id];
+          var decrypted = decryptPhone(encrypted);
+          if (!decrypted) return;
+          var phoneText = formatPhone(decrypted);
+          $el.html('<a href="tel:+' + decrypted + '" rel="nofollow">' + phoneText + '</a>');
+          $el.data('revealed', true);
+        });
+      });
+      var mapPopupStyle = document.createElement('style');
+      mapPopupStyle.textContent = '.map-popup-img { text-align: center; min-height: 20px; } .map-popup-img img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }';
+      document.head.appendChild(mapPopupStyle);
+      map.on('popupopen', function(e) {
+        var $popup = $(e.popup.getElement());
+        var $imgContainer = $popup.find('.map-popup-img');
+        if (!$imgContainer.length || $imgContainer.data('loaded')) return;
+        var offerId = $imgContainer.data('offer-id');
+        if (!offerId) return;
+        $imgContainer.data('loaded', true);
+        getAllData(function(data) {
+          if (!data) return;
+          var item = data.find(function(i) { return String(i.id) === String(offerId); });
+          if (item && item.images && item.images.length > 0) {
+            var img = item.images[0];
+            $imgContainer.html('<img src="' + img.src + '" alt="' + (img.alt || '') + '" title="' + (img.title || '') + '">');
+          } else {
+            $imgContainer.remove();
+          }
+        });
+      });
+    </script>
   {%- else -%}
-    <script>var map = L.map('map',{center:[{{ page.coordinates }}],minZoom:11,zoom:10}).setView([{{ page.coordinates }}],10); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}',tileSize:512,zoomOffset:-1}).addTo(map); map.attributionControl.setPrefix(''); L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ breadcrumb }}</b>').openPopup(); {%- include map/left-menu-map.html -%}</script>
+    <script>
+      var map = L.map('map', { center: [{{ page.coordinates }}], minZoom: 11, zoom: 10 }).setView([{{ page.coordinates }}], 10);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}', tileSize: 512, zoomOffset: -1 }).addTo(map);
+      map.attributionControl.setPrefix('');
+      L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ breadcrumb }}</b>').openPopup();
+      {%- include map/left-menu-map.html -%}
+    </script>
   {%- endif -%}
 {%- endif -%}

@@ -89,3 +89,11 @@ details p a { text-decoration: none; }
 .marker-cluster span {
 	line-height: 30px;
 }
+.tel-reveal {
+  color: #0078A8;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.tel-reveal:hover {
+  text-decoration: none;
+}
