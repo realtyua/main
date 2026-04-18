@@ -1,4 +1,3 @@
-
 {%- assign ones = site.html_pages | sort: 'path' | reverse -%}
 {%- for one in ones -%}
   {%- assign slug = one.url | split: '/' | last -%}
@@ -17,13 +16,15 @@
           </h2>
         </div>
       {%- endcomment -%}
-      <h2 id="{{ slug }}" class="mb-4">
-        <a href="{{ one.url }}" title="Безкоштовні оголошення про {{ one.title | downcase }}">
-          {%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}
-        </a>
-        {% if one.url contains "/district/" %} {{ site.data.uk.deck_region_in }} області{% endif %}
-      </h2>
-      {%- include home/region.html current=one.url -%}
+      <div class="block d-none collapse">
+        <h2 id="{{ slug }}" class="mb-4">
+          <a href="{{ one.url }}" title="Безкоштовні оголошення про {{ one.title | downcase }}">
+            {%- if one.title -%}{{ one.title }}{%- else -%}{{ one.navtitle }}{%- endif -%}
+          </a>
+          {% if one.url contains "/district/" %} {{ site.data.uk.deck_region_in }} области{% endif %}
+        </h2>
+        {%- include home/region.html current=one.url -%}
+      </div>
     {% endif %}
     {%- if one.url -%}
       {%- assign twos = site.html_pages -%}
@@ -42,18 +43,21 @@
                 </h2>
               </div>
             {%- endcomment -%}
-            <h2 id="{{ slug }}" class="mb-4">
-              <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
-                {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
-              </a>
-              {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.uk.deck_region_in }} області{% endif %}
-            </h2>
-            {%- include home/region.html current=two.url -%}
+            <div{% if two.url contains '/district/town/' %} class="block d-none collapse"{% else %} class="block"{% endif %}>
+              <h2 id="{{ slug }}" class="mb-4">
+                <a href="{{ two.url }}" title="Безкоштовні оголошення про {{ two.title | downcase }}">
+                  {%- if two.title -%}{{ two.title }}{%- else -%}{{ two.navtitle }}{%- endif -%}
+                </a>
+                {% if two.url contains '/region/city/' or two.url contains '/district/town/' %} {{ site.data.uk.deck_region_in }} області{% endif %}
+              </h2>
+              {%- include home/region.html current=two.url -%}
+            </div>
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
+<div class="d-flex justify-content-center mb-3"><button id="loadMoreBtn" class="btn btn-primary">Показати більше...</button></div>
 <h2 class="mb-4">Інші <a href="/amalgamated-hromades.html" title="Безкоштовні оголошення про продаж нерухомості місцевих громад">територіальні об'єднані громади</a> {{ site.data.uk.deck_region_in }} області</h2>
 <p class="small">{{ site.data.uk.local_communities }}</p>
