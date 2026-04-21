@@ -132,7 +132,14 @@
 			years.push(y);
 		}
 
-		var results = await Promise.all(years.map(fetchData));
+		var results = [];
+		for (var i = 0; i < years.length; i++) {
+			var result = await fetchData(years[i]);
+			results.push(result);
+			if (i < years.length - 1) {
+				await new Promise(function(resolve) { setTimeout(resolve, 350); });
+			}
+		}
 
 		var yearlyData = {};
 		years.forEach(function(year, index) {
