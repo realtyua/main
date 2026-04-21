@@ -84,7 +84,7 @@
 		var canvas = document.getElementById('visitorsChart');
 		if (!canvas) return;
 
-		hideSpinner();
+		canvas.style.display = 'block';
 
 		var ctx = canvas.getContext('2d');
 		var datasets = [];
@@ -110,6 +110,11 @@
 			options: {
 				responsive: true,
 				maintainAspectRatio: true,
+				animation: {
+					onComplete: function() {
+						hideSpinner();
+					}
+				},
 				plugins: {
 					legend: {
 						position: 'top'
