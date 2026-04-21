@@ -68,9 +68,23 @@
 		}
 	}
 
+	function showSpinner() {
+		var spinner = document.getElementById('chartSpinner');
+		if (spinner) spinner.style.display = 'flex';
+	}
+
+	function hideSpinner() {
+		var spinner = document.getElementById('chartSpinner');
+		var canvas = document.getElementById('visitorsChart');
+		if (spinner) spinner.style.display = 'none';
+		if (canvas) canvas.style.display = 'block';
+	}
+
 	function renderChart(yearlyData) {
 		var canvas = document.getElementById('visitorsChart');
 		if (!canvas) return;
+
+		hideSpinner();
 
 		var ctx = canvas.getContext('2d');
 		var datasets = [];
@@ -124,6 +138,8 @@
 	}
 
 	async function init() {
+		showSpinner();
+
 		var now = new Date();
 		var currentYear = now.getFullYear();
 		var years = [];
