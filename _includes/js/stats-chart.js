@@ -70,14 +70,22 @@
 
 	function showSpinner() {
 		var spinner = document.getElementById('chartSpinner');
-		if (spinner) spinner.style.display = 'flex';
+		var canvas = document.getElementById('visitorsChart');
+		if (spinner) {
+			spinner.className = 'd-flex justify-content-center';
+			spinner.style.display = 'flex';
+		}
+		if (canvas) canvas.classList.add('d-none');
 	}
 
 	function hideSpinner() {
 		var spinner = document.getElementById('chartSpinner');
 		var canvas = document.getElementById('visitorsChart');
-		if (spinner) spinner.style.display = 'none';
-		if (canvas) canvas.style.display = 'block';
+		if (spinner) {
+			spinner.className = 'd-done';
+			spinner.style.display = 'none';
+		}
+		if (canvas) canvas.classList.remove('d-none');
 	}
 
 	function renderChart(yearlyData) {
