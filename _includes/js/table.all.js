@@ -54,12 +54,14 @@ $(function () {
     var $filterFloor = $("#filterFloor").closest("div.col-md-auto");
     var $filterFloors = $("#filterFloors").closest("div.col-md-auto");
     var $filterAction = $("#filterAction").closest("div.col-md-auto");
+    var $filterSurfaceLand = $("#filterSurfaceLand").closest("div.col-md-auto");
 
     $filterRooms.hide();
     $filterSurface.hide();
     $filterFloor.hide();
     $filterFloors.hide();
     $filterAction.hide();
+    $filterSurfaceLand.hide();
     $("#filterAction").val("all");
 
     if (type === "all") {
@@ -79,10 +81,10 @@ $(function () {
       $filterSurface.show();
     } else if (type === "land") {
       $filterAction.show();
-      $filterSurface.show();
+      $filterSurfaceLand.show();
     }
 
-    $("#filterRooms, #filterSurface, #filterFloor, #filterFloors").val("");
+    $("#filterRooms, #filterSurface, #filterFloor, #filterFloors, #filterSurfaceLand").val("");
   }
 
   updateFilterVisibility();
@@ -96,6 +98,7 @@ $(function () {
     var data = window.tableAllOriginalData || $tabpro.bootstrapTable('getData');
     var $rooms = $("select#filterRooms");
     var $surface = $("select#filterSurface");
+    var $surfaceLand = $("select#filterSurfaceLand");
     var $floor = $("select#filterFloor");
     var $floors = $("select#filterFloors");
 
@@ -129,6 +132,25 @@ $(function () {
           }
         } else {
           if (rowSurf < parseFloat(range[0]) || rowSurf >= parseFloat(range[1])) {
+            return false;
+          }
+        }
+      }
+
+      if ($surfaceLand.val()) {
+        var surfLandVal = $surfaceLand.val();
+        var rangeLand = surfLandVal.split('-');
+        var rowSurfLand = parseFloat(row.surface_land) || 0;
+        if (rangeLand[0] === '') {
+          if (rowSurfLand < parseFloat(rangeLand[1])) {
+            return false;
+          }
+        } else if (rangeLand[1] === '') {
+          if (rowSurfLand < parseFloat(rangeLand[0])) {
+            return false;
+          }
+        } else {
+          if (rowSurfLand < parseFloat(rangeLand[0]) || rowSurfLand >= parseFloat(rangeLand[1])) {
             return false;
           }
         }
@@ -186,7 +208,7 @@ $(function () {
     $tabpro.bootstrapTable('load', filteredData);
   }
 
-  $("select#filterRooms, select#filterSurface, select#filterFloor, select#filterFloors, #filterAction").change(function() {
+  $("select#filterRooms, select#filterSurface, select#filterFloor, select#filterFloors, #filterAction, #filterSurfaceLand").change(function() {
     if (window.tableAllOriginalData && window.tableAllOriginalData.length > 0) {
       applyTableFilters();
     }
