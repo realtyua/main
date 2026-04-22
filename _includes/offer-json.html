@@ -30,7 +30,7 @@
       {%- include pencrypted.html phone=offer.phone -%}
       "phone":"{{ encrypted }}",
       "description":"{{ offer.description }}",
-      "link":"{%- if offer.page == 1 -%}{%- elsif offer.link -%}{{ offer.link }}{%- else -%}/region/{{ site.region_slug }}/?id={{ encrypted }}{%- endif -%}",
+      "link":"{%- if offer.page == 1 -%}{%- elsif offer.link -%}{{ offer.link }}{%- else -%}/region/{{ site.region_slug }}/?id={{ offer.id }}{%- endif -%}",
       {%- if idimage == 'true' and files.size == 0 -%}
         "images":{%- capture img -%}[{"src":"{{ imageid | url_decode | relative_url }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},]{%- endcapture -%}{{ img | replace: ',]', ']' }}
       {%- elsif files.size == 1 and idimage == 'false' -%}

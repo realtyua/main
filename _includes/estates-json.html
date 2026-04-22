@@ -30,7 +30,7 @@
       "phone":"{{ encrypted }}",
       {%- if offer.skip -%}"skip":{{ offer.skip }},{%- endif -%}
       "description":"{{ offer.description }}",
-      "link":"{%- if offer.page == 1 -%}{%- elsif offer.url -%}{{ offer.url }}{%- else -%}/region/{{ site.region_slug }}/?id={{ encrypted }}{%- endif -%}",
+      "link":"{%- if offer.page == 1 -%}{%- elsif offer.url -%}{{ offer.url }}{%- else -%}/region/{{ site.region_slug }}/?id={{ offer.uid }}{%- endif -%}",
       {%- if files.size > 0 -%}"images":{%- capture img -%}[{%- for file in files limit: 4 -%}{"src":"{{ file.name }}","alt":"{{ offer.type }} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}","title":"{{ offer.type }} {% if offer.address contains site.data.uk.re_vul %}{{ site.data.uk.re_po }} {{ offer.address }}{% else %}{{ site.data.uk.re_at }} {{ offer.address }}{% endif %} {{ site.data.uk.re_in }} {{ offer.location }}{{ district }}"},{%- endfor -%}]{%- endcapture -%}{{ img | replace: ',]', ']' }}{%- else -%}"images":""{%- endif -%}
     }
     {%- unless forloop.last -%},{%- endunless -%}

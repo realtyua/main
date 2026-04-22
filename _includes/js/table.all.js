@@ -10,6 +10,13 @@ $(function () {
   if (value && value !== '') {
     if (value.split('').length === 12) {
       $tabpro.bootstrapTable('filterBy', { phone: value });
+      $tabpro.on('load-success.bs.table', function(e, data) {
+        var filtered = $tabpro.bootstrapTable('getData');
+        if (filtered && filtered.length > 0) {
+          var seller = filtered[0].seller.replace('{{ site.data.uk.re_seller }} ', '');
+          $('h2.h3').text(seller + ' - всі оголошення про продаж та оренду нерухомості');
+        }
+      });
     } else {
       $tabpro.bootstrapTable('filterBy', { id: value });
       if ($('table[data-detail-formatter="htmlDetailFormatter"]').length === 1) {
