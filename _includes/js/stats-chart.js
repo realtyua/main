@@ -21,6 +21,11 @@
 		{ bg: 'rgba(253, 126, 20, 0.7)', border: 'rgb(253, 126, 20)' }
 	];
 
+	let chartInstance = null;
+	let yearlyDataCache = {};
+	let currentYear = null;
+	let availableYears = [];
+
 	function aggregateByMonth(stats) {
 		var months = {};
 		stats.forEach(function(day) {
@@ -37,10 +42,10 @@
 	function getYearlyData(aggregated, year) {
 		var data = [];
 		var now = new Date();
-		var currentYear = now.getFullYear();
-		var currentMonth = now.getMonth() + 1;
+		var cy = now.getFullYear();
+		var cm = now.getMonth() + 1;
 		for (var m = 1; m <= 12; m++) {
-			if (year === currentYear && m > currentMonth) {
+			if (year === cy && m > cm) {
 				data.push(0);
 			} else {
 				var key = year + '-' + m;
@@ -88,28 +93,50 @@
 		if (canvas) canvas.classList.remove('d-none');
 	}
 
-	function renderChart(yearlyData) {
+	function buildTabs(years) {
+		var tabs = document.getElementById('yearTabs');
+		if (!tabs) return;
+
+		var allYearsLink = document.createElement('a');
+		allYearsLink.href = '#all';
+		allYearsLink.className = 'list-group-item list-group-item-action text-nowrap';
+		allYearsLink.setAttribute('data-year', 'all');
+		allYearsLink.textContent = 'Всі роки';
+		tabs.appendChild(allYearsLink);
+
+		var sortedYears = years.slice().sort(function(a, b) { return b - a; });
+		sortedYears.forEach(function(year) {
+			var link = document.createElement('a');
+			link.href = '#' + year;
+			link.className = 'list-group-item list-group-item-action';
+			link.setAttribute('data-year', year);
+			link.textContent = year;
+			tabs.appendChild(link);
+		});
+
+		tabs.addEventListener('click', handleTabClick);
+	}
+
+	function renderChartSingleYear(year) {
 		var canvas = document.getElementById('visitorsChart');
 		if (!canvas) return;
 
 		canvas.style.display = 'block';
-
 		var ctx = canvas.getContext('2d');
-		var datasets = [];
-		var years = Object.keys(yearlyData).sort();
 
-		years.forEach(function(year, index) {
-			var colorIndex = index % COLORS_PALETTE.length;
-			datasets.push({
-				label: year,
-				data: yearlyData[year],
-				backgroundColor: COLORS_PALETTE[colorIndex].bg,
-				borderColor: COLORS_PALETTE[colorIndex].border,
-				borderWidth: 1
-			});
-		});
+		if (chartInstance) {
+			chartInstance.destroy();
+		}
 
-		new Chart(ctx, {
+		var datasets = [{
+			label: year.toString(),
+			data: yearlyDataCache[year],
+			backgroundColor: COLORS_PALETTE[0].bg,
+			borderColor: COLORS_PALETTE[0].border,
+			borderWidth: 1
+		}];
+
+		chartInstance = new Chart(ctx, {
 			type: 'bar',
 			data: {
 				labels: MONTHS_UA,
@@ -118,65 +145,134 @@
 			options: {
 				responsive: true,
 				maintainAspectRatio: true,
-				animation: {
-					onComplete: function() {
-						hideSpinner();
-					}
-				},
 				plugins: {
-					legend: {
-						position: 'top'
-					},
-					title: {
-						display: false
-					}
+					legend: { position: 'top' },
+					title: { display: false }
 				},
 				scales: {
 					y: {
 						beginAtZero: true,
-						title: {
-							display: true,
-							text: 'Кількість відвідувань'
-						}
+						title: { display: true, text: 'Кількість відвідувань' }
 					},
 					x: {
-						title: {
-							display: true,
-							text: 'Місяць'
-						}
+						title: { display: true, text: 'Місяць' }
 					}
 				}
 			}
 		});
 	}
 
+	function renderChartAllYears() {
+		var canvas = document.getElementById('visitorsChart');
+		if (!canvas) return;
+
+		canvas.style.display = 'block';
+		var ctx = canvas.getContext('2d');
+
+		if (chartInstance) {
+			chartInstance.destroy();
+		}
+
+		var datasets = [];
+		availableYears.forEach(function(year, index) {
+			datasets.push({
+				label: year.toString(),
+				data: yearlyDataCache[year],
+				backgroundColor: COLORS_PALETTE[index % COLORS_PALETTE.length].bg,
+				borderColor: COLORS_PALETTE[index % COLORS_PALETTE.length].border,
+				borderWidth: 1
+			});
+		});
+
+		chartInstance = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: MONTHS_UA,
+				datasets: datasets
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: true,
+				plugins: {
+					legend: { position: 'top' },
+					title: { display: false }
+				},
+				scales: {
+					y: {
+						beginAtZero: true,
+						title: { display: true, text: 'Кількість відвідувань' }
+					},
+					x: {
+						title: { display: true, text: 'Місяць' }
+					}
+				}
+			}
+		});
+	}
+
+	function updateTabsState(mode, year) {
+		var tabs = document.getElementById('yearTabs');
+		if (!tabs) return;
+		var links = tabs.querySelectorAll('a');
+		links.forEach(function(link) {
+			var linkMode = link.getAttribute('data-year');
+			if (linkMode === mode || (mode === 'single' && linkMode === year.toString())) {
+				link.classList.add('active');
+				link.removeAttribute('href');
+			} else {
+				link.classList.remove('active');
+				var y = link.getAttribute('data-year');
+				link.setAttribute('href', y === 'all' ? '#all' : '#' + y);
+			}
+		});
+	}
+
+	function handleTabClick(event) {
+		event.preventDefault();
+		var target = event.target;
+		if (target.tagName === 'A' && target.classList.contains('list-group-item')) {
+			var mode = target.getAttribute('data-year');
+			if (mode === 'all') {
+				renderChartAllYears();
+				updateTabsState('all', null);
+			} else {
+				var year = parseInt(mode, 10);
+				if (year && yearlyDataCache[year]) {
+					renderChartSingleYear(year);
+					updateTabsState('single', year);
+				}
+			}
+		}
+	}
+
 	async function init() {
 		showSpinner();
 
 		var now = new Date();
-		var currentYear = now.getFullYear();
-		var years = [];
+		currentYear = now.getFullYear();
 
 		for (var y = START_YEAR; y <= currentYear; y++) {
-			years.push(y);
+			availableYears.push(y);
 		}
 
 		var results = [];
-		for (var i = 0; i < years.length; i++) {
-			var result = await fetchData(years[i]);
+		for (var i = 0; i < availableYears.length; i++) {
+			var result = await fetchData(availableYears[i]);
 			results.push(result);
-			if (i < years.length - 1) {
+			if (i < availableYears.length - 1) {
 				await new Promise(function(resolve) { setTimeout(resolve, 350); });
 			}
 		}
 
-		var yearlyData = {};
-		years.forEach(function(year, index) {
+		availableYears.forEach(function(year, index) {
 			var aggregated = aggregateByMonth(results[index].stats || []);
-			yearlyData[year] = getYearlyData(aggregated, year);
+			yearlyDataCache[year] = getYearlyData(aggregated, year);
 		});
 
-		renderChart(yearlyData);
+		buildTabs(availableYears);
+		renderChartSingleYear(currentYear);
+		updateTabsState('single', currentYear);
+		hideSpinner();
 	}
 
 	if (document.readyState === 'loading') {
