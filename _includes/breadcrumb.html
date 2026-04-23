@@ -13,18 +13,22 @@
           {%- capture current_breadcrumb_url -%}{{next_prepender}}/{{ splitted_url_parts[i] }}/{%- endcapture -%}
           {%- capture next_prepender -%}{{next_prepender}}/{{ splitted_url_parts[i] }}{%- endcapture -%}
           {%- assign breadcrumb_page = site.data._pages_by_url[current_breadcrumb_url] -%}
+          {%- unless breadcrumb_page -%}
+            {%- assign breadcrumb_page = site.data._pagination_pages[current_breadcrumb_url] -%}
+          {%- endunless -%}
           {%- if breadcrumb_page -%}
-            {%- unless current_breadcrumb_url contains 'page' -%}
-              {%- assign j = forLoopMaxInt | plus: 0 -%}
-              <li class="breadcrumb-item{% if i == j %} active" aria-current="page{% endif %}">
-                <a href="{{ site.baseurl }}{{current_breadcrumb_url}}">
-                  {%- if breadcrumb_page.breadcrumb -%}{{breadcrumb_page.breadcrumb}}{%- elsif breadcrumb_page.navtitle -%}{{breadcrumb_page.navtitle}}{%- else -%}{{breadcrumb_page.title}}{%- endif -%}
-                </a>
-              </li>
-            {%- endunless -%}
+            <li class="breadcrumb-item{% if i == forLoopMaxInt %} active" aria-current="page{% endif %}">
+              <a href="{{ site.baseurl }}{{current_breadcrumb_url}}">
+                {%- if breadcrumb_page.breadcrumb -%}{{breadcrumb_page.breadcrumb}}{%- elsif breadcrumb_page.navtitle -%}{{breadcrumb_page.navtitle}}{%- else -%}{{breadcrumb_page.title}}{%- endif -%}
+              </a>
+            </li>
           {%- endif -%}
         {%- endfor -%}
-        {%- if page.layout == 'property' or page.layout == 'post' -%}
+        {%- if paginator -%}
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ page.title }}
+          </li>
+        {%- elsif page.layout == 'property' or page.layout == 'post' -%}
           <li class="breadcrumb-item active" aria-current="page">
             {{ page.title }}
           </li>

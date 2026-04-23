@@ -2,17 +2,33 @@
 
 Jekyll::Hooks.register :site, :post_read do |site|
   lookup = {}
+  pagination_pages = {}
+
   site.pages.each do |page|
     url = page.url
     next unless url
-    lookup[url] = {
-      'breadcrumb' => page.data['breadcrumb'],
-      'navtitle'   => page.data['navtitle'],
-      'title'      => page.data['title']
-    }
+
+    if page.data['pagination'] && page.data['pagination']['enabled']
+      pagination_pages[url] = {
+        'breadcrumb' => page.data['breadcrumb'],
+        'navtitle'   => page.data['navtitle'],
+        'title'      => page.data['title'],
+        'pagination'=> page.data['pagination']
+      }
+    else
+      lookup[url] = {
+        'breadcrumb' => page.data['breadcrumb'],
+        'navtitle'   => page.data['navtitle'],
+        'title'      => page.data['title']
+      }
+    end
   end
+
   site.data['_pages_by_url'] = lookup
   Jekyll.logger.info 'PagesCache:', "✓ Cached #{lookup.size} pages by URL"
+
+  site.data['_pagination_pages'] = pagination_pages
+  Jekyll.logger.info 'PagesCache:', "✓ Cached #{pagination_pages.size} pagination pages separately"
 
   html_pages = site.pages.select { |p| p.html? }
 
