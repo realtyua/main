@@ -1,6 +1,9 @@
 {%- assign sizeu = slashu | size | minus: 1 -%}
 {%- assign backu = slashu | slice: 0, sizeu | join: '/' | append: '/' -%}
 {%- assign idata = site.data._pages_by_url[backu] -%}
+{%- if idata == nil -%}
+  {%- assign idata = site.data._pagination_pages[backu] -%}
+{%- endif -%}
 <hr>
 <div class="row">
   <div class="col-10 pt-2">

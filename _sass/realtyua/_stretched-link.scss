@@ -1,0 +1,6 @@
+.stretched-link [data-toggle="tooltip"], 
+.stretched-link abbr[title] {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto !important;
+}
