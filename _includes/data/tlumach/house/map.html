@@ -1,0 +1,2 @@
+{%- include data/owner.html -%}
+{%- assign offers = site.data._cached_records | where_exp: 'i', "i.location contains location and i.coordinates and i.coordinates != '' and i.rent != '1' and i.type contains site.data.uk.re_house or i.type == site.data.uk.re_house_part" -%}
