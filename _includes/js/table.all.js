@@ -340,7 +340,9 @@ function jsDetailFormatter(index, row, $detail) {
   var images = Object.values(row.images || {});
 
   var reFooter = function() {
-    if (row.rent && row.rent !== '' && row.rent == 1) {
+    if (isArchive) {
+      html.push('<div class="col px-1"><dl><dt>{{ site.data.uk.re_datea }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.uk.roku }}</dd></dl></div>');
+    } else if (row.rent && row.rent !== '' && row.rent == 1) {
       html.push('<div class="col px-1"><dl><dt>{{ site.data.uk.re_dater }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.uk.roku }}</dd></dl></div>');
     } else if (row.type.includes('{{ site.data.uk.re_land }}') || row.type.includes('{{ site.data.uk.re_land | downcase }}')) {
       html.push('<div class="col px-1"><dl><dt>{{ site.data.uk.re_datel }}</dt><dd>' + d.getDate() + '&nbsp;' + month[n] + '&nbsp;' + d.getFullYear() + '&nbsp;{{ site.data.uk.roku }}</dd></dl></div>');
