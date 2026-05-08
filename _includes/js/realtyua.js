@@ -1,4 +1,20 @@
 "use strict";
+if (!Array.prototype.flatMap) {
+  Array.prototype.flatMap = function(fn) {
+    var result = [];
+    for (var i = 0; i < this.length; i++) {
+      var mapped = fn(this[i], i, this);
+      if (Array.isArray(mapped)) {
+        for (var j = 0; j < mapped.length; j++) {
+          result.push(mapped[j]);
+        }
+      } else {
+        result.push(mapped);
+      }
+    }
+    return result;
+  };
+}
 $(document).ready(function () {
   $("body").tooltip({ selector: '[data-toggle="tooltip"]' });
   $('[data-toggle="popover"]').popover();
@@ -135,7 +151,7 @@ $(document).ready(function () {
   var $mainContainer = $('main.content');
   var $originalContent = null;
   var $searchContent = null;
-  var tomSelectInstance = null;
+  var searchableRehiony = null;
   function wrapOriginalContent() {
     if ($mainContainer.children('.original-content-wrapper').length) {
       $originalContent = $mainContainer.children('.original-content-wrapper');
@@ -166,21 +182,16 @@ $(document).ready(function () {
   }
   wrapOriginalContent();
   createSearchContent();
-  function initTomSelect() {
-    if (tomSelectInstance) {
-      tomSelectInstance.destroy();
-      tomSelectInstance = null;
+  function initSearchableSelect() {
+    if (searchableRehiony) {
+      searchableRehiony.destroy();
+      searchableRehiony = null;
     }
     var $el = document.getElementById('rehiony');
     if (!$el) return;
-    tomSelectInstance = new TomSelect('#rehiony', {
-      create: false,
+    searchableRehiony = new SearchableSelect('#rehiony', {
       maxOptions: 10,
-      maxItems: 1,
-      valueField: 'url',
-      labelField: 'title',
-      searchField: 'title',
-      sortField: 'title',
+      placeholder: $el.options[0] ? $el.options[0].text : 'Введіть назву...',
       options: [
         {%- for r in site.data.realestate -%}
           {%- if r.url == site.url and r.slug and r.slug != '' -%}
@@ -189,20 +200,15 @@ $(document).ready(function () {
             {%- assign d = r.url | remove: 'https://www.realestate.' | remove: '.ua' -%}
             {%- if site.data[d] -%}
               {%- for o in site.data[d] -%}
-                {url:"{{ o.url }}",title:"{{ o.title }}"},
+                {value:"{{ o.url }}",text:"{{ o.title }}"},
               {%- endfor -%}
             {%- endif -%}
           {%- else -%}
-            {url:"{{ r.url }}",title:"{{ r.small }}"},
+            {value:"{{ r.url }}",text:"{{ r.small }}"},
           {%- endif -%}
         {%- endfor -%}
-        {url:"/region/{{ site.region_slug }}/",title:"{{ site.region }}"}
+        {value:"/region/{{ site.region_slug }}/",text:"{{ site.region }}"}
       ],
-      render: {
-        no_results: function (data, escape) {
-          return '<div class="dropdown-item">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
-        }
-      },
       onChange: function (value) {
         if (value !== '') {
           window.location = value;
@@ -210,7 +216,7 @@ $(document).ready(function () {
       }
     });
   }
-  initTomSelect();
+  initSearchableSelect();
   $('input[name="searchMode"]').on('change', function () {
     if ($(this).val() === 'loc') {
       $originalContent.removeClass('d-none').css('display', 'block');
@@ -280,11 +286,220 @@ var sShare = {
     );
   }
 };
-var TS_RENDER = {
-  no_results: function (data, escape) {
-    return '<div class="dropdown-item">За цим запитом "' + escape(data.input) + '" нічого не знайдено</div>';
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+function SearchableSelect(el, opts) {
+  var settings = {
+    options: opts.options || [],
+    placeholder: opts.placeholder || '',
+    onChange: opts.onChange || function() {}
+  };
+  var maxOptions = opts.maxOptions || 10;
+
+  var $original = (typeof el === 'string') ? document.querySelector(el) : el;
+  if (!$original) return null;
+
+  var self = this;
+  var currValue = '';
+  var isOpen = false;
+  var focusIdx = -1;
+
+  $original.style.display = 'none';
+
+  var wrapper = document.createElement('div');
+  wrapper.style.position = 'relative';
+
+  var inp = document.createElement('input');
+  inp.type = 'text';
+  inp.className = 'form-control';
+  inp.placeholder = settings.placeholder;
+  inp.autocomplete = 'off';
+
+  var clearBtn = document.createElement('button');
+  clearBtn.type = 'button';
+  clearBtn.className = 'btn btn-sm btn-outline-secondary';
+  clearBtn.textContent = '\u00d7';
+  clearBtn.style.cssText = 'position:absolute;right:8px;top:50%;transform:translateY(-50%);display:none;z-index:5;line-height:1;padding:0 6px;border:none;background:none;font-size:18px;cursor:pointer;';
+  clearBtn.onclick = function(e) {
+    e.stopPropagation();
+    self.clear();
+    inp.focus();
+  };
+
+  var dropdown = document.createElement('div');
+  dropdown.className = 'dropdown-menu';
+  dropdown.style.cssText = 'width:100%;max-height:300px;overflow-y:auto;position:absolute;display:none;';
+
+  wrapper.appendChild(inp);
+  wrapper.appendChild(clearBtn);
+  wrapper.appendChild(dropdown);
+  $original.parentNode.insertBefore(wrapper, $original.nextSibling);
+
+  function filtered(q) {
+    var query = q.toLowerCase().trim();
+    var result = [];
+    var i, item;
+    for (i = 0; i < settings.options.length; i++) {
+      if (result.length >= maxOptions) break;
+      item = settings.options[i];
+      if (!query || item.text.toLowerCase().indexOf(query) !== -1) {
+        result.push(item);
+      }
+    }
+    return result;
   }
-};
+
+  function render(q) {
+    var items = filtered(q);
+    if (items.length === 0) {
+      dropdown.innerHTML = '<span class="dropdown-item-text text-muted px-3">\u0417\u0430 \u0446\u0438\u043c \u0437\u0430\u043f\u0438\u0442\u043e\u043c "' + escapeHtml(q.trim()) + '" \u043d\u0456\u0447\u043e\u0433\u043e \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e</span>';
+    } else {
+      var html = '';
+      var i, item, active;
+      for (i = 0; i < items.length; i++) {
+        item = items[i];
+        active = item.value === currValue ? ' active' : '';
+        html += '<button type="button" class="dropdown-item' + active + '" data-value="' + item.value.replace(/"/g, '&quot;') + '">' + item.text.replace(/</g, '&lt;') + '</button>';
+      }
+      dropdown.innerHTML = html;
+    }
+    focusIdx = -1;
+  }
+
+  function open() {
+    if (!isOpen) {
+      isOpen = true;
+      dropdown.classList.add('show');
+      dropdown.style.display = 'block';
+      render(inp.value);
+    }
+  }
+
+  function close() {
+    if (isOpen) {
+      isOpen = false;
+      dropdown.classList.remove('show');
+      dropdown.style.display = 'none';
+    }
+  }
+
+  function findItem(val) {
+    var i;
+    for (i = 0; i < settings.options.length; i++) {
+      if (settings.options[i].value === val) return settings.options[i];
+    }
+    return null;
+  }
+
+  function pick(val) {
+    if (val === currValue) { close(); return; }
+    currValue = val;
+    if (val) {
+      var item = findItem(val);
+      inp.value = item ? item.text : val;
+      clearBtn.style.display = '';
+    } else {
+      inp.value = '';
+      clearBtn.style.display = 'none';
+    }
+    close();
+    settings.onChange(val);
+  }
+
+  this.setValue = function(val, silent) {
+    currValue = val;
+    if (val) {
+      var item = findItem(val);
+      inp.value = item ? item.text : val;
+      clearBtn.style.display = '';
+    } else {
+      inp.value = '';
+      clearBtn.style.display = 'none';
+    }
+    if (!silent) settings.onChange(val);
+  };
+
+  this.getValue = function() { return currValue; };
+
+  this.clear = function() {
+    this.setValue('');
+    render('');
+    open();
+  };
+
+  this.destroy = function() {
+    close();
+    if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+    $original.style.display = '';
+  };
+
+  inp.addEventListener('input', function() {
+    var q = inp.value;
+    if (!q && currValue) {
+      self.clear();
+      return;
+    }
+    render(q);
+    open();
+  });
+
+  inp.addEventListener('focus', open);
+
+  inp.addEventListener('click', function(e) {
+    e.stopPropagation();
+    open();
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!wrapper.contains(e.target)) close();
+  });
+
+  inp.addEventListener('keydown', function(e) {
+    var items = dropdown.querySelectorAll('.dropdown-item');
+    var code = e.which || e.keyCode;
+    var i;
+
+    if (code === 40) {
+      e.preventDefault();
+      focusIdx = Math.min(focusIdx + 1, items.length - 1);
+      for (i = 0; i < items.length; i++) {
+        if (i === focusIdx) {
+          items[i].classList.add('active');
+        } else {
+          items[i].classList.remove('active');
+        }
+      }
+    } else if (code === 38) {
+      e.preventDefault();
+      focusIdx = Math.max(focusIdx - 1, -1);
+      for (i = 0; i < items.length; i++) {
+        if (i === focusIdx) {
+          items[i].classList.add('active');
+        } else {
+          items[i].classList.remove('active');
+        }
+      }
+    } else if (code === 13) {
+      e.preventDefault();
+      if (focusIdx >= 0 && focusIdx < items.length) {
+        items[focusIdx].click();
+      }
+    } else if (code === 27) {
+      close();
+      inp.blur();
+    }
+  });
+
+  dropdown.addEventListener('click', function(e) {
+    var item = e.target.closest('.dropdown-item');
+    if (item && item.dataset.value !== undefined) {
+      pick(item.dataset.value);
+    }
+  });
+}
 var TYPE_GROUPS = [
   {
     tag:      'Будинок',
@@ -477,6 +692,11 @@ function loadSearchEngine(callback) {
         })
       ).sort(function (a, b) { return a.text.localeCompare(b.text, 'uk'); });
 
+      if (typeof itemsjs !== 'function') {
+        console.warn('itemsjs не завантажено');
+        callback();
+        return;
+      }
       searchEngine = itemsjs(data, {
         aggregations: {
           type:           { title: 'Тип',   size: 20 },
@@ -674,26 +894,7 @@ function toggleSearchChip(k) {
   searchState.activeChip = (searchState.activeChip === k) ? null : k;
   renderSearchPanel(searchState.activeChip);
 }
-function addClearButton(ts) {
-  if (!ts || !ts.control) return;
-  if (!document.getElementById('ts-clear-btn-fix')) {
-    var style = document.createElement('style');
-    style.id = 'ts-clear-btn-fix';
-    style.textContent = `.clear-button { display:none; position:absolute;right:10px;top:50%;transform:translateY(-50%); width:20px;height:20px;line-height:20px;text-align:center; cursor:pointer;font-size:18px;color:#666;z-index:5; } .ts-wrapper.has-items .ts-control .clear-button{display:block!important;}`;
-    document.head.appendChild(style);
-  }
-  var button = document.createElement('div');
-  button.className = 'clear-button';
-  button.innerHTML = '×';
-  button.title = 'Очистити';
-  button.addEventListener('click', function(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    ts.clear();
-  });
-  ts.control.style.position = 'relative';
-  ts.control.appendChild(button);
-}
+
 function renderSearchPanel(k) {
   var $panel = $('#searchFilterPanel');
   if (!k) {
@@ -704,46 +905,30 @@ function renderSearchPanel(k) {
   }
   $panel.removeClass('d-none').css('display', 'block');
   if (k === 'loc') {
-    $panel.html('<select id="tsLocSelect" placeholder="Введіть назву..."></select>');
+    $panel.html('<div id="tsLocSelect"></div>');
     setTimeout(function () {
       if (searchState.tsLoc) { searchState.tsLoc.destroy(); searchState.tsLoc = null; }
-      searchState.tsLoc = new TomSelect('#tsLocSelect', {
-        options:      searchPlaces,
-        optgroups: [
-          { value: 'Міста',       label: 'Міста' },
-          { value: 'Райони',      label: 'Райони' },
-          { value: 'Села/Селища', label: 'Села/Селища' },
-        ],
-        optgroupField: 'group',
-        labelField:    'text',
-        valueField:    'value',
-        searchField:   'text',
-        placeholder:   'Введіть назву...',
-        maxOptions:    30,
-        render:        TS_RENDER,
+      searchState.tsLoc = new SearchableSelect('#tsLocSelect', {
+        options:    searchPlaces,
+        placeholder: 'Введіть назву...',
+        maxOptions: 30,
         onChange: function (val) {
           if (val) { searchPage = 1; applySearchSimple('loc', val); }
-        },
-        onInitialize: function() { addClearButton(this); }
+        }
       });
       if (searchState.f.loc) searchState.tsLoc.setValue(searchState.f.loc, true);
     }, 50);
   } else if (k === 'addr') {
-    $panel.html('<select id="tsAddrSelect" placeholder="Введіть вулицю..."></select>');
+    $panel.html('<div id="tsAddrSelect"></div>');
     setTimeout(function () {
       if (searchState.tsAddr) { searchState.tsAddr.destroy(); searchState.tsAddr = null; }
-      searchState.tsAddr = new TomSelect('#tsAddrSelect', {
-        options:     searchStreets.map(function (s) { return { value: s, text: s }; }),
-        labelField:  'text',
-        valueField:  'value',
-        searchField: 'text',
+      searchState.tsAddr = new SearchableSelect('#tsAddrSelect', {
+        options:    searchStreets.map(function (s) { return { value: s, text: s }; }),
         placeholder: 'Введіть вулицю...',
-        maxOptions:  30,
-        render:      TS_RENDER,
+        maxOptions: 30,
         onChange: function (val) {
           if (val) { searchPage = 1; applySearchSimple('addr', val); }
-        },
-        onInitialize: function() { addClearButton(this); }
+        }
       });
       if (searchState.f.addr) searchState.tsAddr.setValue(searchState.f.addr, true);
     }, 50);

@@ -2,7 +2,7 @@
 	'use strict';
 
 	const CONFIG = {
-		apiToken: '12k55jwxqe0uj20rjisbwqlvb8mjw8gfpxleve10g65f5xcquww',
+		apiToken: '{{ site.stats_api_token }}',
 		apiEndpoint: 'https://stats.realestate.if.ua/api/v0/stats/total'
 	};
 

@@ -12,7 +12,6 @@ sitemap: false
 {%- include js/bootstrap-table.min.js -%}
 {%- include js/bootstrap-table-uk-UA.min.js -%}
 {%- include js/bootstrap-table-mobile.min.js -%}
-{%- include js/tom-select.base.min.js -%}
 {%- include js/itemsjs.min.js -%}
 {%- capture table_all_js -%}{%- include js/table.all.js -%}{%- endcapture -%}
 {{- table_all_js | js_minify -}}

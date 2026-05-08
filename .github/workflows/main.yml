@@ -151,6 +151,15 @@ jobs:
           sed -i "s/^nbu: .*/nbu: $NBU/" _config.yml
           echo "✅ _config.yml оновлено: USD=$USD EUR=$EUR NBU=$NBU"
 
+      - name: Set stats API token
+        run: |
+          if [ -n "${{ secrets.STATS_API_TOKEN }}" ]; then
+            sed -i "s/^stats_api_token: .*/stats_api_token: ${{ secrets.STATS_API_TOKEN }}/" _config.yml
+            echo "✅ Stats API token встановлено"
+          else
+            echo "⚠️ STATS_API_TOKEN не задано — графік статистики не працюватиме"
+          fi
+
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         # uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4

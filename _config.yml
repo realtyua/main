@@ -12,6 +12,7 @@ region: Івано-Франківська область
 region_slug: ivano-frankivska
 region_size: .89rem
 
+stats_api_token: ''
 usd: 43.50
 eur: 51.50
 nbu: 43.2413

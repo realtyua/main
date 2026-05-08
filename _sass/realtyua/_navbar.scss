@@ -143,8 +143,8 @@ $dropDown       : true;
         }
         @if ($dropDown) {
             .dropdown-menu {
-                background-color: $blue-800;
-                border-color: $blue-800;
+                background-color: #063983;
+                border-color: #063983;
                 .dropdown-item {
                     color: $white;
                     font-weight: 600;
@@ -153,7 +153,7 @@ $dropDown       : true;
                     &:focus,
                     &.active {
                         color: $colHighlight;
-                        background-color: $blue-800;
+                        background-color: #063983;
                     }
                 }
                 .dropdown-divider {
@@ -163,7 +163,7 @@ $dropDown       : true;
         }
         .show > .nav-link {
             color: $colHighlight;
-            background-color: $blue-800;
+            background-color: #063983;
         }
     }
     .navbar-toggle {

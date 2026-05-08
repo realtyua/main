@@ -4,7 +4,7 @@
     {%- assign slug = 2.dir | split: '/' | last -%}
     {%- assign current = 2.url | remove: slug | remove: '//' | append: '/' -%}
     {%- if include.current == current and 2.navhide != 1 and 2.title != '' -%}
-      {url: "{{ 2.url | prepend: site.url }}",title: "{{ 2.navtitle }}"},
+      {value: "{{ 2.url | prepend: site.url }}",text: "{{ 2.navtitle }}"},
       {%- include select/2.html current=2.url navtitle=2.navtitle -%}
     {%- endif -%}
   {%- endfor -%}
