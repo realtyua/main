@@ -221,7 +221,13 @@ $(function () {
     }
   });
   $('#property').on('post-body.bs.table', function() {
-    $('.page-link[href="javascript:void(0)"]').attr('href', '#');
+$('.page-link[href="javascript:void(0)"]').attr('href', '#');
+$('.fixed-table-toolbar .search .search-input').each(function(i) {
+  $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
+});
+$('.fixed-table-toolbar .search .search-input').each(function(i) {
+  $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
+});
   });
 });
 
@@ -539,3 +545,6 @@ function priceSorter(a, b) {
 }
 
 $('.page-link[href="javascript:void(0)"]').attr('href', '#');
+$('.fixed-table-toolbar .search .search-input').each(function(i) {
+  $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
+});

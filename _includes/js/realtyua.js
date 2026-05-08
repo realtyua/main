@@ -148,6 +148,11 @@ $(document).ready(function () {
   });
   $('.toast').toast('show');
   $('.alert').alert();
+  $(document).on('post-body.bs.table', function() {
+    $('.fixed-table-toolbar .search .search-input').each(function(i) {
+      $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
+    });
+  });
   var $mainContainer = $('main.content');
   var $originalContent = null;
   var $searchContent = null;
@@ -317,12 +322,12 @@ function SearchableSelect(el, opts) {
   inp.className = 'form-control';
   inp.placeholder = settings.placeholder;
   inp.autocomplete = 'off';
+  inp.name = $original.id || 'searchable-' + Math.random().toString(36).slice(2, 8);
 
   var clearBtn = document.createElement('button');
   clearBtn.type = 'button';
-  clearBtn.className = 'btn btn-sm btn-outline-secondary';
+  clearBtn.className = 'btn-clear';
   clearBtn.textContent = '\u00d7';
-  clearBtn.style.cssText = 'position:absolute;right:8px;top:50%;transform:translateY(-50%);display:none;z-index:5;line-height:1;padding:0 6px;border:none;background:none;font-size:18px;cursor:pointer;';
   clearBtn.onclick = function(e) {
     e.stopPropagation();
     self.clear();
@@ -330,7 +335,7 @@ function SearchableSelect(el, opts) {
   };
 
   var dropdown = document.createElement('div');
-  dropdown.className = 'dropdown-menu';
+  dropdown.className = 'dropdown-menu searchable-dropdown';
   dropdown.style.cssText = 'width:100%;max-height:300px;overflow-y:auto;position:absolute;display:none;';
 
   wrapper.appendChild(inp);
@@ -400,11 +405,10 @@ function SearchableSelect(el, opts) {
     if (val) {
       var item = findItem(val);
       inp.value = item ? item.text : val;
-      clearBtn.style.display = '';
     } else {
       inp.value = '';
-      clearBtn.style.display = 'none';
     }
+    toggleClear();
     close();
     settings.onChange(val);
   }
@@ -414,11 +418,10 @@ function SearchableSelect(el, opts) {
     if (val) {
       var item = findItem(val);
       inp.value = item ? item.text : val;
-      clearBtn.style.display = '';
     } else {
       inp.value = '';
-      clearBtn.style.display = 'none';
     }
+    toggleClear();
     if (!silent) settings.onChange(val);
   };
 
@@ -436,6 +439,10 @@ function SearchableSelect(el, opts) {
     $original.style.display = '';
   };
 
+  function toggleClear() {
+    clearBtn.style.display = inp.value ? 'block' : 'none';
+  }
+
   inp.addEventListener('input', function() {
     var q = inp.value;
     if (!q && currValue) {
@@ -444,6 +451,7 @@ function SearchableSelect(el, opts) {
     }
     render(q);
     open();
+    toggleClear();
   });
 
   inp.addEventListener('focus', open);
@@ -950,10 +958,12 @@ function searchRangePanel(key, v, unit, mn, mx) {
   return '<div class="form-row">' +
     '<div class="col">' +
       '<input type="number" class="form-control form-control-sm" placeholder="від" ' +
+        'name="' + key + '_min" ' +
         'oninput="applySearchRange(\'' + key + '\', \'min\', this.value)" value="' + (v.min || '') + '">' +
     '</div>' +
     '<div class="col">' +
       '<input type="number" class="form-control form-control-sm" placeholder="до" ' +
+        'name="' + key + '_max" ' +
         'oninput="applySearchRange(\'' + key + '\', \'max\', this.value)" value="' + (v.max || '') + '">' +
     '</div>' +
     (unit ? '<div class="col-auto"><span class="form-control-plaintext">' + unit + '</span></div>' : '') +
