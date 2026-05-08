@@ -649,7 +649,7 @@ function loadSearchEngine(callback) {
         item.rooms_int      = parseInt(item.rooms)  || 0;
         item.surface_f      = parseFloat(item.surface)      || 0;
         item.surface_land_f = parseFloat(item.surface_land) || 0;
-        var firstPart = (item.address || '').split(',')[0].replace(/\s*\(неподалік\)|\s*\(поруч\)/gi, '').trim();
+        var firstPart = (item.address || '').split(',')[0].replace(/\s*\([^)]*\)/g, '').trim();
         item.street = isNonStreet(firstPart) ? '' : firstPart;
       });
       searchLocations = [...new Set(
