@@ -6,8 +6,9 @@
       var target = $(this.hash);
       target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
       if (target.length) {
+        var t = target.offset().top - 72;
         $('html, body').animate({
-          scrollTop: (target.offset().top - 72)
+          scrollTop: t
         }, 1000, "easeInOutExpo");
         return false;
       }
@@ -23,12 +24,18 @@
     offset: 75
   });
 
+  var ticking = false;
   var navbarCollapse = function() {
-    if ($("#mainNav").offset().top > 100) {
-      $("#mainNav").addClass("navbar-scrolled");
-    } else {
-      $("#mainNav").removeClass("navbar-scrolled");
-    }
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      if ($("#mainNav").offset().top > 100) {
+        $("#mainNav").addClass("navbar-scrolled");
+      } else {
+        $("#mainNav").removeClass("navbar-scrolled");
+      }
+      ticking = false;
+    });
   };
 
   navbarCollapse();

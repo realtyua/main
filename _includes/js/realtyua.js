@@ -224,16 +224,16 @@ $(document).ready(function () {
   initSearchableSelect();
   $('input[name="searchMode"]').on('change', function () {
     if ($(this).val() === 'loc') {
-      $originalContent.removeClass('d-none').css('display', 'block');
-      $searchContent.addClass('d-none').css('display', 'none');
-      $('#searchLoc').removeClass('d-none').css('display', 'block');
-      $('#searchObj').addClass('d-none').css('display', 'none');
-      $('#searchResults').addClass('d-none').css('display', 'none');
+      $originalContent.removeClass('d-none');
+      $searchContent.addClass('d-none');
+      $('#searchLoc').removeClass('d-none');
+      $('#searchObj').addClass('d-none');
+      $('#searchResults').addClass('d-none');
     } else {
-      $originalContent.addClass('d-none').css('display', 'none');
-      $searchContent.removeClass('d-none').css('display', 'block');
-      $('#searchLoc').addClass('d-none').css('display', 'none');
-      $('#searchObj').removeClass('d-none').css('display', 'block');
+      $originalContent.addClass('d-none');
+      $searchContent.removeClass('d-none');
+      $('#searchLoc').addClass('d-none');
+      $('#searchObj').removeClass('d-none');
       setTimeout(function () {
         $('#searchListings').focus();
       }, 50);
@@ -851,7 +851,7 @@ function removeSearchTag(e, k) {
 function renderSearchChips() {
   var $chips = $('#searchChips');
   if (!searchState.type && !Object.keys(searchState.f).length) {
-    $chips.addClass('d-none').css('display', 'none');
+    $chips.addClass('d-none');
     return;
   }
   var group = getTypeGroup(searchState.type);
@@ -865,7 +865,7 @@ function renderSearchChips() {
       (active ? ' ×' : '') +
     '</span>';
   }).join('');
-  $chips.html(html).removeClass('d-none').css('display', 'block');
+  $chips.html(html).removeClass('d-none');
 }
 function renderRentChip() {
   var rent       = searchState.f.rent;
@@ -906,12 +906,12 @@ function toggleSearchChip(k) {
 function renderSearchPanel(k) {
   var $panel = $('#searchFilterPanel');
   if (!k) {
-    $panel.addClass('d-none').css('display', 'none').html('');
+    $panel.addClass('d-none').html('');
     if (searchState.tsLoc)  { searchState.tsLoc.destroy();  searchState.tsLoc  = null; }
     if (searchState.tsAddr) { searchState.tsAddr.destroy(); searchState.tsAddr = null; }
     return;
   }
-  $panel.removeClass('d-none').css('display', 'block');
+  $panel.removeClass('d-none');
   if (k === 'loc') {
     $panel.html('<div id="tsLocSelect"></div>');
     setTimeout(function () {
@@ -992,7 +992,7 @@ function renderResults(items, pagination) {
   var $wrap = $('#searchResults');
   if (!items.length) {
     $list.html('<div class="alert alert-info">Нічого не знайдено. Будь ласка спробуйте ще раз, не поспішаючи.</div>');
-    $wrap.removeClass('d-none').css('display', 'block');
+    $wrap.removeClass('d-none');
     return;
   }
   var html = items.map(function (item) {
@@ -1091,7 +1091,7 @@ function renderResults(items, pagination) {
   }
   bottomPager += '</div></div>';
   $list.html(topPager + html + (pages > 1 ? bottomPager : ''));
-  $wrap.removeClass('d-none').css('display', 'block');
+  $wrap.removeClass('d-none');
   $(document).off('click', '#btnNextPage');
   $(document).off('click', '#btnPrevPage');
   $(document).on('click', '#btnNextPage', function (e) {
@@ -1100,7 +1100,8 @@ function renderResults(items, pagination) {
     runSearchWithState();
     var $target = $('#collapseAreaSelect');
     if ($target.length) {
-      $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
+      var t = $target.offset().top - 20;
+      $('html, body').animate({ scrollTop: t }, 300);
     }
   });
   $(document).on('click', '#btnPrevPage', function (e) {
@@ -1109,7 +1110,8 @@ function renderResults(items, pagination) {
     runSearchWithState();
     var $target = $('#collapseAreaSelect');
     if ($target.length) {
-      $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
+      var t = $target.offset().top - 20;
+      $('html, body').animate({ scrollTop: t }, 300);
     }
   });
 }
@@ -1143,6 +1145,7 @@ function setSortPrice(order, e) {
   runSearchWithState();
   var $target = $('#collapseAreaSelect');
   if ($target.length) {
-    $('html, body').animate({ scrollTop: $target.offset().top - 20 }, 300);
+    var t = $target.offset().top - 20;
+    $('html, body').animate({ scrollTop: t }, 300);
   }
 }
