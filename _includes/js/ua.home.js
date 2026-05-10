@@ -3,113 +3,111 @@
   {%- assign region = sr.url | split: "." | slice: 2, 4 | join: "." | replace: ".", "-" -%}
   {%- if sr.slug and sr.slug != '' and sr.url != site.url -%}
     function {{ region | remove: "-" }}Random() {
-      $.getJSON("{{ sr.url }}/region/{{ sr.slug }}/data/all.json", function(data) {
-        var count = data.length;
-        var random = [];
-        var counter = 0;
-        var number = 3;
-        var div = $("#{{ region }}");
-        var usd = {{ site.usd }};
-        var eur = {{ site.eur }};
-        var nbu = {{ site.nbu }};
+      blockLoader.load('{{ region }}', '{{ sr.url }}/region/{{ sr.slug }}/data/all.json', {
+        render: function(data, $el) {
+          $el.empty();
+          var count = data.length;
+          var random = [];
+          var counter = 0;
+          var number = 3;
+          var div = $el;
+          var usd = {{ site.usd }};
+          var eur = {{ site.eur }};
+          var nbu = {{ site.nbu }};
 
-        window.homePhoneCache = window.homePhoneCache || {};
-        data.forEach(function(item) {
-          if (item.id && item.phone) {
-            window.homePhoneCache[item.id] = item.phone;
-          }
-        });
-
-        function reAdsLocation() {
-          return (data[i].location && data[i].location !== '') ? ', ' + data[i].location : '';
-        }
-
-        function reAdsRegion() {
-          return (data[i].region && data[i].region !== '') ? ', ' + data[i].region : '';
-        }
-
-        function reAdsPrice() {
-          if (data[i].price !== '' && data[i].price.includes('$')) {
-            return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('$', '') * usd).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
-          } else if (data[i].price !== '' && data[i].price.includes('€')) {
-            return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('€', '') * eur).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
-          } else if (data[i].price !== '') {
-            return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="$' + (data[i].price / nbu).toFixed(0) + '">' + (data[i].price * 1).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
-          }
-        }
-
-        function reAdsRent() {
-          if (data[i].rent == 1) {
-            return '<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rent }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ' {{ site.data.uk.re_for_month }}, ' + reAdsTel() + '</div></div>';
-          }
-        }
-
-        function reAdsPriceSqmt() {
-          if (data[i].price_sqmt !== '' && data[i].price_sqmt.includes('$')) {
-            return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price_sqmt + '">' + (data[i].price_sqmt.replace('$', '') * usd).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
-          } else if (data[i].price_sqmt !== '' && data[i].price_sqmt.includes('€')) {
-            return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price_sqmt + '">' + (data[i].price_sqmt.replace('€', '') * eur).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
-          } else if (data[i].price_sqmt !== '') {
-            return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price_sqmt + '">' + (data[i].price_sqmt * 1).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
-          }
-        }
-
-        function reAdsTel() {
-          return '&nbsp;<div class="btn-group"><button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button><div class="dropdown-menu px-2 dropdown-menu-right"><span class="text-nowrap"><a href="{{ sr.url }}/region/{{ sr.slug }}/?id=' + data[i].phone + '" title="{{ site.data.uk.offers }}">' + data[i].seller.replace('{{ site.data.uk.re_seller }} ', '') + '</a></span><br><button type="button" class="btn btn-link tel-btn p-0 m-0" data-id="' + data[i].id + '" title="Клікніть для перегляду телефону"><canvas class="tel-canvas"></canvas></button><i class="d-none">' + data[i].id + '</i></div></div>&nbsp;';
-        }
-
-        function reAdsType() {
-          if (count > 0) {
-            if (data[i].type.includes('{{ site.data.uk.re_apartment }}') && data[i].rent == '' && data[i].price !== '') {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell_apartment }}</strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
-            } else if (data[i].rent == 1 && data[i].price !== '' && data[i].price_sqmt == '' && data[i].type.includes('{{ site.data.uk.re_roomsp }}')) {
-              div.append('' + reAdsRent() + '');
-            } else if (data[i].rent == 1 && data[i].price !== '' && data[i].price_sqmt == '' && (data[i].type.includes('{{ site.data.uk.re_house }}') || data[i].type.includes('{{ site.data.uk.re_house | downcase }}'))) {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rent }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_floorss }} ' + data[i].floors + ' {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ' {{ site.data.uk.re_for_month }}, ' + reAdsTel() + '</div></div>');
-            } else if (data[i].rent == 1 && data[i].price !== '' && data[i].price_sqmt == '') {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rent }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ' {{ site.data.uk.re_for_month }}, ' + reAdsTel() + '</div></div>');
-            } else if (data[i].rent == 1 && data[i].price == '' && data[i].price_sqmt !== '') {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rentnd }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPriceSqmt() + ' {{ site.data.uk.re_for_day }} ' + reAdsTel() + '</div></div>');
-            } else if (data[i].type.includes('{{ site.data.uk.re_house }}') || data[i].type.includes('{{ site.data.uk.re_house | downcase }}')) {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_floorss }} ' + data[i].floors + ' {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
-            } else if (data[i].type.includes('{{ site.data.uk.re_house_part }}')) {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} {{ site.data.uk.re_house_partm }}</strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
-            } else if (data[i].type.includes('{{ site.data.uk.re_land }}')) {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell_land }}</strong> {{ site.data.uk.re_surface }} ' + data[i].surface_land + '&nbsp;{{ site.data.uk.m }} (' + (data[i].surface_land / 10000) + ' га) {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
-            } else if (data[i].type.includes('{{ site.data.uk.re_garage }}') || data[i].type.includes('{{ site.data.uk.re_store }}')) {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
-            } else if (data[i].type.includes('{{ site.data.uk.re_roomsp }}')) {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }} {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
-            } else {
-              div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_floorss }} ' + data[i].floor + ' {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+          window.homePhoneCache = window.homePhoneCache || {};
+          data.forEach(function(item) {
+            if (item.id && item.phone) {
+              window.homePhoneCache[item.id] = item.phone;
             }
-          } else {
-            div.append('<div class="alert alert-success mb-0" role="alert"><a href="{{ sr.url }}" class="alert-link">Додати&nbsp;оголошення</a> про нерухомість {{ sr.title | replace_first: "Н", "н" }}</div>');
+          });
+
+          function reAdsLocation() {
+            return (data[i].location && data[i].location !== '') ? ', ' + data[i].location : '';
           }
-        }
 
-        div.append();
-        document.getElementById("{{ region }}").insertAdjacentHTML('afterend', '<div class="float-right btn-group"><a class="btn btn-primary btn-sm" href="{{ sr.url }}">Інші ' + count + ' пропозиції нерухомості </a></div>');
+          function reAdsRegion() {
+            return (data[i].region && data[i].region !== '') ? ', ' + data[i].region : '';
+          }
 
-        while (counter < number) {
-          var i = Math.floor(Math.random() * count);
-          if (random.indexOf(i) == "-1") {
-            if (counter == (number - 1)) {
-              reAdsType();
-            } else {
-              reAdsType();
+          function reAdsPrice() {
+            if (data[i].price !== '' && data[i].price.includes('$')) {
+              return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('$', '') * usd).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
+            } else if (data[i].price !== '' && data[i].price.includes('€')) {
+              return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price + '">' + (data[i].price.replace('€', '') * eur).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
+            } else if (data[i].price !== '') {
+              return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="$' + (data[i].price / nbu).toFixed(0) + '">' + (data[i].price * 1).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
             }
-            random.push(i);
-            counter++;
           }
-        }
 
-        $('.tel-canvas').each(function() {
-          drawPlaceholder(this);
-        });
-      }).fail(function() {
-        var div = $("#{{ region }}");
-        div.append('<div class="alert alert-success mb-0" role="alert"><a href="{{ sr.url }}" class="alert-link">Додати&nbsp;оголошення</a> про нерухомість {{ sr.title | replace_first: "Н", "н" }}</div>');
+          function reAdsRent() {
+            if (data[i].rent == 1) {
+              return '<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rent }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ' {{ site.data.uk.re_for_month }}, ' + reAdsTel() + '</div></div>';
+            }
+          }
+
+          function reAdsPriceSqmt() {
+            if (data[i].price_sqmt !== '' && data[i].price_sqmt.includes('$')) {
+              return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price_sqmt + '">' + (data[i].price_sqmt.replace('$', '') * usd).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
+            } else if (data[i].price_sqmt !== '' && data[i].price_sqmt.includes('€')) {
+              return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price_sqmt + '">' + (data[i].price_sqmt.replace('€', '') * eur).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
+            } else if (data[i].price_sqmt !== '') {
+              return '{{ site.data.uk.re_cost }} <span class="mark" data-toggle="tooltip" title="' + data[i].price_sqmt + '">' + (data[i].price_sqmt * 1).toFixed(0) + '</span>&nbsp;{{ site.data.uk.re_uah }}';
+            }
+          }
+
+          function reAdsTel() {
+            return '&nbsp;<div class="btn-group"><button type="button" class="btn btn-link px-1 rounded-0 border-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&phone;</button><div class="dropdown-menu px-2 dropdown-menu-right"><span class="text-nowrap"><a href="{{ sr.url }}/region/{{ sr.slug }}/?id=' + data[i].phone + '" title="{{ site.data.uk.offers }}">' + data[i].seller.replace('{{ site.data.uk.re_seller }} ', '') + '</a></span><br><button type="button" class="btn btn-link tel-btn p-0 m-0" data-id="' + data[i].id + '" title="Клікніть для перегляду телефону"><canvas class="tel-canvas"></canvas></button><i class="d-none">' + data[i].id + '</i></div></div>&nbsp;';
+          }
+
+          function reAdsType() {
+            if (count > 0) {
+              if (data[i].type.includes('{{ site.data.uk.re_apartment }}') && data[i].rent == '' && data[i].price !== '') {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell_apartment }}</strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+              } else if (data[i].rent == 1 && data[i].price !== '' && data[i].price_sqmt == '' && data[i].type.includes('{{ site.data.uk.re_roomsp }}')) {
+                div.append('' + reAdsRent() + '');
+              } else if (data[i].rent == 1 && data[i].price !== '' && data[i].price_sqmt == '' && (data[i].type.includes('{{ site.data.uk.re_house }}') || data[i].type.includes('{{ site.data.uk.re_house | downcase }}'))) {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rent }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_floorss }} ' + data[i].floors + ' {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ' {{ site.data.uk.re_for_month }}, ' + reAdsTel() + '</div></div>');
+              } else if (data[i].rent == 1 && data[i].price !== '' && data[i].price_sqmt == '') {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rent }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ' {{ site.data.uk.re_for_month }}, ' + reAdsTel() + '</div></div>');
+              } else if (data[i].rent == 1 && data[i].price == '' && data[i].price_sqmt !== '') {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_for_rentnd }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPriceSqmt() + ' {{ site.data.uk.re_for_day }} ' + reAdsTel() + '</div></div>');
+              } else if (data[i].type.includes('{{ site.data.uk.re_house }}') || data[i].type.includes('{{ site.data.uk.re_house | downcase }}')) {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_floorss }} ' + data[i].floors + ' {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+              } else if (data[i].type.includes('{{ site.data.uk.re_house_part }}')) {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} {{ site.data.uk.re_house_partm }}</strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+              } else if (data[i].type.includes('{{ site.data.uk.re_land }}')) {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell_land }}</strong> {{ site.data.uk.re_surface }} ' + data[i].surface_land + '&nbsp;{{ site.data.uk.m }} (' + (data[i].surface_land / 10000) + ' га) {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+              } else if (data[i].type.includes('{{ site.data.uk.re_garage }}') || data[i].type.includes('{{ site.data.uk.re_store }}')) {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+              } else if (data[i].type.includes('{{ site.data.uk.re_roomsp }}')) {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }} {{ site.data.uk.re_na }} ' + data[i].floor + '{{ site.data.uk.re_mu }} {{ site.data.uk.re_floorci }} {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+              } else {
+                div.append('<div class="card my-2"><div class="card-body p-2"><strong>{{ site.data.uk.re_sell }} <span class="text-lowercase">' + data[i].type + '</span></strong> {{ site.data.uk.re_surface_total }} ' + data[i].surface + '&nbsp;{{ site.data.uk.m }}, {{ site.data.uk.re_rooms }} ' + data[i].rooms + ', {{ site.data.uk.re_floorss }} ' + data[i].floor + ' {{ site.data.uk.re_address }} ' + data[i].address + '' + reAdsLocation() + '' + reAdsRegion() + ', ' + reAdsPrice() + ', ' + reAdsTel() + '</div></div>');
+              }
+            } else {
+              div.append('<div class="alert alert-success mb-0" role="alert"><a href="{{ sr.url }}" class="alert-link">Додати&nbsp;оголошення</a> про нерухомість {{ sr.title | replace_first: "Н", "н" }}</div>');
+            }
+          }
+
+          document.getElementById("{{ region }}").insertAdjacentHTML('afterend', '<div class="float-right btn-group"><a class="btn btn-primary btn-sm" href="{{ sr.url }}">Інші ' + count + ' пропозиції нерухомості </a></div>');
+
+          while (counter < number) {
+            var i = Math.floor(Math.random() * count);
+            if (random.indexOf(i) == "-1") {
+              reAdsType();
+              random.push(i);
+              counter++;
+            }
+          }
+
+          $('.tel-canvas').each(function() {
+            drawPlaceholder(this);
+          });
+        },
+        onError: function(err) {
+          return '<div class="alert alert-success mb-0" role="alert"><a href="{{ sr.url }}" class="alert-link">Додати&nbsp;оголошення</a> про нерухомість {{ sr.title | replace_first: "Н", "н" }}</div>';
+        }
       });
     }
 
@@ -139,21 +137,21 @@ function formatPhone(phone) {
   return '+' + phone.slice(0, 2) + ' ' + phone.slice(2, 5) + ' ' + phone.slice(5, 8) + ' ' + phone.slice(8, 10) + ' ' + phone.slice(10);
 }
 
-function drawPlaceholder(canvas) {
+function drawCanvasText(canvas, fontSize, text, color) {
   var ctx = canvas.getContext('2d');
-  var fontSize = 16;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-  var text = '+38 XXX XXX XX XX';
-  var metrics = ctx.measureText(text);
-  var textWidth = metrics.width;
-  var padding = 0;
-  canvas.width = Math.ceil(textWidth) + (padding * 2);
+  var font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+  ctx.font = font;
+  canvas.width = Math.ceil(ctx.measureText(text).width);
   canvas.height = fontSize + 10;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+  ctx.font = font;
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#2d5ca6';
+  ctx.fillStyle = color;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillText(text, padding, fontSize - 1);
+  ctx.fillText(text, 0, fontSize - 1);
+}
+
+function drawPlaceholder(canvas) {
+  drawCanvasText(canvas, 16, '+38 XXX XXX XX XX', '#2d5ca6');
 }
 
 $(document).on('click', '.tel-btn', function(e) {
@@ -167,21 +165,7 @@ $(document).on('click', '.tel-btn', function(e) {
   if (!phone) return;
 
   var decrypted = decryptPhone(phone);
-  var canvasEl = $canvas[0];
-  var ctx = canvasEl.getContext('2d');
-  var fontSize = 16;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-  var phoneText = formatPhone(decrypted);
-  var metrics = ctx.measureText(phoneText);
-  var textWidth = metrics.width;
-  var padding = 0;
-  canvasEl.width = Math.ceil(textWidth) + (padding * 2);
-  canvasEl.height = fontSize + 10;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-  ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#2d5ca6';
-  ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-  ctx.fillText(phoneText, padding, fontSize - 1);
+  drawCanvasText($canvas[0], 16, formatPhone(decrypted), '#2d5ca6');
 
   var $link = $('<a>', {
     href: 'tel:+' + decrypted,
@@ -192,4 +176,5 @@ $(document).on('click', '.tel-btn', function(e) {
   });
   $btn.wrap($link).parent();
   $btn.data('revealed', true);
+  $btn.removeAttr('title');
 });

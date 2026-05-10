@@ -1,6 +1,15 @@
 $(function () {
   "use strict";
   var $tabpro = $('table#property');
+
+  var $btWrapper = $tabpro.closest('.bootstrap-table');
+  var spinnerId = 'tbl-spinner';
+  if ($btWrapper.length) {
+    $btWrapper.after('<div id="' + spinnerId + '">' + blockLoader.spinner() + '</div>');
+    $btWrapper.hide();
+    $('div.form-row').closest('.row.justify-content-between').addClass('d-none');
+  }
+
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: function(searchParams, prop) {
       return searchParams.get(prop);
@@ -28,7 +37,7 @@ $(function () {
           $('tbody tr[data-index="0"]').addClass('active');
         });
       }
-      $('div[class="row justify-content-between"]').remove();
+      $('div.row.justify-content-between').remove();
       $('div.fixed-table-pagination').remove();
       $('div[class="fixed-table-toolbar"]').replaceWith('<div class="float-right btn-group"><a class="my-2" href="' + location.protocol + '//' + location.host + location.pathname + '">' + 'Переглянути інші пропозиції' + '</a></div>');
       $('h2[class="h3"]').remove();
@@ -49,10 +58,27 @@ $(function () {
     $($element).siblings().removeClass('active');
     $($element).addClass('active');
   });
-  $tabpro.on('load-success.bs.table', function(e, data) {
-    window.tableAllOriginalData = data;
-    setTimeout(applyTableFilters, 100);
-  });
+  if ($tabpro.data('url')) {
+    $tabpro.on('load-success.bs.table', function(e, data) {
+      $('#' + spinnerId).remove();
+      $tabpro.removeClass('d-none');
+      $tabpro.closest('.bootstrap-table').show();
+      $('div.form-row').closest('.row.justify-content-between').removeClass('d-none');
+      window.tableAllOriginalData = data;
+      setTimeout(applyTableFilters, 100);
+    });
+    $tabpro.on('load-error.bs.table', function(e, status) {
+      $('#' + spinnerId).remove();
+      var msg = status === 404 ? 'Ой! Щось пішло не так, не вдалося завантажити дані' : 'Не вдалося завантажити дані';
+      var $wrapper = $tabpro.closest('.bootstrap-table');
+      $wrapper.html(blockLoader.error(msg)).show();
+      $('div.form-row').closest('.row.justify-content-between').addClass('d-none');
+    });
+  } else {
+    $('#' + spinnerId).remove();
+    $tabpro.removeClass('d-none');
+    $tabpro.closest('.bootstrap-table').show();
+  }
 
   function updateFilterVisibility() {
     var type = $("#data").val();
@@ -103,6 +129,7 @@ $(function () {
 
   function applyTableFilters() {
     var data = window.tableAllOriginalData || $tabpro.bootstrapTable('getData');
+    if (!data || !data.length) return;
     var $rooms = $("select#filterRooms");
     var $surface = $("select#filterSurface");
     var $surfaceLand = $("select#filterSurfaceLand");
@@ -231,21 +258,21 @@ $('.fixed-table-toolbar .search .search-input').each(function(i) {
   });
 });
 
-function drawPlaceholder(canvas) {
+function drawCanvasText(canvas, fontSize, text, color) {
   var ctx = canvas.getContext('2d');
-  var fontSize = 16;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-  var text = '+38 XXX XXX XX XX';
-  var metrics = ctx.measureText(text);
-  var textWidth = metrics.width;
-  var padding = 0;
-  canvas.width = Math.ceil(textWidth) + (padding * 2);
+  var font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+  ctx.font = font;
+  canvas.width = Math.ceil(ctx.measureText(text).width);
   canvas.height = fontSize + 10;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+  ctx.font = font;
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#2d5ca6';
+  ctx.fillStyle = color;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillText(text, padding, fontSize - 1);
+  ctx.fillText(text, 0, fontSize - 1);
+}
+
+function drawPlaceholder(canvas) {
+  drawCanvasText(canvas, 16, '+38 XXX XXX XX XX', '#2d5ca6');
 }
 
 var month = [

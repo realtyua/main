@@ -1,6 +1,14 @@
 $(function () {
   "use strict";
   var $tabpro = $('table#property');
+
+  var $btWrapper = $tabpro.closest('.bootstrap-table');
+  var spinnerId = 'tbl-spinner';
+  if ($btWrapper.length) {
+    $btWrapper.after('<div id="' + spinnerId + '">' + blockLoader.spinner() + '</div>');
+    $btWrapper.hide();
+  }
+
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: function(searchParams, prop) {
       return searchParams.get(prop);
@@ -49,23 +57,44 @@ $(function () {
   $('#property').on('post-body.bs.table', function() {
     $('.page-link[href="javascript:void(0)"]').attr('href', '#');
   });
+  if ($tabpro.data('url')) {
+    $('#property').on('load-success.bs.table', function() {
+      $('#' + spinnerId).remove();
+      $(this).removeClass('d-none');
+      $(this).closest('.bootstrap-table').show();
+    });
+    $('#property').on('load-error.bs.table', function(e, status) {
+      $('#' + spinnerId).remove();
+      var msg = status === 404 ? 'Дані не знайдено' : 'Не вдалося завантажити дані';
+      var $wrapper = $(this).closest('.bootstrap-table');
+      if ($wrapper.length) {
+        $wrapper.html(blockLoader.error(msg)).show();
+      } else {
+        $(this).replaceWith(blockLoader.error(msg));
+      }
+    });
+  } else {
+    $('#' + spinnerId).remove();
+    $tabpro.removeClass('d-none');
+    $tabpro.closest('.bootstrap-table').show();
+  }
 });
 
-function drawPlaceholder(canvas) {
+function drawCanvasText(canvas, fontSize, text, color) {
   var ctx = canvas.getContext('2d');
-  var fontSize = 16;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-  var text = '+38 XXX XXX XX XX';
-  var metrics = ctx.measureText(text);
-  var textWidth = metrics.width;
-  var padding = 0;
-  canvas.width = Math.ceil(textWidth) + (padding * 2);
+  var font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+  ctx.font = font;
+  canvas.width = Math.ceil(ctx.measureText(text).width);
   canvas.height = fontSize + 10;
-  ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+  ctx.font = font;
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#2d5ca6';
+  ctx.fillStyle = color;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillText(text, padding, fontSize - 1);
+  ctx.fillText(text, 0, fontSize - 1);
+}
+
+function drawPlaceholder(canvas) {
+  drawCanvasText(canvas, 16, '+38 XXX XXX XX XX', '#2d5ca6');
 }
 
 var month = [

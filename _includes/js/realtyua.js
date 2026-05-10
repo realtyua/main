@@ -1,3 +1,5 @@
+{%- capture loader_js -%}{%- include js/block-loader.js -%}{%- endcapture -%}
+{{- loader_js | js_minify -}}
 "use strict";
 if (!Array.prototype.flatMap) {
   Array.prototype.flatMap = function(fn) {
@@ -20,21 +22,26 @@ $(document).ready(function () {
   $('[data-toggle="popover"]').popover();
 
   var phoneCache = null;
-  function drawPlaceholder(canvas) {
+  function drawCanvasText(canvas, fontSize, text, color) {
     var ctx = canvas.getContext('2d');
-    var fontSize = 16;
-    ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-    var text = '+38 XXX XXX XX XX';
-    var metrics = ctx.measureText(text);
-    var textWidth = metrics.width;
-    var padding = 0;
-    canvas.width = Math.ceil(textWidth) + (padding * 2);
+    var font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+    ctx.font = font;
+    canvas.width = Math.ceil(ctx.measureText(text).width);
     canvas.height = fontSize + 10;
-    ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
+    ctx.font = font;
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#2d5ca6';
+    ctx.fillStyle = color;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillText(text, padding, fontSize - 1);
+    ctx.fillText(text, 0, fontSize - 1);
+  }
+  function drawPlaceholder(canvas) {
+    drawCanvasText(canvas, 16, '+38 XXX XXX XX XX', '#2d5ca6');
+  }
+  function drawLoading(canvas) {
+    drawCanvasText(canvas, 14, 'Завантаження...', '#6c757d');
+  }
+  function drawPhoneError(canvas) {
+    drawCanvasText(canvas, 16, 'Помилка...', '#dc3545');
   }
   function getBasePathForData() {
     var path = window.location.pathname;
@@ -104,30 +111,21 @@ $(document).ready(function () {
     var $canvas = $btn.find('canvas');
     if ($btn.data('revealed')) return;
     var id = $btn.data('id');
-    
+
+    drawLoading($canvas[0]);
     loadPhoneData(function(phones) {
       var encrypted = phones[id];
       var decrypted = decryptPhone(encrypted);
-      if (!decrypted) return;
-      var canvasEl = $canvas[0];
-      var ctx = canvasEl.getContext('2d');
-      var fontSize = 16;
-      ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-      var phoneText = formatPhone(decrypted);
-      var metrics = ctx.measureText(phoneText);
-      var textWidth = metrics.width;
-      var padding = 0;
-      canvasEl.width = Math.ceil(textWidth) + (padding * 2);
-      canvasEl.height = fontSize + 10;
-      ctx.font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = '#2d5ca6';
-      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-      ctx.fillText(phoneText, padding, fontSize - 1);
+      if (!decrypted) {
+        drawPhoneError($canvas[0]);
+        return;
+      }
+      drawCanvasText($canvas[0], 16, formatPhone(decrypted), '#2d5ca6');
       var $link = $('<a>',{href: 'tel:+' + decrypted, title: 'Зателефонуйте мені'});
       $link.on('click', function(e) { e.stopPropagation(); });
       $btn.wrap($link).parent();
       $btn.data('revealed', true);
+      $btn.removeAttr('title');
     });
   });
 
@@ -637,7 +635,9 @@ function updateSearchPlaceholder() {
 }
 function loadSearchEngine(callback) {
   if (searchEngine) { callback(); return; }
-    fetch('/region/{{ site.region_slug }}/data/all.json')
+  $('#searchResults').removeClass('d-none');
+  $('#searchResultsList').html(blockLoader.spinner());
+  fetch('/region/{{ site.region_slug }}/data/all.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       data.forEach(function (item) {
@@ -714,7 +714,11 @@ function loadSearchEngine(callback) {
       });
       callback();
     })
-    .catch(function (e) { console.error('JSON load error', e); });
+    .catch(function (e) {
+      console.error('JSON load error', e);
+      $('#searchResults').removeClass('d-none');
+      $('#searchResultsList').html(blockLoader.error('Ой! Щось пішло не так, не вдалося завантажити дані для пошуку'));
+    });
 }
 function matchType(itemType, tag) {
   var group = getTypeGroup(tag);
