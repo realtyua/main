@@ -7,7 +7,18 @@ $(function () {
   if ($btWrapper.length) {
     $btWrapper.after('<div id="' + spinnerId + '">' + blockLoader.spinner() + '</div>');
     $btWrapper.hide();
-    $('div.form-row').closest('.row.justify-content-between').addClass('d-none');
+    var $filterSource = $('#filter-toolbar-source');
+    if ($filterSource.length) {
+      var $toolbar = $btWrapper.find('.fixed-table-toolbar');
+      var $searchInput = $toolbar.find('.search-input').detach();
+      $toolbar.find('.search').remove();
+      $searchInput.addClass('form-control-sm mb-2');
+      $filterSource.children().append(
+        $('<div class="col-md-auto form-group mb-0">').append($searchInput)
+      );
+      $toolbar.html($filterSource.children());
+      $filterSource.remove();
+    }
   }
 
   const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -63,7 +74,6 @@ $(function () {
       $('#' + spinnerId).remove();
       $tabpro.removeClass('d-none');
       $tabpro.closest('.bootstrap-table').show();
-      $('div.form-row').closest('.row.justify-content-between').removeClass('d-none');
       window.tableAllOriginalData = data;
       setTimeout(applyTableFilters, 100);
     });
@@ -72,7 +82,6 @@ $(function () {
       var msg = status === 404 ? 'Ой! Щось пішло не так, не вдалося завантажити дані' : 'Не вдалося завантажити дані';
       var $wrapper = $tabpro.closest('.bootstrap-table');
       $wrapper.html(blockLoader.error(msg)).show();
-      $('div.form-row').closest('.row.justify-content-between').addClass('d-none');
     });
   } else {
     $('#' + spinnerId).remove();
@@ -88,33 +97,39 @@ $(function () {
     var $filterFloors = $("#filterFloors").closest("div.col-md-auto");
     var $filterAction = $("#filterAction").closest("div.col-md-auto");
     var $filterSurfaceLand = $("#filterSurfaceLand").closest("div.col-md-auto");
+    var $filterSearch = $(".search-input").closest("div.col-md-auto");
 
-    $filterRooms.hide();
-    $filterSurface.hide();
-    $filterFloor.hide();
-    $filterFloors.hide();
-    $filterAction.hide();
-    $filterSurfaceLand.hide();
+    $filterRooms.addClass('d-none');
+    $filterSurface.addClass('d-none');
+    $filterFloor.addClass('d-none');
+    $filterFloors.addClass('d-none');
+    $filterAction.addClass('d-none');
+    $filterSurfaceLand.addClass('d-none');
+    $filterSearch.addClass('d-none');
     $("#filterAction").val("all");
 
     if (type === "all") {
     } else if (type === "apartment") {
-      $filterAction.show();
-      $filterRooms.show();
-      $filterSurface.show();
-      $filterFloor.show();
-      $filterFloors.show();
+      $filterAction.removeClass('d-none');
+      $filterRooms.removeClass('d-none');
+      $filterSurface.removeClass('d-none');
+      $filterFloor.removeClass('d-none');
+      $filterFloors.removeClass('d-none');
+      $filterSearch.removeClass('d-none');
     } else if (type === "house") {
-      $filterAction.show();
-      $filterRooms.show();
-      $filterSurface.show();
-      $filterFloors.show();
+      $filterAction.removeClass('d-none');
+      $filterRooms.removeClass('d-none');
+      $filterSurface.removeClass('d-none');
+      $filterFloors.removeClass('d-none');
+      $filterSearch.removeClass('d-none');
     } else if (type === "commercial" || type === "garage") {
-      $filterAction.show();
-      $filterSurface.show();
+      $filterAction.removeClass('d-none');
+      $filterSurface.removeClass('d-none');
+      $filterSearch.removeClass('d-none');
     } else if (type === "land") {
-      $filterAction.show();
-      $filterSurfaceLand.show();
+      $filterAction.removeClass('d-none');
+      $filterSurfaceLand.removeClass('d-none');
+      $filterSearch.removeClass('d-none');
     }
 
     $("#filterRooms, #filterSurface, #filterFloor, #filterFloors, #filterSurfaceLand").val("");
@@ -249,10 +264,10 @@ $(function () {
   });
   $('#property').on('post-body.bs.table', function() {
 $('.page-link[href="javascript:void(0)"]').attr('href', '#');
-$('.fixed-table-toolbar .search .search-input').each(function(i) {
+$('.fixed-table-toolbar .search-input').each(function(i) {
   $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
 });
-$('.fixed-table-toolbar .search .search-input').each(function(i) {
+$('.fixed-table-toolbar .search-input').each(function(i) {
   $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
 });
   });
@@ -572,6 +587,6 @@ function priceSorter(a, b) {
 }
 
 $('.page-link[href="javascript:void(0)"]').attr('href', '#');
-$('.fixed-table-toolbar .search .search-input').each(function(i) {
+$('.fixed-table-toolbar .search-input').each(function(i) {
   $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
 });
