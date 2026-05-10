@@ -54,6 +54,7 @@
       {%- endfor -%}
     {%- endif -%}
   {%- else -%}
+    {%- if filterType == 'seller' -%}{%- include table/js-filter.html -%}{%- endif -%}
     {%- include table/js.html -%}
   {%- endif -%}
 </div>

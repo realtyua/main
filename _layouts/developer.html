@@ -49,6 +49,7 @@ layout: default
     </nav>
     <hr class="mb-2 mt-2 mt-md-0 mt-lg-0" style="position:relative;">
     <div class="tab-content" id="{{ slugu }}-content">
+      {%- assign filterType = 'seller' -%}
       {%- if isJson.size > 0 -%}
         {%- include elements/offer-pane.html -%}
       {%- endif -%}

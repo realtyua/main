@@ -12,10 +12,14 @@ $(function () {
       var $toolbar = $btWrapper.find('.fixed-table-toolbar');
       var $searchInput = $toolbar.find('.search-input').detach();
       $toolbar.find('.search').remove();
-      $searchInput.addClass('form-control-sm mb-2');
-      $filterSource.children().append(
-        $('<div class="col-md-auto form-group mb-0">').append($searchInput)
-      );
+      $searchInput.removeClass('mb-2').addClass('form-control-sm');
+      var $formRow = $filterSource.children();
+      var $searchCol = $('<div class="col-md-auto form-group mb-0">');
+      var $inputGroup = $('<div class="input-group mb-2">');
+      $inputGroup.append($searchInput);
+      $inputGroup.append('<div class="input-group-append"><button type="button" id="filterReset" class="btn btn-link btn-sm" title="Очистити фільтер">&#8634;</button></div>');
+      $searchCol.append($inputGroup);
+      $formRow.append($searchCol);
       $toolbar.html($filterSource.children());
       $filterSource.remove();
     }
@@ -142,6 +146,12 @@ $(function () {
     $tabpro.bootstrapTable("refresh", { url: "data/" + $(this).val() + ".json" });
   });
 
+  $('#filterReset').click(function() {
+    $("#data").val("all");
+    updateFilterVisibility();
+    $tabpro.bootstrapTable("refresh", { url: "data/all.json" });
+  });
+
   function applyTableFilters() {
     var data = window.tableAllOriginalData || $tabpro.bootstrapTable('getData');
     if (!data || !data.length) return;
@@ -155,15 +165,15 @@ $(function () {
       if ($rooms.val()) {
         var roomsVal = parseInt($rooms.val());
         var rowRooms = parseInt(row.rooms) || 0;
-        if (roomsVal === 5) {
-          if (rowRooms < 5) {
-            return false;
+          if (roomsVal === 6) {
+            if (rowRooms < 6) {
+              return false;
+            }
+          } else {
+            if (rowRooms !== roomsVal) {
+              return false;
+            }
           }
-        } else {
-          if (rowRooms !== roomsVal) {
-            return false;
-          }
-        }
       }
 
       if ($surface.val()) {
@@ -206,42 +216,38 @@ $(function () {
       }
 
       if ($floor.val()) {
-        var floorVal = $floor.val();
-        var floorRange = floorVal.split('-');
-        var rowFloor = parseInt(row.floor) || 0;
-        if (floorRange[0] === '') {
-          if (rowFloor < parseInt(floorRange[1])) {
-            return false;
-          }
-        } else if (floorRange[1] === '') {
-          if (rowFloor < parseInt(floorRange[0])) {
-            return false;
-          }
-        } else {
-          if (rowFloor < parseInt(floorRange[0]) || rowFloor >= parseInt(floorRange[1])) {
-            return false;
+          var floorVal = $floor.val();
+          if (floorVal.indexOf('-') === -1) {
+            if (parseInt(row.floor) !== parseInt(floorVal)) return false;
+          } else {
+            var floorRange = floorVal.split('-');
+            var rowFloor = parseInt(row.floor) || 0;
+            if (floorRange[0] === '') {
+              if (rowFloor < parseInt(floorRange[1])) return false;
+            } else if (floorRange[1] === '') {
+              if (rowFloor < parseInt(floorRange[0])) return false;
+            } else {
+              if (rowFloor < parseInt(floorRange[0]) || rowFloor >= parseInt(floorRange[1])) return false;
+            }
           }
         }
-      }
 
-      if ($floors.val()) {
-        var floorsVal = $floors.val();
-        var floorsRange = floorsVal.split('-');
-        var rowFloors = parseInt(row.floors) || 0;
-        if (floorsRange[0] === '') {
-          if (rowFloors < parseInt(floorsRange[1])) {
-            return false;
-          }
-        } else if (floorsRange[1] === '') {
-          if (rowFloors < parseInt(floorsRange[0])) {
-            return false;
-          }
-        } else {
-          if (rowFloors < parseInt(floorsRange[0]) || rowFloors >= parseInt(floorsRange[1])) {
-            return false;
+        if ($floors.val()) {
+          var floorsVal = $floors.val();
+          if (floorsVal.indexOf('-') === -1) {
+            if (parseInt(row.floors) !== parseInt(floorsVal)) return false;
+          } else {
+            var floorsRange = floorsVal.split('-');
+            var rowFloors = parseInt(row.floors) || 0;
+            if (floorsRange[0] === '') {
+              if (rowFloors < parseInt(floorsRange[1])) return false;
+            } else if (floorsRange[1] === '') {
+              if (rowFloors < parseInt(floorsRange[0])) return false;
+            } else {
+              if (rowFloors < parseInt(floorsRange[0]) || rowFloors >= parseInt(floorsRange[1])) return false;
+            }
           }
         }
-      }
 
       var action = $("#filterAction").val();
       if (action === "sale" && row.rent !== "") {

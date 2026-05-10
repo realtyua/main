@@ -1,0 +1,220 @@
+{%- if filterType == 'apartment' or filterType == 'house' or filterType == 'land' or filterType == 'commercial' or filterType == 'garage' -%}
+<div id="filter-toolbar-source" class="d-none" data-filter-type="{{ filterType }}">
+  <div class="form-row float-right">
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterRooms" class="sr-only">Кількість кімнат:</label>
+      <select id="filterRooms" class="form-control form-control-sm mb-2">
+        <option value="">Кімнат</option>
+        <option value="1">1 кімната</option>
+        <option value="2">2 кімнати</option>
+        <option value="3">3 кімнати</option>
+        <option value="4">4 кімнати</option>
+        <option value="5">5 кімнат</option>
+        <option value="6">6 кімнат і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterSurface" class="sr-only">Площа:</label>
+      <select id="filterSurface" class="form-control form-control-sm mb-2">
+        <option value="">Площа м²</option>
+        <option value="1-30">до 30 м²</option>
+        <option value="30-50">30-50 м²</option>
+        <option value="50-80">50-80 м²</option>
+        <option value="80-100">80-100 м²</option>
+        <option value="100-150">100-150 м²</option>
+        <option value="150-300">150-300 м²</option>
+        <option value="300-10000">300 м² і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterFloor" class="sr-only">На якому поверсі:</label>
+      <select id="filterFloor" class="form-control form-control-sm mb-2">
+        <option value="">Поверх</option>
+        <option value="1">1 поверсі</option>
+        <option value="2-5">2-5 поверхах</option>
+        <option value="6-9">6-9 поверхах</option>
+        <option value="10-36">10 поверсі і вище</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterFloors" class="sr-only">Кількість поверхів:</label>
+      <select id="filterFloors" class="form-control form-control-sm mb-2">
+        <option value="">Поверхів</option>
+        <option value="1">1 поверхів</option>
+        <option value="2">2 поверхів</option>
+        <option value="3">3 поверхів</option>
+        <option value="4-7">4-6 поверхів</option>
+        <option value="7-10">7-9 поверхів</option>
+        <option value="10-36">10 поверхів і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterSurfaceLand" class="sr-only">Площа землі:</label>
+      <select id="filterSurfaceLand" class="form-control form-control-sm mb-2">
+        <option value="">Площа землі м²</option>
+        <option value="1-100">до 100 м²</option>
+        <option value="100-500">100-500 м²</option>
+        <option value="500-1000">500-1000 м²</option>
+        <option value="1000-10000">1000-10000 м²</option>
+        <option value="10000-100000">10000 м² і більше</option>
+      </select>
+    </div>
+  </div>
+</div>
+{%- elsif filterType == 'rent' -%}
+<div id="filter-toolbar-source" class="d-none" data-filter-type="rent">
+  <div class="form-row float-right">
+    <div class="col-md-auto form-group mb-0">
+      <label for="data" class="sr-only">Тип нерухомості:</label>
+      <select id="data" class="form-control form-control-sm mb-2">
+        <option value="all" selected>Вся нерухомість</option>
+        <option value="apartment">Квартири</option>
+        <option value="house">Будинки</option>
+        <option value="commercial">Комерція</option>
+        <option value="land">Земля</option>
+        <option value="garage">Гаражі</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterRooms" class="sr-only">Кількість кімнат:</label>
+      <select id="filterRooms" class="form-control form-control-sm mb-2">
+        <option value="">Кімнат</option>
+        <option value="1">1 кімната</option>
+        <option value="2">2 кімнати</option>
+        <option value="3">3 кімнати</option>
+        <option value="4">4 кімнати</option>
+        <option value="5">5 кімнат</option>
+        <option value="6">6 кімнат і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterSurface" class="sr-only">Площа:</label>
+      <select id="filterSurface" class="form-control form-control-sm mb-2">
+        <option value="">Площа м²</option>
+        <option value="1-30">до 30 м²</option>
+        <option value="30-50">30-50 м²</option>
+        <option value="50-80">50-80 м²</option>
+        <option value="80-100">80-100 м²</option>
+        <option value="100-150">100-150 м²</option>
+        <option value="150-300">150-300 м²</option>
+        <option value="300-10000">300 м² і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterFloor" class="sr-only">На якому поверсі:</label>
+      <select id="filterFloor" class="form-control form-control-sm mb-2">
+        <option value="">Поверх</option>
+        <option value="1">1 поверсі</option>
+        <option value="2-5">2-5 поверхах</option>
+        <option value="6-9">6-9 поверхах</option>
+        <option value="10-36">10 поверсі і вище</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterFloors" class="sr-only">Кількість поверхів:</label>
+      <select id="filterFloors" class="form-control form-control-sm mb-2">
+        <option value="">Поверхів</option>
+        <option value="1">1 поверхів</option>
+        <option value="2">2 поверхів</option>
+        <option value="3">3 поверхів</option>
+        <option value="4-7">4-6 поверхів</option>
+        <option value="7-10">7-9 поверхів</option>
+        <option value="10-36">10 поверхів і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterSurfaceLand" class="sr-only">Площа землі:</label>
+      <select id="filterSurfaceLand" class="form-control form-control-sm mb-2">
+        <option value="">Площа землі м²</option>
+        <option value="1-100">до 100 м²</option>
+        <option value="100-500">100-500 м²</option>
+        <option value="500-1000">500-1000 м²</option>
+        <option value="1000-10000">1000-10000 м²</option>
+        <option value="10000-100000">10000 м² і більше</option>
+      </select>
+    </div>
+  </div>
+</div>
+{%- elsif filterType == 'seller' -%}
+<div id="filter-toolbar-source" class="d-none" data-filter-type="seller">
+  <div class="form-row float-right">
+    <div class="col-md-auto form-group mb-0">
+      <label for="data" class="sr-only">Тип нерухомості:</label>
+      <select id="data" class="form-control form-control-sm mb-2">
+        <option value="all" selected>Вся нерухомість</option>
+        <option value="apartment">Квартири</option>
+        <option value="house">Будинки</option>
+        <option value="commercial">Комерція</option>
+        <option value="land">Земля</option>
+        <option value="garage">Гаражі</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterAction" class="sr-only">Дія:</label>
+      <select id="filterAction" class="form-control form-control-sm mb-2">
+        <option value="all">Всі дії</option>
+        <option value="sale">Продаж</option>
+        <option value="rent">Оренда</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterRooms" class="sr-only">Кількість кімнат:</label>
+      <select id="filterRooms" class="form-control form-control-sm mb-2">
+        <option value="">Кімнат</option>
+        <option value="1">1 кімната</option>
+        <option value="2">2 кімнати</option>
+        <option value="3">3 кімнати</option>
+        <option value="4">4 кімнати</option>
+        <option value="5">5 кімнат</option>
+        <option value="6">6 кімнат і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterSurface" class="sr-only">Площа:</label>
+      <select id="filterSurface" class="form-control form-control-sm mb-2">
+        <option value="">Площа м²</option>
+        <option value="1-30">до 30 м²</option>
+        <option value="30-50">30-50 м²</option>
+        <option value="50-80">50-80 м²</option>
+        <option value="80-100">80-100 м²</option>
+        <option value="100-150">100-150 м²</option>
+        <option value="150-300">150-300 м²</option>
+        <option value="300-10000">300 м² і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterFloor" class="sr-only">На якому поверсі:</label>
+      <select id="filterFloor" class="form-control form-control-sm mb-2">
+        <option value="">Поверх</option>
+        <option value="1">1 поверсі</option>
+        <option value="2-5">2-5 поверхах</option>
+        <option value="6-9">6-9 поверхах</option>
+        <option value="10-36">10 поверсі і вище</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterFloors" class="sr-only">Кількість поверхів:</label>
+      <select id="filterFloors" class="form-control form-control-sm mb-2">
+        <option value="">Поверхів</option>
+        <option value="1">1 поверхів</option>
+        <option value="2">2 поверхів</option>
+        <option value="3">3 поверхів</option>
+        <option value="4-7">4-6 поверхів</option>
+        <option value="7-10">7-9 поверхів</option>
+        <option value="10-36">10 поверхів і більше</option>
+      </select>
+    </div>
+    <div class="col-md-auto form-group mb-0">
+      <label for="filterSurfaceLand" class="sr-only">Площа землі:</label>
+      <select id="filterSurfaceLand" class="form-control form-control-sm mb-2">
+        <option value="">Площа землі м²</option>
+        <option value="1-100">до 100 м²</option>
+        <option value="100-500">100-500 м²</option>
+        <option value="500-1000">500-1000 м²</option>
+        <option value="1000-10000">1000-10000 м²</option>
+        <option value="10000-100000">10000 м² і більше</option>
+      </select>
+    </div>
+  </div>
+</div>
+{%- endif -%}

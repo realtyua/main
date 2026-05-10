@@ -2,6 +2,14 @@
 layout: default
 ---
 {%- include vars/page-slash.html -%}
+{%- assign filterType = '' -%}
+{%- if paged contains '/apartment/' -%}{%- assign filterType = 'apartment' -%}
+{%- elsif paged contains '/house/' -%}{%- assign filterType = 'house' -%}
+{%- elsif paged contains '/land/' -%}{%- assign filterType = 'land' -%}
+{%- elsif paged contains '/commercial/' -%}{%- assign filterType = 'commercial' -%}
+{%- elsif paged contains '/garage/' -%}{%- assign filterType = 'garage' -%}
+{%- elsif paged contains '/rent/' -%}{%- assign filterType = 'rent' -%}
+{%- endif -%}
 {%- include back-title.html minus='1' so='1' st='4' data='title' -%}
 <div class="row">
   <div class="col-12">
@@ -58,6 +66,7 @@ layout: default
                 {%- include nav-section.html style='card' -%}
               </div>
             {%- else -%}
+              {%- unless pageu contains '/all.html' -%}{%- if filterType != '' -%}{%- include table/js-filter.html -%}{%- endif -%}{%- endunless -%}
               {%- include table/js.html -%}
             {%- endif -%}
           </div>
@@ -67,6 +76,7 @@ layout: default
           {%- if forloop.first -%}
             <div class="row">
               <div class="col-12">
+                {%- unless pageu contains '/all.html' -%}{%- if filterType != '' -%}{%- include table/js-filter.html -%}{%- endif -%}{%- endunless -%}
                 <table
                     id="property"
                     class="d-none"

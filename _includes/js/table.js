@@ -50,7 +50,7 @@ $(function () {
     $($element).addClass('active');
   });
   $(document).on('post-body.bs.table', function() {
-    $('.fixed-table-toolbar .search .search-input').each(function(i) {
+    $('.fixed-table-toolbar .search-input').each(function(i) {
       $(this).attr({ id: 'tableSearch' + (i + 1), name: 'tableSearch' });
     });
   });
@@ -77,6 +77,214 @@ $(function () {
     $('#' + spinnerId).remove();
     $tabpro.removeClass('d-none');
     $tabpro.closest('.bootstrap-table').show();
+  }
+
+  var $filterSource = $('#filter-toolbar-source');
+  if ($filterSource.length && $btWrapper.length) {
+    var filterType = $filterSource.data('filter-type');
+    var $toolbar = $btWrapper.find('.fixed-table-toolbar');
+    var $searchInput = $toolbar.find('.search-input').detach();
+    $toolbar.find('.search').remove();
+    $searchInput.removeClass('mb-2').addClass('form-control-sm');
+    var $formRow = $filterSource.children().first();
+    var $searchCol = $('<div class="col-md-auto form-group mb-0">');
+    var $inputGroup = $('<div class="input-group mb-2">');
+    $inputGroup.append($searchInput);
+    $inputGroup.append('<div class="input-group-append"><button type="button" id="filterReset" class="btn btn-link btn-sm" title="Очистити фільтер">&#8634;</button></div>');
+    $searchCol.append($inputGroup);
+    $formRow.append($searchCol);
+    $toolbar.html($filterSource.children());
+    $filterSource.remove();
+
+    function updateFilterVisibility() {
+      var $filterAction = $("#filterAction").closest("div.col-md-auto");
+      var $filterRooms = $("#filterRooms").closest("div.col-md-auto");
+      var $filterSurface = $("#filterSurface").closest("div.col-md-auto");
+      var $filterFloor = $("#filterFloor").closest("div.col-md-auto");
+      var $filterFloors = $("#filterFloors").closest("div.col-md-auto");
+      var $filterSurfaceLand = $("#filterSurfaceLand").closest("div.col-md-auto");
+      var $filterSearch = $(".search-input").closest("div.col-md-auto");
+
+      $filterAction.addClass('d-none');
+      $filterRooms.addClass('d-none');
+      $filterSurface.addClass('d-none');
+      $filterFloor.addClass('d-none');
+      $filterFloors.addClass('d-none');
+      $filterSurfaceLand.addClass('d-none');
+      $filterSearch.addClass('d-none');
+      $("#filterAction").val("all");
+
+      if (filterType === 'rent' || filterType === 'seller') {
+        var type = $("#data").val();
+        if (type === 'all') {
+        } else if (type === 'apartment' || type === 'house') {
+          $filterAction.removeClass('d-none');
+          $filterRooms.removeClass('d-none');
+          $filterSurface.removeClass('d-none');
+          $filterSearch.removeClass('d-none');
+          if (type === 'apartment') {
+            $filterFloor.removeClass('d-none');
+          }
+          $filterFloors.removeClass('d-none');
+          if (type === 'house') {
+            $filterSurfaceLand.removeClass('d-none');
+          }
+        } else if (type === 'commercial' || type === 'garage') {
+          $filterAction.removeClass('d-none');
+          $filterSurface.removeClass('d-none');
+          $filterSearch.removeClass('d-none');
+        } else if (type === 'land') {
+          $filterAction.removeClass('d-none');
+          $filterSurfaceLand.removeClass('d-none');
+          $filterSearch.removeClass('d-none');
+        }
+      } else if (filterType === 'apartment' || filterType === 'house') {
+        $filterRooms.removeClass('d-none');
+        $filterSurface.removeClass('d-none');
+        $filterSearch.removeClass('d-none');
+        if (filterType === 'apartment') {
+          $filterFloor.removeClass('d-none');
+        }
+        $filterFloors.removeClass('d-none');
+        if (filterType === 'house') {
+          $filterSurfaceLand.removeClass('d-none');
+        }
+      } else if (filterType === 'commercial' || filterType === 'garage') {
+        $filterSurface.removeClass('d-none');
+        $filterSearch.removeClass('d-none');
+      } else if (filterType === 'land') {
+        $filterSurfaceLand.removeClass('d-none');
+        $filterSearch.removeClass('d-none');
+      }
+    }
+
+    updateFilterVisibility();
+
+    if (filterType === 'rent' || filterType === 'seller') {
+      $("#data").change(function() {
+        $("select#filterRooms, select#filterSurface, select#filterFloor, select#filterFloors, #filterSurfaceLand").val("");
+        $("#filterAction").val("all");
+        updateFilterVisibility();
+        applyTableFilters();
+      });
+    }
+
+    $("select#filterRooms, select#filterSurface, select#filterFloor, select#filterFloors, #filterSurfaceLand, #filterAction").change(function() {
+      if (window.tableFilterOriginalData) {
+        applyTableFilters();
+      }
+    });
+
+    $('#filterReset').click(function() {
+      if ($("#data").length) $("#data").val("all");
+      $("select#filterRooms, select#filterSurface, select#filterFloor, select#filterFloors, #filterSurfaceLand").val("");
+      if ($("#filterAction").length) $("#filterAction").val("all");
+      updateFilterVisibility();
+      applyTableFilters();
+    });
+
+    function applyTableFilters() {
+      var data = window.tableFilterOriginalData || $tabpro.bootstrapTable('getData');
+      if (!data || !data.length) return;
+      var $rooms = $("select#filterRooms");
+      var $surface = $("select#filterSurface");
+      var $surfaceLand = $("select#filterSurfaceLand");
+      var $floor = $("select#filterFloor");
+      var $floors = $("select#filterFloors");
+
+      var filteredData = data.filter(function(row) {
+        if (filterType === 'rent' || filterType === 'seller') {
+          var selectedType = $("#data").val();
+          if (selectedType !== 'all') {
+            var matchesType = false;
+            if (selectedType === 'apartment') matchesType = row.type.indexOf('Квартир') !== -1 || row.type.indexOf('квартир') !== -1;
+            else if (selectedType === 'house') matchesType = row.type.indexOf('Будинок') !== -1 || row.type.indexOf('будино') !== -1;
+            else if (selectedType === 'commercial') matchesType = row.type.indexOf('приміщення') !== -1;
+            else if (selectedType === 'land') matchesType = row.type.indexOf('Земел') !== -1 || row.type.indexOf('земель') !== -1;
+            else if (selectedType === 'garage') matchesType = row.type.indexOf('Гараж') !== -1 || row.type.indexOf('Місце') !== -1 || row.type.indexOf('місце') !== -1;
+            if (!matchesType) return false;
+          }
+        }
+
+        if ($rooms.val()) {
+          var roomsVal = parseInt($rooms.val());
+          var rowRooms = parseInt(row.rooms) || 0;
+          if (roomsVal === 6) { if (rowRooms < 6) return false; } else { if (rowRooms !== roomsVal) return false; }
+        }
+
+        if ($surface.val()) {
+          var surfVal = $surface.val();
+          var range = surfVal.split('-');
+          var rowSurf = parseFloat(row.surface) || 0;
+          if (range[0] === '') { if (rowSurf < parseFloat(range[1])) return false; }
+          else if (range[1] === '') { if (rowSurf < parseFloat(range[0])) return false; }
+          else { if (rowSurf < parseFloat(range[0]) || rowSurf >= parseFloat(range[1])) return false; }
+        }
+
+        if ($surfaceLand.val()) {
+          var surfLandVal = $surfaceLand.val();
+          var rangeLand = surfLandVal.split('-');
+          var rowSurfLand = parseFloat(row.surface_land) || 0;
+          if (rangeLand[0] === '') { if (rowSurfLand < parseFloat(rangeLand[1])) return false; }
+          else if (rangeLand[1] === '') { if (rowSurfLand < parseFloat(rangeLand[0])) return false; }
+          else { if (rowSurfLand < parseFloat(rangeLand[0]) || rowSurfLand >= parseFloat(rangeLand[1])) return false; }
+        }
+
+        if ($floor.val()) {
+          var floorVal = $floor.val();
+          if (floorVal.indexOf('-') === -1) {
+            if (parseInt(row.floor) !== parseInt(floorVal)) return false;
+          } else {
+            var floorRange = floorVal.split('-');
+            var rowFloor = parseInt(row.floor) || 0;
+            if (floorRange[0] === '') { if (rowFloor < parseInt(floorRange[1])) return false; }
+            else if (floorRange[1] === '') { if (rowFloor < parseInt(floorRange[0])) return false; }
+            else { if (rowFloor < parseInt(floorRange[0]) || rowFloor >= parseInt(floorRange[1])) return false; }
+          }
+        }
+
+        if ($floors.val()) {
+          var floorsVal = $floors.val();
+          if (floorsVal.indexOf('-') === -1) {
+            if (parseInt(row.floors) !== parseInt(floorsVal)) return false;
+          } else {
+            var floorsRange = floorsVal.split('-');
+            var rowFloors = parseInt(row.floors) || 0;
+            if (floorsRange[0] === '') { if (rowFloors < parseInt(floorsRange[1])) return false; }
+            else if (floorsRange[1] === '') { if (rowFloors < parseInt(floorsRange[0])) return false; }
+            else { if (rowFloors < parseInt(floorsRange[0]) || rowFloors >= parseInt(floorsRange[1])) return false; }
+          }
+        }
+
+        var action = $("#filterAction").val();
+        if (action === "sale" && row.rent !== "") {
+          return false;
+        }
+        if (action === "rent" && row.rent !== "1") {
+          return false;
+        }
+
+        return true;
+      });
+
+      $tabpro.bootstrapTable('load', filteredData);
+    }
+
+    if ($tabpro.data('url')) {
+      $tabpro.on('load-success.bs.table', function(e, data) {
+        window.tableFilterOriginalData = data;
+        setTimeout(applyTableFilters, 100);
+      });
+    } else {
+      var filterInit = false;
+      $tabpro.on('post-body.bs.table', function() {
+        if (!filterInit) {
+          filterInit = true;
+          window.tableFilterOriginalData = $tabpro.bootstrapTable('getData');
+          applyTableFilters();
+        }
+      });
+    }
   }
 });
 

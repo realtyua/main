@@ -64,6 +64,7 @@ layout: default
         </div>
       </div>
       {% endcomment %}
+      {%- assign filterType = 'seller' -%}
       {%- if fJson == 'true' and isJson[0] -%}
         {%- include elements/offer-pane.html -%}
       {%- else -%}
