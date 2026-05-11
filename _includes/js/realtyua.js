@@ -22,6 +22,7 @@ $(document).ready(function () {
   $('[data-toggle="popover"]').popover();
 
   var phoneCache = null;
+  var regionSlug = '{{ site.region_slug }}';
   function drawCanvasText(canvas, fontSize, text, color) {
     var ctx = canvas.getContext('2d');
     var font = fontSize + 'px -apple-system, "Source Sans Pro", "Open Sans", sans-serif';
@@ -75,16 +76,25 @@ $(document).ready(function () {
   function formatPhone(phone) {
     return '+' + phone.slice(0, 2) + ' ' + phone.slice(2, 5) + ' ' + phone.slice(5, 8) + ' ' + phone.slice(8, 10) + ' ' + phone.slice(10);
   }
+  function revealPhone($btn, $canvas, encrypted) {
+    var decrypted = decryptPhone(encrypted);
+    if (!decrypted) { drawPhoneError($canvas[0]); return; }
+    drawCanvasText($canvas[0], 16, formatPhone(decrypted), '#2d5ca6');
+    var $link = $('<a>',{href: 'tel:+' + decrypted, title: 'Зателефонуйте мені'});
+    $link.on('click', function(e) { e.stopPropagation(); });
+    $btn.wrap($link).parent();
+    $btn.data('revealed', true);
+    $btn.removeAttr('title');
+  }
 
   function loadPhoneData(callback) {
     if (phoneCache) { callback(phoneCache); return; }
-    var basePath = getBasePathForData();
-    if (!basePath) {
-      console.warn('Не вдалося визначити шлях до *.json');
+    if (!regionSlug) {
+      console.warn('regionSlug не визначено');
       callback({});
       return;
     }
-    var jsonUrl = basePath + '/data/all.json';
+    var jsonUrl = '/region/' + regionSlug + '/data/all.json';
     fetch(jsonUrl)
       .then(function(r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -112,20 +122,25 @@ $(document).ready(function () {
     if ($btn.data('revealed')) return;
     var id = $btn.data('id');
 
+    var $table = $('table#property');
+    if ($table.length) {
+      var tableData = $table.bootstrapTable('getData');
+      for (var i = 0; i < (tableData || []).length; i++) {
+        if (String(tableData[i].id) === String(id) && tableData[i].phone) {
+          revealPhone($btn, $canvas, tableData[i].phone);
+          return;
+        }
+      }
+    }
+
     drawLoading($canvas[0]);
     loadPhoneData(function(phones) {
       var encrypted = phones[id];
-      var decrypted = decryptPhone(encrypted);
-      if (!decrypted) {
+      if (encrypted) {
+        revealPhone($btn, $canvas, encrypted);
+      } else {
         drawPhoneError($canvas[0]);
-        return;
       }
-      drawCanvasText($canvas[0], 16, formatPhone(decrypted), '#2d5ca6');
-      var $link = $('<a>',{href: 'tel:+' + decrypted, title: 'Зателефонуйте мені'});
-      $link.on('click', function(e) { e.stopPropagation(); });
-      $btn.wrap($link).parent();
-      $btn.data('revealed', true);
-      $btn.removeAttr('title');
     });
   });
 

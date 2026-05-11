@@ -200,7 +200,7 @@ $(function () {
             if (selectedType === 'apartment') matchesType = row.type.indexOf('Квартир') !== -1 || row.type.indexOf('квартир') !== -1;
             else if (selectedType === 'house') matchesType = row.type.indexOf('Будинок') !== -1 || row.type.indexOf('будино') !== -1;
             else if (selectedType === 'commercial') matchesType = row.type.indexOf('приміщення') !== -1;
-            else if (selectedType === 'land') matchesType = row.type.indexOf('Земел') !== -1 || row.type.indexOf('земель') !== -1;
+            else if (selectedType === 'land') matchesType = row.type.indexOf('Зем') !== -1 || row.type.indexOf('зем') !== -1;
             else if (selectedType === 'garage') matchesType = row.type.indexOf('Гараж') !== -1 || row.type.indexOf('Місце') !== -1 || row.type.indexOf('місце') !== -1;
             if (!matchesType) return false;
           }
@@ -277,13 +277,16 @@ $(function () {
       });
     } else {
       var filterInit = false;
-      $tabpro.on('post-body.bs.table', function() {
-        if (!filterInit) {
-          filterInit = true;
-          window.tableFilterOriginalData = $tabpro.bootstrapTable('getData');
+      function initInlineTable() {
+        if (filterInit) return;
+        filterInit = true;
+        window.tableFilterOriginalData = $tabpro.bootstrapTable('getData');
+        if (window.tableFilterOriginalData && window.tableFilterOriginalData.length) {
           applyTableFilters();
         }
-      });
+      }
+      $tabpro.on('post-body.bs.table', initInlineTable);
+      setTimeout(initInlineTable, 0);
     }
   }
 });
