@@ -6,11 +6,16 @@ var blockLoader = (function() {
       '</div></div>';
   }
 
-  function error(msg) {
+  function error(msg, backUrl) {
     var url = window.location.href;
-    return '<div class="alert alert-warning my-3" role="alert">' +
+    var html = '<div class="row"><div class="col-md-8 offset-md-2"><div class="alert alert-warning my-3" role="alert">' +
       (msg || 'Не вдалося завантажити дані') +
-      '. <a href="' + url + '" class="alert-link">Спробуйте ще раз</a></div>';
+      '. <a href="' + url + '" class="alert-link">Спробуйте ще раз</a>';
+    if (backUrl) {
+      html += '<div class="text-center mt-2"><a href="' + backUrl + '">Переглянути інші пропозиції</a></div>';
+    }
+    html += '</div></div></div>';
+    return html;
   }
 
   function load(container, url, opts) {

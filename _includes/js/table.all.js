@@ -43,19 +43,35 @@ $(function () {
       });
     } else {
       $tabpro.bootstrapTable('filterBy', { id: value });
-      if ($('table[data-detail-formatter="htmlDetailFormatter"]').length === 1) {
-        $tabpro.bootstrapTable('toggleDetailView', 0);
-        $('tbody tr[data-index="0"]').addClass('active');
-      } else {
-        $tabpro.on('post-body.bs.table', function() {
+
+      function handleIdFilterResult() {
+        $('#' + spinnerId).remove();
+        var data = $tabpro.bootstrapTable('getData');
+        if (data && data.length > 0) {
+          $tabpro.removeClass('d-none');
+          $tabpro.closest('.bootstrap-table').show();
           $tabpro.bootstrapTable('toggleDetailView', 0);
           $('tbody tr[data-index="0"]').addClass('active');
-        });
+          $('div.row.justify-content-between').remove();
+          $('div.fixed-table-pagination').remove();
+          $('div[class="fixed-table-toolbar"]').replaceWith('<div class="float-right btn-group"><a class="my-2" href="' + location.protocol + '//' + location.host + location.pathname + '">Переглянути інші пропозиції</a></div>');
+          $('h2[class="h3"]').remove();
+        } else {
+          if ($tabpro.closest('.bootstrap-table').find('.alert').length) return;
+          var $wrapper = $tabpro.closest('.bootstrap-table');
+          if ($wrapper.length) {
+            $wrapper.html(blockLoader.error('Такого запису не знайдено', location.protocol + '//' + location.host + location.pathname)).show();
+          } else {
+            $tabpro.replaceWith(blockLoader.error('Такого запису не знайдено', location.protocol + '//' + location.host + location.pathname));
+          }
+        }
       }
-      $('div.row.justify-content-between').remove();
-      $('div.fixed-table-pagination').remove();
-      $('div[class="fixed-table-toolbar"]').replaceWith('<div class="float-right btn-group"><a class="my-2" href="' + location.protocol + '//' + location.host + location.pathname + '">' + 'Переглянути інші пропозиції' + '</a></div>');
-      $('h2[class="h3"]').remove();
+
+      if ($('table[data-detail-formatter="htmlDetailFormatter"]').length === 1) {
+        handleIdFilterResult();
+      } else {
+        $tabpro.on('post-body.bs.table', handleIdFilterResult);
+      }
     }
   }
   var expandedRow = null;
