@@ -92,47 +92,33 @@
 
   RE.runSearch = function() {
     if (!RE.searchEngine) return;
-    var allItems = RE.searchEngine.search({ filters: {}, per_page: 9999, page: 1 }).data.items;
-    var items = allItems.filter(function(item) {
-      if (RE.searchState.f.type && !RE.matchType(item.type, RE.searchState.f.type)) return false;
-      if (RE.searchState.f.rent !== undefined && item.rent !== RE.searchState.f.rent) return false;
-      if (RE.searchState.f.loc && !RE.matchLoc(item, RE.searchState.f.loc)) return false;
-      if (RE.searchState.f.addr && item.street !== RE.searchState.f.addr) return false;
-      if (RE.searchState.f.rooms) {
-        if (RE.searchState.f.rooms.min && item.rooms_int < RE.searchState.f.rooms.min) return false;
-        if (RE.searchState.f.rooms.max && item.rooms_int > RE.searchState.f.rooms.max) return false;
-      }
-      if (RE.searchState.f.surface) {
-        if (RE.searchState.f.surface.min && item.surface_f < RE.searchState.f.surface.min) return false;
-        if (RE.searchState.f.surface.max && item.surface_f > RE.searchState.f.surface.max) return false;
-      }
-      if (RE.searchState.f.land) {
-        if (RE.searchState.f.land.min && item.surface_land_f < RE.searchState.f.land.min) return false;
-        if (RE.searchState.f.land.max && item.surface_land_f > RE.searchState.f.land.max) return false;
-      }
-      if (RE.searchState.f.floor) {
-        if (RE.searchState.f.floor.min && item.floor_int < RE.searchState.f.floor.min) return false;
-        if (RE.searchState.f.floor.max && item.floor_int > RE.searchState.f.floor.max) return false;
-      }
-      if (RE.searchState.f.floors) {
-        if (RE.searchState.f.floors.min && item.floors_int < RE.searchState.f.floors.min) return false;
-        if (RE.searchState.f.floors.max && item.floors_int > RE.searchState.f.floors.max) return false;
-      }
-      if (RE.searchState.f.price) {
-        if (RE.searchState.f.price.min && item.price_uah < RE.inputPriceToUAH(RE.searchState.f.price.min)) return false;
-        if (RE.searchState.f.price.max && item.price_uah > RE.inputPriceToUAH(RE.searchState.f.price.max)) return false;
-      }
-      return true;
-    });
-    if (RE.searchState.sort === 'desc') {
-      items.sort(function(a, b) { return (b.price_uah || 0) - (a.price_uah || 0); });
-    } else if (RE.searchState.sort === 'asc') {
-      items.sort(function(a, b) { return (a.price_uah || 0) - (b.price_uah || 0); });
+    var f = RE.searchState.f;
+    var ids = RE.getFilteredIds(f);
+    if (!ids.length) {
+      RE.renderResults([], { total: 0 });
+      return;
     }
-    var total   = items.length;
-    var start   = (RE.searchPage - 1) * RE.SEARCH_PER_PAGE;
-    var pageItems = items.slice(start, start + RE.SEARCH_PER_PAGE);
-    RE.renderResults(pageItems, { total: total });
+    var filters = {};
+    if (f.type) filters.type_category = [f.type];
+    if (f.rent !== undefined) filters.rent = [String(f.rent)];
+    if (f.addr) filters.street = [f.addr];
+    if (f.loc) {
+      var placeType = RE.searchPlaceTypes[f.loc] || 'city';
+      if (placeType === 'city') {
+        filters.location_city = [f.loc];
+      } else if (placeType === 'region') {
+        filters.location_region = [f.loc];
+      }
+    }
+    var sort;
+    if (RE.searchState.sort === 'desc') sort = 'price_desc';
+    else if (RE.searchState.sort === 'asc') sort = 'price_asc';
+    var searchParams = { per_page: RE.SEARCH_PER_PAGE, page: RE.searchPage };
+    if (Object.keys(filters).length) searchParams.filters = filters;
+    if (sort) searchParams.sort = sort;
+    searchParams._ids = ids;
+    var res = RE.searchEngine.search(searchParams);
+    RE.renderResults(res.data.items, { total: res.pagination.total });
   };
 
   RE.applySearchSimple = function(k, v) {

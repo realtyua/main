@@ -163,8 +163,8 @@
       }
     });
 
-    /* -- Search input handler -- */
-    $('#searchListings').on('input', function() {
+    /* -- Search input handler (debounced 300ms) -- */
+    var searchInputHandler = RE.debounce(function() {
       var query = $(this).val().trim().toLowerCase();
       if (query.length < 1) return;
       RE.loadSearchEngine(function() {
@@ -191,6 +191,7 @@
           RE.runSearch();
         }
       });
-      });
+    }, 300);
+    $('#searchListings').on('input', searchInputHandler);
   });
 })(window.RE);

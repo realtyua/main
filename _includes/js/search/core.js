@@ -202,6 +202,16 @@ var RE = window.RE = window.RE || {};
     return null;
   };
 
+  RE.debounce = function(fn, delay) {
+    var timer = null;
+    return function() {
+      var context = this;
+      var args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(function() { fn.apply(context, args); }, delay);
+    };
+  };
+
   RE.loadSearchEngine = function(callback) {
     if (RE.searchEngine) { if (callback) callback(); return; }
     $('#searchResults').removeClass('d-none');
@@ -210,17 +220,36 @@ var RE = window.RE = window.RE || {};
       .then(function(r) { return r.json(); })
       .then(function(data) {
         data.forEach(function(item) {
-          item.price_uah      = RE.priceToUAH(item.price);
-          item.location_clean = (item.location || item.region || '')
+          item.price_uah       = RE.priceToUAH(item.price);
+          item.location_clean  = (item.location || item.region || '')
             .replace('м. ', '').replace(' район', '').toLowerCase().trim();
-          item.floors_int     = parseInt(item.floors) || 0;
-          item.floor_int      = parseInt(item.floor)  || 0;
-          item.rooms_int      = parseInt(item.rooms)  || 0;
-          item.surface_f      = parseFloat(item.surface)      || 0;
-          item.surface_land_f = parseFloat(item.surface_land) || 0;
+          item.location_city   = item.location
+            ? item.location.replace('м. ', '').toLowerCase().trim()
+            : '';
+          item.location_region = item.region
+            ? item.region.replace(' район', '').toLowerCase().trim()
+            : '';
+          item.floors_int      = parseInt(item.floors) || 0;
+          item.floor_int       = parseInt(item.floor)  || 0;
+          item.rooms_int       = parseInt(item.rooms)  || 0;
+          item.surface_f       = parseFloat(item.surface)      || 0;
+          item.surface_land_f  = parseFloat(item.surface_land) || 0;
           var firstPart = (item.address || '').split(',')[0].replace(/\s*\([^)]*\)/g, '').trim();
           item.street = RE.isNonStreet(firstPart) ? '' : firstPart;
+          var t = (item.type || '').toLowerCase();
+          for (var gi = 0; gi < RE.TYPE_GROUPS.length; gi++) {
+            var gf = RE.TYPE_GROUPS[gi].filters;
+            for (var fj = 0; fj < gf.length; fj++) {
+              if (t.includes(gf[fj].toLowerCase())) {
+                item.type_category = RE.TYPE_GROUPS[gi].tag;
+                gi = RE.TYPE_GROUPS.length;
+                break;
+              }
+            }
+          }
+          if (!item.type_category) item.type_category = '';
         });
+        RE.allData = data;
 
         RE.searchLocations = [...new Set(
           data.map(function(i) {
@@ -276,10 +305,25 @@ var RE = window.RE = window.RE || {};
           return;
         }
         RE.searchEngine = itemsjs(data, {
+          searchableFields: ['address', 'location', 'region'],
+          sortings: {
+            price_asc:  { field: 'price_uah', order: 'asc' },
+            price_desc: { field: 'price_uah', order: 'desc' },
+          },
           aggregations: {
-            type:           { title: 'Тип',   size: 20 },
-            location_clean: { title: 'Місто', size: 30 },
-            rent:           { title: 'Угода', size: 5  }
+            type:             { title: 'Тип',     size: 20 },
+            location_clean:   { title: 'Місто',   size: 30 },
+            rent:             { title: 'Угода',   size: 5  },
+            type_category:    { title: 'Категорія', size: 10 },
+            street:           { title: 'Вулиця',  size: 50 },
+            location_city:    { title: 'Місто',   size: 30 },
+            location_region:  { title: 'Район',   size: 20 },
+            rooms_int:        { title: 'Кімнати', size: 20 },
+            surface_f:        { title: 'Площа',   size: 20 },
+            surface_land_f:   { title: 'Ділянка', size: 20 },
+            floor_int:        { title: 'Поверх',  size: 20 },
+            floors_int:       { title: 'Поверхів', size: 20 },
+            price_uah:        { title: 'Ціна',    size: 20 }
           }
         });
         if (callback) callback();
@@ -289,5 +333,45 @@ var RE = window.RE = window.RE || {};
         $('#searchResults').removeClass('d-none');
         $('#searchResultsList').html(blockLoader.error('Ой! Щось пішло не так, не вдалося завантажити дані для пошуку'));
       });
+  };
+
+  RE.getFilteredIds = function(f) {
+    var ids = [];
+    for (var i = 0; i < RE.allData.length; i++) {
+      var item = RE.allData[i];
+      if (f.rooms) {
+        if (f.rooms.min && item.rooms_int < f.rooms.min) continue;
+        if (f.rooms.max && item.rooms_int > f.rooms.max) continue;
+      }
+      if (f.surface) {
+        if (f.surface.min && item.surface_f < f.surface.min) continue;
+        if (f.surface.max && item.surface_f > f.surface.max) continue;
+      }
+      if (f.land) {
+        if (f.land.min && item.surface_land_f < f.land.min) continue;
+        if (f.land.max && item.surface_land_f > f.land.max) continue;
+      }
+      if (f.floor) {
+        if (f.floor.min && item.floor_int < f.floor.min) continue;
+        if (f.floor.max && item.floor_int > f.floor.max) continue;
+      }
+      if (f.floors) {
+        if (f.floors.min && item.floors_int < f.floors.min) continue;
+        if (f.floors.max && item.floors_int > f.floors.max) continue;
+      }
+      if (f.price) {
+        if (f.price.min && item.price_uah < f.price.min) continue;
+        if (f.price.max && item.price_uah > f.price.max) continue;
+      }
+      if (f.loc) {
+        var placeType = RE.searchPlaceTypes[f.loc] || 'city';
+        if (placeType === 'village') {
+          var addr = (item.address || '').replace(/\bc./g, 'с.').toLowerCase();
+          if (!addr.includes(f.loc.toLowerCase())) continue;
+        }
+      }
+      ids.push(i + 1);
+    }
+    return ids;
   };
 })(RE);
