@@ -327,7 +327,7 @@ var RE = window.RE = window.RE || {};
           RE.searchPlaceOriginals[rTr] = r;
         });
         searchVillages.forEach(function(v)  {
-          var vTr = RE.transliterate(v);
+          var vTr = RE.transliterate(v.replace(/^с\.м\.т\.\s+/, 'smt-').replace(/^с\.мт\s+/, 'smt-').replace(/^смт\s+/, 'smt-').replace(/^с\.\s+/, 's-'));
           RE.searchPlaceTypes[vTr] = 'village';
           RE.searchPlaceOriginals[vTr] = v;
         });
@@ -340,7 +340,7 @@ var RE = window.RE = window.RE || {};
             return { value: RE.transliterate(r), text: RE.capitalize(r) + ' район', group: 'Райони' };
           }),
           searchVillages.map(function(v) {
-            return { value: RE.transliterate(v), text: v, group: 'Села/Селища' };
+            return { value: RE.transliterate(v.replace(/^с\.м\.т\.\s+/, 'smt-').replace(/^с\.мт\s+/, 'smt-').replace(/^смт\s+/, 'smt-').replace(/^с\.\s+/, 's-')), text: v, group: 'Села/Селища' };
           })
         ).sort(function(a, b) { return a.text.localeCompare(b.text, 'uk'); });
 
