@@ -4,35 +4,43 @@
   RE.TYPE_GROUPS = [
     {
       tag:      'Будинок',
+      slug:     'budynok',
       triggers: ['частина будинку', 'будинок', 'хата'],
       filters:  ['будинок'],
       chips:    ['rent','loc','addr','rooms','surface','land','floors','price'],
     },
     {
       tag:      'Квартира',
+      slug:     'kvartyra',
       triggers: ['частина квартири', 'квартира', 'кімната'],
       filters:  ['квартира', 'кімнат'],
       chips:    ['rent','loc','addr','rooms','surface','floor','floors','price'],
     },
     {
       tag:      'Гараж',
+      slug:     'hrazh',
       triggers: ['місце для паркування', 'паркомісце', 'гараж'],
       filters:  ['гараж', 'паркування'],
       chips:    ['rent','loc','addr','surface','price'],
     },
     {
       tag:      'Нежитлове приміщення',
+      slug:     'nezhyblove-prymishchennia',
       triggers: ['нежитлове приміщення', 'комерційне приміщення', 'приміщення', 'комерція'],
       filters:  ['нежитлове приміщення'],
       chips:    ['rent','loc','addr','surface','land','floor','price'],
     },
     {
       tag:      'Земля',
+      slug:     'zemlia',
       triggers: ['земельна ділянка', 'ділянка землі', 'земля', 'ділянка'],
       filters:  ['земля'],
       chips:    ['rent','loc','addr','land','price'],
     },
   ];
+
+  RE.searchTypeOriginals = {};
+  RE.TYPE_GROUPS.forEach(function(g) { RE.searchTypeOriginals[g.slug] = g.tag; });
 
   RE.DEFAULT_GROUP = {
     tag:      'Всі оголошення',
@@ -68,15 +76,14 @@
   RE.matchLoc = function(item, locVal) {
     var placeType = RE.searchPlaceTypes[locVal] || 'city';
     if (placeType === 'city') {
-      var cityClean = (item.location || '').replace('м. ', '').toLowerCase().trim();
+      var cityClean = RE.transliterate((item.location || '').replace('м. ', '').toLowerCase().trim());
       return cityClean === locVal;
     }
     if (placeType === 'region') {
-      var regClean = (item.region || '').replace(' район', '').toLowerCase().trim();
+      var regClean = RE.transliterate((item.region || '').replace(' район', '').toLowerCase().trim());
       return regClean === locVal;
     }
-    var addr = (item.address || '').replace(/\bc./g, 'с.').toLowerCase();
-    return addr.includes(locVal.toLowerCase());
+    return (item.address_clean || '').includes(locVal.toLowerCase());
   };
 
   RE.buildAddr = function(item) {

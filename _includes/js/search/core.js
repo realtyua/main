@@ -24,6 +24,7 @@ var RE = window.RE = window.RE || {};
   RE.searchPage      = 1;
   RE.searchLastFilters = {};
   RE.searchPlaceTypes  = {};
+  RE.searchAddrOriginals = {};
   RE.phoneCache        = null;
   RE.searchableRehiony = null;
 
@@ -38,6 +39,26 @@ var RE = window.RE = window.RE || {};
   RE.capitalize = function(str) {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  RE.transliterate = function(str) {
+    if (!str) return '';
+    var map = {
+      'а':'a','б':'b','в':'v','г':'h','ґ':'g','д':'d','е':'e','є':'ie',
+      'ж':'zh','з':'z','и':'y','і':'i','ї':'i','й':'i','к':'k','л':'l',
+      'м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u',
+      'ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch',
+      'ь':'','ю':'iu','я':'ia',
+      '\'':'','’':'','ʼ':''
+    };
+    return str.toLowerCase().split('').map(function(c) { return map[c] !== undefined ? map[c] : c; }).join('').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  };
+
+  RE.normalizeCyrillic = function(str) {
+    if (!str) return '';
+    var map = { 'i':'і','o':'о','a':'а','e':'е','c':'с','p':'р','x':'х', 'y':'у',
+                'I':'І','O':'О','A':'А','E':'Е','C':'С','P':'Р','X':'Х', 'Y':'У' };
+    return str.split('').map(function(c) { return map[c] !== undefined ? map[c] : c; }).join('');
   };
 
   RE.isNonStreet = function(str) {
@@ -221,13 +242,14 @@ var RE = window.RE = window.RE || {};
       .then(function(data) {
         data.forEach(function(item) {
           item.price_uah       = RE.priceToUAH(item.price);
-          item.location_clean  = (item.location || item.region || '')
+          var locClean = (item.location || item.region || '')
             .replace('м. ', '').replace(' район', '').toLowerCase().trim();
+          item.location_clean  = RE.transliterate(locClean);
           item.location_city   = item.location
-            ? item.location.replace('м. ', '').toLowerCase().trim()
+            ? RE.transliterate(item.location.replace('м. ', '').toLowerCase().trim())
             : '';
           item.location_region = item.region
-            ? item.region.replace(' район', '').toLowerCase().trim()
+            ? RE.transliterate(item.region.replace(' район', '').toLowerCase().trim())
             : '';
           item.floors_int      = parseInt(item.floors) || 0;
           item.floor_int       = parseInt(item.floor)  || 0;
@@ -235,7 +257,9 @@ var RE = window.RE = window.RE || {};
           item.surface_f       = parseFloat(item.surface)      || 0;
           item.surface_land_f  = parseFloat(item.surface_land) || 0;
           var firstPart = (item.address || '').split(',')[0].replace(/\s*\([^)]*\)/g, '').trim();
-          item.street = RE.isNonStreet(firstPart) ? '' : firstPart;
+          item._streetOriginal = RE.isNonStreet(firstPart) ? '' : firstPart;
+          item.street = RE.transliterate(item._streetOriginal);
+          item.address_clean = RE.transliterate(item.address || '');
           var t = (item.type || '').toLowerCase();
           for (var gi = 0; gi < RE.TYPE_GROUPS.length; gi++) {
             var gf = RE.TYPE_GROUPS[gi].filters;
@@ -254,23 +278,31 @@ var RE = window.RE = window.RE || {};
         RE.searchLocations = [...new Set(
           data.map(function(i) {
             return i.location
-              ? i.location.replace('м. ', '').toLowerCase().trim()
+              ? RE.normalizeCyrillic(i.location.replace('м. ', '').toLowerCase().trim())
               : null;
           }).filter(Boolean)
         )];
         RE.searchRegions = [...new Set(
           data.map(function(i) {
             return i.region
-              ? i.region.replace(' район', '').toLowerCase().trim()
+              ? RE.normalizeCyrillic(i.region.replace(' район', '').toLowerCase().trim())
               : null;
           }).filter(Boolean)
         )];
         RE.searchTypes = [...new Set(
-          data.map(function(i) { return (i.type || '').toLowerCase().trim(); }).filter(Boolean)
+          data.map(function(i) { return RE.transliterate((i.type || '').toLowerCase().trim()); }).filter(Boolean)
         )];
-        RE.searchStreets = [...new Set(
-          data.map(function(i) { return i.street; }).filter(Boolean)
-        )].sort(function(a, b) { return a.localeCompare(b, 'uk'); });
+        var streetsMap = {};
+        data.forEach(function(i) {
+          if (!i._streetOriginal) return;
+          var tr = RE.transliterate(i._streetOriginal);
+          if (!streetsMap[tr]) streetsMap[tr] = i._streetOriginal;
+        });
+        RE.searchAddrOriginals = {};
+        RE.searchStreets = Object.keys(streetsMap).sort().map(function(tr) {
+          RE.searchAddrOriginals[tr] = streetsMap[tr];
+          return { value: tr, text: streetsMap[tr] };
+        });
 
         var villages = [];
         data.forEach(function(item) {
@@ -282,22 +314,42 @@ var RE = window.RE = window.RE || {};
           }
         });
         var searchVillages = [...new Set(villages)];
+        RE.searchPlaceOriginals = {};
         RE.searchPlaceTypes = {};
-        RE.searchLocations.forEach(function(l) { RE.searchPlaceTypes[l] = 'city'; });
-        RE.searchRegions.forEach(function(r)   { RE.searchPlaceTypes[r] = 'region'; });
-        searchVillages.forEach(function(v)  { RE.searchPlaceTypes[v] = 'village'; });
+        RE.searchLocations.forEach(function(l) {
+          var lTr = RE.transliterate(l);
+          RE.searchPlaceTypes[lTr] = 'city';
+          RE.searchPlaceOriginals[lTr] = l;
+        });
+        RE.searchRegions.forEach(function(r)   {
+          var rTr = RE.transliterate(r);
+          RE.searchPlaceTypes[rTr] = 'region';
+          RE.searchPlaceOriginals[rTr] = r;
+        });
+        searchVillages.forEach(function(v)  {
+          var vTr = RE.transliterate(v);
+          RE.searchPlaceTypes[vTr] = 'village';
+          RE.searchPlaceOriginals[vTr] = v;
+        });
 
         RE.searchPlaces = [].concat(
           RE.searchLocations.map(function(l) {
-            return { value: l, text: 'м. ' + RE.capitalize(l), group: 'Міста' };
+            return { value: RE.transliterate(l), text: 'м. ' + RE.capitalize(l), group: 'Міста' };
           }),
           RE.searchRegions.map(function(r) {
-            return { value: r, text: RE.capitalize(r) + ' район', group: 'Райони' };
+            return { value: RE.transliterate(r), text: RE.capitalize(r) + ' район', group: 'Райони' };
           }),
           searchVillages.map(function(v) {
-            return { value: v, text: v, group: 'Села/Селища' };
+            return { value: RE.transliterate(v), text: v, group: 'Села/Селища' };
           })
         ).sort(function(a, b) { return a.text.localeCompare(b.text, 'uk'); });
+
+        var seenVal = {};
+        RE.searchPlaces = RE.searchPlaces.filter(function(p) {
+          if (seenVal[p.value]) return false;
+          seenVal[p.value] = true;
+          return true;
+        });
 
         if (typeof itemsjs !== 'function') {
           console.warn('itemsjs не завантажено');
@@ -366,8 +418,7 @@ var RE = window.RE = window.RE || {};
       if (f.loc) {
         var placeType = RE.searchPlaceTypes[f.loc] || 'city';
         if (placeType === 'village') {
-          var addr = (item.address || '').replace(/\bc./g, 'с.').toLowerCase();
-          if (!addr.includes(f.loc.toLowerCase())) continue;
+          if (!(item.address_clean || '').includes(f.loc.toLowerCase())) continue;
         }
       }
       ids.push(i + 1);

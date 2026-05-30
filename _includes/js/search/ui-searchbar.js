@@ -12,15 +12,16 @@
   };
 
   RE.searchTagLabel = function(k, v) {
-    if (k === 'type')    return v;
+    if (k === 'type')    return RE.searchTypeOriginals[v] || v;
     if (k === 'rent')    return v === '1' ? 'Оренда' : 'Продаж';
     if (k === 'loc') {
+      var orig = RE.searchPlaceOriginals[v] || v;
       var pt = RE.searchPlaceTypes[v] || 'city';
-      if (pt === 'city')   return 'м. ' + RE.capitalize(v);
-      if (pt === 'region') return RE.capitalize(v) + ' район';
-      return v;
+      if (pt === 'city')   return 'м. ' + RE.capitalize(orig);
+      if (pt === 'region') return RE.capitalize(orig) + ' район';
+      return orig;
     }
-    if (k === 'addr')    return v;
+    if (k === 'addr')    return RE.searchAddrOriginals[v] || v;
     if (k === 'rooms')   return RE.searchRangeLabel(v, 'кімн.', '');
     if (k === 'surface') return RE.searchRangeLabel(v, 'м²', '');
     if (k === 'land')    return RE.searchRangeLabel(v, 'м² ділянка', '');
@@ -61,7 +62,8 @@
     RE.runSearch();
   };
 
-  RE.applyType = function(tag) {
+  RE.applyType = function(slug) {
+    var tag = slug ? (RE.searchTypeOriginals[slug] || slug) : '';
     if (tag === RE.searchState.f.type) {
       RE.searchState.type = null;
       delete RE.searchState.f.type;
@@ -83,11 +85,11 @@
   RE.renderTypeChip = function() {
     var active = RE.searchState.f.type;
     var label = active || 'Тип';
-    var allItems = '<a class="dropdown-item' + (!active ? ' active' : '') + '" href="#" onclick="event.preventDefault(); event.stopPropagation(); RE.applyType(\'\')">Всі</a>';
+    var allItems = '<button type="button" class="dropdown-item' + (!active ? ' active' : '') + '" onclick="event.preventDefault(); event.stopPropagation(); RE.applyType(\'\')">Всі</button>';
     allItems += '<div class="dropdown-divider my-0"></div>';
     for (var i = 0; i < RE.TYPE_GROUPS.length; i++) {
-      var tag = RE.TYPE_GROUPS[i].tag;
-      allItems += '<a class="dropdown-item' + (tag === active ? ' active' : '') + '" href="#" onclick="event.preventDefault(); event.stopPropagation(); RE.applyType(\'' + tag.replace(/'/g, "\\'") + '\')">' + tag + '</a>';
+      var g = RE.TYPE_GROUPS[i];
+      allItems += '<button type="button" class="dropdown-item' + (g.tag === active ? ' active' : '') + '" onclick="event.preventDefault(); event.stopPropagation(); RE.applyType(\'' + g.slug + '\')">' + g.tag + '</button>';
     }
     return '<div class="dropdown d-inline-block mr-1 mb-1">' +
       '<button class="btn btn-sm ' + (active ? 'btn-primary' : 'btn-outline-primary') + ' dropdown-toggle" type="button" data-toggle="dropdown">' +
@@ -181,7 +183,7 @@
       setTimeout(function() {
         if (RE.searchState.tsAddr) { RE.searchState.tsAddr.destroy(); RE.searchState.tsAddr = null; }
         RE.searchState.tsAddr = new RE.SearchableSelect('#tsAddrSelect', {
-          options:    RE.searchStreets.map(function(s) { return { value: s, text: s }; }),
+          options:    RE.searchStreets,
           placeholder: 'Введіть вулицю...',
           maxOptions: 30,
           onChange: function(val) {
