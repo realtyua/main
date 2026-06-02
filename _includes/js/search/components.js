@@ -51,11 +51,20 @@
     function filtered(q) {
       var query = q.toLowerCase().trim();
       var result = [];
+      var words = query ? query.split(/\s+/) : [];
       for (var i = 0; i < settings.options.length; i++) {
         if (result.length >= maxOptions) break;
         var item = settings.options[i];
-        if (!query || item.text.toLowerCase().indexOf(query) !== -1) {
+        if (!query) {
           result.push(item);
+        } else {
+          var text = item.text.toLowerCase();
+          var allMatch = words.every(function(word) {
+            return text.indexOf(word) !== -1;
+          });
+          if (allMatch) {
+            result.push(item);
+          }
         }
       }
       return result;

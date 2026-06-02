@@ -8,6 +8,14 @@
     return '\u041f\u043e\u043a\u0430\u0437\u0430\u043d\u043e ' + page + ' \u0441\u0442\u043e\u0440\u0456\u043d\u043e\u043a \u0437 ' + total;
   }
 
+  function roomsLabel(item) {
+    if (!item.rooms || item.type_category === '\u0417\u0435\u043c\u043b\u044f') return '';
+    var suffix = (item.type || '').includes('\u043f\u0440\u0438\u043c\u0456\u0449\u0435\u043d\u043d\u044f') || item.type === '\u0413\u0430\u0440\u0430\u0436'
+      ? ' \u043f\u0440\u0438\u043c.'
+      : ' \u043a\u0456\u043c\u043d.';
+    return item.rooms + suffix;
+  }
+
   RE.renderResults = function(items, pagination) {
     var $list = $('#searchResultsList');
     var $wrap = $('#searchResults');
@@ -19,7 +27,7 @@
     var html = items.map(function(item) {
       var url   = item.link;
       var addr  = RE.buildAddr(item);
-      var rooms = item.rooms        ? item.rooms + ' кімн.'             : '';
+      var rooms = roomsLabel(item);
       var surf  = item.surface      ? item.surface + ' м²'              : '';
       var land  = item.surface_land ? item.surface_land + ' м² ділянка' : '';
       var floor = (item.floor_int && item.floors_int)
