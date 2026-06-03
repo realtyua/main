@@ -110,7 +110,11 @@
     if (f.rent !== undefined) filters.rent = [String(f.rent)];
     if (f.addr) filters.street = [f.addr];
     if (f.loc) {
-      var placeType = RE.searchPlaceTypes[f.loc] || 'city';
+      var placeType = RE.searchPlaceTypes[f.loc];
+      if (!placeType && (f.loc.indexOf('s-') === 0 || f.loc.indexOf('smt-') === 0)) {
+        placeType = 'village';
+      }
+      placeType = placeType || 'city';
       if (placeType === 'city') {
         filters.location_city = [f.loc];
       } else if (placeType === 'region') {

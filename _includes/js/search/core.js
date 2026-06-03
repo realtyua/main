@@ -416,9 +416,15 @@ var RE = window.RE = window.RE || {};
         if (f.price.max && item.price_uah > f.price.max) continue;
       }
       if (f.loc) {
-        var placeType = RE.searchPlaceTypes[f.loc] || 'city';
+        var placeType = RE.searchPlaceTypes[f.loc];
+        if (!placeType && (f.loc.indexOf('s-') === 0 || f.loc.indexOf('smt-') === 0)) {
+          placeType = 'village';
+        }
+        placeType = placeType || 'city';
         if (placeType === 'village') {
-          if (!(item.address_clean || '').includes(f.loc.toLowerCase())) continue;
+          var addrNorm = (item.address_clean || '').replace(/\./g, '');
+          var locNorm = f.loc.toLowerCase().replace(/\./g, '');
+          if (!addrNorm.includes(locNorm)) continue;
         }
       }
       ids.push(i + 1);
