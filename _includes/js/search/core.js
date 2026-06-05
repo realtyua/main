@@ -223,6 +223,10 @@ var RE = window.RE = window.RE || {};
     return null;
   };
 
+  RE.sShare = { show: function(url, w, h) {
+    window.open(url, 'share', 'width=' + w + ',height=' + h + ',menubar=no,toolbar=no,scrollbars=yes');
+  }};
+
   RE.debounce = function(fn, delay) {
     var timer = null;
     return function() {
