@@ -41,7 +41,7 @@
 
 {%- include meta-name.html -%}
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://stats.realestate.if.ua https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://images.weserv.nl https://picsum.photos; connect-src 'self' https://stats.realestate.if.ua; font-src 'self' data:; form-action 'self' https://add.realestate.if.ua">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://stats.realestate.if.ua 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://images.weserv.nl https://picsum.photos; connect-src 'self' https://stats.realestate.if.ua; font-src 'self' data:; form-action 'self' https://add.realestate.if.ua">
 
 {%- if pageu contains '/map.html' and page.layout == 'map' -%}
   <link rel="preload" href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
