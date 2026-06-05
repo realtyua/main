@@ -223,8 +223,12 @@ var RE = window.RE = window.RE || {};
     return null;
   };
 
-  RE.sShare = { show: function(url, w, h) {
-    window.open(url, 'share', 'width=' + w + ',height=' + h + ',menubar=no,toolbar=no,scrollbars=yes');
+  RE.sShare = { show: function(url, windowHeight, windowWidth) {
+    var height = windowHeight || 420;
+    var width  = windowWidth || 550;
+    var top  = (window.screen.height / 2) - (height / 2);
+    var left = (window.screen.width / 2) - (width / 2);
+    return window.open(url, 'share', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, copyhistory=no, width='+ width +', height='+ height +', top='+ top +', left='+ left);
   }};
 
   RE.debounce = function(fn, delay) {
