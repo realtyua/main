@@ -81,6 +81,24 @@
     contactEmail.addEventListener('input', function () { validateSimple(contactEmail, emailPattern); });
   }
 
+  var modalEl = document.getElementById('notifyModal');
+  if (modalEl) {
+    modalEl.addEventListener('show.bs.modal', function () {
+      var ts = document.getElementById('notify-timestamp');
+      if (ts) ts.value = Date.now();
+      var err = document.getElementById('notify-error');
+      if (err) err.classList.add('d-none');
+      if (typeof turnstile !== 'undefined') {
+        turnstile.render('#turnstile-widget', { sitekey: '0x4AAAAAADf6HF6IRoXXsCUb' });
+      }
+    });
+    modalEl.addEventListener('hidden.bs.modal', function () {
+      if (typeof turnstile !== 'undefined') {
+        turnstile.remove('#turnstile-widget');
+      }
+    });
+  }
+
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
