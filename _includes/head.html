@@ -41,7 +41,15 @@
 
 {%- include meta-name.html -%}
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://stats.realestate.if.ua 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://images.weserv.nl https://picsum.photos; connect-src 'self' https://stats.realestate.if.ua; font-src 'self' data:; form-action 'self' https://add.realestate.if.ua">
+{%- capture connect_src -%}
+  'self' https://stats.realestate.if.ua
+  {%- for r in site.data.realestate -%}
+    {%- if r.url contains 'https://' and r.url != site.url -%}
+      {{ r.url | strip }}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://stats.realestate.if.ua 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://images.weserv.nl https://picsum.photos; connect-src {{ connect_src | strip_newlines }}; font-src 'self' data:; form-action 'self' https://add.realestate.if.ua">
 
 {%- if pageu contains '/map.html' and page.layout == 'map' -%}
   <link rel="preload" href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
