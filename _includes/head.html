@@ -42,7 +42,7 @@
 {%- include meta-name.html -%}
 
 {%- capture connect_src -%}'self' https://stats.realestate.if.ua{% for r in site.data.realestate %}{% if r.url contains 'https://' and r.url != site.url %} {{ r.url | strip }}{% endif %}{% endfor %}{%- endcapture -%}
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://stats.realestate.if.ua 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://images.weserv.nl https://picsum.photos; connect-src {{ connect_src | strip_newlines }}; font-src 'self' data:; form-action 'self' https://add.realestate.if.ua">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://stats.realestate.if.ua https://www.realestate.if.ua https://challenges.cloudflare.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://images.weserv.nl https://picsum.photos; connect-src {{ connect_src | strip_newlines }} https://*.workers.dev https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com; font-src 'self' data:; form-action 'self' https://add.realestate.if.ua">
 
 {%- if pageu contains '/map.html' and page.layout == 'map' -%}
   <link rel="preload" href="{{ "/assets/css/main.m.css" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" as="style">
@@ -151,4 +151,5 @@
 
 {%- endif -%}
 
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {%- include analytics-google.html -%}

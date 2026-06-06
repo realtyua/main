@@ -245,6 +245,37 @@ m_11: листопада
 m_12: грудня
 roku: року
 
+notify_title: Повідомити про неточність
+notify_btn: Повідомити
+notify_modal_title: Повідомте нам про оголошення
+notify_modal_lead: Якщо ви помітили, що оголошення містить неточну інформацію або вже не актуальне, будь ласка, повідомте нам про це.
+notify_reason: Причина повідомлення
+notify_reason_placeholder: Оберіть причину
+notify_reason_not_actual: Оголошення вже не актуальне (продано/здано)
+notify_reason_wrong_price: Ціна вказана неправильно
+notify_reason_wrong_info: Інформація в описі неточна
+notify_reason_error: Помилка в оголошенні (адреса, контакти тощо)
+notify_reason_duplicate: Це дублікат іншого оголошення
+notify_reason_other: Інше (напишіть нижче)
+notify_details: Опис проблеми
+notify_details_placeholder: Опишіть, що саме не так з оголошенням...
+notify_contact_name: Ім'я (необов'язково)
+notify_contact_name_placeholder: Ваше ім'я
+notify_contact_phone: Телефон (необов'язково)
+notify_contact_phone_placeholder: +380 (__) ___-__-__
+notify_contact_email: Електронна пошта (необов'язково)
+notify_contact_email_placeholder: email@gmail.com
+notify_submit: Надіслати
+notify_success: Дякуємо за повідомлення!
+notify_success_text: Ваше повідомлення отримано. Ми перевіримо оголошення найближчим часом.
+notify_error: На жаль, сталася помилка. Спробуйте ще раз пізніше.
+notify_chars_left: символів залишилось
+notify_invalid_chars: Тільки українська кирилиця, цифри, пробіли та розділові знаки
+notify_valid_chars: Текст введено правильно
+notify_valid_reason: Причину обрано
+notify_invalid_phone: Тільки цифри, +, -, пробіли та дужки
+notify_invalid_email: Введіть коректну електронну пошту
+
 close: Закрити
 previous: Попереднє
 next: Наступне

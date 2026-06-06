@@ -23,6 +23,11 @@ layout: default
   <div class="col-12">
     <div class="d-flex justify-content-end">
       {%- if page.hidden != true -%}{%- include share.html -%}{%- endif -%}
+      {%- if page.hidden != true -%}
+        <button class="btn btn-link p-1 mr-2 mt-1" data-toggle="modal" data-target="#notifyModal" title="{{ site.data.uk.notify_title }}">
+          <img src="/assets/images/icons/notify.svg" width="24" height="24" alt="{{ site.data.uk.notify_title }}">
+        </button>
+      {%- endif -%}
       {%- include navsection-re.html region=region url=backu -%}
     </div>
     <h1>{{ paget }} {{ idata }}{%- if page.hidden != true -%}, {{ price_name }} <span class="badge badge-primary">{{ price }}&nbsp;₴</span>{%- endif -%}</h1>
@@ -232,6 +237,7 @@ layout: default
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
+    {%- include modals/notify-property.html -%}
     {%- include back.html -%}
   </div>
 </div>

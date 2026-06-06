@@ -1,0 +1,74 @@
+<div class="modal fade" id="notifyModal" tabindex="-1" role="dialog" aria-labelledby="notifyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notifyModalLabel">{{ site.data.uk.notify_modal_title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{{ site.data.uk.close }}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="lead">{{ site.data.uk.notify_modal_lead }}</p>
+        <form id="notify-form" method="POST" action="https://notify-worker.sparkling-union-9e0a.workers.dev" novalidate>
+          <input type="hidden" name="uid" value="{{ page.uid }}">
+          <input type="hidden" name="property_url" value="{{ page.url | absolute_url }}">
+          <input type="hidden" name="property_title" value="{{ page.title }}">
+          <input type="text" name="honeypot" class="honeypot" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="timestamp" id="notify-timestamp" value="">
+          <style>.honeypot{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}</style>
+          <div class="form-group">
+            <label for="notify-reason">{{ site.data.uk.notify_reason }} <span class="text-danger">*</span></label>
+            <select class="form-control" id="notify-reason" name="reason" required>
+              <option value="">{{ site.data.uk.notify_reason_placeholder }}</option>
+              <option value="not_actual">{{ site.data.uk.notify_reason_not_actual }}</option>
+              <option value="wrong_price">{{ site.data.uk.notify_reason_wrong_price }}</option>
+              <option value="wrong_info">{{ site.data.uk.notify_reason_wrong_info }}</option>
+              <option value="error">{{ site.data.uk.notify_reason_error }}</option>
+              <option value="duplicate">{{ site.data.uk.notify_reason_duplicate }}</option>
+              <option value="other">{{ site.data.uk.notify_reason_other }}</option>
+            </select>
+            <div class="invalid-feedback">{{ site.data.uk.notify_reason_placeholder }}</div>
+            <div class="valid-feedback">{{ site.data.uk.notify_valid_reason }}</div>
+          </div>
+          <div class="form-group">
+            <label for="notify-details">{{ site.data.uk.notify_details }}</label>
+            <textarea class="form-control" id="notify-details" name="details" rows="4" maxlength="256" placeholder="{{ site.data.uk.notify_details_placeholder }}"></textarea>
+            <small class="text-muted"><span id="notify-counter">256</span> {{ site.data.uk.notify_chars_left }}</small>
+            <div class="invalid-feedback">{{ site.data.uk.notify_invalid_chars }}</div>
+            <div class="valid-feedback">{{ site.data.uk.notify_valid_chars }}</div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="notify-name">{{ site.data.uk.notify_contact_name }}</label>
+              <input type="text" class="form-control" id="notify-name" name="contact_name" pattern="^[а-яА-ЯіїєґІЇЄҐ0-9\s\-\.@_]+$" placeholder="{{ site.data.uk.notify_contact_name_placeholder }}">
+              <div class="invalid-feedback">{{ site.data.uk.notify_invalid_chars }}</div>
+              <div class="valid-feedback">{{ site.data.uk.notify_valid_chars }}</div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="notify-phone">{{ site.data.uk.notify_contact_phone }}</label>
+              <input type="tel" class="form-control" id="notify-phone" name="contact_phone" pattern="^[\+\d\s\-\(\)]+$" placeholder="{{ site.data.uk.notify_contact_phone_placeholder }}">
+              <div class="invalid-feedback">{{ site.data.uk.notify_invalid_phone }}</div>
+              <div class="valid-feedback">{{ site.data.uk.notify_valid_chars }}</div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="notify-email">{{ site.data.uk.notify_contact_email }}</label>
+              <input type="email" class="form-control" id="notify-email" name="contact_email" pattern="^[a-zA-Z0-9@\.\-_]+$" placeholder="{{ site.data.uk.notify_contact_email_placeholder }}">
+              <div class="invalid-feedback">{{ site.data.uk.notify_invalid_email }}</div>
+              <div class="valid-feedback">{{ site.data.uk.notify_valid_chars }}</div>
+            </div>
+          </div>
+          <div id="notify-error" class="alert alert-danger d-none" role="alert">
+            {{ site.data.uk.notify_error }}
+          </div>
+          <div id="notify-success" class="d-none">
+            <div class="alert alert-success" role="alert">
+              <strong>{{ site.data.uk.notify_success }}</strong> {{ site.data.uk.notify_success_text }}
+            </div>
+          </div>
+          <div class="cf-turnstile mb-3" data-sitekey="0x4AAAAAADf6HF6IRoXXsCUb"></div>
+          <button type="submit" id="notify-submit" class="btn btn-primary">{{ site.data.uk.notify_submit }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
