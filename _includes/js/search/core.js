@@ -228,16 +228,7 @@ var RE = window.RE = window.RE || {};
     var width  = windowWidth || 550;
     var top  = (window.screen.height / 2) - (height / 2);
     var left = (window.screen.width / 2) - (width / 2);
-    var opts = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, copyhistory=no, width='+ width +', height='+ height +', top='+ top +', left='+ left;
-    try {
-      var w = window.open(url, 'share', opts);
-      if (!w || w.closed || typeof w.closed === 'undefined') throw 0;
-      return w;
-    } catch(e) {
-      if (url.indexOf('viber://') === 0 && navigator.clipboard) {
-        navigator.clipboard.writeText(url.replace(/^viber:\/\/forward\?text=/, '') || url);
-      }
-    }
+    window.open(url, 'share', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, copyhistory=no, width='+ width +', height='+ height +', top='+ top +', left='+ left);
   }, native: function() {
     if (navigator.share) {
       navigator.share({ title: document.title, url: window.location.href }).catch(function(){});
@@ -245,6 +236,12 @@ var RE = window.RE = window.RE || {};
       var u = window.location.href;
       var t = encodeURIComponent(document.title);
       RE.sShare.show('https://twitter.com/share?url=' + encodeURIComponent(u) + '&text=' + t, 550, 420);
+    }
+  }, copy: function() {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        alert('Посилання скопійовано в буфер обміну');
+      }).catch(function(){});
     }
   }};
 
