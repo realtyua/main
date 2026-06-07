@@ -31,6 +31,9 @@
           modal.on('shown.bs.modal', function(){ map.invalidateSize(); });
       }
   });
+  modal.on('hide.bs.modal', function (e) {
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  });
   modal.on('hidden.bs.modal', function (e) {
     map.off();
     map.remove();
