@@ -252,6 +252,7 @@ notify_modal_lead: Якщо ви помітили, що оголошення м�
 notify_reason: Причина повідомлення
 notify_reason_placeholder: Оберіть причину
 notify_reason_not_actual: Оголошення вже не актуальне (продано/здано)
+notify_reason_moved_to_archive: Помилково переміщено в архів
 notify_reason_wrong_price: Ціна вказана неправильно
 notify_reason_wrong_info: Інформація в описі неточна
 notify_reason_error: Помилка в оголошенні (адреса, контакти тощо)
