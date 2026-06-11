@@ -24,7 +24,7 @@
         {%- assign lower_indicator = 2 -%}
         {%- assign upper_indicator = total_pages | minus: 1 -%}
       {% endcapture %}
-      <ul class="pagination float-right mb-0">
+      <ul class="pagination mb-0">
       {%- unless paginator.page == 1 -%}
         <li class="page-item icon-first">
           <a class="page-link hoverable" href="/{{ url }}/" title="Перша сторінка" rel="first">
@@ -79,12 +79,13 @@
         {% endif %}
       {% endcapture %}
       {% if page_current_flag == true %}
+        {%- capture li_class -%}page-item{% if page == page_current %} active{% endif %}{% if page == 1 %} first{% endif %}{% if page == total_pages %} last{% endif %} pagination--offset-{{ diff_offset }}{%- endcapture -%}
         {%- if page == page_current -%}
-          <li class="page-item active pagination--offset-{{ diff_offset }}">
+          <li class="{{ li_class }}">
             <span class="page-link">{{ page }}</span>
           </li>
         {%- else -%}
-          <li class="page-item pagination--offset-{{ diff_offset }}">
+          <li class="{{ li_class }}">
             <a class="page-link hoverable" href="{%- if page == 1 -%}/{{ url }}/{%- else -%}/{{ url }}/{{ page }}/{%- endif -%}" aria-label="Перейти до сторінки {{ page }}">
               <span class="sr-only">Сторінка {{ page_cursor }}</span>
               {{ page }}

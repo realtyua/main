@@ -25,11 +25,7 @@ main .paginationjs .paginationjs-pages a:hover {
   border-bottom: unset;
 }
 
-.icon-first, .icon-last { display: none; }
-
-@include media-breakpoint-up(sm) {
-  .icon-first, .icon-last { display: block; }
-}
+.icon-first, .icon-last { display: block; }
 
 @include media-breakpoint-up(md) {
   // .icon-previous :after  { content: " Previous"  }
@@ -58,28 +54,30 @@ $grid-breakpoints-custom: (
 ) !default;
 
 ul.pagination {
+  float: none;
+  display: flex;
+  justify-content: flex-end;
 
   li.first, li.last, li.pages-indicator { display: none; }
 
   //li.pagination--offset-1,
   li.pagination--offset-2, li.pagination--offset-3, li.pagination--offset-4, li.pagination--offset-5, li.pagination--offset-6, li.pagination--offset-7 { display: none; }
 
-  @include media-breakpoint-up(xs, $grid-breakpoints-custom) { }
-  
+  .page-link { padding: .5rem .65rem; }
+
   @include media-breakpoint-up(xs2, $grid-breakpoints-custom) {
     li.pages-indicator { display: inline-block; }
   }
 
   @include media-breakpoint-up(xs3, $grid-breakpoints-custom) {
-    li.pagination--offset-1 { display: inline-block; }
+    li.pagination--offset-1, li.first, li.last { display: inline-block; }
   }
   
-  @include media-breakpoint-up(xs4, $grid-breakpoints-custom) {
-    li.pagination--offset-2 { display: inline-block; }
-  }
+  @include media-breakpoint-up(xs4, $grid-breakpoints-custom) { }
 
   @include media-breakpoint-up(sm, $grid-breakpoints-custom) {
-    li.first, li.last, li.pagination--offset-3 { display: inline-block; }
+    li.pagination--offset-2, li.pagination--offset-3 { display: inline-block; }
+    .page-link { padding: .5rem .75rem; }
   }
   
   @include media-breakpoint-up(sm2, $grid-breakpoints-custom) {
