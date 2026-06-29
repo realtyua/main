@@ -1,0 +1,7 @@
+{% assign f = include.field %}
+<div class="{{ f.col | default: 'col-12' }}"{% if f.depends %} x-show="evaluateDepends({{ f.depends | jsonify | replace: '"', "'" }})"{% endif %}>
+  <figure{% if f.class %} class="{{ f.class }}"{% endif %}>
+    <img src="{{ f.src }}" alt="{{ f.alt | default: '' }}" class="img-fluid">
+    {% if f.caption %}<figcaption class="figure-caption text-center mt-1">{{ f.caption }}</figcaption>{% endif %}
+  </figure>
+</div>

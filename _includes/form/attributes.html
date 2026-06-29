@@ -1,0 +1,31 @@
+{% assign f = include.field %}
+{% assign el = include.element %}
+{% if f.name %} name="{{ f.name }}"{% endif %}
+{% if f.required %} required{% endif %}
+{% if f.autocomplete %} autocomplete="{{ f.autocomplete }}"{% endif %}
+{% if f.tabindex %} tabindex="{{ f.tabindex }}"{% endif %}
+{% if f.aria %}{% for a in f.aria %} aria-{{ a[0] }}="{{ a[1] }}"{% endfor %}{% endif %}
+{% if f.data %}{% for d in f.data %} data-{{ d[0] }}="{{ d[1] }}"{% endfor %}{% endif %}
+{% if el == 'input' %}
+{% if f.inputmode %} inputmode="{{ f.inputmode }}"{% endif %}
+{% if f.enterkeyhint %} enterkeyhint="{{ f.enterkeyhint }}"{% endif %}
+{% if f.spellcheck != nil %} spellcheck="{{ f.spellcheck }}"{% endif %}
+{% if f.autocapitalize != nil %} autocapitalize="{{ f.autocapitalize }}"{% endif %}
+{% if f.list %} list="{{ f.list }}"{% endif %}
+{% if f['size'] %} size="{{ f['size'] }}"{% endif %}
+{% if f.minlength %} minlength="{{ f.minlength }}"{% endif %}
+{% endif %}
+{% if el == 'textarea' %}
+{% if f.inputmode %} inputmode="{{ f.inputmode }}"{% endif %}
+{% if f.enterkeyhint %} enterkeyhint="{{ f.enterkeyhint }}"{% endif %}
+{% if f.spellcheck != nil %} spellcheck="{{ f.spellcheck }}"{% endif %}
+{% if f.autocapitalize != nil %} autocapitalize="{{ f.autocapitalize }}"{% endif %}
+{% if f.cols %} cols="{{ f.cols }}"{% endif %}
+{% if f.rows %} rows="{{ f.rows }}"{% endif %}
+{% if f.wrap %} wrap="{{ f.wrap }}"{% endif %}
+{% if f.minlength %} minlength="{{ f.minlength }}"{% endif %}
+{% endif %}
+{% if el == 'select' %}
+{% if f['size'] %} size="{{ f['size'] }}"{% endif %}
+{% if f.multiple %} multiple{% endif %}
+{% endif %}

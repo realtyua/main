@@ -39,4 +39,9 @@
 {%- if page.layout == 'property' -%}
   <script src="{{ "/assets/js/notify.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- endif -%}
+{%- if page.form == 'add-property' -%}
+<script src="{{ "/assets/js/form-engine.js" | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" crossorigin="anonymous"></script>
+<script>{%- include js/leaflet.js -%}</script>
+{%- endif -%}
 <script data-goatcounter="https://stats.realestate.if.ua/count" async src="https://www.realestate.if.ua/assets/js/count.js"></script>

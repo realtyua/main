@@ -1,0 +1,18 @@
+{% assign l = include.field.label %}
+{% if l.depends %}
+  <span x-text="labelText('{{ include.field.name }}')"></span>
+  {% if l.informer %}
+    <a href="{{ l.informer }}" target="_blank" class="ml-1">{{ l.icon | default: 'ⓘ' }}</a>
+  {% endif %}
+{% elsif l.text %}
+  {% if l.markdown %}
+    {{ l.text | markdownify | replace: '<p>', '' | replace: '</p>', '' }}
+  {% else %}
+    {{ l.text }}
+  {% endif %}
+  {% if l.informer %}
+    <a href="{{ l.informer }}" target="_blank" class="ml-1">{{ l.icon | default: 'ⓘ' }}</a>
+  {% endif %}
+{% else %}
+  {{ l }}
+{% endif %}

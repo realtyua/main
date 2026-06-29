@@ -1,0 +1,20 @@
+{% if include.auto %}{% assign col_fn = 'autoCol' %}{% else %}{% assign col_fn = 'fieldCol' %}{% endif %}
+{% assign f = include.field %}
+<div :class="{{ col_fn }}('{{ f.name }}')" x-show="isFieldVisible('{{ f.name }}')">
+<div class="form-group">
+  <label for="field_{{ f.name }}">{% include form/label.html field=f %}<span class="text-danger" :class="requiredMeta('{{ f.name }}', 'class')" x-show="isFieldRequired('{{ f.name }}')" :title="requiredMeta('{{ f.name }}', 'tooltip') || undefined"><span x-html="requiredMeta('{{ f.name }}', 'marker', '*')"></span><a x-show="requiredMeta('{{ f.name }}', 'informer')" :href="requiredMeta('{{ f.name }}', 'informer')" target="_blank" class="ml-1" x-text="requiredMeta('{{ f.name }}', 'icon', 'ⓘ')"></a></span></label>
+   <select class="form-control" id="field_{{ f.name }}"
+           {% include form/attributes.html field=f element='select' %}
+           x-model="data.{{ f.name }}"
+           :disabled="isFieldReadonly('{{ f.name }}')"
+          :class="errors['{{ f.name }}'] ? 'is-invalid' : touched['{{ f.name }}'] ? 'is-valid' : ''"
+          :title="errors['{{ f.name }}'] || undefined"
+          @change="validateField('{{ f.name }}')" @blur="validateField('{{ f.name }}')"{% if f.helper %} aria-describedby="helper_{{ f.name }}"{% endif %}>
+    <option value="">{{ f.placeholder | default: 'Виберіть район...' }}</option>
+    {% include select/regions.html %}
+  </select>
+  {% if f.helper %}<small id="helper_{{ f.name }}" class="form-text text-muted">{{ f.helper }}</small>{% endif %}
+  <div class="valid-feedback" style="display: block" x-show="touched['{{ f.name }}'] && !errors['{{ f.name }}']">{% if f.feedback.valid %}{{ f.feedback.valid }}{% elsif f.valid %}{{ f.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
+  <div class="invalid-feedback" style="display: block" x-show="errors['{{ f.name }}']">{% if f.feedback.invalid %}{{ f.feedback.invalid }}{% else %}<span x-text="errors['{{ f.name }}']"></span>{% endif %}</div>
+</div>
+</div>

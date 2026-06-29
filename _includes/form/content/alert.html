@@ -1,0 +1,7 @@
+{% assign f = include.field %}
+<div class="{{ f.col | default: 'col-12' }}"{% if f.depends %} x-show="evaluateDepends({{ f.depends | jsonify | replace: '"', "'" }})"{% endif %}>
+  <div class="alert alert-{{ f.variant | default: 'info' }}{% if f.class %} {{ f.class }}{% endif %}" role="alert">
+    {% if f.label.depends %}<span x-html="labelText('{{ f.name }}')"></span>{% elsif f.markdown %}{{ f.label | markdownify }}{% else %}{{ f.label }}{% endif %}
+    {% if f.dismissible %}<button type="button" class="close" data-dismiss="alert">&times;</button>{% endif %}
+  </div>
+</div>

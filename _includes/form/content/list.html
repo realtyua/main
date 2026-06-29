@@ -1,0 +1,9 @@
+{% assign f = include.field %}
+<div class="{{ f.col | default: 'col-12' }}"{% if f.depends %} x-show="evaluateDepends({{ f.depends | jsonify | replace: '"', "'" }})"{% endif %}>
+  <{{ f.tag | default: 'ul' }}{% if f.class %} class="{{ f.class }}"{% endif %}>
+  {% for item in f.items %}
+  {% assign item_md = item.markdown | default: f.markdown %}
+  <li>{% if item_md %}{{ item.text | markdownify | strip_newlines }}{% else %}{{ item.text }}{% endif %}</li>
+  {% endfor %}
+  </{{ f.tag | default: 'ul' }}>
+</div>

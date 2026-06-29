@@ -27,7 +27,7 @@
         ]{%- if forloop.last -%}{%- else -%},{%- endif -%}
         {%- endfor -%}
       ];
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 17, attribution: '<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}', tileSize: 512, zoomOffset: -1, subdomains: ['a', 'b', 'c'] }).addTo(map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 17, attribution: '<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}', tileSize: L.Browser.retina ? 512 : 256, zoomOffset: L.Browser.retina ? -1 : 0, subdomains: ['a', 'b', 'c'] }).addTo(map);
       map.attributionControl.setPrefix('');
       {%- include map/left-menu-map.html -%}
       var markersClusters = L.markerClusterGroup();
@@ -130,7 +130,7 @@
   {%- else -%}
     <script>
       var map = L.map('map', { center: [{{ page.coordinates }}], minZoom: 11, zoom: 10 }).setView([{{ page.coordinates }}], 10);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}', tileSize: 512, zoomOffset: -1 }).addTo(map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '<a href="{{ site.main_url }}" target="_blank">{{ site.title }}</a> - {{ breadcrumb }}', tileSize: L.Browser.retina ? 512 : 256, zoomOffset: L.Browser.retina ? -1 : 0 }).addTo(map);
       map.attributionControl.setPrefix('');
       L.marker([{{ page.coordinates }}]).addTo(map).bindPopup('<b>{{ breadcrumb }}</b>').openPopup();
       {%- include map/left-menu-map.html -%}

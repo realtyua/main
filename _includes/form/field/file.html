@@ -1,0 +1,39 @@
+{% if include.auto %}{% assign col_fn = 'autoCol' %}{% else %}{% assign col_fn = 'fieldCol' %}{% endif %}
+{% assign f = include.field %}
+{% assign fm = f.file %}
+<div :class="{{ col_fn }}('{{ f.name }}')" x-show="isFieldVisible('{{ f.name }}')">
+  <div class="form-group"
+      :class="errors['{{ f.name }}'] ? 'is-invalid' : touched['{{ f.name }}'] ? 'is-valid' : ''">
+     <label for="field_{{ f.name }}">{% include form/label.html field=f %}</label>
+     <div class="custom-file">
+         <input type="file" class="custom-file-input" id="field_{{ f.name }}"
+                {% include form/attributes.html field=f element='input' %}
+                accept="{{ f.accept }}"{% if f.multiple %} multiple{% endif %}
+               :title="fileCount('{{ f.name }}') ? 'Вибрано ' + fileCount('{{ f.name }}') + ' ' + pluralizeFile(fileCount('{{ f.name }}')) : 'Файл не вибрано'"
+               :disabled="isFieldReadonly('{{ f.name }}')"
+              @change="handleFileChange($event, '{{ f.name }}'); validateField('{{ f.name }}')" @blur="validateField('{{ f.name }}')"{% if f.helper %} aria-describedby="helper_{{ f.name }}"{% endif %}>
+       <label class="custom-file-label" for="field_{{ f.name }}" x-text="fileLabel('{{ f.name }}')"></label>
+     </div>
+     <small class="form-text text-muted">{{ site.data.uk.re_images }}: максимум {{ fm.maxFiles | default: 10 }}, до {{ fm.maxSize | default: '5 MB' }}</small>
+     {% if f.helper %}<small id="helper_{{ f.name }}" class="form-text text-muted">{{ f.helper }}</small>{% endif %}
+     <div class="valid-feedback" style="display: block" x-show="touched['{{ f.name }}'] && !errors['{{ f.name }}']">{% if f.feedback.valid %}{{ f.feedback.valid }}{% elsif f.valid %}{{ f.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
+     <div class="file-previews d-flex flex-wrap mt-2" x-show="fileCount('{{ f.name }}')">
+       <template x-for="(p, idx) in filePreviews['{{ f.name }}']" :key="idx">
+         <div class="file-preview mr-2 mb-2">
+           <div class="file-thumb" :style="'width: {{ fm.thumbWidth | default: 140 }}px; height: {{ fm.thumbHeight | default: 105 }}px;'">
+             <img x-show="p" :src="p" class="img-fluid">
+             <div x-show="!p" class="file-thumb-fallback d-flex align-items-center justify-content-center bg-light text-muted" :style="'width: {{ fm.thumbWidth | default: 140 }}px; height: {{ fm.thumbHeight | default: 105 }}px; font-size: 0.7rem; word-break: break-all;'">
+               <span x-text="files['{{ f.name }}'] ? truncateName(files['{{ f.name }}'][idx].name, 20) : ''"></span>
+             </div>
+             <button type="button" class="close position-absolute" style="top: 1px; right: 1px;" @click="removeFile(idx, '{{ f.name }}')">&times;</button>
+           </div>
+           <div class="file-caption text-muted small mt-1" x-show="files['{{ f.name }}']">
+             <span x-text="truncateName(files['{{ f.name }}'][idx].name, 24)"></span>
+             <span x-text="' (' + formatFileSize(files['{{ f.name }}'][idx].size) + ')'"></span>
+           </div>
+         </div>
+       </template>
+     </div>
+     <div class="invalid-feedback" style="display: block" x-show="errors['{{ f.name }}']">{% if f.feedback.invalid %}{{ f.feedback.invalid }}{% else %}<span x-text="errors['{{ f.name }}']"></span>{% endif %}</div>
+   </div>
+</div>

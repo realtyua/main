@@ -1,0 +1,15 @@
+{% assign f = include.field %}
+{% assign deps = f.depends | jsonify | replace: '"', "'" | replace: '&gt;', '>' | replace: '&lt;', '<' %}
+<div class="{{ f.class | default: 'col-12' }}"
+     {% if f.depends %}x-show="evaluateDepends({{ deps }})"{% endif %}>
+  <div class="card mb-3">
+    <div class="card-body p-2">
+      {% if f.label %}<label class="mb-1"><small>{{ f.label }}</small></label>{% endif %}
+      <div x-show="data.address" class="mb-1"><small>Адреса маркера: <span x-text="data.address"></span></small></div>
+      <div id="map-picker" style="height: {{ f.height | default: 300 }}px;" class="border rounded"></div>
+      <small class="form-text text-muted mt-1" x-show="data.lat">
+        Координати маркера: <span x-text="data.lat + ', ' + data.lng"></span>
+      </small>
+    </div>
+  </div>
+</div>

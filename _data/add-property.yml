@@ -1,0 +1,703 @@
+settings:
+  title: Подання оголошення про нерухомість
+  description: |
+    Заповніть форму нижче, щоб додати ваше оголошення.
+    Будь ласка, будьте уважні, заповнюючи форму дійсними даними.
+  feedback:
+    valid: Виглядає наче все добре!
+    invalid: Будь ласка, заповніть це поле дійсними даними
+    pattern: Тільки українські літери, цифри та розділові знаки
+  required:
+    marker: '&#9728;'
+    tooltip: Це поле є обов'язкове
+    message: Будь ласка, заповніть це поле
+    class: h6
+  pattern: '^[а-яА-ЯієїґІЄЇҐ0-9\s.,:;!?()«»№+/–—-]+$'
+
+steps:
+  - id: start
+    title: Узгодження
+    rows:
+      - class: row
+        cols:
+          - class: col-12
+            rows:
+              - class: row
+                fields:
+                  - name: start_alert_info
+                    type: alert
+                    variant: info
+                    label: "Якщо ви вже прочитали <b>правила і умови</b>, тоді вам залишається погодитись і прийняти та розпочати заповнювати форму даними про нерухомість та надіслати ваше оголошення нам."
+                    col: col-12
+                    depends:
+                      - field: agree_rules
+                        values: [false]
+
+              - class: row
+                fields:
+                  - name: start_alert_warning
+                    type: alert
+                    variant: warning
+                    label: Перш ніж додати оголошення перевірте можлво це оголошення вже присутнє у нашому каталозі. Натисність зелену кнопку <b>Пошук</b> у верхній частині сторінки і виберіть опцію <b>Пошук в оголошеннях</b>.
+                    col: col-12
+                    depends:
+                      - field: agree_rules
+                        values: [true]
+
+              - class: row
+                fields:
+                  - name: agree_rules
+                    required: true
+                    type: checkbox
+                    label:
+                      text: Так, я погоджуюсь з [правилами і умовами використання](/terms-and-conditions.html)
+                      markdown: true
+                    helper: Ознайомтесь з <a href="/terms-and-conditions.html">правилами і умовами</a> використання і приміть рішення.
+                    feedback:
+                      valid: Ви погодилися з правилами і умовами використання і можете додати оголошення.
+                      invalid: Якщо не погодитесь з правилами і умовами використання, то не зможете додати оголошення.
+
+  - id: type
+    title: Характеристики
+    rows:
+      - class: row
+        cols:
+          - class: col-12
+            rows:
+              - class: row
+                fields:
+                  - name: action_type
+                    type: select
+                    label: Тип вашої дії
+                    required: true
+                    placeholder: Оберіть дію...
+                    col: col-6
+                    validation:
+                      required: Будь ласка, оберіть дію
+                    options:
+                      - value: sell
+                        label: Продаю
+                      - value: rent
+                        label: Передаю в оренду
+                      - value: realty_free
+                        label: Віддам безкоштовно
+                      - value: rent_free
+                        label: В оренду безкоштовно
+                    feedback:
+                      valid: Ви обрали дію і тут наче все гаразд.
+                      invalid: Ви не вибрали дію, будь ласка виберіть дію.
+
+                  - name: property_type
+                    type: select
+                    label: Вид нерухомості
+                    required: true
+                    placeholder: Оберіть вид...
+                    col: col-6
+                    validation:
+                      required: Будь ласка, оберіть вид нерухомості
+                    options:
+                      - value: apartment
+                        label: Квартира
+                      - value: apartment_part
+                        label: Частина квартири
+                      - value: house
+                        label: Будинок
+                      - value: house_part
+                        label: Частина будинку
+                      - value: room
+                        label: Кімната
+                      - value: commercial
+                        label: Нежитлове приміщення
+                      - value: land
+                        label: Земля
+                      - value: garage
+                        label: Гараж
+
+              - class: row
+                fields:
+                  - name: has_land
+                    type: checkbox
+                    label: У цієї нерухомості є земля
+                    col: col-12
+                    depends:
+                      - field: property_type
+                        values: [apartment, apartment_part, room, commercial, garage]
+
+              - class: row
+                auto: true
+                fields:
+                  - name: rooms
+                    required: true
+                    type: number
+                    label:
+                      text: Кількість кімнат
+                      depends:
+                        - field: property_type
+                          values: [commercial, garage]
+                          text: Кількість приміщень
+                    min: 1
+                    max: 99
+                    value:
+                      default:
+                        value: ''
+                        readonly: false
+                      depends:
+                        - field: property_type
+                          values: [room, garage]
+                          value: 1
+                          readonly: true
+                    col: col-4
+                    validation:
+                      required:
+                        text: Вкажіть кількість кімнат
+                        depends:
+                          - field: property_type
+                            values: [commercial, garage]
+                            text: Вкажіть кількість приміщень
+                      min:
+                        text: Мінімум 1 кімната
+                        depends:
+                          - field: property_type
+                            values: [commercial]
+                            text: Мінімум 5 приміщень
+                      max:
+                        text: Максимум 99 кімнат
+                        depends:
+                          - field: property_type
+                            values: [commercial]
+                            text: Максимум 500 приміщень
+                    depends:
+                      - field: property_type
+                        except: [land]
+
+                  - name: floor
+                    type: number
+                    required: true
+                    label: Поверх
+                    min: 0
+                    max: 35
+                    col: col-4
+                    validation:
+                      compare:
+                        - field: floors
+                          operator: '<='
+                          message: "Поверх не може бути більше за поверховість будинку"
+                    depends:
+                      - field: property_type
+                        except: [land]
+
+                  - name: floors
+                    type: number
+                    required: true
+                    label: Поверхів в будинку
+                    min: 1
+                    max: 35
+                    col: col-4
+                    validation:
+                      compare:
+                        - field: floor
+                          operator: '>='
+                          message: "Поверховість не може бути меншою за поверх"
+                    depends:
+                      - field: property_type
+                        except: [land]
+
+              - class: row
+                fields:
+                  - name: surface_paragraph
+                    type: paragraph
+                    class: font-weight-bold
+                    label:
+                      text: "Площа об'єкта нерухомсті в м²"
+                      depends:
+                        - field: property_type
+                          values: [apartment]
+                          text: Площа квартири в м²
+                        - field: property_type
+                          values: [apartment_part]
+                          text: Площа частини квартири в м²
+                        - field: property_type
+                          values: [house]
+                          text: Площа будинку в м²
+                        - field: property_type
+                          values: [house_part]
+                          text: Площа частини будинку в м²
+                        - field: property_type
+                          values: [commercial]
+                          text: Площа нежитлового приміщення в м²
+                    col: col-12
+                    depends:
+                      - field: property_type
+                        values: [apartment, apartment_part, house, house_part, commercial]
+
+              - class: row
+                auto: true
+                fields:
+                  - name: surface
+                    required: true
+                    type: number
+                    label:
+                      text: Загальна
+                      depends:
+                        - field: property_type
+                          values: [room]
+                          text: Площа кімнати в м²
+                        - field: property_type
+                          values: [garage]
+                          text: Площа гаража в м²
+                    min: 1
+                    depends:
+                      - field: property_type
+                        values: [apartment, apartment_part, house, house_part, room, commercial]
+
+                  - name: surface_live
+                    type: number
+                    label: Житлова
+                    min: 8
+                    #col: col-3
+                    depends:
+                      - field: property_type
+                        values: [apartment, apartment_part, house, house_part]
+
+                  - name: surface_kitchen
+                    type: number
+                    label: Кухня
+                    min: 4
+                    depends:
+                      - field: property_type
+                        except: [room, commercial, garage, land]
+
+                  - name: surface_bathroom
+                    type: number
+                    label: Санвузол
+                    min: 1
+                    depends:
+                      - field: property_type
+                        except: [room, commercial, garage, land]
+
+                  - name: location_room
+                    type: select
+                    label: Розташування кімнати
+                    placeholder: Оберіть де знаходиться кімната...
+                    options:
+                      - value: room_apartment
+                        label: Окрема кімната у квартирі
+                      - value: room_house
+                        label: Окрема кімната у будинку
+                      - value: room_hostel
+                        label: Окрема кімната у гуртожитку
+                      - value: room_hotel
+                        label: Окрема кімната у гостинниці
+                    col: col-8
+                    depends:
+                      - field: property_type
+                        values: [room]
+
+              - class: row
+                fields:
+                  - name: surface_land_paragraph
+                    type: paragraph
+                    class: font-weight-bold
+                    label: "Площа земельної ділянки в м²"
+                    col: col-12
+                    depends:
+                      - field: has_land
+                        values: [true]
+                        logic: or
+                      - field: property_type
+                        values: [house, land]
+
+              - class: row
+                fields:
+                  - name: surface_land
+                    type: number
+                    required:
+                      - field: property_type
+                        values: [house, land]
+                    label: Площа землі
+                    min: 0.01
+                    col: col-4
+                    depends:
+                      - field: has_land
+                        values: [true]
+                        logic: or
+                      - field: property_type
+                        values: [house, land]
+
+                  - name: cadastral_number
+                    type: number
+                    required:
+                      - field: property_type
+                        values: [house, land]
+                    label: Кадастровий номер
+                    min: 0.01
+                    col: col-8
+                    depends:
+                      - field: has_land
+                        values: [true]
+                        logic: or
+                      - field: property_type
+                        values: [house, land]
+
+              - class: row
+                fields:
+                  - name: parking_paragraph
+                    type: paragraph
+                    class: font-weight-bold
+                    label: Паркування транспотрних засобів
+                    col: col-12
+                    depends:
+                      - field: property_type
+                        values: [apartment, apartment_part, house, house_part, room, commercial]
+
+              - class: row
+                auto: true
+                fields:
+                  - name: parking
+                    type: select
+                    label: Тип паркування
+                    placeholder: Оберіть тип...
+                    col: col-8
+                    options:
+                      - value: parking_public
+                        label: Прибудинкова територія (у загальному користуванні)
+                      - value: parking_garage
+                        label: Окремий гараж
+                      - value: parking_area
+                        label: Паркувальний майданчик (у користуванні співвласників)
+                      - value: parking_space_underland
+                        label: Паркувальне місце у підземному паркінгу
+                      - value: parking_space
+                        label: Паркувальне місце на паркувальнрму майданчику
+                    depends:
+                      - field: property_type
+                        values: [apartment, apartment_part, house, house_part, room, commercial]
+
+                  - name: parking_surface
+                    type: number
+                    label: Площа паркування м²
+                    min: 4
+                    depends:
+                      - field: property_type
+                        values: [apartment, apartment_part, house, house_part, room, commercial]
+                        logic: or
+                      - field: parking
+                        values: [parking_garage, parking_space]
+
+              - class: row
+                auto: true
+                fields:
+                  - name: communications
+                    type: checkbox_group
+                    label: Комунікації
+                    variant: primary
+                    options:
+                      - value: electricity
+                        label: Електрика
+                      - value: gas
+                        label: Газ
+                      - value: water
+                        label: Вода
+                      - value: internet
+                        label: Інтернет
+                      - value: sewerage
+                        label: Каналізація
+                      - value: heating
+                        label: Опалення
+                      - value: ventilation
+                        label: Вентиляція
+                    helper: Оберіть всі наявні комунікації
+
+  - id: price_location
+    title: Ціна та місцезнаходження
+    #widgets:
+    #  - map
+    rows:
+      - class: row
+        cols:
+          - class: col-12
+            rows:
+              - class: row
+                auto: true
+                fields:
+                  - name: price
+                    type: number
+                    label: Ціна
+                    required: true
+                    min: 1
+                    validation:
+                      required: Вкажіть ціну
+
+                  - name: currency
+                    type: select
+                    label: Валюта
+                    required: true
+                    placeholder: Оберіть валюту...
+                    options:
+                      - value: uah
+                        label: "Гривня (₴)"
+                      - value: eur
+                        label: "Євро (€)"
+                      - value: usd
+                        label: "Амереканський доллар ($)"
+
+              - class: row
+                fields:
+                  - name: price_info_widget
+                    type: widgets
+                    widget: price_info
+                    depends:
+                      - field: price
+                        value: '>0'
+                      - field: currency
+                        value: '>0'
+                      - field: surface
+                        value: '>0'
+
+              - class: row
+                auto: true
+                fields:
+                  - name: period_rent
+                    type: select
+                    label: Період оплати і оренди...
+                    required: true
+                    placeholder: Оберіть період...
+                    options:
+                      - value: hour
+                        label: "За одну годину (60 хвилин)"
+                      - value: day_night
+                        label: "За одну добу (24 години)"
+                      - value: month
+                        label: "За один місяць"
+                      - value: three_month
+                        label: "За один місяць (не меньше ніж на три місяці)"
+                      - value: six_month
+                        label: "За один місяць (не меньше ніж на пів року)"
+                      - value: year
+                        label: "За один місяць (не меньше ніж на рік)"
+                      - value: more_year
+                        label: "За один місяць (на рік і більше)"
+                    depends:
+                      - field: action_type
+                        values: [rent, rent_free]
+
+              - class: row
+                auto: true
+                fields:
+                  - name: sell_with
+                    type: checkbox_group
+                    label: Продається разом з
+                    variant: primary
+                    options:
+                      - value: furniture
+                        label: Меблі
+                      - value: appliances
+                        label: Побутова техніка
+                      - value: renovation
+                        label: Ремонт
+                      - value: parking
+                        label: Паркувальне місце
+                      - value: land
+                        label: Земля
+                    helper: Оберіть все що вклучно у вартість
+                    depends:
+                      - field: action_type
+                        except: [rent, rent_free]
+
+                  - name: rent_with
+                    type: checkbox_group
+                    label: Передається в оренду з
+                    variant: primary
+                    options:
+                      - value: furniture
+                        label: Меблі
+                      - value: appliances
+                        label: Побутова техніка
+                      - value: kitchen_utensils
+                        label: Кухонне приладдя
+                      - value: tableware
+                        label: Столове приладдя
+                      - value: parking
+                        label: Паркувальне місце
+                      - value: land
+                        label: Земля
+                    helper: Оберіть все що вклучно у вартість оренди
+                    depends:
+                      - field: action_type
+                        values: [rent, rent_free]
+
+              - class: row
+                fields:
+                  - name: location_paragraph
+                    type: paragraph
+                    class: font-weight-bold
+                    label: "Розташування"
+                    col: col-12
+
+              - class: row
+                fields:
+                  - name: location_widget
+                    type: widgets
+                    widget: location
+                    data: /assets/data/address.json
+                    settings:
+                      method: two
+                    fields:
+                      oblast:
+                        label: Область
+                        placeholder: Виберіть область...
+                        required: true
+                        message: Виберіть область
+                        value:
+                          default:
+                            value: ["0342"]
+                            readonly: true
+                      raion:
+                        label: Район
+                        placeholder: Виберіть район...
+                        required: true
+                        message: Виберіть район
+                      hromada:
+                        label: Територіальна громада
+                        placeholder: Введіть назву громади...
+                        required: true
+                        message: Виберіть громаду
+                      settlement:
+                        label: Населений пункт
+                        placeholder: Введіть назву...
+                        required: true
+                        message: Виберіть населений пункт
+
+              - class: row
+                fields:
+                  - name: address_paragraph
+                    type: paragraph
+                    class: font-weight-bold
+                    label: "Адреса"
+                    col: col-12
+
+              - class: row
+                fields:
+                  - name: type_address
+                    type: select
+                    label: Тип адреси
+                    required: true
+                    placeholder: ...
+                    options:
+                      - value: alley
+                        label: алея
+                      - value: boulevard
+                        label: бульвар
+                      - value: street
+                        label: вулиця
+                      - value: maidan
+                        label: майдан
+                      - value: lane
+                        label: провулок
+                      - value: prospectus
+                        label: проспект
+                      - value: uzviz
+                        label: узвіз
+                    col: col-3
+
+                  - name: name_address
+                    type: text
+                    label: Найменування адреси
+                    required: true
+                    placeholder: Шевченка
+                    col: col-6
+
+                  - name: house_address
+                    type: text
+                    label: Номе
+                    required: true
+                    placeholder: 16 чи 10А
+                    col: col-3
+
+              - class: row
+                fields:
+                  - name: map_widget
+                    type: widgets
+                    widget: map
+
+  - id: contact
+    title: Контакти та медіа
+    rows:
+      - class: row
+        cols:
+          - class: col-12
+            rows:
+              - class: row
+                fields:
+                  - name: first_name
+                    type: text
+                    label: Ім'я
+                    required: true
+                    placeholder: Тарас 
+                    col: col-12 col-md-6
+
+                  - name: last_name
+                    type: text
+                    label: Прізвище
+                    required: true
+                    placeholder: Шевченко
+                    col: col-12 col-md-6
+
+              - class: row
+                fields:
+                  - name: phone
+                    type: tel
+                    label: Телефон
+                    required: true
+                    placeholder: "+380 (__) ___-__-__"
+                    pattern: '^[+0-9 ()-]{5,20}$'
+                    col: col-12 col-md-6
+                    validation:
+                      required: Вкажіть номер телефону
+                      pattern: Невірний формат телефону
+
+                  - name: email
+                    type: email
+                    label: Електронна пошта
+                    required: false
+                    placeholder: "___@________.___"
+                    pattern: '^(?!.*@.*\.(ru|su|рф|xn--p1ai|cn|ir)$).+@.+\..+$'
+                    col: col-12 col-md-6
+                    validation:
+                      required: Вкажіть електронну пошту
+                      dnscheck:
+                        value: true
+                        message: Домен не приймає пошту або не існує
+
+              - class: row
+                fields:
+                  - name: description
+                    type: textarea
+                    label: Опис оголошення
+                    helper: Напишіть тут щось особливе про вашу нерухомість
+                    maxlength: 500
+                    placeholder: Опишіть вашу нерухомість...
+
+              - class: row
+                fields:
+                  - name: images
+                    type: file
+                    label: Фотографії
+                    multiple: true
+                    accept: image/*
+                    file:
+                      maxFiles: 4
+                      maxSize: 150KB
+                      thumbWidth: 140
+                      thumbHeight: 105
+                      resizeWidth: 800
+                      resizeHeight: 600
+                      cropOrigin: top-left
+                      formatName: true
+
+              - class: row
+                fields:
+                  - name: agree
+                    type: checkbox
+                    label: Я ознайомився та погоджуюсь з Правилами публікації оголошень
+                    required: true

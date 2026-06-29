@@ -1,0 +1,885 @@
+<script id="add-property-config" type="application/json">{
+  "settings": {{ site.data.add-property.settings | jsonify }},
+  "steps": {{ site.data.add-property.steps | jsonify }},
+  "rates": {
+    "usd": {{ site.usd }},
+    "eur": {{ site.eur }},
+    "nbu": {{ site.nbu }}
+  }
+}</script>
+
+<div x-data="formApp()" x-cloak>
+  <style>
+    [x-cloak] { display: none !important; }
+    .step-indicator { display: flex; justify-content: center; margin-bottom: 2rem; }
+    .step-indicator .step-item { display: flex; align-items: center; }
+    .step-indicator .step-number { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; }
+    .step-indicator .step-label { font-size: 0.85rem; font-weight: 500; }
+    .step-indicator .step-connector { width: 40px; height: 2px; margin: 0 8px; }
+    .field-depends-hidden { display: none; }
+    .form-group.is-invalid { border-left: 3px solid #dc3545; padding-left: 8px; }
+    .form-group.is-valid { border-left: 3px solid #28a745; padding-left: 8px; }
+    .valid-feedback, .invalid-feedback { display: block; }
+    .file-previews { gap: 0; }
+    .file-preview { max-width: 100%; }
+    .file-thumb { position: relative; overflow: hidden; border-radius: 4px; border: 1px solid #dee2e6; }
+    .file-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .file-thumb-fallback { display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+    .file-caption { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .file-thumb .close { background: rgba(255,255,255,0.9); border-radius: 50%; width: 22px; height: 22px; line-height: 20px; text-align: center; font-size: 1rem; opacity: 1; padding: 0; border: 1px solid #dee2e6; }
+    .file-thumb .close:hover { background: #fff; }
+    .custom-file-input ~ .custom-file-label::after { content: "Огляд"; }
+    select.form-control.is-valid,
+    select.form-control.is-invalid {
+      padding-right: calc(1.5em + 2.25rem) !important;
+      background-position: right calc(1em + -0.1rem) center;
+    }
+  </style>
+
+  <div class="step-indicator" x-show="!submitted">
+    <template x-for="(step, i) in totalSteps" :key="i">
+      <div class="step-item">
+        <div class="text-center mx-1">
+          <div class="step-number mx-auto mb-1"
+               :class="step === i + 1 ? 'bg-primary text-white' : (step > i + 1 ? 'bg-success text-white' : 'bg-light text-muted border')">
+            <span x-text="i + 1"></span>
+          </div>
+          <div class="step-label" x-text="config.steps[i].title"></div>
+        </div>
+        <div class="step-connector bg-secondary" x-show="i < totalSteps - 1"></div>
+      </div>
+    </template>
+  </div>
+
+  <form id="add-property-form" novalidate>
+    <div class="row">
+      <div class="col-12">
+
+        {% for step in site.data.add-property.steps %}
+          {% assign step_num = forloop.index %}
+          <div x-show="step === {{ step_num }} && !submitted">
+            {% for row in step.rows %}
+            <div class="{{ row.class | default: 'row' }}">
+              {% for col in row.cols %}
+              <div class="{{ col.class | default: 'col-12' }}">
+                {% for nrow in col.rows %}
+                <div class="{{ nrow.class | default: 'row' }}">
+                  {% for field in nrow.fields %}
+                  {% include form/render.html field=field auto=nrow.auto %}
+                  {% endfor %}
+                </div>
+                {% endfor %}
+              </div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-outline-secondary" x-show="step > 1" @click="prevStep()">
+                ← {{ site.data.uk.previous }}
+              </button>
+              <span x-show="step === 1"></span>
+              <button type="button" class="btn btn-primary" x-show="step < totalSteps" @click="nextStep()"
+                      :disabled="!stepValid">
+                {{ site.data.uk.next }} →
+              </button>
+              <button type="button" class="btn btn-success" x-show="step === totalSteps" @click="submit()"
+                      :disabled="submitting || !stepValid">
+                <span x-show="!submitting">{{ site.data.uk.notify_submit }}</span>
+                <span x-show="submitting">Надсилаю<span class="spinner-border spinner-border-sm ml-2" role="status"><span class="sr-only">Надсилаю...</span></span></span>
+              </button>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div x-show="submitted">
+          <div class="alert alert-success text-center py-5">
+            <h4 class="alert-heading">{{ site.data.uk.notify_success }}</h4>
+            <p class="mb-0">{{ site.data.uk.notify_success_text }}</p>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <div id="turnstile-widget" class="mb-3" x-show="!submitted"></div>
+          <div class="alert alert-info mb-3" x-show="!submitted" style="display:none" id="local-notice"><small>Turnstile пропущено (локальний режим)</small></div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var configEl = document.getElementById('add-property-config');
+  if (!configEl) return;
+  var formConfig;
+  try { formConfig = JSON.parse(configEl.textContent); } catch (e) { return; }
+  var currencyRates = formConfig.rates || { usd: 43.50, eur: 51.50, nbu: 43.2413 };
+  var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  function initTurnstile() {
+    if (isLocal) {
+      var notice = document.getElementById('local-notice');
+      if (notice) notice.style.display = 'block';
+      return;
+    }
+    var widget = document.getElementById('turnstile-widget');
+    if (!widget || widget.hasChildNodes()) return;
+    if (typeof turnstile !== 'undefined') {
+      turnstile.render('#turnstile-widget', { sitekey: '0x4AAAAAADf6HF6IRoXXsCUb' });
+    }
+  }
+
+  function tryInitTurnstile() {
+    initTurnstile();
+    if (isLocal) return;
+    if (!document.getElementById('turnstile-widget') || !document.getElementById('turnstile-widget').hasChildNodes()) {
+      setTimeout(tryInitTurnstile, 300);
+    }
+  }
+
+  document.addEventListener('alpine:init', function () {
+    Alpine.data('formApp', function () {
+      var app = {
+        step: 1,
+        totalSteps: formConfig.steps ? formConfig.steps.length : 3,
+        config: formConfig,
+
+        data: {
+          {% for step in site.data.add-property.steps %}
+          {% for row in step.rows %}
+          {% for col in row.cols %}
+          {% for nrow in col.rows %}
+          {% for field in nrow.fields %}
+          {% if field.name and field.type != 'widgets' %}
+           {{ field.name }}: {% if field.type == 'checkbox_group' %}[]{% elsif field.type == 'checkbox' %}false{% else %}''{% endif %},
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          lat: '', lng: '', address: '',
+          oblast: '', raion: '', hromada: '', settlement: '',
+          raionName: '', hromadaName: ''
+        },
+
+        files: {},
+        filePreviews: {},
+        submitting: false,
+        submitted: false,
+        turnstileToken: '',
+
+        addressData: [],
+        addressIndex: [],
+        addressSearch: '',
+        addressResults: [],
+        addressShowDropdown: false,
+        hromadaSearch: '',
+        hromadaResults: [],
+        hromadaShowDropdown: false,
+        addressLoaded: false,
+
+        _map: null,
+        _marker: null,
+        _mapReady: false,
+
+        init: function () {
+          var self = this;
+          for (var i = 0; i < formConfig.steps.length; i++) {
+            var sf = FormEngine.getStepFields(formConfig.steps[i]);
+            for (var j = 0; j < sf.length; j++) {
+              self.touched[sf[j].name] = false;
+            }
+          }
+          this.loadAddressData();
+          this.$watch('step', function () {
+            self.errors = {};
+            var cur = formConfig.steps[self.step - 1];
+            if (cur && FormEngine.hasWidget(cur, 'map')) {
+              self.$nextTick(function () { self.initMap(); });
+            }
+          });
+        },
+
+        initMap: function () {
+          var self = this;
+          var container = document.getElementById('map-picker');
+          if (!container) return;
+          if (container.offsetParent === null) {
+            var observer = new MutationObserver(function () {
+              if (container.offsetParent !== null) {
+                observer.disconnect();
+                self._doInitMap(container);
+              }
+            });
+            observer.observe(container, { attributes: true, attributeFilter: ['style'] });
+            return;
+          }
+          self._doInitMap(container);
+        },
+
+        _doInitMap: function (container) {
+          var self = this;
+          L.Icon.Default.imagePath = '/assets/css/images/';
+          if (this._mapReady) {
+            if (this._map) self.$nextTick(function () { self._map.invalidateSize(true); });
+            return;
+          }
+          if (container._leaflet_id) return;
+          var map = L.map(container, { center: [48.9215, 24.7097], zoom: 12 });
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18, attribution: '&copy; OpenStreetMap', tileSize: L.Browser.retina ? 512 : 256, zoomOffset: L.Browser.retina ? -1 : 0
+          }).addTo(map);
+          map.attributionControl.setPrefix('');
+          map.on('click', function (e) {
+            var latlng = e.latlng;
+            self.data.lat = latlng.lat.toFixed(6);
+            self.data.lng = latlng.lng.toFixed(6);
+            if (self._marker) self._marker.setLatLng(latlng);
+            else self._marker = L.marker(latlng, { draggable: true }).addTo(map);
+            self._marker.on('dragend', function () {
+              var pos = self._marker.getLatLng();
+              self.data.lat = pos.lat.toFixed(6);
+              self.data.lng = pos.lng.toFixed(6);
+            });
+            self.reverseGeocode(latlng);
+          });
+          self._map = map;
+          self._mapReady = true;
+          setTimeout(function () { map.invalidateSize(true); }, 300);
+        },
+
+        reverseGeocode: function (latlng) {
+          var self = this;
+          var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latlng.lat + '&lon=' + latlng.lng + '&accept-language=uk';
+          fetch(url, { headers: { 'User-Agent': 'RealtyUA/1.0' } })
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              if (data && data.display_name) {
+                self.data.address = data.display_name;
+              }
+            })
+            .catch(function () {});
+        },
+
+        parseFileSize: function (str) {
+          if (typeof str === 'number') return { bytes: str * 1048576, display: str + ' MB' };
+          var m = String(str).match(/^(\d+)\s*(MB|KB)$/i);
+          if (!m) return { bytes: 5 * 1048576, display: '5 MB' };
+          var val = parseInt(m[1], 10);
+          var unit = m[2].toUpperCase();
+          return {
+            bytes: unit === 'MB' ? val * 1048576 : val * 1024,
+            display: val + ' ' + unit
+          };
+        },
+
+        handleFileChange: function (event, fieldName) {
+          var newFiles = Array.prototype.slice.call(event.target.files);
+          var allFiles = (this.files[fieldName] || []).slice();
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          var maxFiles = cfg.maxFiles || 10;
+          var sizeInfo = this.parseFileSize(cfg.maxSize);
+          for (var i = 0; i < newFiles.length; i++) {
+            allFiles.push(newFiles[i]);
+          }
+          if (allFiles.length > maxFiles) { this.errors[fieldName] = 'Максимум ' + maxFiles + ' файлів'; return; }
+          for (var i = 0; i < newFiles.length; i++) {
+            if (newFiles[i].size > sizeInfo.bytes) {
+              this.errors[fieldName] = 'Файл "' + newFiles[i].name + '" перевищує ' + sizeInfo.display;
+              return;
+            }
+          }
+          this.files[fieldName] = allFiles;
+          this.buildFilePreviews(fieldName);
+          delete this.errors[fieldName];
+          event.target.value = '';
+        },
+
+        buildFilePreviews: function (fieldName) {
+          var self = this;
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          var thumbW = cfg.thumbWidth || 140;
+          var thumbH = cfg.thumbHeight || 105;
+          var resizeW = cfg.resizeWidth || 800;
+          var resizeH = cfg.resizeHeight || 600;
+          var cropOrigin = cfg.cropOrigin || 'top-left';
+          this.filePreviews[fieldName] = [];
+          var files = this.files[fieldName] || [];
+          if (!files.length) { this.filePreviews[fieldName] = []; return; }
+          var pending = files.length;
+          function done() {
+            pending--;
+            self.filePreviews[fieldName] = self.filePreviews[fieldName].slice();
+          }
+          for (var i = 0; i < files.length; i++) {
+            (function (idx) {
+              var file = files[idx];
+              if (file.type && file.type.indexOf('image/') === 0) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  var img = new Image();
+                  img.onload = function () {
+                    var cropW = Math.min(img.width, resizeW);
+                    var cropH = Math.min(img.height, resizeH);
+                    var sx = 0, sy = 0;
+                    if (cropOrigin === 'center') {
+                      sx = Math.max(0, (img.width - cropW) / 2);
+                      sy = Math.max(0, (img.height - cropH) / 2);
+                    }
+                    var cropCanvas = document.createElement('canvas');
+                    cropCanvas.width = cropW;
+                    cropCanvas.height = cropH;
+                    var ctx = cropCanvas.getContext('2d');
+                    ctx.drawImage(img, sx, sy, cropW, cropH, 0, 0, cropW, cropH);
+                    cropCanvas.toBlob(function (blob) {
+                      var cropped = new File([blob], file.name, { type: 'image/jpeg' });
+                      self.files[fieldName][idx] = cropped;
+                      var thumbCanvas = document.createElement('canvas');
+                      thumbCanvas.width = thumbW;
+                      thumbCanvas.height = thumbH;
+                      var tctx = thumbCanvas.getContext('2d');
+                      tctx.drawImage(img, sx, sy, cropW, cropH, 0, 0, thumbW, thumbH);
+                      self.filePreviews[fieldName][idx] = thumbCanvas.toDataURL('image/jpeg', 0.85);
+                      done();
+                    }, 'image/jpeg', 0.92);
+                  };
+                  img.onerror = function () { self.filePreviews[fieldName][idx] = null; done(); };
+                  img.src = e.target.result;
+                };
+                reader.onerror = function () { self.filePreviews[fieldName][idx] = null; done(); };
+                reader.readAsDataURL(file);
+              } else {
+                self.filePreviews[fieldName][idx] = null;
+                done();
+              }
+            })(i);
+          }
+        },
+
+        removeFile: function (idx, fieldName) {
+          if (!this.files[fieldName]) return;
+          this.files[fieldName].splice(idx, 1);
+          this.files[fieldName] = this.files[fieldName].slice();
+          if (this.filePreviews[fieldName]) {
+            this.filePreviews[fieldName].splice(idx, 1);
+            this.filePreviews[fieldName] = this.filePreviews[fieldName].slice();
+          }
+        },
+
+        fileCount: function (fieldName) {
+          var f = this.files[fieldName];
+          return f ? f.length : 0;
+        },
+
+        pluralizeFile: function (count) {
+          var n = Math.abs(count) % 100;
+          var n10 = n % 10;
+          if (n > 10 && n < 20) return 'файлів';
+          if (n10 > 1 && n10 < 5) return 'файли';
+          if (n10 === 1) return 'файл';
+          return 'файлів';
+        },
+
+        fileLabel: function (fieldName) {
+          var c = this.fileCount(fieldName);
+          return c ? 'Вибрано ' + c + ' ' + this.pluralizeFile(c) : 'Оберіть файли...';
+        },
+
+        formatFileSize: function (bytes) {
+          if (!bytes) return '';
+          if (bytes < 1024) return bytes + ' B';
+          if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+          return (bytes / 1048576).toFixed(1) + ' MB';
+        },
+
+        truncateName: function (name, maxLen) {
+          if (!name) return '';
+          if (name.length <= maxLen) return name;
+          return name.substring(0, maxLen - 3) + '...';
+        },
+
+        generateDescription: function () {
+          var d = this.data;
+          var typeLabels = { sell: 'Продам', rent: 'Здам в оренду', realty_free: 'Віддам безкоштовно', rent_free: 'Здам в оренду безкоштовно' };
+          var propLabels = { apartment: 'квартиру', apartment_part: 'частину квартири', house: 'будинок', house_part: 'частину будинку', room: 'кімнату', commercial: 'нежитлове приміщення', land: 'земельну ділянку', garage: 'гараж' };
+          var parts = [];
+          parts.push(typeLabels[d.type] || 'Пропоную');
+          if (d.property_type && propLabels[d.property_type]) {
+            parts.push(propLabels[d.property_type]);
+          }
+          if (d.rooms) parts.push(d.rooms + '-кімнатну');
+          if (d.surface) parts.push('загальною площею ' + d.surface + ' м²');
+          if (d.surface_live) parts.push('(житлова ' + d.surface_live + ' м²)');
+          if (d.floor && d.floors) parts.push('на ' + d.floor + '-му поверсі з ' + d.floors);
+          else if (d.floor) parts.push('на ' + d.floor + '-му поверсі');
+          if (d.location) parts.push('в м. ' + d.location);
+          if (d.price) parts.push('за ' + d.price + ' ' + d.currency);
+          if (d.phone) parts.push('тел. ' + d.phone);
+          this.data.description = parts.join(' ') + '.';
+        },
+
+        get pricePerSqmt() {
+          var p = parseFloat(this.data.price);
+          var s = parseFloat(this.data.surface);
+          if (p && s) return (p / s).toFixed(2);
+          return '';
+        },
+
+        get priceUah() {
+          var p = parseFloat(this.data.price);
+          if (!p) return '';
+          var rates = { USD: currencyRates.usd, EUR: currencyRates.eur, UAH: 1 };
+          var key = this.data.currency ? this.data.currency.toUpperCase() : 'UAH';
+          return Math.round(p * (rates[key] || 1)).toLocaleString('uk-UA');
+        },
+
+        get priceForeign() {
+          var p = parseFloat(this.data.price);
+          if (!p) return '';
+          return Math.round(p).toLocaleString('uk-UA');
+        },
+
+        get pricePerM2Foreign() {
+          var p = parseFloat(this.data.price);
+          var s = parseFloat(this.data.surface);
+          if (!p || !s) return '';
+          return Math.round(p / s).toLocaleString('uk-UA');
+        },
+
+        get currencyRateLabel() {
+          var rates = { usd: currencyRates.usd, eur: currencyRates.eur };
+          var rate = rates[this.data.currency];
+          if (!rate) return '';
+          var sym = this.data.currency === 'usd' ? '$1' : '€1';
+          return rate + ' гривень за ' + sym;
+        },
+
+        get filteredRaions() {
+          if (!this.data.oblast || !this.addressData.length) return [];
+          var oblast = this.addressData.find(function (o) { return o.id === this.data.oblast; }.bind(this));
+          var raions = oblast ? oblast.raions : [];
+          var presets = this.getPresetValues('raion');
+          if (presets) return raions.filter(function (r) { return presets.indexOf(r.id) !== -1; });
+          return raions;
+        },
+
+        get filteredHromadas() {
+          if (!this.data.raion || !this.addressData.length) return [];
+          for (var i = 0; i < this.addressData.length; i++) {
+            var raions = this.addressData[i].raions || [];
+            for (var j = 0; j < raions.length; j++) {
+              if (raions[j].id === this.data.raion) {
+                var hromadas = raions[j].hromadas || [];
+                var presets = this.getPresetValues('hromada');
+                if (presets) return hromadas.filter(function (h) { return presets.indexOf(h.id) !== -1; });
+                return hromadas;
+              }
+            }
+          }
+          return [];
+        },
+
+        getLocationWidgetConfig: function () {
+          for (var s = 0; s < (this.config && this.config.steps || []).length; s++) {
+            var step = this.config.steps[s];
+            if (!step.rows) continue;
+            for (var r = 0; r < step.rows.length; r++) {
+              var cols = step.rows[r].cols || [];
+              for (var c = 0; c < cols.length; c++) {
+                var nrows = cols[c].rows || [];
+                for (var nr = 0; nr < nrows.length; nr++) {
+                  var fields = nrows[nr].fields || [];
+                  for (var f = 0; f < fields.length; f++) {
+                    if (fields[f].widget === 'location') return fields[f];
+                  }
+                }
+              }
+            }
+          }
+          return null;
+        },
+
+        getLocationFieldConfig: function (fieldName) {
+          var widget = this.getLocationWidgetConfig();
+          return widget && widget.fields ? widget.fields[fieldName] : null;
+        },
+
+        getLocationMethod: function () {
+          var widget = this.getLocationWidgetConfig();
+          return widget && widget.settings && widget.settings.method === 'two' ? 'two' : 'one';
+        },
+
+        isLocationReadonly: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          if (!field || !field.value) return false;
+          if (field.value.depends) {
+            for (var i = 0; i < field.value.depends.length; i++) {
+              var d = field.value.depends[i];
+              if (FormEngine.matchesValues(this.data[d.field], d.values, d.except)) {
+                return !!d.readonly;
+              }
+            }
+          }
+          if (field.value.default) return !!field.value.default.readonly;
+          return false;
+        },
+
+        isLocationFieldRequired: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          if (!field) return false;
+          return field.required !== false;
+        },
+
+        locationRequiredMeta: function (fieldName, key, def) {
+          def = def || '';
+          var field = this.getLocationFieldConfig(fieldName);
+          if (!field) return def;
+          var r = field.required;
+          if (r && typeof r === 'object' && !Array.isArray(r) && r[key] !== undefined) return r[key];
+          var settings = this.config && this.config.settings && this.config.settings.required;
+          return (settings && settings[key] !== undefined) ? settings[key] : def;
+        },
+
+        getPresetValues: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          if (!field || !field.value) return null;
+          var val = null;
+          if (field.value.depends) {
+            for (var i = 0; i < field.value.depends.length; i++) {
+              var rule = field.value.depends[i];
+              if (FormEngine.matchesValues(this.data[rule.field], rule.values, rule.except)) {
+                val = rule.value;
+                break;
+              }
+            }
+          }
+          if (val === null && field.value.default && field.value.default.value !== undefined) {
+            val = field.value.default.value;
+          }
+          if (val === null || val === '' || val === undefined) return null;
+          return Array.isArray(val) ? val : [val];
+        },
+
+        isSinglePreset: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          if (!field || !field.value) return false;
+          var ro = false;
+          if (field.value.depends) {
+            for (var i = 0; i < field.value.depends.length; i++) {
+              var d = field.value.depends[i];
+              if (FormEngine.matchesValues(this.data[d.field], d.values, d.except)) {
+                ro = !!d.readonly;
+                break;
+              }
+            }
+          }
+          if (!ro && field.value.default) ro = !!field.value.default.readonly;
+          if (!ro) return false;
+          var presets = this.getPresetValues(fieldName);
+          return presets && presets.length === 1;
+        },
+
+        getPresetName: function (fieldName) {
+          var presets = this.getPresetValues(fieldName);
+          if (!presets || presets.length !== 1) return '';
+          var id = presets[0];
+          if (fieldName === 'oblast') {
+            var o = this.addressData.find(function (x) { return x.id === id; });
+            return o ? o.name : id;
+          }
+          if (fieldName === 'raion') {
+            for (var i = 0; i < this.addressData.length; i++) {
+              var raions = this.addressData[i].raions || [];
+              for (var j = 0; j < raions.length; j++) {
+                if (raions[j].id === id) return raions[j].name;
+              }
+            }
+            return id;
+          }
+          if (fieldName === 'hromada') {
+            for (var i = 0; i < this.addressData.length; i++) {
+              var raions = this.addressData[i].raions || [];
+              for (var j = 0; j < raions.length; j++) {
+                var hromadas = raions[j].hromadas || [];
+                for (var k = 0; k < hromadas.length; k++) {
+                  if (hromadas[k].id === id) return hromadas[k].name;
+                }
+              }
+            }
+            return id;
+          }
+          if (fieldName === 'settlement') {
+            for (var i = 0; i < this.addressIndex.length; i++) {
+              if (this.addressIndex[i].id === id) return this.addressIndex[i].name;
+            }
+            return id;
+          }
+          return id;
+        },
+
+        applyLocationPresets: function () {
+          var self = this;
+          var widget = this.getLocationWidgetConfig();
+          if (!widget || !widget.fields) return;
+          var presets = { oblast: null, raion: null, hromada: null, settlement: null };
+          var hasPreset = false;
+          var fn;
+          for (fn in widget.fields) {
+            if (!widget.fields.hasOwnProperty(fn)) continue;
+            var fcfg = widget.fields[fn];
+            if (!fcfg.value) continue;
+            var found = false;
+            if (fcfg.value.depends) {
+              for (var d = 0; d < fcfg.value.depends.length; d++) {
+                var rule = fcfg.value.depends[d];
+                if (FormEngine.matchesValues(self.data[rule.field], rule.values, rule.except)) {
+                  presets[fn] = rule.value;
+                  found = true;
+                  hasPreset = true;
+                  break;
+                }
+              }
+            }
+            if (!found && fcfg.value.default && fcfg.value.default.value !== undefined && fcfg.value.default.value !== '') {
+              var val = fcfg.value.default.value;
+              if (Array.isArray(val)) {
+                if (val.length === 1) presets[fn] = val[0];
+              } else {
+                presets[fn] = val;
+              }
+              hasPreset = true;
+            }
+          }
+          if (!hasPreset) return;
+          var presetOblast = presets['oblast'];
+          var presetRaion = presets['raion'];
+          if (presetRaion && !presetOblast) return;
+          if (presetOblast) self.data.oblast = presetOblast;
+          if (presetRaion) { if (self.data.oblast) self.data.raion = presetRaion; }
+        },
+
+        get filteredOblasts() {
+          var data = this.addressData;
+          var presets = this.getPresetValues('oblast');
+          if (presets) return data.filter(function (o) { return presets.indexOf(o.id) !== -1; });
+          return data;
+        },
+
+        loadAddressData: function () {
+          var self = this;
+          var widget = this.getLocationWidgetConfig();
+          var path = widget && widget.data ? widget.data : '/assets/data/address.json';
+          fetch(path)
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              self.addressData = data;
+              self.addressLoaded = true;
+              var idx = [];
+              for (var i = 0; i < data.length; i++) {
+                var o = data[i];
+                var raions = o.raions || [];
+                for (var j = 0; j < raions.length; j++) {
+                  var r = raions[j];
+                  var hromadas = r.hromadas || [];
+                  for (var k = 0; k < hromadas.length; k++) {
+                    var h = hromadas[k];
+                    var settlements = h.settlements || [];
+                    for (var l = 0; l < settlements.length; l++) {
+                      var s = settlements[l];
+                      idx.push({
+                        id: s.id, name: s.name, type: s.type || '',
+                        hromadaId: h.id, hromadaName: h.name, hromadaType: h.type || '',
+                        raionId: r.id, raionName: r.name,
+                        oblastId: o.id, oblastName: o.name
+                      });
+                    }
+                  }
+                }
+              }
+              self.addressIndex = idx;
+              self.applyLocationPresets();
+            })
+            .catch(function () {
+              self.addressLoaded = false;
+            });
+        },
+
+        onOblastChange: function () {
+          this.data.raion = '';
+          this.data.hromada = '';
+          this.data.settlement = '';
+          this.data.raionName = '';
+          this.data.hromadaName = '';
+          this.addressSearch = '';
+          this.addressResults = [];
+          this.hromadaSearch = '';
+          this.hromadaResults = [];
+          this.errors['oblast'] = null;
+          this.errors['raion'] = null;
+          this.errors['hromada'] = null;
+          this.errors['settlement'] = null;
+        },
+
+        onRaionChange: function () {
+          this.data.hromada = '';
+          this.data.settlement = '';
+          this.data.raionName = '';
+          this.data.hromadaName = '';
+          this.addressSearch = '';
+          this.addressResults = [];
+          this.hromadaSearch = '';
+          this.hromadaResults = [];
+          this.errors['raion'] = null;
+          this.errors['hromada'] = null;
+          this.errors['settlement'] = null;
+        },
+
+        searchHromada: function () {
+          var self = this;
+          var q = this.hromadaSearch ? this.hromadaSearch.trim().toLowerCase() : '';
+          var hromadas = this.filteredHromadas;
+          if (q.length < 3) { this.hromadaResults = hromadas.slice(0, 10); return; }
+          var results = [];
+          for (var i = 0; i < hromadas.length; i++) {
+            if (results.length >= 10) break;
+            if (hromadas[i].name.toLowerCase().indexOf(q) !== -1) {
+              results.push(hromadas[i]);
+            }
+          }
+          this.hromadaResults = results;
+          if (this.data.hromada && results.length && results.every(function (r) { return r.id !== self.data.hromada; })) {
+            this.data.hromada = '';
+            this.data.settlement = '';
+            this.addressSearch = '';
+            this.addressResults = [];
+          }
+        },
+
+        selectHromada: function (h) {
+          this.data.hromada = h.id;
+          this.hromadaSearch = h.name;
+          this.hromadaResults = [];
+          this.hromadaShowDropdown = false;
+          this.data.settlement = '';
+          this.addressSearch = '';
+          this.addressResults = [];
+          this.errors['hromada'] = null;
+          this.errors['settlement'] = null;
+        },
+
+        addressSearchSettlement: function (isFocus) {
+          var self = this;
+          var q = this.addressSearch ? this.addressSearch.trim().toLowerCase() : '';
+          var settlementPresets = this.getPresetValues('settlement');
+          var method = this.getLocationMethod();
+          var results = [];
+          var matching = function (item) {
+            if (method === 'two') {
+              if (self.data.hromada && item.hromadaId !== self.data.hromada) return false;
+              if (self.data.oblast && item.oblastId !== self.data.oblast) return false;
+            } else {
+              if (self.data.hromada && item.hromadaId !== self.data.hromada) return false;
+            }
+            if (settlementPresets && settlementPresets.indexOf(item.id) === -1) return false;
+            return true;
+          };
+          if (q.length < 2) {
+            if (isFocus) {
+              for (var i = 0; i < this.addressIndex.length && results.length < 10; i++) {
+                if (matching(this.addressIndex[i])) results.push(this.addressIndex[i]);
+              }
+            }
+            this.addressResults = results;
+            return;
+          }
+          for (var i = 0; i < this.addressIndex.length; i++) {
+            if (results.length >= 10) break;
+            if (!matching(this.addressIndex[i])) continue;
+            if (this.addressIndex[i].name.toLowerCase().indexOf(q) !== -1) {
+              results.push(this.addressIndex[i]);
+            }
+          }
+          this.addressResults = results;
+          if (this.data.settlement && results.length && results.every(function (s) { return s.id !== self.data.settlement; })) {
+            this.data.settlement = '';
+          }
+        },
+
+        formatSettlementName: function (s) {
+          return s.name + ' <small class="text-muted">(' + s.type + ')</small>, ' + s.hromadaName + ' <small class="text-muted">(' + s.hromadaType + ')</small>.';
+        },
+
+        selectSettlement: function (s) {
+          this.data.settlement = s.id;
+          this.data.hromada = s.hromadaId;
+          this.data.raion = s.raionId;
+          this.data.oblast = s.oblastId;
+          if (this.getLocationMethod() === 'two') {
+            this.addressSearch = s.name + ' (' + s.type + '), ' + s.hromadaName + ' (' + s.hromadaType + ').';
+          } else {
+            this.addressSearch = s.name;
+          }
+          this.addressResults = [];
+          this.addressShowDropdown = false;
+          this.raionName = s.raionName;
+          this.hromadaName = s.hromadaName;
+          this.hromadaSearch = s.hromadaName;
+          this.hromadaResults = [];
+          this.errors['oblast'] = null;
+          this.errors['raion'] = null;
+          this.errors['hromada'] = null;
+          this.errors['settlement'] = null;
+        },
+
+        submit: function () {
+          if (!this.validateAll()) return;
+          var self = this;
+          var locMsg = function (fn, fallback) {
+            var f = self.getLocationFieldConfig(fn);
+            return (f && f.message) ? f.message : fallback;
+          };
+          if (!this.data.oblast) { this.errors['oblast'] = locMsg('oblast', 'Виберіть область'); return; }
+          if (!this.data.raion) { this.errors['raion'] = locMsg('raion', 'Виберіть район'); return; }
+          if (!this.data.hromada) { this.errors['hromada'] = locMsg('hromada', 'Виберіть громаду'); return; }
+          if (!this.data.settlement) { this.errors['settlement'] = locMsg('settlement', 'Виберіть населений пункт'); return; }
+          this.submitting = true;
+          var formEl = document.getElementById('add-property-form');
+          var turnstileField = formEl ? formEl.querySelector('[name="cf-turnstile-response"]') : null;
+          var turnstileToken = turnstileField ? turnstileField.value : '';
+          var formData = new FormData();
+          formData.append('data', JSON.stringify(this.data));
+          formData.append('cf-turnstile-response', turnstileToken);
+          for (var key in this.files) {
+            if (this.files.hasOwnProperty(key)) {
+              var fieldFiles = this.files[key];
+              for (var i = 0; i < fieldFiles.length; i++) {
+                formData.append(key + '[]', fieldFiles[i]);
+              }
+            }
+          }
+          fetch('/php/add-property.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (res.success) { this.submitted = true; this.submitting = false; }
+            else { this.submitting = false; if (res.errors) this.errors = res.errors; }
+          }.bind(this))
+          .catch(function () { this.submitting = false; }.bind(this));
+        }
+      };
+
+      FormEngine.mixInto(app, formConfig);
+      return app;
+    });
+  });
+
+  tryInitTurnstile();
+})();
+</script>

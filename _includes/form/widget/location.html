@@ -1,0 +1,141 @@
+{% assign f = include.field %}
+{% assign method = f.settings.method | default: 'one' %}
+{% assign deps = f.depends | jsonify | replace: '"', "'" | replace: '&gt;', '>' | replace: '&lt;', '<' %}
+{% assign fo = f.fields.oblast %}
+{% assign fr = f.fields.raion %}
+{% assign fh = f.fields.hromada %}
+{% assign fs = f.fields.settlement %}
+<div class="{{ f.class | default: 'col-12' }}"
+     {% if f.depends %}x-show="evaluateDepends({{ deps }})"{% endif %}>
+  <div class="card mb-3">
+    <div class="card-body">
+      {% if f.label %}<h6 class="card-title">{{ f.label }}</h6>{% endif %}
+
+      <div class="form-group">
+        <label>{{ fo.label | default: 'Область' }}
+          <span class="text-danger" :class="locationRequiredMeta('oblast', 'class')"
+                x-show="isLocationFieldRequired('oblast')"
+                :title="locationRequiredMeta('oblast', 'tooltip') || undefined">
+            <span x-html="locationRequiredMeta('oblast', 'marker', '*')"></span>
+            <a x-show="locationRequiredMeta('oblast', 'informer')"
+               :href="locationRequiredMeta('oblast', 'informer')"
+               target="_blank" class="ml-1"
+               x-text="locationRequiredMeta('oblast', 'icon', 'ⓘ')"></a>
+          </span>
+        </label>
+        <select class="form-control" x-model="data.oblast" @change="onOblastChange()"
+                :class="errors['oblast'] ? 'is-invalid' : ''"
+                :disabled="isLocationReadonly('oblast')">
+          <option value="">{{ fo.placeholder | default: 'Виберіть область...' }}</option>
+          <template x-for="o in filteredOblasts" :key="o.id">
+            <option :value="o.id" x-text="o.name"></option>
+          </template>
+        </select>
+        <div class="invalid-feedback" x-show="errors['oblast']" x-text="errors['oblast']"></div>
+      </div>
+
+      <div class="form-group" x-show="{% if method == 'two' %}data.raion{% else %}data.oblast{% endif %}">
+        <label>{{ fr.label | default: 'Район' }}
+          <span class="text-danger" :class="locationRequiredMeta('raion', 'class')"
+                x-show="isLocationFieldRequired('raion')"
+                :title="locationRequiredMeta('raion', 'tooltip') || undefined">
+            <span x-html="locationRequiredMeta('raion', 'marker', '*')"></span>
+            <a x-show="locationRequiredMeta('raion', 'informer')"
+               :href="locationRequiredMeta('raion', 'informer')"
+               target="_blank" class="ml-1"
+               x-text="locationRequiredMeta('raion', 'icon', 'ⓘ')"></a>
+          </span>
+        </label>
+        <select class="form-control" x-model="data.raion" @change="onRaionChange()"
+                :class="errors['raion'] ? 'is-invalid' : ''"
+                :disabled="isLocationReadonly('raion'){% if method == 'two' %} || data.raion{% endif %}">
+          <option value="">{{ fr.placeholder | default: 'Виберіть район...' }}</option>
+          <template x-for="r in filteredRaions" :key="r.id">
+            <option :value="r.id" x-text="r.name"></option>
+          </template>
+        </select>
+        <div class="invalid-feedback" x-show="errors['raion']" x-text="errors['raion']"></div>
+      </div>
+
+      <div class="form-group" x-show="{% if method == 'two' %}data.hromada{% else %}data.raion{% endif %}">
+        <label>{{ fh.label | default: 'Територіальна громада' }}
+          <span class="text-danger" :class="locationRequiredMeta('hromada', 'class')"
+                x-show="isLocationFieldRequired('hromada')"
+                :title="locationRequiredMeta('hromada', 'tooltip') || undefined">
+            <span x-html="locationRequiredMeta('hromada', 'marker', '*')"></span>
+            <a x-show="locationRequiredMeta('hromada', 'informer')"
+               :href="locationRequiredMeta('hromada', 'informer')"
+               target="_blank" class="ml-1"
+               x-text="locationRequiredMeta('hromada', 'icon', 'ⓘ')"></a>
+          </span>
+        </label>
+        <div class="position-relative">
+          <input type="text" class="form-control"
+                 x-model="hromadaSearch"
+                 :class="errors['hromada'] ? 'is-invalid' : ''"
+                 :readonly="isLocationReadonly('hromada'){% if method == 'two' %} || data.hromada{% endif %}"
+                 @input.debounce.200ms="searchHromada()"
+                 @focus="hromadaShowDropdown = true; searchHromada()"
+                 @blur.debounce.300ms="hromadaShowDropdown = false"
+                 placeholder="{{ fh.placeholder | default: 'Введіть назву громади...' }}">
+          <div x-show="hromadaShowDropdown && hromadaResults.length > 0"
+               class="dropdown-menu show position-absolute w-100"
+               style="max-height: 250px; overflow-y: auto; z-index: 1050;">
+            <template x-for="h in hromadaResults" :key="h.id">
+                <button type="button" class="dropdown-item"
+                        @mousedown.prevent="selectHromada(h)">
+                  <span x-text="h.name"></span>
+                  <small class="text-muted" x-text="' (' + h.type + ')'"></small>
+                </button>
+            </template>
+          </div>
+        </div>
+        <div class="invalid-feedback" x-show="errors['hromada']" x-text="errors['hromada']"></div>
+      </div>
+
+      <div class="form-group" x-show="{% if method == 'two' %}true{% else %}data.hromada{% endif %}">
+        <label>{{ fs.label | default: 'Населений пункт' }}
+          <span class="text-danger" :class="locationRequiredMeta('settlement', 'class')"
+                x-show="isLocationFieldRequired('settlement')"
+                :title="locationRequiredMeta('settlement', 'tooltip') || undefined">
+            <span x-html="locationRequiredMeta('settlement', 'marker', '*')"></span>
+            <a x-show="locationRequiredMeta('settlement', 'informer')"
+               :href="locationRequiredMeta('settlement', 'informer')"
+               target="_blank" class="ml-1"
+               x-text="locationRequiredMeta('settlement', 'icon', 'ⓘ')"></a>
+          </span>
+        </label>
+        <div class="position-relative">
+          <input type="text" class="form-control"
+                 x-model="addressSearch"
+                 :class="errors['settlement'] ? 'is-invalid' : ''"
+                 :readonly="isLocationReadonly('settlement')"
+                 @input.debounce.200ms="addressSearchSettlement()"
+                 @focus="addressShowDropdown = true; addressSearchSettlement(true)"
+                 @blur.debounce.300ms="addressShowDropdown = false"
+                 placeholder="{{ fs.placeholder | default: 'Введіть назву...' }}">
+          <div x-show="addressShowDropdown && addressResults.length > 0"
+               class="dropdown-menu show position-absolute w-100"
+               style="max-height: 250px; overflow-y: auto; z-index: 1050;">
+            <template x-for="s in addressResults" :key="s.id">
+              <button type="button" class="dropdown-item"
+                      @mousedown.prevent="selectSettlement(s)">
+{% if method == 'two' %}
+                <span class="font-weight-normal" x-html="formatSettlementName(s)"></span>
+                <br>
+                <small class="text-muted" x-text="s.raionName + ', ' + s.oblastName + '.'"></small>
+{% else %}
+                <span>
+                  <span x-text="s.name"></span>
+                  <small class="text-muted" x-text="' (' + s.type + ')'"></small>
+                </span>
+{% endif %}
+              </button>
+            </template>
+          </div>
+        </div>
+        <div class="invalid-feedback" x-show="errors['settlement']" x-text="errors['settlement']"></div>
+      </div>
+    </div>
+  </div>
+</div>

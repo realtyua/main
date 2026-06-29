@@ -6,14 +6,14 @@ description: Розмістити безкоштовне оголошення п
 navhide: 1
 slug: ivano-frankivsk
 sitemap: false
+form: add-property
 ---
 
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <h1>Подання оголошення в місті {{ site.data.uk.flag_ua_city }} та {{ site.data.uk.deck_region_in }} області</h1>
     <p class="lead">Ми вам завджи раді! Будь ласка будьте уважні заповнюючи форму дійсними даними це дуже важливо для вас.</p>
-    <p><a href="{{ site.addre }}">Безкоштовно додати оголошення</a> про продаж чи оренду нерухомості.</p>
-    {% comment %}{%- include add-property.html -%}{% endcomment %}
+    {%- include add-property.html -%}
   </div>
 </div>
 

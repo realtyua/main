@@ -1,0 +1,10 @@
+{% assign f = include.field %}
+<div class="{{ f.col | default: 'col-12' }}"{% if f.depends %} x-show="evaluateDepends({{ f.depends | jsonify | replace: '"', "'" }})"{% endif %}>
+{% if f.label.depends %}
+  <span class="badge badge-{{ f.variant | default: 'secondary' }}{% if f.pill %} badge-pill{% endif %}{% if f.class %} {{ f.class }}{% endif %}"><span x-html="labelText('{{ f.name }}')"></span></span>
+{% elsif f.markdown %}
+  <span class="badge badge-{{ f.variant | default: 'secondary' }}{% if f.pill %} badge-pill{% endif %}{% if f.class %} {{ f.class }}{% endif %}">{{ f.label | markdownify }}</span>
+{% else %}
+  <span class="badge badge-{{ f.variant | default: 'secondary' }}{% if f.pill %} badge-pill{% endif %}{% if f.class %} {{ f.class }}{% endif %}">{{ f.label }}</span>
+{% endif %}
+</div>

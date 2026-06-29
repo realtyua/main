@@ -1,0 +1,22 @@
+{% assign f = include.field %}{% case f.type %}
+{% when 'radio' %}{% include form/field/radio.html field=f auto=include.auto %}
+{% when 'select' %}{% include form/field/select.html field=f auto=include.auto %}
+{% when 'location' %}{% include form/field/location.html field=f auto=include.auto %}
+{% when 'region' %}{% include form/field/region.html field=f auto=include.auto %}
+{% when 'number' %}{% include form/field/number.html field=f auto=include.auto %}
+{% when 'text' %}{% include form/field/text.html field=f auto=include.auto %}
+{% when 'email' %}{% include form/field/email.html field=f auto=include.auto %}
+{% when 'tel' %}{% include form/field/tel.html field=f auto=include.auto %}
+{% when 'textarea' %}{% include form/field/textarea.html field=f auto=include.auto %}
+{% when 'file' %}{% include form/field/file.html field=f auto=include.auto %}
+{% when 'checkbox' %}{% include form/field/checkbox.html field=f auto=include.auto %}
+{% when 'checkbox_group' %}{% include form/field/checkbox_group.html field=f auto=include.auto %}
+{% when 'heading' %}{% include form/content/heading.html field=f %}
+{% when 'paragraph' %}{% include form/content/paragraph.html field=f %}
+{% when 'list' %}{% include form/content/list.html field=f %}
+{% when 'alert' %}{% include form/content/alert.html field=f %}
+{% when 'badge' %}{% include form/content/badge.html field=f %}
+{% when 'image' %}{% include form/content/image.html field=f %}
+{% when 'raw' %}{% include form/content/raw.html field=f %}
+{% when 'widgets' %}{% include form/widget/render.html field=f %}
+{% endcase %}
