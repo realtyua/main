@@ -162,7 +162,7 @@
           {% endfor %}
           lat: '', lng: '', address: '',
           oblast: '', raion: '', hromada: '', settlement: '',
-          raionName: '', hromadaName: ''
+          raionName: '', hromadaName: '', settlementName: '', settlementType: '', hromadaType: '', oblastName: ''
         },
 
         files: {},
@@ -176,9 +176,15 @@
         addressSearch: '',
         addressResults: [],
         addressShowDropdown: false,
+        settlementHighlightIndex: -1,
         hromadaSearch: '',
         hromadaResults: [],
         hromadaShowDropdown: false,
+        hromadaHighlightIndex: -1,
+        oblastSearch: '',
+        oblastResults: [],
+        oblastShowDropdown: false,
+        oblastHighlightIndex: -1,
         addressLoaded: false,
 
         _map: null,
@@ -659,7 +665,14 @@
           var presetOblast = presets['oblast'];
           var presetRaion = presets['raion'];
           if (presetRaion && !presetOblast) return;
-          if (presetOblast) self.data.oblast = presetOblast;
+          if (presetOblast) {
+            self.data.oblast = presetOblast;
+            var presetObj = self.addressData.find(function (o) { return o.id === presetOblast; });
+            if (presetObj) {
+              self.oblastSearch = presetObj.name;
+              self.data.oblastName = presetObj.name;
+            }
+          }
           if (presetRaion) { if (self.data.oblast) self.data.raion = presetRaion; }
         },
 
@@ -709,12 +722,62 @@
             });
         },
 
+        searchOblast: function () {
+          var raw = this.oblastSearch ? this.oblastSearch.trim().toLowerCase() : '';
+          var oblasts = this.filteredOblasts;
+          if (raw.length < 2) { this.oblastResults = oblasts.slice(0, 10); return; }
+          var results = [];
+          for (var i = 0; i < oblasts.length; i++) {
+            if (results.length >= 10) break;
+            if (oblasts[i].name.toLowerCase().indexOf(raw) !== -1) {
+              results.push(oblasts[i]);
+            }
+          }
+          this.oblastResults = results;
+        },
+
+        selectOblast: function (o) {
+          this.data.oblast = o.id;
+          this.data.oblastName = o.name;
+          this.oblastSearch = o.name;
+          this.oblastResults = [];
+          this.oblastShowDropdown = false;
+          this.onOblastChange();
+        },
+
+        clearOblast: function () {
+          this.data.oblast = '';
+          this.data.oblastName = '';
+          this.oblastSearch = '';
+          this.onOblastChange();
+        },
+
+        oblastHighlightNext: function () {
+          var max = this.oblastResults.length - 1;
+          this.oblastHighlightIndex = this.oblastHighlightIndex >= max ? 0 : this.oblastHighlightIndex + 1;
+          this._scrollHighlighted('oblastDropdown');
+        },
+        oblastHighlightPrev: function () {
+          var max = this.oblastResults.length - 1;
+          this.oblastHighlightIndex = this.oblastHighlightIndex <= 0 ? max : this.oblastHighlightIndex - 1;
+          this._scrollHighlighted('oblastDropdown');
+        },
+        oblastSelectHighlighted: function () {
+          if (this.oblastHighlightIndex >= 0 && this.oblastHighlightIndex < this.oblastResults.length) {
+            this.selectOblast(this.oblastResults[this.oblastHighlightIndex]);
+          }
+        },
+
         onOblastChange: function () {
           this.data.raion = '';
           this.data.hromada = '';
           this.data.settlement = '';
           this.data.raionName = '';
           this.data.hromadaName = '';
+          this.data.settlementName = '';
+          this.data.settlementType = '';
+          this.data.hromadaType = '';
+          this.data.oblastName = '';
           this.addressSearch = '';
           this.addressResults = [];
           this.hromadaSearch = '';
@@ -730,6 +793,10 @@
           this.data.settlement = '';
           this.data.raionName = '';
           this.data.hromadaName = '';
+          this.data.settlementName = '';
+          this.data.settlementType = '';
+          this.data.hromadaType = '';
+          this.data.oblastName = '';
           this.addressSearch = '';
           this.addressResults = [];
           this.hromadaSearch = '';
@@ -741,7 +808,8 @@
 
         searchHromada: function () {
           var self = this;
-          var q = this.hromadaSearch ? this.hromadaSearch.trim().toLowerCase() : '';
+          var raw = this.hromadaSearch ? this.hromadaSearch.trim() : '';
+          var q = raw.split(' - ')[0].toLowerCase();
           var hromadas = this.filteredHromadas;
           if (q.length < 3) { this.hromadaResults = hromadas.slice(0, 10); return; }
           var results = [];
@@ -752,6 +820,7 @@
             }
           }
           this.hromadaResults = results;
+          this.hromadaHighlightIndex = -1;
           if (this.data.hromada && results.length && results.every(function (r) { return r.id !== self.data.hromada; })) {
             this.data.hromada = '';
             this.data.settlement = '';
@@ -762,7 +831,7 @@
 
         selectHromada: function (h) {
           this.data.hromada = h.id;
-          this.hromadaSearch = h.name;
+          this.hromadaSearch = h.name + ' - ' + h.type;
           this.hromadaResults = [];
           this.hromadaShowDropdown = false;
           this.data.settlement = '';
@@ -775,6 +844,35 @@
         addressSearchSettlement: function (isFocus) {
           var self = this;
           var q = this.addressSearch ? this.addressSearch.trim().toLowerCase() : '';
+
+          if (!q && this.data.settlement) {
+            this.clearSettlement();
+            return;
+          }
+          if (q && this.data.settlement) {
+            var current = null;
+            for (var c = 0; c < this.addressIndex.length; c++) {
+              if (this.addressIndex[c].id === this.data.settlement) { current = this.addressIndex[c]; break; }
+            }
+            if (current) {
+              var expected = this.getLocationMethod() === 'two'
+                ? current.name.toLowerCase() + ' - ' + current.type.toLowerCase()
+                : current.name.toLowerCase() + ' - ' + current.type.toLowerCase();
+              if (q !== expected) {
+                this.data.settlement = '';
+                this.data.raion = '';
+                this.data.hromada = '';
+          this.data.raionName = '';
+          this.data.hromadaName = '';
+          this.data.settlementName = '';
+          this.data.settlementType = '';
+          this.data.hromadaType = '';
+          this.data.oblastName = '';
+              }
+            }
+          }
+
+          var searchName = q.split(' - ')[0].trim();
           var settlementPresets = this.getPresetValues('settlement');
           var method = this.getLocationMethod();
           var results = [];
@@ -800,11 +898,15 @@
           for (var i = 0; i < this.addressIndex.length; i++) {
             if (results.length >= 10) break;
             if (!matching(this.addressIndex[i])) continue;
-            if (this.addressIndex[i].name.toLowerCase().indexOf(q) !== -1) {
+            if (this.addressIndex[i].name.toLowerCase().indexOf(searchName) !== -1) {
               results.push(this.addressIndex[i]);
             }
           }
           this.addressResults = results;
+          this.settlementHighlightIndex = -1;
+          if (this.addressResults.length > 0) {
+            this.addressShowDropdown = true;
+          }
           if (this.data.settlement && results.length && results.every(function (s) { return s.id !== self.data.settlement; })) {
             this.data.settlement = '';
           }
@@ -820,20 +922,117 @@
           this.data.raion = s.raionId;
           this.data.oblast = s.oblastId;
           if (this.getLocationMethod() === 'two') {
-            this.addressSearch = s.name + ' (' + s.type + '), ' + s.hromadaName + ' (' + s.hromadaType + ').';
+            this.addressSearch = s.name + ' - ' + s.type;
           } else {
-            this.addressSearch = s.name;
+            this.addressSearch = s.name + ' - ' + s.type;
           }
           this.addressResults = [];
           this.addressShowDropdown = false;
           this.raionName = s.raionName;
           this.hromadaName = s.hromadaName;
-          this.hromadaSearch = s.hromadaName;
+          this.data.settlementName = s.name;
+          this.data.settlementType = s.type;
+          this.data.hromadaType = s.hromadaType;
+          this.data.oblastName = s.oblastName;
+          this.hromadaSearch = s.hromadaName + ' - ' + s.hromadaType;
           this.hromadaResults = [];
           this.errors['oblast'] = null;
           this.errors['raion'] = null;
           this.errors['hromada'] = null;
           this.errors['settlement'] = null;
+        },
+
+        clearHromada: function () {
+          this.data.hromada = '';
+          this.data.settlement = '';
+          this.data.raionName = '';
+          this.data.hromadaName = '';
+          this.data.settlementName = '';
+          this.data.settlementType = '';
+          this.data.hromadaType = '';
+          this.data.oblastName = '';
+          this.addressSearch = '';
+          this.addressResults = [];
+          this.hromadaSearch = '';
+          this.hromadaResults = [];
+          this.errors['hromada'] = null;
+          this.errors['settlement'] = null;
+        },
+
+        clearSettlement: function () {
+          this.data.settlement = '';
+          this.data.raion = '';
+          this.data.hromada = '';
+          this.data.raionName = '';
+          this.data.hromadaName = '';
+          this.data.settlementName = '';
+          this.data.settlementType = '';
+          this.data.hromadaType = '';
+          this.data.oblastName = '';
+          this.addressSearch = '';
+          this.addressResults = [];
+          this.hromadaSearch = '';
+          this.hromadaResults = [];
+          this.errors['oblast'] = null;
+          this.errors['raion'] = null;
+          this.errors['hromada'] = null;
+          this.errors['settlement'] = null;
+        },
+
+        locationSummary: function () {
+          if (!this.data.settlement) return '';
+          var parts = [];
+          if (this.data.settlementType && this.data.settlementName) parts.push(this.data.settlementType + ' ' + this.data.settlementName);
+          if (this.hromadaName && this.data.hromadaType) {
+            var hn = this.hromadaName.replace('територіальна громада', '').trim();
+            parts.push(hn + ' ' + this.data.hromadaType + ' територіальна громада');
+          }
+          if (this.raionName) parts.push(this.raionName);
+          if (this.data.oblastName) parts.push(this.data.oblastName);
+          parts.push('Україна');
+          return parts.join(', ');
+        },
+
+        _scrollHighlighted: function (refName) {
+          var self = this;
+          setTimeout(function () {
+            var container = self.$refs[refName];
+            if (!container) return;
+            var el = container.querySelector('.highlighted');
+            if (el) el.scrollIntoView({ block: 'nearest' });
+          }, 10);
+        },
+
+        settlementHighlightNext: function () {
+          var max = this.addressResults.length - 1;
+          this.settlementHighlightIndex = this.settlementHighlightIndex >= max ? 0 : this.settlementHighlightIndex + 1;
+          this._scrollHighlighted('settlementDropdown');
+        },
+        settlementHighlightPrev: function () {
+          var max = this.addressResults.length - 1;
+          this.settlementHighlightIndex = this.settlementHighlightIndex <= 0 ? max : this.settlementHighlightIndex - 1;
+          this._scrollHighlighted('settlementDropdown');
+        },
+        settlementSelectHighlighted: function () {
+          if (this.settlementHighlightIndex >= 0 && this.settlementHighlightIndex < this.addressResults.length) {
+            this.selectSettlement(this.addressResults[this.settlementHighlightIndex]);
+          }
+        },
+
+        hromadaHighlightNext: function () {
+          var max = this.hromadaResults.length - 1;
+          this.hromadaHighlightIndex = this.hromadaHighlightIndex >= max ? 0 : this.hromadaHighlightIndex + 1;
+          this._scrollHighlighted('hromadaDropdown');
+        },
+        hromadaHighlightPrev: function () {
+          var max = this.hromadaResults.length - 1;
+          this.hromadaHighlightIndex = this.hromadaHighlightIndex <= 0 ? max : this.hromadaHighlightIndex - 1;
+          this._scrollHighlighted('hromadaDropdown');
+        },
+        hromadaSelectHighlighted: function () {
+          if (this.hromadaHighlightIndex >= 0 && this.hromadaHighlightIndex < this.hromadaResults.length) {
+            this.selectHromada(this.hromadaResults[this.hromadaHighlightIndex]);
+          }
         },
 
         submit: function () {

@@ -23,14 +23,42 @@
                x-text="locationRequiredMeta('oblast', 'icon', 'ⓘ')"></a>
           </span>
         </label>
-        <select class="form-control" x-model="data.oblast" @change="onOblastChange()"
-                :class="errors['oblast'] ? 'is-invalid' : ''"
-                :disabled="isLocationReadonly('oblast')">
-          <option value="">{{ fo.placeholder | default: 'Виберіть область...' }}</option>
-          <template x-for="o in filteredOblasts" :key="o.id">
-            <option :value="o.id" x-text="o.name"></option>
-          </template>
-        </select>
+        <div class="position-relative"
+             @click.away="oblastShowDropdown = false; oblastHighlightIndex = -1"
+             @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { oblastShowDropdown = false; oblastHighlightIndex = -1; } })">
+          <input type="text" class="form-control"
+                 x-model="oblastSearch"
+                 :class="errors['oblast'] ? 'is-invalid' : ''"
+                 :readonly="isLocationReadonly('oblast')"
+                 @input.debounce.200ms="searchOblast()"
+                 @focus="if (!isLocationReadonly('oblast')) { oblastShowDropdown = true; oblastHighlightIndex = -1; searchOblast(); }"
+                 @keydown.arrow-up.prevent="oblastHighlightPrev()"
+                 @keydown.arrow-down.prevent="oblastHighlightNext()"
+                 @keydown.enter.prevent="oblastSelectHighlighted()"
+                 @keydown.escape="oblastShowDropdown = false; oblastHighlightIndex = -1"
+                 placeholder="{{ fo.placeholder | default: 'Виберіть область...' }}">
+          <button type="button" class="btn-clear" title="Очистити поле"
+                  x-show="data.oblast && !isLocationReadonly('oblast')"
+                  @click.prevent="clearOblast()">&times;</button>
+          <div x-show="oblastShowDropdown && oblastResults.length > 0 && !isLocationReadonly('oblast')"
+               x-ref="oblastDropdown"
+               class="dropdown-menu show position-absolute w-100"
+               style="max-height: 250px; overflow-y: auto; z-index: 1050;"
+               @keydown.arrow-up.prevent="oblastHighlightPrev()"
+               @keydown.arrow-down.prevent="oblastHighlightNext()"
+               @keydown.enter.prevent="oblastSelectHighlighted()"
+               @keydown.escape="oblastShowDropdown = false; oblastHighlightIndex = -1">
+            <template x-for="(o, oIdx) in oblastResults" :key="o.id">
+              <button type="button" class="dropdown-item"
+                      :class="{ 'highlighted': oblastHighlightIndex === oIdx }"
+                      @mousedown.prevent="selectOblast(o)"
+                      @mouseenter="oblastHighlightIndex = oIdx"
+                      @focus="oblastHighlightIndex = oIdx">
+                <span x-text="o.name"></span>
+              </button>
+            </template>
+          </div>
+        </div>
         <div class="invalid-feedback" x-show="errors['oblast']" x-text="errors['oblast']"></div>
       </div>
 
@@ -69,23 +97,38 @@
                x-text="locationRequiredMeta('hromada', 'icon', 'ⓘ')"></a>
           </span>
         </label>
-        <div class="position-relative">
+        <div class="position-relative"
+             @click.away="hromadaShowDropdown = false; hromadaHighlightIndex = -1"
+             @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { hromadaShowDropdown = false; hromadaHighlightIndex = -1; } })">
           <input type="text" class="form-control"
                  x-model="hromadaSearch"
                  :class="errors['hromada'] ? 'is-invalid' : ''"
                  :readonly="isLocationReadonly('hromada'){% if method == 'two' %} || data.hromada{% endif %}"
                  @input.debounce.200ms="searchHromada()"
-                 @focus="hromadaShowDropdown = true; searchHromada()"
-                 @blur.debounce.300ms="hromadaShowDropdown = false"
-                 placeholder="{{ fh.placeholder | default: 'Введіть назву громади...' }}">
-          <div x-show="hromadaShowDropdown && hromadaResults.length > 0"
+                 @focus="if (!isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}) { hromadaShowDropdown = true; hromadaHighlightIndex = -1; searchHromada(); }"
+                 @keydown.arrow-up.prevent="hromadaHighlightPrev()"
+                 @keydown.arrow-down.prevent="hromadaHighlightNext()"
+                 @keydown.enter.prevent="hromadaSelectHighlighted()"
+                 @keydown.escape="hromadaShowDropdown = false; hromadaHighlightIndex = -1"
+                  placeholder="{{ fh.placeholder | default: 'Введіть назву громади...' }}">
+          <button type="button" class="btn-clear" title="Очистити поле"
+                  x-show="data.hromada && !isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}"
+                  @click.prevent="clearHromada()">&times;</button>
+          <div x-show="hromadaShowDropdown && hromadaResults.length > 0 && !isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}"
+               x-ref="hromadaDropdown"
                class="dropdown-menu show position-absolute w-100"
-               style="max-height: 250px; overflow-y: auto; z-index: 1050;">
-            <template x-for="h in hromadaResults" :key="h.id">
+               style="max-height: 250px; overflow-y: auto; z-index: 1050;"
+               @keydown.arrow-up.prevent="hromadaHighlightPrev()"
+               @keydown.arrow-down.prevent="hromadaHighlightNext()"
+               @keydown.enter.prevent="hromadaSelectHighlighted()"
+               @keydown.escape="hromadaShowDropdown = false; hromadaHighlightIndex = -1">
+            <template x-for="(h, hIdx) in hromadaResults" :key="h.id">
                 <button type="button" class="dropdown-item"
-                        @mousedown.prevent="selectHromada(h)">
-                  <span x-text="h.name"></span>
-                  <small class="text-muted" x-text="' (' + h.type + ')'"></small>
+                        :class="{ 'highlighted': hromadaHighlightIndex === hIdx }"
+                        @mousedown.prevent="selectHromada(h)"
+                        @mouseenter="hromadaHighlightIndex = hIdx"
+                        @focus="hromadaHighlightIndex = hIdx">
+                  <span x-text="h.name + ' - ' + h.type"></span>
                 </button>
             </template>
           </div>
@@ -105,36 +148,65 @@
                x-text="locationRequiredMeta('settlement', 'icon', 'ⓘ')"></a>
           </span>
         </label>
-        <div class="position-relative">
+        <div class="position-relative"
+             @click.away="addressShowDropdown = false; settlementHighlightIndex = -1"
+             @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { addressShowDropdown = false; settlementHighlightIndex = -1; } })">
           <input type="text" class="form-control"
                  x-model="addressSearch"
                  :class="errors['settlement'] ? 'is-invalid' : ''"
                  :readonly="isLocationReadonly('settlement')"
                  @input.debounce.200ms="addressSearchSettlement()"
-                 @focus="addressShowDropdown = true; addressSearchSettlement(true)"
-                 @blur.debounce.300ms="addressShowDropdown = false"
-                 placeholder="{{ fs.placeholder | default: 'Введіть назву...' }}">
-          <div x-show="addressShowDropdown && addressResults.length > 0"
+                 @focus="if (!isLocationReadonly('settlement')) { addressShowDropdown = true; settlementHighlightIndex = -1; addressSearchSettlement(true); }"
+                 @keydown.arrow-up.prevent="settlementHighlightPrev()"
+                 @keydown.arrow-down.prevent="settlementHighlightNext()"
+                 @keydown.enter.prevent="settlementSelectHighlighted()"
+                 @keydown.escape="addressShowDropdown = false; settlementHighlightIndex = -1"
+                  placeholder="{{ fs.placeholder | default: 'Введіть назву...' }}">
+          <button type="button" class="btn-clear" title="Очистити поле"
+                  x-show="data.settlement && !isLocationReadonly('settlement')"
+                  @click.prevent="clearSettlement()">&times;</button>
+          <div x-show="addressShowDropdown && addressResults.length > 0 && !isLocationReadonly('settlement')"
+               x-ref="settlementDropdown"
                class="dropdown-menu show position-absolute w-100"
-               style="max-height: 250px; overflow-y: auto; z-index: 1050;">
-            <template x-for="s in addressResults" :key="s.id">
-              <button type="button" class="dropdown-item"
-                      @mousedown.prevent="selectSettlement(s)">
+               style="max-height: 250px; overflow-y: auto; z-index: 1050;"
+               @keydown.arrow-up.prevent="settlementHighlightPrev()"
+               @keydown.arrow-down.prevent="settlementHighlightNext()"
+               @keydown.enter.prevent="settlementSelectHighlighted()"
+               @keydown.escape="addressShowDropdown = false; settlementHighlightIndex = -1">
+            <template x-for="(s, sIdx) in addressResults" :key="s.id">
 {% if method == 'two' %}
-                <span class="font-weight-normal" x-html="formatSettlementName(s)"></span>
-                <br>
-                <small class="text-muted" x-text="s.raionName + ', ' + s.oblastName + '.'"></small>
-{% else %}
+              <button type="button" class="dropdown-item searchable-dropdown-item"
+                      :class="{ 'highlighted': settlementHighlightIndex === sIdx }"
+                      @mousedown.prevent="selectSettlement(s)"
+                      @mouseenter="settlementHighlightIndex = sIdx"
+                      @focus="settlementHighlightIndex = sIdx">
                 <span>
-                  <span x-text="s.name"></span>
-                  <small class="text-muted" x-text="' (' + s.type + ')'"></small>
+                  <span x-text="s.name + ' - ' + s.type"></span> <small class="text-muted" x-text="'(' + s.hromadaName + ' - ' + s.hromadaType + ')'"></small>
                 </span>
-{% endif %}
+                <div class="text-muted small" x-text="s.raionName + ', ' + s.oblastName"></div>
               </button>
+{% else %}
+              <button type="button" class="dropdown-item"
+                      :class="{ 'highlighted': settlementHighlightIndex === sIdx }"
+                      @mousedown.prevent="selectSettlement(s)"
+                      @mouseenter="settlementHighlightIndex = sIdx"
+                      @focus="settlementHighlightIndex = sIdx">
+                <span>
+                  <span x-text="s.name + ' - ' + s.type"></span>
+                </span>
+              </button>
+{% endif %}
             </template>
           </div>
         </div>
         <div class="invalid-feedback" x-show="errors['settlement']" x-text="errors['settlement']"></div>
+      </div>
+      <div x-show="data.settlement" class="mt-2">
+        <div class="card bg-light mb-0">
+          <div class="card-body py-2">
+            <small class="text-muted d-block" x-text="locationSummary()"></small>
+          </div>
+        </div>
       </div>
     </div>
   </div>

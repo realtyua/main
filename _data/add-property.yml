@@ -281,13 +281,13 @@ steps:
                     placeholder: Оберіть де знаходиться кімната...
                     options:
                       - value: room_apartment
-                        label: Окрема кімната у квартирі
+                        label: Кімната у квартирі
                       - value: room_house
-                        label: Окрема кімната у будинку
+                        label: Кімната у будинку
                       - value: room_hostel
-                        label: Окрема кімната у гуртожитку
+                        label: Кімната у гуртожитку
                       - value: room_hotel
-                        label: Окрема кімната у гостинниці
+                        label: Кімната у гостинниці
                     col: col-8
                     depends:
                       - field: property_type
@@ -360,15 +360,17 @@ steps:
                     col: col-8
                     options:
                       - value: parking_public
-                        label: Прибудинкова територія (у загальному користуванні)
+                        label: Прибудинкова територія (загальна)
+                      - value: parking_garage
+                        label: Окремий гараж
                       - value: parking_garage
                         label: Окремий гараж
                       - value: parking_area
-                        label: Паркувальний майданчик (у користуванні співвласників)
+                        label: Паркувальний майданчик (у співвласників)
                       - value: parking_space_underland
-                        label: Паркувальне місце у підземному паркінгу
+                        label: Паркувальне місце (підземний паркінг)
                       - value: parking_space
-                        label: Паркувальне місце на паркувальнрму майданчику
+                        label: Паркувальне місце (на майданчику)
                     depends:
                       - field: property_type
                         values: [apartment, apartment_part, house, house_part, room, commercial]
@@ -427,6 +429,15 @@ steps:
                     min: 1
                     validation:
                       required: Вкажіть ціну
+                    value:
+                      default:
+                        value: ''
+                        readonly: false
+                      depends:
+                        - field: action_type
+                          values: [realty_free, rent_free]
+                          value: '1'
+                          readonly: true
 
                   - name: currency
                     type: select
@@ -440,6 +451,15 @@ steps:
                         label: "Євро (€)"
                       - value: usd
                         label: "Амереканський доллар ($)"
+                    value:
+                      default:
+                        value: ''
+                        readonly: false
+                      depends:
+                        - field: action_type
+                          values: [realty_free, rent_free]
+                          value: 'uah'
+                          readonly: true
 
               - class: row
                 fields:
@@ -539,19 +559,20 @@ steps:
                   - name: location_widget
                     type: widgets
                     widget: location
-                    data: /assets/data/address.json
+                    data: /assets/data/all.json
                     settings:
-                      method: two
+                      #method: two
+                      method: one
                     fields:
                       oblast:
                         label: Область
-                        placeholder: Виберіть область...
+                        placeholder: Введіть назву області...
                         required: true
                         message: Виберіть область
-                        value:
-                          default:
-                            value: ["0342"]
-                            readonly: true
+                        #value:
+                        #  default:
+                        #    value: ["044"]
+                        #    readonly: true
                       raion:
                         label: Район
                         placeholder: Виберіть район...
