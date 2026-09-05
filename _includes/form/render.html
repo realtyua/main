@@ -1,6 +1,7 @@
 {% assign f = include.field %}{% case f.type %}
 {% when 'radio' %}{% include form/field/radio.html field=f auto=include.auto %}
 {% when 'select' %}{% include form/field/select.html field=f auto=include.auto %}
+{% when 'autocomplete' %}{% include form/field/autocomplete.html field=f auto=include.auto %}
 {% when 'location' %}{% include form/field/location.html field=f auto=include.auto %}
 {% when 'region' %}{% include form/field/region.html field=f auto=include.auto %}
 {% when 'number' %}{% include form/field/number.html field=f auto=include.auto %}

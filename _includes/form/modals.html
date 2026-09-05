@@ -1,0 +1,25 @@
+{% assign rendered_modal_ids = ',' %}
+{% for mstep in site.data.add-property.steps %}
+  {% for mrow in mstep.rows %}
+    {% for mcol in mrow.cols %}
+      {% for mnrow in mcol.rows %}
+        {% for mfield in mnrow.fields %}
+          {% if mfield.prepend.button.modal %}
+            {% capture addon_modal_id %}{% if mfield.prepend.button.modal.id %}{{ mfield.prepend.button.modal.id }}{% else %}modal_{{ mfield.name }}_prepend{% endif %}{% endcapture %}
+            {% unless rendered_modal_ids contains addon_modal_id %}
+              {% include form/modal.html modal=mfield.prepend.button.modal modal_id=addon_modal_id %}
+              {% assign rendered_modal_ids = rendered_modal_ids | append: addon_modal_id | append: ',' %}
+            {% endunless %}
+          {% endif %}
+          {% if mfield.append.button.modal %}
+            {% capture addon_modal_id %}{% if mfield.append.button.modal.id %}{{ mfield.append.button.modal.id }}{% else %}modal_{{ mfield.name }}_append{% endif %}{% endcapture %}
+            {% unless rendered_modal_ids contains addon_modal_id %}
+              {% include form/modal.html modal=mfield.append.button.modal modal_id=addon_modal_id %}
+              {% assign rendered_modal_ids = rendered_modal_ids | append: addon_modal_id | append: ',' %}
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}

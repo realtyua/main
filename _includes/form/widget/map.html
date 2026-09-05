@@ -1,15 +1,40 @@
 {% assign f = include.field %}
 {% assign deps = f.depends | jsonify | replace: '"', "'" | replace: '&gt;', '>' | replace: '&lt;', '<' %}
+<style>
+  .map-marker-info { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.5rem 0.65rem; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 0.3rem; margin-bottom: 0.5rem; }
+  .map-marker-info-icon { flex-shrink: 0; line-height: 0; color: #dc3545; margin-top: 2px; }
+  .map-marker-info-body { flex-grow: 1; min-width: 0; }
+  .map-marker-info-address { font-size: 0.8125rem; line-height: 1.4; color: #212529; word-break: break-word; }
+  .map-marker-info-coords { font-size: 0.75rem; line-height: 1.4; color: #6c757d; margin-top: 1px; font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  .map-marker-info-loading { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8125rem; color: #6c757d; }
+  .map-picker-responsive { height: 280px; }
+  @media (min-width: 768px) { .map-picker-responsive { height: 420px; } }
+</style>
 <div class="{{ f.class | default: 'col-12' }}"
      {% if f.depends %}x-show="evaluateDepends({{ deps }})"{% endif %}>
   <div class="card mb-3">
     <div class="card-body p-2">
       {% if f.label %}<label class="mb-1"><small>{{ f.label }}</small></label>{% endif %}
-      <div x-show="data.address" class="mb-1"><small>Адреса маркера: <span x-text="data.address"></span></small></div>
-      <div id="map-picker" style="height: {{ f.height | default: 300 }}px;" class="border rounded"></div>
-      <small class="form-text text-muted mt-1" x-show="data.lat">
-        Координати маркера: <span x-text="data.lat + ', ' + data.lng"></span>
-      </small>
+      <div class="map-marker-info" x-show="data.lat" x-cloak>
+        <div class="map-marker-info-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a5 5 0 0 0-5 5c0 4.14 4.21 9.34 4.66 9.89a.44.44 0 0 0 .68 0C8.79 14.34 13 9.14 13 5a5 5 0 0 0-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+        </div>
+        <div class="map-marker-info-body">
+          <div class="map-marker-info-loading" x-show="_geocoding">
+            <span class="spinner-border spinner-border-sm"></span> Визначаю адресу&hellip;
+          </div>
+          <div class="map-marker-info-address text-muted font-italic" x-show="!_geocoding && !data.address">
+            Адресу не вдалося визначити
+          </div>
+          <div class="map-marker-info-address" x-show="!_geocoding && data.address">Адреса: <span x-text="data.address"></span></div>
+          <div class="map-marker-info-coords">Координати: <span x-text="(data.lat || '') + (data.lat ? ', ' : '') + (data.lng || '')"></span></div>
+        </div>
+      </div>
+      {% if f.height %}
+      <div id="map-picker" style="height: {{ f.height }}px;" class="border rounded"></div>
+      {% else %}
+      <div id="map-picker" class="border rounded map-picker-responsive"></div>
+      {% endif %}
     </div>
   </div>
 </div>

@@ -11,44 +11,198 @@
 <div x-data="formApp()" x-cloak>
   <style>
     [x-cloak] { display: none !important; }
-    .step-indicator { display: flex; justify-content: center; margin-bottom: 2rem; }
-    .step-indicator .step-item { display: flex; align-items: center; }
-    .step-indicator .step-number { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; }
-    .step-indicator .step-label { font-size: 0.85rem; font-weight: 500; }
-    .step-indicator .step-connector { width: 40px; height: 2px; margin: 0 8px; }
+    .step-indicator { margin-bottom: 1rem; }
+    .step-indicator .step-number { width: 36px; height: 36px; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; }
+    .step-indicator .step-dot { width: 10px; height: 10px; }
+    .step-title { font-weight: 600; color: #212529; }
     .field-depends-hidden { display: none; }
     .form-group.is-invalid { border-left: 3px solid #dc3545; padding-left: 8px; }
     .form-group.is-valid { border-left: 3px solid #28a745; padding-left: 8px; }
     .valid-feedback, .invalid-feedback { display: block; }
-    .file-previews { gap: 0; }
+    .input-group .form-control.is-valid,
+    .input-group .form-control.is-invalid {
+      position: relative;
+      z-index: 3;
+    }
+    .input-group .custom-select.is-valid,
+    .input-group .custom-select.is-invalid {
+      z-index: 3;
+    }
+    .file-previews { display: flex; flex-direction: column; gap: 0.75rem; }
     .file-preview { max-width: 100%; }
-    .file-thumb { position: relative; overflow: hidden; border-radius: 4px; border: 1px solid #dee2e6; }
+    .file-preview-row { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.5rem; border: 1px solid transparent; border-radius: 4px; }
+    .file-preview-row-valid { border-color: #28a745; }
+    .file-preview-row-invalid { border-color: #dc3545; }
+    .file-thumb { position: relative; overflow: hidden; border-radius: 4px; border: 1px solid #dee2e6; flex-shrink: 0; }
+    .file-badge-compress { position: absolute; top: 2px; left: 2px; background: #ffc107; color: #212529; font-size: 0.65rem; font-weight: 600; padding: 1px 5px; border-radius: 3px; z-index: 2; line-height: 1.3; }
+    .file-info { margin-top: 0.5rem; padding: 0.5rem 0.65rem; background: #fff3cd; border: 1px solid #ffe69c; border-radius: 4px; color: #664d03; font-size: 0.8rem; }
     .file-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .file-thumb-fallback { display: flex; align-items: center; justify-content: center; border-radius: 4px; }
     .file-caption { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .file-thumb .close { background: rgba(255,255,255,0.9); border-radius: 50%; width: 22px; height: 22px; line-height: 20px; text-align: center; font-size: 1rem; opacity: 1; padding: 0; border: 1px solid #dee2e6; }
     .file-thumb .close:hover { background: #fff; }
+    .file-list-info { flex: 1; min-width: 0; font-size: 0.8rem; }
+    .file-list-info-row { display: flex; flex-wrap: wrap; gap: 0.35rem; line-height: 1.35; }
+    .file-list-info-label { color: #6c757d; flex-shrink: 0; }
+    .file-list-info-value { color: #212529; word-break: break-word; font-weight: 500; min-width: 0; }
+    @media (max-width: 767.98px) {
+      .file-list-info-row { flex-direction: column; align-items: flex-start; gap: 0; }
+      .file-list-info-label { min-width: 0; }
+      .file-list-info-value { width: 100%; }
+    }
+    .file-list-info-value-over { color: #dc3545 !important; }
     .custom-file-input ~ .custom-file-label::after { content: "Огляд"; }
     select.form-control.is-valid,
     select.form-control.is-invalid {
       padding-right: calc(1.5em + 2.25rem) !important;
       background-position: right calc(1em + -0.1rem) center;
     }
+    .autocomplete-search { padding-right: 2.5rem; }
+    .autocomplete-search.form-control.is-invalid,
+    .autocomplete-search.form-control.is-valid {
+      padding-right: calc(1.5em + 2.5rem) !important;
+    }
+    .autocomplete-search.form-control.is-invalid ~ .btn-clear,
+    .autocomplete-search.form-control.is-valid ~ .btn-clear {
+      right: 1.65rem;
+    }
+    .autocomplete-search-icon {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      color: #6c757d;
+      pointer-events: none;
+      line-height: 0;
+    }
+    .autocomplete-search.form-control.is-invalid ~ .autocomplete-search-icon,
+    .autocomplete-search.form-control.is-valid ~ .autocomplete-search-icon {
+      right: 2rem;
+    }
+    .location-search { padding-right: 2.5rem; }
+    .location-search.form-control.is-invalid,
+    .location-search.form-control.is-valid {
+      padding-right: calc(1.5em + 2.5rem) !important;
+    }
+    .location-search.form-control.is-invalid ~ .btn-clear,
+    .location-search.form-control.is-valid ~ .btn-clear {
+      right: 1.65rem;
+    }
+    .location-search-icon {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      color: #6c757d;
+      pointer-events: none;
+      line-height: 0;
+    }
+    .location-search.form-control.is-invalid ~ .location-search-icon,
+    .location-search.form-control.is-valid ~ .location-search-icon {
+      right: 2rem;
+    }
+    .text-input-wrapper { position: relative; }
+    .input-group > .text-input-wrapper { flex: 1 1 auto; width: 1%; min-width: 0; }
+    .input-group > .text-input-wrapper > .form-control { width: 100%; }
+    .input-group > .text-input-wrapper > .form-control { border-radius: 0; }
+    .input-group > .text-input-wrapper:first-child > .form-control { border-left-radius: .25rem; }
+    .input-group > .text-input-wrapper:last-child > .form-control { border-right-radius: .25rem; }
+    .text-input-wrapper > .form-control.is-invalid,
+    .text-input-wrapper > .form-control.is-valid {
+      padding-right: calc(1.5em + 1.65rem) !important;
+    }
+    .text-input-wrapper > .form-control.is-invalid ~ .btn-clear,
+    .text-input-wrapper > .form-control.is-valid ~ .btn-clear {
+      right: 1.65rem;
+    }
+    textarea.form-control ~ .btn-clear {
+      top: 10px;
+      transform: none;
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: calc(1.5em + .75rem + 2px);
+    }
+    .text-input-wrapper > .custom-file { width: 100%; padding-right: 2rem; }
+    .input-group > .text-input-wrapper > .custom-file { border-radius: 0; }
+    .input-group > .text-input-wrapper:first-child > .custom-file { border-left-radius: .25rem; }
+    .input-group > .text-input-wrapper:last-child > .custom-file { border-right-radius: .25rem; }
+    .text-input-wrapper > .custom-file.is-invalid .custom-file-label {
+      border-color: #dc3545;
+    }
+    .text-input-wrapper > .custom-file.is-invalid::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: calc(0.375em + .1875rem + 4.2rem);
+      transform: translateY(-50%);
+      width: calc(.75em + .375rem);
+      height: calc(.75em + .375rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .text-input-wrapper > .custom-file.is-valid .custom-file-label {
+      border-color: #28a745;
+    }
+    .text-input-wrapper > .custom-file.is-valid::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: calc(0.375em + .1875rem + 4.2rem);
+      transform: translateY(-50%);
+      width: calc(.75em + .375rem);
+      height: calc(.75em + .375rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .text-input-wrapper > .custom-file.is-invalid .custom-file-input:focus ~ .custom-file-label {
+      border-color: #dc3545;
+      box-shadow: 0 0 0 .2rem rgba(220,53,69,.25);
+    }
+    .text-input-wrapper > .custom-file.is-valid .custom-file-input:focus ~ .custom-file-label {
+      border-color: #28a745;
+      box-shadow: 0 0 0 .2rem rgba(40,167,69,.25);
+    }
+    .form-group.is-invalid .text-input-wrapper > .custom-file,
+    .form-group.is-valid .text-input-wrapper > .custom-file {
+      padding-right: calc(1.5em + 5.85rem);
+    }
+    .form-group.is-invalid .text-input-wrapper > .btn-clear,
+    .form-group.is-valid .text-input-wrapper > .btn-clear {
+      right: 5.85rem;
+    }
   </style>
 
-  <div class="step-indicator" x-show="!submitted">
-    <template x-for="(step, i) in totalSteps" :key="i">
-      <div class="step-item">
-        <div class="text-center mx-1">
-          <div class="step-number mx-auto mb-1"
-               :class="step === i + 1 ? 'bg-primary text-white' : (step > i + 1 ? 'bg-success text-white' : 'bg-light text-muted border')">
-            <span x-text="i + 1"></span>
-          </div>
-          <div class="step-label" x-text="config.steps[i].title"></div>
-        </div>
-        <div class="step-connector bg-secondary" x-show="i < totalSteps - 1"></div>
+  <div class="d-flex justify-content-between align-items-center flex-wrap step-indicator" x-show="!submitted">
+    {% for step in site.data.add-property.steps %}
+      {% assign n = forloop.index %}
+      <div class="step-number rounded-circle d-inline-flex align-items-center justify-content-center"
+           :class="{ 'bg-warning text-dark': step === {{ n }},
+                     'bg-success text-white': step > {{ n }},
+                     'bg-primary text-white': step < {{ n }} }">
+        {{ n }}
       </div>
-    </template>
+      {% unless forloop.last %}
+        <div class="step-dot bg-warning rounded-circle"></div>
+      {% endunless %}
+    {% endfor %}
+  </div>
+
+  <div class="text-center my-3" x-show="!submitted">
+    {% for step in site.data.add-property.steps %}
+      {% assign n = forloop.index %}
+      <div class="step-title {{ step.class | default: 'h2' }} mb-0" x-show="step === {{ n }}">{{ step.title }}</div>
+    {% endfor %}
   </div>
 
   <form id="add-property-form" novalidate>
@@ -107,6 +261,7 @@
       </div>
     </div>
   </form>
+  {%- include form/modals.html -%}
 </div>
 
 <script>
@@ -167,6 +322,12 @@
 
         files: {},
         filePreviews: {},
+        fileValid: {},
+        fileOrigSizes: {},
+        fileDims: {},
+        fileStamp: {},
+        fileNewSizes: {},
+        fileProcessed: {},
         submitting: false,
         submitted: false,
         turnstileToken: '',
@@ -185,11 +346,24 @@
         oblastResults: [],
         oblastShowDropdown: false,
         oblastHighlightIndex: -1,
+        raionSearch: '',
+        raionResults: [],
+        raionShowDropdown: false,
+        raionHighlightIndex: -1,
         addressLoaded: false,
+        locationPatternErrors: { oblast: '', raion: '', hromada: '', settlement: '' },
+        locationNoResults: { oblast: false, raion: false, hromada: false, settlement: false },
+        locationNoResultsQuery: { oblast: '', raion: '', hromada: '', settlement: '' },
+
+        asCache: {},
+        asState: {},
 
         _map: null,
         _marker: null,
         _mapReady: false,
+        _geocoding: false,
+        _geoSeq: 0,
+        _geoDebounce: null,
 
         init: function () {
           var self = this;
@@ -199,7 +373,12 @@
               self.touched[sf[j].name] = false;
             }
           }
+          self.touched['oblast'] = false;
+          self.touched['raion'] = false;
+          self.touched['hromada'] = false;
+          self.touched['settlement'] = false;
           this.loadAddressData();
+          this.initAutoSelects();
           this.$watch('step', function () {
             self.errors = {};
             var cur = formConfig.steps[self.step - 1];
@@ -234,40 +413,58 @@
             return;
           }
           if (container._leaflet_id) return;
-          var map = L.map(container, { center: [48.9215, 24.7097], zoom: 12 });
+          var map = L.map(container, {
+            center: [48.9215, 24.7097],
+            zoom: 12,
+            maxBounds: L.latLngBounds([43.9, 21.5], [52.7, 40.6]),
+            maxBoundsViscosity: 1.0
+          });
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18, attribution: '&copy; OpenStreetMap', tileSize: L.Browser.retina ? 512 : 256, zoomOffset: L.Browser.retina ? -1 : 0
           }).addTo(map);
           map.attributionControl.setPrefix('');
-          map.on('click', function (e) {
-            var latlng = e.latlng;
-            self.data.lat = latlng.lat.toFixed(6);
-            self.data.lng = latlng.lng.toFixed(6);
-            if (self._marker) self._marker.setLatLng(latlng);
-            else self._marker = L.marker(latlng, { draggable: true }).addTo(map);
-            self._marker.on('dragend', function () {
-              var pos = self._marker.getLatLng();
-              self.data.lat = pos.lat.toFixed(6);
-              self.data.lng = pos.lng.toFixed(6);
-            });
-            self.reverseGeocode(latlng);
-          });
+          map.on('click', function (e) { self._placeMarker(e.latlng); });
           self._map = map;
           self._mapReady = true;
           setTimeout(function () { map.invalidateSize(true); }, 300);
         },
 
+        _placeMarker: function (latlng) {
+          this.data.lat = latlng.lat.toFixed(6);
+          this.data.lng = latlng.lng.toFixed(6);
+          if (!this._marker) {
+            this._marker = L.marker(latlng, { draggable: true }).addTo(this._map);
+            var self = this;
+            this._marker.on('dragend', function () {
+              self._placeMarker(self._marker.getLatLng());
+            });
+          } else {
+            this._marker.setLatLng(latlng);
+          }
+          this.reverseGeocode(latlng);
+        },
+
         reverseGeocode: function (latlng) {
           var self = this;
-          var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latlng.lat + '&lon=' + latlng.lng + '&accept-language=uk';
-          fetch(url, { headers: { 'User-Agent': 'RealtyUA/1.0' } })
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-              if (data && data.display_name) {
-                self.data.address = data.display_name;
-              }
-            })
-            .catch(function () {});
+          var seq = ++this._geoSeq;
+          this._geocoding = true;
+          clearTimeout(this._geoDebounce);
+          this._geoDebounce = setTimeout(function () {
+            if (seq !== self._geoSeq) return;
+            var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latlng.lat + '&lon=' + latlng.lng + '&accept-language=uk';
+            fetch(url)
+              .then(function (r) { return r.json(); })
+              .then(function (data) {
+                if (seq !== self._geoSeq) return;
+                self.data.address = (data && data.display_name) ? data.display_name : '';
+                self._geocoding = false;
+              })
+              .catch(function () {
+                if (seq !== self._geoSeq) return;
+                self.data.address = '';
+                self._geocoding = false;
+              });
+          }, 450);
         },
 
         parseFileSize: function (str) {
@@ -288,24 +485,152 @@
           var field = this.getField(fieldName);
           var cfg = field && field.file || {};
           var maxFiles = cfg.maxFiles || 10;
-          var sizeInfo = this.parseFileSize(cfg.maxSize);
+          var self = this;
           for (var i = 0; i < newFiles.length; i++) {
             allFiles.push(newFiles[i]);
           }
-          if (allFiles.length > maxFiles) { this.errors[fieldName] = 'Максимум ' + maxFiles + ' файлів'; return; }
-          for (var i = 0; i < newFiles.length; i++) {
-            if (newFiles[i].size > sizeInfo.bytes) {
-              this.errors[fieldName] = 'Файл "' + newFiles[i].name + '" перевищує ' + sizeInfo.display;
-              return;
-            }
-          }
           this.files[fieldName] = allFiles;
-          this.buildFilePreviews(fieldName);
-          delete this.errors[fieldName];
+          this.fileOrigSizes[fieldName] = allFiles.map(function (f) { return f.size; });
+          this.fileValid[fieldName] = allFiles.map(function () { return true; });
+          this.fileDims[fieldName] = allFiles.map(function () { return null; });
+          this.fileNewSizes[fieldName] = allFiles.map(function () { return null; });
+          this.fileProcessed[fieldName] = allFiles.map(function () { return null; });
+          this.fileStamp[fieldName] = Math.floor(Date.now() / 1000);
+          if (allFiles.length > maxFiles) {
+            this.errors[fieldName] = 'Максимум ' + maxFiles + ' файлів';
+          } else {
+            delete this.errors[fieldName];
+          }
+          this.buildFilePreviews(fieldName, function () {
+            self.validateFileSizes(fieldName);
+            if (self.validateField) self.validateField(fieldName);
+          });
           event.target.value = '';
         },
 
-        buildFilePreviews: function (fieldName) {
+        validateFileSizes: function (fieldName) {
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          var sizeInfo = this.parseFileSize(cfg.maxSize);
+          var files = this.files[fieldName] || [];
+          var newSizes = this.fileNewSizes[fieldName] || [];
+          var valid = files.map(function (f, i) {
+            var s = newSizes[i] || f.size;
+            return s <= sizeInfo.bytes;
+          });
+          this.fileValid[fieldName] = valid;
+          var err = null;
+          for (var i = 0; i < files.length; i++) {
+            if (valid[i]) continue;
+            err = 'Файл "' + files[i].name + '" перевищує ' + sizeInfo.display;
+            break;
+          }
+          if (err) { this.errors[fieldName] = err; } else { delete this.errors[fieldName]; }
+        },
+
+        fileNeedsCompress: function (fieldName, idx) {
+          var orig = this.fileOrigSizes[fieldName] || [];
+          if (!orig[idx]) return false;
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          var sizeInfo = this.parseFileSize(cfg.maxSize);
+          return orig[idx] > sizeInfo.bytes;
+        },
+
+        fileSizeLabel: function (fieldName, idx) {
+          var orig = this.fileOrigSizes[fieldName] || [];
+          var files = this.files[fieldName] || [];
+          if (!files[idx]) return '';
+          var cur = files[idx].size;
+          var out = this.formatFileSize(cur);
+          if (orig[idx] && orig[idx] !== cur) {
+            out = this.formatFileSize(orig[idx]) + ' → ' + out;
+          }
+          return out;
+        },
+
+        fileCurrentSizeLabel: function (fieldName, idx) {
+          var orig = this.fileOrigSizes[fieldName] || [];
+          if (!orig[idx]) return '';
+          return this.formatFileSize(orig[idx]);
+        },
+
+        fileDimsLabel: function (fieldName, idx) {
+          var dims = (this.fileDims[fieldName] || [])[idx];
+          if (!dims) return '';
+          return dims.w + ' × ' + dims.h;
+        },
+
+        fileDimsOver: function (fieldName, idx) {
+          var dims = (this.fileDims[fieldName] || [])[idx];
+          if (!dims) return false;
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          return dims.w > (cfg.resizeWidth || 800) || dims.h > (cfg.resizeHeight || 600);
+        },
+
+        fileSizeOver: function (fieldName, idx) {
+          var orig = this.fileOrigSizes[fieldName] || [];
+          if (!orig[idx]) return false;
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          return orig[idx] > this.parseFileSize(cfg.maxSize).bytes;
+        },
+
+        fileNewSizeLabel: function (fieldName) {
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          return (cfg.resizeWidth || 800) + ' × ' + (cfg.resizeHeight || 600);
+        },
+
+        fileNewFileSizeLabel: function (fieldName, idx) {
+          var newSizes = (this.fileNewSizes[fieldName] || []);
+          var files = this.files[fieldName] || [];
+          if (newSizes[idx]) return this.formatFileSize(newSizes[idx]);
+          if (files[idx]) return this.formatFileSize(files[idx].size);
+          return '';
+        },
+
+        fileNewName: function (fieldName, idx) {
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          var type = this.data.property_type || 'object';
+          var stamp = (this.fileStamp[fieldName] || Math.floor(Date.now() / 1000));
+          var ext = cfg.ext || 'jpg';
+          return (idx + 1) + '_' + type + '_' + stamp + '.' + ext;
+        },
+
+        fileInfo: function (fieldName) {
+          var field = this.getField(fieldName);
+          var cfg = field && field.file || {};
+          var sizeInfo = this.parseFileSize(cfg.maxSize);
+          var orig = this.fileOrigSizes[fieldName] || [];
+          var files = this.files[fieldName] || [];
+          var newSizes = this.fileNewSizes[fieldName] || [];
+          var needs = false;
+          var stillOver = false;
+          for (var i = 0; i < orig.length; i++) {
+            if (orig[i] > sizeInfo.bytes) { needs = true; break; }
+          }
+          for (var j = 0; j < files.length; j++) {
+            var s = newSizes[j] || files[j].size;
+            if (s > sizeInfo.bytes) { stillOver = true; break; }
+          }
+          if (!needs || stillOver) return null;
+          var resizeW = cfg.resizeWidth || 800;
+          var resizeH = cfg.resizeHeight || 600;
+          if (cfg.infoMessage !== undefined && cfg.infoMessage !== null) {
+            if (!String(cfg.infoMessage).length) return null;
+            return String(cfg.infoMessage)
+              .replace(/\{limit\}/g, sizeInfo.display)
+              .replace(/\{size\}/g, resizeW + '×' + resizeH);
+          }
+          return 'Деякі фото перевищують ліміт ' + sizeInfo.display +
+                 '. Система автоматично стисне їх до ' + resizeW + '×' + resizeH +
+                 ', і вони будуть у межах ліміту. Якщо вас це не влаштовує — оберіть інші файли.';
+        },
+
+        buildFilePreviews: function (fieldName, onDone) {
           var self = this;
           var field = this.getField(fieldName);
           var cfg = field && field.file || {};
@@ -316,11 +641,16 @@
           var cropOrigin = cfg.cropOrigin || 'top-left';
           this.filePreviews[fieldName] = [];
           var files = this.files[fieldName] || [];
-          if (!files.length) { this.filePreviews[fieldName] = []; return; }
+          if (!files.length) {
+            this.filePreviews[fieldName] = [];
+            if (onDone) onDone();
+            return;
+          }
           var pending = files.length;
           function done() {
             pending--;
             self.filePreviews[fieldName] = self.filePreviews[fieldName].slice();
+            if (pending === 0 && onDone) onDone();
           }
           for (var i = 0; i < files.length; i++) {
             (function (idx) {
@@ -330,6 +660,7 @@
                 reader.onload = function (e) {
                   var img = new Image();
                   img.onload = function () {
+                    self.fileDims[fieldName][idx] = { w: img.width, h: img.height };
                     var cropW = Math.min(img.width, resizeW);
                     var cropH = Math.min(img.height, resizeH);
                     var sx = 0, sy = 0;
@@ -344,7 +675,9 @@
                     ctx.drawImage(img, sx, sy, cropW, cropH, 0, 0, cropW, cropH);
                     cropCanvas.toBlob(function (blob) {
                       var cropped = new File([blob], file.name, { type: 'image/jpeg' });
-                      self.files[fieldName][idx] = cropped;
+                      self.fileProcessed[fieldName][idx] = cropped;
+                      self.fileNewSizes[fieldName][idx] = blob.size;
+                      self.fileNewSizes[fieldName] = self.fileNewSizes[fieldName].slice();
                       var thumbCanvas = document.createElement('canvas');
                       thumbCanvas.width = thumbW;
                       thumbCanvas.height = thumbH;
@@ -375,6 +708,51 @@
             this.filePreviews[fieldName].splice(idx, 1);
             this.filePreviews[fieldName] = this.filePreviews[fieldName].slice();
           }
+          if (this.fileValid[fieldName]) {
+            this.fileValid[fieldName].splice(idx, 1);
+            this.fileValid[fieldName] = this.fileValid[fieldName].slice();
+          }
+          if (this.fileOrigSizes[fieldName]) {
+            this.fileOrigSizes[fieldName].splice(idx, 1);
+            this.fileOrigSizes[fieldName] = this.fileOrigSizes[fieldName].slice();
+          }
+          if (this.fileDims[fieldName]) {
+            this.fileDims[fieldName].splice(idx, 1);
+            this.fileDims[fieldName] = this.fileDims[fieldName].slice();
+          }
+          if (this.fileNewSizes[fieldName]) {
+            this.fileNewSizes[fieldName].splice(idx, 1);
+            this.fileNewSizes[fieldName] = this.fileNewSizes[fieldName].slice();
+          }
+          if (this.fileProcessed[fieldName]) {
+            this.fileProcessed[fieldName].splice(idx, 1);
+            this.fileProcessed[fieldName] = this.fileProcessed[fieldName].slice();
+          }
+          if (this.validateField) this.validateField(fieldName);
+        },
+
+        clearAllFiles: function (fieldName) {
+          this.files[fieldName] = [];
+          this.filePreviews[fieldName] = [];
+          this.fileValid[fieldName] = [];
+          this.fileOrigSizes[fieldName] = [];
+          this.fileDims[fieldName] = [];
+          this.fileNewSizes[fieldName] = [];
+          this.fileProcessed[fieldName] = [];
+          delete this.errors[fieldName];
+          this.touched[fieldName] = false;
+          this.errors = Object.assign({}, this.errors);
+          if (this.validateField) this.validateField(fieldName);
+        },
+
+        fileIsValid: function (fieldName, idx) {
+          var arr = this.fileValid[fieldName];
+          return !!(arr && arr[idx]);
+        },
+
+        filePreview: function (fieldName, idx) {
+          var arr = this.filePreviews[fieldName];
+          return arr ? (arr[idx] || null) : null;
         },
 
         fileCount: function (fieldName) {
@@ -409,7 +787,8 @@
           return name.substring(0, maxLen - 3) + '...';
         },
 
-        generateDescription: function () {
+        generateDescription: function (fieldName) {
+          var target = fieldName || 'description';
           var d = this.data;
           var typeLabels = { sell: 'Продам', rent: 'Здам в оренду', realty_free: 'Віддам безкоштовно', rent_free: 'Здам в оренду безкоштовно' };
           var propLabels = { apartment: 'квартиру', apartment_part: 'частину квартири', house: 'будинок', house_part: 'частину будинку', room: 'кімнату', commercial: 'нежитлове приміщення', land: 'земельну ділянку', garage: 'гараж' };
@@ -426,7 +805,7 @@
           if (d.location) parts.push('в м. ' + d.location);
           if (d.price) parts.push('за ' + d.price + ' ' + d.currency);
           if (d.phone) parts.push('тел. ' + d.phone);
-          this.data.description = parts.join(' ') + '.';
+          this.data[target] = parts.join(' ') + '.';
         },
 
         get pricePerSqmt() {
@@ -457,12 +836,127 @@
           return Math.round(p / s).toLocaleString('uk-UA');
         },
 
+        get nbuRate() {
+          return currencyRates.nbu || 0;
+        },
+
+        get hasNbuRate() {
+          return !!(currencyRates.nbu);
+        },
+
         get currencyRateLabel() {
+          if (this.data.currency === 'uah') {
+            if (!currencyRates.nbu) return '';
+            return currencyRates.nbu + ' гривень за $1';
+          }
           var rates = { usd: currencyRates.usd, eur: currencyRates.eur };
           var rate = rates[this.data.currency];
           if (!rate) return '';
           var sym = this.data.currency === 'usd' ? '$1' : '€1';
           return rate + ' гривень за ' + sym;
+        },
+
+        get pricePerM2Uah() {
+          var p = parseFloat(this.data.price);
+          var s = parseFloat(this.data.surface);
+          if (!p || !s) return '';
+          var rates = { USD: currencyRates.usd, EUR: currencyRates.eur, UAH: 1 };
+          var key = this.data.currency ? this.data.currency.toUpperCase() : 'UAH';
+          return Math.round(p / s * (rates[key] || 1)).toLocaleString('uk-UA');
+        },
+
+        get priceLabel() {
+          var labels = { sell: 'Ціна продажу', rent: 'Ціна оренди', realty_free: 'Ціна продажу', rent_free: 'Ціна оренди' };
+          return labels[this.data.action_type] || 'Ціна';
+        },
+
+        get utilityBillsRentLabel() {
+          var val = this.data.utility_bills_rent;
+          if (!val) return '';
+          var allFields = FormEngine.getStepFields(formConfig.steps[0]);
+          for (var i = 1; i < formConfig.steps.length; i++) {
+            allFields = allFields.concat(FormEngine.getStepFields(formConfig.steps[i]));
+          }
+          for (var f = 0; f < allFields.length; f++) {
+            if (allFields[f].name === 'utility_bills_rent' && allFields[f].options) {
+              for (var o = 0; o < allFields[f].options.length; o++) {
+                if (allFields[f].options[o].value === val) return allFields[f].options[o].label;
+              }
+            }
+          }
+          return val;
+        },
+
+        get periodRentLabel() {
+          var allFields = FormEngine.getStepFields(formConfig.steps[0]);
+          for (var i = 1; i < formConfig.steps.length; i++) {
+            allFields = allFields.concat(FormEngine.getStepFields(formConfig.steps[i]));
+          }
+          for (var f = 0; f < allFields.length; f++) {
+            if (allFields[f].name === 'period_rent' && allFields[f].label) {
+              return allFields[f].label;
+            }
+          }
+          return 'Період оренди';
+        },
+
+        get periodLabel() {
+          var labels = {
+            hour: 'за одну годину',
+            day_night: 'за 24 години (одну добу)',
+            month: 'за один місяць',
+            three_month: 'за один місяць',
+            six_month: 'за один місяць',
+            year: 'за один місяць',
+            more_year: 'за один місяць'
+          };
+          return labels[this.data.period_rent] || '';
+        },
+
+        get periodNote() {
+          var labels = {
+            month: 'період оплати і оренди не менше ніж на один місяць',
+            three_month: 'період оплати і оренди не менше ніж на три місяці',
+            six_month: 'період оплати і оренди не менше ніж на пів року',
+            year: 'період оплати і оренди не менше ніж на один рік',
+            more_year: 'період оплати і оренди на рік і більше'
+          };
+          return labels[this.data.period_rent] || '';
+        },
+
+        _getRentMonths: function() {
+          var m = { hour: 1/24/30, day_night: 1/30, month: 1, three_month: 1, six_month: 1, year: 1, more_year: 1 };
+          return m[this.data.period_rent] || 1;
+        },
+
+        get rentPriceDay() {
+          var p = parseFloat(this.data.price);
+          if (!p || this.data.action_type !== 'rent') return '';
+          return Math.round(p * this._getRentMonths() * 30).toLocaleString('uk-UA');
+        },
+
+        get rentPriceMonth() {
+          var p = parseFloat(this.data.price);
+          if (!p || this.data.action_type !== 'rent') return '';
+          return Math.round(p * this._getRentMonths()).toLocaleString('uk-UA');
+        },
+
+        get rentPriceThreeMonth() {
+          var p = parseFloat(this.data.price);
+          if (!p || this.data.action_type !== 'rent') return '';
+          return Math.round(p * this._getRentMonths() * 3).toLocaleString('uk-UA');
+        },
+
+        get rentPriceSixMonth() {
+          var p = parseFloat(this.data.price);
+          if (!p || this.data.action_type !== 'rent') return '';
+          return Math.round(p * this._getRentMonths() * 6).toLocaleString('uk-UA');
+        },
+
+        get rentPriceYear() {
+          var p = parseFloat(this.data.price);
+          if (!p || this.data.action_type !== 'rent') return '';
+          return Math.round(p * this._getRentMonths() * 12).toLocaleString('uk-UA');
         },
 
         get filteredRaions() {
@@ -488,6 +982,11 @@
             }
           }
           return [];
+        },
+
+        get filteredSettlements() {
+          if (!this.data.hromada || !this.addressIndex.length) return [];
+          return this.addressIndex.filter(function (s) { return s.hromadaId === this.data.hromada; }.bind(this));
         },
 
         getLocationWidgetConfig: function () {
@@ -520,6 +1019,47 @@
           return widget && widget.settings && widget.settings.method === 'two' ? 'two' : 'one';
         },
 
+        locationMode: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          return (field && field.mode) ? field.mode : 'auto';
+        },
+
+        locationThreshold: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          return (field && field.threshold !== undefined) ? field.threshold : 15;
+        },
+
+        locationMinChars: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          return (field && field.minChars !== undefined) ? field.minChars : 2;
+        },
+
+        locationMaxResults: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          var v = (field && field.maxResults !== undefined) ? field.maxResults : 10;
+          v = parseInt(v, 10);
+          return (isNaN(v) || v < 1) ? 10 : v;
+        },
+
+        locationIsSearch: function (fieldName) {
+          var mode = this.locationMode(fieldName);
+          if (mode === 'search') return true;
+          if (mode === 'select') return false;
+          var count = this.locationOptionsCount(fieldName);
+          return count > this.locationThreshold(fieldName);
+        },
+
+        locationOptionsCount: function (fieldName) {
+          if (fieldName === 'oblast') return this.filteredOblasts.length;
+          if (fieldName === 'raion') return this.filteredRaions.length;
+          if (fieldName === 'settlement') {
+            if (this.getLocationMethod() === 'two') return this.addressIndex.length;
+            return this.filteredSettlements.length;
+          }
+          if (fieldName === 'hromada') return this.filteredHromadas.length;
+          return 0;
+        },
+
         isLocationReadonly: function (fieldName) {
           var field = this.getLocationFieldConfig(fieldName);
           if (!field || !field.value) return false;
@@ -549,6 +1089,50 @@
           if (r && typeof r === 'object' && !Array.isArray(r) && r[key] !== undefined) return r[key];
           var settings = this.config && this.config.settings && this.config.settings.required;
           return (settings && settings[key] !== undefined) ? settings[key] : def;
+        },
+
+        locationPatternError: function (fieldName) {
+          return this.locationPatternErrors[fieldName] || '';
+        },
+
+        locationNoResultsText: function (fieldName) {
+          var q = this.locationNoResultsQuery[fieldName] || '';
+          var field = this.getLocationFieldConfig(fieldName);
+          var msg = (field && field.noResults) || (this.config && this.config.settings && this.config.settings.noResults) || 'Запис "{q}" відсутній у списку';
+          return msg.replace(/\{\{q\}\}/g, q).replace(/\{q\}/g, q);
+        },
+
+        locationHasUnselectedText: function (fieldName) {
+          var searchMap = { oblast: 'oblastSearch', raion: 'raionSearch', hromada: 'hromadaSearch', settlement: 'addressSearch' };
+          var searchVar = searchMap[fieldName];
+          return !!(searchVar && this[searchVar] && !this.data[fieldName]);
+        },
+
+        validateLocationField: function (fieldName) {
+          this.touched[fieldName] = true;
+          var val = this.data[fieldName];
+          var empty = val === '' || val === null || val === undefined;
+          if (this.isLocationFieldRequired(fieldName) && empty) {
+            var f = this.getLocationFieldConfig(fieldName);
+            var msg = (f && f.message) ? f.message : "Це поле обов'язкове";
+            this.errors[fieldName] = msg;
+          } else {
+            this.errors[fieldName] = null;
+          }
+        },
+
+        _checkLocationPattern: function (fieldName, searchText) {
+          var field = this.getLocationFieldConfig(fieldName);
+          var pattern = (field && field.pattern) || (this.config && this.config.settings && this.config.settings.pattern);
+          if (!pattern || !searchText) { this.locationPatternErrors[fieldName] = ''; return; }
+          try {
+            if (!new RegExp(pattern).test(searchText)) {
+              var pmsg = (field && field.validation && field.validation.pattern) || (this.config && this.config.settings && this.config.settings.feedback && this.config.settings.feedback.pattern) || 'Неправильний формат';
+              this.locationPatternErrors[fieldName] = pmsg;
+            } else {
+              this.locationPatternErrors[fieldName] = '';
+            }
+          } catch (e) { this.locationPatternErrors[fieldName] = ''; }
         },
 
         getPresetValues: function (fieldName) {
@@ -723,17 +1307,22 @@
         },
 
         searchOblast: function () {
-          var raw = this.oblastSearch ? this.oblastSearch.trim().toLowerCase() : '';
+          var raw = this.oblastSearch ? this.oblastSearch.trim() : '';
+          var q = raw.toLowerCase();
+          this._checkLocationPattern('oblast', raw);
+          if (this.locationPatternErrors['oblast']) { this.oblastResults = []; this.locationNoResults['oblast'] = false; return; }
           var oblasts = this.filteredOblasts;
-          if (raw.length < 2) { this.oblastResults = oblasts.slice(0, 10); return; }
+          if (q.length < this.locationMinChars('oblast')) { this.oblastResults = !this.locationIsSearch('oblast') ? oblasts.slice(0, this.locationMaxResults('oblast')) : []; this.locationNoResults['oblast'] = false; return; }
           var results = [];
           for (var i = 0; i < oblasts.length; i++) {
-            if (results.length >= 10) break;
-            if (oblasts[i].name.toLowerCase().indexOf(raw) !== -1) {
+            if (results.length >= this.locationMaxResults('oblast')) break;
+            if (oblasts[i].name.toLowerCase().indexOf(q) !== -1) {
               results.push(oblasts[i]);
             }
           }
           this.oblastResults = results;
+          this.locationNoResults['oblast'] = results.length === 0;
+          this.locationNoResultsQuery['oblast'] = raw;
         },
 
         selectOblast: function (o) {
@@ -742,14 +1331,27 @@
           this.oblastSearch = o.name;
           this.oblastResults = [];
           this.oblastShowDropdown = false;
+          this.touched['oblast'] = true;
+          this.locationPatternErrors['oblast'] = '';
+          this.locationNoResults['oblast'] = false;
           this.onOblastChange();
+        },
+
+        selectOblastById: function (id) {
+          if (!id) { this.clearOblast(); return; }
+          var oblasts = this.filteredOblasts;
+          for (var i = 0; i < oblasts.length; i++) {
+            if (String(oblasts[i].id) === String(id)) { this.selectOblast(oblasts[i]); return; }
+          }
         },
 
         clearOblast: function () {
           this.data.oblast = '';
           this.data.oblastName = '';
           this.oblastSearch = '';
+          this.locationPatternErrors['oblast'] = '';
           this.onOblastChange();
+          this.validateLocationField('oblast');
         },
 
         oblastHighlightNext: function () {
@@ -768,6 +1370,81 @@
           }
         },
 
+        searchRaion: function () {
+          var raw = this.raionSearch ? this.raionSearch.trim() : '';
+          var q = raw.toLowerCase();
+          this._checkLocationPattern('raion', raw);
+          if (this.locationPatternErrors['raion']) { this.raionResults = []; this.locationNoResults['raion'] = false; return; }
+          var raions = this.filteredRaions;
+          if (q.length < this.locationMinChars('raion')) { this.raionResults = !this.locationIsSearch('raion') ? raions.slice(0, this.locationMaxResults('raion')) : []; this.locationNoResults['raion'] = false; return; }
+          var results = [];
+          for (var i = 0; i < raions.length; i++) {
+            if (results.length >= this.locationMaxResults('raion')) break;
+            if (raions[i].name.toLowerCase().indexOf(q) !== -1) {
+              results.push(raions[i]);
+            }
+          }
+          this.raionResults = results;
+          this.locationNoResults['raion'] = results.length === 0;
+          this.locationNoResultsQuery['raion'] = raw;
+          this.raionHighlightIndex = -1;
+        },
+
+        selectRaion: function (r) {
+          this.data.raion = r.id;
+          this.data.raionName = r.name;
+          this.raionSearch = r.name;
+          this.raionResults = [];
+          this.raionShowDropdown = false;
+          this.onRaionChange();
+        },
+
+        clearRaion: function () {
+          this.data.raion = '';
+          this.data.raionName = '';
+          this.raionSearch = '';
+          this.raionResults = [];
+          this.raionShowDropdown = false;
+          this.raionHighlightIndex = -1;
+          this.locationPatternErrors['raion'] = '';
+          this.touched['raion'] = false;
+          this.touched['hromada'] = false;
+          this.touched['settlement'] = false;
+          this.locationPatternErrors['hromada'] = '';
+          this.locationPatternErrors['settlement'] = '';
+          this.locationNoResults['raion'] = false;
+          this.locationNoResults['hromada'] = false;
+          this.locationNoResults['settlement'] = false;
+          this.errors['raion'] = null;
+          this.errors['hromada'] = null;
+          this.errors['settlement'] = null;
+          this.validateLocationField('raion');
+        },
+
+        raionHighlightNext: function () {
+          var max = this.raionResults.length - 1;
+          this.raionHighlightIndex = this.raionHighlightIndex >= max ? 0 : this.raionHighlightIndex + 1;
+          this._scrollHighlighted('raionDropdown');
+        },
+        raionHighlightPrev: function () {
+          var max = this.raionResults.length - 1;
+          this.raionHighlightIndex = this.raionHighlightIndex <= 0 ? max : this.raionHighlightIndex - 1;
+          this._scrollHighlighted('raionDropdown');
+        },
+        raionSelectHighlighted: function () {
+          if (this.raionHighlightIndex >= 0 && this.raionHighlightIndex < this.raionResults.length) {
+            this.selectRaion(this.raionResults[this.raionHighlightIndex]);
+          }
+        },
+
+        selectRaionById: function (id) {
+          if (!id) { this.clearRaion(); return; }
+          var raions = this.filteredRaions;
+          for (var i = 0; i < raions.length; i++) {
+            if (String(raions[i].id) === String(id)) { this.selectRaion(raions[i]); return; }
+          }
+        },
+
         onOblastChange: function () {
           this.data.raion = '';
           this.data.hromada = '';
@@ -777,11 +1454,21 @@
           this.data.settlementName = '';
           this.data.settlementType = '';
           this.data.hromadaType = '';
-          this.data.oblastName = '';
           this.addressSearch = '';
           this.addressResults = [];
           this.hromadaSearch = '';
           this.hromadaResults = [];
+          this.raionSearch = '';
+          this.raionResults = [];
+          this.touched['raion'] = false;
+          this.touched['hromada'] = false;
+          this.touched['settlement'] = false;
+          this.locationPatternErrors['raion'] = '';
+          this.locationPatternErrors['hromada'] = '';
+          this.locationPatternErrors['settlement'] = '';
+          this.locationNoResults['raion'] = false;
+          this.locationNoResults['hromada'] = false;
+          this.locationNoResults['settlement'] = false;
           this.errors['oblast'] = null;
           this.errors['raion'] = null;
           this.errors['hromada'] = null;
@@ -789,18 +1476,29 @@
         },
 
         onRaionChange: function () {
+          var r = null;
+          for (var i = 0; i < this.filteredRaions.length; i++) {
+            if (this.filteredRaions[i].id === this.data.raion) { r = this.filteredRaions[i]; break; }
+          }
+          this.data.raionName = r ? r.name : '';
+          this.raionSearch = r ? r.name : '';
+          this.touched['raion'] = true;
           this.data.hromada = '';
           this.data.settlement = '';
-          this.data.raionName = '';
           this.data.hromadaName = '';
           this.data.settlementName = '';
           this.data.settlementType = '';
           this.data.hromadaType = '';
-          this.data.oblastName = '';
           this.addressSearch = '';
           this.addressResults = [];
           this.hromadaSearch = '';
           this.hromadaResults = [];
+          this.touched['hromada'] = false;
+          this.touched['settlement'] = false;
+          this.locationPatternErrors['hromada'] = '';
+          this.locationPatternErrors['settlement'] = '';
+          this.locationNoResults['hromada'] = false;
+          this.locationNoResults['settlement'] = false;
           this.errors['raion'] = null;
           this.errors['hromada'] = null;
           this.errors['settlement'] = null;
@@ -809,17 +1507,21 @@
         searchHromada: function () {
           var self = this;
           var raw = this.hromadaSearch ? this.hromadaSearch.trim() : '';
+          this._checkLocationPattern('hromada', raw);
+          if (this.locationPatternErrors['hromada']) { this.hromadaResults = []; this.locationNoResults['hromada'] = false; return; }
           var q = raw.split(' - ')[0].toLowerCase();
           var hromadas = this.filteredHromadas;
-          if (q.length < 3) { this.hromadaResults = hromadas.slice(0, 10); return; }
+          if (q.length < this.locationMinChars('hromada')) { this.hromadaResults = !this.locationIsSearch('hromada') ? hromadas.slice(0, this.locationMaxResults('hromada')) : []; this.locationNoResults['hromada'] = false; return; }
           var results = [];
           for (var i = 0; i < hromadas.length; i++) {
-            if (results.length >= 10) break;
+            if (results.length >= this.locationMaxResults('hromada')) break;
             if (hromadas[i].name.toLowerCase().indexOf(q) !== -1) {
               results.push(hromadas[i]);
             }
           }
           this.hromadaResults = results;
+          this.locationNoResults['hromada'] = results.length === 0;
+          this.locationNoResultsQuery['hromada'] = raw;
           this.hromadaHighlightIndex = -1;
           if (this.data.hromada && results.length && results.every(function (r) { return r.id !== self.data.hromada; })) {
             this.data.hromada = '';
@@ -831,9 +1533,13 @@
 
         selectHromada: function (h) {
           this.data.hromada = h.id;
+          this.data.hromadaName = h.name;
           this.hromadaSearch = h.name + ' - ' + h.type;
           this.hromadaResults = [];
           this.hromadaShowDropdown = false;
+          this.touched['hromada'] = true;
+          this.locationPatternErrors['hromada'] = '';
+          this.locationNoResults['hromada'] = false;
           this.data.settlement = '';
           this.addressSearch = '';
           this.addressResults = [];
@@ -841,9 +1547,20 @@
           this.errors['settlement'] = null;
         },
 
+        selectHromadaById: function (id) {
+          if (!id) { this.clearHromada(); return; }
+          var hromadas = this.filteredHromadas;
+          for (var i = 0; i < hromadas.length; i++) {
+            if (String(hromadas[i].id) === String(id)) { this.selectHromada(hromadas[i]); return; }
+          }
+        },
+
         addressSearchSettlement: function (isFocus) {
           var self = this;
-          var q = this.addressSearch ? this.addressSearch.trim().toLowerCase() : '';
+          var raw = this.addressSearch ? this.addressSearch.trim() : '';
+          var q = raw.toLowerCase();
+          this._checkLocationPattern('settlement', raw);
+          if (this.locationPatternErrors['settlement']) { this.addressResults = []; this.locationNoResults['settlement'] = false; return; }
 
           if (!q && this.data.settlement) {
             this.clearSettlement();
@@ -886,23 +1603,26 @@
             if (settlementPresets && settlementPresets.indexOf(item.id) === -1) return false;
             return true;
           };
-          if (q.length < 2) {
-            if (isFocus) {
-              for (var i = 0; i < this.addressIndex.length && results.length < 10; i++) {
+          if (q.length < this.locationMinChars('settlement')) {
+            if (isFocus && !this.locationIsSearch('settlement')) {
+              for (var i = 0; i < this.addressIndex.length && results.length < this.locationMaxResults('settlement'); i++) {
                 if (matching(this.addressIndex[i])) results.push(this.addressIndex[i]);
               }
             }
             this.addressResults = results;
+            this.locationNoResults['settlement'] = false;
             return;
           }
           for (var i = 0; i < this.addressIndex.length; i++) {
-            if (results.length >= 10) break;
+            if (results.length >= this.locationMaxResults('settlement')) break;
             if (!matching(this.addressIndex[i])) continue;
             if (this.addressIndex[i].name.toLowerCase().indexOf(searchName) !== -1) {
               results.push(this.addressIndex[i]);
             }
           }
           this.addressResults = results;
+          this.locationNoResults['settlement'] = results.length === 0;
+          this.locationNoResultsQuery['settlement'] = raw;
           this.settlementHighlightIndex = -1;
           if (this.addressResults.length > 0) {
             this.addressShowDropdown = true;
@@ -930,53 +1650,89 @@
           this.addressShowDropdown = false;
           this.raionName = s.raionName;
           this.hromadaName = s.hromadaName;
+          this.data.raionName = s.raionName;
+          this.data.hromadaName = s.hromadaName;
           this.data.settlementName = s.name;
           this.data.settlementType = s.type;
           this.data.hromadaType = s.hromadaType;
           this.data.oblastName = s.oblastName;
           this.hromadaSearch = s.hromadaName + ' - ' + s.hromadaType;
+          this.raionSearch = s.raionName;
+          this.oblastSearch = s.oblastName;
           this.hromadaResults = [];
+          this.touched['oblast'] = true;
+          this.touched['raion'] = true;
+          this.touched['hromada'] = true;
+          this.touched['settlement'] = true;
+          this.locationPatternErrors['oblast'] = '';
+          this.locationPatternErrors['hromada'] = '';
+          this.locationPatternErrors['settlement'] = '';
+          this.locationNoResults['oblast'] = false;
+          this.locationNoResults['hromada'] = false;
+          this.locationNoResults['settlement'] = false;
           this.errors['oblast'] = null;
           this.errors['raion'] = null;
           this.errors['hromada'] = null;
           this.errors['settlement'] = null;
+        },
+
+        selectSettlementById: function (id) {
+          if (!id) { this.clearSettlement(); return; }
+          var settlements = this.filteredSettlements;
+          for (var i = 0; i < settlements.length; i++) {
+            if (String(settlements[i].id) === String(id)) { this.selectSettlement(settlements[i]); return; }
+          }
         },
 
         clearHromada: function () {
           this.data.hromada = '';
           this.data.settlement = '';
-          this.data.raionName = '';
           this.data.hromadaName = '';
           this.data.settlementName = '';
           this.data.settlementType = '';
           this.data.hromadaType = '';
-          this.data.oblastName = '';
           this.addressSearch = '';
           this.addressResults = [];
           this.hromadaSearch = '';
           this.hromadaResults = [];
+          this.touched['settlement'] = false;
+          this.locationPatternErrors['hromada'] = '';
+          this.locationPatternErrors['settlement'] = '';
+          this.locationNoResults['hromada'] = false;
+          this.locationNoResults['settlement'] = false;
           this.errors['hromada'] = null;
           this.errors['settlement'] = null;
+          this.validateLocationField('hromada');
         },
 
         clearSettlement: function () {
           this.data.settlement = '';
-          this.data.raion = '';
-          this.data.hromada = '';
-          this.data.raionName = '';
-          this.data.hromadaName = '';
           this.data.settlementName = '';
           this.data.settlementType = '';
-          this.data.hromadaType = '';
-          this.data.oblastName = '';
           this.addressSearch = '';
           this.addressResults = [];
-          this.hromadaSearch = '';
-          this.hromadaResults = [];
-          this.errors['oblast'] = null;
-          this.errors['raion'] = null;
-          this.errors['hromada'] = null;
+          this.locationPatternErrors['settlement'] = '';
+          this.locationNoResults['settlement'] = false;
+          if (this.getLocationMethod() === 'two') {
+            this.data.raion = '';
+            this.data.hromada = '';
+            this.data.raionName = '';
+            this.data.hromadaName = '';
+            this.data.oblastName = '';
+            this.hromadaSearch = '';
+            this.hromadaResults = [];
+            this.touched['raion'] = false;
+            this.touched['hromada'] = false;
+            this.locationPatternErrors['raion'] = '';
+            this.locationPatternErrors['hromada'] = '';
+            this.locationNoResults['raion'] = false;
+            this.locationNoResults['hromada'] = false;
+            this.errors['oblast'] = null;
+            this.errors['raion'] = null;
+            this.errors['hromada'] = null;
+          }
           this.errors['settlement'] = null;
+          this.validateLocationField('settlement');
         },
 
         locationSummary: function () {
@@ -1035,6 +1791,412 @@
           }
         },
 
+        initAutoSelects: function () {
+          var self = this;
+          var steps = this.config.steps || [];
+          for (var s = 0; s < steps.length; s++) {
+            var sf = FormEngine.getStepFields(steps[s]);
+            for (var i = 0; i < sf.length; i++) {
+              var field = sf[i];
+              if (!field || field.type !== 'autocomplete') continue;
+              self.asLoad(field.name);
+              var deps = [];
+              if (field.filter && field.filter.field) deps.push(field.filter.field);
+              var datas = field.datas;
+              if (datas && datas.length) {
+                for (var j = 0; j < datas.length; j++) {
+                  if (datas[j] && datas[j].field && deps.indexOf(datas[j].field) === -1) deps.push(datas[j].field);
+                }
+              }
+              for (var k = 0; k < deps.length; k++) {
+                (function (name, parent) {
+                  self.$watch('data.' + parent, function () { self.asResolve(name); });
+                })(field.name, deps[k]);
+              }
+            }
+          }
+        },
+
+        asGetField: function (name) {
+          return this.getField(name);
+        },
+
+        asInlineData: function (d) {
+          if (!d || typeof d !== 'object' || !Array.isArray(d)) return null;
+          var norm = [];
+          for (var i = 0; i < d.length; i++) {
+            var o = d[i];
+            if (!o) continue;
+            var id = (o.id !== undefined && o.id !== null) ? o.id : o.value;
+            var name = (o.name !== undefined && o.name !== null) ? o.name : o.label;
+            if (id === undefined || id === null) continue;
+            norm.push({ id: id, name: (name === undefined || name === null) ? String(id) : name });
+          }
+          return norm;
+        },
+
+        asResolveSource: function (field) {
+          var fd = this.asInlineData(field.data);
+          if (fd) {
+            return {
+              url: null,
+              inline: true,
+              inlineData: fd,
+              mode: field.mode,
+              threshold: field.threshold,
+              minChars: field.minChars,
+              maxResults: field.maxResults
+            };
+          }
+          var fallback = {
+            url: field.data || null,
+            mode: field.mode,
+            threshold: field.threshold,
+            minChars: field.minChars,
+            maxResults: field.maxResults
+          };
+          var datas = field.datas;
+          if (datas && datas.length) {
+            for (var i = 0; i < datas.length; i++) {
+              var entry = datas[i];
+              if (!entry || !entry.data) continue;
+              if (this.data[entry.field] === entry.value) {
+                var ed = this.asInlineData(entry.data);
+                if (ed) {
+                  return {
+                    url: null,
+                    inline: true,
+                    inlineData: ed,
+                    mode: entry.mode || field.mode,
+                    threshold: entry.threshold !== undefined ? entry.threshold : field.threshold,
+                    minChars: entry.minChars !== undefined ? entry.minChars : field.minChars,
+                    maxResults: entry.maxResults !== undefined ? entry.maxResults : field.maxResults
+                  };
+                }
+                return {
+                  url: entry.data,
+                  mode: entry.mode || field.mode,
+                  threshold: entry.threshold !== undefined ? entry.threshold : field.threshold,
+                  minChars: entry.minChars !== undefined ? entry.minChars : field.minChars,
+                  maxResults: entry.maxResults !== undefined ? entry.maxResults : field.maxResults
+                };
+              }
+            }
+          }
+          return fallback;
+        },
+
+        asResolve: function (name) {
+          var field = this.getField(name);
+          if (!field) return;
+          var src = this.asResolveSource(field);
+          var newUrl = src && src.url ? src.url : null;
+          var st = this.asState[name];
+          if (newUrl !== (st ? st.dataUrl : undefined)) {
+            this.asLoad(name);
+            return;
+          }
+          this.asSync(name);
+        },
+
+        asLoad: function (name) {
+          var self = this;
+          var field = this.getField(name);
+          if (!field) return;
+          var src = this.asResolveSource(field);
+          var st = this.asState[name];
+          if (!st) st = this.asState[name] = { search: '', results: [], showDropdown: false, highlightIndex: -1 };
+          if (src && src.inline) {
+            st.loaded = true;
+            st.loading = false;
+            st.dataUrl = null;
+            this.asSync(name);
+            return;
+          }
+          var url = src && src.url ? src.url : null;
+          if (!url) {
+            st.loaded = true;
+            st.loading = false;
+            st.dataUrl = null;
+            this.asSync(name);
+            return;
+          }
+          if (this.asCache[url]) {
+            st.loaded = true;
+            st.loading = false;
+            st.dataUrl = url;
+            this.asSync(name);
+            return;
+          }
+          if (st.loading && st.dataUrl === url) return;
+          st.loading = true;
+          st.dataUrl = url;
+          fetch(url)
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              self.asCache[url] = data;
+              var cur = self.asState[name];
+              if (!cur) cur = self.asState[name] = { search: '', results: [], showDropdown: false, highlightIndex: -1 };
+              cur.loading = false;
+              if (cur.dataUrl === url) {
+                cur.loaded = true;
+                self.asSync(name);
+              }
+            })
+            .catch(function () {
+              if (self.asState[name]) self.asState[name].loading = false;
+            });
+        },
+
+        asRawOptions: function (name) {
+          var field = this.getField(name);
+          if (!field) return [];
+          var src = this.asResolveSource(field);
+          if (!src) return [];
+          if (src.inline) return src.inlineData;
+          if (!src.url) return [];
+          var data = this.asCache[src.url];
+          if (!data) return [];
+          var filter = field.filter;
+          if (!filter || !filter.field) return data;
+          var parentVal = this.data[filter.field];
+          var key = filter.key || filter.field;
+          if (parentVal === '' || parentVal === null || parentVal === undefined) return [];
+          return data.filter(function (o) { return String(o[key]) === String(parentVal); });
+        },
+
+        asOptions: function (name) {
+          return this.asRawOptions(name);
+        },
+
+        asMode: function (name) {
+          var field = this.getField(name);
+          var src = this.asResolveSource(field);
+          return (src && src.mode) ? src.mode : 'auto';
+        },
+
+        asThreshold: function (name) {
+          var field = this.getField(name);
+          var src = this.asResolveSource(field);
+          return (src && src.threshold !== undefined) ? src.threshold : 15;
+        },
+
+        asMinChars: function (name) {
+          var field = this.getField(name);
+          var src = this.asResolveSource(field);
+          return (src && src.minChars !== undefined) ? src.minChars : 3;
+        },
+
+        asMaxResults: function (name) {
+          var field = this.getField(name);
+          var src = this.asResolveSource(field);
+          var v = (src && src.maxResults !== undefined) ? src.maxResults : (field ? field.maxResults : undefined);
+          if (v === undefined || v === null) v = 10;
+          v = parseInt(v, 10);
+          return (isNaN(v) || v < 1) ? 10 : v;
+        },
+
+        asPatternError: function (name) {
+          var st = this.asState[name];
+          return (st && st.patternError) || '';
+        },
+
+        asNoResultsText: function (name) {
+          var field = this.getField(name);
+          var st = this.asState[name];
+          var q = (st && st.noResultsQuery) || '';
+          var msg = (field && field.noResults) || (this.config && this.config.settings && this.config.settings.noResults) || 'Запис "{q}" відсутній у списку';
+          return msg.replace(/\{\{q\}\}/g, q).replace(/\{q\}/g, q);
+        },
+
+        asShowOnFocus: function (name) {
+          var field = this.getField(name);
+          return !(field && field.showOnFocus === false);
+        },
+
+        asIsSearch: function (name) {
+          var mode = this.asMode(name);
+          if (mode === 'search') return true;
+          if (mode === 'select') return false;
+          var st = this.asState[name];
+          if (!st || !st.loaded) return false;
+          return this.asRawOptions(name).length > this.asThreshold(name);
+        },
+
+        asSync: function (name) {
+          var st = this.asState[name];
+          if (!st) return;
+          var opts = this.asRawOptions(name);
+          var val = this.data[name];
+          if (val === '' || val === null || val === undefined) {
+            st.search = '';
+            return;
+          }
+          var found = null;
+          for (var i = 0; i < opts.length; i++) {
+            if (String(opts[i].id) === String(val)) { found = opts[i]; break; }
+          }
+          if (!found) {
+            this.data[name] = '';
+            st.search = '';
+          } else {
+            st.search = found.name;
+          }
+          st.patternError = '';
+          st.noResults = false;
+        },
+
+        asSearch: function (name, isFocus) {
+          var field = this.getField(name);
+          var st = this.asState[name];
+          if (!field || !st) return;
+          var q = st.search ? st.search.trim() : '';
+          var minChars = this.asMinChars(name);
+          var pattern = field.pattern || (this.config && this.config.settings && this.config.settings.pattern);
+
+          if (pattern && q) {
+            try {
+              if (!new RegExp(pattern).test(q)) {
+                var pmsg = (field.validation && field.validation.pattern) || (this.config && this.config.settings && this.config.settings.feedback && this.config.settings.feedback.pattern) || 'Неправильний формат';
+                st.patternError = pmsg;
+                st.results = [];
+                st.highlightIndex = -1;
+                st.showDropdown = false;
+                st.noResults = false;
+                return;
+              }
+            } catch (e) {}
+          }
+          if (st.patternError) st.patternError = '';
+
+          if (!q && this.data[name]) {
+            this.asSync(name);
+            return;
+          }
+          if (q && this.data[name]) {
+            var opts = this.asRawOptions(name);
+            var selected = null;
+            for (var c = 0; c < opts.length; c++) {
+              if (String(opts[c].id) === String(this.data[name])) { selected = opts[c]; break; }
+            }
+            if (selected && q.toLowerCase() !== String(selected.name || '').toLowerCase()) {
+              this.data[name] = '';
+            }
+          }
+
+          var ql = q.toLowerCase();
+          var searchName = ql.split(' - ')[0].trim();
+          var results = [];
+          var all = this.asRawOptions(name);
+          if (ql.length < minChars) {
+            if (isFocus && this.asShowOnFocus(name) && !this.asIsSearch(name)) {
+              var max = this.asMaxResults(name);
+              for (var i = 0; i < all.length && results.length < max; i++) results.push(all[i]);
+              st.showDropdown = true;
+              st.noResults = false;
+            } else {
+              results = [];
+              st.showDropdown = false;
+              st.noResults = false;
+            }
+            st.results = results;
+            st.highlightIndex = -1;
+            return;
+          }
+          var maxR = this.asMaxResults(name);
+          for (var i = 0; i < all.length; i++) {
+            if (results.length >= maxR) break;
+            if (String(all[i].name || '').toLowerCase().indexOf(searchName) !== -1) {
+              results.push(all[i]);
+            }
+          }
+          st.results = results;
+          st.highlightIndex = -1;
+          st.noResults = !!q && results.length === 0 && st.loaded;
+          if (st.noResults) st.noResultsQuery = q;
+          st.showDropdown = results.length > 0 || st.noResults;
+        },
+
+        asSelect: function (name, opt) {
+          this.data[name] = opt.id;
+          this.asState[name].search = opt.name || String(opt.id);
+          this.asState[name].results = [];
+          this.asState[name].showDropdown = false;
+          this.asState[name].highlightIndex = -1;
+          this.asState[name].noResults = false;
+          this.asState[name].patternError = '';
+          if (this.validateField) this.validateField(name);
+        },
+
+        asClear: function (name) {
+          this.data[name] = '';
+          this.asState[name].search = '';
+          this.asState[name].results = [];
+          this.asState[name].showDropdown = false;
+          this.asState[name].highlightIndex = -1;
+          this.asState[name].noResults = false;
+          this.asState[name].patternError = '';
+          if (this.validateField) this.validateField(name);
+        },
+
+        asClose: function (name) {
+          var st = this.asState[name];
+          if (!st) return;
+          st.showDropdown = false;
+          st.highlightIndex = -1;
+        },
+
+        asBlur: function (name) {
+          var st = this.asState[name];
+          if (!st) return;
+          if (st.search && !this.data[name]) {
+            st.search = '';
+            st.results = [];
+            st.highlightIndex = -1;
+            st.noResults = false;
+            st.patternError = '';
+            if (this.isFieldRequired && this.isFieldRequired(name) && this.validateField) this.validateField(name);
+          }
+          this.asClose(name);
+        },
+
+        asHasUnselectedText: function (name) {
+          var st = this.asState[name];
+          return !!(st && st.search && !this.data[name]);
+        },
+
+        asFocus: function (name) {
+          var st = this.asState[name];
+          if (!st) return;
+          if (this.isFieldReadonly && this.isFieldReadonly(name)) return;
+          st.showDropdown = true;
+          st.highlightIndex = -1;
+          this.asSearch(name, true);
+        },
+
+        asHighlightNext: function (name) {
+          var st = this.asState[name];
+          if (!st) return;
+          var max = st.results.length - 1;
+          st.highlightIndex = st.highlightIndex >= max ? 0 : st.highlightIndex + 1;
+          this._scrollHighlighted(name + 'Dropdown');
+        },
+
+        asHighlightPrev: function (name) {
+          var st = this.asState[name];
+          if (!st) return;
+          var max = st.results.length - 1;
+          st.highlightIndex = st.highlightIndex <= 0 ? max : st.highlightIndex - 1;
+          this._scrollHighlighted(name + 'Dropdown');
+        },
+
+        asSelectHighlighted: function (name) {
+          var st = this.asState[name];
+          if (st && st.highlightIndex >= 0 && st.highlightIndex < st.results.length) {
+            this.asSelect(name, st.results[st.highlightIndex]);
+          }
+        },
+
         submit: function () {
           if (!this.validateAll()) return;
           var self = this;
@@ -1056,8 +2218,9 @@
           for (var key in this.files) {
             if (this.files.hasOwnProperty(key)) {
               var fieldFiles = this.files[key];
+              var processed = this.fileProcessed[key] || [];
               for (var i = 0; i < fieldFiles.length; i++) {
-                formData.append(key + '[]', fieldFiles[i]);
+                formData.append(key + '[]', processed[i] || fieldFiles[i]);
               }
             }
           }

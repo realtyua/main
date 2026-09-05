@@ -1,0 +1,12 @@
+{% assign addon_field = include.field %}
+{% assign addon_side = include.side %}
+{% assign addon = addon_field[addon_side] %}
+{%- if addon -%}
+{%- if addon.button -%}
+{%- assign addon_btn = addon.button -%}
+{%- capture addon_modal_id -%}{% if addon_btn.modal.id %}{{ addon_btn.modal.id }}{% else %}modal_{{ addon_field.name }}_{{ addon_side }}{% endif %}{%- endcapture -%}
+<div class="input-group-{{ addon_side }}"><button type="button" class="btn btn-{{ addon_btn.variant | default: 'primary' }}{% if addon_btn.class %} {{ addon_btn.class }}{% endif %}"{% if addon_btn.title %} title="{{ addon_btn.title }}"{% endif %} data-toggle="modal" data-target="#{{ addon_modal_id }}">{{ addon_btn.label | default: addon_btn }}</button></div>
+{%- else -%}
+<div class="input-group-{{ addon_side }}"><span class="input-group-text{% if addon.class %} {{ addon.class }}{% endif %}" id="inputGroup{{ addon_field.name | capitalize }}{{ addon_side | capitalize }}">{{ addon.text | default: addon }}</span></div>
+{%- endif -%}
+{%- endif -%}

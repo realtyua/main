@@ -23,24 +23,40 @@
                x-text="locationRequiredMeta('oblast', 'icon', 'ⓘ')"></a>
           </span>
         </label>
+        <select class="form-control" x-show="!locationIsSearch('oblast')"
+                x-model="data.oblast"
+                :class="errors['oblast'] ? 'is-invalid' : touched['oblast'] ? 'is-valid' : ''"
+                :title="errors['oblast'] || undefined"
+                :disabled="isLocationReadonly('oblast')"
+                @change="selectOblastById($event.target.value)"
+                @blur="validateLocationField('oblast')">
+          <option value="">{{ fo.placeholder | default: 'Виберіть область...' }}</option>
+          <template x-for="o in filteredOblasts" :key="o.id">
+            <option :value="o.id" x-text="o.name"></option>
+          </template>
+        </select>
         <div class="position-relative"
+             x-show="locationIsSearch('oblast')"
              @click.away="oblastShowDropdown = false; oblastHighlightIndex = -1"
              @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { oblastShowDropdown = false; oblastHighlightIndex = -1; } })">
-          <input type="text" class="form-control"
+          <input type="text" class="form-control location-search" autocomplete="off"
                  x-model="oblastSearch"
-                 :class="errors['oblast'] ? 'is-invalid' : ''"
+                 :class="errors['oblast'] || locationPatternError('oblast') ? 'is-invalid' : touched['oblast'] ? 'is-valid' : ''"
+                 :title="errors['oblast'] || locationPatternError('oblast') || undefined"
                  :readonly="isLocationReadonly('oblast')"
                  @input.debounce.200ms="searchOblast()"
                  @focus="if (!isLocationReadonly('oblast')) { oblastShowDropdown = true; oblastHighlightIndex = -1; searchOblast(); }"
+                 @blur="validateLocationField('oblast')"
                  @keydown.arrow-up.prevent="oblastHighlightPrev()"
                  @keydown.arrow-down.prevent="oblastHighlightNext()"
                  @keydown.enter.prevent="oblastSelectHighlighted()"
                  @keydown.escape="oblastShowDropdown = false; oblastHighlightIndex = -1"
                  placeholder="{{ fo.placeholder | default: 'Виберіть область...' }}">
+          <span class="location-search-icon" x-show="!oblastSearch && !data.oblast && !isLocationReadonly('oblast')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"></circle><line x1="11" y1="11" x2="14.5" y2="14.5"></line></svg></span>
           <button type="button" class="btn-clear" title="Очистити поле"
-                  x-show="data.oblast && !isLocationReadonly('oblast')"
+                  x-show="(data.oblast || oblastSearch) && !isLocationReadonly('oblast')"
                   @click.prevent="clearOblast()">&times;</button>
-          <div x-show="oblastShowDropdown && oblastResults.length > 0 && !isLocationReadonly('oblast')"
+          <div x-show="oblastShowDropdown && (oblastResults.length > 0 || locationNoResults['oblast']) && !isLocationReadonly('oblast')"
                x-ref="oblastDropdown"
                class="dropdown-menu show position-absolute w-100"
                style="max-height: 250px; overflow-y: auto; z-index: 1050;"
@@ -57,9 +73,13 @@
                 <span x-text="o.name"></span>
               </button>
             </template>
+            <div class="dropdown-item text-muted" style="pointer-events: none;"
+                 x-show="locationNoResults['oblast'] && oblastResults.length === 0"
+                 x-text="locationNoResultsText('oblast')"></div>
           </div>
         </div>
-        <div class="invalid-feedback" x-show="errors['oblast']" x-text="errors['oblast']"></div>
+        <div class="invalid-feedback" style="display: block" x-show="errors['oblast'] || locationPatternError('oblast')"><span x-show="locationPatternError('oblast')" x-text="locationPatternError('oblast')"></span><span x-show="!locationPatternError('oblast')" x-text="errors['oblast']"></span></div>
+        <div class="valid-feedback" style="display: block" x-show="touched['oblast'] && !errors['oblast'] && !locationPatternError('oblast') && !locationHasUnselectedText('oblast')">{% if fo.feedback and fo.feedback.valid %}{{ fo.feedback.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
       </div>
 
       <div class="form-group" x-show="{% if method == 'two' %}data.raion{% else %}data.oblast{% endif %}">
@@ -74,15 +94,63 @@
                x-text="locationRequiredMeta('raion', 'icon', 'ⓘ')"></a>
           </span>
         </label>
-        <select class="form-control" x-model="data.raion" @change="onRaionChange()"
-                :class="errors['raion'] ? 'is-invalid' : ''"
-                :disabled="isLocationReadonly('raion'){% if method == 'two' %} || data.raion{% endif %}">
+        <select class="form-control" x-show="!locationIsSearch('raion')"
+                x-model="data.raion"
+                :class="errors['raion'] ? 'is-invalid' : touched['raion'] ? 'is-valid' : ''"
+                :title="errors['raion'] || undefined"
+                :disabled="isLocationReadonly('raion'){% if method == 'two' %} || data.raion{% endif %}"
+                @change="selectRaionById($event.target.value)"
+                @blur="validateLocationField('raion')">
           <option value="">{{ fr.placeholder | default: 'Виберіть район...' }}</option>
           <template x-for="r in filteredRaions" :key="r.id">
             <option :value="r.id" x-text="r.name"></option>
           </template>
         </select>
-        <div class="invalid-feedback" x-show="errors['raion']" x-text="errors['raion']"></div>
+        <div class="position-relative"
+             x-show="locationIsSearch('raion')"
+             @click.away="raionShowDropdown = false; raionHighlightIndex = -1"
+             @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { raionShowDropdown = false; raionHighlightIndex = -1; } })">
+          <input type="text" class="form-control location-search" autocomplete="off"
+                 x-model="raionSearch"
+                 :class="errors['raion'] || locationPatternError('raion') ? 'is-invalid' : touched['raion'] ? 'is-valid' : ''"
+                 :title="errors['raion'] || locationPatternError('raion') || undefined"
+                 :readonly="isLocationReadonly('raion'){% if method == 'two' %} || data.raion{% endif %}"
+                 @input.debounce.200ms="searchRaion()"
+                 @focus="if (!isLocationReadonly('raion'){% if method == 'two' %} && !data.raion{% endif %}) { raionShowDropdown = true; raionHighlightIndex = -1; searchRaion(); }"
+                 @blur="validateLocationField('raion')"
+                 @keydown.arrow-up.prevent="raionHighlightPrev()"
+                 @keydown.arrow-down.prevent="raionHighlightNext()"
+                 @keydown.enter.prevent="raionSelectHighlighted()"
+                 @keydown.escape="raionShowDropdown = false; raionHighlightIndex = -1"
+                 placeholder="{{ fr.placeholder | default: 'Виберіть район...' }}">
+          <span class="location-search-icon" x-show="!raionSearch && !data.raion && !isLocationReadonly('raion'){% if method == 'two' %} && !data.raion{% endif %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"></circle><line x1="11" y1="11" x2="14.5" y2="14.5"></line></svg></span>
+          <button type="button" class="btn-clear" title="Очистити поле"
+                  x-show="(data.raion || raionSearch) && !isLocationReadonly('raion'){% if method == 'two' %} && !data.raion{% endif %}"
+                  @click.prevent="clearRaion()">&times;</button>
+          <div x-show="raionShowDropdown && (raionResults.length > 0 || locationNoResults['raion']) && !isLocationReadonly('raion'){% if method == 'two' %} && !data.raion{% endif %}"
+               x-ref="raionDropdown"
+               class="dropdown-menu show position-absolute w-100"
+               style="max-height: 250px; overflow-y: auto; z-index: 1050;"
+               @keydown.arrow-up.prevent="raionHighlightPrev()"
+               @keydown.arrow-down.prevent="raionHighlightNext()"
+               @keydown.enter.prevent="raionSelectHighlighted()"
+               @keydown.escape="raionShowDropdown = false; raionHighlightIndex = -1">
+            <template x-for="(r, rIdx) in raionResults" :key="r.id">
+              <button type="button" class="dropdown-item"
+                      :class="{ 'highlighted': raionHighlightIndex === rIdx }"
+                      @mousedown.prevent="selectRaion(r)"
+                      @mouseenter="raionHighlightIndex = rIdx"
+                      @focus="raionHighlightIndex = rIdx">
+                <span x-text="r.name"></span>
+              </button>
+            </template>
+            <div class="dropdown-item text-muted" style="pointer-events: none;"
+                 x-show="locationNoResults['raion'] && raionResults.length === 0"
+                 x-text="locationNoResultsText('raion')"></div>
+          </div>
+        </div>
+        <div class="invalid-feedback" style="display: block" x-show="errors['raion'] || locationPatternError('raion')"><span x-show="locationPatternError('raion')" x-text="locationPatternError('raion')"></span><span x-show="!locationPatternError('raion')" x-text="errors['raion']"></span></div>
+        <div class="valid-feedback" style="display: block" x-show="touched['raion'] && !errors['raion'] && !locationPatternError('raion') && !locationHasUnselectedText('raion')">{% if fr.feedback and fr.feedback.valid %}{{ fr.feedback.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
       </div>
 
       <div class="form-group" x-show="{% if method == 'two' %}data.hromada{% else %}data.raion{% endif %}">
@@ -97,24 +165,40 @@
                x-text="locationRequiredMeta('hromada', 'icon', 'ⓘ')"></a>
           </span>
         </label>
+        <select class="form-control" x-show="!locationIsSearch('hromada')"
+                x-model="data.hromada"
+                :class="errors['hromada'] ? 'is-invalid' : touched['hromada'] ? 'is-valid' : ''"
+                :title="errors['hromada'] || undefined"
+                :disabled="isLocationReadonly('hromada'){% if method == 'two' %} || data.hromada{% endif %}"
+                @change="selectHromadaById($event.target.value)"
+                @blur="validateLocationField('hromada')">
+          <option value="">{{ fh.placeholder | default: 'Виберіть громаду...' }}</option>
+          <template x-for="h in filteredHromadas" :key="h.id">
+            <option :value="h.id" x-text="h.name + ' - ' + h.type"></option>
+          </template>
+        </select>
         <div class="position-relative"
+             x-show="locationIsSearch('hromada')"
              @click.away="hromadaShowDropdown = false; hromadaHighlightIndex = -1"
              @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { hromadaShowDropdown = false; hromadaHighlightIndex = -1; } })">
-          <input type="text" class="form-control"
+          <input type="text" class="form-control location-search" autocomplete="off"
                  x-model="hromadaSearch"
-                 :class="errors['hromada'] ? 'is-invalid' : ''"
+                 :class="errors['hromada'] || locationPatternError('hromada') ? 'is-invalid' : touched['hromada'] ? 'is-valid' : ''"
+                 :title="errors['hromada'] || locationPatternError('hromada') || undefined"
                  :readonly="isLocationReadonly('hromada'){% if method == 'two' %} || data.hromada{% endif %}"
                  @input.debounce.200ms="searchHromada()"
                  @focus="if (!isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}) { hromadaShowDropdown = true; hromadaHighlightIndex = -1; searchHromada(); }"
+                 @blur="validateLocationField('hromada')"
                  @keydown.arrow-up.prevent="hromadaHighlightPrev()"
                  @keydown.arrow-down.prevent="hromadaHighlightNext()"
                  @keydown.enter.prevent="hromadaSelectHighlighted()"
                  @keydown.escape="hromadaShowDropdown = false; hromadaHighlightIndex = -1"
                   placeholder="{{ fh.placeholder | default: 'Введіть назву громади...' }}">
+          <span class="location-search-icon" x-show="!hromadaSearch && !data.hromada && !isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"></circle><line x1="11" y1="11" x2="14.5" y2="14.5"></line></svg></span>
           <button type="button" class="btn-clear" title="Очистити поле"
-                  x-show="data.hromada && !isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}"
+                  x-show="(data.hromada || hromadaSearch) && !isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}"
                   @click.prevent="clearHromada()">&times;</button>
-          <div x-show="hromadaShowDropdown && hromadaResults.length > 0 && !isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}"
+          <div x-show="hromadaShowDropdown && (hromadaResults.length > 0 || locationNoResults['hromada']) && !isLocationReadonly('hromada'){% if method == 'two' %} && !data.hromada{% endif %}"
                x-ref="hromadaDropdown"
                class="dropdown-menu show position-absolute w-100"
                style="max-height: 250px; overflow-y: auto; z-index: 1050;"
@@ -131,9 +215,13 @@
                   <span x-text="h.name + ' - ' + h.type"></span>
                 </button>
             </template>
+            <div class="dropdown-item text-muted" style="pointer-events: none;"
+                 x-show="locationNoResults['hromada'] && hromadaResults.length === 0"
+                 x-text="locationNoResultsText('hromada')"></div>
           </div>
         </div>
-        <div class="invalid-feedback" x-show="errors['hromada']" x-text="errors['hromada']"></div>
+        <div class="invalid-feedback" style="display: block" x-show="errors['hromada'] || locationPatternError('hromada')"><span x-show="locationPatternError('hromada')" x-text="locationPatternError('hromada')"></span><span x-show="!locationPatternError('hromada')" x-text="errors['hromada']"></span></div>
+        <div class="valid-feedback" style="display: block" x-show="touched['hromada'] && !errors['hromada'] && !locationPatternError('hromada') && !locationHasUnselectedText('hromada')">{% if fh.feedback and fh.feedback.valid %}{{ fh.feedback.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
       </div>
 
       <div class="form-group" x-show="{% if method == 'two' %}true{% else %}data.hromada{% endif %}">
@@ -148,24 +236,40 @@
                x-text="locationRequiredMeta('settlement', 'icon', 'ⓘ')"></a>
           </span>
         </label>
+        <select class="form-control" x-show="!locationIsSearch('settlement')"
+                x-model="data.settlement"
+                :class="errors['settlement'] ? 'is-invalid' : touched['settlement'] ? 'is-valid' : ''"
+                :title="errors['settlement'] || undefined"
+                :disabled="isLocationReadonly('settlement')"
+                @change="selectSettlementById($event.target.value)"
+                @blur="validateLocationField('settlement')">
+          <option value="">{{ fs.placeholder | default: 'Виберіть населений пункт...' }}</option>
+          <template x-for="s in filteredSettlements" :key="s.id">
+            <option :value="s.id" x-text="s.name + ' - ' + s.type"></option>
+          </template>
+        </select>
         <div class="position-relative"
+             x-show="locationIsSearch('settlement')"
              @click.away="addressShowDropdown = false; settlementHighlightIndex = -1"
              @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { addressShowDropdown = false; settlementHighlightIndex = -1; } })">
-          <input type="text" class="form-control"
+          <input type="text" class="form-control location-search" autocomplete="off"
                  x-model="addressSearch"
-                 :class="errors['settlement'] ? 'is-invalid' : ''"
+                 :class="errors['settlement'] || locationPatternError('settlement') ? 'is-invalid' : touched['settlement'] ? 'is-valid' : ''"
+                 :title="errors['settlement'] || locationPatternError('settlement') || undefined"
                  :readonly="isLocationReadonly('settlement')"
                  @input.debounce.200ms="addressSearchSettlement()"
                  @focus="if (!isLocationReadonly('settlement')) { addressShowDropdown = true; settlementHighlightIndex = -1; addressSearchSettlement(true); }"
+                 @blur="validateLocationField('settlement')"
                  @keydown.arrow-up.prevent="settlementHighlightPrev()"
                  @keydown.arrow-down.prevent="settlementHighlightNext()"
                  @keydown.enter.prevent="settlementSelectHighlighted()"
                  @keydown.escape="addressShowDropdown = false; settlementHighlightIndex = -1"
                   placeholder="{{ fs.placeholder | default: 'Введіть назву...' }}">
+          <span class="location-search-icon" x-show="!addressSearch && !data.settlement && !isLocationReadonly('settlement')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"></circle><line x1="11" y1="11" x2="14.5" y2="14.5"></line></svg></span>
           <button type="button" class="btn-clear" title="Очистити поле"
-                  x-show="data.settlement && !isLocationReadonly('settlement')"
+                  x-show="(data.settlement || addressSearch) && !isLocationReadonly('settlement')"
                   @click.prevent="clearSettlement()">&times;</button>
-          <div x-show="addressShowDropdown && addressResults.length > 0 && !isLocationReadonly('settlement')"
+          <div x-show="addressShowDropdown && (addressResults.length > 0 || locationNoResults['settlement']) && !isLocationReadonly('settlement')"
                x-ref="settlementDropdown"
                class="dropdown-menu show position-absolute w-100"
                style="max-height: 250px; overflow-y: auto; z-index: 1050;"
@@ -197,9 +301,13 @@
               </button>
 {% endif %}
             </template>
+            <div class="dropdown-item text-muted" style="pointer-events: none;"
+                 x-show="locationNoResults['settlement'] && addressResults.length === 0"
+                 x-text="locationNoResultsText('settlement')"></div>
           </div>
         </div>
-        <div class="invalid-feedback" x-show="errors['settlement']" x-text="errors['settlement']"></div>
+        <div class="invalid-feedback" style="display: block" x-show="errors['settlement'] || locationPatternError('settlement')"><span x-show="locationPatternError('settlement')" x-text="locationPatternError('settlement')"></span><span x-show="!locationPatternError('settlement')" x-text="errors['settlement']"></span></div>
+        <div class="valid-feedback" style="display: block" x-show="touched['settlement'] && !errors['settlement'] && !locationPatternError('settlement') && !locationHasUnselectedText('settlement')">{% if fs.feedback and fs.feedback.valid %}{{ fs.feedback.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
       </div>
       <div x-show="data.settlement" class="mt-2">
         <div class="card bg-light mb-0">

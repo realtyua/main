@@ -81,6 +81,9 @@
         },
 
         validateField: function (fieldName) {
+          if (this._validatingStack && this._validatingStack.indexOf(fieldName) !== -1) return;
+          var prevStack = this._validatingStack;
+          this._validatingStack = (prevStack || []).concat([fieldName]);
           var steps = this.config.steps || [];
           var field;
           for (var s = 0; s < steps.length; s++) {
@@ -90,7 +93,7 @@
             }
             if (field) break;
           }
-          if (!field) return;
+          if (!field) { this._validatingStack = prevStack; return; }
           this.touched[fieldName] = true;
           var err = this.getFieldErrors(field);
           if (err !== null) {
@@ -105,6 +108,26 @@
             }
           }
           this.clearHiddenErrors();
+          for (var si = 0; si < steps.length; si++) {
+            var sFields = steps[si].fields || [];
+            for (var fi = 0; fi < sFields.length; fi++) {
+              var otherField = sFields[fi];
+              if (otherField.name === fieldName) continue;
+              if (!this.touched[otherField.name]) continue;
+              var otherCompare = otherField.validation && otherField.validation.compare;
+              if (otherCompare && Array.isArray(otherCompare)) {
+                for (var ri = 0; ri < otherCompare.length; ri++) {
+                  var rule = otherCompare[ri];
+                  var fieldsToCheck = Array.isArray(rule.field) ? rule.field : [rule.field];
+                  if (fieldsToCheck.indexOf(fieldName) !== -1) {
+                    this.validateField(otherField.name);
+                    break;
+                  }
+                }
+              }
+            }
+          }
+          this._validatingStack = prevStack;
         },
 
         fieldClass: function (name) {
@@ -152,6 +175,44 @@
             try {
               if (!new RegExp(f.pattern).test(val)) return 'Неправильний формат';
             } catch (e) {}
+          }
+
+          if (f.validation && f.validation.compare && Array.isArray(f.validation.compare)) {
+            for (var r = 0; r < f.validation.compare.length; r++) {
+              var rule = f.validation.compare[r];
+              var myNum = parseFloat(val);
+              if (isNaN(myNum) || val === '' || val === null || val === undefined) continue;
+              var otNum;
+              if (Array.isArray(rule.field)) {
+                var sum = 0;
+                var hasAny = false;
+                for (var k = 0; k < rule.field.length; k++) {
+                  var v = this.data[rule.field[k]];
+                  if (v === '' || v === null || v === undefined) continue;
+                  var n = parseFloat(v);
+                  if (!isNaN(n)) { sum += n; hasAny = true; }
+                }
+                if (!hasAny) continue;
+                otNum = sum;
+              } else {
+                var otherVal = this.data[rule.field];
+                if (otherVal === '' || otherVal === null || otherVal === undefined) continue;
+                otNum = parseFloat(otherVal);
+              }
+              if (isNaN(otNum) && !Array.isArray(rule.field)) continue;
+              var pass = false;
+              switch (rule.operator) {
+                case '<':  pass = myNum < otNum; break;
+                case '<=': pass = myNum <= otNum; break;
+                case '>':  pass = myNum > otNum; break;
+                case '>=': pass = myNum >= otNum; break;
+                case '==': pass = myNum == otNum; break;
+                case '!=': pass = myNum != otNum; break;
+              }
+              if (!pass) {
+                return rule.message || 'Некоректне значення';
+              }
+            }
           }
 
           return null;

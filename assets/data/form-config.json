@@ -1,0 +1,26 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign fieldList = "" | split: "," -%}
+{%- assign locWidget = nil -%}
+{%- for step in site.data.add-property.steps -%}
+  {%- for row in step.rows -%}
+    {%- for col in row.cols -%}
+      {%- for nrow in col.rows -%}
+        {%- for field in nrow.fields -%}
+          {%- if field.name and field.type != 'widgets' -%}
+            {%- assign fieldList = fieldList | push: field -%}
+          {%- elsif field.widget == 'location' -%}
+            {%- assign locWidget = field -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endfor -%}
+{
+  "fields": {{ fieldList | jsonify }},
+  "location": {{ locWidget.fields | jsonify }},
+  "settings": {{ site.data.add-property.settings | jsonify }}
+}

@@ -3,10 +3,11 @@
 <div :class="{{ col_fn }}('{{ f.name }}')" x-show="isFieldVisible('{{ f.name }}')">
 <div class="form-group">
   <label for="field_{{ f.name }}">{% include form/label.html field=f %}
-    {% if f.name == 'description' %}
-    <button type="button" class="btn btn-sm btn-outline-primary ml-2 py-0" @click="generateDescription()" title="Згенерувати опис">✨ Авто</button>
+    {% if f.autogenerate %}
+    <button type="button" class="btn btn-sm btn-outline-primary ml-2 py-0" @click="generateDescription('{{ f.name }}')" title="Згенерувати опис">✨ Авто</button>
     {% endif %}
   </label>
+    <div class="text-input-wrapper">
     <textarea class="form-control" id="field_{{ f.name }}" rows="4"
               {% include form/attributes.html field=f element='textarea' %}
               x-model="data.{{ f.name }}"
@@ -18,6 +19,10 @@
             @change="validateField('{{ f.name }}')"
             @blur="validateField('{{ f.name }}')"
             @input="validateField('{{ f.name }}')"{% if f.helper %} aria-describedby="helper_{{ f.name }}"{% endif %}></textarea>
+    <button type="button" class="btn-clear" title="Очистити поле"
+            x-show="data.{{ f.name }} && !isFieldReadonly('{{ f.name }}')"
+            @click.prevent="clearField('{{ f.name }}')">&times;</button>
+    </div>
   {% if f.helper %}<small id="helper_{{ f.name }}" class="form-text text-muted">{{ f.helper }}</small>{% endif %}
   {% if f.maxlength %}
   <small class="form-text text-muted">

@@ -41,19 +41,19 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="notify-name">{{ site.data.uk.notify_contact_name }}</label>
-              <input type="text" class="form-control" id="notify-name" name="contact_name" pattern="^[а-яА-ЯіїєґІЇЄҐ0-9\s\-\.@_]+$" placeholder="{{ site.data.uk.notify_contact_name_placeholder }}">
+              <input type="text" class="form-control" id="notify-name" name="contact_name" autocomplete="name" minlength="2" maxlength="50" pattern="^[а-яА-ЯіїєґІЇЄҐ0-9\s\-\.@_]+$" placeholder="{{ site.data.uk.notify_contact_name_placeholder }}">
               <div class="invalid-feedback">{{ site.data.uk.notify_invalid_chars }}</div>
               <div class="valid-feedback">{{ site.data.uk.notify_valid_chars }}</div>
             </div>
             <div class="form-group col-md-4">
               <label for="notify-phone">{{ site.data.uk.notify_contact_phone }}</label>
-              <input type="tel" class="form-control" id="notify-phone" name="contact_phone" pattern="^[\+\d\s\-\(\)]+$" placeholder="{{ site.data.uk.notify_contact_phone_placeholder }}">
+              <input type="tel" class="form-control" id="notify-phone" name="contact_phone" autocomplete="tel" minlength="5" maxlength="20" pattern="^[\+\d\s\-\(\)]+$" placeholder="{{ site.data.uk.notify_contact_phone_placeholder }}">
               <div class="invalid-feedback">{{ site.data.uk.notify_invalid_phone }}</div>
               <div class="valid-feedback">{{ site.data.uk.notify_valid_chars }}</div>
             </div>
             <div class="form-group col-md-4">
               <label for="notify-email">{{ site.data.uk.notify_contact_email }}</label>
-              <input type="email" class="form-control" id="notify-email" name="contact_email" pattern="^[a-zA-Z0-9@\.\-_]+$" placeholder="{{ site.data.uk.notify_contact_email_placeholder }}">
+              <input type="email" class="form-control" id="notify-email" name="contact_email" autocomplete="email" minlength="3" maxlength="254" pattern="^[a-zA-Z0-9@\.\-_]+$" placeholder="{{ site.data.uk.notify_contact_email_placeholder }}">
               <div class="invalid-feedback">{{ site.data.uk.notify_invalid_email }}</div>
               <div class="valid-feedback">{{ site.data.uk.notify_valid_chars }}</div>
             </div>

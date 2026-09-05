@@ -5,20 +5,76 @@
   <div class="card bg-light mb-3">
     <div class="card-body py-2">
       <small class="text-muted d-block">
-        <template x-if="data.currency === 'usd' || data.currency === 'eur'">
+
+        <!-- SELL / REALTY_FREE -->
+        <template x-if="data.action_type === 'sell' || data.action_type === 'realty_free'">
           <div>
-            <div x-text="'Ціна ' + priceUah + ' гривень за все'"></div>
-            <div x-text="'Ціна в іноземній валюті ' + (data.currency === 'usd' ? '$' : '€') + ' ' + priceForeign + ' за весь об\'єкт нерухомості'"></div>
-            <div x-show="data.surface" x-text="'Ціна в іноземній валюті ' + (data.currency === 'usd' ? '$' : '€') + ' ' + pricePerM2Foreign + ' за 1 м²'"></div>
-            <div x-text="'Конвертовано за курсом ' + currencyRateLabel"></div>
+            <template x-if="data.currency !== 'uah'">
+              <div>
+                <div x-text="priceLabel + ' ' + priceUah + ' гривень за весь об\'єкт нерухомості'"></div>
+                <div x-show="data.surface" x-text="priceLabel + ' в українських гривнях ' + pricePerM2Uah + ' ₴ за 1 м²'"></div>
+                <div x-text="priceLabel + ' в іноземній валюті ' + (data.currency === 'usd' ? '$' : '€') + ' ' + priceForeign + ' за весь об\'єкт нерухомості'"></div>
+                <div x-show="data.surface" x-text="priceLabel + ' в іноземній валюті ' + (data.currency === 'usd' ? '$' : '€') + ' ' + pricePerM2Foreign + ' за 1 м²'"></div>
+                <div x-text="'Конвертовано за курсом ' + currencyRateLabel"></div>
+              </div>
+            </template>
+            <template x-if="data.currency === 'uah'">
+              <div>
+                <div x-text="priceLabel + ' ' + priceForeign + ' гривень за весь об\'єкт нерухомості'"></div>
+                <div x-show="data.surface" x-text="priceLabel + ' в гривнях ' + pricePerM2Foreign + ' за 1 м²'"></div>
+              </div>
+            </template>
           </div>
         </template>
-        <template x-if="data.currency === 'uah'">
+
+        <!-- RENT: без періоду -->
+        <template x-if="data.action_type === 'rent' && !data.period_rent">
           <div>
-            <div x-text="'Ціна ' + priceForeign + ' гривень за весь об\'єкт нерухомості'"></div>
-            <div x-show="data.surface" x-text="'Ціна в гривнях ' + pricePerM2Foreign + ' за 1 м²'"></div>
+            <div class="text-danger fw-bold" x-text="'Подавач оголошення не вказав період оренди'"></div>
+            <div x-text="priceLabel + ' ' + (data.currency !== 'uah' ? ((data.currency === 'usd' ? '$' : '€') + ' ') : '') + priceForeign + ' - період не вказано'"></div>
+            <div x-show="data.surface && data.currency !== 'uah'" x-text="priceLabel + ' в українських гривнях ' + pricePerM2Uah + ' ₴ за 1 м²'"></div>
+            <div x-show="data.surface && data.currency !== 'uah'" x-text="priceLabel + ' в іноземній валюті ' + (data.currency === 'usd' ? '$' : '€') + ' ' + pricePerM2Foreign + ' за 1 м²'"></div>
+            <div x-show="data.surface && data.currency === 'uah'" x-text="priceLabel + ' в гривнях ' + pricePerM2Foreign + ' за 1 м²'"></div>
+            <div class="text-danger fw-bold" x-text="'Для точного підрахунку ціни оренди вам необхідно вибрати період у полі \u00AB' + periodRentLabel + '\u00BB'"></div>
           </div>
         </template>
+
+        <!-- RENT: з періодом -->
+        <template x-if="data.action_type === 'rent' && data.period_rent">
+          <div>
+            <div x-text="priceLabel + ' в українських гривнях ' + priceUah + ' ₴ ' + periodLabel"></div>
+            <div x-show="data.currency !== 'uah'" x-text="priceLabel + ' в іноземній валюті ' + (data.currency === 'usd' ? '$' : '€') + ' ' + priceForeign + ' ' + periodLabel"></div>
+            <div x-show="data.currency === 'uah' && hasNbuRate" x-text="'Ціна в іноземній валюті $ ' + (parseFloat(data.price) / nbuRate).toFixed(2) + ' ' + periodLabel"></div>
+            <div x-show="data.surface" x-text="priceLabel + ' в українських гривнях ' + pricePerM2Uah + ' ₴ за 1 м²'"></div>
+            <div x-show="data.surface && data.currency !== 'uah'" x-text="priceLabel + ' в іноземній валюті ' + (data.currency === 'usd' ? '$' : '€') + ' ' + pricePerM2Foreign + ' за 1 м²'"></div>
+            <div x-show="data.surface && data.currency === 'uah' && hasNbuRate" x-text="'Ціна в іноземній валюті $ ' + (parseFloat(data.price) / parseFloat(data.surface) / nbuRate).toFixed(2) + ' за 1 м²'"></div>
+            <template x-if="['month', 'three_month', 'six_month', 'year', 'more_year'].indexOf(data.period_rent) !== -1">
+              <div>
+                <div x-text="'Вартість оренди в ' + (data.currency !== 'uah' ? 'іноземній валюті' : 'українських гривнях') + ' за відповідні періоди:'"></div>
+                <div x-text="'- за один місяць: ' + (data.currency !== 'uah' ? ((data.currency === 'usd' ? '$' : '€') + ' ') : '') + rentPriceMonth + (data.currency === 'uah' ? ' гривень' : '') + (data.period_rent === 'month' ? '  (' + periodNote + ')' : '')"></div>
+                <div x-text="'- за три місяці: ' + (data.currency !== 'uah' ? ((data.currency === 'usd' ? '$' : '€') + ' ') : '') + rentPriceThreeMonth + (data.currency === 'uah' ? ' гривень' : '') + (data.period_rent === 'three_month' ? '  (' + periodNote + ')' : '')"></div>
+                <div x-text="'- за півроку: ' + (data.currency !== 'uah' ? ((data.currency === 'usd' ? '$' : '€') + ' ') : '') + rentPriceSixMonth + (data.currency === 'uah' ? ' гривень' : '') + (data.period_rent === 'six_month' ? '  (' + periodNote + ')' : '')"></div>
+                <div x-text="'- за один рік: ' + (data.currency !== 'uah' ? ((data.currency === 'usd' ? '$' : '€') + ' ') : '') + rentPriceYear + (data.currency === 'uah' ? ' гривень' : '') + (data.period_rent === 'year' || data.period_rent === 'more_year' ? '  (' + periodNote + ')' : '')"></div>
+              </div>
+            </template>
+            <template x-if="data.currency === 'uah'">
+              <div x-text="'Конвертовано за курсом національного банку України ' + currencyRateLabel"></div>
+            </template>
+            <template x-if="data.currency !== 'uah'">
+              <div x-text="'Конвертовано за курсом ' + currencyRateLabel"></div>
+            </template>
+            <div x-show="utilityBillsRentLabel" x-text="utilityBillsRentLabel"></div>
+          </div>
+        </template>
+
+        <!-- RENT_FREE -->
+        <template x-if="data.action_type === 'rent_free'">
+          <div>
+            <div x-text="priceLabel + ' ' + priceForeign + ' гривень за весь об\'єкт нерухомості на один рік'"></div>
+            <div x-show="utilityBillsRentLabel" x-text="utilityBillsRentLabel"></div>
+          </div>
+        </template>
+
       </small>
     </div>
   </div>

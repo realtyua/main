@@ -132,36 +132,62 @@
   function createBase(config) {
     buildCache(config);
 
+    var dnsTimers = {};
+
     var base = {
       config: config,
       errors: {},
       touched: {},
+      _validatingStack: null,
 
       getField: function (name) { return getField(name); },
 
       getStepFields: function (step) { return getStepFields(step); },
 
       validateField: function (fieldName) {
+        if (this._validatingStack && this._validatingStack.indexOf(fieldName) !== -1) return;
+        var prevStack = this._validatingStack;
+        this._validatingStack = (prevStack || []).concat([fieldName]);
         var field = this.getField(fieldName);
-        if (!field) return;
+        if (!field) { this._validatingStack = prevStack; return; }
         this.touched[fieldName] = true;
         var err = this.getFieldErrors(field);
         if (err !== null) {
           if (this.errors[fieldName] !== err) {
             this.errors[fieldName] = err;
-            this.errors = Object.assign({}, this.errors);
           }
         } else {
           if (this.errors[fieldName]) {
             delete this.errors[fieldName];
-            this.errors = Object.assign({}, this.errors);
           }
         }
+        this.errors = Object.assign({}, this.errors);
         if (!err && field.type === 'email' && field.validation && field.validation.dnscheck && field.validation.dnscheck.value && this.data[fieldName]) {
-          this.checkEmailDomain(fieldName, field);
+          var self = this;
+          if (dnsTimers[fieldName]) clearTimeout(dnsTimers[fieldName]);
+          dnsTimers[fieldName] = setTimeout(function () {
+            self.checkEmailDomain(fieldName, field);
+          }, 500);
         }
         this.clearHiddenErrors();
         this.applySetRules();
+        for (var i = 0; i < fieldsCache.length; i++) {
+          var otherField = fieldsCache[i];
+          if (otherField.name === fieldName) continue;
+          if (!this.touched[otherField.name]) continue;
+          var otherValidation = otherField.validation && otherField.validation.compare;
+          if (otherValidation && Array.isArray(otherValidation)) {
+            for (var r = 0; r < otherValidation.length; r++) {
+              var rule = otherValidation[r];
+              var fieldsToCheck = Array.isArray(rule.field) ? rule.field : [rule.field];
+              if (fieldsToCheck.indexOf(fieldName) !== -1) {
+                this.validateField(otherField.name);
+                break;
+              }
+            }
+          }
+        }
+        this._validatingStack = prevStack;
       },
 
       checkEmailDomain: function (fieldName, field) {
@@ -183,7 +209,7 @@
           var hasMX = results[0].Answer && results[0].Answer.length > 0;
           var hasA  = results[1].Answer && results[1].Answer.length > 0;
           var hasAAAA = results[2].Answer && results[2].Answer.length > 0;
-          if (!hasMX || (!hasA && !hasAAAA)) {
+          if (!hasMX && !hasA && !hasAAAA) {
             self.errors[fieldName] = msg;
             self.errors = Object.assign({}, self.errors);
           }
@@ -222,6 +248,7 @@
           }
           return val.text;
         }
+        if (key === 'required' && f.message) return f.message;
         var def = (this.config && this.config.settings && this.config.settings.validation) || {};
         if (key === 'required') {
           var settingsMsg = this.config && this.config.settings && this.config.settings.required && this.config.settings.required.message;
@@ -234,11 +261,15 @@
         if (!this.isFieldVisible(f.name)) return null;
         var val = this.data[f.name];
         if (this.isFieldRequired(f.name)) {
-          var empty = val === '' || val === null || val === undefined || val === false || (Array.isArray(val) && val.length === 0);
-          var defMsg = f.type === 'checkbox' ? "Підтвердіть згоду" : f.type === 'checkbox_group' ? "Оберіть хоча б один варіант" : "Це поле обов'язкове";
+          var empty = f.type === 'file'
+            ? !(this.files && this.files[f.name] && this.files[f.name].length)
+            : val === '' || val === null || val === undefined || val === false || (Array.isArray(val) && val.length === 0);
+          var defMsg = f.type === 'checkbox' ? "Підтвердіть згоду" : f.type === 'checkbox_group' ? "Оберіть хоча б один варіант" : f.type === 'file' ? "Виберіть хоча б один файл" : "Це поле обов'язкове";
           if (empty) return this.getValidationMsg(f, 'required', 'required', defMsg);
         }
-        if (val === '' || val === null || val === undefined) return null;
+        if (val === '' || val === null || val === undefined) {
+          if (f.type !== 'file') return null;
+        }
         if (f.type === 'number') {
           var num = parseFloat(val);
           if (!isNaN(num)) {
@@ -247,6 +278,24 @@
           }
         }
         var textTypes = ['text', 'email', 'tel', 'textarea', 'number'];
+        if (f.type === 'file') {
+          var fl = this.files[f.name] || [];
+          var fv = this.fileValid && this.fileValid[f.name] || [];
+          var cfg = f.file || {};
+          var mf = cfg.maxFiles || 10;
+          var mn = cfg.minFiles || 0;
+          if (fl.length > mf) return 'Максимум ' + mf + ' файлів';
+          if (mn && fl.length < mn) {
+            var mnp = this.pluralizeFile ? this.pluralizeFile(mn) : 'файлів';
+            return 'Мінімум ' + mn + ' ' + mnp;
+          }
+          for (var fi = 0; fi < fl.length; fi++) {
+            if (fv[fi] === false) {
+              var si = this.parseFileSize ? this.parseFileSize(cfg.maxSize) : null;
+              if (si) return 'Файл "' + fl[fi].name + '" перевищує ' + si.display;
+            }
+          }
+        }
         if (textTypes.indexOf(f.type) !== -1 && typeof val === 'string') {
           var pattern = f.pattern || (f.type !== 'email' && this.config.settings && this.config.settings.pattern);
           if (pattern) {
@@ -256,6 +305,15 @@
                 return pmsg;
               }
             } catch (e) {}
+          }
+        }
+        if (textTypes.indexOf(f.type) !== -1 && typeof val === 'string') {
+          var len = val.length;
+          if (f.minlength !== undefined && len < f.minlength) {
+            return this.getValidationMsg(f, 'minlength', 'minlength', 'Мінімальна довжина: ' + f.minlength + ' символів');
+          }
+          if (f.maxlength !== undefined && len > f.maxlength) {
+            return this.getValidationMsg(f, 'maxlength', 'maxlength', 'Максимальна довжина: ' + f.maxlength + ' символів');
           }
         }
         if (f.type === 'email' && typeof val === 'string') {
@@ -268,12 +326,29 @@
         if (f.validation && f.validation.compare && Array.isArray(f.validation.compare)) {
           for (var r = 0; r < f.validation.compare.length; r++) {
             var rule = f.validation.compare[r];
-            var otherVal = this.data[rule.field];
-            if (val === '' || val === null || val === undefined ||
-                otherVal === '' || otherVal === null || otherVal === undefined) continue;
+            var otNum;
+            if (Array.isArray(rule.field)) {
+              var sum = 0;
+              var hasAny = false;
+              for (var k = 0; k < rule.field.length; k++) {
+                var fieldName = rule.field[k];
+                var v = this.data[fieldName];
+                if (v === '' || v === null || v === undefined) continue;
+                var n = parseFloat(v);
+                if (!isNaN(n)) { sum += n; hasAny = true; }
+              }
+              if (!hasAny) continue;
+              otNum = sum;
+            } else {
+              var otherVal = this.data[rule.field];
+              if (val === '' || val === null || val === undefined ||
+                  otherVal === '' || otherVal === null || otherVal === undefined) continue;
+              otNum = parseFloat(otherVal);
+            }
+            if (val === '' || val === null || val === undefined) continue;
             var myNum = parseFloat(val);
-            var otNum = parseFloat(otherVal);
-            if (isNaN(myNum) || isNaN(otNum)) continue;
+            if (isNaN(myNum)) continue;
+            if (!Array.isArray(rule.field) && isNaN(otNum)) continue;
             var pass = false;
             switch (rule.operator) {
               case '<':  pass = myNum < otNum; break;
@@ -442,12 +517,20 @@
 
       evaluateDepends: function (deps) {
         if (!deps || deps.length === 0) return true;
+        var self = this;
+        function checkWhen(w) {
+          if (!w) return true;
+          var dataVal = self.data[w.field];
+          if (w.values && w.values.length > 0) return w.values.indexOf(dataVal) !== -1;
+          if (w.value !== undefined) return matchesValueCondition(dataVal, w.value);
+          return true;
+        }
         function checkOne(d) {
+          if (!checkWhen(d.when)) return true;
           if (!matchesValues(self.data[d.field], d.values, d.except)) return false;
           if (d.value !== undefined && !matchesValueCondition(self.data[d.field], d.value)) return false;
           return true;
         }
-        var self = this;
         var mode = 'and';
         for (var d = 0; d < deps.length; d++) {
           if (deps[d].logic === 'or') { mode = 'or'; break; }
@@ -508,6 +591,16 @@
         return result ? result.readonly : false;
       },
 
+      clearField: function (name) {
+        this.data[name] = '';
+        this.touched[name] = false;
+        if (this.errors[name]) {
+          delete this.errors[name];
+          this.errors = Object.assign({}, this.errors);
+        }
+        if (dnsTimers[name]) { clearTimeout(dnsTimers[name]); delete dnsTimers[name]; }
+      },
+
       applySetRules: function () {
         for (var i = 0; i < fieldsCache.length; i++) {
           var f = fieldsCache[i];
@@ -529,9 +622,9 @@
         }
       },
 
-      nextStep: function () { if (this.validateStep(this.step)) this.step++; },
+      nextStep: function () { if (this.validateStep(this.step)) { this.step++; var el = document.querySelector('.step-indicator'); if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } },
 
-      prevStep: function () { if (this.step > 1) this.step--; },
+      prevStep: function () { if (this.step > 1) { this.step--; var el = document.querySelector('.step-indicator'); if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } },
 
       validateStep: function (n) {
         var idx = n - 1;
@@ -611,4 +704,74 @@
       return target;
     }
   };
+})();
+
+(function () {
+  'use strict';
+
+  var triggers = {};
+  var ModalApi = window.jQuery && jQuery.fn && jQuery.fn.modal && jQuery.fn.modal.Constructor;
+  var patched = false;
+
+  function isInModal(el) {
+    return !!(el && el.closest && el.closest('.modal'));
+  }
+
+  function getTrigger(modal) {
+    if (!modal || !modal.id) return null;
+    return document.querySelector('[data-target="#' + modal.id + '"]');
+  }
+
+  function blurInside(modal) {
+    var active = document.activeElement;
+    if (modal && isInModal(active) && modal.contains(active)) {
+      active.blur();
+    }
+  }
+
+  function releaseModalFocusTrap() {
+    if (window.jQuery && jQuery.fn && jQuery.fn.off) {
+      jQuery(document).off('focusin.bs.modal');
+    }
+  }
+
+  // Patch Bootstrap 4 Modal._hideModal so focus leaves the modal BEFORE
+  // aria-hidden="true" is applied. Without this, any close path (close
+  // button click, ESC, backdrop, programmatic hide) leaves focus on an
+  // element inside the aria-hidden modal, and Chrome logs
+  // "Blocked aria-hidden ... retained focus".
+  (function patchHideModal() {
+    if (!ModalApi || !ModalApi.prototype || !ModalApi.prototype._hideModal) return;
+    if (patched) return;
+    patched = true;
+    var orig = ModalApi.prototype._hideModal;
+    ModalApi.prototype._hideModal = function () {
+      blurInside(this._element);
+      var trg = getTrigger(this._element);
+      if (trg && trg.focus) trg.focus();
+      return orig.apply(this, arguments);
+    };
+  })();
+
+  document.addEventListener('show.bs.modal', function (e) {
+    var id = e.target && e.target.id;
+    var el = e.relatedTarget || document.activeElement;
+    if (id && el && !isInModal(el)) triggers[id] = el;
+  });
+
+  document.addEventListener('hide.bs.modal', function (e) {
+    var id = e.target && e.target.id;
+    releaseModalFocusTrap();
+    blurInside(e.target);
+    var el = triggers[id] || getTrigger(e.target);
+    if (el && el.focus) el.focus();
+    triggers[id] = null;
+  });
+
+  document.addEventListener('hidden.bs.modal', function (e) {
+    var id = e.target && e.target.id;
+    var el = triggers[id] || getTrigger(e.target);
+    if (el && el.focus) el.focus();
+    delete triggers[id];
+  });
 })();
