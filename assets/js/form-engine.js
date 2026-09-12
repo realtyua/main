@@ -106,6 +106,20 @@
     return false;
   }
 
+  function getDataValue(root, path) {
+    if (root === null || root === undefined) return undefined;
+    if (typeof path === 'string' && path.indexOf('.') !== -1) {
+      var parts = path.split('.');
+      var cur = root;
+      for (var i = 0; i < parts.length; i++) {
+        if (cur === null || cur === undefined) return undefined;
+        cur = cur[parts[i]];
+      }
+      return cur;
+    }
+    return root[path];
+  }
+
   function matchesValueCondition(dataValue, condition) {
     if (typeof condition === 'number') return parseFloat(dataValue) === condition;
     if (typeof condition !== 'string') return false;
@@ -235,19 +249,19 @@
           if (r && typeof r === 'object' && !Array.isArray(r) && r.depends) {
             for (var i = 0; i < r.depends.length; i++) {
               var d = r.depends[i];
-              if (d.message && matchesValues(this.data[d.field], d.values, d.except)) return d.message;
+              if (d.message && matchesValues(getDataValue(this.data, d.field), d.values, d.except)) return d.message;
             }
           }
         }
         var val = f.validation && f.validation[key];
         if (typeof val === 'string') return val;
-        if (val && val.depends) {
-          for (var i = 0; i < val.depends.length; i++) {
-            var d = val.depends[i];
-            if (matchesValues(this.data[d.field], d.values, d.except)) return d.text;
+          if (val && val.depends) {
+            for (var i = 0; i < val.depends.length; i++) {
+              var d = val.depends[i];
+              if (matchesValues(getDataValue(this.data, d.field), d.values, d.except)) return d.text;
+            }
+            return val.text;
           }
-          return val.text;
-        }
         if (key === 'required' && f.message) return f.message;
         var def = (this.config && this.config.settings && this.config.settings.validation) || {};
         if (key === 'required') {
@@ -340,7 +354,7 @@
               if (!hasAny) continue;
               otNum = sum;
             } else {
-              var otherVal = this.data[rule.field];
+              var otherVal = getDataValue(this.data, rule.field);
               if (val === '' || val === null || val === undefined ||
                   otherVal === '' || otherVal === null || otherVal === undefined) continue;
               otNum = parseFloat(otherVal);
@@ -509,7 +523,7 @@
         if (l.depends) {
           for (var i = 0; i < l.depends.length; i++) {
             var d = l.depends[i];
-            if (matchesValues(this.data[d.field], d.values, d.except)) return d.text;
+            if (matchesValues(getDataValue(this.data, d.field), d.values, d.except)) return d.text;
           }
         }
         return (typeof l === 'string') ? l : (l.text || '');
@@ -520,15 +534,15 @@
         var self = this;
         function checkWhen(w) {
           if (!w) return true;
-          var dataVal = self.data[w.field];
+          var dataVal = getDataValue(self.data, w.field);
           if (w.values && w.values.length > 0) return w.values.indexOf(dataVal) !== -1;
           if (w.value !== undefined) return matchesValueCondition(dataVal, w.value);
           return true;
         }
         function checkOne(d) {
           if (!checkWhen(d.when)) return true;
-          if (!matchesValues(self.data[d.field], d.values, d.except)) return false;
-          if (d.value !== undefined && !matchesValueCondition(self.data[d.field], d.value)) return false;
+          if (!matchesValues(getDataValue(self.data, d.field), d.values, d.except)) return false;
+          if (d.value !== undefined && !matchesValueCondition(getDataValue(self.data, d.field), d.value)) return false;
           return true;
         }
         var mode = 'and';
@@ -574,10 +588,11 @@
 
       evaluateSet: function (name) {
         var f = this.getField(name);
-        if (!f || !f.value || !f.value.depends) return null;
+        if (!f || f.type === 'widgets' || f.widget) return null;
+        if (!f.value || !f.value.depends) return null;
         for (var i = 0; i < f.value.depends.length; i++) {
           var rule = f.value.depends[i];
-          if (matchesValues(this.data[rule.field], rule.values, rule.except))
+          if (matchesValues(getDataValue(this.data, rule.field), rule.values, rule.except))
             return { value: rule.value, readonly: !!rule.readonly, matched: true };
         }
         var def = f.value.default || {};
@@ -605,6 +620,7 @@
         for (var i = 0; i < fieldsCache.length; i++) {
           var f = fieldsCache[i];
           if (!f.value || !f.value.depends) continue;
+          if (f.type === 'widgets' || f.widget) continue;
           var result = this.evaluateSet(f.name);
           if (!result) continue;
           if (result.matched) {
@@ -693,6 +709,8 @@
     getStepFields: getStepFields,
     hasWidget: hasWidget,
     getField: getField,
+    matchesValues: matchesValues,
+    getDataValue: getDataValue,
     createBase: createBase,
 
     mixInto: function (target, config) {

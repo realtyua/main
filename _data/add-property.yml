@@ -277,7 +277,7 @@ steps:
                     validation:
                       min: Мінімальні кількість це 2 м²
                       compare:
-                        - field: [surface_live, surface_kitchen, surface_bathroom, surface_corridor, surface_othre]
+                        - field: [surface_live, surface_kitchen, surface_bathroom, surface_corridor, surface_othres]
                           operator: '>='
                           message: "Загальна площа не може бути меншою за сумарну площу всіх частин об'єкта нерухомості"
 
@@ -779,9 +779,11 @@ steps:
                     widget: location
                     data: /assets/data/all.json
                     settings:
-                      method: two
+                      method: one
                     fields:
-                      oblast:
+                      - name: oblast
+                        parent: null
+                        children: raions
                         label: Область
                         placeholder: Введіть назву області...
                         required: true
@@ -790,11 +792,13 @@ steps:
                         threshold: 15
                         minChars: 2
                         maxResults: 6
-                        value:
-                          default:
-                            value: ["0342"]
-                            readonly: true
-                      raion:
+                        #value:
+                        #  default:
+                        #    value: ["0342"]
+                        #    readonly: true
+                      - name: raion
+                        parent: oblast
+                        children: hromadas
                         label: Район
                         placeholder: Виберіть район...
                         required: true
@@ -803,15 +807,19 @@ steps:
                         threshold: 6
                         minChars: 2
                         maxResults: 6
-                      hromada:
+                      - name: hromada
+                        parent: raion
+                        children: settlements
                         label: Територіальна громада
                         placeholder: Введіть назву громади...
                         required: true
                         message: Виберіть громаду
                         mode: auto
                         threshold: 6
-                        minChars: 3
-                      settlement:
+                        minChars: 2
+                        maxResults: 6
+                      - name: settlement
+                        parent: hromada
                         label: Населений пункт
                         placeholder: Введіть назву...
                         required: true
@@ -825,6 +833,7 @@ steps:
                           invalid: Будь ласка, заповніть це поле дійсними даними
                           pattern: Тільки українські літери...
                         helper: Введіть перші три українські літери у назві населеного пункту
+                    helper: ....
 
               - class: row
                 fields:
@@ -833,14 +842,14 @@ steps:
                     label: Мікрорайон населеного пункту
                     placeholder: Введіть назву мікрорайону...
                     datas:
-                      - field: settlement
+                      - field: location_widget.settlement
                         value: "30595"
                         data: /assets/data/districts.json
                         mode: search
                         threshold: 6
                         minChars: 2
                         maxResults: 6
-                      - field: settlement
+                      - field: location_widget.settlement
                         value: "30559"
                         data: /assets/data/districts-30559.json
                         mode: auto
@@ -851,7 +860,7 @@ steps:
                     validation:
                       required: Виберіть район населеного пункту
                     depends:
-                      - field: settlement
+                      - field: location_widget.settlement
                         values: ["30595","30559"]
                     helper: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов'язковим
 
@@ -977,7 +986,7 @@ steps:
                     label: Неподалік об'єкта нерухомості станція метро
                     required: false
                     depends:
-                      - field: settlement
+                      - field: location_widget.settlement
                         values: ["30595"]
 
               - class: row
@@ -998,15 +1007,28 @@ steps:
                       - field: is_metro
                         values: [true]
                         logic: and
-                      - field: settlement
+                      - field: location_widget.settlement
                         values: ["30595"]
                     helper: Введіть перші три українські літери у назві станції і виберіть станцію метро
+
+              #- class: row
+              #  fields:
+              #    - name: settlement
+              #      type: text
+              #      label: Field name settlement
 
               - class: row
                 fields:
                   - name: map_widget
                     type: widgets
                     widget: map
+                    center: [48.632359, 31.252051]
+                    zoom: 5
+                    value:
+                      depends:
+                        - field: location_widget.settlement
+                      default:
+                        zoom: 13
 
   - id: contact
     title: Контакти та медіа

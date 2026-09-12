@@ -315,9 +315,26 @@
           {% endfor %}
           {% endfor %}
           {% endfor %}
-          lat: '', lng: '', address: '',
-          oblast: '', raion: '', hromada: '', settlement: '',
-          raionName: '', hromadaName: '', settlementName: '', settlementType: '', hromadaType: '', oblastName: ''
+          {% for step in site.data.add-property.steps %}
+          {% for row in step.rows %}
+          {% for col in row.cols %}
+          {% for nrow in col.rows %}
+          {% for field in nrow.fields %}
+          {% if field.widget == 'location' and field.fields and field.name %}
+           {{ field.name }}: {
+          {% for sub in field.fields %}
+          {% if sub.name %}
+           {{ sub.name }}: '', {{ sub.name }}Name: '{{ sub.label | default: '' }}',
+          {% endif %}
+          {% endfor %}
+          },
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          lat: '', lng: '', address: ''
         },
 
         files: {},
@@ -334,26 +351,29 @@
 
         addressData: [],
         addressIndex: [],
-        addressSearch: '',
-        addressResults: [],
-        addressShowDropdown: false,
-        settlementHighlightIndex: -1,
-        hromadaSearch: '',
-        hromadaResults: [],
-        hromadaShowDropdown: false,
-        hromadaHighlightIndex: -1,
-        oblastSearch: '',
-        oblastResults: [],
-        oblastShowDropdown: false,
-        oblastHighlightIndex: -1,
-        raionSearch: '',
-        raionResults: [],
-        raionShowDropdown: false,
-        raionHighlightIndex: -1,
         addressLoaded: false,
-        locationPatternErrors: { oblast: '', raion: '', hromada: '', settlement: '' },
-        locationNoResults: { oblast: false, raion: false, hromada: false, settlement: false },
-        locationNoResultsQuery: { oblast: '', raion: '', hromada: '', settlement: '' },
+        locationState: {
+          {% for step in site.data.add-property.steps %}
+          {% for row in step.rows %}
+          {% for col in row.cols %}
+          {% for nrow in col.rows %}
+          {% for field in nrow.fields %}
+          {% if field.widget == 'location' and field.fields %}
+          {% for sub in field.fields %}
+          {% if sub.name %}
+          '{{ sub.name }}': { search: '', results: [], showDropdown: false, highlightIndex: -1 },
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+        },
+        locationPatternErrors: {},
+        locationNoResults: {},
+        locationNoResultsQuery: {},
 
         asCache: {},
         asState: {},
@@ -364,6 +384,9 @@
         _geocoding: false,
         _geoSeq: 0,
         _geoDebounce: null,
+        _settlementSeq: 0,
+        _settlementDebounce: null,
+        _attributionText: '',
 
         init: function () {
           var self = this;
@@ -373,10 +396,7 @@
               self.touched[sf[j].name] = false;
             }
           }
-          self.touched['oblast'] = false;
-          self.touched['raion'] = false;
-          self.touched['hromada'] = false;
-          self.touched['settlement'] = false;
+          self.initLocationState();
           this.loadAddressData();
           this.initAutoSelects();
           this.$watch('step', function () {
@@ -386,6 +406,20 @@
               self.$nextTick(function () { self.initMap(); });
             }
           });
+          var mapField = self._mapFieldName();
+          if (mapField) {
+            var mapWatchPath = self._mapFieldPath();
+            this.$watch('data.' + mapWatchPath, function (val) {
+              if (!val) return;
+              var cur = formConfig.steps[self.step - 1];
+              if (!cur || !FormEngine.hasWidget(cur, 'map')) return;
+              self._resetMarker();
+              self.$nextTick(function () {
+                self.initMap();
+                self.$nextTick(function () { self._centerMapOnSettlement(); });
+              });
+            });
+          }
         },
 
         initMap: function () {
@@ -413,20 +447,38 @@
             return;
           }
           if (container._leaflet_id) return;
+          var mc = this.getMapWidgetConfig();
+          var center = (mc && mc.center) ? mc.center : [48.9215, 24.7097];
+          var zoom = (mc && mc.zoom !== undefined) ? mc.zoom : 12;
           var map = L.map(container, {
-            center: [48.9215, 24.7097],
-            zoom: 12,
+            center: center,
+            zoom: zoom,
             maxBounds: L.latLngBounds([43.9, 21.5], [52.7, 40.6]),
             maxBoundsViscosity: 1.0
           });
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18, attribution: '&copy; OpenStreetMap', tileSize: L.Browser.retina ? 512 : 256, zoomOffset: L.Browser.retina ? -1 : 0
+            maxZoom: 18, attribution: '', tileSize: L.Browser.retina ? 512 : 256, zoomOffset: L.Browser.retina ? -1 : 0
           }).addTo(map);
           map.attributionControl.setPrefix('');
-          map.on('click', function (e) { self._placeMarker(e.latlng); });
           self._map = map;
           self._mapReady = true;
+          this._updateAttribution('© Україна — OpenStreetMap');
+          map.on('click', function (e) { self._placeMarker(e.latlng); });
           setTimeout(function () { map.invalidateSize(true); }, 300);
+          var field = this._mapFieldName();
+          if (field && self._locObj()[field + 'Name']) self._centerMapOnSettlement();
+        },
+
+        _resetMarker: function () {
+          if (this._marker) {
+            if (this._map) this._marker.remove();
+            this._marker = null;
+          }
+          this._geoSeq = (this._geoSeq || 0) + 1;
+          this.data.lat = '';
+          this.data.lng = '';
+          this.data.address = '';
+          this._geocoding = false;
         },
 
         _placeMarker: function (latlng) {
@@ -463,6 +515,129 @@
                 if (seq !== self._geoSeq) return;
                 self.data.address = '';
                 self._geocoding = false;
+              });
+          }, 450);
+        },
+
+        getMapWidgetConfig: function () {
+          for (var s = 0; s < (this.config && this.config.steps || []).length; s++) {
+            var step = this.config.steps[s];
+            if (!step.rows) continue;
+            for (var r = 0; r < step.rows.length; r++) {
+              var cols = step.rows[r].cols || [];
+              for (var c = 0; c < cols.length; c++) {
+                var nrows = cols[c].rows || [];
+                for (var nr = 0; nr < nrows.length; nr++) {
+                  var fields = nrows[nr].fields || [];
+                  for (var f = 0; f < fields.length; f++) {
+                    if (fields[f].widget === 'map') return fields[f];
+                  }
+                }
+              }
+            }
+          }
+          return null;
+        },
+
+        _updateAttribution: function (text) {
+          if (!this._map) return;
+          var c = this._map.attributionControl;
+          if (this._attributionText) c.removeAttribution(this._attributionText);
+          this._attributionText = text;
+          c.addAttribution(text);
+        },
+
+        _mapFieldPath: function () {
+          var mc = this.getMapWidgetConfig();
+          if (!mc) return null;
+          if (mc.depends && mc.depends.length && mc.depends[0].field) {
+            return mc.depends[0].field;
+          }
+          if (mc.value && mc.value.depends && mc.value.depends.length && mc.value.depends[0].field) {
+            return mc.value.depends[0].field;
+          }
+          return null;
+        },
+
+        _mapFieldName: function () {
+          var field = this._mapFieldPath();
+          if (!field) return null;
+          if (typeof field === 'string' && field.indexOf('.') !== -1) {
+            var parts = field.split('.');
+            return parts[parts.length - 1];
+          }
+          return field;
+        },
+
+        _mapValueConfig: function () {
+          var mc = this.getMapWidgetConfig();
+          if (!mc || !mc.value) return null;
+          var def = mc.value.default || {};
+          if (mc.value.depends) {
+            for (var i = 0; i < mc.value.depends.length; i++) {
+              var rule = mc.value.depends[i];
+              if (FormEngine.matchesValues(FormEngine.getDataValue(this.data, rule.field), rule.values, rule.except)) {
+                return { zoom: rule.zoom, defaultZoom: def.zoom, matched: true };
+              }
+            }
+          }
+          return { zoom: def.zoom !== undefined ? def.zoom : undefined, defaultZoom: def.zoom, matched: false };
+        },
+
+        _autoZoomForSettlement: function (field) {
+          var type = (this._locObj()[field + 'Type'] || '').toLowerCase();
+          if (type === 'місто') return 8;
+          if (type === 'столиця') return 7;
+          if (type === 'селище') return 10;
+          if (type === 'село') return 12;
+          return null;
+        },
+
+        _locationLeafField: function () {
+          var list = this.locationFieldList();
+          return list && list.length ? list[list.length - 1] : null;
+        },
+
+        _centerMapOnSettlement: function () {
+          var self = this;
+          var field = this._mapFieldName();
+          if (!field) return;
+          if (!this._map) return;
+          var name = this._locObj()[field + 'Name'] || '';
+          if (!name) return;
+          var mc = this.getMapWidgetConfig();
+          var fallbackCenter = (mc && mc.center) ? mc.center : [48.9215, 24.7097];
+          var fallbackZoom = (mc && mc.zoom !== undefined) ? mc.zoom : 12;
+          var qParts = [name];
+          var oblast = this._locObj()['oblastName'];
+          if (oblast && oblast.toLowerCase().indexOf(name.toLowerCase()) === -1) {
+            qParts.push(oblast);
+          }
+          qParts.push('Україна');
+          var seq = ++this._settlementSeq;
+          var url = 'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(qParts.join(', ')) + '&format=json&limit=5&accept-language=uk';
+          clearTimeout(this._settlementDebounce);
+          this._settlementDebounce = setTimeout(function () {
+            if (seq !== self._settlementSeq) return;
+            fetch(url)
+              .then(function (r) { return r.json(); })
+              .then(function (res) {
+                if (seq !== self._settlementSeq) return;
+                if (res && res.length > 0) {
+                  var vc = self._mapValueConfig();
+                  var zoom = (vc && vc.zoom !== undefined) ? vc.zoom : ((vc && vc.defaultZoom !== undefined) ? vc.defaultZoom : self._autoZoomForSettlement(field));
+                  if (!zoom) zoom = fallbackZoom;
+                  self._map.setView(L.latLng(parseFloat(res[0].lat), parseFloat(res[0].lon)), zoom);
+                  self._updateAttribution('© ' + name + ' — OpenStreetMap');
+                } else {
+                  self._map.setView(fallbackCenter, fallbackZoom);
+                  self._updateAttribution('© Україна — OpenStreetMap');
+                }
+              })
+              .catch(function () {
+                if (seq !== self._settlementSeq) return;
+                self._map.setView(fallbackCenter, fallbackZoom);
+                self._updateAttribution('© Україна — OpenStreetMap');
               });
           }, 450);
         },
@@ -959,34 +1134,156 @@
           return Math.round(p * this._getRentMonths() * 12).toLocaleString('uk-UA');
         },
 
-        get filteredRaions() {
-          if (!this.data.oblast || !this.addressData.length) return [];
-          var oblast = this.addressData.find(function (o) { return o.id === this.data.oblast; }.bind(this));
-          var raions = oblast ? oblast.raions : [];
-          var presets = this.getPresetValues('raion');
-          if (presets) return raions.filter(function (r) { return presets.indexOf(r.id) !== -1; });
-          return raions;
-        },
-
-        get filteredHromadas() {
-          if (!this.data.raion || !this.addressData.length) return [];
-          for (var i = 0; i < this.addressData.length; i++) {
-            var raions = this.addressData[i].raions || [];
-            for (var j = 0; j < raions.length; j++) {
-              if (raions[j].id === this.data.raion) {
-                var hromadas = raions[j].hromadas || [];
-                var presets = this.getPresetValues('hromada');
-                if (presets) return hromadas.filter(function (h) { return presets.indexOf(h.id) !== -1; });
-                return hromadas;
-              }
+        locationFieldList: function () {
+          var widget = this.getLocationWidgetConfig();
+          var out = [];
+          if (widget && widget.fields && widget.fields.length) {
+            for (var i = 0; i < widget.fields.length; i++) {
+              if (widget.fields[i].name) out.push(widget.fields[i].name);
             }
           }
-          return [];
+          return out;
         },
 
-        get filteredSettlements() {
-          if (!this.data.hromada || !this.addressIndex.length) return [];
-          return this.addressIndex.filter(function (s) { return s.hromadaId === this.data.hromada; }.bind(this));
+        _locRootName: function () {
+          var w = this.getLocationWidgetConfig();
+          return (w && w.name) ? w.name : 'location_widget';
+        },
+
+        _locObj: function () {
+          var root = this._locRootName();
+          if (!this.data[root]) this.data[root] = {};
+          return this.data[root];
+        },
+
+        _locVal: function (fieldName, suffix) {
+          var obj = this._locObj();
+          return obj[fieldName + (suffix || '')];
+        },
+
+        locationFieldIndex: function (fieldName) {
+          var list = this.locationFieldList();
+          for (var i = 0; i < list.length; i++) {
+            if (list[i] === fieldName) return i;
+          }
+          return -1;
+        },
+
+        locationParent: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          return field && field.parent ? field.parent : null;
+        },
+
+        locationIsRoot: function (fieldName) {
+          return !this.locationParent(fieldName);
+        },
+
+        locationIsLeaf: function (fieldName) {
+          var list = this.locationFieldList();
+          return this.locationFieldIndex(fieldName) === list.length - 1;
+        },
+
+        locationChildren: function (fieldName) {
+          var out = [];
+          var list = this.locationFieldList();
+          for (var i = 0; i < list.length; i++) {
+            if (this.locationParent(list[i]) === fieldName) out.push(list[i]);
+          }
+          return out;
+        },
+
+        locationDescendants: function (fieldName) {
+          var out = [];
+          var children = this.locationChildren(fieldName);
+          for (var i = 0; i < children.length; i++) {
+            out.push(children[i]);
+            var grand = this.locationDescendants(children[i]);
+            for (var j = 0; j < grand.length; j++) out.push(grand[j]);
+          }
+          return out;
+        },
+
+        locationOptions: function (fieldName) {
+          var idx = this.locationFieldIndex(fieldName);
+          if (idx < 0) return [];
+          var parent = this.locationParent(fieldName);
+          var method = this.getLocationMethod();
+          var out = [];
+
+          if (parent) {
+            if (method === 'two') {
+              out = this.addressIndex.filter(function (s) {
+                if (s._field !== fieldName) return false;
+                var ancestors = s._ancestors || [];
+                for (var i = 0; i < ancestors.length; i++) {
+                  var a = ancestors[i];
+                  var pv = a.field ? this._locObj()[a.field] : null;
+                  if (pv === '' || pv === null || pv === undefined) continue;
+                  if (String(a.id) !== String(pv)) return false;
+                }
+                return true;
+              }.bind(this));
+            } else {
+              var parentVal = this._locObj()[parent];
+              if (parentVal === '' || parentVal === null || parentVal === undefined) return [];
+              out = this.addressIndex.filter(function (s) {
+                return s._field === fieldName && String(s[parent]) === String(parentVal);
+              });
+            }
+          } else {
+            out = this.addressIndex.filter(function (s) { return s._field === fieldName; });
+          }
+
+          var presets = this.getPresetValues(fieldName);
+          if (presets) {
+            out = out.filter(function (o) { return presets.indexOf(o.id) !== -1; });
+          }
+          return out;
+        },
+
+        locationShouldShow: function (fieldName) {
+          var method = this.getLocationMethod();
+          if (method === 'one') {
+            if (this.locationIsRoot(fieldName)) return true;
+            var parent = this.locationParent(fieldName);
+            return !!(parent && this._locObj()[parent]);
+          }
+          if (this.locationIsRoot(fieldName) || this.locationIsLeaf(fieldName)) return true;
+          return !!this._locObj()[fieldName];
+        },
+
+        locationLocked: function (fieldName) {
+          if (this.isLocationReadonly(fieldName)) return true;
+          var method = this.getLocationMethod();
+          if (method === 'two' && !this.locationIsRoot(fieldName) && !this.locationIsLeaf(fieldName) && this._locObj()[fieldName]) {
+            return true;
+          }
+          return false;
+        },
+
+        locationDisplay: function (obj) {
+          if (!obj) return '';
+          return obj.name + (obj.type ? ' - ' + obj.type : '');
+        },
+
+        locationFieldHasType: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          if (field && field.showType !== undefined) return !!field.showType;
+          return !!(this.locationShowTypeMap && this.locationShowTypeMap[fieldName]);
+        },
+
+        locationShowParentInfo: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          if (field && field.showParentInfo !== undefined) return !!field.showParentInfo;
+          return this.getLocationMethod() === 'two' && this.locationIsLeaf(fieldName);
+        },
+
+        _syncLocationSearch: function (fieldName, obj) {
+          var st = this.locationState[fieldName];
+          if (!st) return;
+          if (obj) {
+            st.search = this.locationFieldHasType(fieldName) && obj.type ? obj.name + ' - ' + obj.type : obj.name;
+          }
         },
 
         getLocationWidgetConfig: function () {
@@ -1011,7 +1308,12 @@
 
         getLocationFieldConfig: function (fieldName) {
           var widget = this.getLocationWidgetConfig();
-          return widget && widget.fields ? widget.fields[fieldName] : null;
+          if (widget && widget.fields && widget.fields.length) {
+            for (var i = 0; i < widget.fields.length; i++) {
+              if (widget.fields[i].name === fieldName) return widget.fields[i];
+            }
+          }
+          return null;
         },
 
         getLocationMethod: function () {
@@ -1050,14 +1352,14 @@
         },
 
         locationOptionsCount: function (fieldName) {
-          if (fieldName === 'oblast') return this.filteredOblasts.length;
-          if (fieldName === 'raion') return this.filteredRaions.length;
-          if (fieldName === 'settlement') {
-            if (this.getLocationMethod() === 'two') return this.addressIndex.length;
-            return this.filteredSettlements.length;
+          var opts = this.locationOptions(fieldName);
+          var method = this.getLocationMethod();
+          var parent = this.locationParent(fieldName);
+          if (method === 'two' && this.locationIsLeaf(fieldName) && (!parent || this._locObj()[parent] === '' || this._locObj()[parent] === null || this._locObj()[parent] === undefined)) {
+            var all = this.addressIndex.filter(function (s) { return s._field === fieldName; });
+            return all.length;
           }
-          if (fieldName === 'hromada') return this.filteredHromadas.length;
-          return 0;
+          return opts.length;
         },
 
         isLocationReadonly: function (fieldName) {
@@ -1066,7 +1368,7 @@
           if (field.value.depends) {
             for (var i = 0; i < field.value.depends.length; i++) {
               var d = field.value.depends[i];
-              if (FormEngine.matchesValues(this.data[d.field], d.values, d.except)) {
+              if (FormEngine.matchesValues(FormEngine.getDataValue(this.data, d.field), d.values, d.except)) {
                 return !!d.readonly;
               }
             }
@@ -1103,14 +1405,13 @@
         },
 
         locationHasUnselectedText: function (fieldName) {
-          var searchMap = { oblast: 'oblastSearch', raion: 'raionSearch', hromada: 'hromadaSearch', settlement: 'addressSearch' };
-          var searchVar = searchMap[fieldName];
-          return !!(searchVar && this[searchVar] && !this.data[fieldName]);
+          var st = this.locationState[fieldName];
+          return !!(st && st.search && !this._locObj()[fieldName]);
         },
 
         validateLocationField: function (fieldName) {
           this.touched[fieldName] = true;
-          var val = this.data[fieldName];
+          var val = this._locObj()[fieldName];
           var empty = val === '' || val === null || val === undefined;
           if (this.isLocationFieldRequired(fieldName) && empty) {
             var f = this.getLocationFieldConfig(fieldName);
@@ -1142,7 +1443,7 @@
           if (field.value.depends) {
             for (var i = 0; i < field.value.depends.length; i++) {
               var rule = field.value.depends[i];
-              if (FormEngine.matchesValues(this.data[rule.field], rule.values, rule.except)) {
+              if (FormEngine.matchesValues(FormEngine.getDataValue(this.data, rule.field), rule.values, rule.except)) {
                 val = rule.value;
                 break;
               }
@@ -1162,7 +1463,7 @@
           if (field.value.depends) {
             for (var i = 0; i < field.value.depends.length; i++) {
               var d = field.value.depends[i];
-              if (FormEngine.matchesValues(this.data[d.field], d.values, d.except)) {
+              if (FormEngine.matchesValues(FormEngine.getDataValue(this.data, d.field), d.values, d.except)) {
                 ro = !!d.readonly;
                 break;
               }
@@ -1178,93 +1479,61 @@
           var presets = this.getPresetValues(fieldName);
           if (!presets || presets.length !== 1) return '';
           var id = presets[0];
-          if (fieldName === 'oblast') {
-            var o = this.addressData.find(function (x) { return x.id === id; });
-            return o ? o.name : id;
-          }
-          if (fieldName === 'raion') {
-            for (var i = 0; i < this.addressData.length; i++) {
-              var raions = this.addressData[i].raions || [];
-              for (var j = 0; j < raions.length; j++) {
-                if (raions[j].id === id) return raions[j].name;
-              }
+          for (var i = 0; i < this.addressIndex.length; i++) {
+            if (this.addressIndex[i]._field === fieldName && String(this.addressIndex[i].id) === String(id)) {
+              return this.addressIndex[i].name;
             }
-            return id;
-          }
-          if (fieldName === 'hromada') {
-            for (var i = 0; i < this.addressData.length; i++) {
-              var raions = this.addressData[i].raions || [];
-              for (var j = 0; j < raions.length; j++) {
-                var hromadas = raions[j].hromadas || [];
-                for (var k = 0; k < hromadas.length; k++) {
-                  if (hromadas[k].id === id) return hromadas[k].name;
-                }
-              }
-            }
-            return id;
-          }
-          if (fieldName === 'settlement') {
-            for (var i = 0; i < this.addressIndex.length; i++) {
-              if (this.addressIndex[i].id === id) return this.addressIndex[i].name;
-            }
-            return id;
           }
           return id;
         },
 
         applyLocationPresets: function () {
-          var self = this;
-          var widget = this.getLocationWidgetConfig();
-          if (!widget || !widget.fields) return;
-          var presets = { oblast: null, raion: null, hromada: null, settlement: null };
-          var hasPreset = false;
-          var fn;
-          for (fn in widget.fields) {
-            if (!widget.fields.hasOwnProperty(fn)) continue;
-            var fcfg = widget.fields[fn];
-            if (!fcfg.value) continue;
-            var found = false;
-            if (fcfg.value.depends) {
-              for (var d = 0; d < fcfg.value.depends.length; d++) {
-                var rule = fcfg.value.depends[d];
-                if (FormEngine.matchesValues(self.data[rule.field], rule.values, rule.except)) {
-                  presets[fn] = rule.value;
-                  found = true;
-                  hasPreset = true;
-                  break;
-                }
-              }
-            }
-            if (!found && fcfg.value.default && fcfg.value.default.value !== undefined && fcfg.value.default.value !== '') {
-              var val = fcfg.value.default.value;
-              if (Array.isArray(val)) {
-                if (val.length === 1) presets[fn] = val[0];
-              } else {
-                presets[fn] = val;
-              }
-              hasPreset = true;
-            }
+          var list = this.locationFieldList();
+          for (var i = 0; i < list.length; i++) {
+            var fn = list[i];
+            var fcfg = this.getLocationFieldConfig(fn);
+            if (!fcfg || !fcfg.value) continue;
+            var vals = this.getPresetValues(fn);
+            if (!vals || vals.length !== 1) continue;
+            this.locationSelectById(fn, vals[0]);
           }
-          if (!hasPreset) return;
-          var presetOblast = presets['oblast'];
-          var presetRaion = presets['raion'];
-          if (presetRaion && !presetOblast) return;
-          if (presetOblast) {
-            self.data.oblast = presetOblast;
-            var presetObj = self.addressData.find(function (o) { return o.id === presetOblast; });
-            if (presetObj) {
-              self.oblastSearch = presetObj.name;
-              self.data.oblastName = presetObj.name;
-            }
-          }
-          if (presetRaion) { if (self.data.oblast) self.data.raion = presetRaion; }
         },
 
-        get filteredOblasts() {
-          var data = this.addressData;
-          var presets = this.getPresetValues('oblast');
-          if (presets) return data.filter(function (o) { return presets.indexOf(o.id) !== -1; });
-          return data;
+        _buildLocationShowTypeMap: function () {
+          this.locationShowTypeMap = {};
+          var list = this.locationFieldList();
+          for (var i = 0; i < list.length; i++) {
+            var fn = list[i];
+            var field = this.getLocationFieldConfig(fn);
+            if (field && field.showType !== undefined) {
+              this.locationShowTypeMap[fn] = !!field.showType;
+              continue;
+            }
+            var hasType = false;
+            var allRedundant = true;
+            for (var j = 0; j < this.addressIndex.length; j++) {
+              var e = this.addressIndex[j];
+              if (e._field !== fn || !e.type) continue;
+              hasType = true;
+              if (e.name.toLowerCase().indexOf(e.type.toLowerCase()) === -1) {
+                allRedundant = false;
+                break;
+              }
+            }
+            this.locationShowTypeMap[fn] = hasType && !allRedundant;
+          }
+        },
+
+        initLocationState: function () {
+          var list = this.locationFieldList();
+          for (var i = 0; i < list.length; i++) {
+            var fn = list[i];
+            if (!this.locationState[fn]) {
+              this.locationState[fn] = { search: '', results: [], showDropdown: false, highlightIndex: -1 };
+            }
+            if (this._locObj()[fn + 'Name'] === undefined) this._locObj()[fn + 'Name'] = '';
+            if (this.locationFieldHasType(fn) && this._locObj()[fn + 'Type'] === undefined) this._locObj()[fn + 'Type'] = '';
+          }
         },
 
         loadAddressData: function () {
@@ -1274,31 +1543,11 @@
           fetch(path)
             .then(function (r) { return r.json(); })
             .then(function (data) {
-              self.addressData = data;
+              self.addressData = data || [];
+              self.addressIndex = self._buildLocationIndex(data);
               self.addressLoaded = true;
-              var idx = [];
-              for (var i = 0; i < data.length; i++) {
-                var o = data[i];
-                var raions = o.raions || [];
-                for (var j = 0; j < raions.length; j++) {
-                  var r = raions[j];
-                  var hromadas = r.hromadas || [];
-                  for (var k = 0; k < hromadas.length; k++) {
-                    var h = hromadas[k];
-                    var settlements = h.settlements || [];
-                    for (var l = 0; l < settlements.length; l++) {
-                      var s = settlements[l];
-                      idx.push({
-                        id: s.id, name: s.name, type: s.type || '',
-                        hromadaId: h.id, hromadaName: h.name, hromadaType: h.type || '',
-                        raionId: r.id, raionName: r.name,
-                        oblastId: o.id, oblastName: o.name
-                      });
-                    }
-                  }
-                }
-              }
-              self.addressIndex = idx;
+              self._buildLocationShowTypeMap();
+              self.initLocationState();
               self.applyLocationPresets();
             })
             .catch(function () {
@@ -1306,446 +1555,314 @@
             });
         },
 
-        searchOblast: function () {
-          var raw = this.oblastSearch ? this.oblastSearch.trim() : '';
-          var q = raw.toLowerCase();
-          this._checkLocationPattern('oblast', raw);
-          if (this.locationPatternErrors['oblast']) { this.oblastResults = []; this.locationNoResults['oblast'] = false; return; }
-          var oblasts = this.filteredOblasts;
-          if (q.length < this.locationMinChars('oblast')) { this.oblastResults = !this.locationIsSearch('oblast') ? oblasts.slice(0, this.locationMaxResults('oblast')) : []; this.locationNoResults['oblast'] = false; return; }
-          var results = [];
-          for (var i = 0; i < oblasts.length; i++) {
-            if (results.length >= this.locationMaxResults('oblast')) break;
-            if (oblasts[i].name.toLowerCase().indexOf(q) !== -1) {
-              results.push(oblasts[i]);
-            }
-          }
-          this.oblastResults = results;
-          this.locationNoResults['oblast'] = results.length === 0;
-          this.locationNoResultsQuery['oblast'] = raw;
-        },
-
-        selectOblast: function (o) {
-          this.data.oblast = o.id;
-          this.data.oblastName = o.name;
-          this.oblastSearch = o.name;
-          this.oblastResults = [];
-          this.oblastShowDropdown = false;
-          this.touched['oblast'] = true;
-          this.locationPatternErrors['oblast'] = '';
-          this.locationNoResults['oblast'] = false;
-          this.onOblastChange();
-        },
-
-        selectOblastById: function (id) {
-          if (!id) { this.clearOblast(); return; }
-          var oblasts = this.filteredOblasts;
-          for (var i = 0; i < oblasts.length; i++) {
-            if (String(oblasts[i].id) === String(id)) { this.selectOblast(oblasts[i]); return; }
-          }
-        },
-
-        clearOblast: function () {
-          this.data.oblast = '';
-          this.data.oblastName = '';
-          this.oblastSearch = '';
-          this.locationPatternErrors['oblast'] = '';
-          this.onOblastChange();
-          this.validateLocationField('oblast');
-        },
-
-        oblastHighlightNext: function () {
-          var max = this.oblastResults.length - 1;
-          this.oblastHighlightIndex = this.oblastHighlightIndex >= max ? 0 : this.oblastHighlightIndex + 1;
-          this._scrollHighlighted('oblastDropdown');
-        },
-        oblastHighlightPrev: function () {
-          var max = this.oblastResults.length - 1;
-          this.oblastHighlightIndex = this.oblastHighlightIndex <= 0 ? max : this.oblastHighlightIndex - 1;
-          this._scrollHighlighted('oblastDropdown');
-        },
-        oblastSelectHighlighted: function () {
-          if (this.oblastHighlightIndex >= 0 && this.oblastHighlightIndex < this.oblastResults.length) {
-            this.selectOblast(this.oblastResults[this.oblastHighlightIndex]);
-          }
-        },
-
-        searchRaion: function () {
-          var raw = this.raionSearch ? this.raionSearch.trim() : '';
-          var q = raw.toLowerCase();
-          this._checkLocationPattern('raion', raw);
-          if (this.locationPatternErrors['raion']) { this.raionResults = []; this.locationNoResults['raion'] = false; return; }
-          var raions = this.filteredRaions;
-          if (q.length < this.locationMinChars('raion')) { this.raionResults = !this.locationIsSearch('raion') ? raions.slice(0, this.locationMaxResults('raion')) : []; this.locationNoResults['raion'] = false; return; }
-          var results = [];
-          for (var i = 0; i < raions.length; i++) {
-            if (results.length >= this.locationMaxResults('raion')) break;
-            if (raions[i].name.toLowerCase().indexOf(q) !== -1) {
-              results.push(raions[i]);
-            }
-          }
-          this.raionResults = results;
-          this.locationNoResults['raion'] = results.length === 0;
-          this.locationNoResultsQuery['raion'] = raw;
-          this.raionHighlightIndex = -1;
-        },
-
-        selectRaion: function (r) {
-          this.data.raion = r.id;
-          this.data.raionName = r.name;
-          this.raionSearch = r.name;
-          this.raionResults = [];
-          this.raionShowDropdown = false;
-          this.onRaionChange();
-        },
-
-        clearRaion: function () {
-          this.data.raion = '';
-          this.data.raionName = '';
-          this.raionSearch = '';
-          this.raionResults = [];
-          this.raionShowDropdown = false;
-          this.raionHighlightIndex = -1;
-          this.locationPatternErrors['raion'] = '';
-          this.touched['raion'] = false;
-          this.touched['hromada'] = false;
-          this.touched['settlement'] = false;
-          this.locationPatternErrors['hromada'] = '';
-          this.locationPatternErrors['settlement'] = '';
-          this.locationNoResults['raion'] = false;
-          this.locationNoResults['hromada'] = false;
-          this.locationNoResults['settlement'] = false;
-          this.errors['raion'] = null;
-          this.errors['hromada'] = null;
-          this.errors['settlement'] = null;
-          this.validateLocationField('raion');
-        },
-
-        raionHighlightNext: function () {
-          var max = this.raionResults.length - 1;
-          this.raionHighlightIndex = this.raionHighlightIndex >= max ? 0 : this.raionHighlightIndex + 1;
-          this._scrollHighlighted('raionDropdown');
-        },
-        raionHighlightPrev: function () {
-          var max = this.raionResults.length - 1;
-          this.raionHighlightIndex = this.raionHighlightIndex <= 0 ? max : this.raionHighlightIndex - 1;
-          this._scrollHighlighted('raionDropdown');
-        },
-        raionSelectHighlighted: function () {
-          if (this.raionHighlightIndex >= 0 && this.raionHighlightIndex < this.raionResults.length) {
-            this.selectRaion(this.raionResults[this.raionHighlightIndex]);
-          }
-        },
-
-        selectRaionById: function (id) {
-          if (!id) { this.clearRaion(); return; }
-          var raions = this.filteredRaions;
-          for (var i = 0; i < raions.length; i++) {
-            if (String(raions[i].id) === String(id)) { this.selectRaion(raions[i]); return; }
-          }
-        },
-
-        onOblastChange: function () {
-          this.data.raion = '';
-          this.data.hromada = '';
-          this.data.settlement = '';
-          this.data.raionName = '';
-          this.data.hromadaName = '';
-          this.data.settlementName = '';
-          this.data.settlementType = '';
-          this.data.hromadaType = '';
-          this.addressSearch = '';
-          this.addressResults = [];
-          this.hromadaSearch = '';
-          this.hromadaResults = [];
-          this.raionSearch = '';
-          this.raionResults = [];
-          this.touched['raion'] = false;
-          this.touched['hromada'] = false;
-          this.touched['settlement'] = false;
-          this.locationPatternErrors['raion'] = '';
-          this.locationPatternErrors['hromada'] = '';
-          this.locationPatternErrors['settlement'] = '';
-          this.locationNoResults['raion'] = false;
-          this.locationNoResults['hromada'] = false;
-          this.locationNoResults['settlement'] = false;
-          this.errors['oblast'] = null;
-          this.errors['raion'] = null;
-          this.errors['hromada'] = null;
-          this.errors['settlement'] = null;
-        },
-
-        onRaionChange: function () {
-          var r = null;
-          for (var i = 0; i < this.filteredRaions.length; i++) {
-            if (this.filteredRaions[i].id === this.data.raion) { r = this.filteredRaions[i]; break; }
-          }
-          this.data.raionName = r ? r.name : '';
-          this.raionSearch = r ? r.name : '';
-          this.touched['raion'] = true;
-          this.data.hromada = '';
-          this.data.settlement = '';
-          this.data.hromadaName = '';
-          this.data.settlementName = '';
-          this.data.settlementType = '';
-          this.data.hromadaType = '';
-          this.addressSearch = '';
-          this.addressResults = [];
-          this.hromadaSearch = '';
-          this.hromadaResults = [];
-          this.touched['hromada'] = false;
-          this.touched['settlement'] = false;
-          this.locationPatternErrors['hromada'] = '';
-          this.locationPatternErrors['settlement'] = '';
-          this.locationNoResults['hromada'] = false;
-          this.locationNoResults['settlement'] = false;
-          this.errors['raion'] = null;
-          this.errors['hromada'] = null;
-          this.errors['settlement'] = null;
-        },
-
-        searchHromada: function () {
+        _buildLocationIndex: function (data) {
           var self = this;
-          var raw = this.hromadaSearch ? this.hromadaSearch.trim() : '';
-          this._checkLocationPattern('hromada', raw);
-          if (this.locationPatternErrors['hromada']) { this.hromadaResults = []; this.locationNoResults['hromada'] = false; return; }
-          var q = raw.split(' - ')[0].toLowerCase();
-          var hromadas = this.filteredHromadas;
-          if (q.length < this.locationMinChars('hromada')) { this.hromadaResults = !this.locationIsSearch('hromada') ? hromadas.slice(0, this.locationMaxResults('hromada')) : []; this.locationNoResults['hromada'] = false; return; }
-          var results = [];
-          for (var i = 0; i < hromadas.length; i++) {
-            if (results.length >= this.locationMaxResults('hromada')) break;
-            if (hromadas[i].name.toLowerCase().indexOf(q) !== -1) {
-              results.push(hromadas[i]);
+          var fields = this.locationFieldList();
+          var all = [];
+          if (!data || !data.length || !fields.length) return all;
+          var isFlat = Object.prototype.hasOwnProperty.call(data[0] || {}, 'parentId');
+
+          if (isFlat) {
+            var byId = {};
+            for (var i = 0; i < data.length; i++) {
+              var it = data[i];
+              if (it && it.id !== undefined && it.id !== null) byId[String(it.id)] = it;
             }
-          }
-          this.hromadaResults = results;
-          this.locationNoResults['hromada'] = results.length === 0;
-          this.locationNoResultsQuery['hromada'] = raw;
-          this.hromadaHighlightIndex = -1;
-          if (this.data.hromada && results.length && results.every(function (r) { return r.id !== self.data.hromada; })) {
-            this.data.hromada = '';
-            this.data.settlement = '';
-            this.addressSearch = '';
-            this.addressResults = [];
-          }
-        },
-
-        selectHromada: function (h) {
-          this.data.hromada = h.id;
-          this.data.hromadaName = h.name;
-          this.hromadaSearch = h.name + ' - ' + h.type;
-          this.hromadaResults = [];
-          this.hromadaShowDropdown = false;
-          this.touched['hromada'] = true;
-          this.locationPatternErrors['hromada'] = '';
-          this.locationNoResults['hromada'] = false;
-          this.data.settlement = '';
-          this.addressSearch = '';
-          this.addressResults = [];
-          this.errors['hromada'] = null;
-          this.errors['settlement'] = null;
-        },
-
-        selectHromadaById: function (id) {
-          if (!id) { this.clearHromada(); return; }
-          var hromadas = this.filteredHromadas;
-          for (var i = 0; i < hromadas.length; i++) {
-            if (String(hromadas[i].id) === String(id)) { this.selectHromada(hromadas[i]); return; }
-          }
-        },
-
-        addressSearchSettlement: function (isFocus) {
-          var self = this;
-          var raw = this.addressSearch ? this.addressSearch.trim() : '';
-          var q = raw.toLowerCase();
-          this._checkLocationPattern('settlement', raw);
-          if (this.locationPatternErrors['settlement']) { this.addressResults = []; this.locationNoResults['settlement'] = false; return; }
-
-          if (!q && this.data.settlement) {
-            this.clearSettlement();
-            return;
-          }
-          if (q && this.data.settlement) {
-            var current = null;
-            for (var c = 0; c < this.addressIndex.length; c++) {
-              if (this.addressIndex[c].id === this.data.settlement) { current = this.addressIndex[c]; break; }
-            }
-            if (current) {
-              var expected = this.getLocationMethod() === 'two'
-                ? current.name.toLowerCase() + ' - ' + current.type.toLowerCase()
-                : current.name.toLowerCase() + ' - ' + current.type.toLowerCase();
-              if (q !== expected) {
-                this.data.settlement = '';
-                this.data.raion = '';
-                this.data.hromada = '';
-          this.data.raionName = '';
-          this.data.hromadaName = '';
-          this.data.settlementName = '';
-          this.data.settlementType = '';
-          this.data.hromadaType = '';
-          this.data.oblastName = '';
+            var levels = {};
+            var assignLevel = function (item) {
+              var key = String(item.id);
+              if (levels[key] !== undefined) return levels[key];
+              var p = item.parentId;
+              if (p === null || p === undefined || p === '') {
+                levels[key] = 0;
+              } else {
+                var parent = byId[String(p)];
+                levels[key] = parent ? assignLevel(parent) + 1 : 0;
               }
+              return levels[key];
+            };
+            for (var i2 = 0; i2 < data.length; i2++) assignLevel(data[i2]);
+            for (var i3 = 0; i3 < data.length; i3++) {
+              var item = data[i3];
+              var lvl = assignLevel(item);
+              if (lvl >= fields.length) lvl = fields.length - 1;
+              var fieldName = fields[lvl];
+              var entry = { id: item.id, name: item.name || item.label || String(item.id), type: item.type || '', url: item.url || '', katotth: item.katotth || '', _field: fieldName, _parent: null, _ancestors: [] };
+              var anc = [];
+              var cur = item;
+              var guard = 0;
+              while (cur && cur.parentId !== null && cur.parentId !== undefined && cur.parentId !== '' && guard < fields.length) {
+                var par = byId[String(cur.parentId)];
+                if (!par) break;
+                var pf = fields[assignLevel(par)];
+                entry[pf] = par.id;
+                anc.unshift({ field: pf, id: par.id, name: par.name || String(par.id), type: par.type || '' });
+                cur = par;
+                guard++;
+              }
+              entry._ancestors = anc;
+              entry._parent = anc.length ? anc[anc.length - 1].field : null;
+              all.push(entry);
             }
+            return all;
           }
 
-          var searchName = q.split(' - ')[0].trim();
-          var settlementPresets = this.getPresetValues('settlement');
-          var method = this.getLocationMethod();
-          var results = [];
-          var matching = function (item) {
-            if (method === 'two') {
-              if (self.data.hromada && item.hromadaId !== self.data.hromada) return false;
-              if (self.data.oblast && item.oblastId !== self.data.oblast) return false;
-            } else {
-              if (self.data.hromada && item.hromadaId !== self.data.hromada) return false;
+          var chain = [];
+          var walk = function (node, fieldIdx) {
+            var fieldName = fields[fieldIdx];
+            var nodeField = self.getLocationFieldConfig(fieldName);
+            var entry = { id: node.id, name: node.name || node.label || String(node.id), type: node.type || '', url: node.url || '', katotth: node.katotth || '', _field: fieldName };
+            var anc = [];
+            for (var c = 0; c < chain.length; c++) {
+              var a = chain[c];
+              entry[a.field] = a.id;
+              anc.push({ field: a.field, id: a.id, name: a.name, type: a.type });
             }
-            if (settlementPresets && settlementPresets.indexOf(item.id) === -1) return false;
-            return true;
+            entry._ancestors = anc;
+            entry._parent = chain.length ? chain[chain.length - 1].field : null;
+            all.push(entry);
+            var childKey = nodeField && nodeField.children ? nodeField.children : null;
+            var kids = (childKey && node[childKey]) ? node[childKey] : [];
+            if (kids.length && fieldIdx < fields.length - 1) {
+              chain.push({ field: fieldName, id: node.id, name: entry.name, type: entry.type });
+              for (var i4 = 0; i4 < kids.length; i4++) walk(kids[i4], fieldIdx + 1);
+              chain.pop();
+            }
           };
-          if (q.length < this.locationMinChars('settlement')) {
-            if (isFocus && !this.locationIsSearch('settlement')) {
-              for (var i = 0; i < this.addressIndex.length && results.length < this.locationMaxResults('settlement'); i++) {
-                if (matching(this.addressIndex[i])) results.push(this.addressIndex[i]);
-              }
+          for (var i5 = 0; i5 < data.length; i5++) walk(data[i5], 0);
+          return all;
+        },
+
+        locationSearch: function (fieldName, isFocus) {
+          var st = this.locationState[fieldName];
+          if (!st) return;
+          var raw = st.search ? st.search.trim() : '';
+          var q = raw.toLowerCase();
+          this._checkLocationPattern(fieldName, raw);
+          if (this.locationPatternErrors[fieldName]) { st.results = []; this.locationNoResults[fieldName] = false; st.showDropdown = false; return; }
+          var opts = this.locationOptions(fieldName);
+          var searchName = q.split(' - ')[0].trim();
+          if (q.length < this.locationMinChars(fieldName)) {
+            if (isFocus && !this.locationIsSearch(fieldName)) {
+              st.results = opts.slice(0, this.locationMaxResults(fieldName));
+              st.showDropdown = true;
+            } else {
+              st.results = [];
+              st.showDropdown = false;
             }
-            this.addressResults = results;
-            this.locationNoResults['settlement'] = false;
+            st.highlightIndex = -1;
+            this.locationNoResults[fieldName] = false;
             return;
           }
+          var results = [];
+          for (var i = 0; i < opts.length; i++) {
+            if (results.length >= this.locationMaxResults(fieldName)) break;
+            if (opts[i].name.toLowerCase().indexOf(searchName) !== -1) results.push(opts[i]);
+          }
+          st.results = results;
+          st.highlightIndex = -1;
+          this.locationNoResults[fieldName] = results.length === 0;
+          this.locationNoResultsQuery[fieldName] = raw;
+          st.showDropdown = true;
+        },
+
+        locationSelect: function (obj) {
+          if (!obj) return;
+          var fieldName = obj._field;
+          var st = this.locationState[fieldName] || { search: '', results: [], showDropdown: false, highlightIndex: -1 };
+          this.locationState[fieldName] = st;
+          this._locObj()[fieldName] = obj.id;
+          this._locObj()[fieldName + 'Name'] = obj.name;
+          if (this.locationFieldHasType(fieldName)) this._locObj()[fieldName + 'Type'] = obj.type || '';
+          this._syncLocationSearch(fieldName, obj);
+          st.results = [];
+          st.highlightIndex = -1;
+          st.noResults = false;
+          st.noResultsQuery = '';
+          st.showDropdown = false;
+          this.touched[fieldName] = true;
+          this.locationPatternErrors[fieldName] = '';
+          this.locationNoResults[fieldName] = false;
+          this.errors[fieldName] = null;
+          if (this.getLocationMethod() === 'two' && this.locationIsLeaf(fieldName)) {
+            this.locationFillAncestors(obj);
+          }
+          this.locationCascade(fieldName);
+          var mapField = this._mapFieldName();
+          if (mapField && fieldName === mapField) {
+            var selfSel = this;
+            this.$nextTick(function () {
+              selfSel._resetMarker();
+              selfSel.$nextTick(function () {
+                selfSel.initMap();
+                selfSel.$nextTick(function () { selfSel._centerMapOnSettlement(); });
+              });
+            });
+          }
+        },
+
+        locationSelectById: function (fieldName, id) {
+          if (!id) { this.locationClear(fieldName); return; }
           for (var i = 0; i < this.addressIndex.length; i++) {
-            if (results.length >= this.locationMaxResults('settlement')) break;
-            if (!matching(this.addressIndex[i])) continue;
-            if (this.addressIndex[i].name.toLowerCase().indexOf(searchName) !== -1) {
-              results.push(this.addressIndex[i]);
+            var r = this.addressIndex[i];
+            if (r._field === fieldName && String(r.id) === String(id)) {
+              this.locationSelect(r);
+              return;
             }
           }
-          this.addressResults = results;
-          this.locationNoResults['settlement'] = results.length === 0;
-          this.locationNoResultsQuery['settlement'] = raw;
-          this.settlementHighlightIndex = -1;
-          if (this.addressResults.length > 0) {
-            this.addressShowDropdown = true;
-          }
-          if (this.data.settlement && results.length && results.every(function (s) { return s.id !== self.data.settlement; })) {
-            this.data.settlement = '';
-          }
         },
 
-        formatSettlementName: function (s) {
-          return s.name + ' <small class="text-muted">(' + s.type + ')</small>, ' + s.hromadaName + ' <small class="text-muted">(' + s.hromadaType + ')</small>.';
-        },
-
-        selectSettlement: function (s) {
-          this.data.settlement = s.id;
-          this.data.hromada = s.hromadaId;
-          this.data.raion = s.raionId;
-          this.data.oblast = s.oblastId;
-          if (this.getLocationMethod() === 'two') {
-            this.addressSearch = s.name + ' - ' + s.type;
+        locationClear: function (fieldName) {
+          this._wipeLocationField(fieldName);
+          this.locationPatternErrors[fieldName] = '';
+          this.locationNoResults[fieldName] = false;
+          this.touched[fieldName] = false;
+          if (this.getLocationMethod() === 'two' && this.locationIsLeaf(fieldName)) {
+            this.clearLocationAncestors(fieldName);
           } else {
-            this.addressSearch = s.name + ' - ' + s.type;
+            this.locationCascade(fieldName);
           }
-          this.addressResults = [];
-          this.addressShowDropdown = false;
-          this.raionName = s.raionName;
-          this.hromadaName = s.hromadaName;
-          this.data.raionName = s.raionName;
-          this.data.hromadaName = s.hromadaName;
-          this.data.settlementName = s.name;
-          this.data.settlementType = s.type;
-          this.data.hromadaType = s.hromadaType;
-          this.data.oblastName = s.oblastName;
-          this.hromadaSearch = s.hromadaName + ' - ' + s.hromadaType;
-          this.raionSearch = s.raionName;
-          this.oblastSearch = s.oblastName;
-          this.hromadaResults = [];
-          this.touched['oblast'] = true;
-          this.touched['raion'] = true;
-          this.touched['hromada'] = true;
-          this.touched['settlement'] = true;
-          this.locationPatternErrors['oblast'] = '';
-          this.locationPatternErrors['hromada'] = '';
-          this.locationPatternErrors['settlement'] = '';
-          this.locationNoResults['oblast'] = false;
-          this.locationNoResults['hromada'] = false;
-          this.locationNoResults['settlement'] = false;
-          this.errors['oblast'] = null;
-          this.errors['raion'] = null;
-          this.errors['hromada'] = null;
-          this.errors['settlement'] = null;
+          this.validateLocationField(fieldName);
         },
 
-        selectSettlementById: function (id) {
-          if (!id) { this.clearSettlement(); return; }
-          var settlements = this.filteredSettlements;
-          for (var i = 0; i < settlements.length; i++) {
-            if (String(settlements[i].id) === String(id)) { this.selectSettlement(settlements[i]); return; }
+        _wipeLocationField: function (fieldName) {
+          this._locObj()[fieldName] = '';
+          this._locObj()[fieldName + 'Name'] = '';
+          if (this.locationFieldHasType(fieldName)) this._locObj()[fieldName + 'Type'] = '';
+          var st = this.locationState[fieldName];
+          if (st) {
+            st.search = '';
+            st.results = [];
+            st.highlightIndex = -1;
+            st.noResults = false;
+            st.noResultsQuery = '';
+            st.showDropdown = false;
+          }
+          this.touched[fieldName] = false;
+          this.errors[fieldName] = null;
+        },
+
+        locationCascade: function (fieldName) {
+          var desc = this.locationDescendants(fieldName);
+          for (var i = 0; i < desc.length; i++) {
+            this._wipeLocationField(desc[i]);
+            this.locationPatternErrors[desc[i]] = '';
+            this.locationNoResults[desc[i]] = false;
+            this.errors[desc[i]] = null;
           }
         },
 
-        clearHromada: function () {
-          this.data.hromada = '';
-          this.data.settlement = '';
-          this.data.hromadaName = '';
-          this.data.settlementName = '';
-          this.data.settlementType = '';
-          this.data.hromadaType = '';
-          this.addressSearch = '';
-          this.addressResults = [];
-          this.hromadaSearch = '';
-          this.hromadaResults = [];
-          this.touched['settlement'] = false;
-          this.locationPatternErrors['hromada'] = '';
-          this.locationPatternErrors['settlement'] = '';
-          this.locationNoResults['hromada'] = false;
-          this.locationNoResults['settlement'] = false;
-          this.errors['hromada'] = null;
-          this.errors['settlement'] = null;
-          this.validateLocationField('hromada');
+        locationFillAncestors: function (obj) {
+          var anc = obj._ancestors || [];
+          for (var i = 0; i < anc.length; i++) {
+            var a = anc[i];
+            this._locObj()[a.field] = a.id;
+            this._locObj()[a.field + 'Name'] = a.name;
+            if (this.locationFieldHasType(a.field)) this._locObj()[a.field + 'Type'] = a.type || '';
+            var ast = this.locationState[a.field];
+            if (ast) {
+              ast.search = this.locationFieldHasType(a.field) && a.type ? a.name + ' - ' + a.type : a.name;
+              ast.results = [];
+              ast.highlightIndex = -1;
+              ast.noResults = false;
+              ast.noResultsQuery = '';
+              ast.showDropdown = false;
+            }
+            this.touched[a.field] = true;
+            this.locationPatternErrors[a.field] = '';
+            this.locationNoResults[a.field] = false;
+            this.errors[a.field] = null;
+          }
         },
 
-        clearSettlement: function () {
-          this.data.settlement = '';
-          this.data.settlementName = '';
-          this.data.settlementType = '';
-          this.addressSearch = '';
-          this.addressResults = [];
-          this.locationPatternErrors['settlement'] = '';
-          this.locationNoResults['settlement'] = false;
-          if (this.getLocationMethod() === 'two') {
-            this.data.raion = '';
-            this.data.hromada = '';
-            this.data.raionName = '';
-            this.data.hromadaName = '';
-            this.data.oblastName = '';
-            this.hromadaSearch = '';
-            this.hromadaResults = [];
-            this.touched['raion'] = false;
-            this.touched['hromada'] = false;
-            this.locationPatternErrors['raion'] = '';
-            this.locationPatternErrors['hromada'] = '';
-            this.locationNoResults['raion'] = false;
-            this.locationNoResults['hromada'] = false;
-            this.errors['oblast'] = null;
-            this.errors['raion'] = null;
-            this.errors['hromada'] = null;
+        clearLocationAncestors: function (fieldName) {
+          var list = this.locationFieldList();
+          var idx = this.locationFieldIndex(fieldName);
+          for (var i = 0; i < idx; i++) {
+            var fn = list[i];
+            this._wipeLocationField(fn);
+            this.locationPatternErrors[fn] = '';
+            this.locationNoResults[fn] = false;
           }
-          this.errors['settlement'] = null;
-          this.validateLocationField('settlement');
+        },
+
+        locationHighlightNext: function (fieldName) {
+          var st = this.locationState[fieldName];
+          if (!st) return;
+          var max = st.results.length - 1;
+          st.highlightIndex = st.highlightIndex >= max ? 0 : st.highlightIndex + 1;
+          this._scrollHighlighted('locationDropdown' + fieldName);
+        },
+
+        locationHighlightPrev: function (fieldName) {
+          var st = this.locationState[fieldName];
+          if (!st) return;
+          var max = st.results.length - 1;
+          st.highlightIndex = st.highlightIndex <= 0 ? max : st.highlightIndex - 1;
+          this._scrollHighlighted('locationDropdown' + fieldName);
+        },
+
+        locationSelectHighlighted: function (fieldName) {
+          var st = this.locationState[fieldName];
+          if (st && st.highlightIndex >= 0 && st.highlightIndex < st.results.length) {
+            this.locationSelect(st.results[st.highlightIndex]);
+          }
         },
 
         locationSummary: function () {
-          if (!this.data.settlement) return '';
+          var list = this.locationFieldList();
+          if (!list.length) return '';
+          var leaf = list[list.length - 1];
+          if (!this._locObj()[leaf]) return '';
           var parts = [];
-          if (this.data.settlementType && this.data.settlementName) parts.push(this.data.settlementType + ' ' + this.data.settlementName);
-          if (this.hromadaName && this.data.hromadaType) {
-            var hn = this.hromadaName.replace('територіальна громада', '').trim();
-            parts.push(hn + ' ' + this.data.hromadaType + ' територіальна громада');
+          for (var i = 0; i < list.length; i++) {
+            var fn = list[i];
+            var name = this._locObj()[fn + 'Name'] || '';
+            var type = this._locObj()[fn + 'Type'] || '';
+            if (fn === leaf) {
+              if (type) parts.push(type + ' ' + name);
+              else if (name) parts.push(name);
+            } else if (i === list.length - 2) {
+              var clean = name.replace('територіальна громада', '').trim();
+              if (type) parts.push(clean + ' ' + type + ' територіальна громада');
+              else if (clean) parts.push(clean);
+            } else {
+              if (name) parts.push(name);
+            }
           }
-          if (this.raionName) parts.push(this.raionName);
-          if (this.data.oblastName) parts.push(this.data.oblastName);
           parts.push('Україна');
+          return parts.join(', ');
+        },
+
+        locationDetail: function (obj) {
+          if (!obj) return '';
+          var anc = obj._ancestors || [];
+          var parts = [];
+          if (obj.name) {
+            parts.push(obj.name + (obj.type ? ' <small class="text-muted">(' + obj.type + ')</small>' : ''));
+          }
+          for (var i = anc.length - 1; i >= 0; i--) {
+            var a = anc[i];
+            var label = a.name;
+            if (a.type) label += ' <small class="text-muted">(' + a.type + ')</small>';
+            parts.push(label);
+          }
+          return parts.join(', ');
+        },
+
+        locationNearest: function (obj) {
+          var anc = obj && obj._ancestors ? obj._ancestors : [];
+          if (!anc.length) return '';
+          var a = anc[anc.length - 1];
+          return '(' + a.name + (a.type ? ' - ' + a.type : '') + ')';
+        },
+
+        locationAncestorsTail: function (obj) {
+          var anc = obj && obj._ancestors ? obj._ancestors : [];
+          var parts = [];
+          for (var i = anc.length - 2; i >= 0; i--) {
+            parts.push(anc[i].name);
+          }
           return parts.join(', ');
         },
 
@@ -1757,38 +1874,6 @@
             var el = container.querySelector('.highlighted');
             if (el) el.scrollIntoView({ block: 'nearest' });
           }, 10);
-        },
-
-        settlementHighlightNext: function () {
-          var max = this.addressResults.length - 1;
-          this.settlementHighlightIndex = this.settlementHighlightIndex >= max ? 0 : this.settlementHighlightIndex + 1;
-          this._scrollHighlighted('settlementDropdown');
-        },
-        settlementHighlightPrev: function () {
-          var max = this.addressResults.length - 1;
-          this.settlementHighlightIndex = this.settlementHighlightIndex <= 0 ? max : this.settlementHighlightIndex - 1;
-          this._scrollHighlighted('settlementDropdown');
-        },
-        settlementSelectHighlighted: function () {
-          if (this.settlementHighlightIndex >= 0 && this.settlementHighlightIndex < this.addressResults.length) {
-            this.selectSettlement(this.addressResults[this.settlementHighlightIndex]);
-          }
-        },
-
-        hromadaHighlightNext: function () {
-          var max = this.hromadaResults.length - 1;
-          this.hromadaHighlightIndex = this.hromadaHighlightIndex >= max ? 0 : this.hromadaHighlightIndex + 1;
-          this._scrollHighlighted('hromadaDropdown');
-        },
-        hromadaHighlightPrev: function () {
-          var max = this.hromadaResults.length - 1;
-          this.hromadaHighlightIndex = this.hromadaHighlightIndex <= 0 ? max : this.hromadaHighlightIndex - 1;
-          this._scrollHighlighted('hromadaDropdown');
-        },
-        hromadaSelectHighlighted: function () {
-          if (this.hromadaHighlightIndex >= 0 && this.hromadaHighlightIndex < this.hromadaResults.length) {
-            this.selectHromada(this.hromadaResults[this.hromadaHighlightIndex]);
-          }
         },
 
         initAutoSelects: function () {
@@ -1835,6 +1920,17 @@
           return norm;
         },
 
+        asDataValue: function (path) {
+          if (path === null || path === undefined) return undefined;
+          var parts = String(path).split('.');
+          var cur = this.data;
+          for (var i = 0; i < parts.length; i++) {
+            if (cur === null || cur === undefined) return undefined;
+            cur = cur[parts[i]];
+          }
+          return cur;
+        },
+
         asResolveSource: function (field) {
           var fd = this.asInlineData(field.data);
           if (fd) {
@@ -1860,7 +1956,7 @@
             for (var i = 0; i < datas.length; i++) {
               var entry = datas[i];
               if (!entry || !entry.data) continue;
-              if (this.data[entry.field] === entry.value) {
+              if (this.asDataValue(entry.field) === entry.value) {
                 var ed = this.asInlineData(entry.data);
                 if (ed) {
                   return {
@@ -2200,14 +2296,17 @@
         submit: function () {
           if (!this.validateAll()) return;
           var self = this;
-          var locMsg = function (fn, fallback) {
-            var f = self.getLocationFieldConfig(fn);
-            return (f && f.message) ? f.message : fallback;
-          };
-          if (!this.data.oblast) { this.errors['oblast'] = locMsg('oblast', 'Виберіть область'); return; }
-          if (!this.data.raion) { this.errors['raion'] = locMsg('raion', 'Виберіть район'); return; }
-          if (!this.data.hromada) { this.errors['hromada'] = locMsg('hromada', 'Виберіть громаду'); return; }
-          if (!this.data.settlement) { this.errors['settlement'] = locMsg('settlement', 'Виберіть населений пункт'); return; }
+          var locFields = this.locationFieldList();
+          for (var li = 0; li < locFields.length; li++) {
+            var fn = locFields[li];
+            if (this.isLocationFieldRequired(fn) && !this._locObj()[fn]) {
+              var f = this.getLocationFieldConfig(fn);
+              this.errors[fn] = (f && f.message) ? f.message : 'Виберіть значення';
+            }
+          }
+          for (var lj = 0; lj < locFields.length; lj++) {
+            if (this.isLocationFieldRequired(locFields[lj]) && !this._locObj()[locFields[lj]]) return;
+          }
           this.submitting = true;
           var formEl = document.getElementById('add-property-form');
           var turnstileField = formEl ? formEl.querySelector('[name="cf-turnstile-response"]') : null;

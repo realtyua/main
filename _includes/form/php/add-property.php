@@ -242,7 +242,15 @@ if (is_file($manifestPath)) {
 }
 if (!is_array($manifest)) $manifest = [];
 $fields = isset($manifest['fields']) && is_array($manifest['fields']) ? $manifest['fields'] : [];
-$location = isset($manifest['location']) && is_array($manifest['location']) ? $manifest['location'] : [];
+$locationRaw = isset($manifest['location']) && is_array($manifest['location']) ? $manifest['location'] : [];
+$location = [];
+if ($locationRaw === array_values($locationRaw)) {
+    foreach ($locationRaw as $lc) {
+        if (is_array($lc) && isset($lc['name'])) $location[$lc['name']] = $lc;
+    }
+} else {
+    $location = $locationRaw;
+}
 $settings = isset($manifest['settings']) && is_array($manifest['settings']) ? $manifest['settings'] : [];
 
 if (count($fields) === 0) {
