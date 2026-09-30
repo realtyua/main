@@ -67,9 +67,20 @@ function matchesValues($dataValue, $values, $except) {
     return false;
 }
 
+function dataGet($data, $path) {
+    if ($path === null || $path === '') return null;
+    if (strpos($path, '.') === false) return isset($data[$path]) ? $data[$path] : null;
+    $cur = $data;
+    foreach (explode('.', $path) as $part) {
+        if (!is_array($cur) || !array_key_exists($part, $cur)) return null;
+        $cur = $cur[$part];
+    }
+    return $cur;
+}
+
 function depValue($data, $dep) {
     if (!isset($dep['field'])) return null;
-    return isset($data[$dep['field']]) ? $data[$dep['field']] : null;
+    return dataGet($data, $dep['field']);
 }
 
 function matchesValueCondition($dataValue, $condition) {
@@ -98,7 +109,7 @@ function matchesValueCondition($dataValue, $condition) {
 
 function checkWhen($when, $data) {
     if (!$when) return true;
-    $dataVal = isset($data[$when['field']]) ? $data[$when['field']] : null;
+    $dataVal = dataGet($data, isset($when['field']) ? $when['field'] : null);
     if (isset($when['values']) && is_array($when['values']) && count($when['values']) > 0) {
         foreach ($when['values'] as $v) {
             if ($dataVal === $v || (string)$dataVal === (string)$v) return true;
@@ -219,14 +230,21 @@ function formatValue($field, $value) {
     return $value;
 }
 
-function locationDisplay($name, $data) {
-    $id = isset($data[$name]) ? $data[$name] : null;
+function locationVal($data, $root, $key) {
+    if ($root !== null && $root !== '' && isset($data[$root]) && is_array($data[$root]) && array_key_exists($key, $data[$root])) {
+        return $data[$root][$key];
+    }
+    return isset($data[$key]) ? $data[$key] : null;
+}
+
+function locationDisplay($data, $name, $root) {
+    $id = locationVal($data, $root, $name);
     $nameKey = $name . 'Name';
     $typeKey = $name . 'Type';
-    $nameVal = isset($data[$nameKey]) ? $data[$nameKey] : '';
-    if ($nameVal === '') return $id;
-    $typeVal = isset($data[$typeKey]) ? $data[$typeKey] : '';
-    return ($typeVal !== '' ? $typeVal . ' ' : '') . $nameVal;
+    $nameVal = locationVal($data, $root, $nameKey);
+    if ($nameVal === '' || $nameVal === null) return $id;
+    $typeVal = locationVal($data, $root, $typeKey);
+    return ($typeVal !== '' && $typeVal !== null ? $typeVal . ' ' : '') . $nameVal;
 }
 
 function carriesData($field) {
@@ -252,6 +270,7 @@ if ($locationRaw === array_values($locationRaw)) {
     $location = $locationRaw;
 }
 $settings = isset($manifest['settings']) && is_array($manifest['settings']) ? $manifest['settings'] : [];
+$locRoot = isset($manifest['locationWidget']) && is_string($manifest['locationWidget']) && $manifest['locationWidget'] !== '' ? $manifest['locationWidget'] : 'location_widget';
 
 if (count($fields) === 0) {
     http_response_code(500);
@@ -265,15 +284,18 @@ foreach ($fields as $field) {
     if (!$name) continue;
     if (!isFieldVisible($field, $data)) continue;
     if (!isFieldRequired($field, $data)) continue;
-    if (isEmptyValue(isset($data[$name]) ? $data[$name] : null)) {
+    $val = isset($data[$name]) ? $data[$name] : null;
+    if (isset($field['widget']) && $field['widget'] === 'map') {
+        $val = !empty($data['lat']) ? $data['lat'] : null;
+    }
+    if (isEmptyValue($val)) {
         $errors[$name] = requiredMessage($field, $data, $settings);
     }
 }
 foreach ($location as $name => $lcfg) {
-    $locRequired = isset($lcfg['required']) && $lcfg['required'] !== false;
-    if (!$locRequired) continue;
-    if (isEmptyValue(isset($data[$name]) ? $data[$name] : null)) {
-        $errors[$name] = isset($lcfg['message']) && is_string($lcfg['message']) ? $lcfg['message'] : "Виберіть поле $name";
+    if (!isFieldRequired($lcfg, $data)) continue;
+    if (isEmptyValue(locationVal($data, $locRoot, $name))) {
+        $errors[$name] = requiredMessage($lcfg, $data, $settings);
     }
 }
 if (!empty($errors)) {
@@ -317,10 +339,17 @@ foreach ($fields as $field) {
     $lines[] = $label . ': ' . sanitize(formatValue($field, $val));
 }
 foreach ($location as $name => $lcfg) {
-    $val = isset($data[$name]) ? $data[$name] : null;
+    $val = locationVal($data, $locRoot, $name);
     if (isEmptyValue($val)) continue;
-    $label = isset($lcfg['label']) && is_string($lcfg['label']) ? $lcfg['label'] : $name;
-    $lines[] = $label . ': ' . sanitize(locationDisplay($name, $data));
+    $label = fieldLabel($lcfg, $data);
+    if ($label === '') $label = $name;
+    $lines[] = $label . ': ' . sanitize(locationDisplay($data, $name, $locRoot));
+}
+if (!empty($data['lat']) && !empty($data['lng'])) {
+    $lines[] = 'Координати: ' . sanitize($data['lat']) . ', ' . sanitize($data['lng']);
+}
+if (!empty($data['address'])) {
+    $lines[] = 'Адреса на карті: ' . sanitize($data['address']);
 }
 
 $date = date('Y-m-d H:i:s');

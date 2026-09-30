@@ -22,5 +22,6 @@ sitemap: false
 {
   "fields": {{ fieldList | jsonify }},
   "location": {{ locWidget.fields | jsonify }},
+  "locationWidget": "{{ locWidget.name }}",
   "settings": {{ site.data.add-property.settings | jsonify }}
 }

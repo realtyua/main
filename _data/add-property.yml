@@ -11,7 +11,7 @@ settings:
     marker: '&#9728;'
     tooltip: Це поле є обов'язкове
     message: Будь ласка, заповніть це поле
-    class: h6
+    class: small font-weight-bold
   pattern: '^[а-яА-ЯієїґІЄЇҐ0-9\s.,:;!?\(\)«»№+\/–—\-]+$'
 
 steps:
@@ -180,7 +180,7 @@ steps:
                     label: Поверх
                     placeholder: 0 це підвал
                     min: 0
-                    max: 35
+                    max: 65
                     col: col-6 col-md-4
                     validation:
                       compare:
@@ -780,6 +780,7 @@ steps:
                     data: /assets/data/all.json
                     settings:
                       method: one
+                    label: Пошук населеного пункту
                     fields:
                       - name: oblast
                         parent: null
@@ -792,10 +793,16 @@ steps:
                         threshold: 15
                         minChars: 2
                         maxResults: 6
+                        pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
                         #value:
                         #  default:
                         #    value: ["0342"]
                         #    readonly: true
+                        feedback:
+                          valid: Виглядає наче у полі Область все добре!
+                          invalid: Будь ласка, заповніть це поле дійсними даними
+                          pattern: Тільки українські літери
+                        helper: Виберіть область у списку
                       - name: raion
                         parent: oblast
                         children: hromadas
@@ -807,6 +814,12 @@ steps:
                         threshold: 6
                         minChars: 2
                         maxResults: 6
+                        pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
+                        feedback:
+                          valid: Виглядає наче у полі Район все добре!
+                          invalid: Будь ласка, заповніть це поле дійсними даними
+                          pattern: Тільки українські літери
+                        helper: Виберіть район у списку
                       - name: hromada
                         parent: raion
                         children: settlements
@@ -818,6 +831,12 @@ steps:
                         threshold: 6
                         minChars: 2
                         maxResults: 6
+                        pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
+                        feedback:
+                          valid: Виглядає наче у полі Територіальна громада все добре!
+                          invalid: Будь ласка, заповніть це поле дійсними даними
+                          pattern: Тільки українські літери
+                        helper: Введіть перші три українські літери у назві громади
                       - name: settlement
                         parent: hromada
                         label: Населений пункт
@@ -828,12 +847,13 @@ steps:
                         threshold: 6
                         minChars: 2
                         maxResults: 6
+                        pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
                         feedback:
                           valid: Виглядає наче у полі Населений пункт все добре!
                           invalid: Будь ласка, заповніть це поле дійсними даними
-                          pattern: Тільки українські літери...
+                          pattern: Тільки українські літери
                         helper: Введіть перші три українські літери у назві населеного пункту
-                    helper: ....
+                    helper: "Це допоможе легко знайти населений пункт де знаходиться об'єкт нерухомості"
 
               - class: row
                 fields:
@@ -1022,6 +1042,9 @@ steps:
                   - name: map_widget
                     type: widgets
                     widget: map
+                    label:
+                      text: Мапа населених пунктів України
+                    required: true
                     center: [48.632359, 31.252051]
                     zoom: 5
                     value:
@@ -1029,6 +1052,7 @@ steps:
                         - field: location_widget.settlement
                       default:
                         zoom: 13
+                    helper: Ця мапа допоможе вам точно вказати де знаходиться ваша нерухомість. Рухаючи мапу вверх, вниз, вліво, вправо, збільшуючи, зменшуючи, знайдіть свою вулицю, будинок та покладіть паркер у тому місці і мапа визначить де це і точне розташування об'єкта на мапі.
 
   - id: contact
     title: Контакти та медіа

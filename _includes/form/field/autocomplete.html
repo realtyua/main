@@ -22,6 +22,7 @@
           @click.away="asClose('{{ f.name }}')"
           @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { asBlur('{{ f.name }}'); } })">
       <input type="text" class="form-control autocomplete-search" autocomplete="off"
+             id="field_{{ f.name }}_search"
              x-model="asState['{{ f.name }}'].search"
              :class="errors['{{ f.name }}'] || asPatternError('{{ f.name }}') ? 'is-invalid' : touched['{{ f.name }}'] ? 'is-valid' : ''"
              :title="errors['{{ f.name }}'] || asPatternError('{{ f.name }}') || undefined"

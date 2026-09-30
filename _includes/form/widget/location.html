@@ -5,10 +5,12 @@
   <div class="card mb-3">
     <div class="card-body">
       {% if f.label %}<h6 class="card-title">{{ f.label }}</h6>{% endif %}
+      {% if f.helper %}<small class="form-text text-muted mb-2">{{ f.helper }}</small>{% endif %}
 
       {% for field in f.fields %}
       <div class="form-group" x-show="locationShouldShow('{{ field.name }}')">
-        <label>{{ field.label | default: field.name }}
+        <label for="field_{{ f.name }}_{{ field.name }}"
+               :for="locationIsSearch('{{ field.name }}') ? 'field_{{ f.name }}_{{ field.name }}_search' : 'field_{{ f.name }}_{{ field.name }}'">{% if field.label and field.label.depends %}<span x-text="locationLabelText('{{ field.name }}')"></span>{% else %}{% include form/label.html field=field %}{% endif %}
           <span class="text-danger" :class="locationRequiredMeta('{{ field.name }}', 'class')"
                 x-show="isLocationFieldRequired('{{ field.name }}')"
                 :title="locationRequiredMeta('{{ field.name }}', 'tooltip') || undefined">
@@ -19,10 +21,12 @@
                x-text="locationRequiredMeta('{{ field.name }}', 'icon', 'ⓘ')"></a>
           </span>
         </label>
-        <select class="form-control" x-show="!locationIsSearch('{{ field.name }}')"
+        <select class="form-control" id="field_{{ f.name }}_{{ field.name }}" name="{{ f.name }}.{{ field.name }}"
+                x-show="!locationIsSearch('{{ field.name }}')"
                 x-model="data.{{ f.name }}.{{ field.name }}"
                 :class="errors['{{ field.name }}'] ? 'is-invalid' : touched['{{ field.name }}'] ? 'is-valid' : ''"
                 :title="errors['{{ field.name }}'] || undefined"
+                {% if field.helper %}aria-describedby="helper_{{ f.name }}_{{ field.name }}"{% endif %}
                 :disabled="locationLocked('{{ field.name }}')"
                 @change="locationSelectById('{{ field.name }}', $event.target.value)"
                 @blur="validateLocationField('{{ field.name }}')">
@@ -36,9 +40,11 @@
              @click.away="locationState['{{ field.name }}'].showDropdown = false; locationState['{{ field.name }}'].highlightIndex = -1"
              @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) { locationState['{{ field.name }}'].showDropdown = false; locationState['{{ field.name }}'].highlightIndex = -1; } })">
           <input type="text" class="form-control location-search" autocomplete="off"
+                 id="field_{{ f.name }}_{{ field.name }}_search"
                  x-model="locationState['{{ field.name }}'].search"
                  :class="errors['{{ field.name }}'] || locationPatternError('{{ field.name }}') ? 'is-invalid' : touched['{{ field.name }}'] ? 'is-valid' : ''"
                  :title="errors['{{ field.name }}'] || locationPatternError('{{ field.name }}') || undefined"
+                 {% if field.helper %}aria-describedby="helper_{{ f.name }}_{{ field.name }}"{% endif %}
                  :readonly="locationLocked('{{ field.name }}')"
                  @input.debounce.200ms="locationSearch('{{ field.name }}')"
                  @focus="if (!locationLocked('{{ field.name }}')) { locationState['{{ field.name }}'].showDropdown = true; locationState['{{ field.name }}'].highlightIndex = -1; locationSearch('{{ field.name }}', true); }"
@@ -78,8 +84,9 @@
                  x-text="locationNoResultsText('{{ field.name }}')"></div>
           </div>
         </div>
+        {% if field.helper %}<small id="helper_{{ f.name }}_{{ field.name }}" class="form-text text-muted">{{ field.helper }}</small>{% endif %}
         <div class="invalid-feedback" style="display: block" x-show="errors['{{ field.name }}'] || locationPatternError('{{ field.name }}')"><span x-show="locationPatternError('{{ field.name }}')" x-text="locationPatternError('{{ field.name }}')"></span><span x-show="!locationPatternError('{{ field.name }}')" x-text="errors['{{ field.name }}']"></span></div>
-        <div class="valid-feedback" style="display: block" x-show="touched['{{ field.name }}'] && !errors['{{ field.name }}'] && !locationPatternError('{{ field.name }}') && !locationHasUnselectedText('{{ field.name }}')">{% if field.feedback and field.feedback.valid %}{{ field.feedback.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
+        <div class="valid-feedback" style="display: block" x-show="touched['{{ field.name }}'] && !errors['{{ field.name }}'] && !locationPatternError('{{ field.name }}') && !locationHasUnselectedText('{{ field.name }}')">{% if field.feedback and field.feedback.valid %}{{ field.feedback.valid }}{% elsif field.valid %}{{ field.valid }}{% elsif site.data.add-property.settings.feedback.valid %}{{ site.data.add-property.settings.feedback.valid }}{% else %}✓{% endif %}</div>
       </div>
       {% endfor %}
 

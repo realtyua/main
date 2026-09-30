@@ -274,11 +274,14 @@
       getFieldErrors: function (f) {
         if (!this.isFieldVisible(f.name)) return null;
         var val = this.data[f.name];
+        var isMapWidget = f.type === 'widgets' && f.widget === 'map';
+        if (isMapWidget) val = this.data.lat || '';
         if (this.isFieldRequired(f.name)) {
           var empty = f.type === 'file'
             ? !(this.files && this.files[f.name] && this.files[f.name].length)
+            : isMapWidget ? !this.data.lat
             : val === '' || val === null || val === undefined || val === false || (Array.isArray(val) && val.length === 0);
-          var defMsg = f.type === 'checkbox' ? "Підтвердіть згоду" : f.type === 'checkbox_group' ? "Оберіть хоча б один варіант" : f.type === 'file' ? "Виберіть хоча б один файл" : "Це поле обов'язкове";
+          var defMsg = f.type === 'checkbox' ? "Підтвердіть згоду" : f.type === 'checkbox_group' ? "Оберіть хоча б один варіант" : f.type === 'file' ? "Виберіть хоча б один файл" : isMapWidget ? "Поставте маркер на карті" : "Це поле обов'язкове";
           if (empty) return this.getValidationMsg(f, 'required', 'required', defMsg);
         }
         if (val === '' || val === null || val === undefined) {

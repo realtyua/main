@@ -409,8 +409,7 @@
           var mapField = self._mapFieldName();
           if (mapField) {
             var mapWatchPath = self._mapFieldPath();
-            this.$watch('data.' + mapWatchPath, function (val) {
-              if (!val) return;
+            this.$watch('data.' + mapWatchPath, function () {
               var cur = formConfig.steps[self.step - 1];
               if (!cur || !FormEngine.hasWidget(cur, 'map')) return;
               self._resetMarker();
@@ -598,16 +597,26 @@
           return list && list.length ? list[list.length - 1] : null;
         },
 
+        _mapFallbackView: function () {
+          this._settlementSeq = (this._settlementSeq || 0) + 1;
+          clearTimeout(this._settlementDebounce);
+          this._resetMarker();
+          var mc = this.getMapWidgetConfig();
+          var c = (mc && mc.center) ? mc.center : [48.9215, 24.7097];
+          var z = (mc && mc.zoom !== undefined) ? mc.zoom : 12;
+          this._map.setView(L.latLng(c[0], c[1]), z);
+          this._updateAttribution('© Україна — OpenStreetMap');
+        },
+
         _centerMapOnSettlement: function () {
           var self = this;
           var field = this._mapFieldName();
           if (!field) return;
           if (!this._map) return;
-          var name = this._locObj()[field + 'Name'] || '';
-          if (!name) return;
           var mc = this.getMapWidgetConfig();
-          var fallbackCenter = (mc && mc.center) ? mc.center : [48.9215, 24.7097];
           var fallbackZoom = (mc && mc.zoom !== undefined) ? mc.zoom : 12;
+          var name = this._locObj()[field + 'Name'] || '';
+          if (!name) { this._mapFallbackView(); return; }
           var qParts = [name];
           var oblast = this._locObj()['oblastName'];
           if (oblast && oblast.toLowerCase().indexOf(name.toLowerCase()) === -1) {
@@ -630,14 +639,12 @@
                   self._map.setView(L.latLng(parseFloat(res[0].lat), parseFloat(res[0].lon)), zoom);
                   self._updateAttribution('© ' + name + ' — OpenStreetMap');
                 } else {
-                  self._map.setView(fallbackCenter, fallbackZoom);
-                  self._updateAttribution('© Україна — OpenStreetMap');
+                  self._mapFallbackView();
                 }
               })
               .catch(function () {
                 if (seq !== self._settlementSeq) return;
-                self._map.setView(fallbackCenter, fallbackZoom);
-                self._updateAttribution('© Україна — OpenStreetMap');
+                self._mapFallbackView();
               });
           }, 450);
         },
@@ -1380,7 +1387,11 @@
         isLocationFieldRequired: function (fieldName) {
           var field = this.getLocationFieldConfig(fieldName);
           if (!field) return false;
-          return field.required !== false;
+          var r = field.required;
+          if (r === true) return true;
+          if (Array.isArray(r)) return this.evaluateDepends(r);
+          if (r && typeof r === 'object' && !Array.isArray(r) && r.depends) return this.evaluateDepends(r.depends);
+          return false;
         },
 
         locationRequiredMeta: function (fieldName, key, def) {
@@ -1404,6 +1415,19 @@
           return msg.replace(/\{\{q\}\}/g, q).replace(/\{q\}/g, q);
         },
 
+        locationLabelText: function (fieldName) {
+          var f = this.getLocationFieldConfig(fieldName);
+          if (!f || !f.label) return '';
+          var l = f.label;
+          if (l && l.depends) {
+            for (var i = 0; i < l.depends.length; i++) {
+              var d = l.depends[i];
+              if (FormEngine.matchesValues(FormEngine.getDataValue(this.data, d.field), d.values || [], d.except || [])) return d.text;
+            }
+          }
+          return (typeof l === 'string') ? l : ((l && l.text) || '');
+        },
+
         locationHasUnselectedText: function (fieldName) {
           var st = this.locationState[fieldName];
           return !!(st && st.search && !this._locObj()[fieldName]);
@@ -1414,12 +1438,34 @@
           var val = this._locObj()[fieldName];
           var empty = val === '' || val === null || val === undefined;
           if (this.isLocationFieldRequired(fieldName) && empty) {
-            var f = this.getLocationFieldConfig(fieldName);
-            var msg = (f && f.message) ? f.message : "Це поле обов'язкове";
-            this.errors[fieldName] = msg;
+            this.errors[fieldName] = this.locationRequiredMessage(fieldName);
           } else {
             this.errors[fieldName] = null;
           }
+        },
+
+        locationRequiredMessage: function (fieldName) {
+          var field = this.getLocationFieldConfig(fieldName);
+          var v = field && field.validation;
+          if (v && v.required !== undefined) {
+            var req = v.required;
+            if (typeof req === 'string') return req;
+            if (req && typeof req === 'object') {
+              if (Array.isArray(req.depends)) {
+                for (var i = 0; i < req.depends.length; i++) {
+                  var d = req.depends[i];
+                  if (FormEngine.matchesValues(FormEngine.getDataValue(this.data, d.field), d.values || [], d.except || [])) {
+                    if (d.text !== undefined && d.text !== '') return d.text;
+                  }
+                }
+              }
+              return req.text !== undefined ? req.text : '';
+            }
+          }
+          if (field && field.message) return field.message;
+          var settings = this.config && this.config.settings;
+          if (settings && settings.required && settings.required.message) return settings.required.message;
+          return "Це поле обов'язкове";
         },
 
         _checkLocationPattern: function (fieldName, searchText) {
@@ -1428,7 +1474,7 @@
           if (!pattern || !searchText) { this.locationPatternErrors[fieldName] = ''; return; }
           try {
             if (!new RegExp(pattern).test(searchText)) {
-              var pmsg = (field && field.validation && field.validation.pattern) || (this.config && this.config.settings && this.config.settings.feedback && this.config.settings.feedback.pattern) || 'Неправильний формат';
+              var pmsg = (field && field.validation && field.validation.pattern) || (field && field.feedback && field.feedback.pattern) || (this.config && this.config.settings && this.config.settings.feedback && this.config.settings.feedback.pattern) || 'Неправильний формат';
               this.locationPatternErrors[fieldName] = pmsg;
             } else {
               this.locationPatternErrors[fieldName] = '';
