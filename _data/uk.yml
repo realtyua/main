@@ -270,6 +270,17 @@ notify_submit: Надіслати
 notify_success: Дякуємо за повідомлення!
 notify_success_text: Ваше повідомлення отримано. Ми перевіримо оголошення найближчим часом.
 notify_error: На жаль, сталася помилка. Спробуйте ще раз пізніше.
+add_property_success: Оголошення надіслано
+add_property_success_text: Дякуємо! Ваше оголошення отримано. Ми перевіримо його та опублікуємо найближчим часом.
+add_property_error_title: Не вдалося надіслати оголошення
+add_property_error_generic: Виникла несподівана помилка. Спробуйте ще раз.
+add_property_error_captcha: Не вдалося перевірити, що ви не робот. Оновіть сторінку та спробуйте ще раз.
+add_property_error_photos_large: Фото завеликі, щоб надіслати лист. Приклейте менше фото або спробуйте ще раз.
+add_property_error_photos_invalid: Фото мають некоректний формат. Приклейте фото у форматі JPG або PNG.
+add_property_error_photos_many: Забагато фото. Можна приклеїти не більше 4.
+add_property_error_rate_limit: Забагато спроб за короткий час. Зачекайте хвилину і спробуйте ще раз.
+add_property_error_code: Код помилки
+add_property_retry: Спробувати ще раз
 notify_chars_left: символів залишилось
 notify_invalid_chars: Тільки українська кирилиця, цифри, пробіли та розділові знаки
 notify_valid_chars: Текст введено правильно

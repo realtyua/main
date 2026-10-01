@@ -411,23 +411,24 @@ async function readPayload(request) {
 async function buildAttachments(photos) {
   if (!photos.length) return { attachments: [] };
   if (photos.length > MAX_PHOTOS) {
-    return { error: 'Too many photos', status: 400 };
+    return { error: 'Too many photos', code: 'E_TOO_MANY_ATTACHMENTS', status: 400 };
   }
   const attachments = [];
   let total = 0;
   for (let i = 0; i < photos.length; i++) {
     const photo = photos[i];
     if (photo.type && photo.type.indexOf('image/') !== 0) {
-      return { error: 'Invalid file type', status: 400 };
+      return { error: 'Invalid file type', code: 'E_ATTACHMENT_TYPE_INVALID', status: 400 };
     }
     const buffer = await photo.arrayBuffer();
     total += buffer.byteLength;
     if (total > MAX_TOTAL_BYTES) {
-      return { error: 'Photos are too large', status: 400 };
+      return { error: 'Photos are too large', code: 'E_CONTENT_TOO_LARGE', status: 400 };
     }
     attachments.push({
       filename: photo.name || 'photo-' + (i + 1) + '.jpg',
       type: photo.type || 'image/jpeg',
+      disposition: 'attachment',
       content: buffer,
     });
   }
@@ -440,34 +441,39 @@ export default {
       return new Response(null, { headers: corsHeaders() });
     }
     if (request.method !== 'POST') {
-      return jsonResponse({ success: false, error: 'Method not allowed' }, 405);
+      return jsonResponse({ success: false, error: 'Method not allowed', code: 'E_METHOD' }, 405);
     }
 
     let payload;
     try {
       payload = await readPayload(request);
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Invalid data' }, 400);
+      return jsonResponse({ success: false, error: 'Invalid data', code: 'E_INVALID_PAYLOAD' }, 400);
     }
 
     const turnstile = await verifyTurnstile(payload.token, 'add_property', env);
-    if (!turnstile.ok) return jsonResponse({ success: false, error: turnstile.error }, turnstile.status);
+    if (!turnstile.ok) {
+      return jsonResponse({ success: false, error: turnstile.error, code: 'E_CAPTCHA' }, turnstile.status);
+    }
 
     const data = payload.data;
     if (!data || typeof data !== 'object' || Array.isArray(data)) {
-      return jsonResponse({ success: false, error: 'Invalid data' }, 400);
+      return jsonResponse({ success: false, error: 'Invalid data', code: 'E_INVALID_PAYLOAD' }, 400);
     }
 
     const photoResult = await buildAttachments(payload.photos);
     if (photoResult.error) {
-      return jsonResponse({ success: false, error: photoResult.error }, photoResult.status);
+      return jsonResponse(
+        { success: false, error: photoResult.error, code: photoResult.code },
+        photoResult.status
+      );
     }
     const attachments = photoResult.attachments;
 
     const site = siteHostname(request);
     const manifest = await loadManifest(env);
     if (!manifest || !Array.isArray(manifest.fields) || manifest.fields.length === 0) {
-      return jsonResponse({ success: false, error: 'Form configuration not found' }, 500);
+      return jsonResponse({ success: false, error: 'Form configuration not found', code: 'E_CONFIG_MISSING' }, 500);
     }
 
     const { errors } = validateManifest(manifest, data);
@@ -496,7 +502,7 @@ export default {
     ].join('\n');
 
     if (!env.EMAIL) {
-      return jsonResponse({ success: false, error: 'Mail sending unavailable' }, 500);
+      return jsonResponse({ success: false, error: 'Mail sending unavailable', code: 'E_MAIL_UNAVAILABLE' }, 500);
     }
 
     try {
@@ -510,7 +516,10 @@ export default {
       });
     } catch (err) {
       console.error('Email sending failed:', err && err.code, err && err.message);
-      return jsonResponse({ success: false, error: 'Failed to send email' }, 500);
+      return jsonResponse(
+        { success: false, error: 'Failed to send email', code: (err && err.code) || 'E_SEND_FAILED' },
+        500
+      );
     }
 
     return jsonResponse({ success: true });

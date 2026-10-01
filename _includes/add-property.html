@@ -246,10 +246,24 @@
           </div>
         {% endfor %}
 
-        <div x-show="submitted">
+        <div x-show="submitted" x-cloak>
           <div class="alert alert-success text-center py-5">
-            <h4 class="alert-heading">{{ site.data.uk.notify_success }}</h4>
-            <p class="mb-0">{{ site.data.uk.notify_success_text }}</p>
+            <h4 class="alert-heading">{{ site.data.uk.add_property_success }}</h4>
+            <p class="mb-0">{{ site.data.uk.add_property_success_text }}</p>
+          </div>
+        </div>
+
+        <div x-show="submittingError" x-cloak>
+          <div class="alert alert-danger text-center py-4" role="alert">
+            <h5 class="alert-heading">{{ site.data.uk.add_property_error_title }}</h5>
+            <p class="mb-2" x-text="submittingErrorText"></p>
+            <p class="mb-3 small text-muted" x-show="submittingErrorCode">
+              {{ site.data.uk.add_property_error_code }}: <span x-text="submittingErrorCode"></span>
+            </p>
+            <button type="button" class="btn btn-outline-danger btn-sm" @click="submit()"
+                    :disabled="submitting">
+              {{ site.data.uk.add_property_retry }}
+            </button>
           </div>
         </div>
 
@@ -354,6 +368,10 @@
         fileProcessed: {},
         submitting: false,
         submitted: false,
+        submittingError: false,
+        submittingErrorTitle: '',
+        submittingErrorText: '',
+        submittingErrorCode: '',
         turnstileToken: '',
 
         addressData: [],
@@ -863,7 +881,7 @@
                     var ctx = cropCanvas.getContext('2d');
                     ctx.drawImage(img, sx, sy, cropW, cropH, 0, 0, cropW, cropH);
                     cropCanvas.toBlob(function (blob) {
-                      var cropped = new File([blob], file.name, { type: 'image/jpeg' });
+                      var cropped = new File([blob], self.fileNewName(fieldName, idx), { type: 'image/jpeg' });
                       self.fileProcessed[fieldName][idx] = cropped;
                       self.fileNewSizes[fieldName][idx] = blob.size;
                       self.fileNewSizes[fieldName] = self.fileNewSizes[fieldName].slice();
@@ -2361,9 +2379,27 @@
           return { list: list };
         },
 
+        showSubmitError: function (code) {
+          var texts = {
+            E_CAPTCHA: '{{ site.data.uk.add_property_error_captcha | escape }}',
+            E_CONTENT_TOO_LARGE: '{{ site.data.uk.add_property_error_photos_large | escape }}',
+            E_TOO_MANY_ATTACHMENTS: '{{ site.data.uk.add_property_error_photos_many | escape }}',
+            E_ATTACHMENT_TYPE_INVALID: '{{ site.data.uk.add_property_error_photos_invalid | escape }}',
+            E_RATE_LIMIT_EXCEEDED: '{{ site.data.uk.add_property_error_rate_limit | escape }}',
+            E_DAILY_LIMIT_EXCEEDED: '{{ site.data.uk.add_property_error_rate_limit | escape }}'
+          };
+          this.submitted = false;
+          this.submittingError = true;
+          this.submittingErrorText = texts[code] || '{{ site.data.uk.add_property_error_generic | escape }}';
+          this.submittingErrorCode = code || '';
+          this.step = this.totalSteps;
+        },
+
         submit: function () {
           var staleNotice = document.getElementById('local-notice');
           if (staleNotice) staleNotice.style.display = 'none';
+          this.submittingError = false;
+          this.submittingErrorCode = '';
           if (!this.validateAll()) return;
           var self = this;
           var locFields = this.locationFieldList();
@@ -2413,11 +2449,11 @@
           })
           .then(function (r) { return r.json().then(function (res) { return { ok: r.ok, body: res }; }); })
           .then(function (res) {
-            if (res.body.success) { this.submitted = true; }
+            if (res.body.success) { this.submitted = true; this.submittingError = false; }
             else if (res.body.errors) { this.errors = res.body.errors; }
-            else { this.submittingError = true; }
+            else { this.showSubmitError(res.body.code); }
           }.bind(this))
-          .catch(function () { this.submittingError = true; }.bind(this))
+          .catch(function () { this.showSubmitError(''); }.bind(this))
           .finally(function () { this.submitting = false; }.bind(this));
         }
       };
