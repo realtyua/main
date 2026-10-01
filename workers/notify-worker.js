@@ -6,21 +6,25 @@ export default {
       return new Response(null, { headers: corsHeaders() });
     }
     if (request.method !== 'POST') {
-      return jsonResponse({ success: false, error: 'Method not allowed' }, 405);
+      return jsonResponse({ success: false, error: 'Method not allowed', code: 'E_METHOD' }, 405);
     }
 
     let data;
     try {
       data = await request.json();
     } catch (err) {
-      return jsonResponse({ success: false, error: 'Invalid data' }, 400);
+      return jsonResponse({ success: false, error: 'Invalid data', code: 'E_INVALID_PAYLOAD' }, 400);
     }
 
     const turnstile = await verifyTurnstile(data['cf-turnstile-response'], 'notify_property', env);
-    if (!turnstile.ok) return jsonResponse({ success: false, error: turnstile.error }, turnstile.status);
+    if (!turnstile.ok) {
+      return jsonResponse({ success: false, error: turnstile.error, code: 'E_CAPTCHA' }, turnstile.status);
+    }
 
     const spam = checkSpamTraps(data);
-    if (!spam.ok) return jsonResponse({ success: false, error: spam.error }, spam.status);
+    if (!spam.ok) {
+      return jsonResponse({ success: false, error: spam.error, code: 'E_SPAM' }, spam.status);
+    }
 
     const site = siteHostname(request);
     const reasonText = NOTIFY_REASONS[data.reason] || data.reason || '';
@@ -53,7 +57,7 @@ export default {
     const subject = '[' + site + '] Неточність: ' + (data.property_title || data.uid || 'оголошення');
 
     if (!env.EMAIL) {
-      return jsonResponse({ success: false, error: 'Mail sending unavailable' }, 500);
+      return jsonResponse({ success: false, error: 'Mail sending unavailable', code: 'E_MAIL_UNAVAILABLE' }, 500);
     }
 
     try {
@@ -66,7 +70,10 @@ export default {
       });
     } catch (err) {
       console.error('Email sending failed:', err && err.code, err && err.message);
-      return jsonResponse({ success: false, error: 'Failed to send email' }, 500);
+      return jsonResponse(
+        { success: false, error: 'Failed to send email', code: (err && err.code) || 'E_SEND_FAILED' },
+        500
+      );
     }
 
     return jsonResponse({ success: true });

@@ -90,6 +90,21 @@
     err.classList.remove('d-none');
   }
 
+  // map the worker's machine code to a specific Ukrainian message,
+  // falling back to the generic one already in the markup
+  var NOTIFY_ERROR_TEXTS = {
+    E_CAPTCHA: 'Не вдалося перевірити, що ви не робот. Оновіть сторінку та спробуйте ще раз.',
+    E_SPAM: 'Запит відхилено. Спробуйте ще раз.',
+    E_INVALID_PAYLOAD: 'Не вдалося обробити дані форми. Спробуйте ще раз.',
+    E_MAIL_UNAVAILABLE: 'Сервер тимчасово недоступний. Спробуйте ще раз пізніше.',
+    E_RATE_LIMIT_EXCEEDED: 'Забагато спроб за короткий час. Зачекайте хвилину і спробуйте ще раз.',
+    E_DAILY_LIMIT_EXCEEDED: 'Забагато спроб за короткий час. Зачекайте хвилину і спробуйте ще раз.'
+  };
+
+  function notifyErrorText(code) {
+    return NOTIFY_ERROR_TEXTS[code] || '';
+  }
+
   var modalEl = document.getElementById('notifyModal');
   if (modalEl) {
     modalEl.addEventListener('show.bs.modal', function () {
@@ -164,8 +179,15 @@
       body: JSON.stringify(data),
     })
     .then(function (response) {
-      if (!response.ok) throw new Error('Server error');
-      return response.json();
+      return response.json()
+        .catch(function () { return {}; })
+        .then(function (body) {
+          if (!response.ok || !body || !body.success) {
+            notifyError(notifyErrorText(body && body.code));
+            throw new Error('Send failed');
+          }
+          return body;
+        });
     })
     .then(function () {
       var groups = form.querySelectorAll('.form-group');
