@@ -37,7 +37,8 @@
     return cfg('enabled') === true && !isLocal();
   }
 
-  function tokenOf(container) {
+  function tokenOf(target) {
+    var container = typeof target === 'string' ? document.querySelector(target) : target;
     if (!container) return '';
     var field = container.querySelector('[name="cf-turnstile-response"]');
     return field && field.value ? field.value : '';

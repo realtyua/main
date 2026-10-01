@@ -147,16 +147,16 @@
 
     form.classList.remove('was-validated');
 
-    var submitBtn = document.getElementById('notify-submit');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = 'Надсилаю<span class="spinner-border spinner-border-sm ml-2" role="status"><span class="sr-only">Надсилаю...</span></span>';
-
     var formData = new FormData(form);
     var data = {};
     for (var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
     data['cf-turnstile-response'] = Captcha ? Captcha.token('#turnstile-widget') : '';
+
+    var submitBtn = document.getElementById('notify-submit');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Надсилаю<span class="spinner-border spinner-border-sm ml-2" role="status"><span class="sr-only">Надсилаю...</span></span>';
 
     fetch(form.action, {
       method: 'POST',

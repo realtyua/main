@@ -255,7 +255,7 @@
 
         <div class="mt-4">
           <div id="turnstile-widget" class="mb-3" x-show="!submitted"></div>
-          <div class="alert alert-info mb-3" x-show="!submitted" style="display:none" id="local-notice"><small>Turnstile пропущено (локальний режим)</small></div>
+          <div class="alert alert-info mb-3" style="display:none" id="local-notice"></div>
         </div>
 
       </div>
@@ -2362,6 +2362,8 @@
         },
 
         submit: function () {
+          var staleNotice = document.getElementById('local-notice');
+          if (staleNotice) staleNotice.style.display = 'none';
           if (!this.validateAll()) return;
           var self = this;
           var locFields = this.locationFieldList();
@@ -2397,8 +2399,8 @@
             return;
           }
           delete this.errors.images;
-          this.submitting = true;
           var turnstileToken = captchaCheck ? captchaCheck.token('#turnstile-widget') : '';
+          this.submitting = true;
           var body = new FormData();
           body.append('cf-turnstile-response', turnstileToken);
           body.append('data', JSON.stringify(this.data));
@@ -2411,12 +2413,12 @@
           })
           .then(function (r) { return r.json().then(function (res) { return { ok: r.ok, body: res }; }); })
           .then(function (res) {
-            this.submitting = false;
             if (res.body.success) { this.submitted = true; }
             else if (res.body.errors) { this.errors = res.body.errors; }
             else { this.submittingError = true; }
           }.bind(this))
-          .catch(function () { this.submitting = false; this.submittingError = true; }.bind(this));
+          .catch(function () { this.submittingError = true; }.bind(this))
+          .finally(function () { this.submitting = false; }.bind(this));
         }
       };
 
