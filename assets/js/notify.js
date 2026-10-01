@@ -105,33 +105,42 @@
     return NOTIFY_ERROR_TEXTS[code] || '';
   }
 
+  function resetNotifyForm() {
+    var ts = document.getElementById('notify-timestamp');
+    if (ts) ts.value = Date.now();
+    var err = document.getElementById('notify-error');
+    if (err) err.classList.add('d-none');
+  }
+
+  function mountNotifyCaptcha() {
+    if (!Captcha) return;
+    if (Captcha.isLocal()) {
+      var notice = document.getElementById('notify-local-notice');
+      if (notice) notice.classList.remove('d-none');
+      return;
+    }
+    var localNotice = document.getElementById('notify-local-notice');
+    if (localNotice) localNotice.classList.add('d-none');
+    var retryNotice = document.getElementById('notify-captcha-retry');
+    if (retryNotice) retryNotice.classList.add('d-none');
+    Captcha.mount('#turnstile-widget', 'notify_property', function () {
+      notifyError('Не вдалося завантажити перевірку.');
+      if (retryNotice) retryNotice.classList.remove('d-none');
+    });
+  }
+
   var modalEl = document.getElementById('notifyModal');
   if (modalEl) {
-    modalEl.addEventListener('show.bs.modal', function () {
-      var ts = document.getElementById('notify-timestamp');
-      if (ts) ts.value = Date.now();
-      var err = document.getElementById('notify-error');
-      if (err) err.classList.add('d-none');
-      if (!Captcha) return;
-      if (Captcha.isLocal()) {
-        var notice = document.getElementById('notify-local-notice');
-        if (notice) notice.classList.remove('d-none');
-        return;
-      }
-      var localNotice = document.getElementById('notify-local-notice');
-      if (localNotice) localNotice.classList.add('d-none');
-      var retryNotice = document.getElementById('notify-captcha-retry');
-      if (retryNotice) retryNotice.classList.add('d-none');
-      Captcha.mount('#turnstile-widget', 'notify_property', function () {
-        notifyError('Не вдалося завантажити перевірку.');
-        if (retryNotice) retryNotice.classList.remove('d-none');
-      });
-    });
+    modalEl.addEventListener('show.bs.modal', resetNotifyForm);
+
+    // Turnstile не малюється у контейнері з display:none, а Bootstrap 4
+    // надсилає show.bs.modal до _showElement(). Тому captcha встановлюється
+    // на shown.bs.modal, коли модалка вже видима.
+    modalEl.addEventListener('shown.bs.modal', mountNotifyCaptcha);
+
     var captchaRetry = document.getElementById('notify-captcha-retry-btn');
     if (captchaRetry) {
-      captchaRetry.addEventListener('click', function () {
-        modalEl.dispatchEvent(new Event('show.bs.modal'));
-      });
+      captchaRetry.addEventListener('click', mountNotifyCaptcha);
     }
     modalEl.addEventListener('hidden.bs.modal', function () {
       if (Captcha) Captcha.unmount('#turnstile-widget');
