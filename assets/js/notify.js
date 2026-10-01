@@ -129,20 +129,32 @@
     });
   }
 
+  // Bootstrap 4 викликає події модалки через jQuery.trigger(), який не
+  // породжує нативну DOM-подію. Тому слухач через addEventListener ніколи не
+  // спрацьовує. При наявності jQuery підписка робиться через .on(), інакше
+  // залишається нативний варіант.
+  function onModalEvent(el, eventName, handler) {
+    if (window.jQuery) {
+      window.jQuery(el).on(eventName, handler);
+      return;
+    }
+    el.addEventListener(eventName, handler);
+  }
+
   var modalEl = document.getElementById('notifyModal');
   if (modalEl) {
-    modalEl.addEventListener('show.bs.modal', resetNotifyForm);
+    onModalEvent(modalEl, 'show.bs.modal', resetNotifyForm);
 
     // Turnstile не малюється у контейнері з display:none, а Bootstrap 4
     // надсилає show.bs.modal до _showElement(). Тому captcha встановлюється
     // на shown.bs.modal, коли модалка вже видима.
-    modalEl.addEventListener('shown.bs.modal', mountNotifyCaptcha);
+    onModalEvent(modalEl, 'shown.bs.modal', mountNotifyCaptcha);
 
     var captchaRetry = document.getElementById('notify-captcha-retry-btn');
     if (captchaRetry) {
       captchaRetry.addEventListener('click', mountNotifyCaptcha);
     }
-    modalEl.addEventListener('hidden.bs.modal', function () {
+    onModalEvent(modalEl, 'hidden.bs.modal', function () {
       if (Captcha) Captcha.unmount('#turnstile-widget');
     });
   }
