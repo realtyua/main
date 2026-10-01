@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <p class="lead">{{ site.data.uk.notify_modal_lead }}</p>
-        <form id="notify-form" method="POST" action="https://notify-worker.sparkling-union-9e0a.workers.dev" novalidate>
+        <form id="notify-form" method="POST" action="{{ site.notify_endpoint | default: 'https://notify-worker.sparkling-union-9e0a.workers.dev' }}" novalidate>
           <input type="hidden" name="uid" value="{{ page.uid }}">
           <input type="hidden" name="property_url" value="{{ page.url | absolute_url }}">
           <input type="hidden" name="property_title" value="{{ page.title }}">
@@ -67,6 +67,10 @@
             </div>
           </div>
           <div id="turnstile-widget" class="mb-3"></div>
+          <div class="alert alert-info mb-3 d-none" id="notify-local-notice"><small>Turnstile пропущено (локальний режим)</small></div>
+          <div class="mb-3 d-none" id="notify-captcha-retry">
+            <button type="button" id="notify-captcha-retry-btn" class="btn btn-link btn-sm">Спробувати ще раз</button>
+          </div>
           <button type="submit" id="notify-submit" class="btn btn-primary">{{ site.data.uk.notify_submit }}</button>
         </form>
       </div>

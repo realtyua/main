@@ -59,7 +59,7 @@ steps:
                       invalid: Якщо не погодитесь з правилами і умовами використання, то не зможете додати оголошення.
 
   - id: type
-    title: Характеристики
+    title: Характеристики та ціна об'єкта нерухомості
     class: h4 text-primary text-left
     rows:
       - class: row
@@ -623,7 +623,7 @@ steps:
                 fields:
                   - name: communications
                     type: checkbox_group
-                    label: Комунікації
+                    label: "Комунікації в об'єкті нерухомості"
                     variant: primary
                     options:
                       - value: electricity
@@ -640,10 +640,68 @@ steps:
                         label: Опалення
                       - value: ventilation
                         label: Вентиляція
+                    depends:
+                      - field: property_type
+                        value: '>0'
                     helper: Оберіть всі наявні комунікації
 
-  - id: price_location
-    title: Ціна та місцезнаходження
+              - class: row
+                auto: true
+                fields:
+                  - name: sell_with
+                    type: checkbox_group
+                    label: "Продаються разом з об'єктом нерухомості"
+                    variant: primary
+                    options:
+                      - value: furniture
+                        label: Меблі
+                      - value: appliances
+                        label: Побутова техніка
+                      - value: parking
+                        label: Паркувальне місце
+                      - value: farm_buildings
+                        label: Госопдарські споруди
+                      - value: garage
+                        label: Гараж
+                      - value: land
+                        label: Земля
+                    helper: Оберіть все що вклучно у вартість продажу
+                    depends:
+                      - field: action_type
+                        except: [rent, rent_free]
+                        logic: and
+                      - field: property_type
+                        value: '>0'
+
+                  - name: rent_with
+                    type: checkbox_group
+                    label: "Передається в оренду разом з об'єктом нерухомості"
+                    variant: primary
+                    options:
+                      - value: furniture
+                        label: Меблі
+                      - value: appliances
+                        label: Побутова техніка
+                      - value: kitchen_utensils
+                        label: Кухонне приладдя
+                      - value: tableware
+                        label: Столове приладдя
+                      - value: bedroom_essentials
+                        label: Постільне приладдя
+                      - value: parking
+                        label: Паркувальне місце
+                      - value: land
+                        label: Земля
+                    helper: Оберіть все що вклучно у вартість оренди
+                    depends:
+                      - field: action_type
+                        values: [rent, rent_free]
+                        logic: and
+                      - field: property_type
+                        value: '>0'
+
+  - id: object_price
+    title: Ціна об'єкта нерухомості
     class: h4 text-primary text-left
     rows:
       - class: row
@@ -719,51 +777,14 @@ steps:
                           field: action_type
                           values: [rent, rent_free]
 
-              - class: row
-                auto: true
-                fields:
-                  - name: sell_with
-                    type: checkbox_group
-                    label: Продається разом з
-                    variant: primary
-                    options:
-                      - value: furniture
-                        label: Меблі
-                      - value: appliances
-                        label: Побутова техніка
-                      - value: renovation
-                        label: Ремонт
-                      - value: parking
-                        label: Паркувальне місце
-                      - value: land
-                        label: Земля
-                    helper: Оберіть все що вклучно у вартість
-                    depends:
-                      - field: action_type
-                        except: [rent, rent_free]
-
-                  - name: rent_with
-                    type: checkbox_group
-                    label: Передається в оренду з
-                    variant: primary
-                    options:
-                      - value: furniture
-                        label: Меблі
-                      - value: appliances
-                        label: Побутова техніка
-                      - value: kitchen_utensils
-                        label: Кухонне приладдя
-                      - value: tableware
-                        label: Столове приладдя
-                      - value: parking
-                        label: Паркувальне місце
-                      - value: land
-                        label: Земля
-                    helper: Оберіть все що вклучно у вартість оренди
-                    depends:
-                      - field: action_type
-                        values: [rent, rent_free]
-
+  - id: object_location
+    title: Місцезнаходження об'єкта нерухомості
+    class: h4 text-primary text-left
+    rows:
+      - class: row
+        cols:
+          - class: col-12
+            rows:
               - class: row
                 fields:
                   - name: location_paragraph
@@ -1030,12 +1051,6 @@ steps:
                       - field: location_widget.settlement
                         values: ["30595"]
                     helper: Введіть перші три українські літери у назві станції і виберіть станцію метро
-
-              #- class: row
-              #  fields:
-              #    - name: settlement
-              #      type: text
-              #      label: Field name settlement
 
               - class: row
                 fields:

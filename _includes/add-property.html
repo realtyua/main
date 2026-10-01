@@ -272,26 +272,33 @@
   var formConfig;
   try { formConfig = JSON.parse(configEl.textContent); } catch (e) { return; }
   var currencyRates = formConfig.rates || { usd: 43.50, eur: 51.50, nbu: 43.2413 };
-  var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-  function initTurnstile() {
-    if (isLocal) {
-      var notice = document.getElementById('local-notice');
-      if (notice) notice.style.display = 'block';
-      return;
-    }
-    var widget = document.getElementById('turnstile-widget');
-    if (!widget || widget.hasChildNodes()) return;
-    if (typeof turnstile !== 'undefined') {
-      turnstile.render('#turnstile-widget', { sitekey: '0x4AAAAAADf6HF6IRoXXsCUb' });
+  var Captcha = window.CaptchaSite || null;
+
+  function showCaptchaError() {
+    var notice = document.getElementById('local-notice');
+    if (!notice) return;
+    notice.innerHTML = 'Не вдалося завантажити перевірку. <button type="button" id="captcha-retry" class="btn btn-link btn-sm p-0 align-baseline">Спробувати ще раз</button>';
+    notice.style.display = 'block';
+    var retry = document.getElementById('captcha-retry');
+    if (retry) {
+      retry.addEventListener('click', function () {
+        initTurnstile();
+      });
     }
   }
 
-  function tryInitTurnstile() {
-    initTurnstile();
-    if (isLocal) return;
-    if (!document.getElementById('turnstile-widget') || !document.getElementById('turnstile-widget').hasChildNodes()) {
-      setTimeout(tryInitTurnstile, 300);
+  function initTurnstile() {
+    var notice = document.getElementById('local-notice');
+    if (!Captcha) return;
+    if (Captcha.isLocal()) {
+      if (notice) {
+        notice.textContent = 'Turnstile пропущено (локальний режим)';
+        notice.style.display = 'block';
+      }
+      return;
     }
+    if (notice) notice.style.display = 'none';
+    Captcha.mount('#turnstile-widget', {{ site.turnstile_action_add_property | default: 'add_property' | jsonify }}, showCaptchaError);
   }
 
   document.addEventListener('alpine:init', function () {
@@ -2339,6 +2346,21 @@
           }
         },
 
+        collectPhotos: function (fieldName) {
+          fieldName = fieldName || 'images';
+          var originals = this.files[fieldName] || [];
+          var processed = this.fileProcessed[fieldName] || [];
+          var list = [];
+          for (var i = 0; i < originals.length; i++) {
+            var file = processed[i];
+            if (!file) {
+              return { error: 'Фото ще обробляються. Зачекайте кілька секунд і спробуйте ще раз.' };
+            }
+            list.push(file);
+          }
+          return { list: list };
+        },
+
         submit: function () {
           if (!this.validateAll()) return;
           var self = this;
@@ -2353,32 +2375,48 @@
           for (var lj = 0; lj < locFields.length; lj++) {
             if (this.isLocationFieldRequired(locFields[lj]) && !this._locObj()[locFields[lj]]) return;
           }
-          this.submitting = true;
-          var formEl = document.getElementById('add-property-form');
-          var turnstileField = formEl ? formEl.querySelector('[name="cf-turnstile-response"]') : null;
-          var turnstileToken = turnstileField ? turnstileField.value : '';
-          var formData = new FormData();
-          formData.append('data', JSON.stringify(this.data));
-          formData.append('cf-turnstile-response', turnstileToken);
-          for (var key in this.files) {
-            if (this.files.hasOwnProperty(key)) {
-              var fieldFiles = this.files[key];
-              var processed = this.fileProcessed[key] || [];
-              for (var i = 0; i < fieldFiles.length; i++) {
-                formData.append(key + '[]', processed[i] || fieldFiles[i]);
-              }
+          var captchaCheck = window.CaptchaSite;
+          if (captchaCheck && captchaCheck.enabled() && !captchaCheck.solved('#turnstile-widget')) {
+            this.step = this.totalSteps;
+            var notice = document.getElementById('local-notice');
+            if (notice) {
+              notice.textContent = 'Підтвердьте, що ви не робот, щоб надіслати оголошення.';
+              notice.style.display = 'block';
             }
+            return;
           }
-          fetch('/php/add-property.php', {
+          var photos = this.collectPhotos();
+          if (photos.error) {
+            this.step = this.totalSteps;
+            this.errors.images = photos.error;
+            var photoNotice = document.getElementById('local-notice');
+            if (photoNotice) {
+              photoNotice.textContent = photos.error;
+              photoNotice.style.display = 'block';
+            }
+            return;
+          }
+          delete this.errors.images;
+          this.submitting = true;
+          var turnstileToken = captchaCheck ? captchaCheck.token('#turnstile-widget') : '';
+          var body = new FormData();
+          body.append('cf-turnstile-response', turnstileToken);
+          body.append('data', JSON.stringify(this.data));
+          for (var pi = 0; pi < photos.list.length; pi++) {
+            body.append('images', photos.list[pi]);
+          }
+          fetch({{ site.add_property_endpoint | default: 'https://add-property-worker.sparkling-union-9e0a.workers.dev' | jsonify }}, {
             method: 'POST',
-            body: formData
+            body: body
           })
-          .then(function (r) { return r.json(); })
+          .then(function (r) { return r.json().then(function (res) { return { ok: r.ok, body: res }; }); })
           .then(function (res) {
-            if (res.success) { this.submitted = true; this.submitting = false; }
-            else { this.submitting = false; if (res.errors) this.errors = res.errors; }
+            this.submitting = false;
+            if (res.body.success) { this.submitted = true; }
+            else if (res.body.errors) { this.errors = res.body.errors; }
+            else { this.submittingError = true; }
           }.bind(this))
-          .catch(function () { this.submitting = false; }.bind(this));
+          .catch(function () { this.submitting = false; this.submittingError = true; }.bind(this));
         }
       };
 
@@ -2387,6 +2425,6 @@
     });
   });
 
-  tryInitTurnstile();
+  initTurnstile();
 })();
 </script>

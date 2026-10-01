@@ -81,6 +81,15 @@
     contactEmail.addEventListener('input', function () { validateSimple(contactEmail, emailPattern); });
   }
 
+  var Captcha = window.CaptchaSite || null;
+
+  function notifyError(message) {
+    var err = document.getElementById('notify-error');
+    if (!err) return;
+    if (message) err.textContent = message;
+    err.classList.remove('d-none');
+  }
+
   var modalEl = document.getElementById('notifyModal');
   if (modalEl) {
     modalEl.addEventListener('show.bs.modal', function () {
@@ -88,14 +97,29 @@
       if (ts) ts.value = Date.now();
       var err = document.getElementById('notify-error');
       if (err) err.classList.add('d-none');
-      if (typeof turnstile !== 'undefined') {
-        turnstile.render('#turnstile-widget', { sitekey: '0x4AAAAAADf6HF6IRoXXsCUb' });
+      if (!Captcha) return;
+      if (Captcha.isLocal()) {
+        var notice = document.getElementById('notify-local-notice');
+        if (notice) notice.classList.remove('d-none');
+        return;
       }
+      var localNotice = document.getElementById('notify-local-notice');
+      if (localNotice) localNotice.classList.add('d-none');
+      var retryNotice = document.getElementById('notify-captcha-retry');
+      if (retryNotice) retryNotice.classList.add('d-none');
+      Captcha.mount('#turnstile-widget', 'notify_property', function () {
+        notifyError('Не вдалося завантажити перевірку.');
+        if (retryNotice) retryNotice.classList.remove('d-none');
+      });
     });
+    var captchaRetry = document.getElementById('notify-captcha-retry-btn');
+    if (captchaRetry) {
+      captchaRetry.addEventListener('click', function () {
+        modalEl.dispatchEvent(new Event('show.bs.modal'));
+      });
+    }
     modalEl.addEventListener('hidden.bs.modal', function () {
-      if (typeof turnstile !== 'undefined') {
-        turnstile.remove('#turnstile-widget');
-      }
+      if (Captcha) Captcha.unmount('#turnstile-widget');
     });
   }
 
@@ -110,6 +134,11 @@
       else if (el === contactEmail) validateSimple(el, emailPattern);
       else validateUkr(el);
     });
+
+    if (Captcha && Captcha.enabled() && !Captcha.solved('#turnstile-widget')) {
+      notifyError('Підтвердьте, що ви не робот, щоб надіслати звернення.');
+      return;
+    }
 
     if (form.checkValidity() === false) {
       form.classList.add('was-validated');
@@ -127,6 +156,7 @@
     for (var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
+    data['cf-turnstile-response'] = Captcha ? Captcha.token('#turnstile-widget') : '';
 
     fetch(form.action, {
       method: 'POST',
@@ -142,6 +172,8 @@
       for (var i = 0; i < groups.length; i++) {
         groups[i].classList.add('d-none');
       }
+      var localNotice = document.getElementById('notify-local-notice');
+      if (localNotice) localNotice.classList.add('d-none');
       form.querySelector('#notify-success').classList.remove('d-none');
       submitBtn.classList.add('d-none');
     })

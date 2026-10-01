@@ -160,6 +160,17 @@ jobs:
             echo "⚠️ STATS_API_TOKEN не задано — графік статистики не працюватиме"
           fi
 
+      - name: Enable Turnstile captcha
+        run: |
+          if [ -n "${{ secrets.TURNSTILE_SITEKEY }}" ]; then
+            sed -i "s/^turnstile_sitekey: .*/turnstile_sitekey: '${{ secrets.TURNSTILE_SITEKEY }}'/" _config.yml
+            echo "✅ Turnstile sitekey встановлено"
+          else
+            echo "⚠️ TURNSTILE_SITEKEY не задано — використовується sitekey з _config.yml"
+          fi
+          sed -i "s/^turnstile_enabled: .*/turnstile_enabled: true/" _config.yml
+          echo "✅ Turnstile captcha увімкнено для production"
+
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         # uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4

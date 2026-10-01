@@ -8,25 +8,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$turnstileToken = $_POST['cf-turnstile-response'] ?? '';
-if ($turnstileToken) {
-    $secret = getenv('TURNSTILE_SECRET_KEY') ?: '0x4AAAAAADf6HHL_uIYQWjdoKgygA8Ttv-U';
-    $verify = @file_get_contents('https://challenges.cloudflare.com/turnstile/v0/siteverify', false, stream_context_create([
-        'http' => [
-            'method' => 'POST',
-            'header' => 'Content-Type: application/x-www-form-urlencoded',
-            'content' => http_build_query([
-                'secret' => $secret,
-                'response' => $turnstileToken,
-            ]),
-        ],
-    ]));
-    $outcome = json_decode($verify, true);
-    if (!$outcome['success']) {
-        http_response_code(400);
-        echo json_encode(['success' => false, 'error' => 'Verification failed']);
-        exit;
-    }
+require_once __DIR__ . '/turnstile.php';
+
+list($turnstileError, $turnstileErrorCode) = verify_turnstile_request(
+    $_POST['cf-turnstile-response'] ?? '',
+    'add_property',
+    ['www.realestate.if.ua', 'realestate.if.ua']
+);
+if ($turnstileError !== null) {
+    http_response_code($turnstileErrorCode);
+    echo json_encode(['success' => false, 'error' => $turnstileError]);
+    exit;
 }
 
 $raw = $_POST['data'] ?? '';

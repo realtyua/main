@@ -9,27 +9,24 @@
 
   var currencyRates = formConfig.rates || { usd: 43.50, eur: 51.50, nbu: 43.2413 };
 
-  var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  var Captcha = window.CaptchaSite || null;
 
   function initTurnstile() {
-    if (isLocal) {
-      var notice = document.getElementById('local-notice');
-      if (notice) notice.style.display = 'block';
+    var notice = document.getElementById('local-notice');
+    if (!Captcha) return;
+    if (Captcha.isLocal()) {
+      if (notice) {
+        notice.textContent = 'Turnstile пропущено (локальний режим)';
+        notice.style.display = 'block';
+      }
       return;
     }
-    var widget = document.getElementById('turnstile-widget');
-    if (!widget || widget.hasChildNodes()) return;
-    if (typeof turnstile !== 'undefined') {
-      turnstile.render('#turnstile-widget', { sitekey: '0x4AAAAAADf6HF6IRoXXsCUb' });
-    }
-  }
-
-  function tryInitTurnstile() {
-    initTurnstile();
-    if (isLocal) return;
-    if (!document.getElementById('turnstile-widget') || !document.getElementById('turnstile-widget').hasChildNodes()) {
-      setTimeout(tryInitTurnstile, 300);
-    }
+    Captcha.mount('#turnstile-widget', 'add_property', function () {
+      if (notice) {
+        notice.textContent = 'Не вдалося завантажити перевірку. Спробуйте ще раз.';
+        notice.style.display = 'block';
+      }
+    });
   }
 
   document.addEventListener('alpine:init', function () {
@@ -339,37 +336,40 @@
           if (!this.validateAll()) return;
           this.submitting = true;
 
-          var formEl = document.getElementById('add-property-form');
-          var turnstileField = formEl ? formEl.querySelector('[name="cf-turnstile-response"]') : null;
-          var turnstileToken = turnstileField ? turnstileField.value : '';
+          var captchaCheck = window.CaptchaSite;
+          var turnstileToken = captchaCheck ? captchaCheck.token('#turnstile-widget') : '';
 
-          var payload = { data: this.data };
-
-          var formData = new FormData();
-          formData.append('data', JSON.stringify(this.data));
-          formData.append('cf-turnstile-response', turnstileToken);
-
-          fetch('/php/add-property.php', {
+          fetch('https://add-property-worker.sparkling-union-9e0a.workers.dev', {
             method: 'POST',
-            body: formData
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              'cf-turnstile-response': turnstileToken,
+              data: this.data
+            })
           })
-          .then(function (r) { return r.json(); })
+          .then(function (r) {
+            return r.json().then(function (res) {
+              return { ok: r.ok, body: res };
+            });
+          })
           .then(function (res) {
-            if (res.success) {
+            this.submitting = false;
+            if (res.body.success) {
               this.submitted = true;
-              this.submitting = false;
+            } else if (res.body.errors) {
+              this.errors = res.body.errors;
             } else {
-              this.submitting = false;
-              if (res.errors) this.errors = res.errors;
+              this.submittingError = true;
             }
           }.bind(this))
           .catch(function () {
             this.submitting = false;
+            this.submittingError = true;
           }.bind(this));
         }
       };
     });
   });
 
-  tryInitTurnstile();
+  initTurnstile();
 })();

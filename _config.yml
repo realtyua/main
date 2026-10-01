@@ -1,7 +1,7 @@
 baseurl: ''
 domain: realestate.if.ua
 url: 'https://www.realestate.if.ua'
-addre: 'https://add.realestate.if.ua'
+addre: '/new.html'
 
 encoding: UTF-8
 lang: uk_UA
@@ -13,6 +13,22 @@ region_slug: ivano-frankivska
 region_size: .89rem
 
 stats_api_token: ''
+
+# Cloudflare Turnstile. Прапорці для локальної розробки — captcha вимкнена.
+# CI (.github/workflows/main.yml) перезаписує turnstile_enabled у true перед production-збіркою.
+turnstile_enabled: false
+turnstile_sitekey: '0x4AAAAAAFK5oHx0Im_YJgMa'
+turnstile_action_add_property: 'add_property'
+turnstile_action_notify_property: 'notify_property'
+turnstile_language: 'uk-ua'
+turnstile_retry_interval: 8000
+turnstile_max_retries: 3
+turnstile_local_hosts: ['localhost', '127.0.0.1', '0.0.0.0', '::1']
+
+# Cloudflare Workers, які приймають форми (вхідний endpoint з Форми -> Worker).
+add_property_endpoint: 'https://add-property-worker.sparkling-union-9e0a.workers.dev'
+notify_endpoint: 'https://notify-worker.sparkling-union-9e0a.workers.dev'
+
 usd: 43.50
 eur: 51.50
 nbu: 43.2413
