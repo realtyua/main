@@ -56,14 +56,35 @@ async function verifyTurnstile(token, action, env) {
 
   // Cloudflare codes: invalid-input-secret (wrong secret), invalid-input-response
   // (token bad, expired or already used), missing-input-response, timeout-or-duplicate.
-  const cfErrors = outcome['error-codes'];
+  const cfErrors = Array.isArray(outcome['error-codes']) ? outcome['error-codes'] : [];
   if (!outcome.success) {
-    console.log('turnstile rejected', JSON.stringify({ action, hostname: outcome.hostname, errors: cfErrors || null }));
+    // Token length and prefix only: enough to tell an empty field, a stale
+    // token and a token issued for another sitekey apart, without logging the
+    // token itself.
+    const t = String(token);
+    console.log('turnstile rejected', JSON.stringify({
+      action,
+      tokenLen: t.length,
+      tokenHead: t.slice(0, 4),
+      hasDots: t.split('.').length === 3,
+      siteverifyHost: outcome.hostname || null,
+      errors: cfErrors.length ? cfErrors : null,
+    }));
+
+    // Cloudflare collapses several unrelated problems into
+    // invalid-input-response, so map them apart for the caller.
+    let code = 'E_CAPTCHA_INVALID';
+    if (cfErrors.indexOf('timeout-or-duplicate') !== -1) {
+      code = 'E_CAPTCHA_REUSED';
+    } else if (cfErrors.indexOf('invalid-input-response') !== -1) {
+      code = 'E_CAPTCHA_MALFORMED';
+    }
+
     return {
       ok: false,
       status: 400,
-      code: 'E_CAPTCHA_INVALID',
-      error: 'Captcha verification failed: ' + (Array.isArray(cfErrors) ? cfErrors.join(',') : 'unknown'),
+      code,
+      error: 'Captcha verification failed: ' + (cfErrors.length ? cfErrors.join(',') : 'unknown'),
     };
   }
   if (outcome.action !== action) {

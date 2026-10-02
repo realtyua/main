@@ -95,7 +95,9 @@
   var NOTIFY_ERROR_TEXTS = {
     E_CAPTCHA: 'Не вдалося перевірити, що ви не робот. Оновіть сторінку та спробуйте ще раз.',
     E_CAPTCHA_REQUIRED: 'Підтвердьте, що ви не робот, щоб надіслати звернення.',
-    E_CAPTCHA_INVALID: 'Перевірка captcha застаріла або була вже використана. Оновіть сторінку та спробуйте ще раз.',
+    E_CAPTCHA_INVALID: 'Перевірка captcha не пройдена. Оновіть сторінку та спробуйте ще раз.',
+    E_CAPTCHA_REUSED: 'Перевірка captcha вже була використана. Натисніть «Спробувати ще раз» і надішліть заново.',
+    E_CAPTCHA_MALFORMED: 'Перевірка captcha отримала некоректну відповідь. Оновіть сторінку та спробуйте ще раз.',
     E_CAPTCHA_ACTION: 'Перевірка captcha не пройдена. Оновіть сторінку та спробуйте ще раз.',
     E_CAPTCHA_HOSTNAME: 'Перевірка captcha не підтримує цей домен. Спробуйте з головної сторінки сайту.',
     E_CAPTCHA_UNAVAILABLE: 'Сервер тимчасово недоступний. Спробуйте ще раз пізніше.',
@@ -210,6 +212,12 @@
         .then(function (body) {
           if (!response.ok || !body || !body.success) {
             notifyError(notifyErrorText(body && body.code));
+            // A turnstile token is single-use, so a rejected one cannot be
+            // retried. Ask for a fresh token instead of looping on a dead one.
+            if (Captcha && body && String(body.code || '').indexOf('E_CAPTCHA') === 0) {
+              var retryNotice = document.getElementById('notify-captcha-retry');
+              if (retryNotice) retryNotice.classList.remove('d-none');
+            }
             throw new Error('Send failed');
           }
           return body;
