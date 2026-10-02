@@ -18,7 +18,7 @@ export default {
 
     const turnstile = await verifyTurnstile(data['cf-turnstile-response'], 'notify_property', env);
     if (!turnstile.ok) {
-      return jsonResponse({ success: false, error: turnstile.error, code: 'E_CAPTCHA' }, turnstile.status);
+      return jsonResponse({ success: false, error: turnstile.error, code: turnstile.code }, turnstile.status);
     }
 
     const spam = checkSpamTraps(data);

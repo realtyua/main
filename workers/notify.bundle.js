@@ -35,9 +35,11 @@ async function loadManifest(env) {
 
 async function verifyTurnstile(token, action, env) {
   const secret = env.TURNSTILE_SECRET_KEY;
-  if (!secret) return { ok: false, status: 500, error: 'Captcha verification unavailable' };
+  if (!secret) {
+    return { ok: false, status: 500, code: 'E_CAPTCHA_UNAVAILABLE', error: 'Captcha verification unavailable' };
+  }
   if (typeof token !== 'string' || token.trim() === '') {
-    return { ok: false, status: 400, error: 'Captcha required' };
+    return { ok: false, status: 400, code: 'E_CAPTCHA_REQUIRED', error: 'Captcha required' };
   }
 
   let outcome;
@@ -49,13 +51,28 @@ async function verifyTurnstile(token, action, env) {
     });
     outcome = await verify.json();
   } catch (err) {
-    return { ok: false, status: 502, error: 'Captcha service unavailable' };
+    return { ok: false, status: 502, code: 'E_CAPTCHA_UNAVAILABLE', error: 'Captcha service unavailable' };
   }
 
-  if (!outcome.success) return { ok: false, status: 400, error: 'Captcha verification failed' };
-  if (outcome.action !== action) return { ok: false, status: 400, error: 'Captcha action mismatch' };
+  // Cloudflare codes: invalid-input-secret (wrong secret), invalid-input-response
+  // (token bad, expired or already used), missing-input-response, timeout-or-duplicate.
+  const cfErrors = outcome['error-codes'];
+  if (!outcome.success) {
+    console.log('turnstile rejected', JSON.stringify({ action, hostname: outcome.hostname, errors: cfErrors || null }));
+    return {
+      ok: false,
+      status: 400,
+      code: 'E_CAPTCHA_INVALID',
+      error: 'Captcha verification failed: ' + (Array.isArray(cfErrors) ? cfErrors.join(',') : 'unknown'),
+    };
+  }
+  if (outcome.action !== action) {
+    console.log('turnstile action mismatch', JSON.stringify({ expected: action, got: outcome.action }));
+    return { ok: false, status: 400, code: 'E_CAPTCHA_ACTION', error: 'Captcha action mismatch' };
+  }
   if (ALLOWED_HOSTNAMES.indexOf(outcome.hostname) === -1) {
-    return { ok: false, status: 400, error: 'Captcha hostname mismatch' };
+    console.log('turnstile hostname mismatch', JSON.stringify({ got: outcome.hostname, allowed: ALLOWED_HOSTNAMES }));
+    return { ok: false, status: 400, code: 'E_CAPTCHA_HOSTNAME', error: 'Captcha hostname mismatch' };
   }
   return { ok: true };
 }
@@ -101,7 +118,7 @@ export default {
 
     const turnstile = await verifyTurnstile(data['cf-turnstile-response'], 'notify_property', env);
     if (!turnstile.ok) {
-      return jsonResponse({ success: false, error: turnstile.error, code: 'E_CAPTCHA' }, turnstile.status);
+      return jsonResponse({ success: false, error: turnstile.error, code: turnstile.code }, turnstile.status);
     }
 
     const spam = checkSpamTraps(data);

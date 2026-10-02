@@ -73,7 +73,7 @@ export default {
 
     const turnstile = await verifyTurnstile(payload.token, 'add_property', env);
     if (!turnstile.ok) {
-      return jsonResponse({ success: false, error: turnstile.error, code: 'E_CAPTCHA' }, turnstile.status);
+      return jsonResponse({ success: false, error: turnstile.error, code: turnstile.code }, turnstile.status);
     }
 
     const data = payload.data;
