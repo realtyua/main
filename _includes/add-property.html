@@ -313,10 +313,6 @@
       return;
     }
     if (notice) notice.style.display = 'none';
-    if (typeof window.turnstile === 'undefined' && retry < 10) {
-      setTimeout(function () { initTurnstile(retry + 1); }, 250);
-      return;
-    }
     try {
       Captcha.mount('#turnstile-widget', {{ site.turnstile_action_add_property | default: 'add_property' | jsonify }}, function () {
         if (retry < 2) {
@@ -2479,7 +2475,7 @@ notice.textContent = 'Підтвердьте, що ви не робот, щоб 
       };
 
       FormEngine.mixInto(app, formConfig);
-      initTurnstile(0);
+      setTimeout(function(){ initTurnstile(0); }, 50);
       return app;
     });
   });
