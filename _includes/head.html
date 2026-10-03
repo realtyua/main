@@ -168,6 +168,6 @@
 </script>
 <script src="{{ '/assets/js/captcha.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 {%- if site.turnstile_enabled %}
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 {%- endif -%}
 {%- include analytics-google.html -%}

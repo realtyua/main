@@ -126,11 +126,7 @@
         poll(state);
       }
     };
-    if (typeof window.turnstile.ready === 'function') {
-      window.turnstile.ready(renderFn);
-    } else {
-      renderFn();
-    }
+    renderFn();
   }
 
   function poll(state, action) {
