@@ -130,10 +130,21 @@
     if (localNotice) localNotice.classList.add('d-none');
     var retryNotice = document.getElementById('notify-captcha-retry');
     if (retryNotice) retryNotice.classList.add('d-none');
-    Captcha.mount('#turnstile-widget', 'notify_property', function () {
-      notifyError('Не вдалося завантажити перевірку.');
-      if (retryNotice) retryNotice.classList.remove('d-none');
-    });
+    var mounted = false;
+    try {
+      Captcha.mount('#turnstile-widget', 'notify_property', function () {
+        if (!mounted) {
+          mounted = true;
+          setTimeout(mountNotifyCaptcha, 700);
+          return;
+        }
+        if (retryNotice) retryNotice.classList.remove('d-none');
+        notifyError('Не вдалося завантажити перевірку.');
+      });
+      mounted = true;
+    } catch (e) {
+      setTimeout(mountNotifyCaptcha, 700);
+    }
   }
 
   // Bootstrap 4 викликає події модалки через jQuery.trigger(), який не

@@ -268,7 +268,7 @@
         </div>
 
         <div class="mt-4">
-          <div id="turnstile-widget" class="mb-3" x-show="!submitted"></div>
+          <div id="turnstile-widget" class="mb-3" style="min-height: 65px;" x-show="!submitted"></div>
           <div class="alert alert-info mb-3" style="display:none" id="local-notice"></div>
         </div>
 
@@ -301,19 +301,35 @@
     }
   }
 
-  function initTurnstile() {
+  function initTurnstile(retry) {
+    retry = retry || 0;
     var notice = document.getElementById('local-notice');
     if (!Captcha) return;
     if (Captcha.isLocal()) {
       if (notice) {
-        notice.textContent = 'Turnstile пропущено (локальний режим)';
+notice.textContent = 'Turnstile пропущено (локальний режим)';
         notice.style.display = 'block';
       }
       return;
     }
     if (notice) notice.style.display = 'none';
-    Captcha.mount('#turnstile-widget', {{ site.turnstile_action_add_property | default: 'add_property' | jsonify }}, showCaptchaError);
+    try {
+      Captcha.mount('#turnstile-widget', {{ site.turnstile_action_add_property | default: 'add_property' | jsonify }}, function () {
+        if (retry < 2) {
+          setTimeout(function () { initTurnstile(retry + 1); }, 700);
+          return;
+        }
+        if (typeof showCaptchaError === 'function') showCaptchaError();
+      });
+    } catch (e) {
+      if (retry < 2) {
+        setTimeout(function () { initTurnstile(retry + 1); }, 700);
+        return;
+      }
+      if (typeof showCaptchaError === 'function') showCaptchaError();
+    }
   }
+
 
   document.addEventListener('alpine:init', function () {
     Alpine.data('formApp', function () {
@@ -2418,7 +2434,7 @@
             this.step = this.totalSteps;
             var notice = document.getElementById('local-notice');
             if (notice) {
-              notice.textContent = 'Підтвердьте, що ви не робот, щоб надіслати оголошення.';
+notice.textContent = 'Підтвердьте, що ви не робот, щоб надіслати оголошення.';
               notice.style.display = 'block';
             }
             return;

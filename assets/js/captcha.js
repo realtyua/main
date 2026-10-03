@@ -118,11 +118,18 @@
     if (action) options.action = action;
 
     state.rendered = true;
-    try {
-      window.turnstile.render(state.selector, options);
-    } catch (err) {
-      state.rendered = false;
-      poll(state);
+    var renderFn = function () {
+      try {
+        window.turnstile.render(state.selector, options);
+      } catch (err) {
+        state.rendered = false;
+        poll(state);
+      }
+    };
+    if (typeof window.turnstile.ready === 'function') {
+      window.turnstile.ready(renderFn);
+    } else {
+      renderFn();
     }
   }
 
