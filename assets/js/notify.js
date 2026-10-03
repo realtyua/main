@@ -130,6 +130,10 @@
     if (localNotice) localNotice.classList.add('d-none');
     var retryNotice = document.getElementById('notify-captcha-retry');
     if (retryNotice) retryNotice.classList.add('d-none');
+    if (typeof window.turnstile === 'undefined') {
+      setTimeout(mountNotifyCaptcha, 250);
+      return;
+    }
     var mounted = false;
     try {
       Captcha.mount('#turnstile-widget', 'notify_property', function () {

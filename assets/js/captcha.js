@@ -126,6 +126,10 @@
         poll(state);
       }
     };
+    if (typeof window.turnstile === 'undefined') {
+      setTimeout(renderFn, 200);
+      return;
+    }
     renderFn();
   }
 

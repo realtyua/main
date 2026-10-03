@@ -296,7 +296,7 @@
     var retry = document.getElementById('captcha-retry');
     if (retry) {
       retry.addEventListener('click', function () {
-        initTurnstile();
+        initTurnstile(0);
       });
     }
   }
@@ -307,12 +307,16 @@
     if (!Captcha) return;
     if (Captcha.isLocal()) {
       if (notice) {
-notice.textContent = 'Turnstile пропущено (локальний режим)';
+        notice.textContent = 'Turnstile пропущено (локальний режим)';
         notice.style.display = 'block';
       }
       return;
     }
     if (notice) notice.style.display = 'none';
+    if (typeof window.turnstile === 'undefined' && retry < 4) {
+      setTimeout(function () { initTurnstile(retry + 1); }, 250);
+      return;
+    }
     try {
       Captcha.mount('#turnstile-widget', {{ site.turnstile_action_add_property | default: 'add_property' | jsonify }}, function () {
         if (retry < 2) {
@@ -2479,6 +2483,6 @@ notice.textContent = 'Підтвердьте, що ви не робот, щоб 
     });
   });
 
-  initTurnstile();
+  initTurnstile(0);
 })();
 </script>
