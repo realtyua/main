@@ -313,7 +313,7 @@
       return;
     }
     if (notice) notice.style.display = 'none';
-    if (typeof window.turnstile === 'undefined' && retry < 4) {
+    if (typeof window.turnstile === 'undefined' && retry < 10) {
       setTimeout(function () { initTurnstile(retry + 1); }, 250);
       return;
     }
@@ -2479,10 +2479,8 @@ notice.textContent = 'Підтвердьте, що ви не робот, щоб 
       };
 
       FormEngine.mixInto(app, formConfig);
+      initTurnstile(0);
       return app;
     });
   });
-
-  initTurnstile(0);
-})();
 </script>
