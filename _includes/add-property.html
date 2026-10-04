@@ -494,25 +494,63 @@
           }
         },
 
+        /* Turnstile не повідомляє про помилку, коли його iframe не стартував
+           (заблокований запит, проксі, відсутність IPv6): error-callback не
+           приходить, тож ані captchaFail(), ані ретраї не запускаються.
+           Контейнер без iframe і без токена вважаємо збоєм: спершу
+           перезапускаємо віджет через resetCaptcha(), а якщо й це не
+           допомогло — показуємо warning із кнопкою «Спробувати ще раз». */
+        _captchaStallTicks: 60,
+        _captchaStallRetryTicks: 30,
+
+        _captchaStalled: function (field) {
+          var container = document.querySelector(this.captchaSelector(field.name));
+          if (!container) return false;
+          /* iframe є — віджет живий, просто користувач не натиснув перевірку. */
+          if (container.querySelector('iframe')) return false;
+          return !this.captchaSolved(field.name);
+        },
+
         _watchCaptchaToken: function (field) {
           var self = this;
           var key = '_captchaTimer_' + field.name;
           if (this[key]) return;
           var ticks = 0;
+          var stallTicks = field._captchaStallAttempt ? this._captchaStallRetryTicks : this._captchaStallTicks;
+          var stop = function () {
+            clearInterval(self[key]);
+            /* mergeProxies в Alpine не дає видалити ключ, тому обнуляємо
+               таймер — інакше наступний _watchCaptchaToken() зробить
+               early return і watchdog більше не спрацює. */
+            self[key] = 0;
+          };
           this[key] = setInterval(function () {
             ticks++;
             if (self.submitted || ticks > 240) {
-              clearInterval(self[key]);
-              delete self[key];
+              stop();
               return;
             }
-            if (!self.captchaSolved(field.name)) return;
-            clearInterval(self[key]);
-            delete self[key];
-            if (self.errors[field.name]) {
-              delete self.errors[field.name];
-              self.errors = Object.assign({}, self.errors);
+            if (self.captchaSolved(field.name)) {
+              stop();
+              field._captchaStallAttempt = 0;
+              if (self.errors[field.name]) {
+                delete self.errors[field.name];
+                self.errors = Object.assign({}, self.errors);
+              }
+              return;
             }
+            if (ticks < stallTicks || !self._captchaStalled(field)) return;
+            stop();
+            /* Після resetCaptcha() віджет піднімається заново і сам re-arm-ить
+               watchdog з коротшим вікном. */
+            if (field._captchaStallAttempt) {
+              field._captchaStallAttempt = 0;
+              self.captchaUnavailable[field.name] = true;
+              return;
+            }
+            field._captchaStallAttempt = 1;
+            self.resetCaptcha();
+            if (!self[key]) self._watchCaptchaToken(field);
           }, 500);
         },
 
@@ -529,6 +567,8 @@
                 self.captchaFail(field, 0);
               });
             } catch (e) {}
+            /* Новий токен очікуємо заново, тож перезапускаємо і watchdog. */
+            this._watchCaptchaToken(field);
           }
         },
 
@@ -2468,6 +2508,13 @@
         showSubmitError: function (code) {
           var texts = {
             E_CAPTCHA: '{{ site.data.uk.add_property_error_captcha | escape }}',
+            E_CAPTCHA_REQUIRED: '{{ site.data.uk.add_property_error_captcha_required | escape }}',
+            E_CAPTCHA_REUSED: '{{ site.data.uk.add_property_error_captcha_reused | escape }}',
+            E_CAPTCHA_INVALID: '{{ site.data.uk.add_property_error_captcha_failed | escape }}',
+            E_CAPTCHA_MALFORMED: '{{ site.data.uk.add_property_error_captcha_failed | escape }}',
+            E_CAPTCHA_ACTION: '{{ site.data.uk.add_property_error_captcha_failed | escape }}',
+            E_CAPTCHA_HOSTNAME: '{{ site.data.uk.add_property_error_captcha_failed | escape }}',
+            E_CAPTCHA_UNAVAILABLE: '{{ site.data.uk.add_property_error_captcha_failed | escape }}',
             E_CONTENT_TOO_LARGE: '{{ site.data.uk.add_property_error_photos_large | escape }}',
             E_TOO_MANY_ATTACHMENTS: '{{ site.data.uk.add_property_error_photos_many | escape }}',
             E_ATTACHMENT_TYPE_INVALID: '{{ site.data.uk.add_property_error_photos_invalid | escape }}',

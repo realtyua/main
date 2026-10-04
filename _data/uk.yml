@@ -275,6 +275,9 @@ add_property_success_text: Дякуємо! Ваше оголошення отр�
 add_property_error_title: Не вдалося надіслати оголошення
 add_property_error_generic: Виникла несподівана помилка. Спробуйте ще раз.
 add_property_error_captcha: Не вдалося перевірити, що ви не робот. Оновіть сторінку та спробуйте ще раз.
+add_property_error_captcha_required: Підтвердьте, що ви не робот, щоб надіслати оголошення.
+add_property_error_captcha_reused: Перевірка captcha вже була використана. Підтвердьте її ще раз і надішліть оголошення заново.
+add_property_error_captcha_failed: Не вдалося перевірити, що ви не робот. Спробуйте ще раз.
 add_property_error_photos_large: Фото завеликі, щоб надіслати лист. Приклейте менше фото або спробуйте ще раз.
 add_property_error_photos_invalid: Фото мають некоректний формат. Приклейте фото у форматі JPG або PNG.
 add_property_error_photos_many: Забагато фото. Можна приклеїти не більше 4.
