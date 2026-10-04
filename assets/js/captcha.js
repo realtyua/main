@@ -44,6 +44,15 @@
     return field && field.value ? field.value : '';
   }
 
+  // Вигляд віджета задає поле у _data/add-property.yml (theme/size/appearance),
+  // а не глобальний конфіг: одна сторінка може мати кілька captcha-полів.
+  function dataOption(state, key) {
+    var el = state && state.container;
+    if (!el || typeof el.getAttribute !== 'function') return '';
+    var value = el.getAttribute('data-captcha-' + key);
+    return value ? String(value).trim() : '';
+  }
+
   var instances = {};
 
   function clearTimer(state) {
@@ -116,6 +125,13 @@
       }
     };
     if (action) options.action = action;
+
+    /* Без явного theme Turnstile бере 'auto' і підлаштовується під системну
+       тему браузера, тож світлий сайт отримує темний віджет. */
+    ['theme', 'size', 'appearance'].forEach(function (key) {
+      var value = dataOption(state, key) || cfg(key);
+      if (value) options[key] = value;
+    });
 
     state.rendered = true;
     var renderFn = function () {

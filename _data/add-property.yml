@@ -812,28 +812,28 @@ steps:
                         label: Область
                         placeholder: Введіть назву області...
                         required: true
-                        message: Виберіть область
+                        #message: Оберіть область
                         mode: auto
                         threshold: 15
                         minChars: 2
                         maxResults: 6
                         pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
-                        #value:
-                        #  default:
-                        #    value: ["0342"]
-                        #    readonly: true
+                        value:
+                          default:
+                            value: ["0342"]
+                            readonly: true
                         feedback:
                           valid: Виглядає наче у полі Область все добре!
                           invalid: Будь ласка, заповніть це поле дійсними даними
                           pattern: Тільки українські літери
-                        helper: Виберіть область у списку
+                        helper: Оберіть область у списку
                       - name: raion
                         parent: oblast
                         children: hromadas
                         label: Район
-                        placeholder: Виберіть район...
+                        placeholder: Оберіть район...
                         required: true
-                        message: Виберіть район
+                        #message: Оберіть район
                         mode: auto
                         threshold: 6
                         minChars: 2
@@ -843,14 +843,14 @@ steps:
                           valid: Виглядає наче у полі Район все добре!
                           invalid: Будь ласка, заповніть це поле дійсними даними
                           pattern: Тільки українські літери
-                        helper: Виберіть район у списку
+                        helper: Оберіть район у списку
                       - name: hromada
                         parent: raion
                         children: settlements
                         label: Територіальна громада
-                        placeholder: Введіть назву громади...
+                        placeholder: Оберіть назву громади...
                         required: true
-                        message: Виберіть громаду
+                        message: Оберіть громаду
                         mode: auto
                         threshold: 6
                         minChars: 2
@@ -905,7 +905,8 @@ steps:
                       required: Виберіть район населеного пункту
                     depends:
                       - field: location_widget.settlement
-                        values: ["30595","30559"]
+                        #values: ["30595","30559"]
+                        values: ["30595"]
                     helper: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов'язковим
 
               - class: row
@@ -1023,37 +1024,37 @@ steps:
                     autocomplete: "off"
                     col: col-12 col-md-3
 
-              - class: row
-                fields:
-                  - name: is_metro
-                    type: checkbox
-                    label: Неподалік об'єкта нерухомості станція метро
-                    required: false
-                    depends:
-                      - field: location_widget.settlement
-                        values: ["30595"]
+              #- class: row
+              #  fields:
+              #    - name: is_metro
+              #      type: checkbox
+              #      label: Неподалік об'єкта нерухомості станція метро
+              #      required: false
+              #      depends:
+              #        - field: location_widget.settlement
+              #          values: ["30595"]
 
-              - class: row
-                fields:
-                  - name: metro
-                    type: autocomplete
-                    label: Станція метро
-                    placeholder: Введіть назву cтанції метро...
-                    data: /assets/data/districts.json
-                    mode: search
-                    threshold: 10
-                    minChars: 3
-                    required: true
-                    validation:
-                      required: Виберіть станцію метро
-                      message: Будь ласка, заповніть це поле
-                    depends:
-                      - field: is_metro
-                        values: [true]
-                        logic: and
-                      - field: location_widget.settlement
-                        values: ["30595"]
-                    helper: Введіть перші три українські літери у назві станції і виберіть станцію метро
+              # - class: row
+              #   fields:
+              #     - name: metro
+              #       type: autocomplete
+              #       label: Станція метро
+              #       placeholder: Введіть назву cтанції метро...
+              #       data: /assets/data/districts.json
+              #       mode: search
+              #       threshold: 10
+              #       minChars: 3
+              #       required: true
+              #       validation:
+              #         required: Виберіть станцію метро
+              #         message: Будь ласка, заповніть це поле
+              #       depends:
+              #         - field: is_metro
+              #           values: [true]
+              #           logic: and
+              #         - field: location_widget.settlement
+              #           values: ["30595"]
+              #       helper: Введіть перші три українські літери у назві станції і виберіть станцію метро
 
               - class: row
                 fields:

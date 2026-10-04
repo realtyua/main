@@ -11,6 +11,9 @@
          class="captcha-widget-box"
          tabindex="-1"
          data-captcha-field="{{ f.name }}"
+         {%- if f.theme %} data-captcha-theme="{{ f.theme }}"{% endif %}
+         {%- if f.size %} data-captcha-size="{{ f.size }}"{% endif %}
+         {%- if f.appearance %} data-captcha-appearance="{{ f.appearance }}"{% endif %}
          x-show="!submitted"></div>
     <div class="alert alert-info mt-2 mb-0 py-2" x-show="isLocalCaptcha()" x-cloak>
       <small>Turnstile пропущено (локальний режим)</small>
