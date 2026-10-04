@@ -1063,7 +1063,7 @@ steps:
                     widget: map
                     label:
                       text: Мапа населених пунктів України
-                    required: true
+                    required: false
                     center: [48.632359, 31.252051]
                     zoom: 5
                     value:
