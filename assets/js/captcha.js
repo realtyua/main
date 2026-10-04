@@ -215,6 +215,44 @@
     if (container && container.id) delete instances[container.id];
   }
 
+  function reset(selector, action, onError) {
+    var container = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!container) return false;
+    if (isLocal()) return true;
+
+    var state = container.id ? instances[container.id] : null;
+    var wantedAction = action || (state && state.action) || '';
+
+    if (!state) {
+      // Стану ще немає — створюємо одразу з action, інакше повторний рендер
+      // піде без нього і сервер відхилить токен через E_CAPTCHA_ACTION.
+      return !!mount(selector, wantedAction, onError);
+    }
+    if (state.dead) {
+      // Померлий інстанс mount() піднімає сам і перерендерить з action.
+      mount(selector, wantedAction, onError);
+      return true;
+    }
+
+    state.solved = false;
+    state.attempts = 0;
+    state.errorCode = null;
+    clearTimer(state);
+    clearPoll(state);
+    if (state.rendered && typeof window.turnstile !== 'undefined') {
+      try {
+        window.turnstile.reset(state.selector);
+        return true;
+      } catch (err) {
+        /* віджет зник — перерендеримо нижче */
+      }
+    }
+    state.rendered = false;
+    container.innerHTML = '';
+    poll(state, wantedAction);
+    return true;
+  }
+
   function solved(selector) {
     var container = typeof selector === 'string' ? document.querySelector(selector) : selector;
     if (isLocal()) return true;
@@ -227,6 +265,7 @@
     isLocal: isLocal,
     mount: mount,
     unmount: unmount,
+    reset: reset,
     solved: solved,
     token: tokenOf,
     selectorOf: function (selector) {

@@ -143,6 +143,15 @@
     return false;
   }
 
+  function captchaSelector(f) {
+    if (!f) return null;
+    return '#' + (f.element_id || f.name) + '-widget';
+  }
+
+  function isWidget(field, name) {
+    return field && field.type === 'widgets' && field.widget === name;
+  }
+
   function createBase(config) {
     buildCache(config);
 
@@ -157,6 +166,24 @@
       getField: function (name) { return getField(name); },
 
       getStepFields: function (step) { return getStepFields(step); },
+
+      captchaSelector: function (fieldName) { return captchaSelector(getField(fieldName)); },
+
+      captchaSolved: function (fieldName) {
+        var selector = captchaSelector(getField(fieldName));
+        if (!selector) return true;
+        if (typeof document !== 'undefined' && !document.querySelector(selector)) return true;
+        var captcha = window.CaptchaSite;
+        if (!captcha) return false;
+        return !!captcha.solved(selector);
+      },
+
+      captchaToken: function (fieldName) {
+        var selector = captchaSelector(getField(fieldName));
+        if (!selector) return '';
+        var captcha = window.CaptchaSite;
+        return captcha ? (captcha.token(selector) || '') : '';
+      },
 
       validateField: function (fieldName) {
         if (this._validatingStack && this._validatingStack.indexOf(fieldName) !== -1) return;
@@ -274,16 +301,19 @@
       getFieldErrors: function (f) {
         if (!this.isFieldVisible(f.name)) return null;
         var val = this.data[f.name];
-        var isMapWidget = f.type === 'widgets' && f.widget === 'map';
+        var isMapWidget = isWidget(f, 'map');
+        var isCaptchaWidget = isWidget(f, 'captcha');
         if (isMapWidget) val = this.data.lat || '';
+        if (isCaptchaWidget) val = this.captchaSolved(f.name) ? '1' : '';
         if (this.isFieldRequired(f.name)) {
           var empty = f.type === 'file'
             ? !(this.files && this.files[f.name] && this.files[f.name].length)
             : isMapWidget ? !this.data.lat
             : val === '' || val === null || val === undefined || val === false || (Array.isArray(val) && val.length === 0);
-          var defMsg = f.type === 'checkbox' ? "Підтвердіть згоду" : f.type === 'checkbox_group' ? "Оберіть хоча б один варіант" : f.type === 'file' ? "Виберіть хоча б один файл" : isMapWidget ? "Поставте маркер на карті" : "Це поле обов'язкове";
+          var defMsg = f.type === 'checkbox' ? "Підтвердіть згоду" : f.type === 'checkbox_group' ? "Оберіть хоча б один варіант" : f.type === 'file' ? "Виберіть хоча б один файл" : isMapWidget ? "Поставте маркер на карті" : isCaptchaWidget ? "Підтвердьте, що ви не робот" : "Це поле обов'язкове";
           if (empty) return this.getValidationMsg(f, 'required', 'required', defMsg);
         }
+        if (isCaptchaWidget) return null;
         if (val === '' || val === null || val === undefined) {
           if (f.type !== 'file') return null;
         }

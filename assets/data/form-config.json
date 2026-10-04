@@ -4,6 +4,7 @@ sitemap: false
 ---
 {%- assign fieldList = "" | split: "," -%}
 {%- assign locWidget = nil -%}
+{%- assign captchaWidget = nil -%}
 {%- for step in site.data.add-property.steps -%}
   {%- for row in step.rows -%}
     {%- for col in row.cols -%}
@@ -13,6 +14,8 @@ sitemap: false
             {%- assign fieldList = fieldList | push: field -%}
           {%- elsif field.widget == 'location' -%}
             {%- assign locWidget = field -%}
+          {%- elsif field.widget == 'captcha' -%}
+            {%- assign captchaWidget = field -%}
           {%- endif -%}
         {%- endfor -%}
       {%- endfor -%}
@@ -23,5 +26,6 @@ sitemap: false
   "fields": {{ fieldList | jsonify }},
   "location": {{ locWidget.fields | jsonify }},
   "locationWidget": "{{ locWidget.name }}",
+  "captcha": {{ captchaWidget | jsonify }},
   "settings": {{ site.data.add-property.settings | jsonify }}
 }

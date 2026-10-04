@@ -421,6 +421,7 @@ function buildSubmissionBody(manifest, data) {
 // ===== workers/add-property-worker.js =====
 const MAX_PHOTOS = 4;
 const MAX_TOTAL_BYTES = 2 * 1024 * 1024;
+const DEFAULT_CAPTCHA_ACTION = 'add_property';
 
 async function readPayload(request) {
   const contentType = (request.headers.get('content-type') || '').toLowerCase();
@@ -489,7 +490,17 @@ export default {
       return jsonResponse({ success: false, error: 'Invalid data', code: 'E_INVALID_PAYLOAD' }, 400);
     }
 
-    const turnstile = await verifyTurnstile(payload.token, 'add_property', env);
+    const site = siteHostname(request);
+    const manifest = await loadManifest(env);
+    if (!manifest || !Array.isArray(manifest.fields) || manifest.fields.length === 0) {
+      return jsonResponse({ success: false, error: 'Form configuration not found', code: 'E_CONFIG_MISSING' }, 500);
+    }
+
+    // Action captcha приїжджає з конфігурації форми (_data/add-property.yml).
+    const captchaCfg = manifest.captcha || {};
+    const captchaAction = captchaCfg.action || DEFAULT_CAPTCHA_ACTION;
+
+    const turnstile = await verifyTurnstile(payload.token, captchaAction, env);
     if (!turnstile.ok) {
       return jsonResponse({ success: false, error: turnstile.error, code: turnstile.code }, turnstile.status);
     }
@@ -507,12 +518,6 @@ export default {
       );
     }
     const attachments = photoResult.attachments;
-
-    const site = siteHostname(request);
-    const manifest = await loadManifest(env);
-    if (!manifest || !Array.isArray(manifest.fields) || manifest.fields.length === 0) {
-      return jsonResponse({ success: false, error: 'Form configuration not found', code: 'E_CONFIG_MISSING' }, 500);
-    }
 
     const { errors } = validateManifest(manifest, data);
     if (errors && Object.keys(errors).length) {

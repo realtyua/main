@@ -10,9 +10,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require_once __DIR__ . '/turnstile.php';
 
+$manifestPath = __DIR__ . '/../assets/data/form-config.json';
+$manifest = [];
+if (is_file($manifestPath)) {
+    $manifest = json_decode(@file_get_contents($manifestPath), true);
+}
+if (!is_array($manifest)) $manifest = [];
+$captchaConfig = isset($manifest['captcha']) && is_array($manifest['captcha']) ? $manifest['captcha'] : [];
+$captchaTokenField = isset($captchaConfig['token']) && is_string($captchaConfig['token']) && $captchaConfig['token'] !== ''
+    ? $captchaConfig['token']
+    : 'cf-turnstile-response';
+// Action captcha приїжджає з конфігурації форми (_data/add-property.yml).
+$captchaAction = isset($captchaConfig['action']) && is_string($captchaConfig['action']) && $captchaConfig['action'] !== ''
+    ? $captchaConfig['action']
+    : 'add_property';
+
 list($turnstileError, $turnstileErrorCode) = verify_turnstile_request(
-    $_POST['cf-turnstile-response'] ?? '',
-    'add_property',
+    $_POST[$captchaTokenField] ?? '',
+    $captchaAction,
     ['www.realestate.if.ua', 'realestate.if.ua']
 );
 if ($turnstileError !== null) {
@@ -245,12 +260,6 @@ function carriesData($field) {
     return !in_array($type, $skip, true);
 }
 
-$manifestPath = __DIR__ . '/../assets/data/form-config.json';
-$manifest = [];
-if (is_file($manifestPath)) {
-    $manifest = json_decode(@file_get_contents($manifestPath), true);
-}
-if (!is_array($manifest)) $manifest = [];
 $fields = isset($manifest['fields']) && is_array($manifest['fields']) ? $manifest['fields'] : [];
 $locationRaw = isset($manifest['location']) && is_array($manifest['location']) ? $manifest['location'] : [];
 $location = [];

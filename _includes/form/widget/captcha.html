@@ -1,0 +1,26 @@
+{% assign f = include.field %}
+{% assign deps = f.depends | jsonify | replace: '"', "'" | replace: '&gt;', '>' | replace: '&lt;', '<' %}
+<div class="{{ f.class | default: 'col-12' }}"
+     {% if f.depends %}x-show="evaluateDepends({{ deps }})"{% endif %}>
+  <div class="captcha-widget mb-3"
+       :class="errors['{{ f.name }}'] ? 'border-danger' : ''">
+    {% if f.label %}
+    <div class="mb-2" id="label_{{ f.name }}">{% include form/label.html field=f %}{% if f.required %} <span class="text-danger" :class="requiredMeta('{{ f.name }}', 'class')" x-show="isFieldRequired('{{ f.name }}')" :title="requiredMeta('{{ f.name }}', 'tooltip') || undefined"><span x-html="requiredMeta('{{ f.name }}', 'marker', '*')"></span></span>{% endif %}</div>
+    {% endif %}
+    <div id="{{ f.element_id | default: f.name }}-widget"
+         class="captcha-widget-box"
+         tabindex="-1"
+         data-captcha-field="{{ f.name }}"
+         x-show="!submitted"></div>
+    <div class="alert alert-info mt-2 mb-0 py-2" x-show="isLocalCaptcha()" x-cloak>
+      <small>Turnstile пропущено (локальний режим)</small>
+    </div>
+    <div class="alert alert-warning mt-2 mb-0 py-2" x-show="isCaptchaUnavailable('{{ f.name }}')" x-cloak>
+      <small>Не вдалося завантажити перевірку.
+        <button type="button" class="btn btn-link btn-sm p-0 align-baseline" @click="resetCaptcha()">Спробувати ще раз</button>
+      </small>
+    </div>
+    {% if f.helper %}<small class="form-text text-muted mt-1 d-block">{{ f.helper }}</small>{% endif %}
+    <div class="invalid-feedback" style="display: block" x-show="errors['{{ f.name }}']"><span x-text="errors['{{ f.name }}']"></span></div>
+  </div>
+</div>

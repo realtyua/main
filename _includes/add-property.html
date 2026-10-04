@@ -268,7 +268,6 @@
         </div>
 
         <div class="mt-4">
-          <div id="turnstile-widget" class="mb-3" style="min-height: 65px;" x-show="!submitted"></div>
           <div class="alert alert-info mb-3" style="display:none" id="local-notice"></div>
         </div>
 
@@ -286,49 +285,6 @@
   var formConfig;
   try { formConfig = JSON.parse(configEl.textContent); } catch (e) { return; }
   var currencyRates = formConfig.rates || { usd: 43.50, eur: 51.50, nbu: 43.2413 };
-  var Captcha = window.CaptchaSite || null;
-
-  function showCaptchaError() {
-    var notice = document.getElementById('local-notice');
-    if (!notice) return;
-    notice.innerHTML = 'Не вдалося завантажити перевірку. <button type="button" id="captcha-retry" class="btn btn-link btn-sm p-0 align-baseline">Спробувати ще раз</button>';
-    notice.style.display = 'block';
-    var retry = document.getElementById('captcha-retry');
-    if (retry) {
-      retry.addEventListener('click', function () {
-        initTurnstile(0);
-      });
-    }
-  }
-
-  function initTurnstile(retry) {
-    retry = retry || 0;
-    var notice = document.getElementById('local-notice');
-    if (!Captcha) return;
-    if (Captcha.isLocal()) {
-      if (notice) {
-        notice.textContent = 'Turnstile пропущено (локальний режим)';
-        notice.style.display = 'block';
-      }
-      return;
-    }
-    if (notice) notice.style.display = 'none';
-    try {
-      Captcha.mount('#turnstile-widget', {{ site.turnstile_action_add_property | default: 'add_property' | jsonify }}, function () {
-        if (retry < 2) {
-          setTimeout(function () { initTurnstile(retry + 1); }, 700);
-          return;
-        }
-        if (typeof showCaptchaError === 'function') showCaptchaError();
-      });
-    } catch (e) {
-      if (retry < 2) {
-        setTimeout(function () { initTurnstile(retry + 1); }, 700);
-        return;
-      }
-      if (typeof showCaptchaError === 'function') showCaptchaError();
-    }
-  }
 
 
   document.addEventListener('alpine:init', function () {
@@ -388,7 +344,7 @@
         submittingErrorTitle: '',
         submittingErrorText: '',
         submittingErrorCode: '',
-        turnstileToken: '',
+        captchaUnavailable: {},
 
         addressData: [],
         addressIndex: [],
@@ -446,6 +402,9 @@
             if (cur && FormEngine.hasWidget(cur, 'map')) {
               self.$nextTick(function () { self.initMap(); });
             }
+            if (cur && FormEngine.hasWidget(cur, 'captcha')) {
+              self.$nextTick(function () { self.initCaptchaWidgets(); });
+            }
           });
           var mapField = self._mapFieldName();
           if (mapField) {
@@ -459,6 +418,117 @@
                 self.$nextTick(function () { self._centerMapOnSettlement(); });
               });
             });
+          }
+        },
+
+        getCaptchaWidgets: function () {
+          var list = [];
+          var steps = (this.config && this.config.steps) || [];
+          for (var s = 0; s < steps.length; s++) {
+            var fields = FormEngine.getStepFields(steps[s]);
+            for (var f = 0; f < fields.length; f++) {
+              if (fields[f].type === 'widgets' && fields[f].widget === 'captcha') list.push(fields[f]);
+            }
+          }
+          return list;
+        },
+
+        isLocalCaptcha: function () {
+          var captcha = window.CaptchaSite;
+          return !!captcha && captcha.isLocal();
+        },
+
+        isCaptchaUnavailable: function (name) {
+          return !!(this.captchaUnavailable && this.captchaUnavailable[name]);
+        },
+
+        captchaActionOf: function (field) {
+          return field.action || {{ site.turnstile_action_add_property | default: 'add_property' | jsonify }};
+        },
+
+        captchaFail: function (field, attempt) {
+          var self = this;
+          var nextAttempt = (attempt || 0) + 1;
+          if (nextAttempt < 3) {
+            setTimeout(function () { self._mountCaptcha(field, nextAttempt); }, 700);
+            return;
+          }
+          self.captchaUnavailable[field.name] = true;
+        },
+
+        initCaptchaWidgets: function () {
+          var list = this.getCaptchaWidgets();
+          for (var i = 0; i < list.length; i++) this._mountCaptcha(list[i], 0);
+        },
+
+        _mountCaptcha: function (field, attempt) {
+          var self = this;
+          var captcha = window.CaptchaSite;
+          if (!captcha) return;
+          var container = document.querySelector(this.captchaSelector(field.name));
+          if (!container) return;
+
+          /* Контейнер живе у кроці під x-show, тож монтуємо лише коли видимий.
+             Коментар блоковий, бо compress_html склеює інлайн-скрипт в один рядок. */
+          if (container.offsetParent === null) {
+            if (container._captchaObserver) return;
+            var observer = new MutationObserver(function () {
+              if (container.offsetParent === null) return;
+              observer.disconnect();
+              delete container._captchaObserver;
+              self._mountCaptcha(field, attempt);
+            });
+            container._captchaObserver = observer;
+            observer.observe(container, { attributes: true, attributeFilter: ['style'] });
+            return;
+          }
+
+          var action = this.captchaActionOf(field);
+          this._watchCaptchaToken(field);
+          try {
+            captcha.mount(this.captchaSelector(field.name), action, function () {
+              self.captchaFail(field, attempt);
+            });
+          } catch (e) {
+            this.captchaFail(field, attempt);
+          }
+        },
+
+        _watchCaptchaToken: function (field) {
+          var self = this;
+          var key = '_captchaTimer_' + field.name;
+          if (this[key]) return;
+          var ticks = 0;
+          this[key] = setInterval(function () {
+            ticks++;
+            if (self.submitted || ticks > 240) {
+              clearInterval(self[key]);
+              delete self[key];
+              return;
+            }
+            if (!self.captchaSolved(field.name)) return;
+            clearInterval(self[key]);
+            delete self[key];
+            if (self.errors[field.name]) {
+              delete self.errors[field.name];
+              self.errors = Object.assign({}, self.errors);
+            }
+          }, 500);
+        },
+
+        resetCaptcha: function () {
+          var captcha = window.CaptchaSite;
+          var list = this.getCaptchaWidgets();
+          for (var i = 0; i < list.length; i++) {
+            var field = list[i];
+            var self = this;
+            delete this.captchaUnavailable[field.name];
+            if (!captcha) continue;
+            try {
+              captcha.reset(this.captchaSelector(field.name), this.captchaActionOf(field), function () {
+                self.captchaFail(field, 0);
+              });
+            } catch (e) {}
           }
         },
 
@@ -2409,6 +2479,12 @@
           this.submittingErrorText = texts[code] || '{{ site.data.uk.add_property_error_generic | escape }}';
           this.submittingErrorCode = code || '';
           this.step = this.totalSteps;
+          if (code === 'E_CAPTCHA' || code === 'E_CAPTCHA_REUSED' || code === 'E_CAPTCHA_MALFORMED' ||
+              code === 'E_CAPTCHA_ACTION' || code === 'E_CAPTCHA_REQUIRED') {
+            this.$nextTick(function () {
+              this.resetCaptcha();
+            }.bind(this));
+          }
         },
 
         submit: function () {
@@ -2430,14 +2506,19 @@
             if (this.isLocationFieldRequired(locFields[lj]) && !this._locObj()[locFields[lj]]) return;
           }
           var captchaCheck = window.CaptchaSite;
-          if (captchaCheck && captchaCheck.enabled() && !captchaCheck.solved('#turnstile-widget')) {
-            this.step = this.totalSteps;
-            var notice = document.getElementById('local-notice');
-            if (notice) {
-notice.textContent = 'Підтвердьте, що ви не робот, щоб надіслати оголошення.';
-              notice.style.display = 'block';
+          var captchaWidgets = this.getCaptchaWidgets();
+          for (var cw = 0; cw < captchaWidgets.length; cw++) {
+            var cwField = captchaWidgets[cw];
+            if (captchaCheck && captchaCheck.enabled() && !this.captchaSolved(cwField.name)) {
+              this.step = this.totalSteps;
+              this.validateField(cwField.name);
+              var cwName = cwField.name;
+              self.$nextTick(function () {
+                var box = document.querySelector(self.captchaSelector(cwName));
+                if (box && box.scrollIntoView) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              });
+              return;
             }
-            return;
           }
           var photos = this.collectPhotos();
           if (photos.error) {
@@ -2451,10 +2532,12 @@ notice.textContent = 'Підтвердьте, що ви не робот, щоб 
             return;
           }
           delete this.errors.images;
-          var turnstileToken = captchaCheck ? captchaCheck.token('#turnstile-widget') : '';
           this.submitting = true;
           var body = new FormData();
-          body.append('cf-turnstile-response', turnstileToken);
+          for (var ci = 0; ci < captchaWidgets.length; ci++) {
+            var cf = captchaWidgets[ci];
+            body.append(cf.token || 'cf-turnstile-response', this.captchaToken(cf.name));
+          }
           body.append('data', JSON.stringify(this.data));
           for (var pi = 0; pi < photos.list.length; pi++) {
             body.append('images', photos.list[pi]);
@@ -2475,7 +2558,6 @@ notice.textContent = 'Підтвердьте, що ви не робот, щоб 
       };
 
       FormEngine.mixInto(app, formConfig);
-      setTimeout(function(){ initTurnstile(0); }, 50);
       return app;
     });
   });

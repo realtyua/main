@@ -87,8 +87,8 @@ steps:
                         label: В оренду безкоштовно
                     feedback:
                       valid: Ви обрали дію і тут наче все гаразд.
-                      invalid: Ви не вибрали дію, будь ласка виберіть дію.
-                    helper: Вкажіть дію яку чините з нерухомстю
+                      invalid: Ви не обрали дію, будь ласка виберіть дію.
+                    helper: Оберіть дію яку чините з нерухомстю
 
                   - name: property_type
                     type: select
@@ -115,7 +115,10 @@ steps:
                         label: Земля
                       - value: garage
                         label: Гараж
-                    helper: Виберіть тут те що продаєте чи передаєте в оренду.
+                    feedback:
+                      valid: Ви обрали вид нерухомості і тут наче все гаразд.
+                      invalid: Ви не обрали вид нерухомості, будь ласка виберіть вид нерухомості.
+                    helper: Оберіть тут те що продаєте чи передаєте в оренду.
 
               - class: row
                 fields:
@@ -1186,3 +1189,21 @@ steps:
                     type: checkbox
                     label: Я ознайомився та погоджуюсь з Правилами публікації оголошень
                     required: true
+
+              - class: row
+                fields:
+                  - name: captcha
+                    type: widgets
+                    widget: captcha
+                    element_id: captcha
+                    action: add_property
+                    token: cf-turnstile-response
+                    required: true
+                    class: col-12
+                    label: Підтвердьте, що ви не робот
+                    theme: light
+                    size: normal
+                    appearance: always
+                    validation:
+                      required: Підтвердьте, що ви не робот
+                    helper: Якщо перевірка не з'явилася, натисніть «Спробувати ще раз».
