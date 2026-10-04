@@ -105,7 +105,8 @@
   navtitle: місто Луцьк
   subtitle: Нерухомість в Луцьку
   small: Волинська область
-  url: https://www.realestate.lt.ua
+  url: https://www.realestate.net.ua
+  #url: https://www.realestate.lt.ua
   slug: volynska
 
 - title: Нерухомість в Миколаївській області
