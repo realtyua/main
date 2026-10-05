@@ -156,6 +156,20 @@
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" as="script" crossorigin="anonymous">
   <style>{%- include css/leaflet.css -%}</style>
 {%- endif -%}
+{%- comment -%}
+  Captcha потрібна лише там, де реально є віджет Turnstile: форма додавання
+  (_data/add-property.yml, рендериться на new.html) і модалка «Написати
+  власнику» (_includes/modals/notify-property.html, його підключає
+  _layouts/property.html — цей layout дається постам у _config.yml).
+  На всіх інших сторінках не вантажимо captcha.js і api.js: це ~50 КБ
+  і весь код Cloudflare, який у консоль пише свої внутрішні перевірки.
+  Якщо додаєте новий captcha-віджет — додайте його сюди.
+{%- endcomment -%}
+{%- assign needs_captcha = false -%}
+{%- if page.form == 'add-property' or page.layout == 'property' -%}
+  {%- assign needs_captcha = true -%}
+{%- endif -%}
+{%- if site.turnstile_enabled and needs_captcha %}
 <script>
   window.TURNSTILE_CONFIG = {
     enabled: {{ site.turnstile_enabled | default: false }},
@@ -167,7 +181,6 @@
   };
 </script>
 <script src="{{ '/assets/js/captcha.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-{%- if site.turnstile_enabled %}
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 {%- endif -%}
 {%- include analytics-google.html -%}
