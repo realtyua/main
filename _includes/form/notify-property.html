@@ -1,0 +1,27 @@
+<div class="modal fade" id="notifyModal" tabindex="-1" role="dialog" aria-labelledby="notifyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notifyModalLabel">{{ site.data.uk.notify_modal_title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{{ site.data.uk.close }}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="lead">{{ site.data.uk.notify_modal_lead }}</p>
+        <div id="notify-app" data-endpoint="{{ site.notify_endpoint | default: 'https://notify-worker.sparkling-union-9e0a.workers.dev' }}"></div>
+        {%- comment -%}
+          The form is rendered by assets/js/form-notify.js, so Liquid hands it
+          two JSON islands instead of markup: the config (the same file the
+          validator checks) and the page values the hidden inputs need.
+          `replace: '</'` keeps a title like "</script>" from closing the tag.
+        {%- endcomment -%}
+        <script id="notify-config" type="application/json">{{ site.data.notify | jsonify | replace: '</', '<\/' }}</script>
+        {%- capture notify_page_json -%}
+          {"uid": {{ page.uid | jsonify }}, "property_url": {{ page.url | absolute_url | jsonify | replace: '</', '<\/' }}, "property_email": {{ page.email | jsonify }}, "property_title": {{ page.title | jsonify | replace: '</', '<\/' }}}
+        {%- endcapture -%}
+        <script id="notify-page" type="application/json">{{ notify_page_json }}</script>
+      </div>
+    </div>
+  </div>
+</div>

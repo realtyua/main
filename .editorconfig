@@ -1,0 +1,5 @@
+root = true
+
+# Усі файли проєкту — UTF-8 без BOM.
+[*]
+charset = utf-8

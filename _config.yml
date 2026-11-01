@@ -1,6 +1,6 @@
 baseurl: ''
 domain: realestate.if.ua
-url: 'https://www.realestate.if.ua'
+#url: 'https://www.realestate.if.ua'
 addre: '/new.html'
 
 encoding: UTF-8
@@ -84,7 +84,8 @@ collections:
 
 defaults:
   - scope:
-      path: /*/data/*.json
+      #path: /*/data/*.json
+      path: "**/data/*.json"
     values:
       layout: "null"
       sitemap: false
