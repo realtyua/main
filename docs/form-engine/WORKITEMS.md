@@ -21,21 +21,25 @@
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| OC-1 | 1 | `opencode.jsonc`: model, references, worktree, permissions | — | review | feature/form-engine | — | 2026-11-01 | — |
-| OC-2 | 1 | Skill `form-engine`: `SKILL.md` + references + scripts | OC-1 | review | feature/form-engine | — | 2026-11-01 | — |
-| OC-3 | 1 | Реєстр, шаблон item, команда `/item` | OC-2 | review | feature/form-engine | — | 2026-11-01 | — |
-| OC-4 | 1 | `AGENTS.md`: архітектура, заборони, гейти, конвенції | OC-1 | review | feature/form-engine | — | 2026-11-01 | — |
-| OC-5 | 1 | `.gitignore`: прибрати `README.md`, `package.json` | — | review | feature/form-engine | — | 2026-11-01 | — |
+| OC-1 | 1 | `opencode.jsonc`: model, references, worktree, permissions | — | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
+| OC-2 | 1 | Skill `form-engine`: `SKILL.md` + references + scripts | OC-1 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
+| OC-3 | 1 | Реєстр, шаблон item, команда `/item` | OC-2 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
+| OC-4 | 1 | `AGENTS.md`: архітектура, заборони, гейти, конвенції | OC-1 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
+| OC-5 | 1 | `.gitignore`: прибрати `README.md`, `package.json` | — | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
 
 ## Phase 2 — Baseline
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| BASE-1 | 2 | Інвентаризація 47 змін realtyua → план комітів | OC-5 | todo | — | — | — | — |
-| BASE-2 | 2 | commit 1: OpenCode setup | BASE-1, OC-1..OC-4 | todo | — | — | — | — |
-| BASE-3 | 2 | commit 2: Form Engine WIP | BASE-2 | todo | — | — | — | — |
-| BASE-4 | 2 | Гілка + логічні коміти reifua | BASE-3 | todo | — | — | — | — |
+| BASE-1 | 2 | Інвентаризація 47 змін realtyua → план комітів | OC-5 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
+| BASE-2 | 2 | commit 1: OpenCode setup | BASE-1, OC-1..OC-4 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
+| BASE-3 | 2 | commit 2: Form Engine WIP | BASE-2 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
+| BASE-4 | 2 | Гілка + логічні коміти reifua | BASE-3 | review | feature/form-engine (reifua) | — | 2026-11-01 | — |
 | BASE-5 | 2 | Push обох гілок + worktree smoke test | BASE-4 | todo | — | — | — | — |
+| BASE-6 | 2 | `reifua`: доля `src/assets/data/**` (7.9 MB) | BASE-5 | todo | — | — | — | — |
+
+> Примітка: BASE-2 і BASE-3 увійшли одним комітом `178afaf8` (97 файлів,
+> +19952/−4365). Розділяти історію після push не стали — гілка вже опублікована.
 
 ## Phase 3 — Jekyll readiness
 
@@ -88,7 +92,7 @@
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | todo | — | — | — | — |
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | todo | — | — | — | — |
 
-**Разом: 41 item.**
+**Разом: 42 item.**
 
 ## Протокол сесії
 

@@ -3,7 +3,7 @@
 Phase: 1 · Depends: OC-2 · Repo: realtyua
 Branch: `feature/form-engine` · Worktree: —
 
-Status: `review` (чекає commit BASE-2)
+Status: `done` (коміт `178afaf8`, гілка `feature/form-engine`)
 
 ## Goal
 
