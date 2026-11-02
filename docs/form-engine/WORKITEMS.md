@@ -34,8 +34,8 @@
 | BASE-1 | 2 | Інвентаризація 47 змін realtyua → план комітів | OC-5 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
 | BASE-2 | 2 | commit 1: OpenCode setup | BASE-1, OC-1..OC-4 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
 | BASE-3 | 2 | commit 2: Form Engine WIP | BASE-2 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
-| BASE-4 | 2 | Гілка + логічні коміти reifua | BASE-3 | review | feature/form-engine (reifua) | — | 2026-11-01 | — |
-| BASE-5 | 2 | Push обох гілок + worktree smoke test | BASE-4 | todo | — | — | — | — |
+| BASE-4 | 2 | Гілка + логічні коміти reifua | BASE-3 | done | feature/form-engine (reifua) | — | 2026-11-02 | 7a95f78 |
+| BASE-5 | 2 | Push обох гілок + worktree smoke test | BASE-4 | done | — | — | 2026-11-02 | — |
 | BASE-6 | 2 | `reifua`: доля `src/assets/data/**` (7.9 MB) | BASE-5 | todo | — | — | — | — |
 
 > Примітка: BASE-2 і BASE-3 увійшли одним комітом `178afaf8` (97 файлів,
@@ -52,6 +52,7 @@
 | JEK-R5 | 3 | Мертвий код: legacy partial-и, дубль notify, сирота, `.old` | BASE-5 | todo | — | — | — | — |
 | JEK-R6 | 3 | `_form-engine/README.md`: актуальний статус | JEK-R1..R5 | todo | — | — | — | — |
 | JEK-R7 | 3 | Повний прогін гейтів Jekyll | JEK-R1..R6 | todo | — | — | — | — |
+| JEK-R8 | 3 | EOL-нормалізація: `.gitattributes` + EOL-незалежний freshness-тест | BASE-5 | todo | — | — | — | — |
 
 ## Phase 4 — Jekyll engine
 
@@ -92,7 +93,7 @@
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | todo | — | — | — | — |
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | todo | — | — | — | — |
 
-**Разом: 42 item.**
+**Разом: 43 item.**
 
 ## Протокол сесії
 
