@@ -99,7 +99,11 @@
 
 1. Нова сесія (build-агент), назва `<ID> — <Title>`.
 2. `/item <ID>`.
-3. Агент читає цей реєстр, item-файл, перевіряє repo/branch/worktree.
+3. Worktree: `worktree_create <ID>-<slug>` і всередині нього — гілка
+   `feat/<ID>-<slug>` (**worktree створюється в detached HEAD**, треба перейти
+   на нову гілку одразу). У worktree немає `node_modules`; для гейтів зробити
+   junction на канонічний (`cmd /c mklink /J node_modules ..\..\main\node_modules`),
+   **ніколи** `npm install`. Junction знімати **до** `worktree_remove`.
 4. Baseline-гейти **до** змін.
 5. Реалізація лише в межах scope.
 6. Гейти item.

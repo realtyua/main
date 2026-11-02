@@ -101,6 +101,12 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
 
 - Один item = одна сесія = одна гілка `feat/<ID>-<slug>` = один worktree
   `../worktrees/<ID>-<slug>`.
+- `worktree_create` створює worktree в **detached HEAD** → одразу всередині
+  нього `git checkout -b feat/<ID>-<slug>`. Без цього коміти item-а не
+  прив'язані до гілки.
+- У worktree немає `node_modules`. Для гейтів — junction на канонічний:
+  `cmd /c mklink /J node_modules ..\..\main\node_modules`. `npm install`
+  заборонений (офлайн-політика). Junction знімати **до** `worktree_remove`.
 - Старт: `/item <ID>`. Агент читає `WORKITEMS.md` + `docs/form-engine/items/<ID>.md`.
 - Baseline-гейти **до** змін, гейти item — після.
 - Handoff дописується в item-файл, статус — у `WORKITEMS.md`.
