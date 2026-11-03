@@ -151,10 +151,6 @@
 
 {%- endif -%}
 
-{%- if page.form == 'add-property' -%}
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <style>{%- include css/leaflet.css -%}</style>
-{%- endif -%}
 {%- comment -%}
   Captcha потрібна лише там, де реально є віджет Turnstile: форма додавання
   (_data/add-property.yml, рендериться на new.html) і модалка «Написати
