@@ -21,6 +21,7 @@
           {"uid": {{ page.uid | jsonify }}, "property_url": {{ page.url | absolute_url | jsonify | replace: '</', '<\/' }}, "property_email": {{ page.email | jsonify }}, "property_title": {{ page.title | jsonify | replace: '</', '<\/' }}}
         {%- endcapture -%}
         <script id="notify-page" type="application/json">{{ notify_page_json }}</script>
+        <script type="module" src="{{ '/assets/js/form-engine/app.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
       </div>
     </div>
   </div>
