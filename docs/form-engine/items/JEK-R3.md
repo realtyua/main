@@ -3,7 +3,7 @@
 Phase: 3 · Depends: BASE-5 · Repo: realtyua
 Branch: `feat/JEK-R3-copy-triage` · Worktree: `../worktrees/JEK-R3-copy-triage`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -149,5 +149,8 @@ CA після item очікувано червоний лише на `file info 
   відкочено до `HEAD`, у diff не входить.
 - 2026-11-04: Commit SHA: немає (агент не комітить; staging/commit/merge —
   користувач).
+- 2026-11-04: Користувач закомітив item: `13aa53ca` —
+  `JEK-R3: accept reviewed add-property copy edits`; merge у
+  `feature/form-engine`: `a9b83197` (`--no-ff`). Worktree прибрано.
 - Залишок: `file info container` — окремий item JEK-R4. Baseline copy
   reconcile не робився (свідоме рішення).
