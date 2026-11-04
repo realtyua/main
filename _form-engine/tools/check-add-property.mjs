@@ -140,6 +140,54 @@ function expectedStrings(config) {
   return [...seen];
 }
 
+// Reviewed copy edits between the frozen baseline and the config (JEK-R3).
+// The config is the source of truth: after the baseline was captured, the
+// Ukrainian copy gained typographic apostrophes, quotes around the two
+// "Пошук" buttons, and one typo fix ("однму" -> "одному"). Each pair was
+// triaged by hand; nothing else is accepted. A new or reworded string still
+// fails the copy check unless the baseline contains it verbatim.
+//   [ baseline text, accepted config text ]
+const ACCEPTED_COPY_EDITS = [
+  // 1. start_alert_warning.label - quotes around the "Пошук" buttons
+  ['Перш ніж додати оголошення перевірте можлво це оголошення вже присутнє у нашому каталозі. Натисність зелену кнопку <b>Пошук</b> у верхній частині сторінки і виберіть опцію <b>Пошук в оголошеннях</b>.',
+    'Перш ніж додати оголошення перевірте можлво це оголошення вже присутнє у нашому каталозі. Натисність зелену кнопку «<b>Пошук</b>» у верхній частині сторінки і виберіть опцію «<b>Пошук в оголошеннях</b>».'],
+  // 2. communications.label - apostrophe
+  ["Комунікації в об'єкті нерухомості",
+    'Комунікації в об’єкті нерухомості'],
+  // 3. sell_with.label - apostrophe
+  ["Продаються разом з об'єктом нерухомості",
+    'Продаються разом з об’єктом нерухомості'],
+  // 4. rent_with.label - apostrophe
+  ["Передається в оренду разом з об'єктом нерухомості",
+    'Передається в оренду разом з об’єктом нерухомості'],
+  // 5. location_widget.helper - apostrophe
+  ["Це допоможе легко знайти населений пункт де знаходиться об'єкт нерухомості",
+    'Це допоможе легко знайти населений пункт де знаходиться об’єкт нерухомості'],
+  // 6. district_settlement.helper - apostrophe
+  ["Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов'язковим",
+    'Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов’язковим'],
+  // 7. house_section_address option - apostrophe
+  ["під'їзд", 'під’їзд'],
+  // 8. map_widget.helper - apostrophe
+  ["Ця мапа допоможе вам точно вказати де знаходиться ваша нерухомість. Рухаючи мапу вверх, вниз, вліво, вправо, збільшуючи, зменшуючи, знайдіть свою вулицю, будинок та покладіть паркер у тому місці і мапа визначить де це і точне розташування об'єкта на мапі.",
+    'Ця мапа допоможе вам точно вказати де знаходиться ваша нерухомість. Рухаючи мапу вверх, вниз, вліво, вправо, збільшуючи, зменшуючи, знайдіть свою вулицю, будинок та покладіть паркер у тому місці і мапа визначить де це і точне розташування об’єкта на мапі.'],
+  // 9. first_name.label - apostrophe
+  ["Ім'я", 'Ім’я'],
+  // 10. images.label - apostrophe
+  ["Фотознимки об'єкта нерухомості", 'Фотознимки об’єкта нерухомості'],
+  // 11. images.helper - apostrophe
+  ["Додайте максимум чотири широкоформатних фото не більше 5-ти мегабайт, до прикладу: загальне фото об'єкту нерухомості, вітальні чи спальні, кухні та кімнати особистої гігієни. Приклад доброго та поганого фото.",
+    'Додайте максимум чотири широкоформатних фото не більше 5-ти мегабайт, до прикладу: загальне фото об’єкту нерухомості, вітальні чи спальні, кухні та кімнати особистої гігієни. Приклад доброго та поганого фото.'],
+  // 12. images.file.infoLine - apostrophe + typo fix ("однму" -> "одному")
+  ["Ви можете додати фотознімки об'єкта нерухомості: від 1 до 4 файлів, до 150KB в однму файлі",
+    'Ви можете додати фотознімки об’єкта нерухомості: від 1 до 4 файлів, до 150KB в одному файлі'],
+  // 13. captcha.helper - apostrophe
+  ["Якщо перевірка не з'явилася, натисніть «Спробувати ще раз».",
+    'Якщо перевірка не з’явилася, натисніть «Спробувати ще раз».'],
+];
+
+const acceptedCopy = new Map(ACCEPTED_COPY_EDITS.map(([oldText, newText]) => [newText, oldText]));
+
 // ------------------------------------------------------------------ running
 
 const args = process.argv.slice(2);
@@ -167,13 +215,21 @@ if (!existsSync(baselinePath)) {
 }
 const baselineSlice = normalize(extractFormSlice(readFileSync(baselinePath, 'utf8').replace(/^\uFEFF/, '')), { alpine: true, dataAttr: false });
 
+// A copy string passes when the frozen baseline rendered it verbatim, or when
+// it is the accepted config side of a reviewed JEK-R3 copy edit.
+function copyInBaseline(text) {
+  if (baselineSlice.includes(text)) return true;
+  const oldText = acceptedCopy.get(text);
+  return oldText !== undefined && baselineSlice.includes(oldText);
+}
+
 const html = FormRender.render(config);
 const engineNorm = normalize(html, { alpine: false, dataAttr: true });
 
 // ----------------------------------------------------------------- copy
 const strings = expectedStrings(config);
 for (const text of strings) {
-  check(baselineSlice.includes(text), `copy in baseline: ${text.slice(0, 60)}`);
+  check(copyInBaseline(text), `copy in baseline: ${text.slice(0, 60)}`);
   check(engineNorm.includes(text), `copy in render: ${text.slice(0, 60)}`);
 }
 
