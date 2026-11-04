@@ -53,6 +53,7 @@
 | JEK-R6 | 3 | `_form-engine/README.md`: актуальний статус | JEK-R1..R5 | todo | — | — | — | — |
 | JEK-R7 | 3 | Повний прогін гейтів Jekyll | JEK-R1..R6 | todo | — | — | — | — |
 | JEK-R8 | 3 | EOL-нормалізація: `.gitattributes` + EOL-незалежний freshness-тест | BASE-5 | todo | — | — | — | — |
+| JEK-R9 | 3 | Property notify: підключити `form-engine/app.js` | BASE-5 | todo | — | — | — | — |
 
 ## Phase 4 — Jekyll engine
 
