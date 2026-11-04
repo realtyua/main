@@ -1,6 +1,6 @@
 baseurl: ''
 domain: realestate.if.ua
-#url: 'https://www.realestate.if.ua'
+url: 'https://www.realestate.if.ua'
 addre: '/new.html'
 
 encoding: UTF-8
