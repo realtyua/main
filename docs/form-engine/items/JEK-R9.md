@@ -3,7 +3,7 @@
 Phase: 3 · Depends: BASE-5 · Repo: realtyua
 Branch: `feat/JEK-R9-property-notify-appjs` · Worktree: `../worktrees/JEK-R9-property-notify-appjs`
 
-Status: `todo`
+Status: `review`
 
 ## Goal
 
@@ -87,3 +87,39 @@ Build — офлайн (`--limit_posts 1`, тимчасовий `jekyll_get_json
 ## Handoff log
 
 <!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
+
+- 2026-11-04: Початок сесії. Worktree
+  `../worktrees/JEK-R9-property-notify-appjs`, гілка
+  `feat/JEK-R9-property-notify-appjs` (worktree створено в detached HEAD,
+  одразу перейшли на гілку), junction `node_modules` на канонічний
+  `main/node_modules`.
+- 2026-11-04: Baseline до правок. У свіжому worktree `npm test` спершу падав
+  на CRLF-vs-LF у `test/form-app-fresh.test.mjs` (`core.autocrlf=true`);
+  після першого offline-build — **214/214**. Конфіги — **3/3 valid**
+  (`add-property`, `notify`, `demo`, `--strict`).
+- 2026-11-04: Baseline `check-notify` — **1 failure**:
+  `district/town/kosiv/apartment/prodam-1789988154.html: missing the
+  form-engine/app.js module include`. `verify-render.mjs verify` — 2/3
+  changed: `new.html` (freshness `sha=`) і `assets/data/form-config.json`
+  (copy-drift, JEK-R3); property-фрагмент **ok** (baseline = без скрипта).
+- 2026-11-04: Правка — рівно один рядок у
+  `_includes/modals/notify-property.html` після `#notify-page`:
+  `<script type="module" src="{{ '/assets/js/form-engine/app.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>`.
+  Інші файли не змінювалися; `check-notify.mjs` і baseline не чіпано.
+- 2026-11-04: Build офлайн (`--limit_posts 1`, тимчасовий override
+  `jekyll_get_json: []` поза репо). `_site` property-сторінка: `#notifyModal`
+  — 1, module-скрипт `form-engine/app.js` — 1, legacy
+  `/assets/js/notify.js` — 0.
+- 2026-11-04: Гейти після правки: `check-notify` — **ok (1 page(s) checked)**;
+  `npm test` — **214/214**; 3/3 конфіги valid. `verify-render.mjs verify`:
+  property-фрагмент CHANGED лише доданим `<script type="module" ...>` (після
+  нормалізації `?v=BUILD`), інших змін у фрагменті немає. `new.html` і
+  `form-config.json` лишилися на тих самих pre-existing розбіжностях
+  (`sha=` freshness + copy-drift JEK-R3), що й до правки.
+- 2026-11-04: Generated `_includes/form/app/add-property.html` після build
+  змінено лише в `sha=`/`?v=`; відкочено до `HEAD`, у diff не входить.
+  Baseline не перезаписувався.
+- 2026-11-04: Лишилося ручному smoke (користувач): `jekyll serve
+  --limit_posts 1`, property-сторінка → «Написати власнику» → форма рендериться.
+- 2026-11-04: Commit SHA: немає (агент не комітить; staging/commit/merge —
+  користувач).
