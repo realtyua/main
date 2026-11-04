@@ -47,7 +47,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | JEK-R1 | 3 | Leaflet dedup: `head.html`, `java-script.html`, порожній блок | BASE-5 | review | `feat/JEK-R1-leaflet-dedup` | `JEK-R1-leaflet-dedup` | 2026-11-03 | — |
 | JEK-R2 | 3 | `url` + `property_url` у notify | BASE-5 | review | `feat/JEK-R2-notify-url` | `JEK-R2-notify-url` | 2026-11-04 | — |
-| JEK-R3 | 3 | `check-add-property`: тріаж 13 copy-розбіжностей | BASE-5 | todo | — | — | — | — |
+| JEK-R3 | 3 | `check-add-property`: тріаж 13 copy-розбіжностей | BASE-5 | review | `feat/JEK-R3-copy-triage` | `JEK-R3-copy-triage` | 2026-11-04 | — |
 | JEK-R4 | 3 | `check-add-property`: структурний `file-info` | JEK-R3 | todo | — | — | — | — |
 | JEK-R5 | 3 | Мертвий код: legacy partial-и, дубль notify, сирота, `.old` | BASE-5 | todo | — | — | — | — |
 | JEK-R6 | 3 | `_form-engine/README.md`: актуальний статус | JEK-R1..R5 | todo | — | — | — | — |
