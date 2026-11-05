@@ -3,7 +3,7 @@
 Phase: 3 · Depends: JEK-R3 · Repo: realtyua
 Branch: `feat/JEK-R4-file-info` · Worktree: `../worktrees/JEK-R4-file-info`
 
-Status: `review`
+Status: `done` · Commit: `8457ff21` · Merge: `d580169d`
 
 ## Goal
 
@@ -160,3 +160,8 @@ node _form-engine/tools/check-add-property.mjs
 - 2026-11-05: Сесію відновлено після переривання. Повторно запущено
   `check-add-property` — **PASS**, 0 failures (exit 0). Код після цього не
   змінювався; зміни лишаються в робочому дереві worktree.
+- 2026-11-05: Коміт item-а `8457ff21` («JEK-R4: check actual file-info
+  contract», 3 файли) і merge `--no-ff` у `feature/form-engine` —
+  `d580169d`. Worktree `JEK-R4-file-info` і гілку `feat/JEK-R4-file-info`
+  прибрано (junction `node_modules` знято до `worktree remove`). Item
+  закрито; статус у реєстрі — `done`.
