@@ -257,7 +257,13 @@ check(/<div class="col-12 col-md-6" data-field-col="phone">/.test(html), 'plain 
 check(/class="custom-file-input" id="field_images" name="images" data-field="images" required/.test(html), 'file input attrs');
 check(/accept="image\/\*" multiple/.test(html), 'file accept and multiple');
 check(/class="file-previews mt-2"/.test(html), 'file previews container');
-check(/class="file-info"/.test(html), 'file info container');
+
+// JEK-R4: `.file-info` was an Alpine-only slot in the old page
+// (`x-text="fileInfo(name)"`). The engine keeps the static limits line in
+// <small> and per-file details in .file-previews; it deliberately emits no
+// .file-info node (see test/render*.test.mjs). Keep the absence explicit so a
+// re-added dead slot fails the gate.
+check(!/class="file-info"/.test(html), 'no Alpine-only file-info slot');
 
 check(/<div class="col-12" data-widget="captcha" data-widget-name="captcha">/.test(html), 'captcha widget column');
 check(/<div class="mb-2" id="label_captcha">/.test(html), 'captcha label block');
