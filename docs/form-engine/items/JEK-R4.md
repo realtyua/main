@@ -3,7 +3,7 @@
 Phase: 3 · Depends: JEK-R3 · Repo: realtyua
 Branch: `feat/JEK-R4-file-info` · Worktree: `../worktrees/JEK-R4-file-info`
 
-Status: `done` · Commit: `8457ff21` · Merge: `d580169d`
+Status: `done`
 
 ## Goal
 

@@ -3,7 +3,7 @@
 Phase: 3 · Depends: BASE-5 · Repo: realtyua
 Branch: `feat/JEK-R2-notify-url` · Worktree: `../worktrees/JEK-R2-notify-url`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -121,3 +121,6 @@ property-сторінки (окремий дефект, не JEK-R2). Для п�
   Baseline не перезаписувався.
 - 2026-11-04: Commit SHA: немає (агент не комітить; staging/commit/merge —
   користувач).
+- 2026-11-05: Закрито. Item-коміт `3044fe03` (`JEK-R2: absolute site url for
+  canonical and notify links`); merge у `feature/form-engine`: `f08d1ea3`
+  (`--no-ff`). Worktree прибрано; статус у реєстрі — `done`.

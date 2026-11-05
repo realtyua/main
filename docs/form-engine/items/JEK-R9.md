@@ -3,7 +3,7 @@
 Phase: 3 · Depends: BASE-5 · Repo: realtyua
 Branch: `feat/JEK-R9-property-notify-appjs` · Worktree: `../worktrees/JEK-R9-property-notify-appjs`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -123,3 +123,7 @@ Build — офлайн (`--limit_posts 1`, тимчасовий `jekyll_get_json
   --limit_posts 1`, property-сторінка → «Написати власнику» → форма рендериться.
 - 2026-11-04: Commit SHA: немає (агент не комітить; staging/commit/merge —
   користувач).
+- 2026-11-05: Закрито. Item-коміт `c4ce9c75` (`JEK-R9: load form-engine app.js
+  in property notify modal`), spec — `71f2b5ca`; merge у
+  `feature/form-engine`: `e83c1c1f` (`--no-ff`). Worktree прибрано; статус
+  у реєстрі — `done`.

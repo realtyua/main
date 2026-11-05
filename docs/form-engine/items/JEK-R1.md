@@ -3,7 +3,7 @@
 Phase: 3 · Depends: BASE-5 · Repo: realtyua
 Branch: `feat/JEK-R1-leaflet-dedup` · Worktree: `../worktrees/JEK-R1-leaflet-dedup`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -90,3 +90,6 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
 - Ручна перевірка користувачем: `jekyll serve --limit_posts 1` на
   `http://localhost:4000/` — форма й карта працюють.
 - Commit SHA: немає (агент не комітить; staging/commit/merge — користувач).
+- 2026-11-05: Закрито. Item-коміт `19e99ce6` (`JEK-R1: remove duplicate
+  Leaflet CSS/JS from page includes`) ліг у `feature/form-engine` лінійно,
+  без merge-коміту. Worktree прибрано; статус у реєстрі — `done`.
