@@ -75,8 +75,8 @@ Inline-асети Jekyll: `_includes/css/leaflet.css`, `_includes/js/leaflet.js`
 
 ## Notify — окремий випадок
 
-Notify **не** проходить через `{% include form/app/notify.html %}`. Робоча
-модалка — `_includes/modals/notify-property.html`, підключена в
+Notify **не** проходить через механізм `form-app` (bake). Робоча модалка —
+`_includes/modals/notify-property.html`, підключена в
 `_layouts/property.html`. Вона кладе два JSON-острівці:
 
 - `#notify-config` — `site.data.notify`;
@@ -84,10 +84,6 @@ Notify **не** проходить через `{% include form/app/notify.html %
 
 `property_url` використовує `page.url | absolute_url`, тому потребує
 `site.url` у `_config.yml` (зараз закоментований — відомий дефект JEK-R2).
-
-Відомий борг (JEK-R5): трекнутий дубль `_includes/form/notify-property.html`,
-сирітський `_includes/form/app/notify.html`, застарілий коментар у робочій
-модалці (згадує `form-notify.js`).
 
 ## Відомі дефекти готовності (не «фіксити» мовчки)
 

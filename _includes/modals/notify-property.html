@@ -11,7 +11,7 @@
         <p class="lead">{{ site.data.uk.notify_modal_lead }}</p>
         <div id="notify-app" data-endpoint="{{ site.notify_endpoint | default: 'https://notify-worker.sparkling-union-9e0a.workers.dev' }}"></div>
         {%- comment -%}
-          The form is rendered by assets/js/form-notify.js, so Liquid hands it
+          The form is rendered by assets/js/form-engine/app.js, so Liquid hands it
           two JSON islands instead of markup: the config (the same file the
           validator checks) and the page values the hidden inputs need.
           `replace: '</'` keeps a title like "</script>" from closing the tag.
