@@ -203,6 +203,8 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
   `_includes/form/app/add-property.html` до вмісту HEAD (bake змінював лише
   `?v=`-рядок). `_form-engine/baseline/**`, `_data/**`, `_plugins/**`,
   `_layouts/**`, рендерер і тести не змінювались.
-- 2026-11-05: Commit SHA: — (не комічено; staging/commit/merge — за
-  користувачем). Junction `node_modules` лишено для перевірки; зняти перед
-  `worktree_remove`.
+- 2026-11-05: Item закомічено `13f52ac4` («JEK-R5: remove dead form-engine
+  legacy code», 44 файли: +212/−3629) і змерджено `--no-ff` у
+  `feature/form-engine` — merge-коміт `72bde613`. Junction `node_modules`
+  знято, worktree `JEK-R5-dead-code` і гілку `feat/JEK-R5-dead-code` видалено.
+  Item закрито; статус — `done`.
