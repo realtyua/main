@@ -3,7 +3,7 @@
 Phase: 3 · Depends: BASE-5 · Repo: realtyua
 Branch: `feat/JEK-R8-eol-normalization` · Worktree: `../worktrees/JEK-R8-eol-normalization`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -133,3 +133,6 @@ node _form-engine/tools/validate-config.mjs _data/add-property.yml --strict
   - Leftovers: після merge re-checkout не потрібен — хеш EOL-незалежний.
     `node_modules` у worktree — junction, зняти перед `worktree_remove`.
   - Commit SHA: немає (агент не комітить; зміни в робочому дереві, чекають review).
+- 2026-11-06: Закрито. Item-коміт `1c35ef86` (`JEK-R8: normalize EOL for
+  generated forms`), merge у `feature/form-engine`: `e33f7379` (`--no-ff`).
+  Worktree і гілку прибрано; статус у реєстрі — `done`.
