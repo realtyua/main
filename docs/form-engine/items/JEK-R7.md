@@ -166,4 +166,7 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
   `verify -SkipBuild` — **PASS 3/3**.
 - 2026-11-06: Статус — `done`: **T** 214/214, **V** 3/3, **CA** PASS,
   **CN** ok, **VR** PASS після approved re-capture, Leaflet 1/1/0.
-  Commit SHA: немає (агент не комітить; staging/commit/merge — користувач).
+- 2026-11-06: Закриття: item commit `dfda107e`, merge `--no-ff` `7969a1d7`;
+  worktree і гілку видалено; `origin/feature/form-engine` = `7969a1d7`.
+  На merged HEAD у канонічному `main` перепрогнано: **T** 214/214, **V** 3/3,
+  **CA** PASS, **CN** ok, **VR** PASS 3/3 (повний build).
