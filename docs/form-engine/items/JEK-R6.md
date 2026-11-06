@@ -3,7 +3,7 @@
 Phase: 3 · Depends: JEK-R1..R5 · Repo: realtyua
 Branch: `feat/JEK-R6-readme-status` · Worktree: `../worktrees/JEK-R6-readme-status`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -142,3 +142,16 @@ node _form-engine/tools/check-add-property.mjs
   Гейти повторно прогнано: `npm test` — 214/213/1 (той самий EOL-fail JEK-R8);
   3/3 конфіги valid; `check-add-property` — PASS, 0 failures. Код не змінювався,
   commit не створювався. Статус лишається `review`.
+- 2026-11-06: Item закомічено `0bed23ae` («JEK-R6: refresh engine README
+  status», 3 файли: +190/−21) і змерджено `--no-ff` у `feature/form-engine` —
+  merge-коміт `0e3e980c`. Гілку `feat/JEK-R6-readme-status` і worktree
+  `JEK-R6-readme-status` видалено (junction `node_modules` знято до видалення).
+  Item закрито; статус — `done`.
+- 2026-11-06: Побічно виявлено в `main` `M _includes/form/app/add-property.html`
+  — лише `form-bake sha=` (і EOL), тобто застарілий baked-фрагмент після
+  змін рушія JEK-R1..R9. `gen-form-app.mjs` на поточному дереві каже
+  `unchanged`, отже робоча версія — свіжий bake. Перевірка: із цим файлом
+  `npm test` — **214/214 pass** (зокрема `form-app-fresh` 6/6), тобто «відомий
+  1 fail» був саме застарілим фрагментом (sha + CRLF у коміті), а не кодом.
+  Дія: закомітити rebake окремим господарським комітом; детермінованість
+  після checkout лишається за JEK-R8 (`.gitattributes`).

@@ -55,7 +55,7 @@
 | JEK-R3 | 3 | `check-add-property`: тріаж 13 copy-розбіжностей | BASE-5 | done | `feat/JEK-R3-copy-triage` | `JEK-R3-copy-triage` | 2026-11-04 | 13aa53ca |
 | JEK-R4 | 3 | `check-add-property`: структурний `file-info` | JEK-R3 | done | `feat/JEK-R4-file-info` | `JEK-R4-file-info` | 2026-11-05 | 8457ff21 |
 | JEK-R5 | 3 | Мертвий код: legacy partial-и, дубль notify, сирота, `.old` | BASE-5 | done | `feat/JEK-R5-dead-code` | `JEK-R5-dead-code` | 2026-11-05 | 13f52ac4 |
-| JEK-R6 | 3 | `_form-engine/README.md`: актуальний статус | JEK-R1..R5 | review | `feat/JEK-R6-readme-status` | `JEK-R6-readme-status` | 2026-11-06 | — |
+| JEK-R6 | 3 | `_form-engine/README.md`: актуальний статус | JEK-R1..R5 | done | `feat/JEK-R6-readme-status` | `JEK-R6-readme-status` | 2026-11-06 | 0bed23ae |
 | JEK-R7 | 3 | Повний прогін гейтів Jekyll | JEK-R1..R6 | todo | — | — | — | — |
 | JEK-R8 | 3 | EOL-нормалізація: `.gitattributes` + EOL-незалежний freshness-тест | BASE-5 | todo | — | — | — | — |
 | JEK-R9 | 3 | Property notify: підключити `form-engine/app.js` | BASE-5 | done | `feat/JEK-R9-property-notify-appjs` | `JEK-R9-property-notify-appjs` | 2026-11-05 | c4ce9c75 |
