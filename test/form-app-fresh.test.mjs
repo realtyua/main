@@ -12,15 +12,20 @@ import { renderPage } from '../assets/js/form-engine/shell.js';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BAKED = join(ROOT, '_includes', 'form', 'app', 'add-property.html');
 
+// EOL is not part of the baked contract. `.gitattributes` keeps the generated
+// files LF on checkout, but an existing Windows worktree may still hand us CRLF
+// until the attributes are re-applied, so normalize before comparing.
+const normalizeEol = (text) => text.replace(/\r\n/g, '\n');
+
 // The first line is the plugin's freshness marker: `<!-- form-bake ... -->`.
 // Strip it so the comparison stays about the rendered markup only.
-const stripMarker = (html) => html.replace(/^<!--\s*form-bake\b[^>]*-->\s*\n?/, '');
+const stripMarker = (html) => normalizeEol(html).replace(/^<!--\s*form-bake\b[^>]*-->\s*\n?/, '');
 
 test('the baked add-property page matches a fresh render of the config', () => {
   const config = loadYaml(join(ROOT, '_data', 'add-property.yml'));
   const fresh = renderPage(config, { ...loadSiteOpts(ROOT, config), name: 'add-property' });
   const baked = stripMarker(readFileSync(BAKED, 'utf8'));
-  assert.equal(baked.trim(), fresh.trim(),
+  assert.equal(baked.trim(), normalizeEol(fresh).trim(),
     'stale server-side form - run `node _form-engine/tools/gen-form-app.mjs` and rebuild');
 });
 

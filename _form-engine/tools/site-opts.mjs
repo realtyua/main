@@ -62,10 +62,18 @@ function digestOf(root, relPaths) {
   for (const rel of relPaths) {
     hash.update(rel);
     hash.update('\0');
-    hash.update(readFileSync(join(root, ...rel.split('/'))));
+    hash.update(canonicalText(join(root, ...rel.split('/'))));
     hash.update('\0');
   }
   return hash.digest('hex');
+}
+
+// Checkout EOL is not part of the engine contract. The same tree arrives as LF
+// on Linux/CI and as CRLF on a Windows checkout with core.autocrlf=true, so
+// normalise before hashing: `?v=` and the freshness marker must not depend on
+// how git happened to materialise the files.
+function canonicalText(file) {
+  return readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
 }
 
 /** Hash of the engine alone; its first 12 chars are the `?v=` cache token. */
@@ -82,7 +90,7 @@ export function freshnessSha(root, dataPath) {
     hash.update(rel);
     hash.update('\0');
     const full = join(root, ...rel.split('/'));
-    if (existsSync(full)) hash.update(readFileSync(full));
+    if (existsSync(full)) hash.update(canonicalText(full));
     hash.update('\0');
   }
   return hash.digest('hex');

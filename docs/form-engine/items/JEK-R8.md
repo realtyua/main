@@ -3,7 +3,7 @@
 Phase: 3 · Depends: BASE-5 · Repo: realtyua
 Branch: `feat/JEK-R8-eol-normalization` · Worktree: `../worktrees/JEK-R8-eol-normalization`
 
-Status: `todo`
+Status: `review`
 
 ## Goal
 
@@ -99,3 +99,37 @@ node _form-engine/tools/validate-config.mjs _data/add-property.yml --strict
 ## Handoff log
 
 - 2026-11-02: item створено за результатами BASE-5 (worktree smoke test).
+- 2026-11-06: **review** — сесія JEK-R8, гілка `feat/JEK-R8-eol-normalization`,
+  worktree `../worktrees/JEK-R8-eol-normalization`.
+  - Baseline: канонічний чекаут — `form-app-fresh` 6/6; свіжий worktree — падає
+    `the baked add-property page matches a fresh render of the config`
+    (1431/1431 CRLF).
+  - Знахідка ширша за початковий опис: від EOL залежав не лише запечений HTML, а й
+    `?v=` та маркер `sha=`. `engineDigest`/`freshnessSha` хешували сирі байти 24
+    engine-файлів; канонічний digest `557366cdba1c`, свіжий worktree
+    `ea6edc1b2205`. Тому самого `.gitattributes` + нормалізації тесту не досить.
+  - Рішення (погоджено з користувачем): нормалізувати EOL у хешах, генератор пише
+    LF, `.gitattributes` фіксує generated-файли, тест порівнює без EOL; rebake.
+  - Files changed:
+    - `.gitattributes` (новий): `_includes/form/app/** -text`,
+      `assets/data/form-*.json -text`.
+    - `test/form-app-fresh.test.mjs`: `normalizeEol()` для baked і fresh render.
+    - `_form-engine/tools/site-opts.mjs`: `canonicalText()` у `digestOf()` і
+      `freshnessSha()`.
+    - `_form-engine/tools/gen-form-app.mjs`: рендер нормалізується до LF перед
+      записом.
+    - `_includes/form/app/add-property.html` (generated, rebake): нові
+      `sha=549a0a347cbbb2b1da399059cb932961d43c5fcf1498e5fecb79298cecb21a00`,
+      `?v=637e2d5308a4`.
+  - Gates:
+    - `npm test` — 214/214.
+    - `validate-config add-property/notify/demo --strict` — 3/3 valid.
+    - `node --test test/form-app-fresh.test.mjs` — 6/6, зокрема після примусового
+      перетворення baked-файлу на CRLF.
+    - повторний `gen-form-app.mjs` — `unchanged`; `git status` без нових змін у
+      `_includes/form/app/**`.
+  - Перевірено: `engineDigest` і `freshnessSha` однакові в канонічному чекауті й
+    свіжому worktree (`637e2d53…`, `549a0a34…`).
+  - Leftovers: після merge re-checkout не потрібен — хеш EOL-незалежний.
+    `node_modules` у worktree — junction, зняти перед `worktree_remove`.
+  - Commit SHA: немає (агент не комітить; зміни в робочому дереві, чекають review).
