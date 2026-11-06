@@ -84,7 +84,8 @@ collections:
 
 defaults:
   - scope:
-      path: /*/data/*.json
+      #path: /*/data/*.json
+      path: "**/data/*.json"
     values:
       layout: "null"
       sitemap: false

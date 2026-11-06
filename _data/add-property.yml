@@ -1,3 +1,7 @@
+version: 1
+id: add-property
+theme: bootstrap4
+
 settings:
   title: Подання оголошення про нерухомість
   description: |
@@ -9,10 +13,10 @@ settings:
     pattern: Тільки українські літери, цифри та розділові знаки
   required:
     marker: '&#9728;'
-    tooltip: Це поле є обов'язкове
+    tooltip: Це поле є обов’язкове
     message: Будь ласка, заповніть це поле
-    class: small font-weight-bold
-  pattern: '^[а-яА-ЯієїґІЄЇҐ0-9\s.,:;!?\(\)«»№+\/–—\-]+$'
+    class: text-danger small font-weight-bold
+  pattern: ^[а-я'А-ЯієїґІЄЇҐ0-9\s.,:;!?\(\)""№+\/–—\-]+$
 
 steps:
   - id: start
@@ -39,7 +43,7 @@ steps:
                   - name: start_alert_warning
                     type: alert
                     variant: warning
-                    label: Перш ніж додати оголошення перевірте можлво це оголошення вже присутнє у нашому каталозі. Натисність зелену кнопку <b>Пошук</b> у верхній частині сторінки і виберіть опцію <b>Пошук в оголошеннях</b>.
+                    label: Перш ніж додати оголошення перевірте можлво це оголошення вже присутнє у нашому каталозі. Натисність зелену кнопку «<b>Пошук</b>» у верхній частині сторінки і виберіть опцію «<b>Пошук в оголошеннях</b>».
                     col: col-12
                     depends:
                       - field: agree_rules
@@ -59,7 +63,7 @@ steps:
                       invalid: Якщо не погодитесь з правилами і умовами використання, то не зможете додати оголошення.
 
   - id: type
-    title: Характеристики та ціна об'єкта нерухомості
+    title: Характеристики та ціна об’єкта нерухомості
     class: h4 text-primary text-left
     rows:
       - class: row
@@ -207,7 +211,7 @@ steps:
                       compare:
                         - field: floor
                           operator: '>='
-                          message: "Поверховість не може бути меншою за поверх"
+                          message: Поверховість не може бути меншою за поверх
                       min: У будинку як мініму 1 поврех
                       max: Найвища споруда в Україні має 65 поверхів
                     depends:
@@ -220,7 +224,7 @@ steps:
                     type: paragraph
                     class: font-weight-bold
                     label:
-                      text: "Площа об'єкта нерухомсті в м²"
+                      text: Площа об’єкта нерухомсті в м²
                       depends:
                         - field: property_type
                           values: [apartment]
@@ -282,7 +286,7 @@ steps:
                       compare:
                         - field: [surface_live, surface_kitchen, surface_bathroom, surface_corridor, surface_othres]
                           operator: '>='
-                          message: "Загальна площа не може бути меншою за сумарну площу всіх частин об'єкта нерухомості"
+                          message: Загальна площа не може бути меншою за сумарну площу всіх частин об’єкта нерухомості
 
                   - name: surface_live
                     type: number
@@ -371,9 +375,9 @@ steps:
                           body: |
                             <dl>
                               <dt>Один метр (м)</dt>
-                              <dd>Це 1000 мм або 100 см</dd>
+                              <dd>Це 1000 міліметрів або 100 сантиметрів</dd>
                               <dt>Один метр квадратний (<small>м<sup>2</sup></small>)</dt>
-                              <dd>Це площа квадрата зі стороною один метр (1 м х 1 м)</dd>
+                              <dd>Це площа квадрата зі стороною один метр (1 метр х 1 метр)</dd>
                             </dl>
                             <p><b>Приклад</b>: Якщо ви хочете визначити кількість метрів квадратних коридора у квартирі чи у будинку вам необхідно виміряти дві стіни, які мають спільний кут, одна стіна буде довжиною, а друга шириною. Отримані показники множите, в результаті чого ви отримаєте кількість метрів квадратних коридора.</p>
                     depends:
@@ -427,7 +431,7 @@ steps:
                   - name: surface_land_paragraph
                     type: paragraph
                     class: font-weight-bold
-                    label: "Площа земельної ділянки в м²"
+                    label: Площа земельної ділянки в м²
                     col: col-12
                     depends:
                       - field: has_land
@@ -474,7 +478,7 @@ steps:
                       - field: property_type
                         values: [house, land]
                     validation:
-                      required: Ви не ввели загальну площу м2 землі. Будь ласка введіть загальну площу м2 землі.
+                      required: Ви не ввели загальну площу м² землі. Будь ласка введіть загальну площу м² землі.
                       min: Тут може бути мінімум 5 м².
                       max: Тут може бути максимум 999999999 м².
                     helper: Введіть не менше 5 м².
@@ -626,7 +630,7 @@ steps:
                 fields:
                   - name: communications
                     type: checkbox_group
-                    label: "Комунікації в об'єкті нерухомості"
+                    label: Комунікації в об’єкті нерухомості
                     variant: primary
                     options:
                       - value: electricity
@@ -653,7 +657,7 @@ steps:
                 fields:
                   - name: sell_with
                     type: checkbox_group
-                    label: "Продаються разом з об'єктом нерухомості"
+                    label: Продаються разом з об’єктом нерухомості
                     variant: primary
                     options:
                       - value: furniture
@@ -678,7 +682,7 @@ steps:
 
                   - name: rent_with
                     type: checkbox_group
-                    label: "Передається в оренду разом з об'єктом нерухомості"
+                    label: Передається в оренду разом з об’єктом нерухомості
                     variant: primary
                     options:
                       - value: furniture
@@ -704,7 +708,7 @@ steps:
                         value: '>0'
 
   - id: object_price
-    title: Ціна об'єкта нерухомості
+    title: Ціна об’єкта нерухомості
     class: h4 text-primary text-left
     rows:
       - class: row
@@ -781,7 +785,7 @@ steps:
                           values: [rent, rent_free]
 
   - id: object_location
-    title: Місцезнаходження об'єкта нерухомості
+    title: Місцезнаходження об’єкта нерухомості
     class: h4 text-primary text-left
     rows:
       - class: row
@@ -793,7 +797,7 @@ steps:
                   - name: location_paragraph
                     type: paragraph
                     class: font-weight-bold
-                    label: "Розташування"
+                    label: Розташування
                     col: col-12
 
               - class: row
@@ -803,7 +807,7 @@ steps:
                     widget: location
                     data: /assets/data/all.json
                     settings:
-                      method: one
+                      method: two
                     label: Пошук населеного пункту
                     fields:
                       - name: oblast
@@ -817,7 +821,7 @@ steps:
                         threshold: 15
                         minChars: 2
                         maxResults: 6
-                        pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
+                        pattern: ^[А-Яа-яІіЇїЄєҐґ\s\-\']+$
                         value:
                           default:
                             value: ["0342"]
@@ -838,6 +842,9 @@ steps:
                         threshold: 6
                         minChars: 2
                         maxResults: 6
+                        #minlength: 2
+                        #maxlength: 22
+                        #pattern: ^[А-Яа-яІіЇїЄєҐґ\s\-']+$
                         pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
                         feedback:
                           valid: Виглядає наче у полі Район все добре!
@@ -855,6 +862,8 @@ steps:
                         threshold: 6
                         minChars: 2
                         maxResults: 6
+                        #minlength: 2
+                        #maxlength: 23
                         pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
                         feedback:
                           valid: Виглядає наче у полі Територіальна громада все добре!
@@ -871,13 +880,15 @@ steps:
                         threshold: 6
                         minChars: 2
                         maxResults: 6
+                        #minlength: 2
+                        #maxlength: 26
                         pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
                         feedback:
                           valid: Виглядає наче у полі Населений пункт все добре!
                           invalid: Будь ласка, заповніть це поле дійсними даними
                           pattern: Тільки українські літери
                         helper: Введіть перші три українські літери у назві населеного пункту
-                    helper: "Це допоможе легко знайти населений пункт де знаходиться об'єкт нерухомості"
+                    helper: Це допоможе легко знайти населений пункт де знаходиться об’єкт нерухомості
 
               - class: row
                 fields:
@@ -907,7 +918,7 @@ steps:
                       - field: location_widget.settlement
                         #values: ["30595","30559"]
                         values: ["30595"]
-                    helper: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов'язковим
+                    helper: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов’язковим
 
               - class: row
                 fields:
@@ -971,8 +982,14 @@ steps:
                     placeholder: Шевченка
                     minlength: 4
                     maxlength: 33
-                    pattern: '^[А-Яа-яІіЇїЄєҐґ\s\-’]+$'
+                    pattern: ^([1-9]?[0-9]{0,3}[\s]?)?([а-щА-ЩЬьЮюЯяЇїІіЄєҐґ'\-][\s]?){4,33}$
                     col: col-12 col-md-8
+                    validation:
+                      required: Ви не ввели Найменування адреси.
+                      message: Будь ласка введіть дійсне Найменування адреси.
+                      pattern: 'Це поле має містити "Найменування адреси" українською, до прикладу "Степана Бандери" або "30-річчя Незалежності"'
+                      minlength: Це поле має містити щонайменше 1 символ
+                      maxlength: Це поле має містити не більше 4-х символів
                     autocomplete: "off"
                     helper: Введіть найменування адреси українською
 
@@ -985,7 +1002,7 @@ steps:
                     placeholder: 16 чи 10А
                     minlength: 1
                     maxlength: 4
-                    pattern: '^([1-9]{1})([0-9]{0,2})([абвгґдеєжзиіїйклмнопАБВГҐДЕЄЖЗИІЇЙКЛМНОП]{0,1})$'
+                    pattern: ^([1-9]{1})([0-9]{0,2})([абвгґдеєжзиіїйклмнопАБВГҐДЕЄЖЗИІЇЙКЛМНОП]{0,1})$
                     col: col-12 col-md-4
                     validation:
                       required: Ви не ввели номер будинку.
@@ -1004,7 +1021,7 @@ steps:
                     autocomplete: "off"
                     options:
                       - value: entrance
-                        label: під'їзд
+                        label: під’їзд
                       - value: section
                         label: секція
                       - value: paradna
@@ -1071,7 +1088,7 @@ steps:
                         - field: location_widget.settlement
                       default:
                         zoom: 13
-                    helper: Ця мапа допоможе вам точно вказати де знаходиться ваша нерухомість. Рухаючи мапу вверх, вниз, вліво, вправо, збільшуючи, зменшуючи, знайдіть свою вулицю, будинок та покладіть паркер у тому місці і мапа визначить де це і точне розташування об'єкта на мапі.
+                    helper: Ця мапа допоможе вам точно вказати де знаходиться ваша нерухомість. Рухаючи мапу вверх, вниз, вліво, вправо, збільшуючи, зменшуючи, знайдіть свою вулицю, будинок та покладіть паркер у тому місці і мапа визначить де це і точне розташування об’єкта на мапі.
 
   - id: contact
     title: Контакти та медіа
@@ -1085,18 +1102,19 @@ steps:
                 fields:
                   - name: first_name
                     type: text
-                    label: Ім'я
+                    label: Ім’я
                     required: true
                     placeholder: Тарас
                     autocomplete: given-name
                     col: col-12 col-md-6
+                    pattern: ^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']{2,30}$
                     minlength: 2
                     maxlength: 30
                     validation:
-                      required: Будь ласка вкажіть ім'я українською
+                      required: Будь ласка вкажіть ім’я українською
                       minlength: Це поле має містити щонайменше 2 символи.
                       maxlength: Це поле маже містити не більше 30 символів.
-                      pattern: Це поле має містити ім'я українською, на зразок цього "Ян", "Федір" або "Петро".
+                      pattern: Це поле має містити ім’я українською, на зразок цього "Ян", "Федір" або "Петро".
 
                   - name: last_name
                     type: text
@@ -1105,6 +1123,7 @@ steps:
                     placeholder: Шевченко
                     autocomplete: family-name
                     col: col-12 col-md-6
+                    pattern: ^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ'\-]{3,30}$
                     minlength: 3
                     maxlength: 30
                     validation:
@@ -1121,7 +1140,7 @@ steps:
                     required: true
                     placeholder: "504949649"
                     prepend: "+380"
-                    pattern: '^([1-9]{1})([0-9]{1})([0-9]{7})$'
+                    pattern: ^([1-9]{1})([0-9]{1})([0-9]{7})$
                     minlength: 9
                     maxlength: 9
                     autocomplete: tel
@@ -1137,7 +1156,7 @@ steps:
                     label: Електронна пошта
                     required: false
                     placeholder: "my@email.domain.ua"
-                    pattern: '^(?!.*@.*\.(ru|su|рф|xn--p1ai|cn|ir)$).+@.+\..+$'
+                    pattern: ^(?!.*@.*\.(ru|su|рф|xn--p1ai|cn|ir)$).+@.+\..+$
                     minlength: 3
                     maxlength: 254
                     col: col-12 col-md-6
@@ -1165,7 +1184,7 @@ steps:
                 fields:
                   - name: images
                     type: file
-                    label: Фотознимки об'єкта нерухомості
+                    label: Фотознимки об’єкта нерухомості
                     multiple: true
                     required: true
                     accept: image/*
@@ -1173,7 +1192,7 @@ steps:
                       minFiles: 1
                       maxFiles: 4
                       maxSize: 150KB
-                      infoLine: "Ви можете додати фотознімки об'єкта нерухомості: від {min} до {max} файлів, до {limit} в однму файлі"
+                      infoLine: "Ви можете додати фотознімки об’єкта нерухомості: від {min} до {max} файлів, до {limit} в одному файлі"
                       thumbWidth: 140
                       thumbHeight: 105
                       resizeWidth: 800
@@ -1181,8 +1200,15 @@ steps:
                       cropOrigin: top-left
                       formatName: true
                       ext: jpg
-                      infoMessage: "Додані фотознимки перевищують встановлені ліміти, а саме розмір зображення {size} і кілкьість кілобайт у файлі {limit}. Система автоматично змінить розміри фотознимків до {size} та стисне файли до {limit} і вони будуть у межах ліміту. Якщо ви хочете зроити це самостійно, будь ласка оберіть інші файли."
-                    helper: "Додайте максимум чотири широкоформатних фото не більше 5-ти мегабайт, до прикладу: загальне фото об'єкту нерухомості, вітальні чи спальні, кухні та кімнати особистої гігієни. Приклад доброго та поганого фото."
+                    validation:
+                      required: Будь ласка додайте фотознімки
+                      minFiles: Ви маєте додати як мінімум {min} фотознімок
+                      maxFiles: Ви можете додати максимум {max} фотознімків
+                      maxSize: В одному файлі не може бути більше ніж {limit}
+                    feedback:
+                      valid: Виглядає наче все добре!
+                      invalid: Будь ласка, додайте хоча б {min} фотознімок
+                    helper: "Додайте максимум чотири широкоформатних фото не більше 5-ти мегабайт, до прикладу: загальне фото об’єкту нерухомості, вітальні чи спальні, кухні та кімнати особистої гігієни. Приклад доброго та поганого фото."
 
               - class: row
                 fields:
@@ -1207,4 +1233,4 @@ steps:
                     appearance: always
                     validation:
                       required: Підтвердьте, що ви не робот
-                    helper: Якщо перевірка не з'явилася, натисніть «Спробувати ще раз».
+                    helper: Якщо перевірка не з’явилася, натисніть «Спробувати ще раз».
