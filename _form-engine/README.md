@@ -36,21 +36,24 @@ it, and the same bytes serve the browser and (for add-property) the worker.
 | `assets/js/form-engine/modal-form.js` | Modal-form glue (`bootModal`): island -> render -> bind. |
 | `assets/js/form-engine/data.js` | Pure config/data helpers shared by both glues. |
 | `assets/js/form-engine/submit.js` | Payload builders + worker error-text maps. |
-| `assets/js/form-engine/*.js` | Conditions, layout, validation, model, HTML helpers, modals. |
+| `assets/js/form-engine/*.js` | Conditions, layout, validation, model, language, HTML helpers, modals. |
 | `assets/js/form-engine/controller.js` | One live controller per form: data, errors, steps. |
 | `assets/js/form-engine/binder.js` | DOM binder: input events in, validity out. |
 | `assets/js/form-engine/captcha.js` | Turnstile loader/gate shared by the glues. |
 | `assets/js/form-engine/themes/*.js` | Themes (bootstrap4, tailwind) + chrome/modals/navTokens. |
 | `assets/js/form-engine/themes/*.css` | The engine skin of each theme, inlined by `shell.js`. |
+| `assets/js/form-engine/themes/themeStyle.js` | Build-time CSS lookup used by `shell.js` (Node only). |
 | `assets/js/form-engine/package.json` | Declares the engine's `.js` files as ESM (`{"type":"module"}`). |
 | `_includes/form/app/<name>.html` | Baked page fragment included by a page (generated). |
 | `assets/data/form-*.json` | Baked configs served to the browser (worker manifests etc.). |
-| `_form-engine/tools/validate-config.mjs` | Config validator. No npm dependencies. |
+| `_form-engine/tools/validate-config.mjs` | Config validator: a draft-07 subset in plain Node, no schema library. |
 | `_form-engine/tools/check-notify.mjs` | Post-build gate for the config-driven Notify modal. |
 | `_form-engine/tools/check-add-property.mjs` | Purity gate against the frozen old-page baseline. |
-| `_form-engine/tools/verify-render.ps1` | Build-diff safety net. |
+| `_form-engine/tools/verify-render.ps1` | Build-diff safety net (build + normalise + compare). |
+| `_form-engine/tools/verify-render.mjs` | The comparison engine the wrapper drives. |
+| `_form-engine/tools/yaml.mjs` | Shared YAML loader (`js-yaml`) used by the validator and tests. |
 | `_form-engine/baseline/*` | Frozen old-page + rendered-output baselines for the gates. |
-| `test/*.test.mjs` | `node --test` suites (191 tests). |
+| `test/*.test.mjs` | `node --test` suites (214 tests). |
 
 Underscore-prefixed directories are never published by Jekyll, so `_form-engine/`
 holds sources and specs while `assets/` holds what the browser fetches.
@@ -104,9 +107,10 @@ node _form-engine/tools/validate-config.mjs _data/add-property.yml
 node _form-engine/tools/validate-config.mjs _data/add-property.yml --strict
 ```
 
-YAML is parsed by Ruby's `psych` (Jekyll already requires Ruby); validation runs
-in plain Node with a small draft-07 subset, so there is no npm install step and
-the same check can run in CI, in an editor task, or in the browser.
+YAML is read by `_form-engine/tools/yaml.mjs` through `js-yaml`, so validation
+runs in plain Node (Jekyll itself still loads `_data` with Ruby's `psych`). The
+validator implements a small draft-07 subset directly; there is no schema
+library and no build step, so the same check runs in CI or in an editor task.
 
 `--strict` additionally reports keys the schema does not know. `field` is
 deliberately open - it is the long tail of the DSL and grows per widget - so
@@ -115,20 +119,25 @@ that is where typos would otherwise hide silently.
 ## Tests
 
 ```bash
-node --test "test/*.test.mjs"
+npm test
 ```
 
-Run it as a plain command rather than `npm test`: `.gitignore` keeps
-`package.json` out of the repository (an old Gulp entry) on purpose, so the npm
-scripts exist only where somebody has written them locally. The `.mjs` extension
-makes the test files ES modules by themselves, so nothing depends on that file.
+`package.json` is tracked. Its `test` script runs
+`node --test --test-force-exit --test-timeout=60000 --test-concurrency=2
+"test/*.test.mjs"`; `--test-force-exit` is required because the runtime keeps
+open handles. The `.mjs` files are ES modules by themselves. A fresh clone needs
+one `npm install` for the small dependency set (`js-yaml` for the config loader,
+`linkedom` for the page-wire suites); there is no test framework or jsdom - the
+DOM stubs are hand-built.
 
 What is covered: condition evaluation, grid distribution, validation message
 precedence, the HTML helpers and their escaping rules, the model index, the
 renderer's output - including a test that no Alpine attribute reaches the page
 - the binder's DOM wiring against a stub element tree, and the Notify parity
 suite (the worker's `E_*` message map, the captcha gate, the counter and a
-FormData-shaped payload).
+FormData-shaped payload). The add-property page adds a glue test against a
+parsed DOM (`linkedom`), a parity test that mirrors `check-add-property.mjs`, and
+a freshness test that compares the baked fragment with a fresh render.
 
 ## Safety net
 
@@ -186,7 +195,7 @@ bundle exec jekyll serve --limit_posts 1 --host localhost --trace --profile
    reason, details, the hidden page fields, the honeypot and
    `cf-turnstile-response`
 
-Then close with `node --test "test/*.test.mjs"` - all suites green.
+Then close with `npm test` - all suites green.
 
 ## Known warts in the v1 DSL
 
@@ -248,7 +257,22 @@ for the renderer to be in place.
 | 7a | One browser entry + shared glue (`app.js`, `page-form`, `modal-form`, `data`, `submit`) | done |
 | 7b | Config-driven worker copy (`submit.errors` overrides the built-in map) | done |
 | 7c | Theme-neutral DOM hooks (drop the tailwind `.form-group` crash) | pending |
+| 3 | Jekyll readiness (JEK-R1..R9): Leaflet, notify URL, copy triage, file-info, dead code | done |
 | 6 | port to the Eleventy site | pending |
+
+Phase 3 closed the gaps between the engine and the live Jekyll site. JEK-R1
+de-duplicated Leaflet on `/new.html`; JEK-R2 restored `url` in `_config.yml`, so
+canonical/OG links and the notify island's `property_url` are absolute; JEK-R3
+recorded the 13 reviewed Ukrainian copy edits as an explicit allow-list in
+`check-add-property.mjs` while the baseline stays frozen; JEK-R4 made the gate
+assert the absence of the Alpine-only `.file-info` slot, so the gate is now
+**PASS with 0 failures**; JEK-R5 removed the legacy `_includes/form/**`
+partials, the duplicate notify include, the orphan baked notify fragment and the
+`php`/`python` copies - `_includes/form/` holds only `app/add-property.html`;
+JEK-R9 loads the engine module on property pages and no longer ships
+`notify.js`. JEK-R8 is still open: the repository has no `.gitattributes`, so a
+Windows checkout can fail the baked-fragment freshness test on CRLF-vs-LF until
+the EOL work lands.
 
 Phase 2 renders `config → HTML` and is covered by tests; Phase 3 made the
 result live. The instance controller tracks data, errors and steps per form -
@@ -324,12 +348,13 @@ cannot feed it), and `verify-render` tracks the new page byte-for-byte. The
 module boots with the same DOMContentLoaded guard as the modal glue, and the
 bundle runs only where a config island exists - no Alpine anywhere.
 
-> **Known drift:** `check-add-property.mjs` reports 13 failures, all "copy in
-> baseline" - `_data/add-property.yml` was later edited for typography
-> (`’` instead of `'`, `«»` instead of `<b>`, `м²`) and wording, while the frozen
-> `_form-engine/baseline/add-property-old.txt` keeps the Phase 0 text. Every
-> structural check (ids, classes, widget hooks, no-Alpine) passes. The text
-> difference is intentional and left as-is; the gate keeps guarding structure.
+> **Copy drift, resolved:** the frozen baseline keeps the Phase 0 text while
+> `_data/add-property.yml` moved to Ukrainian typography (`’`, `«»`, `м²`) and
+> fixed wording. JEK-R3 records those 13 edits as an explicit allow-list in
+> `check-add-property.mjs`, so the baseline remains a proof of the old page and
+> a new or changed string still fails. JEK-R4 replaced the stale `.file-info`
+> assertion with an explicit "must not exist" contract. The gate reports
+> **PASS, 0 failures** (`node _form-engine/tools/check-add-property.mjs`).
 
 The second theme proves the framework split clean. `form-engine/themes/tailwind.js`
 is the full functional sibling of the Bootstrap one: `FormRender.render` exposes
