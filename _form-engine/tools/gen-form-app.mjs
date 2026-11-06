@@ -77,7 +77,10 @@ const config = loadYaml(dataPath);
 const siteOpts = loadSiteOpts(ROOT, config, opts.site || {});
 if (opts.version) siteOpts.version = opts.version;
 
-const html = renderPage(config, { ...siteOpts, name });
+// Generated files are committed with `.gitattributes` `-text`, so write the
+// fragment as LF on every platform. A mixed-EOL bake would show up as a dirty
+// working tree after every build on Windows.
+const html = renderPage(config, { ...siteOpts, name }).replace(/\r\n/g, '\n');
 
 const liquid = html.match(LIQUID);
 if (liquid) {

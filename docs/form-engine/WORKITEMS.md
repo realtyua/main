@@ -57,7 +57,7 @@
 | JEK-R5 | 3 | Мертвий код: legacy partial-и, дубль notify, сирота, `.old` | BASE-5 | done | `feat/JEK-R5-dead-code` | `JEK-R5-dead-code` | 2026-11-05 | 13f52ac4 |
 | JEK-R6 | 3 | `_form-engine/README.md`: актуальний статус | JEK-R1..R5 | done | `feat/JEK-R6-readme-status` | `JEK-R6-readme-status` | 2026-11-06 | 0bed23ae |
 | JEK-R7 | 3 | Повний прогін гейтів Jekyll | JEK-R1..R6 | todo | — | — | — | — |
-| JEK-R8 | 3 | EOL-нормалізація: `.gitattributes` + EOL-незалежний freshness-тест | BASE-5 | todo | — | — | — | — |
+| JEK-R8 | 3 | EOL-нормалізація: `.gitattributes` + EOL-незалежний freshness-тест | BASE-5 | review | `feat/JEK-R8-eol-normalization` | `JEK-R8-eol-normalization` | 2026-11-06 | — |
 | JEK-R9 | 3 | Property notify: підключити `form-engine/app.js` | BASE-5 | done | `feat/JEK-R9-property-notify-appjs` | `JEK-R9-property-notify-appjs` | 2026-11-05 | c4ce9c75 |
 
 > Примітка: JEK-R1 ліг у `feature/form-engine` лінійно (коміт `19e99ce6`,
