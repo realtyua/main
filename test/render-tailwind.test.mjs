@@ -42,7 +42,8 @@ const BOOTSTRAP_TOKENS = [
 // the theme's own skin, themes/tailwind.css, not from Bootstrap.
 const HOOK_TOKENS = [
   'custom-file', 'custom-file-label', 'file-previews',
-  'dropdown-menu', 'dropdown-item', 'valid-feedback', 'invalid-feedback',
+  'dropdown-menu', 'dropdown-item', 'dropdown-item-empty',
+  'valid-feedback', 'invalid-feedback',
   'position-relative',
 ];
 
@@ -221,6 +222,8 @@ test('an autocomplete field mirrors the two-control partial, tailwind chrome', (
   assert.match(html, /data-autocomplete-noresults="district"/);
   assert.match(html, /data-autocomplete-clear="district"/);
   assert.match(html, /dropdown-menu absolute z-10 mt-1 w-full rounded-md/);
+  assert.doesNotMatch(html, /dropdown-menu[^"]*\bshow\b/, 'the dead .show marker is gone');
+  assert.match(html, /dropdown-item dropdown-item-empty/);
   assert.ok(!html.includes('name="district"'));
   assert.match(html, /data-required-marker="district"/);
 });
@@ -299,6 +302,8 @@ test('the map and price_info widgets keep their shells tailwind-styled', () => {
   assert.match(mapHtml, /<div id="map-picker" class="map-picker-responsive relative w-full rounded-md border border-gray-300"/);
   assert.match(mapHtml, /<span data-map-coords="map_widget"/);
   assert.match(mapHtml, /class="map-marker-info" hidden/);
+  assert.match(mapHtml, /<div class="map-marker-info-address text-gray-500 italic" data-map-fallback>/,
+    'both themes expose the fallback hook, so the glue hides it on tailwind too');
 
   const priceHtml = form([
     { name: 'price_info_widget', type: 'widgets', widget: 'price_info', depends: [{ field: 'action_type', value: '>0' }] },
@@ -334,7 +339,8 @@ test('the location widget renders every subfield and the summary', () => {
   assert.match(html, /class="valid-feedback mt-1 text-xs text-green-600" hidden>Виглядає добре!<\/div>/);
   assert.match(html, /<span data-error="location_widget\.oblast">/);
   assert.match(html, /data-location-summary="settlement"/);
-  assert.match(html, /class="mt-2"/, 'the summary panel hook the glue wraps stays');
+  assert.match(html, /<div class="mt-2" data-location-summary-panel hidden>/,
+    'the summary panel hook the glue selects stays');
 });
 
 test('content types render with tailwind variants, no bootstrap classes', () => {

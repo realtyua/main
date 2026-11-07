@@ -866,7 +866,7 @@ test('the summary renders the legacy locationSummary format', async () => {
   assert.ok(app, 'wireAddProperty must boot');
 
   const box = document.querySelector('[data-location-summary]');
-  const panel = box.closest('.mt-2');
+  const panel = box.closest('[data-location-summary-panel]');
   assert.ok(box && panel, 'the summary panel must be mounted');
   assert.equal(panel.hidden, true, 'the panel stays hidden without a leaf value');
 

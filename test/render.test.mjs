@@ -288,6 +288,10 @@ test('an autocomplete field mirrors the two-control partial', () => {
   assert.match(html, /data-autocomplete-search="district"/);
   assert.match(html, /class="autocomplete-search-icon"/);
   assert.match(html, /data-autocomplete-dropdown="district"/);
+  assert.match(html, /<div class="dropdown-menu position-absolute w-100"/,
+    'visibility is style.display only; the dead .show marker is gone');
+  assert.doesNotMatch(html, /dropdown-menu[^"]*\bshow\b/);
+  assert.match(html, /class="dropdown-item dropdown-item-empty"/);
   assert.match(html, /<button type="button" class="btn-clear autocomplete-clear" title="Очистити поле" data-autocomplete-clear="district" hidden>&times;<\/button>/);
   assert.ok(!html.includes('name="district"'), 'the raw select/search carry no name, like the partial');
   assert.match(html, /data-required-marker="district"/);
@@ -374,6 +378,7 @@ test('the map widget renders the picker shell with the partial CSS', () => {
   assert.match(html, /\.map-picker-responsive \{ height: 280px; \}/);
   assert.match(html, /<div class="mb-2" id="label_map_widget">Мапа<\/div>/);
   assert.match(html, /<div class="map-marker-info" hidden>/);
+  assert.match(html, /<div class="map-marker-info-address text-muted font-italic" data-map-fallback>/);
   assert.match(html, /<div id="map-picker" class="border rounded map-picker-responsive" role="application" aria-labelledby="label_map_widget"><\/div>/);
   assert.match(html, /<span data-map-coords="map_widget"/);
 });
@@ -420,6 +425,8 @@ test('the location widget renders each subfield and its summary', () => {
   assert.match(html, /<div class="valid-feedback">Виглядає добре!<\/div>/);
   assert.match(html, /<span data-error="location_widget\.oblast">/);
   assert.match(html, /data-location-summary="settlement"/);
+  assert.match(html, /<div class="mt-2" data-location-summary-panel hidden>/,
+    'the summary panel exposes a semantic hook, not the mt-2 spacing locator');
 });
 
 test('the new field types emit no Alpine', () => {

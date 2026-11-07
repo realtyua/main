@@ -78,7 +78,10 @@ function changeEvent(el) {
  *   {function} [opts.listen] (el, type, fn) -> void
  *   {object}   [opts.classes]  the invalid/valid classes the theme reacts to,
  *                              defaults to the Bootstrap names (is-invalid,
- *                              is-valid); a Tailwind page passes its own, e.g.
+ *                              is-valid). Both built-in themes pass their
+ *                              `validationClasses` here, so the names come from
+ *                              the theme rather than from this default; a third
+ *                              theme can supply its own, e.g.
  *                              { invalid: 'border-red-500', valid: 'border-green-500' }
  *   {function} [opts.colClass] (colString) -> colString, translates the grid
  *                              classes autoCol() emits (Bootstrap vocabulary)
