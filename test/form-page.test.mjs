@@ -33,7 +33,7 @@ function mount() {
   const html = `<!doctype html><html><body>
     <script id="demo-config" type="application/json">${island}</script>
     <div id="demo-app" data-endpoint="/api/demo">${baked}</div>
-    <div class="step-indicator"></div>
+    <div class="step-indicator" data-step-indicator></div>
     <button data-step-prev hidden></button><button data-step-next></button><button data-submit hidden></button>
     <div data-submitted-block hidden></div><div data-error-block hidden></div>
     <p data-error-text></p><p data-error-code-wrap hidden><span data-error-code></span></p>

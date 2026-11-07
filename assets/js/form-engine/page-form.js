@@ -75,7 +75,7 @@ export function bootPage(root, opts = {}) {
   qsa('input[type="file"][data-field]', form).forEach((input) => input.removeAttribute('data-field'));
 
   const theme = FormRender.theme(config.theme || 'bootstrap4');
-  const binder = bindForm(form, controller, { colClass: theme.colClass });
+  const binder = bindForm(form, controller, { classes: theme.validationClasses, colClass: theme.colClass });
 
   const Captcha = opts.Captcha !== undefined
     ? opts.Captcha
@@ -109,7 +109,7 @@ export function bootPage(root, opts = {}) {
   const localNotice = el('#local-notice');
   // Worker code -> copy. A config may carry its own messages in submit.errors.
   const errorMap = { ...AP_ERROR_TEXTS, ...((config.submit && config.submit.errors) || {}) };
-  const stepIndicator = el('.step-indicator');
+  const stepIndicator = el('[data-step-indicator]');
   const titleWrap = stepTitles.length ? stepTitles[0].parentElement : null;
 
   let state = { submitted: false, submitting: false, submittingError: false };
@@ -257,7 +257,7 @@ export function bootPage(root, opts = {}) {
 
   const focusFirstInvalid = () => {
     later(() => {
-      const el = form.querySelector('.is-invalid');
+      const el = form.querySelector('.' + theme.validationClasses.invalid);
       if (el) {
         el.focus && el.focus();
         el.scrollIntoView && el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -702,13 +702,13 @@ export function bootPage(root, opts = {}) {
     const ok = committed && !err;
     const select = form.querySelector(`select[data-location-field="${fieldName}"]`);
     if (select) {
-      select.classList.toggle('is-invalid', Boolean(err));
-      select.classList.toggle('is-valid', !err && valueOk);
+      select.classList.toggle(theme.validationClasses.invalid, Boolean(err));
+      select.classList.toggle(theme.validationClasses.valid, !err && valueOk);
     }
     const search = form.querySelector(`input[data-location-search="${fieldName}"]`);
     if (search) {
-      search.classList.toggle('is-invalid', Boolean(err));
-      search.classList.toggle('is-valid', ok);
+      search.classList.toggle(theme.validationClasses.invalid, Boolean(err));
+      search.classList.toggle(theme.validationClasses.valid, ok);
       search.title = err ? err : '';
     }
     // The sub-field feedback blocks live in the same .form-group, a shell the
@@ -736,7 +736,7 @@ export function bootPage(root, opts = {}) {
 
   const syncSummary = () => {
     const leaf = locationIndex(locationWidget()).slice(-1)[0];
-    const panel = form.querySelector('[data-location-summary]') ? form.querySelector('[data-location-summary]').parentElement.closest('.mt-2') : null;
+    const panel = form.querySelector('[data-location-summary-panel]');
     if (!panel) return;
     const box = form.querySelector('[data-location-summary]');
     if (!leaf || !locData()[leaf]) {
@@ -860,7 +860,6 @@ export function bootPage(root, opts = {}) {
     const dropdown = form.querySelector(`[data-location-dropdown="${fieldName}"]`);
     if (!dropdown) return;
     dropdown.style.display = st.showDropdown ? 'block' : 'none';
-    dropdown.classList.toggle('show', Boolean(st.showDropdown));
     const items = dropdown.querySelectorAll('.dropdown-item');
     for (const item of Array.prototype.slice.call(items)) item.remove();
     const host = dropdown;
@@ -883,11 +882,11 @@ export function bootPage(root, opts = {}) {
         btn.appendChild(span);
         if (showInfo) {
           const sub = document.createElement('small');
-          sub.className = 'text-muted';
+          sub.className = 'dropdown-item-info';
           sub.textContent = ' ' + locationNearest(o);
           btn.appendChild(sub);
           const tail = document.createElement('div');
-          tail.className = 'text-muted small';
+          tail.className = 'dropdown-item-tail';
           tail.textContent = locationAncestorsTail(o);
           btn.appendChild(tail);
         }
@@ -895,7 +894,7 @@ export function bootPage(root, opts = {}) {
       }
       if (noResults[fieldName] && !st.results.length) {
         const div = document.createElement('div');
-        div.className = 'dropdown-item text-muted';
+        div.className = 'dropdown-item dropdown-item-empty';
         div.style.pointerEvents = 'none';
         div.textContent = locationNoResultsText(fieldName);
         host.appendChild(div);
@@ -1072,8 +1071,8 @@ export function bootPage(root, opts = {}) {
     const valid = !err && list.length > 0;
     for (const el of [cfile, group, customFile]) {
       if (!el) continue;
-      el.classList.toggle('is-invalid', Boolean(err));
-      el.classList.toggle('is-valid', valid);
+      el.classList.toggle(theme.validationClasses.invalid, Boolean(err));
+      el.classList.toggle(theme.validationClasses.valid, valid);
     }
     syncFileFeedback(name);
     const previewWrap = form.querySelector('.file-previews');
@@ -1104,11 +1103,11 @@ export function bootPage(root, opts = {}) {
         if (filePreviewMap[name][i]) {
           const img = document.createElement('img');
           img.src = filePreviewMap[name][i];
-          img.className = 'img-fluid';
+          img.className = 'file-thumb-img';
           thumb.appendChild(img);
         } else {
           const fallback = document.createElement('div');
-          fallback.className = 'file-thumb-fallback d-flex align-items-center justify-content-center bg-light text-muted';
+          fallback.className = 'file-thumb-fallback';
           fallback.style.width = `${cfg.thumbWidth || 140}px`;
           fallback.style.height = `${cfg.thumbHeight || 105}px`;
           fallback.style.fontSize = '0.7rem';
@@ -1118,7 +1117,7 @@ export function bootPage(root, opts = {}) {
         }
         const close = document.createElement('button');
         close.type = 'button';
-        close.className = 'close position-absolute';
+        close.className = 'file-remove';
         close.style.top = '1px';
         close.style.right = '1px';
         close.innerHTML = '&times;';
@@ -1475,7 +1474,7 @@ export function bootPage(root, opts = {}) {
       if (st.showDropdown) {
         if (st.noResults && !st.results.length) {
           const div = document.createElement('div');
-          div.className = 'dropdown-item text-muted';
+          div.className = 'dropdown-item dropdown-item-empty';
           div.style.pointerEvents = 'none';
           div.textContent = autocompleteNoResults(name);
           host.appendChild(div);
@@ -1494,8 +1493,8 @@ export function bootPage(root, opts = {}) {
     const err = controller.visibleError(name);
     if (search) {
       const invalid = Boolean(err) || Boolean(st.patternError) || Boolean(st.noResults);
-      search.classList.toggle('is-invalid', invalid);
-      search.classList.toggle('is-valid', !invalid && Boolean(data[name]));
+      search.classList.toggle(theme.validationClasses.invalid, invalid);
+      search.classList.toggle(theme.validationClasses.valid, !invalid && Boolean(data[name]));
       search.title = err || st.patternError || '';
     }
   };
@@ -1882,7 +1881,7 @@ export function bootPage(root, opts = {}) {
     const coordsSpan = shell.querySelector(`[data-map-coords="${mapWidgetName()}"]`);
     const addressSpan = shell.querySelector(`[data-map-address="${mapWidgetName()}"]`);
     const loading = shell.querySelector('.map-marker-info-loading');
-    const fallback = shell.querySelector('.map-marker-info-address.text-muted.font-italic');
+    const fallback = shell.querySelector('[data-map-fallback]');
     const addressLine = addressSpan ? addressSpan.closest('.map-marker-info-address') : null;
     const coordsLine = coordsSpan ? coordsSpan.closest('.map-marker-info-coords') : null;
 
