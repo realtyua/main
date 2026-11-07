@@ -159,3 +159,13 @@ node _form-engine/tools/check-add-property.mjs
   Flaky-ів немає; `VR`/`B`/`P` не потрібні для doc-only item-а.
 - Commit SHA: `—` (агент не комітить; commit + merge `--no-ff` робить
   користувач після перегляду).
+- 2026-11-07: Закриття (користувач): item commit **`2b9dc860`**
+  (`JEK-E1: audit theme-neutral hooks`), merge `--no-ff` у
+  `feature/form-engine` — **`aacfcf2e`**. Гілку `feat/JEK-E1-theme-hooks-audit`
+  видалено; `git worktree list` містить лише канонічний `main`. Залишковий
+  junction `node_modules` у каталозі worktree знято, порожній каталог
+  видалено агентом.
+- 2026-11-07: Статус — `done`. `WORKITEMS.md`: JEK-E1 → `done`,
+  Commit `2b9dc860`; JEK-E2 → `ready` (єдина залежність виконана).
+  На merged HEAD у канонічному `main` перепрогнано **T** 214/214,
+  **V** 3/3, **CA** PASS.

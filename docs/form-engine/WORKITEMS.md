@@ -75,11 +75,17 @@
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| JEK-E1 | 4 | Аудит Phase 7c: чого бракує theme-neutral hooks | JEK-R7 | review | `feat/JEK-E1-theme-hooks-audit` | `JEK-E1-theme-hooks-audit` | 2026-11-07 | — |
-| JEK-E2 | 4 | Реалізація theme-neutral hooks | JEK-E1 | todo | — | — | — | — |
+| JEK-E1 | 4 | Аудит Phase 7c: чого бракує theme-neutral hooks | JEK-R7 | done | `feat/JEK-E1-theme-hooks-audit` | `JEK-E1-theme-hooks-audit` | 2026-11-07 | 2b9dc860 |
+| JEK-E2 | 4 | Реалізація theme-neutral hooks | JEK-E1 | ready | — | — | — | — |
 | JEK-E3 | 4 | Bootstrap4 render-тести до паритету з Tailwind | JEK-E2 | todo | — | — | — | — |
 | JEK-E4 | 4 | Доступність: labels, aria, focus, keyboard | JEK-E3 | todo | — | — | — | — |
 | JEK-E5 | 4 | Повний build + docs | JEK-E4 | todo | — | — | — | — |
+
+> Примітка: JEK-E1 — `done`: item commit `2b9dc860`, merge `--no-ff`
+> `aacfcf2e`. Аудит без зміни коду; item-гейти — **T** 214/214, **V** 3/3,
+> **CA** PASS. Відкрито 8 прогалин (G-1..G-8): blocker-ів немає, G-1 —
+> єдиний видимий UI-дефект. Рішення для реалізації — `items/JEK-E1.md` і
+> `theme-neutral-hooks.md`. JEK-E2 переведено в `ready`.
 
 ## Phase 5 — Eleventy parity (`reifua`)
 
