@@ -75,7 +75,7 @@
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| JEK-E1 | 4 | Аудит Phase 7c: чого бракує theme-neutral hooks | JEK-R7 | todo | — | — | — | — |
+| JEK-E1 | 4 | Аудит Phase 7c: чого бракує theme-neutral hooks | JEK-R7 | review | `feat/JEK-E1-theme-hooks-audit` | `JEK-E1-theme-hooks-audit` | 2026-11-07 | — |
 | JEK-E2 | 4 | Реалізація theme-neutral hooks | JEK-E1 | todo | — | — | — | — |
 | JEK-E3 | 4 | Bootstrap4 render-тести до паритету з Tailwind | JEK-E2 | todo | — | — | — | — |
 | JEK-E4 | 4 | Доступність: labels, aria, focus, keyboard | JEK-E3 | todo | — | — | — | — |
