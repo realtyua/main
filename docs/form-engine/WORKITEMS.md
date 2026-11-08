@@ -76,7 +76,7 @@
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | JEK-E1 | 4 | Аудит Phase 7c: чого бракує theme-neutral hooks | JEK-R7 | done | `feat/JEK-E1-theme-hooks-audit` | `JEK-E1-theme-hooks-audit` | 2026-11-07 | 2b9dc860 |
-| JEK-E2 | 4 | Реалізація theme-neutral hooks | JEK-E1 | review | `feat/JEK-E2-theme-neutral-hooks` | `JEK-E2-theme-neutral-hooks` | 2026-11-07 | — |
+| JEK-E2 | 4 | Реалізація theme-neutral hooks | JEK-E1 | done | `feat/JEK-E2-theme-neutral-hooks` | `JEK-E2-theme-neutral-hooks` | 2026-11-07 | c950b994 |
 | JEK-E3 | 4 | Bootstrap4 render-тести до паритету з Tailwind | JEK-E2 | todo | — | — | — | — |
 | JEK-E4 | 4 | Доступність: labels, aria, focus, keyboard | JEK-E3 | todo | — | — | — | — |
 | JEK-E5 | 4 | Повний build + docs | JEK-E4 | todo | — | — | — | — |
@@ -87,10 +87,11 @@
 > єдиний видимий UI-дефект. Рішення для реалізації — `items/JEK-E1.md` і
 > `theme-neutral-hooks.md`. JEK-E2 переведено в `ready`.
 >
-> JEK-E2 — `review` (нічого не закомічено): G-1..G-6, G-8 реалізовано,
-> `T` 215/215, `V` 3/3, `CA` PASS, `CN` ok, `VR` PASS після ручного
-> перегляду розбіжностей `new.html` і перезахоплення baseline. G-7
-> лишається окремим item-ом. Деталі — `items/JEK-E2.md`.
+> JEK-E2 — `done`: item commit `c950b994`, merge `--no-ff` `4cfd9730`.
+> G-1..G-6, G-8 реалізовано; `T` 215/215, `V` 3/3, `CA` PASS, `CN` ok,
+> `VR` PASS після ручного перегляду розбіжностей `new.html` і
+> перезахоплення baseline. G-7 лишається окремим item-ом. Деталі —
+> `items/JEK-E2.md`.
 
 ## Phase 5 — Eleventy parity (`reifua`)
 

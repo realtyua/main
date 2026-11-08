@@ -3,7 +3,7 @@
 Phase: 4 · Depends: JEK-E1 · Repo: realtyua
 Branch: `feat/JEK-E2-theme-neutral-hooks` · Worktree: `../worktrees/JEK-E2-theme-neutral-hooks`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -148,8 +148,9 @@ powershell -File _form-engine/tools/verify-render.ps1 verify -SkipBuild
   `theme-neutral-hooks.md` §6/§8 (G-1..G-6, G-8). База — `realtyua/main`,
   гілка `feature/form-engine`, HEAD `bbaa52e7`, робоче дерево чисте.
 
-- 2026-11-07: Реалізація завершена, статус `review`. Нічого не закомічено —
-  усі зміни в робочому дереві worktree `JEK-E2-theme-neutral-hooks`.
+- 2026-11-07: Реалізація завершена. Item commit `c950b994`, merge `--no-ff`
+  `4cfd9730` у `feature/form-engine`; worktree і гілку прибрано (коміт і
+  merge зроблені користувачем).
 
   **Baseline до правок:** `T` 214/214, `V` 3/3 (`add-property`, `notify`,
   `demo`), `CA` PASS. Junction `node_modules` → `../../main/node_modules`,
@@ -219,5 +220,5 @@ powershell -File _form-engine/tools/verify-render.ps1 verify -SkipBuild
 
   **Ліворуч / поза scope:** G-7 (host-контракт модалки), JEK-E3 (wire
   parity), JEK-E4 (a11y), JEK-E5 (docs + повний build). `_data/**`,
-  схема, `_plugins/**`, `new.html`, `reifua/**` не змінювалися. Коміт не
-  створювався — це робить користувач після перегляду.
+  схема, `_plugins/**`, `new.html`, `reifua/**` не змінювалися. Item
+  commit — `c950b994`, merge — `4cfd9730`.
