@@ -189,3 +189,19 @@ textarea.form-control {
 .form-group.is-valid .text-input-wrapper > .btn-clear {
   right: 5.85rem;
 }
+
+/* :focus-visible for accessibility - visible focus ring for keyboard navigation */
+.btn-clear:focus-visible,
+.file-remove:focus-visible,
+.step-number:focus-visible,
+.form-control:focus-visible,
+.custom-file-input:focus-valid ~ .custom-file-label,
+.custom-file-input:focus-visible ~ .custom-file-label {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* Ensure step-number focus is visible when it receives focus via tabindex=-1 */
+.step-number:focus-visible {
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.4);
+}

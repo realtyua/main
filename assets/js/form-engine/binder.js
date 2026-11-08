@@ -21,6 +21,29 @@
 
 const escAttrSelector = (s) => String(s).replace(/[\\"]/g, (ch) => `\\${ch}`);
 
+/**
+ * Ensures an element has an ID, generating one if needed.
+ * Returns the ID (existing or new).
+ */
+const ensureId = (el, prefix = 'fb') => {
+  if (el.id) return el.id;
+  const base = prefix + '_' + Math.random().toString(36).slice(2, 9);
+  el.id = base;
+  return base;
+};
+
+/**
+ * Merges a new ID into an element's aria-describedby, avoiding duplicates.
+ */
+const mergeDescribedBy = (el, newId) => {
+  const current = el.getAttribute('aria-describedby') || '';
+  const ids = current.split(/\s+/).filter(Boolean);
+  if (!ids.includes(newId)) {
+    ids.push(newId);
+    el.setAttribute('aria-describedby', ids.join(' '));
+  }
+};
+
 /** Same emptiness the legacy engine used (form-engine.js:312): `false` and an
  * empty array are "no answer", not a value. A single checkbox initialises to
  * `false` and a checkbox_group to `[]`, so without this the binder would paint
@@ -191,10 +214,12 @@ export function bindForm(form, controller, opts = {}) {
       if (error) {
         cls.add(classes.invalid);
         cls.remove(classes.valid);
+        control.setAttribute('aria-invalid', 'true');
       } else {
         cls.remove(classes.invalid);
         if (nonEmpty) cls.add(classes.valid);
         else cls.remove(classes.valid);
+        control.setAttribute('aria-invalid', 'false');
       }
     }
 
@@ -261,6 +286,26 @@ export function bindForm(form, controller, opts = {}) {
       // green on any broad re-sync. The glue owns the location blocks instead.
       for (const node of fb.valid) {
         if (node.style) node.style.display = nonEmpty && !error && controls.length > 0 ? 'block' : 'none';
+      }
+
+      // 2) Associate controls with the first invalid feedback block via aria-describedby
+      // (runtime IDs only - no static IDs in the baked markup)
+      if (error && fb.invalid.length > 0 && controls.length > 0) {
+        const firstInvalid = fb.invalid[0];
+        const fbId = ensureId(firstInvalid, 'err');
+        for (const control of controls) {
+          if (control.getAttribute && control.getAttribute('type') === 'hidden') continue;
+          mergeDescribedBy(control, fbId);
+        }
+      } else if (!error && controls.length > 0) {
+        // When error clears, remove the describedby reference to the error block
+        for (const control of controls) {
+          if (control.getAttribute && control.getAttribute('type') === 'hidden') continue;
+          const current = control.getAttribute('aria-describedby') || '';
+          const ids = current.split(/\s+/).filter((id) => id && !id.startsWith('err_'));
+          if (ids.length) control.setAttribute('aria-describedby', ids.join(' '));
+          else control.removeAttribute('aria-describedby');
+        }
       }
     }
   }

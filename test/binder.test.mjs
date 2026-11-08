@@ -32,6 +32,9 @@ function el(tag, attrs = {}) {
     setAttribute(name, value) {
       this._attrs[name] = String(value);
     },
+    removeAttribute(name) {
+      delete this._attrs[name];
+    },
     addEventListener(type, fn) {
       (this.handlers[type] = this.handlers[type] || []).push(fn);
     },

@@ -123,6 +123,9 @@ export function bootPage(root, opts = {}) {
       const done = n < step;
       for (const cls of nav.current.concat(nav.done, nav.todo)) node.classList.remove(cls);
       for (const cls of (current ? nav.current : done ? nav.done : nav.todo)) node.classList.add(cls);
+      // aria-current for accessibility
+      if (current) node.setAttribute('aria-current', 'step');
+      else node.removeAttribute('aria-current');
     }
     for (const node of stepTitles) {
       const n = Number(node.getAttribute('data-step-title'));
@@ -244,6 +247,12 @@ export function bootPage(root, opts = {}) {
           showSubmitError(res.body && res.body.code);
         }
         syncChrome();
+        // Focus management after submit
+        if (state.submitted && submittedBlock) {
+          later(() => submittedBlock.focus(), 0);
+        } else if (state.submittingError && errorBlock) {
+          later(() => errorBlock.focus(), 0);
+        }
       })
       .catch(() => {
         showSubmitError('');
@@ -268,15 +277,23 @@ export function bootPage(root, opts = {}) {
   const retryBtn = el('[data-submit-retry]');
   if (retryBtn) retryBtn.addEventListener('click', submit);
 
-  if (prevBtn) prevBtn.addEventListener('click', () => { controller.prev(); scrollToIndicator(); });
+  const focusStepTitle = (stepNum) => {
+    const title = el(`[data-step-title="${stepNum}"]`);
+    if (title) {
+      title.focus();
+    }
+  };
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { controller.prev(); focusStepTitle(controller.step() + 1); });
   if (nextBtn) nextBtn.addEventListener('click', () => {
     if (locationStepInvalid()) {
       syncChrome();
       focusFirstInvalid();
       return;
     }
-    if (controller.next()) scrollToIndicator();
-    else {
+    if (controller.next()) {
+      focusStepTitle(controller.step() + 1);
+    } else {
       syncChrome();
       focusFirstInvalid();
     }
@@ -816,6 +833,13 @@ export function bootPage(root, opts = {}) {
       search.readOnly = locked;
       const st = locationState[fieldName] || { search: '', results: [], showDropdown: false, highlightIndex: -1 };
       locationState[fieldName] = st;
+      // Combobox ARIA attributes
+      if (useSearch) {
+        search.setAttribute('role', 'combobox');
+        search.setAttribute('aria-autocomplete', 'list');
+        search.setAttribute('aria-expanded', st.showDropdown ? 'true' : 'false');
+        search.setAttribute('aria-controls', `loc-dropdown-${fieldName}`);
+      }
       // Derive the display text only for an untouched field: an in-progress
       // query is never wiped by an unrelated controller change (legacy kept it
       // too - nothing outside clear/select rewrote locationState.search), and
@@ -860,23 +884,32 @@ export function bootPage(root, opts = {}) {
     const dropdown = form.querySelector(`[data-location-dropdown="${fieldName}"]`);
     if (!dropdown) return;
     dropdown.style.display = st.showDropdown ? 'block' : 'none';
+    dropdown.setAttribute('role', 'listbox');
+    dropdown.setAttribute('id', `loc-dropdown-${fieldName}`);
     const items = dropdown.querySelectorAll('.dropdown-item');
     for (const item of Array.prototype.slice.call(items)) item.remove();
     const host = dropdown;
     const showInfo = showParentInfoFor(fieldName);
+    const search = form.querySelector(`input[data-location-search="${fieldName}"]`);
     if (st.results.length || noResults[fieldName]) {
       for (let i = 0; i < st.results.length; i++) {
         const o = st.results[i];
         const btn = document.createElement('button');
         btn.type = 'button';
+        btn.setAttribute('role', 'option');
+        btn.setAttribute('aria-selected', st.highlightIndex === i ? 'true' : 'false');
+        btn.setAttribute('id', `loc-option-${fieldName}-${i}`);
         // Legacy location widget adds `searchable-dropdown-item` so the item
         // wraps (white-space: normal in _buttons.scss) instead of pushing a
         // horizontal scrollbar when the ancestor tail is shown.
         btn.className = 'dropdown-item'
           + (showInfo ? ' searchable-dropdown-item' : '')
           + (st.highlightIndex === i ? ' highlighted' : '');
-        btn.addEventListener('mousedown', (e) => { e.preventDefault(); locationSelectById(fieldName, o.id); });
-        btn.addEventListener('mouseenter', () => { st.highlightIndex = i; });
+        // Both mousedown (legacy mouse) and click (keyboard Enter/Space) for activation
+        const pick = () => { locationSelectById(fieldName, o.id); };
+        btn.addEventListener('mousedown', (e) => { e.preventDefault(); pick(); });
+        btn.addEventListener('click', (e) => { e.preventDefault(); pick(); });
+        btn.addEventListener('mouseenter', () => { st.highlightIndex = i; renderLocationDropdown(fieldName, st); });
         const span = document.createElement('span');
         span.textContent = locationDisplay(o, shoType[fieldName]);
         btn.appendChild(span);
@@ -896,8 +929,16 @@ export function bootPage(root, opts = {}) {
         const div = document.createElement('div');
         div.className = 'dropdown-item dropdown-item-empty';
         div.style.pointerEvents = 'none';
+        div.setAttribute('role', 'option');
+        div.setAttribute('aria-selected', 'false');
         div.textContent = locationNoResultsText(fieldName);
         host.appendChild(div);
+      }
+      // aria-activedescendant on search input
+      if (search && st.highlightIndex >= 0 && st.highlightIndex < st.results.length) {
+        search.setAttribute('aria-activedescendant', `loc-option-${fieldName}-${st.highlightIndex}`);
+      } else if (search) {
+        search.removeAttribute('aria-activedescendant');
       }
     }
   };
@@ -1121,6 +1162,7 @@ export function bootPage(root, opts = {}) {
         close.style.top = '1px';
         close.style.right = '1px';
         close.innerHTML = '&times;';
+        close.setAttribute('aria-label', `Видалити файл: ${file.name}`);
         close.addEventListener('click', () => removeFilesAt(name, [i]));
         thumb.appendChild(close);
         row.appendChild(thumb);
@@ -1457,6 +1499,13 @@ export function bootPage(root, opts = {}) {
     if (search) {
       search.readOnly = !!readonly;
       search.value = st.search || '';
+      // Combobox ARIA attributes
+      if (useSearch) {
+        search.setAttribute('role', 'combobox');
+        search.setAttribute('aria-autocomplete', 'list');
+        search.setAttribute('aria-expanded', st.showDropdown ? 'true' : 'false');
+        search.setAttribute('aria-controls', `ac-dropdown-${name}`);
+      }
       if (clearBtn) {
         const hasValue = (data[name] || st.search);
         clearBtn.hidden = !hasValue || !!readonly;
@@ -1468,6 +1517,8 @@ export function bootPage(root, opts = {}) {
     }
     if (dropdown) {
       dropdown.style.display = st.showDropdown && (st.results.length > 0 || st.noResults) ? 'block' : 'none';
+      dropdown.setAttribute('id', `ac-dropdown-${name}`);
+      dropdown.setAttribute('role', 'listbox');
       const host = dropdown;
       const items = host.querySelectorAll('.dropdown-item');
       for (const item of Array.prototype.slice.call(items)) item.remove();
@@ -1476,6 +1527,8 @@ export function bootPage(root, opts = {}) {
           const div = document.createElement('div');
           div.className = 'dropdown-item dropdown-item-empty';
           div.style.pointerEvents = 'none';
+          div.setAttribute('role', 'option');
+          div.setAttribute('aria-selected', 'false');
           div.textContent = autocompleteNoResults(name);
           host.appendChild(div);
         }
@@ -1483,11 +1536,23 @@ export function bootPage(root, opts = {}) {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'dropdown-item' + (st.highlightIndex === i ? ' highlighted' : '');
-          btn.addEventListener('mousedown', (e) => { e.preventDefault(); autocompleteSelect(name, o); });
-          btn.addEventListener('mouseenter', () => { st.highlightIndex = i; });
+          btn.setAttribute('role', 'option');
+          btn.setAttribute('aria-selected', st.highlightIndex === i ? 'true' : 'false');
+          btn.setAttribute('id', `ac-option-${name}-${i}`);
+          // Both mousedown (legacy mouse) and click (keyboard Enter/Space) for activation
+          const pick = () => { autocompleteSelect(name, o); };
+          btn.addEventListener('mousedown', (e) => { e.preventDefault(); pick(); });
+          btn.addEventListener('click', (e) => { e.preventDefault(); pick(); });
+          btn.addEventListener('mouseenter', () => { st.highlightIndex = i; syncAcSearch(name); });
           btn.textContent = o.name;
           host.appendChild(btn);
         });
+        // aria-activedescendant on search input
+        if (st.highlightIndex >= 0 && st.highlightIndex < st.results.length) {
+          search.setAttribute('aria-activedescendant', `ac-option-${name}-${st.highlightIndex}`);
+        } else {
+          search.removeAttribute('aria-activedescendant');
+        }
       }
     }
     const err = controller.visibleError(name);
@@ -1755,6 +1820,9 @@ export function bootPage(root, opts = {}) {
     // never produces a token, so the required rule must not block on it - the
     // legacy engine read CaptchaSite.solved() as true in exactly these cases.
     controller.setCaptchaSolved(name, local || !Captcha);
+    // aria-labelledby for accessibility (runtime, not in baked markup)
+    const labelId = `label_${name}`;
+    if (root.getElementById(labelId)) box.setAttribute('aria-labelledby', labelId);
   });
 
   for (const field of captchaWidgets()) {
