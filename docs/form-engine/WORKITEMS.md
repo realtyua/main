@@ -77,7 +77,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | JEK-E1 | 4 | Аудит Phase 7c: чого бракує theme-neutral hooks | JEK-R7 | done | `feat/JEK-E1-theme-hooks-audit` | `JEK-E1-theme-hooks-audit` | 2026-11-07 | 2b9dc860 |
 | JEK-E2 | 4 | Реалізація theme-neutral hooks | JEK-E1 | done | `feat/JEK-E2-theme-neutral-hooks` | `JEK-E2-theme-neutral-hooks` | 2026-11-07 | c950b994 |
-| JEK-E3 | 4 | Bootstrap4 render-тести до паритету з Tailwind | JEK-E2 | todo | — | — | — | — |
+| JEK-E3 | 4 | Bootstrap4 render-тести до паритету з Tailwind | JEK-E2 | review | `feat/JEK-E3-bootstrap4-render-parity` | `JEK-E3-bootstrap4-render-parity` | 2026-11-08 | — |
 | JEK-E4 | 4 | Доступність: labels, aria, focus, keyboard | JEK-E3 | todo | — | — | — | — |
 | JEK-E5 | 4 | Повний build + docs | JEK-E4 | todo | — | — | — | — |
 
@@ -92,6 +92,14 @@
 > `VR` PASS після ручного перегляду розбіжностей `new.html` і
 > перезахоплення baseline. G-7 лишається окремим item-ом. Деталі —
 > `items/JEK-E2.md`.
+>
+> JEK-E3 — `review`: item лише про тести (runtime, теми, CSS, конфіги,
+> `_includes`, `_plugins`, baseline без змін). Додано `theme-render-parity`
+> і `theme-wire-parity` — Tailwind тепер проходить booted `add-property`
+> (таблиця glue-селекторів, autocomplete, G-1, location summary, локальний
+> captcha); узгоджено `BOOTSTRAP_TOKENS`/`HOOK_TOKENS` (`alert-info` —
+> widget-хук captcha). `T` 228/228, `V` 3/3, `CA` PASS; `VR` не запускався.
+> Коміту ще немає. Деталі — `items/JEK-E3.md`.
 
 ## Phase 5 — Eleventy parity (`reifua`)
 

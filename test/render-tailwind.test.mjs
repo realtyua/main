@@ -23,11 +23,14 @@ const ALPINE = /\b(x-[a-z]+|@[a-z]+(\.[a-z0-9]+)*|:[a-z-]+)=/;
 
 // Bootstrap presentation tokens a Tailwind render must never emit. The hook
 // classes the page scripts select are NOT listed here - they are intentional
-// and asserted positive below.
+// and asserted positive below. `alert-info` is deliberately absent: the captcha
+// card emits `alert alert-info` in both themes because page-form.js queries
+// `.alert-info` to show the local-mode notice. It is a neutral hook, not a
+// Bootstrap utility, so it belongs in the widget allow-list below.
 const BOOTSTRAP_TOKENS = [
   'form-control', 'form-group', 'custom-control', 'custom-radio', 'custom-checkbox',
   'input-group-text', 'input-group-prepend', 'input-group-append', 'input-group',
-  'btn btn-', 'btn-primary', 'btn-outline-', 'alert-info', 'badge-',
+  'btn btn-', 'btn-primary', 'btn-outline-', 'badge-',
   'text-danger', 'text-muted', 'form-text',
   'spinner-border',
   'card-title', 'img-fluid', 'figure-caption', ' row ',
@@ -44,8 +47,18 @@ const HOOK_TOKENS = [
   'custom-file', 'custom-file-label', 'file-previews',
   'dropdown-menu', 'dropdown-item', 'dropdown-item-empty',
   'valid-feedback', 'invalid-feedback',
-  'position-relative',
+  'position-relative', 'location-search-icon',
+  'captcha-widget', 'alert', 'alert-info',
 ];
+
+// Widget-scoped legacy class names that are JS hooks, not presentation. A
+// widget may keep them in either theme because page-form.js selects them by
+// name; the render-wide scan below must not treat them as Bootstrap leakage.
+// Listing them explicitly keeps the exception narrow: only the captcha card
+// may emit `alert alert-info`, and only because it owns the local-mode notice.
+const WIDGET_HOOKS = {
+  captcha: ['captcha-widget', 'alert', 'alert-info'],
+};
 
 test('the tailwind theme is registered and unknown themes still fail', () => {
   assert.ok(FormRender.themes.includes('tailwind'));
@@ -108,6 +121,13 @@ test('no Bootstrap utility or Alpine attribute reaches a tailwind render', () =>
       label: 'Локація',
       fields: [{ name: 'settlement', label: 'НП' }],
     },
+    {
+      name: 'cap',
+      type: 'widgets',
+      widget: 'captcha',
+      element_id: 'cap',
+      label: 'Підтвердьте, що ви не робот',
+    },
   ]);
 
   assert.ok(!ALPINE.test(html), `framework attribute leaked: ${html.match(ALPINE)?.[0]}`);
@@ -116,10 +136,29 @@ test('no Bootstrap utility or Alpine attribute reaches a tailwind render', () =>
 
   // the hook tokens survive intentionally
   for (const hook of HOOK_TOKENS) assert.ok(html.includes(hook), `hook class kept: ${hook}`);
+  for (const hook of WIDGET_HOOKS.captcha) assert.ok(html.includes(hook), `widget hook kept: ${hook}`);
 
   assert.match(html, /data-field="a"/);
   assert.match(html, /data-field-col="a"/);
   assert.match(html, /data-widget="location" data-widget-name="loc_widget"/);
+});
+
+test('the captcha widget owns the neutral alert hooks, nothing else emits them', () => {
+  const withCaptcha = form([
+    { name: 'cap', type: 'widgets', widget: 'captcha', element_id: 'cap', label: 'CAP' },
+  ]);
+  const withoutCaptcha = form([{ name: 'a', type: 'text', label: 'A' }]);
+
+  for (const hook of WIDGET_HOOKS.captcha) {
+    assert.ok(withCaptcha.includes(hook), `captcha keeps the ${hook} hook`);
+    assert.ok(!withoutCaptcha.includes(hook),
+      `${hook} is widget-owned and must not leak into a plain render`);
+  }
+
+  // The hook is positive evidence, not a bootstrap-token escape hatch: the
+  // alert still carries Tailwind presentation classes.
+  assert.match(withCaptcha,
+    /class="alert alert-info[^"]*rounded-md[^"]*bg-blue-50[^"]*text-blue-800"/);
 });
 
 test('grid classes translate to tailwind widths, other tokens pass through', () => {
