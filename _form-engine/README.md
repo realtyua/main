@@ -258,7 +258,7 @@ for the renderer to be in place.
 | 7b | Config-driven worker copy (`submit.errors` overrides the built-in map) | done |
 | 7c | Theme-neutral DOM hooks (drop the tailwind `.form-group` crash) | done (JEK-E1/E2, crash closed in 7a/7b) |
 | 3 | Jekyll readiness (JEK-R1..R9): Leaflet, notify URL, copy triage, file-info, dead code | done |
-| 4 | Jekyll engine (JEK-E1..E5): theme-neutral hooks, Bootstrap4 parity, accessibility, full build+docs | **in progress (E5)** |
+| 4 | Jekyll engine (JEK-E1..E5): theme-neutral hooks, Bootstrap4 parity, accessibility, full build+docs | **done** |
 | 6 | port to the Eleventy site | pending |
 
 Phase 3 closed the gaps between the engine and the live Jekyll site. JEK-R1
@@ -405,7 +405,7 @@ generator and shell are what the Eleventy port will call.
 | JEK-E2 | Theme-neutral hooks implementation (G-1..G-6, G-8) | done |
 | JEK-E3 | Bootstrap4 render parity tests (Tailwind wire + theme-render parity) | done |
 | JEK-E4 | Accessibility: labels, aria, focus, keyboard | done |
-| JEK-E5 | Full build + docs (this item) | in progress |
+| JEK-E5 | Full build + docs (this item) | done |
 
 **JEK-E1** (audit): Found 8 gaps (G-1..G-8). G-1 = map fallback visible in Tailwind (only visible UI defect). No blockers. Details: `docs/form-engine/theme-neutral-hooks.md`.
 
