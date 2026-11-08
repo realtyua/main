@@ -495,3 +495,20 @@ textarea ~ .btn-clear {
     width: 100%;
   }
 }
+
+/* :focus-visible for accessibility - visible focus ring for keyboard navigation */
+.btn-clear:focus-visible,
+.file-remove:focus-visible,
+.step-number:focus-visible,
+.form-file:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Ensure step-number focus is visible when it receives focus via tabindex=-1 */
+.step-number:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+}
