@@ -3,7 +3,7 @@
 Phase: 4 · Depends: JEK-E2 · Repo: realtyua
 Branch: `feat/JEK-E3-bootstrap4-render-parity` · Worktree: `../worktrees/JEK-E3-bootstrap4-render-parity`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -153,7 +153,7 @@ baseline не змінюються. `CN`, `B`, `P` — поза scope item-а.
 
 ### 2026-11-08 — session 1 (JEK-E3)
 
-**Status:** `review`.
+**Status:** `done`.
 
 **Files changed (worktree, unstaged/untracked):**
 
@@ -188,5 +188,5 @@ Runtime, теми, CSS, `_data/**`, `_includes/form/app/**`, `_plugins/**`,
   рівність кольорів.
 - `alert-info` у captcha — нейтральний хук `page-form.js`, не
   Bootstrap-протікання; allow-list `WIDGET_HOOKS.captcha` звужує виняток.
-- Commit SHA — **немає**: зміни не закомічені, staging/commit/merge — за
-  користувачем.
+- Commit SHA — `a1ef8c59`; merge `--no-ff` — `6a25a32b`. Гілку запушено,
+  worktree прибрано, локальну гілку видалено.
