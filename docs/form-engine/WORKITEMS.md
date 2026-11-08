@@ -78,7 +78,7 @@
 | JEK-E1 | 4 | Аудит Phase 7c: чого бракує theme-neutral hooks | JEK-R7 | done | `feat/JEK-E1-theme-hooks-audit` | `JEK-E1-theme-hooks-audit` | 2026-11-07 | 2b9dc860 |
 | JEK-E2 | 4 | Реалізація theme-neutral hooks | JEK-E1 | done | `feat/JEK-E2-theme-neutral-hooks` | `JEK-E2-theme-neutral-hooks` | 2026-11-07 | c950b994 |
 | JEK-E3 | 4 | Bootstrap4 render-тести до паритету з Tailwind | JEK-E2 | done | `feat/JEK-E3-bootstrap4-render-parity` | `JEK-E3-bootstrap4-render-parity` | 2026-11-08 | a1ef8c59 |
-| JEK-E4 | 4 | Доступність: labels, aria, focus, keyboard | JEK-E3 | todo | — | — | — | — |
+| JEK-E4 | 4 | Доступність: labels, aria, focus, keyboard | JEK-E3 | done | `feat/JEK-E4-accessibility` | `../worktrees/JEK-E4-accessibility` | 2026-11-08 | — |
 | JEK-E5 | 4 | Повний build + docs | JEK-E4 | todo | — | — | — | — |
 
 > Примітка: JEK-E1 — `done`: item commit `2b9dc860`, merge `--no-ff`

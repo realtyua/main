@@ -183,3 +183,24 @@ node _form-engine/tools/check-add-property.mjs
   Специфікацію показано користувачу для затвердження до будь-яких змін коду.
   База — `realtyua/main`, гілка `feature/form-engine`, HEAD `78a3408e`,
   робоче дерево чисте. Worktree/гілка ще не створювалися.
+
+- 2026-11-08: **JEK-E4 COMPLETED** ✅
+  Worktree: `C:\Users\Vasyl\Documents\GitHub\realtyua\worktrees\JEK-E4-accessibility`
+  Branch: `feat/JEK-E4-accessibility`
+  
+  **Files modified:**
+  - `assets/js/form-engine/binder.js` — added `ensureId`/`mergeDescribedBy` helpers; `syncField` sets `aria-invalid` and associates controls with error blocks via runtime `aria-describedby`
+  - `assets/js/form-engine/page-form.js` — `syncChrome` adds `aria-current="step"`; combobox ARIA on autocomplete/location (`role="combobox"`, `aria-expanded`, `aria-controls`, `aria-activedescendant`); dropdown items `role="option"`, `aria-selected`; both `mousedown` + `click` for keyboard activation; `focusStepTitle` after next/prev; focus error/success blocks after submit; captcha runtime `aria-labelledby`; file-remove gets `aria-label` with filename
+  - `assets/js/form-engine/themes/bootstrap4.js` / `tailwind.js` — `searchIcon` SVG `aria-hidden`/`focusable="false"`; feedback `aria-live`/`aria-atomic`; radio `fieldset`/`legend`; clear buttons `aria-label`; map marker `aria-hidden`; spinner/fallback `role="status"`; step number `aria-label`; step title `id` + `tabindex="-1"`; submitted/error blocks `tabindex="-1"`; success alert `role="status" aria-live="polite"`; local notice `role="status" aria-live="polite"`
+  - `assets/js/form-engine/themes/bootstrap4.css` / `tailwind.css` — added `:focus-visible` styles for `.btn-clear`, `.file-remove`, `.step-number`, form controls
+  - `test/accessibility.test.mjs` — new test file (12 tests covering both themes)
+  - `test/binder.test.mjs` — added `removeAttribute` to element shim
+  - `_includes/form/app/add-property.html` — regenerated via `gen-form-app.mjs`
+  
+  **Gates passed:**
+  - `npm test` — 228/228 tests pass
+  - `validate-config --strict` — 3/3 configs valid (add-property, notify, demo)
+  - `check-add-property.mjs` — PASS (ID contract intact, no new static IDs)
+  
+  **Leftovers:** none — all changes are within item scope
+  **Commit SHA:** worktree HEAD (uncommitted changes)
