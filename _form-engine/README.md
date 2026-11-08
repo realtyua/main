@@ -256,8 +256,9 @@ for the renderer to be in place.
 | 6 | Tailwind theme | done |
 | 7a | One browser entry + shared glue (`app.js`, `page-form`, `modal-form`, `data`, `submit`) | done |
 | 7b | Config-driven worker copy (`submit.errors` overrides the built-in map) | done |
-| 7c | Theme-neutral DOM hooks (drop the tailwind `.form-group` crash) | pending |
+| 7c | Theme-neutral DOM hooks (drop the tailwind `.form-group` crash) | done (JEK-E1/E2, crash closed in 7a/7b) |
 | 3 | Jekyll readiness (JEK-R1..R9): Leaflet, notify URL, copy triage, file-info, dead code | done |
+| 4 | Jekyll engine (JEK-E1..E5): theme-neutral hooks, Bootstrap4 parity, accessibility, full build+docs | **in progress (E5)** |
 | 6 | port to the Eleventy site | pending |
 
 Phase 3 closed the gaps between the engine and the live Jekyll site. JEK-R1
@@ -395,6 +396,28 @@ colours from `config.chrome.nav` (fallback: the Bootstrap tokens), and toggles
 the error-code block through the `hidden` property rather than a `d-none` class
 (the attribute used to win, so a worker code was never shown). The same
 generator and shell are what the Eleventy port will call.
+
+## Phase 4 — Jekyll engine (JEK-E1..E5)
+
+| Item | Scope | State |
+| --- | --- | --- |
+| JEK-E1 | Theme-neutral hooks audit (no code changes) | done |
+| JEK-E2 | Theme-neutral hooks implementation (G-1..G-6, G-8) | done |
+| JEK-E3 | Bootstrap4 render parity tests (Tailwind wire + theme-render parity) | done |
+| JEK-E4 | Accessibility: labels, aria, focus, keyboard | done |
+| JEK-E5 | Full build + docs (this item) | in progress |
+
+**JEK-E1** (audit): Found 8 gaps (G-1..G-8). G-1 = map fallback visible in Tailwind (only visible UI defect). No blockers. Details: `docs/form-engine/theme-neutral-hooks.md`.
+
+**JEK-E2** (implementation): G-1..G-6, G-8 fixed. Added `data-map-fallback`, `data-location-summary-panel`, `data-step-indicator`, `theme.validationClasses`. Removed Bootstrap utilities from glue DOM (`img-fluid`, `d-flex`, `align-items-center`, `justify-content-center`, `bg-light`, `text-muted`, `position-absolute`, `text-muted small`, `searchable-dropdown-item`). `.show` toggle removed. `T` 215/215, `V` 3/3, `CA` PASS, `VR` PASS after manual review + baseline recapture.
+
+**JEK-E3** (Bootstrap4 parity tests): Added `theme-render-parity` + `theme-wire-parity` (Tailwind now passes booted `add-property`). Glue selector table, autocomplete, G-1 map fallback, location summary, local captcha all parity-verified. Aligned `BOOTSTRAP_TOKENS`/`HOOK_TOKENS` (`alert-info` = widget hook for captcha). `T` 228/228.
+
+**JEK-E4** (accessibility): Both themes now have accessible names on every control, `fieldset`/`legend` for radio groups, `aria-label` on icon-only clear buttons, `aria-hidden` on decorative icons. `aria-invalid`/`aria-describedby` on validation, `role="combobox"` + `aria-expanded`/`aria-activedescendant` + `role="option"` on dropdowns, `aria-current="step"` on current step, live regions for errors/success/map-fallback/captcha. Focus management: step titles after next/prev, error/success blocks after submit. Keyboard activation of dropdown items (Enter/Space). `test/accessibility.test.mjs` added (12 tests, both themes). `T` 228/228.
+
+**JEK-E5** (this item): Full Jekyll build, docs sync (`README.md`, `theming.md`), baked fragment refresh, `verify-render` baseline recapture, all gates green.
+
+---
 
 ## One entry, one glue
 
