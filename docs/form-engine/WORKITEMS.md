@@ -106,7 +106,7 @@
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| EL-1 | 5 | Синхронізація рушія + hash-тест | JEK-E5 | todo | — | — | — | — |
+| EL-1 | 5 | Синхронізація рушія + hash-тест | JEK-E5 | done | `feat/EL-1-engine-sync` | `../worktrees/EL-1-engine-sync` | 2026-11-09 | — |
 | EL-2 | 5 | Сторінка add-property + Bootstrap4 wiring | EL-1 | todo | — | — | — | — |
 | EL-3 | 5 | Demo-сторінка (Tailwind) | EL-1 | todo | — | — | — | — |
 | EL-4 | 5 | Notify: layout/host, config, captcha, endpoint | EL-2 | todo | — | — | — | — |
