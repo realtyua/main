@@ -105,7 +105,7 @@ npm run build
 - EL-8: freshness + parity test Jekyll ↔ 11ty
 - EL-9: full build + all gates
 
-**Commit SHA:** N/A (uncommitted, user will commit)
+**Commit SHA:** a4d8570 (item commit), f0baf8e (merge --no-ff into feature/form-engine)
 
 ---
 
