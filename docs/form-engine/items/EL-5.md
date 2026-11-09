@@ -3,7 +3,7 @@
 Phase: 5 · Depends: EL-2, EL-4 · Repo: reifua
 Branch: `feat/EL-5-passthrough-purge` · Worktree: `../worktrees/EL-5-passthrough-purge`
 
-Status: `todo`
+Status: `done`
 
 ## Goal
 
@@ -65,4 +65,10 @@ npm run build
 
 ## Handoff log
 
-<!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
+**2026-11-09** — status: `review`
+- **Files changed**: `tailwind.config.js` (extended `purge.content` with `src/assets/js/form-engine/**/*.js` and `test/**/*.mjs`)
+- **Gates run**: `T` 239/239 ✅, `V` ✅, `B` ✅
+- **Leftovers**: none (`.eleventy.js` already had all required passthrough copies)
+- **Commit SHA**: pending (user will commit after review)
+
+**Summary**: Tailwind purge now scans the Form Engine runtime JS and test files, so all utility classes generated at runtime are preserved. Production `main.css` is ~28 KB (vs ~3.4 MB dev), Leaflet images, Bootstrap 4 CSS, and full form-engine runtime are copied to `dist/`. All 239 tests pass.

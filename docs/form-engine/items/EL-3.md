@@ -3,7 +3,7 @@
 Phase: 5 · Depends: EL-1 · Repo: reifua
 Branch: `feat/EL-3-demo-page` · Worktree: `../worktrees/EL-3-demo-page`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 

@@ -3,7 +3,7 @@
 Phase: 5 · Depends: EL-2 · Repo: reifua
 Branch: `feat/EL-4-notify-wiring` · Worktree: `../worktrees/EL-4-notify-wiring`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 

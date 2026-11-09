@@ -3,7 +3,7 @@
 Phase: 5 · Depends: EL-1 · Repo: reifua
 Branch: `feat/EL-2-add-property-page` · Worktree: `../worktrees/EL-2-add-property-page`
 
-Status: `todo`
+Status: `done`
 
 ## Goal
 
