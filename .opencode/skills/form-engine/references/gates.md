@@ -42,9 +42,15 @@ node _form-engine/tools/check-add-property.mjs
 Baseline — **заморожений** знімок старої сторінки; він не оновлюється від
 поточного рендера.
 
-Поточний стан: **14 failures** — 13 copy-drift (українська типографіка) +
-1 структурний `file info container`. Структурні перевірки (ids, classes,
+Поточний стан: **0 failures (PASS)** — після JEK-R3/JEK-R4 baseline reconciliation.
+13 copy-drift прийняті через `ACCEPTED_COPY_EDITS` таблицю; `file-info` перевірка
+інвертована (явний негативний контракт). Структурні перевірки (ids, classes,
 widget hooks, no-Alpine) проходять. Не «лікувати» baseline наосліп — JEK-R3/R4.
+
+> **Важливо:** Інструмент має рендерити з `theme: config.theme || 'bootstrap4'`,
+> щоб поважати тему конфігу (Bootstrap 4 для add-property, Tailwind для demo).
+> При портуванні на 11ty (EL-6) це виправлено:
+> `FormRender.render(config, { theme: config.theme || 'bootstrap4' })`.
 
 ### CN — notify
 
@@ -89,14 +95,15 @@ Property-сторінка — пост, тому при появі новішо�
 npm test
 npm run validate
 npm run build
+npm run check:add-property
 ```
 
 - `B` — `npm run build` = `rimraf dist && cross-env NODE_ENV=production eleventy`;
 - `npm run validate` — `validate-config.mjs src/_data/add-property.yml --strict`;
+- `npm run check:add-property` — порт `check-add-property.mjs` (EL-6), очікує 0 failures;
 - тести — той самий `node --test` набір (208/208 на момент плану).
 
-Для повного паритету (Phase 5) знадобляться порти `check-add-property`,
-`check-notify`, freshness-тест і `parity.test.mjs` — їх ще немає.
+Для повного паритету (Phase 5) знадобляться порти `check-notify`, freshness-тест і `parity.test.mjs` — їх ще немає.
 
 ## P — паритет рушія
 
