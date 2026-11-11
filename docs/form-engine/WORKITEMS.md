@@ -111,8 +111,8 @@
 | EL-3 | 5 | Demo-сторінка (Tailwind) | EL-1 | done | `feat/EL-3-demo-page` | `../worktrees/EL-3-demo-page` | 2026-11-09 | a4d8570 |
 | EL-4 | 5 | Notify: layout/host, config, captcha, endpoint | EL-2 | done | `feat/EL-4-notify-wiring` | `../worktrees/EL-4-notify-wiring` | 2026-11-09 | e8ad8f7 |
 | EL-5 | 5 | Passthrough + Tailwind purge | EL-2, EL-4 | done | `feat/EL-5-passthrough-purge` | `../worktrees/EL-5-passthrough-purge` | 2026-11-09 | 1689dc6 |
-| EL-6 | 5 | Порт `check-add-property` | EL-2 | review | `feat/EL-6-check-add-property` | `../worktrees/EL-6-check-add-property` | 2026-11-10 | — |
-| EL-7 | 5 | Порт `check-notify` | EL-4 | todo | `feat/EL-7-check-notify` | `../worktrees/EL-7-check-notify` | — | — |
+| EL-6 | 5 | Порт `check-add-property` | EL-2 | done | `feat/EL-6-check-add-property` | `../worktrees/EL-6-check-add-property` | 2026-11-10 | db1f95f |
+| EL-7 | 5 | Порт `check-notify` | EL-4 | done | `feat/EL-7-check-notify` | `X:/OpenCodeData/opencode/worktree/b25e23/EL-7-check-notify` | 2026-11-11 | bb0fc36 |
 | EL-8 | 5 | Freshness + parity test Jekyll ↔ 11ty | EL-6, EL-7 | todo | `feat/EL-8-freshness-parity` | `../worktrees/EL-8-freshness-parity` | — | — |
 | EL-9 | 5 | Повний build + усі гейти | EL-1..EL-8 | todo | `feat/EL-9-full-gates` | `../worktrees/EL-9-full-gates` | — | — |
 
