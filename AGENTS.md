@@ -107,6 +107,8 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
 - У worktree немає `node_modules`. Для гейтів — junction на канонічний:
   `cmd /c mklink /J node_modules ..\..\main\node_modules`. `npm install`
   заборонений (офлайн-політика). Junction знімати **до** `worktree_remove`.
+- Після прибирання worktree сесію item-а паркувати в репо предмета item-а:
+  EL-* → `reifua/main`, JEK-* → `realtyua/main`.
 - Старт: `/item <ID>`. Агент читає `WORKITEMS.md` + `docs/form-engine/items/<ID>.md`.
 - Baseline-гейти **до** змін, гейти item — після.
 - Handoff дописується в item-файл, статус — у `WORKITEMS.md`.
