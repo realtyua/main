@@ -115,7 +115,7 @@
 | EL-7 | 5 | Порт `check-notify` | EL-4 | done | `feat/EL-7-check-notify` | `X:/OpenCodeData/opencode/worktree/b25e23/EL-7-check-notify` | 2026-11-11 | bb0fc36 |
 | EL-8 | 5 | Freshness + parity test Jekyll ↔ 11ty | EL-6, EL-7 | todo | `feat/EL-8-freshness-parity` | `../worktrees/EL-8-freshness-parity` | — | — |
 | EL-9 | 5 | Повний build + усі гейти | EL-1..EL-8 | todo | `feat/EL-9-full-gates` | `../worktrees/EL-9-full-gates` | — | — |
-| EL-10 | 5 | Notify: повний конфіг в island | EL-7 | todo | `feat/EL-10-notify-config-island` | `../worktrees/EL-10-notify-config-island` | — | — |
+| EL-10 | 5 | Notify: повний конфіг в island | EL-7 | done | `feat/EL-10-notify-config-island` | `X:/OpenCodeData/opencode/worktree/b25e23/EL-10-notify-config-island` | 2026-11-11 | b0f5e05 |
 
 ## Phase 6 — Publication (`form-engine`)
 
