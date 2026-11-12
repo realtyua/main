@@ -122,7 +122,7 @@
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | PUB-1 | 6 | Bootstrap репо + MIT `LICENSE` + `NOTICE` | EL-9 | done | `feat/PUB-1-bootstrap-repo` | `../worktrees/PUB-1-bootstrap-repo` | 2026-11-12 | 1b15b19 |
-| PUB-2 | 6 | Виділити `runtime/` | PUB-1 | todo | — | — | — | — |
+| PUB-2 | 6 | Виділити `runtime/` | PUB-1 | done | `feat/PUB-2-extract-runtime` | `../worktrees/PUB-2-extract-runtime` | 2026-11-12 | 397c93c |
 | PUB-3 | 6 | Виділити Jekyll-адаптер | PUB-2 | todo | — | — | — | — |
 | PUB-4 | 6 | Виділити Eleventy-адаптер | PUB-2 | todo | — | — | — | — |
 | PUB-5 | 6 | `tools/`, `schema/`, `test/` | PUB-2 | todo | — | — | — | — |
