@@ -124,8 +124,8 @@
 | PUB-1 | 6 | Bootstrap репо + MIT `LICENSE` + `NOTICE` | EL-9 | done | `feat/PUB-1-bootstrap-repo` | `../worktrees/PUB-1-bootstrap-repo` | 2026-11-12 | 1b15b19 |
 | PUB-2 | 6 | Виділити `runtime/` | PUB-1 | done | `feat/PUB-2-extract-runtime` | `../worktrees/PUB-2-extract-runtime` | 2026-11-12 | 397c93c |
 | PUB-3 | 6 | Виділити Jekyll-адаптер | PUB-2 | done | `feat/PUB-3-extract-jekyll-adapter` | `../worktrees/PUB-3-extract-jekyll-adapter` | 2026-11-12 | 35e80dd |
-| PUB-4 | 6 | Виділити Eleventy-адаптер | PUB-2 | review | `feat/PUB-4-extract-eleventy-adapter` | `../worktrees/PUB-4-extract-eleventy-adapter` | 2026-11-12 | 86880af |
-| PUB-5 | 6 | `tools/`, `schema/`, `test/` | PUB-2 | todo | — | — | — | — |
+| PUB-4 | 6 | Виділити Eleventy-адаптер | PUB-2 | done | `feat/PUB-4-extract-eleventy-adapter` | `../worktrees/PUB-4-extract-eleventy-adapter` | 2026-11-12 | 86880af |
+| PUB-5 | 6 | `tools/`, `schema/`, `test/` | PUB-2 | ready | — | — | — | — |
 | PUB-6 | 6 | `package.json`, exports, versioning, changelog | PUB-2..5 | todo | — | — | — | — |
 | PUB-7 | 6 | `examples/jekyll` + `examples/eleventy` | PUB-6 | todo | — | — | — | — |
 | PUB-8 | 6 | `README.md` + getting started | PUB-7 | todo | — | — | — | — |
