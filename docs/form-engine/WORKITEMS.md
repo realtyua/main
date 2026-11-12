@@ -147,12 +147,16 @@
 5. Реалізація лише в межах scope.
 6. Гейти item.
 7. Handoff + статус.
-8. Користувач переглядає зміни й комітить `<ID>: <short imperative>`.
-9. Користувач merge-ить `--no-ff` у `feature/form-engine`; worktree видаляється,
-   статус `done`.
+8. Користувач переглядає зміни → «прийнято».
+9. Агент виконує локальний цикл: `git add` (явні файли), `git commit`
+   `<ID>: <short imperative>`, `git merge --no-ff` у `feature/form-engine`,
+   оновлення Commit SHA у реєстрі, видалення worktree; статус → `done`.
+10. `git push` — користувач.
 
-Агент не виконує `git add`, `git commit`, `git push`, `git merge` чи
-`git rebase`. Зміни лишаються в робочому дереві до рішення користувача.
+Агент НЕ запускає: `git push`, `git fetch/pull`, `git rebase`, `git reset --hard`,
+`git commit --amend`, не створює тегів, не робить force-push.
+Локальний цикл (commit → merge --no-ff → cleanup) — лише після явного схвалення
+користувачем («прийнято»). До схвалення всі зміни лишаються в робочому дереві.
 Усе робиться локально (без мережі), файли — UTF-8 без BOM, будь-яка дія — з
 дозволу користувача.
 
