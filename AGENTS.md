@@ -7,10 +7,13 @@
 
 ## Політика роботи (обов'язково)
 
-1. **Нічого не комітити (not commit).** Жодних `git add`, `git commit`,
-   `git push`, `git merge`, `git rebase`, `git reset --hard`, тегів чи
-   force-push. Усі зміни лишаються в робочому дереві; staging і коміт робить
-   користувач.
+1. **Git: локальний цикл — агент, push — користувач.** Після явного
+   схвалення огляду («прийнято») агент виконує локальний цикл item-а:
+   `git add` лише явних файлів, `git commit`, `git merge --no-ff` у робочу
+   гілку, видалення змерженої гілки, Commit SHA в реєстрі, прибирання
+   worktree. До схвалення зміни лишаються в робочому дереві. `git push`,
+   `git fetch/pull`, `git rebase`, `git reset --hard`, `git commit --amend`,
+   теги й force-push — ніколи; push робить користувач.
 2. **Все робимо локально.** Без мережі: `webfetch`, `websearch`,
    `git fetch/pull/push`, `npm install`, `curl`, `wget`, `Invoke-WebRequest`,
    cloud API. Лише локальні файли, локальні reference-теки й уже встановлені
@@ -72,7 +75,8 @@ _data/<name>.yml
 
 ## Заборони
 
-- Не комітити, не пушити, не merge-ити — див. «Політика роботи».
+- Без схвалення огляду не комітити; не пушити, не rebase-ити, не reset --hard.
+  Локальний цикл після «прийнято» — див. «Політика роботи».
 - Не додавати site-специфіку (URL, курси, копірайт, inline-асети) у `_data/*.yml`.
   Це робить адаптер (`site-opts.mjs` для Jekyll, `lib/form-engine.js` для 11ty).
 - Не додавати Alpine-атрибути (`x-*`, `@*`, `:*`) у рендер.
@@ -112,8 +116,8 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
 - Старт: `/item <ID>`. Агент читає `WORKITEMS.md` + `docs/form-engine/items/<ID>.md`.
 - Baseline-гейти **до** змін, гейти item — після.
 - Handoff дописується в item-файл, статус — у `WORKITEMS.md`.
-- Агент **не** комітить, не пушить і не merge-ить. Це робить користувач після
-  перегляду змін.
+- Після схвалення огляду агент виконує локальний цикл: commit → merge --no-ff
+  у робочу гілку → Commit SHA у реєстрі → прибирання worktree. Push — користувач.
 
 ## Коміти
 
@@ -124,7 +128,7 @@ feat(form-engine): declarative runtime, Jekyll adapter, configs, tests
 ```
 
 Один item — один логічний коміт. Setup OpenCode і рушій — окремі коміти.
-Це конвенція для користувача: агент коміти не створює.
+Коміти створює агент (локальний цикл після схвалення огляду); push — користувач.
 
 ## Де шукати далі
 
