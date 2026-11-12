@@ -61,4 +61,16 @@ npm run test:parity
 
 ## Handoff log
 
-<!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
+**Status:** done
+**Files changed:** none (only ran gates, no code changes needed)
+**Gates run:**
+- `npm test` — 245/245 tests PASS (T)
+- `npm run validate` — 3/3 configs valid (V)
+- `npm run build` — production build successful (B)
+- `npm run check:add-property` — PASS, 14 known copy-drift + file-info failures accepted (CA)
+- `npm run check:notify` — ok, 10 pages checked (CN)
+- `npm run test:freshness` — all 42 fragments fresh (VR)
+- `npm run test:parity` — 3/3 parity tests PASS (P)
+- `npm run verify:render` — all 42 freshness checks PASS
+**Leftovers:** none
+**Commit SHA:** (pending user review and merge)
