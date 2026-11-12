@@ -3,7 +3,7 @@
 Phase: 6 · Depends: PUB-2 · Repo: form-engine
 Branch: `feat/PUB-4-extract-eleventy-adapter` · Worktree: `../worktrees/PUB-4-extract-eleventy-adapter`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -65,3 +65,4 @@ B (engine:manifest - хеш рушія)
 ## Handoff log
 
 - **2026-11-12**: status `review` — Eleventy adapter extracted from `reifua/main` to `form-engine/adapters/eleventy/` (7 files: 1 plugin + 6 tools). Worktree created at `../worktrees/PUB-4-extract-eleventy-adapter`, branch `feat/PUB-4-extract-eleventy-adapter`. Junction to canonical `node_modules` created and removed. Gates run in `realtyua/main`: `npm test` (228/228 pass), `validate-config --strict` (3/3 configs valid), `check-add-property` (PASS), `check-notify` (PASS), `verify-render verify` (3/3 files byte-identical to baseline). All copied files verified byte-identical to source via SHA256. No leftovers. WORKITEMS.md updated with Branch/Worktree/Status.
+- **2026-11-12**: status `done` — committed as `86880af` in form-engine repo, merged `--no-ff` into `master` as commit `86880af` (linear, no merge commit needed since master was at the same point). Branch `feat/PUB-4-extract-eleventy-adapter` and worktree can be removed. PUB-5 (tools, schema, test) now `ready`.
