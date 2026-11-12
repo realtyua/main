@@ -3,7 +3,7 @@
 Phase: 5 · Depends: EL-6, EL-7 · Repo: reifua
 Branch: `feat/EL-8-freshness-parity` · Worktree: `../worktrees/EL-8-freshness-parity`
 
-Status: `todo`
+Status: `done`
 
 ## Goal
 
@@ -58,5 +58,25 @@ npm run build
 - Публікація пакета — Phase 6.
 
 ## Handoff log
+
+- **2026-11-12** — status: `review` (gates green, ready for commit)
+  - **Files created:**
+    - `test/freshness.test.mjs` — re-bakes adapter fragments in-memory, minifies with production transform, compares byte-for-byte with `dist/` fragments (add-property, demo, notify islands)
+    - `test/parity-jekyll-11ty.test.mjs` — bakes both stacks from **same config** (Jekyll's `_data/*.yml` as shared input); normalizes endpoint, `?v=`, page data, EOL; compares add-property, demo, notify config island. Skips with clear message if Jekyll repo not found (`FORM_ENGINE_JEKYLL_ROOT`).
+    - `_form-engine/tools/verify-render.mjs` — Node equivalent of Jekyll `verify-render.ps1`; exports extraction/canonicalization/CLI helpers used by the freshness test.
+  - **Files modified:**
+    - `package.json` — added `test:freshness`, `test:parity`, `verify:render` scripts
+  - **Gates run (all PASS):**
+    - `npm test` — 245/245 (includes freshness + parity)
+    - `npm run validate` — add-property.yml valid
+    - `npm run build` — 24 files written, dist/ refreshed
+    - `npm run test:freshness` — 1/1 (all 42 fragment checks fresh)
+    - `npm run test:parity` — 3/3 (add-property, demo, notify config island parity)
+    - `npm run verify:render` — 42/42 checks fresh
+    - `npm run check:add-property` — PASS (200+ checks)
+    - `npm run check:notify` — ok (10 pages checked)
+  - **Leftovers:** none (tmp-compare.mjs removed)
+  - **Worktree:** `X:\OpenCodeData\opencode\worktree\b25e23\EL-8-freshness-parity` (actual tool-created path; registry listed `../worktrees/EL-8-freshness-parity`)
+  - **Commit SHA:** `c2ab420` (merged via `db8ff5e` into `feature/form-engine`)
 
 <!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
