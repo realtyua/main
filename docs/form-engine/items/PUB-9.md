@@ -3,7 +3,7 @@
 Phase: 6 · Depends: PUB-6 · Repo: form-engine
 Branch: `feat/PUB-9-config-reference-theming-migration` · Worktree: `../worktrees/PUB-9-config-reference-theming-migration`
 
-Status: `todo`
+Status: `done`
 
 ## Goal
 
@@ -70,4 +70,4 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
   - CI (PUB-10) will run Ruby + 11ty in pipeline
   - Release `1.0.0` (PUB-10)
 
-  Commit SHA: (not committed; awaiting review).
+  Commit SHA: 7dc5b287 (realtyua/main), 0358377 (form-engine).
