@@ -127,7 +127,7 @@
 | PUB-4 | 6 | Виділити Eleventy-адаптер | PUB-2 | done | `feat/PUB-4-extract-eleventy-adapter` | `../worktrees/PUB-4-extract-eleventy-adapter` | 2026-11-12 | 86880af |
 | PUB-5 | 6 | `tools/`, `schema/`, `test/` | PUB-2 | done | `feat/PUB-5-tools-schema-test` | `../worktrees/PUB-5-tools-schema-test` | 2026-11-12 | d1b8187 |
 | PUB-6 | 6 | `package.json`, exports, versioning, changelog | PUB-2..5 | done | `feat/PUB-6-package-exports` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-6-package-exports` | 2026-11-13 | ba5a759 |
-| PUB-7 | 6 | `examples/jekyll` + `examples/eleventy` | PUB-6 | todo | — | — | — | — |
+| PUB-7 | 6 | `examples/jekyll` + `examples/eleventy` | PUB-6 | done | `feat/PUB-7-examples` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-7-examples` | 2026-11-14 | d611cc5 |
 | PUB-11 | 6 | Close test debt: pure-runtime on `../runtime/*`, site-coupled to adapters with fixtures | PUB-6 | done | `feat/PUB-6-package-exports` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-6-package-exports` | 2026-11-13 | ba5a759 |
 | PUB-8 | 6 | `README.md` + getting started | PUB-7 | todo | — | — | — | — |
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | todo | — | — | — | — |
