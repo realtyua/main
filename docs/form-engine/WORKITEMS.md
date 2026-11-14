@@ -131,7 +131,7 @@
 | PUB-11 | 6 | Close test debt: pure-runtime on `../runtime/*`, site-coupled to adapters with fixtures | PUB-6 | done | `feat/PUB-6-package-exports` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-6-package-exports` | 2026-11-13 | ba5a759 |
 | PUB-8 | 6 | `README.md` + getting started | PUB-7 | done | `feat/PUB-8-readme-getting-started` | `../worktrees/PUB-8-readme-getting-started` | 2026-11-14 | 19f35d9 |
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | done | `feat/PUB-9-config-reference-theming-migration` | `../worktrees/PUB-9-config-reference-theming-migration` | 2026-11-14 | 7dc5b287 |
-| PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | review | `feat/PUB-10-ci-release` | `../worktrees/PUB-10-ci-release` | 2026-11-14 | — |
+| PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | done | `feat/PUB-10-ci-release` | `../worktrees/PUB-10-ci-release` | 2026-11-14 | 6065337 |
 
 **Разом: 43 item.**
 
