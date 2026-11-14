@@ -100,4 +100,4 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
   - CI/CD badge URLs in README point to `realtyua/form-engine` — update if repo URL differs
   - `npm install -g ./form-engine-1.0.0.tgz` smoke-test — skipped due to permission restrictions; verified via direct imports and packaging tests instead
   
-  Commit SHA: — (not committed; awaiting review)
+  Commit SHA: `6065337` (form-engine repo), merge commit `74cd83c6` (realtyua feature/form-engine)
