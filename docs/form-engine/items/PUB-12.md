@@ -34,7 +34,7 @@ Status: `todo`
    - `npm install @11ty/eleventy js-yaml @realtyua/form-engine`
    - Перевірити імпорт адаптера: `await import('@realtyua/form-engine/adapters/eleventy/lib/form-engine.js')`
    - Перевірити passthrough copy runtime
-7. Задокументувати результат (успех/проблеми) в handoff log.
+7. Задокументувати результат (успіх/проблеми) в handoff log.
 
 ## Acceptance
 
