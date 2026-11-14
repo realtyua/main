@@ -132,8 +132,11 @@
 | PUB-8 | 6 | `README.md` + getting started | PUB-7 | done | `feat/PUB-8-readme-getting-started` | `../worktrees/PUB-8-readme-getting-started` | 2026-11-14 | 19f35d9 |
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | done | `feat/PUB-9-config-reference-theming-migration` | `../worktrees/PUB-9-config-reference-theming-migration` | 2026-11-14 | 7dc5b287 |
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | done | `feat/PUB-10-ci-release` | `../worktrees/PUB-10-ci-release` | 2026-11-14 | 6065337 |
+| PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | todo | — | — | — | — |
+| PUB-13 | 6 | Міграція `realtyua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
+| PUB-14 | 6 | Міграція `reifua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
 
-**Разом: 43 item.**
+**Разом: 46 item.**
 
 ## Протокол сесії
 
