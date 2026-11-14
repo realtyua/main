@@ -45,12 +45,12 @@
     { "action": "shell", "resource": "node _form-engine/tools/*", "effect": "allow" },
     { "action": "shell", "resource": "powershell -File _form-engine/tools/*", "effect": "allow" },
 
-    // Політика: нічого не комітити. Останній збіг перемагає, тому заборони
-    // стоять після загального `shell: ask`.
-    { "action": "shell", "resource": "git add *", "effect": "deny" },
-    { "action": "shell", "resource": "git commit *", "effect": "deny" },
+    // Політика: локальний цикл (add, commit, merge --no-ff) — агент; push — користувач.
+    // Останній збіг перемагає, тому allow для локальних операцій стоїть після загального `shell: ask`.
+    { "action": "shell", "resource": "git add *", "effect": "allow" },
+    { "action": "shell", "resource": "git commit *", "effect": "allow" },
     { "action": "shell", "resource": "git push *", "effect": "deny" },
-    { "action": "shell", "resource": "git merge *", "effect": "deny" },
+    { "action": "shell", "resource": "git merge *", "effect": "allow" },
     { "action": "shell", "resource": "git rebase *", "effect": "deny" },
     { "action": "shell", "resource": "git reset --hard *", "effect": "deny" },
     { "action": "shell", "resource": "git tag *", "effect": "deny" },
