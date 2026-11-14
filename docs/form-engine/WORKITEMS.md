@@ -129,7 +129,7 @@
 | PUB-6 | 6 | `package.json`, exports, versioning, changelog | PUB-2..5 | done | `feat/PUB-6-package-exports` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-6-package-exports` | 2026-11-13 | ba5a759 |
 | PUB-7 | 6 | `examples/jekyll` + `examples/eleventy` | PUB-6 | done | `feat/PUB-7-examples` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-7-examples` | 2026-11-14 | d611cc5 |
 | PUB-11 | 6 | Close test debt: pure-runtime on `../runtime/*`, site-coupled to adapters with fixtures | PUB-6 | done | `feat/PUB-6-package-exports` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-6-package-exports` | 2026-11-13 | ba5a759 |
-| PUB-8 | 6 | `README.md` + getting started | PUB-7 | todo | — | — | — | — |
+| PUB-8 | 6 | `README.md` + getting started | PUB-7 | done | `feat/PUB-8-readme-getting-started` | `../worktrees/PUB-8-readme-getting-started` | 2026-11-14 | 19f35d9 |
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | todo | — | — | — | — |
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | todo | — | — | — | — |
 
