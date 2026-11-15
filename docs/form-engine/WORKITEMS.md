@@ -132,7 +132,7 @@
 | PUB-8 | 6 | `README.md` + getting started | PUB-7 | done | `feat/PUB-8-readme-getting-started` | `../worktrees/PUB-8-readme-getting-started` | 2026-11-14 | 19f35d9 |
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | done | `feat/PUB-9-config-reference-theming-migration` | `../worktrees/PUB-9-config-reference-theming-migration` | 2026-11-14 | 7dc5b287 |
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | done | `feat/PUB-10-ci-release` | `../worktrees/PUB-10-ci-release` | 2026-11-14 | 6065337 |
-| PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | blocked | `feat/PUB-12-install-smoke-test` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-12-install-smoke-test` | 2026-11-15 | — |
+| PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | done | `feat/PUB-12-install-smoke-test` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-12-install-smoke-test` | 2026-11-15 | 719ba5fd |
 | PUB-13 | 6 | Міграція `realtyua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
 | PUB-14 | 6 | Міграція `reifua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
 | PUB-15 | 6 | `runtime/package.json` (`type: module`) у пакеті | PUB-10 | done | `feat/PUB-15-runtime-package-type` | `../worktrees/PUB-15-runtime-package-type` | 2026-11-15 | 404f6c2 |
@@ -140,10 +140,10 @@
 | PUB-17 | 6 | README/theming: шляхи копіювання та заяви про залежності | PUB-10 | done | `feat/PUB-17-docs-paths-deps` | `../worktrees/PUB-17-docs-paths-deps` | 2026-11-15 | 3a44099 |
 
 > Примітка: PUB-15..PUB-17 відкриті за результатами PUB-12 (F1–F6 в
-> `items/PUB-12.md`). PUB-12 стоїть `blocked`, доки F1, F3, F4 не виправлені;
-> повторна перевірка установки — після PUB-15..PUB-17. PUB-15 → `review`.
-> PUB-16 (F3, F4 виправлено) → `done` (commit 2941bee9).
-> PUB-17 (docs only) → `done` (commit 3a44099 in form-engine).
+> `items/PUB-12.md`). PUB-12 був `blocked`, доки F1, F3, F4 не виправлені;
+> повторна перевірка установки після PUB-15..PUB-17 — **успішна**, статус → `done`.
+> PUB-15 → `done` (commit 404f6c2). PUB-16 → `done` (commit 2941bee9 / fbcbc6e merge).
+> PUB-17 (docs only) → `done` (commit 3a44099). PUB-13/PUB-14 тепер `ready`.
 
 **Разом: 49 item.**
 
