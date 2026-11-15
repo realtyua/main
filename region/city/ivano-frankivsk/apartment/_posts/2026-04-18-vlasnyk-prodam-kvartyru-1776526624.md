@@ -1,5 +1,5 @@
 ---
-last_modified_at: 2026-04-18T00:00:00+02:00
+last_modified_at: 2026-11-15T00:00:00+02:00
 title: Продаю двокімнатну квартиру 49 м² від власника на Симоненка
 seo: продам квартиру власник
 uid: 1776526624
@@ -8,7 +8,7 @@ rent:
 rooms: '2'
 surface: '49'
 surface_land:
-price: $48000
+price: $51000
 price_sqmt:
 floor: '5'
 floors: '5'
