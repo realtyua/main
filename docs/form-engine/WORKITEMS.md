@@ -135,13 +135,13 @@
 | PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | blocked | `feat/PUB-12-install-smoke-test` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-12-install-smoke-test` | 2026-11-15 | — |
 | PUB-13 | 6 | Міграція `realtyua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
 | PUB-14 | 6 | Міграція `reifua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
-| PUB-15 | 6 | `runtime/package.json` (`type: module`) у пакеті | PUB-10 | todo | — | — | — | — |
+| PUB-15 | 6 | `runtime/package.json` (`type: module`) у пакеті | PUB-10 | done | `feat/PUB-15-runtime-package-type` | `../worktrees/PUB-15-runtime-package-type` | 2026-11-15 | 404f6c2 |
 | PUB-16 | 6 | Eleventy-адаптер: CJS/ESM-скоуп і відв'язка від шляхів сайту | PUB-10 | todo | — | — | — | — |
 | PUB-17 | 6 | README/theming: шляхи копіювання та заяви про залежності | PUB-10 | todo | — | — | — | — |
 
 > Примітка: PUB-15..PUB-17 відкриті за результатами PUB-12 (F1–F6 в
 > `items/PUB-12.md`). PUB-12 стоїть `blocked`, доки F1, F3, F4 не виправлені;
-> повторна перевірка установки — після PUB-15..PUB-17.
+> повторна перевірка установки — після PUB-15..PUB-17. PUB-15 → `review`.
 
 **Разом: 49 item.**
 

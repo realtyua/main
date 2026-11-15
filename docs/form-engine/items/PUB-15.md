@@ -3,7 +3,7 @@
 Phase: 6 · Depends: PUB-10 · Repo: form-engine
 Branch: `feat/PUB-15-runtime-package-type` · Worktree: `../worktrees/PUB-15-runtime-package-type`
 
-Status: `todo`
+Status: `done`
 
 ## Goal
 
@@ -56,4 +56,32 @@ npm pack --dry-run
 
 ## Handoff log
 
-<!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
+- **2026-11-15**: status `review` — `runtime/package.json` added to the package.
+  Branch `feat/PUB-15-runtime-package-type`, worktree
+  `C:\Users\Vasyl\Documents\GitHub\worktrees\PUB-15-runtime-package-type`
+  (junction `node_modules` → `C:\Users\Vasyl\Documents\GitHub\form-engine\node_modules`).
+
+  **Files changed (form-engine repo):**
+  - `runtime/package.json` — new, `{"type":"module"}` (byte-identical to
+    `examples/jekyll/assets/js/form-engine/package.json` and
+    `examples/eleventy/src/assets/js/form-engine/package.json`).
+  - `test/packaging.test.mjs` — +1 test: marker exists, is shipped in tarball,
+    and `shell.js` exposes `renderPage` as a named import.
+  - `CHANGELOG.md` — entry under `[Unreleased] → Fixed` describing the marker
+    and the PUB-12 F1 fix.
+
+  **Gates run (all pass):**
+  - `npm test` — 184/184 pass (was 183, +1 new test).
+  - `npm run test:packaging` — 6/6 pass (was 5, +1 new test).
+  - `npm pack --dry-run` — 67 files, includes `runtime/package.json` (was 66).
+  - Offline smoke test (clean site + tarball):
+    - With marker present: `gen-form-app.mjs` bakes OK (15453 chars, fresh
+      marker SHA).
+    - With marker forced to `{"type":"commonjs"}`: reproduces PUB-12 F1
+      (`Named export 'renderPage' not found … CommonJS module`).
+    - With marker restored to `{"type":"module"}`: bakes OK again.
+
+  **Leftovers:** none. The worktree is clean; junction removed; sandbox
+  cleaned.
+
+  **Commit SHA:** 404f6c2 (item), f73892e (merge --no-ff into master).
