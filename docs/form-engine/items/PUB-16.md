@@ -3,7 +3,7 @@
 Phase: 6 · Depends: PUB-10 · Repo: form-engine
 Branch: `feat/PUB-16-eleventy-adapter-packaging` · Worktree: `../worktrees/PUB-16-eleventy-adapter-packaging`
 
-Status: `todo`
+Status: `review`
 
 ## Goal
 
@@ -44,13 +44,13 @@ Status: `todo`
 
 ## Acceptance
 
-- [ ] `await import('@realtyua/form-engine/adapters/eleventy/lib/form-engine.js')`
+- [x] `await import('@realtyua/form-engine/adapters/eleventy/lib/form-engine.js')`
       не кидає помилок у чистому проєкті
-- [ ] `registerForms` пече `src/_data/<name>.yml` без тек усередині пакета
-- [ ] Шорткоди `formApp`, `formEngineVersion`, `notifyConfigIsland`,
+- [x] `registerForms` пече `src/_data/<name>.yml` без тек усередині пакета
+- [x] Шорткоди `formApp`, `formEngineVersion`, `notifyConfigIsland`,
       `notifyPageJson` реєструються
-- [ ] `npm run test:eleventy` і `npm test` зелені
-- [ ] `reifua`-варіант (копія в `lib/`) не зламано
+- [x] `npm run test:eleventy` і `npm test` зелені
+- [ ] `reifua`-варіант (копія в `lib/`) не зламано (перевірка в PUB-14)
 
 ## Gates
 
@@ -68,4 +68,15 @@ npm pack --dry-run
 
 ## Handoff log
 
-<!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
+2026-11-15: Implemented in form-engine worktree `form-engine-PUB-16-eleventy-adapter-packaging`.
+- Changed `DEFAULT_ENGINE_DIR` from `path.join(DEFAULT_SITE_DIR, 'src', 'assets', 'js', 'form-engine')` to `path.join(__dirname, '..', '..', '..', 'runtime')` so the adapter defaults to the package's runtime instead of the site's copy.
+- Updated comments to document the new behavior.
+- Synchronized `examples/eleventy/lib/form-engine.js` with the adapter.
+- Added `"type": "module"` to `examples/eleventy/package.json` to eliminate ESM warning.
+- All gates pass: `npm test` (184/184), `npm run test:eleventy` (23/23), `npm run test:packaging` (6/6), `npm pack --dry-run`.
+- Files changed:
+  - `adapters/eleventy/lib/form-engine.js`
+  - `examples/eleventy/lib/form-engine.js`
+  - `examples/eleventy/package.json`
+- Leftovers: reifua variant not verified (out of scope, PUB-14).
+- Commit SHA: (pending user review and commit)
