@@ -132,11 +132,18 @@
 | PUB-8 | 6 | `README.md` + getting started | PUB-7 | done | `feat/PUB-8-readme-getting-started` | `../worktrees/PUB-8-readme-getting-started` | 2026-11-14 | 19f35d9 |
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | done | `feat/PUB-9-config-reference-theming-migration` | `../worktrees/PUB-9-config-reference-theming-migration` | 2026-11-14 | 7dc5b287 |
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | done | `feat/PUB-10-ci-release` | `../worktrees/PUB-10-ci-release` | 2026-11-14 | 6065337 |
-| PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | todo | — | — | — | — |
+| PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | blocked | `feat/PUB-12-install-smoke-test` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-12-install-smoke-test` | 2026-11-15 | — |
 | PUB-13 | 6 | Міграція `realtyua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
 | PUB-14 | 6 | Міграція `reifua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
+| PUB-15 | 6 | `runtime/package.json` (`type: module`) у пакеті | PUB-10 | todo | — | — | — | — |
+| PUB-16 | 6 | Eleventy-адаптер: CJS/ESM-скоуп і відв'язка від шляхів сайту | PUB-10 | todo | — | — | — | — |
+| PUB-17 | 6 | README/theming: шляхи копіювання та заяви про залежності | PUB-10 | todo | — | — | — | — |
 
-**Разом: 46 item.**
+> Примітка: PUB-15..PUB-17 відкриті за результатами PUB-12 (F1–F6 в
+> `items/PUB-12.md`). PUB-12 стоїть `blocked`, доки F1, F3, F4 не виправлені;
+> повторна перевірка установки — після PUB-15..PUB-17.
+
+**Разом: 49 item.**
 
 ## Протокол сесії
 
