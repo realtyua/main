@@ -76,4 +76,19 @@ bundle exec jekyll build --limit_posts 1
 
 ## Handoff log
 
-<!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
+### 2026-11-16 — implementation (option 1, no commit)
+
+- **Status:** review (migration implemented locally; full VR/CN/Jekyll build blocked by pre-existing baseline condition, no regression observed). Not committed/merged.
+- **Worktree/branch:** `C:\Users\Vasyl\Documents\GitHub\realtyua\worktrees\PUB-13-realtyua-migrate-npm` on `feat/PUB-13-realtyua-migrate-npm` (created from `feature/form-engine` @ `8799a2a1`, not from `master`; initial mistaken worktree from `master` was removed and recreated correctly).
+- **Scope done (realtyua):**
+  - `package.json`: added dependency `"@realtyua/form-engine": "^1.0.0"`.
+  - `node_modules/@realtyua/form-engine` (in canonical `realtyua/main/node_modules`, visible via worktree junction): junction → local package repo `C:\Users\Vasyl\Documents\GitHub\form-engine` (offline; no `npm install`).
+  - `assets/js/form-engine/` replaced by junction → `node_modules/@realtyua/form-engine/runtime`.
+  - `_form-engine/tools/` replaced by junction → `node_modules/@realtyua/form-engine/adapters/jekyll/tools` (keeps site-relative plugin/tool paths working).
+  - `_form-engine/schema/` replaced by junction → `node_modules/@realtyua/form-engine/schema`.
+  - `_form-engine/baseline/` and `_form-engine/README.md` preserved; `_plugins/form_engine.rb` unchanged (tool/schema paths remain valid via symlinks).
+- **Gates run (before changes, baseline):** `npm test` 228/228 PASS; `validate-config` add-property/notify/demo `--strict` PASS; `check-add-property` PASS; `check-notify` FAIL (`_site` missing); `verify-render.ps1 verify` FAIL (`jekyll build --limit_posts 1` → `FormEngine: Форма «demo»: не вказано endpoint. Додайте submit.action у _data/demo.yml або demo_endpoint у _config.yml.`) — pre-existing, no `_site` produced.
+- **Gates run (after changes):** `npm test` **228/228 PASS**; `validate-config` add-property/notify/demo `--strict` **PASS** (via package tools through junction); `check-add-property` **PASS**; `check-notify` **FAIL** for same pre-existing reason (`_site` missing); `bundle exec jekyll build --limit_posts 1` **FAIL** with the **same** pre-existing `demo` endpoint error as baseline (no regression from migration); `gen-form-app.mjs` manual bake to temp file **OK**. `verify-render.ps1 verify` not rerun end-to-end (blocked by same pre-existing build failure).
+- **Side-effect outside realtyua worktree (reported):** patched local package repo `C:\Users\Vasyl\Documents\GitHub\form-engine` (adapters/jekyll/tools: `validate-config.mjs`, `gen-form-app.mjs`, `check-add-property.mjs`, `check-notify.mjs`) to resolve schema/runtime/site root when consumed from a site context (symlinked/installed-package usage). These edits are **not** in this realtyua worktree/commit; they affect the shared local `form-engine` repo and may need a separate upstream/package change/review.
+- **Leftovers / risks:** (1) `check-notify`, `verify-render`, and `bundle exec jekyll build --limit_posts 1` remain blocked by pre-existing `demo` endpoint config (outside PUB-13 scope; not fixed here per option 1). (2) `_site` absent in worktree. (3) `node_modules/@realtyua/form-engine` junction was added in `realtyua/main/node_modules` (shared canonical location) and worktree `node_modules` junction remains — remove worktree `node_modules` junction before `worktree_remove` if/when cleaning up. (4) Package-repo tool patches should be reconciled with `form-engine` package (PUB follow-up) so migration does not rely on local uncommitted package edits.
+- **Commit SHA:** — (no commit made).
