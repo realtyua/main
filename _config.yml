@@ -28,6 +28,7 @@ turnstile_local_hosts: ['localhost', '127.0.0.1', '0.0.0.0', '::1']
 # Cloudflare Workers, які приймають форми (вхідний endpoint з Форми -> Worker).
 add_property_endpoint: 'https://add-property-worker.sparkling-union-9e0a.workers.dev'
 notify_endpoint: 'https://notify-worker.sparkling-union-9e0a.workers.dev'
+demo_endpoint: 'https://notify-worker.sparkling-union-9e0a.workers.dev'
 
 usd: 43.50
 eur: 51.50
