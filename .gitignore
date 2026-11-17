@@ -6,6 +6,10 @@ Gemfile.lock
 ### Node ###
 /node_modules/
 
+### Form Engine (generated) ###
+# demo.yml is a tailwind-only example; its baked fragment is not shipped on this site.
+/_includes/form/app/demo.html
+
 ### Atom ###
 .ftpconfig
 .sftpconfig
