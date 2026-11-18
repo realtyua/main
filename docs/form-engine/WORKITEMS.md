@@ -155,9 +155,16 @@
 > merge `4e62dc8` у form-engine `master`). PUB-14 → `done` (reifua item `9685757`,
 > merge `559e1b0` у `reifua/feature/form-engine`, branch/worktree прибрано;
 > гейти зелені, локальні копії runtime/adapter видалено).
-
-**Разом: 50 item.**
-
+
+## Phase 7 — Integration (merge to master)
+
+| ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| MERGE-1 | 7 | Merge `feature/form-engine` → `master` (`reifua`) | BASE-6 | ready | — | — | — | — |
+| MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | todo | — | — | — | — |
+
+**Разом: 52 item.**
+
 ## Протокол сесії
 
 1. Нова сесія (build-агент), назва `<ID> — <Title>`.
