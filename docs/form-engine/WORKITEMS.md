@@ -176,7 +176,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | MOD-1 | 8 | Node 24 + Eleventy 3.1.8 (CI fix, Tailwind без плагіна) | MERGE-1 | done | `feat/MOD-1-eleventy3-node24` (merged) | `reifua/main` | 2026-11-18 | ad87a29 |
 | MOD-2 | 8 | Purge: сканувати Tailwind-тему з npm-пакета (стилі `/demo`) | MOD-1 | done | `feat/MOD-2-purge-npm-runtime` (merged) | `reifua/main` | 2026-11-18 | 92c773e |
-| MOD-3 | 8 | Оновити `actions/*` (прибрати застереження Node 20) | MOD-1 | review | `feat/MOD-3-actions-versions` (merged) | `reifua/main` | 2026-11-18 | a2dbcb3 |
+| MOD-3 | 8 | Оновити `actions/*` (прибрати застереження Node 20) | MOD-1 | done | `feat/MOD-3-actions-versions` (merged) | `reifua/main` | 2026-11-18 | a2dbcb3 |
 | MOD-4 | 8 | Cloudflare: Worker-endpoint форм, зона `rent.if.ua`, Turnstile | MERGE-1 | blocked | `feat/MOD-4-cloudflare-forms` | `reifua/main` | 2026-11-18 | — |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
@@ -208,8 +208,8 @@
 > `deploy-pages@v5` (`v5.0.1`). Входи workflow (`node-version`, `cache`,
 > `path`) сумісні — звірено з `action.yml`. Гейти: YAML parse ok, build 0,
 > `T` 238/238. Item-коміт `a2dbcb3`, merge `--no-ff` `494de8b`, гілку
-> видалено. Чекає push + зелений Action без застережень про Node 20.
-> Деталі — `items/MOD-3.md`.
+> видалено; push виконано, Action зелений без застережень про Node 20.
+> Status `done`. Деталі — `items/MOD-3.md`.
 >
 > MOD-4 — `blocked`: Cloudflare Worker-endpoint для форм, зона `rent.if.ua`
 > і Turnstile. Рішення: той самий акаунт; API token + `wrangler`; код —
@@ -220,8 +220,8 @@
 > sitekey, email-адрес, підтвердження NS і дозволу на `npm install`
 > wrangler. Деталі — `items/MOD-4.md`.
 >
-> MOD-3 і MOD-4 — окремі сесії. MOD-3: лишились push і перевірка Action.
-> MOD-4: реалізація ще не починалася (у цій сесії — лише рішення й план);
+> MOD-3 і MOD-4 — окремі сесії. MOD-3 закрито (`done`). MOD-4:
+> реалізація ще не починалася (у цій сесії — лише рішення й план);
 > старт — після токена й sitekey.
 
 **Разом: 56 item.**

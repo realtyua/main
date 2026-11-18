@@ -5,10 +5,10 @@ Phase: 8 · Depends: MOD-1 · Repo: reifua
 Branch: `feat/MOD-3-actions-versions` · Worktree: `reifua/main` (зміна лише
 YAML; junction на `node_modules` не потрібен, гейти виконуються в `main`)
 
-Status: `review`
+Status: `done`
 
-> Окрема сесія: MOD-3 закривається самостійно. Item уже закомічено й
-> змерджено локально; push + зелений Action — наступна сесія.
+> Окрема сесія: MOD-3 закрито самостійно (commit → merge → push → зелений
+> Action).
 
 ## Goal
 
@@ -45,7 +45,7 @@ Node 20. Після item-а всі чотири кроки в `.github/workflows
 - [x] Вхідні параметри (`node-version: 24.x`, `cache: npm`, `path: dist`)
       сумісні з новими мажорами — звірено з `action.yml` на закріплених тегах
 - [x] YAML парситься; `npm run build` 0; `T` 238/238
-- [ ] Merge у `master` + `git push` (користувач) + зелений Action **без**
+- [x] Merge у `master` + `git push` (користувач) + зелений Action **без**
       застережень про Node 20
 
 ## Gates
@@ -89,5 +89,5 @@ npm test
   Item-коміт `a2dbcb3`, merge `--no-ff` `494de8b` у `master`, гілку
   видалено (`master` ahead 2; push — користувач).
 
-  Leftovers: `git push` і перевірка зеленого Action без застережень
-  «Node.js 20 is deprecated» — користувач; після цього status → `done`.
+  Leftovers: push виконано; користувач підтвердив зелений Action без
+  застережень «Node.js 20 is deprecated». Status → `done`.
