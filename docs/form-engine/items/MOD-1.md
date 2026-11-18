@@ -6,7 +6,7 @@ Branch: `feat/MOD-1-eleventy3-node24` · Worktree: `reifua/main` (worktree не
 використовувався: `npm ci/install` має перезібрати `node_modules`, junction
 тут не працює)
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -37,7 +37,7 @@ Status: `review`
 - [x] Eleventy 3.1.8; конфіг ESM; `npm ci` + `npm run build` зелені
 - [x] Tailwind-плагін прибрано, CSS збирається тим самим стеком
 - [x] `T` 238/238, `V` valid, `CA` PASS, `CN` ok, `VR` 42/42
-- [ ] Merge у `master` + `git push` (користувач) + зелений Action
+- [x] Merge у `master` + `git push` (користувач) + зелений Action
 
 ## Gates
 
@@ -118,3 +118,7 @@ npm run verify:render
   Статус лишається `review`: `master` на 3 коміти попереду `origin/master`,
   push і зелений Action — за користувачем. Після зеленого деплою MOD-1 і
   MERGE-1 можна переводити в `done`.
+
+- 2026-11-18: **done** — `master` запушено, Action зелений (лишились лише
+  застереження про Node 20 у `actions/*@v4`, див. `items/MOD-1.md`). Деплой
+  `/demo` показав регресію стилів → відкрито MOD-2.

@@ -4,7 +4,7 @@ Phase: 7 · Depends: BASE-6 · Repo: reifua
 
 Branch: `master` (reifua, без item-гілки) · Worktree: `reifua/main`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -24,7 +24,7 @@ Status: `review`
 - [x] `master` містить зміни `feature/form-engine` (merge або FF за узгодженням)
 - [x] Конфліктів немає або вони розв’язані й узгоджені
 - [x] Узгоджені гейти/перевірки після merge виконані (або зафіксовано, що пропущено і чому)
-- [ ] Handoff оновлено; `git push` виконано користувачем
+- [x] Handoff оновлено; `git push` виконано користувачем
 
 ## Gates
 
@@ -80,7 +80,7 @@ npm run build
   зелено). MERGE-1 лишається `review`, доки деплой не стане зеленим; push
   MERGE-1 вважається виконаним.
 
-- 2026-11-18 (продовження 2): MOD-1 прийнято й змерджено локально в
-  `reifua/master` (`156fd37`, item-коміти `bdd6df2` + `ad87a29`), гейти після
-  merge зелені. Наступний крок — користувач пушить `master` (3 коміти) і
-  перевіряє зелений Action; після цього MERGE-1 і MOD-1 → `done`.
+- 2026-11-18 (продовження 3): **done** — push + зелений Action (деплой
+  пройшов на Node 24). Єдине застереження Action — «Node.js 20 is deprecated»
+  для `actions/*@v4` (не помилка); `/demo` після деплою втратив стилі →
+  MOD-2.

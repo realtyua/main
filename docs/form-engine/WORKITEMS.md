@@ -160,7 +160,7 @@
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| MERGE-1 | 7 | Merge `feature/form-engine` → `master` (`reifua`) | BASE-6 | review | `master` (reifua) | `reifua/main` | 2026-11-18 | 6da93db |
+| MERGE-1 | 7 | Merge `feature/form-engine` → `master` (`reifua`) | BASE-6 | done | `master` (reifua) | `reifua/main` | 2026-11-18 | 6da93db |
 | MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | todo | — | — | — | — |
 
 > Примітка: MERGE-1 — merge виконано локально 2026-11-18 (`--no-ff`,
@@ -174,7 +174,8 @@
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| MOD-1 | 8 | Node 24 + Eleventy 3.1.8 (CI fix, Tailwind без плагіна) | MERGE-1 | review | `feat/MOD-1-eleventy3-node24` (merged) | `reifua/main` | 2026-11-18 | ad87a29 |
+| MOD-1 | 8 | Node 24 + Eleventy 3.1.8 (CI fix, Tailwind без плагіна) | MERGE-1 | done | `feat/MOD-1-eleventy3-node24` (merged) | `reifua/main` | 2026-11-18 | ad87a29 |
+| MOD-2 | 8 | Purge: сканувати Tailwind-тему з npm-пакета (стилі `/demo`) | MOD-1 | review | `feat/MOD-2-purge-npm-runtime` (merged) | `reifua/main` | 2026-11-18 | 92c773e |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
 > `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
@@ -182,9 +183,23 @@
 > два коміти (`bdd6df2` + `ad87a29`), merge `--no-ff` у `reifua/master` —
 > `156fd37`, гілку видалено. Гейти: `npm ci` ok, build 0, `T` 238/238,
 > `V` valid, `CA` PASS, `CN` ok, `VR` 42/42. Чекає push + зелений Action.
-> Деталі — `items/MOD-1.md`.
+> Деталі — `items/MOD-1.md`.
+>
+> MOD-1 задеплоєно 2026-11-18: Action зелений. Лишились застереження
+> «Node.js 20 is deprecated» для `actions/checkout@v4`, `setup-node@v4`,
+> `upload-artifact@v4`, `deploy-pages@v4` — це не помилка (actions примусово
+> виконуються на Node 24), оновлення тегів — окремий item після перевірки
+> актуальних версій (мережа).
+>
+> MOD-2 — `review`: після першого деплою `/demo` втратив стилі. Причина —
+> застарілий шлях purge (`./src/assets/js/form-engine/**`) після PUB-14;
+> тепер сканується `node_modules/@realtyua/form-engine/runtime/**`. Класів без
+> CSS по `dist` **86 → 29**, `main.css` 19 361 → 28 671 B. Item-коміт
+> `92c773e`, merge `--no-ff` `4c94ecc`, гілку видалено. Гейти: build 0,
+> `T` 238/238, `V` valid, `CA` PASS, `CN` ok, `VR` 42/42. Чекає push і
+> візуальну перевірку `/demo`. Деталі — `items/MOD-2.md`.
 
-**Разом: 53 item.**
+**Разом: 54 item.**
 
 ## Протокол сесії
 
