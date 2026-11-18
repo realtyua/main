@@ -5,7 +5,7 @@
     "iconv-lite": "^0.7.3",
     "js-yaml": "^5.5.0",
     "linkedom": "^0.18.13",
-    "@realtyua/form-engine": "^1.0.3"
+    "@realtyua/form-engine": "^1.0.4"
   },
   "scripts": {
     "postinstall": "node scripts/sync-form-engine.mjs",
