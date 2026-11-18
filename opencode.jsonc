@@ -1,0 +1,83 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // Модель за замовчуванням для цього проєкту.
+  "model": "opencode/big-pickle",
+  "default_agent": "build",
+
+  // AGENTS.md описує архітектуру, заборони та гейти Form Engine.
+  "instructions": ["AGENTS.md"],
+
+  // reifua — 11ty/Eleventy двійник того самого рушія (read-only reference).
+  // plan — затверджений план робіт поза репозиторієм.
+  "references": {
+    "reifua": {
+      "path": "../../reifua/main",
+      "description": "11ty/Eleventy двійник: той самий Form Engine, адаптер {% formApp %}, порівняння паритету"
+    },
+    "plan": {
+      "path": "~/.opencode/plan",
+      "description": "Затверджений план робіт Form Engine (фази, work items, протокол сесій)"
+    }
+  },
+
+  // Відносний шлях резолвиться від канонічного чекауту проєкту:
+  // C:\Users\Vasyl\Documents\GitHub\realtyua\worktrees\<name>
+  "worktree": {
+    "directory": "../worktrees"
+  },
+
+  // Правила застосовуються по порядку; перемагає останній збіг.
+  "permissions": [
+    { "action": "read", "resource": "*", "effect": "allow" },
+    { "action": "glob", "resource": "*", "effect": "allow" },
+    { "action": "grep", "resource": "*", "effect": "allow" },
+
+    // Будь-яка shell-команда потребує підтвердження, крім безпечних нижче.
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git log *", "effect": "allow" },
+    { "action": "shell", "resource": "git show *", "effect": "allow" },
+    { "action": "shell", "resource": "git branch *", "effect": "allow" },
+    { "action": "shell", "resource": "npm test *", "effect": "allow" },
+    { "action": "shell", "resource": "node --test *", "effect": "allow" },
+    { "action": "shell", "resource": "node _form-engine/tools/*", "effect": "allow" },
+    { "action": "shell", "resource": "powershell -File _form-engine/tools/*", "effect": "allow" },
+
+    // Політика: локальний цикл (add, commit, merge --no-ff) — агент; push — користувач.
+    // Останній збіг перемагає, тому allow для локальних операцій стоїть після загального `shell: ask`.
+    { "action": "shell", "resource": "git add *", "effect": "allow" },
+    { "action": "shell", "resource": "git commit *", "effect": "allow" },
+    { "action": "shell", "resource": "git push *", "effect": "deny" },
+    { "action": "shell", "resource": "git merge *", "effect": "allow" },
+    { "action": "shell", "resource": "git rebase *", "effect": "deny" },
+    { "action": "shell", "resource": "git reset --hard *", "effect": "deny" },
+    { "action": "shell", "resource": "git tag *", "effect": "deny" },
+
+    // Політика: все локально. Жодних мережевих команд.
+    { "action": "shell", "resource": "git fetch *", "effect": "deny" },
+    { "action": "shell", "resource": "git pull *", "effect": "deny" },
+    { "action": "shell", "resource": "npm install *", "effect": "deny" },
+    { "action": "shell", "resource": "npm i *", "effect": "deny" },
+    { "action": "shell", "resource": "npm publish *", "effect": "deny" },
+    { "action": "shell", "resource": "curl *", "effect": "deny" },
+    { "action": "shell", "resource": "wget *", "effect": "deny" },
+    { "action": "shell", "resource": "Invoke-WebRequest *", "effect": "deny" },
+    { "action": "shell", "resource": "Invoke-RestMethod *", "effect": "deny" },
+    { "action": "shell", "resource": "gh *", "effect": "deny" },
+    { "action": "webfetch", "resource": "*", "effect": "deny" },
+    { "action": "websearch", "resource": "*", "effect": "deny" },
+    { "action": "experimental_image_generate", "resource": "*", "effect": "deny" },
+
+    // Політика: нічого не робити без дозволу. Кожне редагування або субагент —
+    // з підтвердженням.
+    { "action": "edit", "resource": "*", "effect": "ask" },
+    { "action": "subagent", "resource": "*", "effect": "ask" },
+
+    // 11ty-двійник і план доступні лише для читання.
+    { "action": "external_directory", "resource": "~/Documents/GitHub/reifua/main/*", "effect": "allow" },
+    { "action": "edit", "resource": "~/Documents/GitHub/reifua/main/*", "effect": "deny" },
+    { "action": "external_directory", "resource": "~/.opencode/plan/*", "effect": "allow" }
+  ]
+}

@@ -3,9 +3,17 @@ _site/
 .jekyll-metadata
 Gemfile.lock
 
-### Gulp ###
-package.json
+### Node ###
 /node_modules/
+
+### Form Engine (generated) ###
+# demo.yml is a tailwind-only example; its baked fragment is not shipped on this site.
+/_includes/form/app/demo.html
+# Engine files are materialised from @realtyua/form-engine by
+# scripts/sync-form-engine.mjs (npm postinstall); the repo keeps no copies.
+/assets/js/form-engine/
+/_form-engine/tools/
+/_form-engine/schema/
 
 ### Atom ###
 .ftpconfig
@@ -70,6 +78,3 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
-
-### Other ###
-README.md
