@@ -190,7 +190,7 @@
 | MOD-3 | 8 | Оновити `actions/*` (прибрати застереження Node 20) | MOD-1 | done | `feat/MOD-3-actions-versions` (merged) | `reifua/main` | 2026-11-18 | a2dbcb3 |
 | MOD-4 | 8 | Cloudflare: Worker-endpoint форм, зона `rent.if.ua`, Turnstile | MERGE-1 | blocked | `feat/MOD-4-cloudflare-forms` | `reifua/main` | 2026-11-18 | — |
 | MOD-5 | 8 | Оновити `actions/*` + `ubuntu-24.04` (`realtyua`) | MERGE-2 | todo | `feat/MOD-5-actions-versions` | `../worktrees/MOD-5-actions-versions` | — | — |
-| MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | review | `feat/MOD-6-captcha-path` | `../worktrees/MOD-6-captcha-path` | 2026-11-18 | — |
+| MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | done | `feat/MOD-6-captcha-path` (merged) | `../worktrees/MOD-6-captcha-path` (cleaned) | 2026-11-18 | 748ea138 |
 | MOD-7 | 8 | Turnstile: діагностувати подвійне завантаження `api.js` | MOD-6 | todo | `feat/MOD-7-turnstile-double-load` | `../worktrees/MOD-7-turnstile-double-load` | — | — |
 | MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
 
@@ -252,8 +252,9 @@
 > старий шлях відсутній, тег `api.js` не змінено. Гейти: build 0 + check-notify
 > ok, `V` 3/3 valid; `T` 227/228 (stale baked form) і `CA` 4 failure(s)
 > (autocomplete) — обидві розбіжності існували ще на `master` @ `5f07b1c9`
-> і не спричинені MOD-6. Коміт не створено, чекає огляду. Деталі —
-> `items/MOD-6.md`.
+> і не спричинені MOD-6. Item-коміт `748ea138`, merge `--no-ff` у `master` —
+> `35da72b9` (затверджено користувачем; `feature/form-engine` позаду master).
+> Push — користувач. Деталі — `items/MOD-6.md`.
 
 **Разом: 60 item.**
 

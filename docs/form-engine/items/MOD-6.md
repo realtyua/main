@@ -4,7 +4,7 @@ Phase: 8 · Depends: MERGE-2 · Repo: realtyua
 
 Branch: `feat/MOD-6-captcha-path` · Worktree: `../worktrees/MOD-6-captcha-path`
 
-Status: `todo`
+Status: `done`
 
 > Окрема сесія. Помилка 404 існувала ще на feature-гілці, але проявилася
 > на живому сайті лише після MERGE-2.
@@ -78,8 +78,9 @@ powershell -File _form-engine/tools/verify-render.ps1 build
 
 ### 2026-11-18 — сесія 1
 
-- **Status:** `review` — реалізовано в робочому дереві, чекає огляду.
-  Локальний цикл (commit → merge → cleanup) **не виконувався** за інструкцією.
+- **Status:** `done` — огляд схвалено користувачем 2026-11-18; локальний цикл
+  виконано: commit → merge `--no-ff` у `master` → cleanup worktree. Push —
+  користувач.
 - **Repo / branch / worktree:** `realtyua` · `feat/MOD-6-captcha-path` ·
   `../worktrees/MOD-6-captcha-path` (detached HEAD → гілка створена всередині,
   `node_modules` — junction на канонічний, `npm install` не запускався).
@@ -119,5 +120,9 @@ powershell -File _form-engine/tools/verify-render.ps1 build
   - Перевірку консолі на живому сайті (зникнення 404) робить користувач після
     деплою; warning Turnstile — MOD-7; перезахоплення baseline — MOD-8; push —
     користувач.
-- **Commit SHA:** `—` (коміт не створено; очікує схвалення огляду).
+- **Commit SHA:** item `748ea138` (`MOD-6: restore captcha.js path in head.html`),
+  merge `--no-ff` у `master` — `35da72b9`. Локальний цикл виконано після
+  схвалення; `git push` навмисно не виконувався (завжди користувач).
+  Мердж ішов у `master`, а не в `feature/form-engine` (затверджено користувачем):
+  остання гілка на 5 комітів позаду і не є деплойною.
 
