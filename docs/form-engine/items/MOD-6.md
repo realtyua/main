@@ -117,12 +117,22 @@ powershell -File _form-engine/tools/verify-render.ps1 build
   - Jekyll build перезаписує трекований generated
     `_includes/form/app/add-property.html` (побічний ефект плагіна); відновлено
     з HEAD через `git checkout -- <file>` — у diff лишився тільки `head.html`.
-  - Перевірку консолі на живому сайті (зникнення 404) робить користувач після
-    деплою; warning Turnstile — MOD-7; перезахоплення baseline — MOD-8; push —
-    користувач.
+  - Жива перевірка консолі виконана користувачем 2026-11-19 (див. нижче);
+    warning Turnstile — MOD-7; перезахоплення baseline — MOD-8.
 - **Commit SHA:** item `748ea138` (`MOD-6: restore captcha.js path in head.html`),
   merge `--no-ff` у `master` — `35da72b9`. Локальний цикл виконано після
-  схвалення; `git push` навмисно не виконувався (завжди користувач).
-  Мердж ішов у `master`, а не в `feature/form-engine` (затверджено користувачем):
-  остання гілка на 5 комітів позаду і не є деплойною.
+  схвалення; у межах локального циклу `git push` не виконувався (завжди
+  користувач; див. 2026-11-19). Мердж ішов у `master`, а не в
+  `feature/form-engine` (затверджено користувачем): остання гілка на 5 комітів
+  позаду і не є деплойною.
+
+### 2026-11-19 — жива перевірка (користувач)
+
+- `git push` виконано користувачем; GitHub Action — **зелений**.
+- На живому сайті помилки `GET /assets/js/captcha.js … 404` **немає** —
+  acceptance-критерій закрито.
+- Репо `form-engine` змін не потребувало: там уже правильний шлях
+  `/assets/js/form-engine/captcha.js` (`runtime/shell.js`, адаптер, приклади),
+  а `_includes/head.html` до пакета не входить. У `reifua` старого шляху немає.
+- Статус item-а лишається `done`; MOD-7 і MOD-8 — окремі сесії.
 
