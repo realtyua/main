@@ -134,7 +134,7 @@
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | done | `feat/PUB-10-ci-release` | `../worktrees/PUB-10-ci-release` | 2026-11-14 | 6065337 |
 | PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | done | `feat/PUB-12-install-smoke-test` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-12-install-smoke-test` | 2026-11-15 | 719ba5fd |
 | PUB-13 | 6 | Міграція `realtyua` на npm пакет (локально, гейти, без пушу) | PUB-12 | done | `feat/PUB-13-realtyua-migrate-npm` (merged) | — (cleaned 2026-11-18) | 2026-11-18 | 5ade2ac7 |
-| PUB-14 | 6 | Міграція `reifua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
+| PUB-14 | 6 | Міграція `reifua` на npm пакет (локально, гейти, без пушу) | PUB-12 | done | `feat/PUB-14-reifua-migrate-npm` (reifua) | `../worktrees/PUB-14-reifua-migrate-npm` (reifua) | 2026-11-18 | 9685757 |
 | PUB-15 | 6 | `runtime/package.json` (`type: module`) у пакеті | PUB-10 | done | `feat/PUB-15-runtime-package-type` | `../worktrees/PUB-15-runtime-package-type` | 2026-11-15 | 404f6c2 |
 | PUB-16 | 6 | Eleventy-адаптер: CJS/ESM-скоуп і відв'язка від шляхів сайту | PUB-10 | done | `feat/PUB-16-eleventy-adapter-packaging` | `../worktrees/PUB-16-eleventy-adapter-packaging` | 2026-11-15 | 2941bee9 |
 | PUB-17 | 6 | README/theming: шляхи копіювання та заяви про залежності | PUB-10 | done | `feat/PUB-17-docs-paths-deps` | `../worktrees/PUB-17-docs-paths-deps` | 2026-11-15 | 3a44099 |
@@ -147,7 +147,9 @@
 > PUB-17 (docs only) → `done` (commit 3a44099). PUB-13 → `done` (follow-ups закрито
 > 2026-11-18: package-backed paths з npm, `demo` endpoint, пакет 1.0.3; фінальний
 > коміт `5ade2ac7`, push — користувач). PUB-18 → `done` (commit `ca98184`,
-merge `4e62dc8` у form-engine `master`). PUB-14 залишається `todo`.
+> merge `4e62dc8` у form-engine `master`). PUB-14 → `done` (reifua item `9685757`,
+> merge `559e1b0` у `reifua/feature/form-engine`, branch/worktree прибрано;
+> гейти зелені, локальні копії runtime/adapter видалено).
 
 **Разом: 50 item.**
 
