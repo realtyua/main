@@ -161,7 +161,7 @@
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | MERGE-1 | 7 | Merge `feature/form-engine` → `master` (`reifua`) | BASE-6 | done | `master` (reifua) | `reifua/main` | 2026-11-18 | 6da93db |
-| MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | todo | — | — | — | — |
+| MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | review | `master` (realtyua) | `realtyua/main` | 2026-11-18 | 80e9e38c |
 
 > Примітка: MERGE-1 — merge виконано локально 2026-11-18 (`--no-ff`,
 > merge-коміт `6da93db`, 24 коміти / 56 файлів, конфліктів немає). Гейти на
@@ -169,6 +169,17 @@
 > запушив `master` (`24d3a5b`), але Action упав на Node 18 (`ERR_REQUIRE_ESM`
 > + `engines >=20`) — відкрито MOD-1. MERGE-1 лишається `review`, доки деплой
 > не стане зеленим. Деталі — `items/MERGE-1.md`.
+>
+> Примітка: MERGE-2 — merge виконано локально 2026-11-18 у `realtyua/main`
+> (`master`, `--no-ff`, merge-коміт `80e9e38c`, батьки `6d8bbeec` і `0ef96b72`).
+> Конфлікт лише в `_config.yml` (коментований `#path: /*/data/*.json`): за
+> погодженням користувача лишено рядок із `feature/form-engine`. Гейти на
+> `master`: `T` 228/228, `V` 3/3 valid, `CA` PASS, Jekyll build 0 (175 с),
+> `CN` ok (1 page). `VR` — FAIL 2/3 через застарілий baseline (captured
+> 2026-11-08): `form-bake sha` після PUB-18 rebake (`e301affb`, 2026-11-18) і
+> новий пост у `master`; baseline свідомо не перезахоплювався. Статус `review`:
+> `git push master` — користувач, docs/handoff лишаються некоміченими. Деталі —
+> `items/MERGE-2.md`.
 
 ## Phase 8 — Modernization
 
