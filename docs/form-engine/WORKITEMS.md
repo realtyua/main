@@ -189,6 +189,10 @@
 | MOD-2 | 8 | Purge: сканувати Tailwind-тему з npm-пакета (стилі `/demo`) | MOD-1 | done | `feat/MOD-2-purge-npm-runtime` (merged) | `reifua/main` | 2026-11-18 | 92c773e |
 | MOD-3 | 8 | Оновити `actions/*` (прибрати застереження Node 20) | MOD-1 | done | `feat/MOD-3-actions-versions` (merged) | `reifua/main` | 2026-11-18 | a2dbcb3 |
 | MOD-4 | 8 | Cloudflare: Worker-endpoint форм, зона `rent.if.ua`, Turnstile | MERGE-1 | blocked | `feat/MOD-4-cloudflare-forms` | `reifua/main` | 2026-11-18 | — |
+| MOD-5 | 8 | Оновити `actions/*` + `ubuntu-24.04` (`realtyua`) | MERGE-2 | todo | `feat/MOD-5-actions-versions` | `../worktrees/MOD-5-actions-versions` | — | — |
+| MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | todo | `feat/MOD-6-captcha-path` | `../worktrees/MOD-6-captcha-path` | — | — |
+| MOD-7 | 8 | Turnstile: діагностувати подвійне завантаження `api.js` | MOD-6 | todo | `feat/MOD-7-turnstile-double-load` | `../worktrees/MOD-7-turnstile-double-load` | — | — |
+| MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
 > `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
@@ -234,8 +238,16 @@
 > MOD-3 і MOD-4 — окремі сесії. MOD-3 закрито (`done`). MOD-4:
 > реалізація ще не починалася (у цій сесії — лише рішення й план);
 > старт — після токена й sitekey.
+>
+> MOD-5..MOD-8 — окремі сесії після MERGE-2 (зареєстровано 2026-11-18,
+> статус `todo`; гілку й worktree створює кожна сесія самостійно):
+> MOD-5 — застереження Actions (рецепт MOD-3 із reifua, плюс `ubuntu-24.04`);
+> MOD-6 — 404 `/assets/js/captcha.js` після перейменування в `178afaf8`;
+> MOD-7 — подвійне завантаження Turnstile (перевірити після MOD-6);
+> MOD-8 — свідоме перезахоплення baseline `verify-render` (дві застарілі
+> розбіжності, зафіксовані в MERGE-2). Деталі — `items/MOD-5.md`..`MOD-8.md`.
 
-**Разом: 56 item.**
+**Разом: 60 item.**
 
 ## Протокол сесії
 
