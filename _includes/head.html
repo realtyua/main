@@ -175,7 +175,7 @@
     localHosts: {{ site.turnstile_local_hosts | jsonify }}
   };
 </script>
-<script src="{{ '/assets/js/captcha.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ '/assets/js/form-engine/captcha.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 {%- endif -%}
 {%- include analytics-google.html -%}
