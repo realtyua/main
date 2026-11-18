@@ -890,35 +890,35 @@ steps:
                         helper: Введіть перші три українські літери у назві населеного пункту
                     helper: Це допоможе легко знайти населений пункт де знаходиться об’єкт нерухомості
 
-              - class: row
-                fields:
-                  - name: district_settlement
-                    type: autocomplete
-                    label: Мікрорайон населеного пункту
-                    placeholder: Введіть назву мікрорайону...
-                    datas:
-                      - field: location_widget.settlement
-                        value: "30595"
-                        data: /assets/data/districts.json
-                        mode: search
-                        threshold: 6
-                        minChars: 2
-                        maxResults: 6
-                      - field: location_widget.settlement
-                        value: "30559"
-                        data: /assets/data/districts-30559.json
-                        mode: auto
-                        minChars: 2
-                        maxResults: 6
-                    required: false
-                    #message: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов'язковим
-                    validation:
-                      required: Виберіть район населеного пункту
-                    depends:
-                      - field: location_widget.settlement
-                        #values: ["30595","30559"]
-                        values: ["30595"]
-                    helper: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов’язковим
+              # - class: row
+              #   fields:
+              #     - name: district_settlement
+              #       type: autocomplete
+              #       label: Мікрорайон населеного пункту
+              #       placeholder: Введіть назву мікрорайону...
+              #       datas:
+              #         - field: location_widget.settlement
+              #           value: "30595"
+              #           data: /assets/data/districts.json
+              #           mode: search
+              #           threshold: 6
+              #           minChars: 2
+              #           maxResults: 6
+              #         - field: location_widget.settlement
+              #           value: "30559"
+              #           data: /assets/data/districts-30559.json
+              #           mode: auto
+              #           minChars: 2
+              #           maxResults: 6
+              #       required: false
+              #       #message: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов'язковим
+              #       validation:
+              #         required: Виберіть район населеного пункту
+              #       depends:
+              #         - field: location_widget.settlement
+              #           #values: ["30595","30559"]
+              #           values: ["30595"]
+              #       helper: Введіть перші три українські літери у назві мікрорайону міста і виберіть ваш мікрорайон. Довідома, ці мікрорайони не є офіційним аміністративним поділом міста, то ж це поле не є обов’язковим
 
               - class: row
                 fields:
