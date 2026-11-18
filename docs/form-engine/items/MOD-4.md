@@ -8,6 +8,10 @@ Branch: `feat/MOD-4-cloudflare-forms` · Worktree: `reifua/main`
 
 Status: `blocked`
 
+> Окрема сесія. У цій сесії код MOD-4 **не створювався**: зафіксовано лише
+> рішення і план. Реалізація — окрема сесія, після появи
+> `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` і Turnstile sitekey.
+>
 > `blocked`: рішення ухвалені (нижче), але для старту бракує доступу до
 > Cloudflare та адрес доставки. Блокери — у розділі «Що потрібно від
 > користувача».
@@ -303,3 +307,8 @@ npm run verify:render
   NS змінює користувач (агент дає пару); `/demo` теж отримує captcha
   (`?form=demo`, без email); `npm install` wrangler дозволено. Лишилось:
   sitekey і поява токена в env.
+
+- 2026-11-18: **реалізацію відкладено в окрему сесію.** Код Worker-а,
+  маніфест `form-config.json`, зміни `site.js`/конфігів і тести в цій
+  сесії не створювалися. Наступна сесія стартує після отримання
+  `CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_ACCOUNT_ID` і Turnstile sitekey.

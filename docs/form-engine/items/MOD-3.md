@@ -7,6 +7,9 @@ YAML; junction на `node_modules` не потрібен, гейти викон�
 
 Status: `review`
 
+> Окрема сесія: MOD-3 закривається самостійно. Item уже закомічено й
+> змерджено локально; push + зелений Action — наступна сесія.
+
 ## Goal
 
 Прибрати з Action застереження «Node.js 20 is deprecated». GitHub примусово
