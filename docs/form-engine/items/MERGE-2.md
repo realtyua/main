@@ -4,7 +4,7 @@ Phase: 7 · Depends: MERGE-1 · Repo: realtyua
 
 Branch: `—` · Worktree: `—`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -98,3 +98,12 @@ npm run build
     дереві за правилами сесії.
 
   Commit SHA (merge): `80e9e38c2fd2cd0852561d00caad73308d198f68`.
+
+- 2026-11-18 (після push): **done** — користувач запушив `master`
+  (`26b6c47b` — docs-коміт item-а, поверх merge-коміту `80e9e38c`); Action
+  зелений. MERGE-2 закрито, статус у реєстрі — `done`.
+
+  Примітка: після push у `master` з'явився окремий коміт користувача `fd4978c6`
+  («Toggle line comment 893-921», `_data/add-property.yml`, 29+/29−) — не частина
+  MERGE-2, цим item-ом не зачіпався. Може вплинути на `form-bake sha` / baseline
+  `verify-render` — окреме рішення.
