@@ -138,6 +138,7 @@
 | PUB-15 | 6 | `runtime/package.json` (`type: module`) у пакеті | PUB-10 | done | `feat/PUB-15-runtime-package-type` | `../worktrees/PUB-15-runtime-package-type` | 2026-11-15 | 404f6c2 |
 | PUB-16 | 6 | Eleventy-адаптер: CJS/ESM-скоуп і відв'язка від шляхів сайту | PUB-10 | done | `feat/PUB-16-eleventy-adapter-packaging` | `../worktrees/PUB-16-eleventy-adapter-packaging` | 2026-11-15 | 2941bee9 |
 | PUB-17 | 6 | README/theming: шляхи копіювання та заяви про залежності | PUB-10 | done | `feat/PUB-17-docs-paths-deps` | `../worktrees/PUB-17-docs-paths-deps` | 2026-11-15 | 3a44099 |
+| PUB-18 | 6 | Mouse pick in autocomplete/location dropdowns (hover loop) | PUB-13 | done | `feat/PUB-18-autocomplete-mouse-pick` (merged) | `../worktrees/PUB-18-autocomplete-mouse-pick` (form-engine, cleaned 2026-11-18) | 2026-11-18 | ca98184 |
 
 > Примітка: PUB-15..PUB-17 відкриті за результатами PUB-12 (F1–F6 в
 > `items/PUB-12.md`). PUB-12 був `blocked`, доки F1, F3, F4 не виправлені;
@@ -145,9 +146,10 @@
 > PUB-15 → `done` (commit 404f6c2). PUB-16 → `done` (commit 2941bee9 / fbcbc6e merge).
 > PUB-17 (docs only) → `done` (commit 3a44099). PUB-13 → `done` (follow-ups закрито
 > 2026-11-18: package-backed paths з npm, `demo` endpoint, пакет 1.0.3; фінальний
-> коміт `5ade2ac7`, push — користувач). PUB-14 залишається `todo`.
+> коміт `5ade2ac7`, push — користувач). PUB-18 → `done` (commit `ca98184`,
+merge `4e62dc8` у form-engine `master`). PUB-14 залишається `todo`.
 
-**Разом: 49 item.**
+**Разом: 50 item.**
 
 ## Протокол сесії
 
