@@ -96,6 +96,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: Install Node dependencies
+        # postinstall runs scripts/sync-form-engine.mjs and materialises
+        # assets/js/form-engine, _form-engine/tools and _form-engine/schema
+        # from the installed @realtyua/form-engine package.
+        run: npm ci
       - name: Update exchange rates in _config.yml
         run: |
           CURRENT_USD=$(grep '^usd:' _config.yml | awk '{print $2}')
