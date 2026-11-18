@@ -3,7 +3,7 @@
 Phase: 2 · Depends: BASE-5 · Repo: reifua
 Branch: `feat/BASE-6-reifua-data` · Worktree: `../worktrees/BASE-6-reifua-data`
 
-Status: `todo`
+Status: `done`
 
 ## Goal
 
@@ -74,3 +74,47 @@ npm run build
   відкладено, щоб не змішувати дані сайту з комітами рушія.
 - 2026-11-02: файли закомічено в `7a95f78` разом з рештою змін `reifua`.
   Item переорієнтовано з «вирішити, чи трекати» на «перевірити доцільність».
+- 2026-11-18: **verified + trimmed** (worktree `BASE-6-reifua-data`, branch
+  `feat/BASE-6-reifua-data`, без коміту).
+
+  Рішення: лишити трекованими **тільки фактично вживані** файли — `if.json`
+  (239 446 B) і `districts.json` (1 545 B). Видалено 25 файлів (8 003 822 B):
+  `all.json`, `districts-30559.json`, 22 регіональні `.json`, `info`,
+  `scraper.py`.
+
+  Обґрунтування (відповіді на питання item):
+  1. `src/**` звертається лише до `all.json` / `districts.json` /
+     `districts-30559.json`; регіональні файли не читає ніщо.
+  2. `all.json` — не «вся Україна», а вирізка з 2 областей: `if.json[0]` +
+     `kyiv.json[0]` (перевірено, entries ідентичні). Тому `all.json` замінено
+     на `if.json` у `data:` location-віджета.
+  3. Дані не відтворювані: `scraper.py` ходить у мережу, приймає один
+     oblast id і пише hardcode `if_oblast_data.json`; пайплайну для 23 назв
+     немає. Усі 27 файлів були байт-ідентичні (EOL-нормалізовано)
+     `realtyua/assets/data/*` — тобто копія, а не генерація.
+  4. 7.9 MB одноразово — прийнятно, LFS не потрібен: `add-property-wire`
+     читає `if.json` з диска, LFS вимагав би `lfs pull` (мережа) для гейтів.
+
+  Зміни (`reifua`):
+  - `src/assets/data/`: видалено 25 файлів, лишились `if.json`, `districts.json`.
+  - `src/_data/add-property.yml`, `src/_data/demo.yml`: `data:`
+    `/assets/data/all.json` → `/assets/data/if.json`; datas-гілка для `30559`
+    (`districts-30559.json`) закоментована.
+  - `test/add-property-wire.test.mjs`: читання/моки `all.json` → `if.json`;
+    тест `autocomplete datas switch…` (єдина залежність від
+    `districts-30559.json`) видалено.
+
+  Гейти (worktree, `node_modules` — junction):
+  - `npm run build` — exit 0; `dist/assets/data` 27→2 файли
+    (8 244 813 B → 240 991 B);
+  - `npm test` — 238/238 pass (було 239; −1 видалений тест);
+  - `npm run validate --strict` — valid; `check:add-property` — PASS;
+    `check:notify` — ok (10 pages); `verify:render` — PASS 42/42.
+
+  Leftovers: `dist` більше не тягне 7.6 MB мертвих даних; `all.json` більше
+  не згадується в `src/**`.
+
+  Коміт: `cd2fb02` (`BASE-6: trim region datasets to used files`), merge
+  `--no-ff` у `reifua/feature/form-engine` — `dcf1ee7`. Гілку
+  `feat/BASE-6-reifua-data` і worktree прибрано; junction `node_modules`
+  знято.

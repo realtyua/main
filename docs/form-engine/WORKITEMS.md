@@ -41,10 +41,15 @@
 | BASE-3 | 2 | commit 2: Form Engine WIP | BASE-2 | done | feature/form-engine | — | 2026-11-01 | 178afaf8 |
 | BASE-4 | 2 | Гілка + логічні коміти reifua | BASE-3 | done | feature/form-engine (reifua) | — | 2026-11-02 | 7a95f78 |
 | BASE-5 | 2 | Push обох гілок + worktree smoke test | BASE-4 | done | — | — | 2026-11-02 | — |
-| BASE-6 | 2 | `reifua`: доля `src/assets/data/**` (7.9 MB) | BASE-5 | todo | — | — | — | — |
+| BASE-6 | 2 | `reifua`: доля `src/assets/data/**` (7.9 MB) | BASE-5 | done | `feat/BASE-6-reifua-data` | `BASE-6-reifua-data` | 2026-11-18 | cd2fb02 |
 
 > Примітка: BASE-2 і BASE-3 увійшли одним комітом `178afaf8` (97 файлів,
 > +19952/−4365). Розділяти історію після push не стали — гілка вже опублікована.
+>
+> BASE-6 — `done`: лишились трекованими лише вживані
+> `src/assets/data/if.json` і `districts.json`; 25 файлів (8 003 822 B ≈ 7.6 MiB)
+> видалено, `all.json` → `if.json`, datas-гілка `30559` закоментована. Гейти: build 0, `T` 238/238, `V` valid, `CA` PASS, `CN` ok,
+> `VR` 42/42. Деталі — `items/BASE-6.md`.
 
 ## Phase 3 — Jekyll readiness
 
