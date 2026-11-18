@@ -133,7 +133,7 @@
 | PUB-9 | 6 | Config reference, theming, migration | PUB-6 | done | `feat/PUB-9-config-reference-theming-migration` | `../worktrees/PUB-9-config-reference-theming-migration` | 2026-11-14 | 7dc5b287 |
 | PUB-10 | 6 | CI + реліз `1.0.0` | PUB-7..9 | done | `feat/PUB-10-ci-release` | `../worktrees/PUB-10-ci-release` | 2026-11-14 | 6065337 |
 | PUB-12 | 6 | Перевірка установки пакету (`npm install @realtyua/form-engine`) в чистому проекті | PUB-10 | done | `feat/PUB-12-install-smoke-test` | `X:/OpenCodeData/opencode/worktree/247de9/PUB-12-install-smoke-test` | 2026-11-15 | 719ba5fd |
-| PUB-13 | 6 | Міграція `realtyua` на npm пакет (локально, гейти, без пушу) | PUB-12 | done | `feat/PUB-13-realtyua-migrate-npm` | `../worktrees/PUB-13-realtyua-migrate-npm` | 2026-11-16 | 33a32f31 |
+| PUB-13 | 6 | Міграція `realtyua` на npm пакет (локально, гейти, без пушу) | PUB-12 | done | `feat/PUB-13-realtyua-migrate-npm` (merged) | — (cleaned 2026-11-18) | 2026-11-18 | 5ade2ac7 |
 | PUB-14 | 6 | Міграція `reifua` на npm пакет (локально, гейти, без пушу) | PUB-12 | todo | — | — | — | — |
 | PUB-15 | 6 | `runtime/package.json` (`type: module`) у пакеті | PUB-10 | done | `feat/PUB-15-runtime-package-type` | `../worktrees/PUB-15-runtime-package-type` | 2026-11-15 | 404f6c2 |
 | PUB-16 | 6 | Eleventy-адаптер: CJS/ESM-скоуп і відв'язка від шляхів сайту | PUB-10 | done | `feat/PUB-16-eleventy-adapter-packaging` | `../worktrees/PUB-16-eleventy-adapter-packaging` | 2026-11-15 | 2941bee9 |
@@ -143,7 +143,9 @@
 > `items/PUB-12.md`). PUB-12 був `blocked`, доки F1, F3, F4 не виправлені;
 > повторна перевірка установки після PUB-15..PUB-17 — **успішна**, статус → `done`.
 > PUB-15 → `done` (commit 404f6c2). PUB-16 → `done` (commit 2941bee9 / fbcbc6e merge).
-> PUB-17 (docs only) → `done` (commit 3a44099). PUB-13/PUB-14 тепер `ready`.
+> PUB-17 (docs only) → `done` (commit 3a44099). PUB-13 → `done` (follow-ups закрито
+> 2026-11-18: package-backed paths з npm, `demo` endpoint, пакет 1.0.3; фінальний
+> коміт `5ade2ac7`, push — користувач). PUB-14 залишається `todo`.
 
 **Разом: 49 item.**
 
