@@ -4,7 +4,7 @@ Phase: 8 · Depends: MOD-1 · Repo: reifua
 
 Branch: `feat/MOD-2-purge-npm-runtime` · Worktree: `reifua/main`
 
-Status: `review`
+Status: `done`
 
 ## Goal
 
@@ -28,7 +28,7 @@ Status: `review`
 - [x] Purge сканує встановлений пакет, а не видалену локальну копію
 - [x] `/demo` отримує утиліти теми (`md:col-span-*`, `focus:*`, `hover:*`, ...)
 - [x] Гейти: build 0, `T` 238/238, `V` valid, `CA` PASS, `CN` ok, `VR` 42/42
-- [ ] Merge у `master` + push (користувач) + перевірка `/demo` на живому сайті
+- [x] Merge у `master` + push (користувач) + перевірка `/demo` на живому сайті
 
 ## Gates
 
@@ -95,3 +95,6 @@ npm run verify:render
 
   Статус `review`: `master` на 2 коміти попереду `origin/master`; push і
   візуальна перевірка `/demo` на живому сайті — за користувачем.
+
+- 2026-11-18: **done** — `master` запушено, Action зелений, користувач
+  підтвердив, що стилі `/demo` на живому сайті відновлені. Item закрито.

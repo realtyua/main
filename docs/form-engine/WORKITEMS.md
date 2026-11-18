@@ -175,7 +175,9 @@
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | MOD-1 | 8 | Node 24 + Eleventy 3.1.8 (CI fix, Tailwind без плагіна) | MERGE-1 | done | `feat/MOD-1-eleventy3-node24` (merged) | `reifua/main` | 2026-11-18 | ad87a29 |
-| MOD-2 | 8 | Purge: сканувати Tailwind-тему з npm-пакета (стилі `/demo`) | MOD-1 | review | `feat/MOD-2-purge-npm-runtime` (merged) | `reifua/main` | 2026-11-18 | 92c773e |
+| MOD-2 | 8 | Purge: сканувати Tailwind-тему з npm-пакета (стилі `/demo`) | MOD-1 | done | `feat/MOD-2-purge-npm-runtime` (merged) | `reifua/main` | 2026-11-18 | 92c773e |
+| MOD-3 | 8 | Оновити `actions/*` (прибрати застереження Node 20) | MOD-1 | review | `feat/MOD-3-actions-versions` (merged) | `reifua/main` | 2026-11-18 | a2dbcb3 |
+| MOD-4 | 8 | Cloudflare: Worker-endpoint форм, зона `rent.if.ua`, Turnstile | MERGE-1 | blocked | `feat/MOD-4-cloudflare-forms` | `reifua/main` | 2026-11-18 | — |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
 > `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
@@ -191,15 +193,34 @@
 > виконуються на Node 24), оновлення тегів — окремий item після перевірки
 > актуальних версій (мережа).
 >
-> MOD-2 — `review`: після першого деплою `/demo` втратив стилі. Причина —
+> MOD-2 — `done`: після першого деплою `/demo` втратив стилі. Причина —
 > застарілий шлях purge (`./src/assets/js/form-engine/**`) після PUB-14;
 > тепер сканується `node_modules/@realtyua/form-engine/runtime/**`. Класів без
 > CSS по `dist` **86 → 29**, `main.css` 19 361 → 28 671 B. Item-коміт
 > `92c773e`, merge `--no-ff` `4c94ecc`, гілку видалено. Гейти: build 0,
-> `T` 238/238, `V` valid, `CA` PASS, `CN` ok, `VR` 42/42. Чекає push і
-> візуальну перевірку `/demo`. Деталі — `items/MOD-2.md`.
-
-**Разом: 54 item.**
+> `T` 238/238, `V` valid, `CA` PASS, `CN` ok, `VR` 42/42. Push + зелений
+> Action; користувач підтвердив стилі `/demo` на живому сайті. Деталі —
+> `items/MOD-2.md`.
+>
+> MOD-3 — `review`: теги `actions/*` піднято до актуальних мажорів, що
+> працюють на Node 24 — `checkout@v7` (`v7.0.1`), `setup-node@v7` (`v7.1.0`),
+> `upload-pages-artifact@v5` (`v5.0.0`, всередині `upload-artifact@v7`),
+> `deploy-pages@v5` (`v5.0.1`). Входи workflow (`node-version`, `cache`,
+> `path`) сумісні — звірено з `action.yml`. Гейти: YAML parse ok, build 0,
+> `T` 238/238. Item-коміт `a2dbcb3`, merge `--no-ff` `494de8b`, гілку
+> видалено. Чекає push + зелений Action без застережень про Node 20.
+> Деталі — `items/MOD-3.md`.
+>
+> MOD-4 — `blocked`: Cloudflare Worker-endpoint для форм, зона `rent.if.ua`
+> і Turnstile. Рішення: той самий акаунт; API token + `wrangler`; код —
+> `workers/forms/` у `reifua/main`; доставка — як `realtyua/main/workers/*`,
+> окремо для `rent.if.ua`; endpoint `https://forms.rent.if.ua`; NS на
+> Cloudflare, GitHub Pages — DNS-only; новий Turnstile widget, secret
+> вставляє користувач. План A–D готовий; бракує токена/Account ID,
+> sitekey, email-адрес, підтвердження NS і дозволу на `npm install`
+> wrangler. Деталі — `items/MOD-4.md`.
+
+**Разом: 56 item.**
 
 ## Протокол сесії
 
