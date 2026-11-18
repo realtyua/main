@@ -160,10 +160,31 @@
 
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| MERGE-1 | 7 | Merge `feature/form-engine` → `master` (`reifua`) | BASE-6 | ready | — | — | — | — |
-| MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | todo | — | — | — | — |
+| MERGE-1 | 7 | Merge `feature/form-engine` → `master` (`reifua`) | BASE-6 | review | `master` (reifua) | `reifua/main` | 2026-11-18 | 6da93db |
+| MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | todo | — | — | — | — |
+
+> Примітка: MERGE-1 — merge виконано локально 2026-11-18 (`--no-ff`,
+> merge-коміт `6da93db`, 24 коміти / 56 файлів, конфліктів немає). Гейти на
+> `master`: build 0, `T` 238/238, `V` valid, `CA` PASS, `CN` ok. Користувач
+> запушив `master` (`24d3a5b`), але Action упав на Node 18 (`ERR_REQUIRE_ESM`
+> + `engines >=20`) — відкрито MOD-1. MERGE-1 лишається `review`, доки деплой
+> не стане зеленим. Деталі — `items/MERGE-1.md`.
+
+## Phase 8 — Modernization
+
+| ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| MOD-1 | 8 | Node 24 + Eleventy 3.1.8 (CI fix, Tailwind без плагіна) | MERGE-1 | review | `feat/MOD-1-eleventy3-node24` (merged) | `reifua/main` | 2026-11-18 | ad87a29 |
+
+> Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
+> `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
+> `lib/build-css.mjs` (postcss + tailwind + autoprefixer + clean-css). Item —
+> два коміти (`bdd6df2` + `ad87a29`), merge `--no-ff` у `reifua/master` —
+> `156fd37`, гілку видалено. Гейти: `npm ci` ok, build 0, `T` 238/238,
+> `V` valid, `CA` PASS, `CN` ok, `VR` 42/42. Чекає push + зелений Action.
+> Деталі — `items/MOD-1.md`.
 
-**Разом: 52 item.**
+**Разом: 53 item.**
 
 ## Протокол сесії
 

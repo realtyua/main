@@ -2,9 +2,9 @@
 
 Phase: 7 · Depends: BASE-6 · Repo: reifua
 
-Branch: `—` · Worktree: `—`
+Branch: `master` (reifua, без item-гілки) · Worktree: `reifua/main`
 
-Status: `ready`
+Status: `review`
 
 ## Goal
 
@@ -21,9 +21,9 @@ Status: `ready`
 
 ## Acceptance
 
-- [ ] `master` містить зміни `feature/form-engine` (merge або FF за узгодженням)
-- [ ] Конфліктів немає або вони розв’язані й узгоджені
-- [ ] Узгоджені гейти/перевірки після merge виконані (або зафіксовано, що пропущено і чому)
+- [x] `master` містить зміни `feature/form-engine` (merge або FF за узгодженням)
+- [x] Конфліктів немає або вони розв’язані й узгоджені
+- [x] Узгоджені гейти/перевірки після merge виконані (або зафіксовано, що пропущено і чому)
 - [ ] Handoff оновлено; `git push` виконано користувачем
 
 ## Gates
@@ -44,3 +44,43 @@ npm run build
 ## Handoff log
 
 <!-- Дописувати в кінці сесії: status, files changed, gates run, leftovers, commit SHA. -->
+
+- 2026-11-18: **merged locally** (`reifua/main`, гілка `master`, без worktree
+  й item-гілки — merge-айтем).
+
+  Стан до merge: `feature/form-engine` @ `dcf1ee7`, робоче дерево чисте;
+  `master` @ `b27fe4d` = merge-base (власних комітів немає), 24 коміти
+  попереду. Baseline-гейти на `feature/form-engine`: `npm run build` — 0,
+  `npm test` — **238/238**, `validate --strict` — valid,
+  `check:add-property` — PASS, `check:notify` — ok (10 pages). Перший прогін
+  `npm test` падав лише на freshness/parity через відсутній `dist` — після
+  `build` зелено.
+
+  Merge: `git checkout master` + `git merge --no-ff feature/form-engine`
+  (стратегія `ort`), повідомлення `Merge branch 'feature/form-engine'`.
+  Конфліктів немає. 56 файлів, +26 229/−64.
+
+  Гейти після merge на `master`: `npm run build` — 0, `npm test` —
+  **238/238**, `validate --strict` — valid, `check:add-property` — PASS,
+  `check:notify` — ok (10 pages). `verify:render` не запускався — його
+  немає в гейтах item-а.
+
+  Локальний стан: `master` @ `6da93db` (merge-коміт), на 1 коміт попереду
+  `origin/master`; гілка `feature/form-engine` @ `dcf1ee7` не видалена.
+  Репо `reifua` лишено на `master`.
+
+  Leftovers: `git push origin master` — користувач; рішення щодо долі гілки
+  `feature/form-engine` після push — за користувачем. Коміт реєстру/доків у
+  `realtyua` — після «прийнято».
+
+- 2026-11-18 (продовження): користувач запушив `master` (`24d3a5b`,
+  `Change url in the menu`), але Action `Install dependencies & build` упав:
+  Node 18.x проти `engines >=20` і `require(ESM)` адаптера. Merge-частина
+  item-а не винна — відкрито **MOD-1** (Node 24 + Eleventy 3.1.8, локально
+  зелено). MERGE-1 лишається `review`, доки деплой не стане зеленим; push
+  MERGE-1 вважається виконаним.
+
+- 2026-11-18 (продовження 2): MOD-1 прийнято й змерджено локально в
+  `reifua/master` (`156fd37`, item-коміти `bdd6df2` + `ad87a29`), гейти після
+  merge зелені. Наступний крок — користувач пушить `master` (3 коміти) і
+  перевіряє зелений Action; після цього MERGE-1 і MOD-1 → `done`.
