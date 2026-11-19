@@ -218,4 +218,4 @@ npm test
   (modal island/check-notify + modal-form runtime) розходяться з опублікованим `1.0.5`
   — потрібне рішення щодо patch/release; `realtyua/main` має пропатчений `node_modules`
   та `M package.json/lock`. **Статус item:** `done` (реалізація/гейти прийнято; live
-  Turnstile — очікує користувача). **Commit SHA (item):** `5a6b2d93`.
+  Turnstile — очікує користувача). **Commit SHA (item):** `5a6b2d93`, merge `d05fb9de`.
