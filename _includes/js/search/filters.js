@@ -6,14 +6,14 @@
       tag:      'Будинок',
       slug:     'budynok',
       triggers: ['частина будинку', 'будинок', 'хата'],
-      filters:  ['будинок'],
+      filters:  ['будинок', 'частина будинку'],
       chips:    ['rent','loc','addr','rooms','surface','land','floors','price'],
     },
     {
       tag:      'Квартира',
       slug:     'kvartyra',
       triggers: ['частина квартири', 'квартира', 'кімната'],
-      filters:  ['квартира', 'кімнат'],
+      filters:  ['квартира', 'частина квартири', 'кімната'],
       chips:    ['rent','loc','addr','rooms','surface','floor','floors','price'],
     },
     {

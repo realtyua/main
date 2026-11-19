@@ -18,12 +18,6 @@ const config = {
 
 const html = FormRender.render(config);
 
-const attrOf = (tag, name) => {
-  const m = html.match(new RegExp(`<${tag}[^>]*\\b${name}="([^"]*)"`));
-  assert.ok(m, `missing ${name} on <${tag}>`);
-  return m[1];
-};
-
 const patternOf = (id) => {
   const m = html.match(new RegExp(`<input[^>]*id="field_${id}"[^>]*\\bpattern="([^"]*)"`));
   assert.ok(m, `missing pattern on input#field_${id}`);
@@ -32,32 +26,32 @@ const patternOf = (id) => {
 
 const ALPINE = /\b(x-[a-z]+|@[a-z]+(\.[a-z0-9]+)*|:[a-z-]+)=/;
 
-test('notify config is version 1 and matches schema', () => {
+test('notify config is version 1 modal config (target MOD-9)', () => {
   assert.equal(config.version, 1);
   assert.equal(config.id, 'notify');
+  assert.equal(config.theme, 'bootstrap4');
+  assert.equal(config.behavior?.mode, 'modal');
+  assert.equal(config.behavior?.modal, '#notifyModal');
 });
 
-test('the form carries the old id, method, novalidate and data-form', () => {
+test('the form carries id, method, action, novalidate and data-form', () => {
   assert.match(html, /^<form id="notify-form" method="POST"/);
   assert.match(html, /action="https:\/\/notify-worker\.test\/hook"/);
   assert.match(html, /novalidate autocomplete="off" data-form="notify">/);
   assert.ok(!ALPINE.test(html), `framework attribute leaked: ${html.match(ALPINE)?.[0]}`);
 });
 
-test('hidden fields match the old names and stay bare', () => {
+test('hidden context fields and honeypot raw block are rendered', () => {
   for (const name of ['timestamp', 'uid', 'property_url', 'property_email', 'property_title']) {
     const re = new RegExp(`<input type="hidden" id="field_${name}" name="${name}"[^>]*>`);
     assert.match(html, re, `hidden ${name}`);
   }
   assert.ok(!html.includes('data-field-col="timestamp"'));
-});
-
-test('the honeypot block is carried over verbatim', () => {
   assert.match(html, /<div class="sr-only" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">/);
   assert.match(html, /<input type="text" id="notify-honeypot" name="honeypot" tabindex="-1" autocomplete="off" value="" spellcheck="false">/);
 });
 
-test('reason is a required select with the old options and copy', () => {
+test('reason is a required select with configured options and feedback', () => {
   assert.match(html, /<select class="form-control" id="field_reason" name="reason"[^>]*required/);
   assert.match(html, /<option value="">Оберіть причину<\/option>/);
   for (const [value, label] of [
@@ -75,53 +69,49 @@ test('reason is a required select with the old options and copy', () => {
   assert.match(html, /class="valid-feedback">Причину обрано<\/div>/);
 });
 
-test('details keeps maxlength, rows and the counter inside the helper', () => {
-  assert.match(html, /<textarea class="form-control" id="field_details" name="details"[^>]*maxlength="256"/);
+test('details textarea keeps configured limits, helper, counter and feedback', () => {
+  assert.match(html, /<textarea class="form-control" id="field_details" name="details"[^>]*minlength="0" maxlength="256"/);
   assert.match(html, /rows="4"/);
   assert.match(html, /placeholder="Опишіть, що саме не так з оголошенням\.\.\."/);
-  assert.match(html, /<span id="notify-counter" data-countdown="details">256<\/span> символів залишилось/);
+  assert.match(html, /<small id="helper_details" class="form-text text-muted">Напишіть тут що не так з цією нерухомістю<\/small>/);
+  assert.match(html, /<small class="form-text text-muted" data-char-counter="details" data-maxlength="256">/);
+  assert.match(html, /class="valid-feedback">Текст введено правильно<\/div>/);
   assert.match(html, /class="invalid-feedback">Тільки українська кирилиця, цифри, пробіли та розділові знаки<\/div>/);
+  assert.ok(!/textarea[^>]*\bpattern=/.test(html), 'no pattern attribute on textarea');
+  assert.equal(config.steps?.[0]?.rows?.[0]?.cols?.[0]?.rows?.[2]?.fields?.[0]?.name, 'details');
 });
 
-test('contact fields keep the old patterns and limits', () => {
-  assert.match(html, /<input type="text" class="form-control" id="field_contact_name" name="contact_name"[^>]*minlength="2"/);
-  assert.match(html, /maxlength="50"/);
-  assert.equal(patternOf('contact_name'), '^[а-яА-ЯіїєґІЇЄҐ0-9\\s\\-\\.@_]+$');
+test('contact fields render with target config constraints and layout', () => {
+  assert.match(html, /<input type="text" class="form-control" id="field_contact_name" name="contact_name"[^>]*required[^>]*autocomplete="given-name"[^>]*minlength="2" maxlength="30"/);
+  assert.equal(patternOf('contact_name'), "^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ&#39;]{2,30}$");
 
-  assert.match(html, /<input type="tel" class="form-control" id="field_contact_phone" name="contact_phone"[^>]*minlength="5"/);
-  assert.match(html, /maxlength="20"/);
-  assert.equal(patternOf('contact_phone'), '^[\\+\\d\\s\\-\\(\\)]+$');
+  assert.match(html, /<div class="input-group-prepend"><span class="input-group-text" id="inputGroupContact_phonePrepend">\+380<\/span><\/div>/);
+  assert.match(html, /<input type="tel" class="form-control" id="field_contact_phone" name="contact_phone"[^>]*required[^>]*minlength="9" maxlength="9"/);
+  assert.equal(patternOf('contact_phone'), '^([1-9]{1})([0-9]{1})([0-9]{7})$');
 
-  assert.match(html, /<input type="email" class="form-control" id="field_contact_email" name="contact_email"[^>]*minlength="3"/);
-  assert.match(html, /maxlength="254"/);
-  assert.equal(patternOf('contact_email'), '^[a-zA-Z0-9@\\.\\-_]+$');
+  assert.match(html, /<input type="email" class="form-control" id="field_contact_email" name="contact_email"[^>]*minlength="3" maxlength="254"/);
+  assert.equal(patternOf('contact_email'), '^(?!.*@.*\\.(ru|su|рф|xn--p1ai|cn|ir)$).+@.+\\..+$');
 
   for (const name of ['contact_name', 'contact_phone', 'contact_email']) {
-    assert.match(html, new RegExp(`<div class="col-md-4" data-field-col="${name}">`), `${name} keeps its md-4 column`);
+    assert.match(html, new RegExp(`<div class="col-12 col-md-4" data-field-col="${name}">`), `${name} keeps its configured column`);
   }
 });
 
-test('feedback copy matches the old invalid/valid texts', () => {
-  assert.match(html, /class="invalid-feedback">Тільки українська кирилиця, цифри, пробіли та розділові знаки<\/div>/);
-  assert.match(html, /class="invalid-feedback">Тільки цифри, \+, -, пробіли та дужки<\/div>/);
-  assert.match(html, /class="invalid-feedback">Введіть коректну електронну пошту<\/div>/);
-  assert.equal((html.match(/class="valid-feedback">Текст введено правильно<\/div>/g) || []).length, 4);
+test('captcha is rendered as engine widget (no raw turnstile block)', () => {
+  assert.match(html, /data-widget="captcha" data-widget-name="captcha"/);
+  assert.match(html, /id="captcha-widget" class="captcha-widget-box"[^>]*data-captcha-field="captcha"/);
+  assert.match(html, /data-captcha-theme="light" data-captcha-size="normal" data-captcha-appearance="always"/);
+  assert.ok(!html.includes('<div id="turnstile-widget"'), 'no legacy raw turnstile container');
+  const captcha = config.steps?.[0]?.rows?.[0]?.cols?.[0]?.rows?.[4]?.fields?.[0];
+  assert.equal(captcha?.widget, 'captcha');
+  assert.equal(captcha?.element_id, 'captcha');
+  assert.equal(captcha?.action, 'notify');
+  assert.equal(captcha?.token, 'cf-turnstile-response');
 });
 
-test('the bespoke status blocks keep their ids', () => {
-  assert.match(html, /<div id="notify-error" class="alert alert-danger d-none" role="alert">/);
-  assert.match(html, /<div id="notify-success" class="d-none">/);
-  assert.match(html, /<div id="turnstile-widget" class="mb-3"><\/div>/);
-  assert.match(html, /id="notify-local-notice"/);
-  assert.match(html, /id="notify-captcha-retry-btn" class="btn btn-link btn-sm">Спробувати ще раз<\/button>/);
-  assert.match(html, /<button type="submit" id="notify-submit" class="btn btn-primary">Надіслати<\/button>/);
-});
-
-test('details gates on the old JS ukrainian pattern, with no html attribute', () => {
-  // The textarea partial never emitted a pattern attribute (the check was JS
-  // only); the renderer keeps that parity, and the config carries the rule so
-  // the controller enforces exactly the same characters at submit time.
-  assert.ok(!/textarea[^>]*\bpattern=/.test(html), 'no pattern attribute on textarea');
-  const details = config.steps[0].rows[0].fields.find((f) => f.name === 'details');
-  assert.equal(details.pattern, '^[а-яА-ЯіїєґІЇЄҐ0-9\\s\\-–—,\\.!?\\(\\)«»@_#\\+:;\'"]*$');
+test('email field keeps dnscheck validation config', () => {
+  const email = config.steps?.[0]?.rows?.[0]?.cols?.[0]?.rows?.[3]?.fields?.[2];
+  assert.equal(email?.name, 'contact_email');
+  assert.equal(email?.validation?.dnscheck?.value, true);
+  assert.equal(email?.validation?.dnscheck?.message, 'Домен не приймає пошту або не існує');
 });

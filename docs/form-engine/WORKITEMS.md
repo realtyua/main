@@ -161,7 +161,7 @@
 | ID | Phase | Title | Depends | Status | Branch | Worktree | Last session | Commit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | MERGE-1 | 7 | Merge `feature/form-engine` → `master` (`reifua`) | BASE-6 | done | `master` (reifua) | `reifua/main` | 2026-11-18 | 6da93db |
-| MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | todo | — | — | — | — |
+| MERGE-2 | 7 | Merge `feature/form-engine` → `master` (`realtyua`) | MERGE-1 | done | `master` (realtyua) | `realtyua/main` | 2026-11-18 | 80e9e38c |
 
 > Примітка: MERGE-1 — merge виконано локально 2026-11-18 (`--no-ff`,
 > merge-коміт `6da93db`, 24 коміти / 56 файлів, конфліктів немає). Гейти на
@@ -169,6 +169,17 @@
 > запушив `master` (`24d3a5b`), але Action упав на Node 18 (`ERR_REQUIRE_ESM`
 > + `engines >=20`) — відкрито MOD-1. MERGE-1 лишається `review`, доки деплой
 > не стане зеленим. Деталі — `items/MERGE-1.md`.
+>
+> Примітка: MERGE-2 — merge виконано локально 2026-11-18 у `realtyua/main`
+> (`master`, `--no-ff`, merge-коміт `80e9e38c`, батьки `6d8bbeec` і `0ef96b72`).
+> Конфлікт лише в `_config.yml` (коментований `#path: /*/data/*.json`): за
+> погодженням користувача лишено рядок із `feature/form-engine`. Гейти на
+> `master`: `T` 228/228, `V` 3/3 valid, `CA` PASS, Jekyll build 0 (175 с),
+> `CN` ok (1 page). `VR` — FAIL 2/3 через застарілий baseline (captured
+> 2026-11-08): `form-bake sha` після PUB-18 rebake (`e301affb`, 2026-11-18) і
+> новий пост у `master`; baseline свідомо не перезахоплювався. Push `master`
+> (`26b6c47b`) і зелений Action — 2026-11-18; статус `done`. Деталі —
+> `items/MERGE-2.md`.
 
 ## Phase 8 — Modernization
 
@@ -178,6 +189,14 @@
 | MOD-2 | 8 | Purge: сканувати Tailwind-тему з npm-пакета (стилі `/demo`) | MOD-1 | done | `feat/MOD-2-purge-npm-runtime` (merged) | `reifua/main` | 2026-11-18 | 92c773e |
 | MOD-3 | 8 | Оновити `actions/*` (прибрати застереження Node 20) | MOD-1 | done | `feat/MOD-3-actions-versions` (merged) | `reifua/main` | 2026-11-18 | a2dbcb3 |
 | MOD-4 | 8 | Cloudflare: Worker-endpoint форм, зона `rent.if.ua`, Turnstile | MERGE-1 | blocked | `feat/MOD-4-cloudflare-forms` | `reifua/main` | 2026-11-18 | — |
+| MOD-5 | 8 | Оновити `actions/*` + `ubuntu-24.04` (`realtyua`) | MERGE-2 | todo | `feat/MOD-5-actions-versions` | `../worktrees/MOD-5-actions-versions` | — | — |
+| MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | done | `feat/MOD-6-captcha-path` (merged) | `../worktrees/MOD-6-captcha-path` (cleaned) | 2026-11-18 | 748ea138 |
+| MOD-7 | 8 | Turnstile: усунути подвійне завантаження `api.js` | MOD-6 | done | `feat/MOD-7-turnstile-double-load` (merged) | `../worktrees/MOD-7-turnstile-double-load` (cleaned) | 2026-11-19 | 08ca1244 |
+| MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
+| MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | done | `feat/MOD-9-realtyua-captcha` (merged) | `../worktrees/MOD-9-realtyua-captcha` (cleaned) | 2026-11-19 | 5a6b2d93 (realtyua item), d3eaf90 (form-engine) |
+| MOD-10 | 8 | Modal runtime: config-driven lifecycle (уніфікація) | MOD-9 | todo | `feat/MOD-10-modal-runtime-unify` | `../worktrees/MOD-10-modal-runtime-unify` | — | — |
+| MOD-11 | 8 | Контракт дій/chrome форм (submit/reset) для page і modal | MOD-9 | todo | `feat/MOD-11-form-actions-chrome` | `../worktrees/MOD-11-form-actions-chrome` | — | — |
+| MOD-12 | 8 | Паритет валідації та async-перевірок (page/modal) | MOD-9 | todo | `feat/MOD-12-validation-parity` | `../worktrees/MOD-12-validation-parity` | — | — |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
 > `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
@@ -223,8 +242,51 @@
 > MOD-3 і MOD-4 — окремі сесії. MOD-3 закрито (`done`). MOD-4:
 > реалізація ще не починалася (у цій сесії — лише рішення й план);
 > старт — після токена й sitekey.
+>
+> MOD-5..MOD-8 — окремі сесії після MERGE-2 (зареєстровано 2026-11-18,
+> статус `todo`; гілку й worktree створює кожна сесія самостійно):
+> MOD-5 — застереження Actions (рецепт MOD-3 із reifua, плюс `ubuntu-24.04`);
+> MOD-6 — 404 `/assets/js/captcha.js` після перейменування в `178afaf8`;
+> MOD-7 — подвійне завантаження Turnstile: підтверджено живими доказами
+> (HEAD + BODY) і усунуто видаленням інжекту з `head.html`;
+> MOD-8 — свідоме перезахоплення baseline `verify-render` (дві застарілі
+> розбіжності, зафіксовані в MERGE-2). Деталі — `items/MOD-5.md`..`MOD-8.md`.
+>
+> MOD-6 — `review`: `_includes/head.html:178` тепер посилається на
+> `assets/js/form-engine/captcha.js`; у рендері з `turnstile_enabled: true`
+> старий шлях відсутній, тег `api.js` не змінено. Гейти: build 0 + check-notify
+> ok, `V` 3/3 valid; `T` 227/228 (stale baked form) і `CA` 4 failure(s)
+> (autocomplete) — обидві розбіжності існували ще на `master` @ `5f07b1c9`
+> і не спричинені MOD-6. Item-коміт `748ea138`, merge `--no-ff` у `master` —
+> `35da72b9` (затверджено користувачем; `feature/form-engine` позаду master).
+> Push — користувач. Деталі — `items/MOD-6.md`.
+>
+> MOD-7 — `done`: живі Network/View Source підтвердили два інжекти —
+> `head.html` (`?v=site.time`) і запечений фрагмент двигуна
+> (`?v=engineDigest`). Варіантом A сайтовий блок видалено; з
+> `turnstile_enabled: true` у `new.html` лишився 1 набір тегів у BODY
+> (було 2: HEAD + BODY). Гейти: build 0, `V` 3/3 valid, `CN` ok,
+> `T` 227/228 (stale baked form) і `CA` 4 failure(s) (autocomplete) —
+> відомі розбіжності baseline. Notify лишається на `type: raw` і без
+> асетів; уніфікація вимагає нової версії `@realtyua/form-engine` —
+> окремий ID. Item-коміт `08ca1244`, merge `--no-ff` у `master` —
+> `a73eaabf`. Push — користувач. Деталі — `items/MOD-7.md`.
+>
+> MOD-9 — `done` (2026-11-19, реалізація прийнята; live Turnstile — очікує користувача):
+> notify приведено до роботи під поточний переписаний `_data/notify.yml`
+> (snapshot `items/MOD-9-notify.target.yml`) через engine modal path + `widget: captcha`.
+> `modal-form.js` узагальнено (config-driven captcha/action/token, auto submit/status,
+> page-context, `dnscheck`, legacy compat). Додано MOD-10..MOD-12 (уніфікація). Rebake/build,
+> `validate-config notify --strict`, `check-notify _site`, `test/notify-config` — ок.
+> Поза scope/відомі drifts: `check-add-property`, `add-property-wire`, `verify-render` (MOD-8),
+> повний `npm test`; потрібне рішення щодо patch/release для локальних фіксів `form-engine` 1.0.5
+> та пропатченого `realtyua/main/node_modules`. Деталі/гейти/leftovers — `items/MOD-9.md`.
+>
+> MOD-10..MOD-12 — `todo` (2026-11-19): винесені з MOD-9 для уніфікації form-engine
+> (config-driven modal lifecycle; контракт submit/reset/chrome; паритет
+> валідації/async-перевірок між page і modal). Деталі — відповідні `items/MOD-*.md`.
 
-**Разом: 56 item.**
+**Разом: 63 item.**
 
 ## Протокол сесії
 
