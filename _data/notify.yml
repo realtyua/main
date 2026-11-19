@@ -166,3 +166,9 @@ steps:
                     validation:
                       required: Підтвердьте, що ви не робот
                     helper: Якщо перевірка не з’явилася, натисніть «Спробувати ще раз».
+
+              - class: row
+                fields:
+                  - name: notify_submit
+                    type: raw
+                    html: '<button type="submit" id="notify-submit" class="btn btn-primary">Надіслати</button>'

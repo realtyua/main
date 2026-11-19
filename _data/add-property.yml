@@ -1167,6 +1167,7 @@ steps:
                       dnscheck:
                         value: true
                         message: Домен не приймає пошту або не існує
+                      pattern: Неправильний формат електронної пошти
                     autocomplete: "off"
 
               - class: row
