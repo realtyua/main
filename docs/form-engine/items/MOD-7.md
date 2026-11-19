@@ -4,7 +4,7 @@ Phase: 8 · Depends: MOD-6 · Repo: realtyua
 
 Branch: `feat/MOD-7-turnstile-double-load` · Worktree: `../worktrees/MOD-7-turnstile-double-load`
 
-Status: `review`
+Status: `done`
 
 > Окрема сесія. Старт — після MOD-6 і деплою: спершу треба перевірити, чи
 > зник warning разом із 404 `captcha.js`.
@@ -140,8 +140,9 @@ powershell -File _form-engine/tools/verify-render.ps1 build
 
 ### 2026-11-19 — сесія 2 (фікс; актуальний діагноз)
 
-- **Status:** `review` — Step 4 item-а підтверджено живими доказами, дубль
-  усунуто, гейти зіставлено з baseline. Чекає огляду користувачем і деплою.
+- **Status:** `done` — огляд схвалено користувачем 2026-11-19; локальний цикл
+  виконано: commit → merge `--no-ff` у `master` → cleanup worktree. Push —
+  користувач. Step 4 item-а підтверджено живими доказами, дубль усунуто.
 - **Живі докази (Network + View Source, інкогніто без розширень):**
   - `api.js?render=explicit` — 2 запити; `captcha.js` — 2 запити з різними
     версіями: `?v=20261119002155` (`site.time` з `head.html`) і
@@ -209,4 +210,9 @@ powershell -File _form-engine/tools/verify-render.ps1 build
   - Жива перевірка консолі `new.html` після деплою — за користувачем.
   - Дві відомі розбіжності гейтів (stale baked form, 4 autocomplete) —
     не MOD-7, без змін.
-- **Commit SHA:** — (коміт не створювався; огляд користувачем попереду).
+- **Commit SHA:** item `08ca1244` (`MOD-7: remove duplicate Turnstile
+  injection from head.html`), merge `--no-ff` у `master` — `a73eaabf`.
+  Локальний цикл виконано після схвалення; `git push` навмисно не
+  виконувався (завжди користувач). Мердж ішов у `master`, а не в
+  `feature/form-engine` (затверджено користувачем): остання гілка позаду
+  і не є деплойною.
