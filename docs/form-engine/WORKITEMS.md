@@ -193,7 +193,7 @@
 | MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | done | `feat/MOD-6-captcha-path` (merged) | `../worktrees/MOD-6-captcha-path` (cleaned) | 2026-11-18 | 748ea138 |
 | MOD-7 | 8 | Turnstile: усунути подвійне завантаження `api.js` | MOD-6 | done | `feat/MOD-7-turnstile-double-load` (merged) | `../worktrees/MOD-7-turnstile-double-load` (cleaned) | 2026-11-19 | 08ca1244 |
 | MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
-| MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | done | `feat/MOD-9-realtyua-captcha` (merged) | `../worktrees/MOD-9-realtyua-captcha` (cleaned) | 2026-11-19 | 5a6b2d93 (realtyua item), d3eaf90 (form-engine) |
+| MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | done | `feat/MOD-9-realtyua-captcha` (merged) | `../worktrees/MOD-9-realtyua-captcha` (cleaned) | 2026-11-19 | 5a6b2d93 / merge d05fb9de (realtyua), d3eaf90 (form-engine) |
 | MOD-10 | 8 | Modal runtime: config-driven lifecycle (уніфікація) | MOD-9 | todo | `feat/MOD-10-modal-runtime-unify` | `../worktrees/MOD-10-modal-runtime-unify` | — | — |
 | MOD-11 | 8 | Контракт дій/chrome форм (submit/reset) для page і modal | MOD-9 | todo | `feat/MOD-11-form-actions-chrome` | `../worktrees/MOD-11-form-actions-chrome` | — | — |
 | MOD-12 | 8 | Паритет валідації та async-перевірок (page/modal) | MOD-9 | todo | `feat/MOD-12-validation-parity` | `../worktrees/MOD-12-validation-parity` | — | — |
