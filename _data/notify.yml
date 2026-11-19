@@ -169,6 +169,24 @@ steps:
 
               - class: row
                 fields:
+                  - name: notify_error_block
+                    type: raw
+                    html: |-
+                      <div id="notify-error" class="alert alert-danger d-none" role="alert">
+                        На жаль, сталася помилка. Спробуйте ще раз пізніше.
+                      </div>
+
+                  - name: notify_success_block
+                    type: raw
+                    html: |-
+                      <div id="notify-success" class="d-none">
+                        <div class="alert alert-success" role="alert">
+                          <strong>Дякуємо за повідомлення!</strong> Ваше повідомлення отримано. Ми перевіримо оголошення найближчим часом.
+                        </div>
+                      </div>
+
+              - class: row
+                fields:
                   - name: notify_submit
                     type: raw
                     html: '<button type="submit" id="notify-submit" class="btn btn-primary">Надіслати</button>'
