@@ -193,7 +193,10 @@
 | MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | done | `feat/MOD-6-captcha-path` (merged) | `../worktrees/MOD-6-captcha-path` (cleaned) | 2026-11-18 | 748ea138 |
 | MOD-7 | 8 | Turnstile: усунути подвійне завантаження `api.js` | MOD-6 | done | `feat/MOD-7-turnstile-double-load` (merged) | `../worktrees/MOD-7-turnstile-double-load` (cleaned) | 2026-11-19 | 08ca1244 |
 | MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
-| MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | doing | `feat/MOD-9-modal-captcha-assets` (form-engine, merged→master) | — (form-engine worktree cleaned) | 2026-11-19 | d3eaf90 (form-engine) |
+| MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | done | `feat/MOD-9-realtyua-captcha` (merged) | `../worktrees/MOD-9-realtyua-captcha` (cleaned) | 2026-11-19 | 5a6b2d93 / merge d05fb9de (realtyua), d3eaf90 (form-engine) |
+| MOD-10 | 8 | Modal runtime: config-driven lifecycle (уніфікація) | MOD-9 | todo | `feat/MOD-10-modal-runtime-unify` | `../worktrees/MOD-10-modal-runtime-unify` | — | — |
+| MOD-11 | 8 | Контракт дій/chrome форм (submit/reset) для page і modal | MOD-9 | todo | `feat/MOD-11-form-actions-chrome` | `../worktrees/MOD-11-form-actions-chrome` | — | — |
+| MOD-12 | 8 | Паритет валідації та async-перевірок (page/modal) | MOD-9 | todo | `feat/MOD-12-validation-parity` | `../worktrees/MOD-12-validation-parity` | — | — |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
 > `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
@@ -269,19 +272,21 @@
 > окремий ID. Item-коміт `08ca1244`, merge `--no-ff` у `master` —
 > `a73eaabf`. Push — користувач. Деталі — `items/MOD-7.md`.
 >
-> MOD-9 — `doing` (2026-11-19, сесія обмежена **form-engine до кроку 2**,
-> версія **1.0.5**, без npm publish/без змін коду realtyua): у form-engine
-> додано `renderAssets`/`renderModal` у `runtime/shell.js`, modal-bake в
-> `adapters/jekyll/tools/gen-form-app.mjs`, посилено
-> `adapters/jekyll/tools/check-notify.mjs`, додано
-> `test/modal-captcha.test.mjs`, bump `1.0.5` + `CHANGELOG`. Гейти: baseline
-> `npm test` 186/186, після змін `npm test` **190/190** pass. Після
-> «прийнято»: item commit `d3eaf90`, merge `--no-ff` у form-engine `master`
-> `e919267`, гілку/worktree (з junction) прибрано. Залишилось: publish `1.0.5`
-> (користувач), кроки 3–5 realtyua після публікації, 11ty parity — окремо.
-> Статус `doing`. Деталі — `items/MOD-9.md`.
+> MOD-9 — `done` (2026-11-19, реалізація прийнята; live Turnstile — очікує користувача):
+> notify приведено до роботи під поточний переписаний `_data/notify.yml`
+> (snapshot `items/MOD-9-notify.target.yml`) через engine modal path + `widget: captcha`.
+> `modal-form.js` узагальнено (config-driven captcha/action/token, auto submit/status,
+> page-context, `dnscheck`, legacy compat). Додано MOD-10..MOD-12 (уніфікація). Rebake/build,
+> `validate-config notify --strict`, `check-notify _site`, `test/notify-config` — ок.
+> Поза scope/відомі drifts: `check-add-property`, `add-property-wire`, `verify-render` (MOD-8),
+> повний `npm test`; потрібне рішення щодо patch/release для локальних фіксів `form-engine` 1.0.5
+> та пропатченого `realtyua/main/node_modules`. Деталі/гейти/leftovers — `items/MOD-9.md`.
+>
+> MOD-10..MOD-12 — `todo` (2026-11-19): винесені з MOD-9 для уніфікації form-engine
+> (config-driven modal lifecycle; контракт submit/reset/chrome; паритет
+> валідації/async-перевірок між page і modal). Деталі — відповідні `items/MOD-*.md`.
 
-**Разом: 60 item.**
+**Разом: 63 item.**
 
 ## Протокол сесії
 
