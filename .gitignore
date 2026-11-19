@@ -78,3 +78,6 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
+
+# OpenCode local config
+.opencode/
