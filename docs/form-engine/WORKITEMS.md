@@ -193,7 +193,7 @@
 | MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | done | `feat/MOD-6-captcha-path` (merged) | `../worktrees/MOD-6-captcha-path` (cleaned) | 2026-11-18 | 748ea138 |
 | MOD-7 | 8 | Turnstile: усунути подвійне завантаження `api.js` | MOD-6 | done | `feat/MOD-7-turnstile-double-load` (merged) | `../worktrees/MOD-7-turnstile-double-load` (cleaned) | 2026-11-19 | 08ca1244 |
 | MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
-| MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | todo | `feat/MOD-9-modal-captcha-assets` | `../worktrees/MOD-9-modal-captcha-assets` | — | — |
+| MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | doing | `feat/MOD-9-modal-captcha-assets` (form-engine, merged→master) | — (form-engine worktree cleaned) | 2026-11-19 | d3eaf90 (form-engine) |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
 > `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
@@ -268,6 +268,18 @@
 > асетів; уніфікація вимагає нової версії `@realtyua/form-engine` —
 > окремий ID. Item-коміт `08ca1244`, merge `--no-ff` у `master` —
 > `a73eaabf`. Push — користувач. Деталі — `items/MOD-7.md`.
+>
+> MOD-9 — `doing` (2026-11-19, сесія обмежена **form-engine до кроку 2**,
+> версія **1.0.5**, без npm publish/без змін коду realtyua): у form-engine
+> додано `renderAssets`/`renderModal` у `runtime/shell.js`, modal-bake в
+> `adapters/jekyll/tools/gen-form-app.mjs`, посилено
+> `adapters/jekyll/tools/check-notify.mjs`, додано
+> `test/modal-captcha.test.mjs`, bump `1.0.5` + `CHANGELOG`. Гейти: baseline
+> `npm test` 186/186, після змін `npm test` **190/190** pass. Після
+> «прийнято»: item commit `d3eaf90`, merge `--no-ff` у form-engine `master`
+> `e919267`, гілку/worktree (з junction) прибрано. Залишилось: publish `1.0.5`
+> (користувач), кроки 3–5 realtyua після публікації, 11ty parity — окремо.
+> Статус `doing`. Деталі — `items/MOD-9.md`.
 
 **Разом: 60 item.**
 
