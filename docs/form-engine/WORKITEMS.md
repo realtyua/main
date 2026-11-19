@@ -191,7 +191,7 @@
 | MOD-4 | 8 | Cloudflare: Worker-endpoint форм, зона `rent.if.ua`, Turnstile | MERGE-1 | blocked | `feat/MOD-4-cloudflare-forms` | `reifua/main` | 2026-11-18 | — |
 | MOD-5 | 8 | Оновити `actions/*` + `ubuntu-24.04` (`realtyua`) | MERGE-2 | todo | `feat/MOD-5-actions-versions` | `../worktrees/MOD-5-actions-versions` | — | — |
 | MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | done | `feat/MOD-6-captcha-path` (merged) | `../worktrees/MOD-6-captcha-path` (cleaned) | 2026-11-18 | 748ea138 |
-| MOD-7 | 8 | Turnstile: діагностувати подвійне завантаження `api.js` | MOD-6 | todo | `feat/MOD-7-turnstile-double-load` | `../worktrees/MOD-7-turnstile-double-load` | — | — |
+| MOD-7 | 8 | Turnstile: усунути подвійне завантаження `api.js` | MOD-6 | review | `feat/MOD-7-turnstile-double-load` | `../worktrees/MOD-7-turnstile-double-load` | 2026-11-19 | — |
 | MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
@@ -243,7 +243,8 @@
 > статус `todo`; гілку й worktree створює кожна сесія самостійно):
 > MOD-5 — застереження Actions (рецепт MOD-3 із reifua, плюс `ubuntu-24.04`);
 > MOD-6 — 404 `/assets/js/captcha.js` після перейменування в `178afaf8`;
-> MOD-7 — подвійне завантаження Turnstile (перевірити після MOD-6);
+> MOD-7 — подвійне завантаження Turnstile: підтверджено живими доказами
+> (HEAD + BODY) і усунуто видаленням інжекту з `head.html`;
 > MOD-8 — свідоме перезахоплення baseline `verify-render` (дві застарілі
 > розбіжності, зафіксовані в MERGE-2). Деталі — `items/MOD-5.md`..`MOD-8.md`.
 >
@@ -255,6 +256,16 @@
 > і не спричинені MOD-6. Item-коміт `748ea138`, merge `--no-ff` у `master` —
 > `35da72b9` (затверджено користувачем; `feature/form-engine` позаду master).
 > Push — користувач. Деталі — `items/MOD-6.md`.
+>
+> MOD-7 — `review`: живі Network/View Source підтвердили два інжекти —
+> `head.html` (`?v=site.time`) і запечений фрагмент двигуна
+> (`?v=engineDigest`). Варіантом A сайтовий блок видалено; з
+> `turnstile_enabled: true` у `new.html` лишився 1 набір тегів у BODY
+> (було 2: HEAD + BODY). Гейти: build 0, `V` 3/3 valid, `CN` ok,
+> `T` 227/228 (stale baked form) і `CA` 4 failure(s) (autocomplete) —
+> відомі розбіжності baseline. Notify лишається на `type: raw` і без
+> асетів; уніфікація вимагає нової версії `@realtyua/form-engine` —
+> окремий ID. Деталі — `items/MOD-7.md`.
 
 **Разом: 60 item.**
 

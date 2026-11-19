@@ -152,30 +152,9 @@
 {%- endif -%}
 
 {%- comment -%}
-  Captcha потрібна лише там, де реально є віджет Turnstile: форма додавання
-  (_data/add-property.yml, рендериться на new.html) і модалка «Написати
-  власнику» (_includes/modals/notify-property.html, його підключає
-  _layouts/property.html — цей layout дається постам у _config.yml).
-  На всіх інших сторінках не вантажимо captcha.js і api.js: це ~50 КБ
-  і весь код Cloudflare, який у консоль пише свої внутрішні перевірки.
-  Якщо додаєте новий captcha-віджет — додайте його сюди.
+  MOD-7: captcha.js і api.js підключає @realtyua/form-engine — один раз, у
+  запеченому фрагменті форми, коли її конфіг оголошує `widget: captcha`.
+  Не додавайте їх тут: сторінка з формою отримає дві копії й Cloudflare
+  напише в консоль "Turnstile already has been loaded".
 {%- endcomment -%}
-{%- assign needs_captcha = false -%}
-{%- if page.form == 'add-property' or page.layout == 'property' -%}
-  {%- assign needs_captcha = true -%}
-{%- endif -%}
-{%- if site.turnstile_enabled and needs_captcha %}
-<script>
-  window.TURNSTILE_CONFIG = {
-    enabled: {{ site.turnstile_enabled | default: false }},
-    sitekey: {{ site.turnstile_sitekey | jsonify }},
-    language: {{ site.turnstile_language | default: 'uk-ua' | jsonify }},
-    retryInterval: {{ site.turnstile_retry_interval | default: 8000 }},
-    maxRetries: {{ site.turnstile_max_retries | default: 3 }},
-    localHosts: {{ site.turnstile_local_hosts | jsonify }}
-  };
-</script>
-<script src="{{ '/assets/js/form-engine/captcha.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-{%- endif -%}
 {%- include analytics-google.html -%}
