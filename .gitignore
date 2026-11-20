@@ -81,6 +81,8 @@ $RECYCLE.BIN/
 
 # OpenCode local config
 .opencode/
+/opencode.jsonc
+/AGENTS.md
 
 # Form Engine work items and docs (local only)
 /docs/form-engine/
