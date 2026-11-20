@@ -175,8 +175,8 @@ npm test
   `realtyua/main` — після огляду/«прийнято» локальний цикл (commit/merge --no-ff/
   SHA/cleanup), push — користувач; (3) жива перевірка notify captcha на property-
   сторінці з увімкненим Turnstile; (4) 3× add-property-wire autocomplete failures
-  і `check-add-property`/`verify-render` drifts — відомі/супутні, потребують
-  окремого рішення (не розширювати scope без погодження); (5) 11ty parity — окремо.
+  і `check-add-property` — заведено **MOD-13** (2026-11-20); `verify-render`
+  дрейф закрито MOD-8; (5) 11ty parity — окремо.
   **Статус item:** `doing`. **Commit SHA:** — (без комітів у цій сесії).
 
 - 2026-11-19: **переписано `_data/notify.yml` (цільова структура, користувач).**

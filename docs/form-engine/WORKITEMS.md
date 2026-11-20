@@ -197,6 +197,7 @@
 | MOD-10 | 8 | Modal runtime: config-driven lifecycle (уніфікація) | MOD-9 | todo | `feat/MOD-10-modal-runtime-unify` | `../worktrees/MOD-10-modal-runtime-unify` | — | — |
 | MOD-11 | 8 | Контракт дій/chrome форм (submit/reset) для page і modal | MOD-9 | todo | `feat/MOD-11-form-actions-chrome` | `../worktrees/MOD-11-form-actions-chrome` | — | — |
 | MOD-12 | 8 | Паритет валідації та async-перевірок (page/modal) | MOD-9 | todo | `feat/MOD-12-validation-parity` | `../worktrees/MOD-12-validation-parity` | — | — |
+| MOD-13 | 8 | Тріаж autocomplete drift (`check-add-property` + `add-property-wire`) | MOD-9 | todo | `feat/MOD-13-autocomplete-drift` | `../worktrees/MOD-13-autocomplete-drift` | — | — |
 
 > Примітка: MOD-1 — `review`: Node 24 у CI, `@11ty/eleventy` 3.1.8, ESM-конфіг
 > `eleventy.config.mjs`, `eleventy-plugin-tailwindcss` замінено на
@@ -296,8 +297,14 @@
 > merge `--no-ff` у `master` — `18f402f2`; `feature/form-engine` підтягнуто до
 > `master`, junction/worktree/гілку прибрано. Push — користувач. Відомі
 > `CA`/`T`-залишки (autocomplete) без змін. Деталі — `items/MOD-8.md`.
+>
+> MOD-13 — `todo` (2026-11-20): заведено окремо з MOD-8/MOD-9 для тріажу 4
+> `CA`-фейлів і 3 autocomplete-фейлів `add-property-wire` (поле `district_settlement`
+> свідомо видалено в `fd4978c6`). Рішення — оновити очікування гейта/тестів чи
+> повернути поле (тоді потрібне нове перезахоплення baseline) — фіксується в item.
+> Деталі — `items/MOD-13.md`.
 
-**Разом: 63 item.**
+**Разом: 64 item.**
 
 ## Протокол сесії
 

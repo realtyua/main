@@ -146,4 +146,4 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
   коміт → merge у `master` → локальне підтягування `feature/form-engine` до
   `master` → junction знято, worktree `proud-cactus` і змержену гілку прибрано.
   Push не виконувався (завжди користувач). Відомі `CA`/`T`-залишки без змін;
-  фікс autocomplete — окремий item за рішенням користувача.
+  фікс autocomplete — MOD-13 (заведено 2026-11-20).
