@@ -86,3 +86,8 @@ $RECYCLE.BIN/
 
 # Form Engine work items and docs (local only)
 /docs/form-engine/
+
+# Local-only server/worker scripts
+/php/
+/python/
+/workers/
