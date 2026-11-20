@@ -5,7 +5,7 @@ Phase: 8 · Depends: MOD-6, MOD-7 · Repo: realtyua
 Branch: `feat/MOD-8-baseline-recapture` · Worktree: `../worktrees/proud-cactus`
 (сесійний worktree; погоджено користувачем 2026-11-20 замість імені з реєстру)
 
-Status: `review`
+Status: `done`
 
 > Окрема сесія. Основний акт — **перегляд кожної розбіжності**, а не «зелений
 > гейт будь-якою ціною». Заборонено послаблювати нормалізатор і «лікувати»
@@ -139,4 +139,11 @@ powershell -File _form-engine/tools/verify-render.ps1 verify
   коміт `<ID>: …` → `git merge --no-ff` у `master` (за практикою MOD-6/7/9,
   бо `feature/form-engine` відстає і не є деploy-гілкою) → локально підтягнути
   `feature/form-engine` до `master` → зняти junction і прибрати worktree.
-  Commit SHA — **після схвалення**.
+  Commit SHA: item `1972e27a` (`MOD-8: recapture verify-render baseline`),
+  merge `--no-ff` у `master` — `18f402f2`.
+
+- 2026-11-20: **done** — огляд схвалено користувачем; локальний цикл виконано:
+  коміт → merge у `master` → локальне підтягування `feature/form-engine` до
+  `master` → junction знято, worktree `proud-cactus` і змержену гілку прибрано.
+  Push не виконувався (завжди користувач). Відомі `CA`/`T`-залишки без змін;
+  фікс autocomplete — окремий item за рішенням користувача.
