@@ -2,7 +2,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@realtyua/form-engine": "^1.0.7",
+    "@realtyua/form-engine": "^1.0.8",
     "iconv-lite": "^0.7.3",
     "js-yaml": "^5.5.0",
     "linkedom": "^0.18.13"

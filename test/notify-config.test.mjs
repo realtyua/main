@@ -105,7 +105,7 @@ test('captcha is rendered as engine widget (no raw turnstile block)', () => {
   const captcha = config.steps?.[0]?.rows?.[0]?.cols?.[0]?.rows?.[4]?.fields?.[0];
   assert.equal(captcha?.widget, 'captcha');
   assert.equal(captcha?.element_id, 'captcha');
-  assert.equal(captcha?.action, 'notify');
+  assert.equal(captcha?.action, 'notify_property');
   assert.equal(captcha?.token, 'cf-turnstile-response');
 });
 
