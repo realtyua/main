@@ -158,7 +158,7 @@ steps:
                     type: widgets
                     widget: captcha
                     element_id: captcha
-                    action: notify
+                    action: notify_property
                     token: cf-turnstile-response
                     required: true
                     class: col-12
