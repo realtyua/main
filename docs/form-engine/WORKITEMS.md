@@ -272,15 +272,16 @@
 > окремий ID. Item-коміт `08ca1244`, merge `--no-ff` у `master` —
 > `a73eaabf`. Push — користувач. Деталі — `items/MOD-7.md`.
 >
-> MOD-9 — `done` (2026-11-19, реалізація прийнята; live Turnstile — очікує користувача):
+> MOD-9 — `done` (2026-11-19..20, реалізація прийнята; live Turnstile підтверджено):
 > notify приведено до роботи під поточний переписаний `_data/notify.yml`
 > (snapshot `items/MOD-9-notify.target.yml`) через engine modal path + `widget: captcha`.
 > `modal-form.js` узагальнено (config-driven captcha/action/token, auto submit/status,
-> page-context, `dnscheck`, legacy compat). Додано MOD-10..MOD-12 (уніфікація). Rebake/build,
-> `validate-config notify --strict`, `check-notify _site`, `test/notify-config` — ок.
-> Поза scope/відомі drifts: `check-add-property`, `add-property-wire`, `verify-render` (MOD-8),
-> повний `npm test`; потрібне рішення щодо patch/release для локальних фіксів `form-engine` 1.0.5
-> та пропатченого `realtyua/main/node_modules`. Деталі/гейти/leftovers — `items/MOD-9.md`.
+> page-context, `dnscheck`, legacy compat). Додано MOD-10..MOD-12 (уніфікація). Follow-up:
+> modal captcha-sync + реліз `form-engine@1.0.7`, оновлення залежності в realtyua, фікс
+> Turnstile `action` для notify (`notify` → `notify_property`) та rebake. Жива перевірка
+> на `realestate.if.ua`: `add-property` і `notify` — captcha/submit/лист ок, без дублів
+> `api.js`/`captcha.js`. Поза scope/відомі drifts: `check-add-property`, `add-property-wire`,
+> `verify-render` (MOD-8), повний `npm test`. Деталі/гейти/leftovers — `items/MOD-9.md`.
 >
 > MOD-10..MOD-12 — `todo` (2026-11-19): винесені з MOD-9 для уніфікації form-engine
 > (config-driven modal lifecycle; контракт submit/reset/chrome; паритет

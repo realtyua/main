@@ -58,7 +58,7 @@ Notify (`behavior.mode: modal`) працює через engine-шлях (bake/mo
 - [ ] Поточний `_data/notify.yml` (цільова структура) працює в модалці: поля рендеряться, валідація/required поводяться за конфігом, captcha інтегрується за конфігом, форму можна відправити, стани помилки/успіху коректні
 - [x] Captcha як engine-асет: для конфігу з `widget: captcha` асети/конфіг емітуються через engine-шлях; на сторінках без `widget: captcha` captcha-теги відсутні; дублювання `TURNSTILE_CONFIG`/`captcha.js`/`api.js`/`app.js` не допускається (перевіряється `check-notify`, з урахуванням умов `turnstile_enabled`)
 - [ ] `node _form-engine/tools/validate-config.mjs _data/notify.yml --strict` — valid; `check-notify _site` — ok; релевантні тести/гейти MOD-9 зелені (відомі позаскоупні drifts задокументовані)
-- [ ] Жива перевірка property-сторінки з увімкненим Turnstile: captcha відображається і працює, зайвих запитів captcha-скриптів немає (користувач)
+- [x] Жива перевірка property-сторінки з увімкненим Turnstile: captcha відображається і працює, зайвих запитів captcha-скриптів немає (користувач, 2026-11-19)
 
 ## Gates
 
@@ -218,4 +218,25 @@ npm test
   (modal island/check-notify + modal-form runtime) розходяться з опублікованим `1.0.5`
   — потрібне рішення щодо patch/release; `realtyua/main` має пропатчений `node_modules`
   та `M package.json/lock`. **Статус item:** `done` (реалізація/гейти прийнято; live
-  Turnstile — очікує користувача). **Commit SHA (item):** `5a6b2d93`, merge `d05fb9de`.
+  Turnstile — очікує користувача). **Commit SHA (item):** `5a6b2d93`, merge `d05fb9de`.
+
+- 2026-11-19..20: **live follow-up, випуск 1.0.7 і фінальна верифікація (користувач).**
+  Після деплою виявлено, що captcha в notify показує `[Успіх!]`, але submit
+  не проходив (лист не надходив). **Причини/фікси:**
+  (1) `form-engine` `runtime/modal-form.js` потребував синхронізації solved
+  стану/токена з контролером (poll/watch + sync перед `validateAll`) для
+  config-driven captcha widget-ів — фікс закомічено `6c97a3a`, підготовлено
+  реліз `1.0.7` (`f9466f8`, `CHANGELOG`/версії), опубліковано користувачем;
+  `realtyua` оновлено до `@realtyua/form-engine@1.0.7` (`03a06d9e`) і задеплоєно.
+  (2) Узгоджено Turnstile `action` у notify з воркером
+  (`workers/notify-worker.js` очікує `notify_property`): `_data/notify.yml`
+  `notify` → `notify_property`, rebake `_includes/form/app/notify.html`,
+  commit `d5251b4c` (realtyua `master`), push/deploy користувачем.
+  **Жива перевірка (https://www.realestate.if.ua, 2026-11-19):** дублів
+  `api.js`/`captcha.js` немає; `add-property` — captcha `[Успіх!]`, submit/лист
+  ок; `notify` — captcha `[Успіх!]`, submit/лист ок. **Статус item:** `done`
+  (live Turnstile підтверджено). **Залишки/прибирання:** позаскоупні drifts
+  (`check-add-property`, `add-property-wire`, `verify-render`/MOD-8, повний
+  `npm test`) лишаються окремими items; перевірити відсутність/видалити
+  залишковий worktree/гілку `feat/MOD-9-realtyua-captcha`, якщо ще є локально;
+  за потреби привести до ладу службові нотатки/реєстр після остаточного закриття.
