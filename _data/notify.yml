@@ -20,9 +20,9 @@ settings:
     tooltip: Це поле є обов’язкове
     message: Будь ласка, заповніть це поле
     class: text-danger small font-weight-bold
-  submit:
-    action: "{{ site.notify_endpoint }}"
-    method: POST
+  #submit:
+  #  action: "{{ site.notify_endpoint }}"
+  #  method: POST
 
 steps:
   - id: form
