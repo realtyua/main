@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { parseHTML } from 'linkedom';
 
 import { bootPage as wireAddPropertyImpl } from '../assets/js/form-engine/page-form.js';
+import { asInlineData } from '../assets/js/form-engine/data.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -150,43 +151,122 @@ const feedbackOf = (el) => el.closest('[data-field-group]').querySelector('.inva
 const itemWith = (dropdown, text) =>
   Array.prototype.find.call(dropdown.querySelectorAll('.dropdown-item'), (it) => it.textContent.includes(text));
 
-test('district autocomplete reacts to typing and switches to search mode once its settlement is chosen', async () => {
+// MOD-13: derive names from the mounted config instead of baking a field name
+// into the test. A rename must not require touching this suite.
+const readConfig = (document) => JSON.parse(document.getElementById('add-property-config').textContent);
+
+const walkConfig = (node, visit) => {
+  if (Array.isArray(node)) {
+    for (const value of node) walkConfig(value, visit);
+    return;
+  }
+  if (node && typeof node === 'object') {
+    visit(node);
+    for (const value of Object.values(node)) walkConfig(value, visit);
+  }
+};
+
+const fieldsOf = (config, predicate = () => true) => {
+  const found = [];
+  walkConfig(config, (node) => {
+    if (typeof node.name === 'string' && typeof node.type === 'string' && predicate(node)) found.push(node);
+  });
+  return found;
+};
+
+const mountAutocomplete = (document) => {
+  const fields = fieldsOf(readConfig(document), (f) => f.type === 'autocomplete');
+  assert.equal(fields.length, 1, 'the mounted config must carry exactly one autocomplete field');
+  const field = fields[0];
+  const options = asInlineData(field.data);
+  assert.ok(options && options.length, 'the autocomplete must carry inline options');
+  const name = field.name;
+  return {
+    field,
+    options,
+    name,
+    search: document.querySelector(`[data-autocomplete-search="${name}"]`),
+    dropdown: document.querySelector(`[data-autocomplete-dropdown="${name}"]`),
+    clear: document.querySelector(`[data-autocomplete-clear="${name}"]`),
+    select: document.querySelector(`select[data-field="${name}"]`),
+  };
+};
+
+// Pick an option whose short prefix is unambiguous, so the typed query always
+// filters down to exactly that option regardless of its label.
+const uniqueOption = (options, minChars = 2) => {
+  for (const opt of options) {
+    const label = String(opt.name);
+    if (label.length < minChars) continue;
+    const query = label.slice(0, minChars);
+    if (options.filter((o) => String(o.name).startsWith(query)).length === 1) return { opt, query };
+  }
+  const opt = options[0];
+  return { opt, query: String(opt.name) };
+};
+
+const setLocationFromConfig = (document, ctl, settlementId = '30595') => {
+  const widget = findLocationWidget(readConfig(document));
+  assert.ok(widget && Array.isArray(widget.fields), 'the mounted config must carry the location widget');
+  const chain = findSettlement(ADDR, settlementId);
+  assert.ok(chain, `settlement ${settlementId} must exist in the address fixture`);
+  const part = (name) => {
+    const field = widget.fields.find((f) => f.name === name);
+    assert.ok(field, `the location widget must carry the ${name} sub-field`);
+    return field.name;
+  };
+  const oblast = part('oblast');
+  const raion = part('raion');
+  const hromada = part('hromada');
+  const settlement = part('settlement');
+  ctl.setData(widget.name, {
+    [oblast]: chain.oblast.id,
+    [`${oblast}Type`]: chain.oblast.type,
+    [`${oblast}Name`]: chain.oblast.name,
+    [raion]: chain.raion.id,
+    [`${raion}Name`]: chain.raion.name,
+    [hromada]: chain.hromada.id,
+    [`${hromada}Name`]: chain.hromada.name,
+    [settlement]: chain.s.id,
+    [`${settlement}Type`]: chain.s.type,
+    [`${settlement}Name`]: chain.s.name,
+  });
+  return widget;
+};
+
+const assertAutocompleteHooksMatchConfig = (document) => {
+  const mounted = Array.from(document.querySelectorAll('[data-autocomplete-search]'), (el) =>
+    el.getAttribute('data-autocomplete-search'));
+  const configured = fieldsOf(readConfig(document), (f) => f.type === 'autocomplete').map((f) => f.name);
+  assert.deepEqual(mounted.sort(), configured.sort(), 'every configured autocomplete is mounted exactly once');
+};
+
+const locationRootOf = (document) => {
+  const widget = findLocationWidget(readConfig(document));
+  assert.ok(widget, 'the mounted config must carry the location widget');
+  return widget.name;
+};
+const locValue = (ctl, document, part) => ctl.getValue(`${locationRootOf(document)}.${part}`);
+const locId = (document, part) => `field_${locationRootOf(document)}_${part}`;
+
+// MOD-13: generic autocomplete contract — typing filters inline options, a pick
+// stores the option id, blur keeps it. No field name is hardcoded.
+test('autocomplete with inline data filters options, stores the pick and survives blur', async () => {
   const { window, document } = mount();
 
-  globalThis.fetch = async (url) => {
-    const abs = join(ROOT, String(url).replace(/^\//, ''));
-    try {
-      const txt = readFileSync(abs, 'utf8');
-      return { ok: true, json: async () => JSON.parse(txt) };
-    } catch {
-      return { ok: false, status: 404, json: async () => ({}) };
-    }
-  };
-
-  const app = wireAddProperty(document, { fetch: globalThis.fetch, leaflet: null, Captcha: null });
+  const app = wireAddProperty(document, { fetch: addrFetch, leaflet: null, Captcha: null });
   assert.ok(app, 'wireAddProperty must boot');
   const ctl = app.controller;
 
   await flush(); await flush(); await flush();
 
-  const chain = findSettlement(JSON.parse(readFileSync(join(ROOT, 'assets/data/all.json'), 'utf8')), '30595');
-  assert.ok(chain, 'settlement 30595 must exist in all.json');
+  assertAutocompleteHooksMatchConfig(document);
+  const ac = mountAutocomplete(document);
+  const { search, dropdown, select, name } = ac;
+  assert.ok(search && dropdown && select, `${name} autocomplete controls must be mounted`);
+  const { opt, query } = uniqueOption(ac.options);
 
-  ctl.setData('location_widget', {
-    oblast: '0342', oblastType: 'область', oblastName: 'Івано-Франківська область',
-    raion: chain.raion.id, raionName: chain.s.raionName,
-    hromada: chain.hromada.id, hromadaName: chain.s.hromadaName,
-    settlement: chain.s.id, settlementType: chain.s.type, settlementName: chain.s.name,
-  });
-  await flush(); await flush(); await tick(30);
-  await flush();
-
-  const search = document.querySelector('[data-autocomplete-search="district_settlement"]');
-  const dropdown = document.querySelector('[data-autocomplete-dropdown="district_settlement"]');
-  const select = document.querySelector('select[data-field="district_settlement"]');
-  assert.ok(search && dropdown && select, 'district autocomplete controls must be mounted');
-
-  for (const ch of 'Пас') {
+  for (const ch of query) {
     search.focus();
     search.value += ch;
     fire(window, search, 'input');
@@ -194,27 +274,23 @@ test('district autocomplete reacts to typing and switches to search mode once it
   }
 
   const items = dropdown.querySelectorAll('.dropdown-item');
-  assert.ok(items.length >= 1, `expected Пасічна in the dropdown after char-by-char typing, got ${items.length}`);
-  assert.ok(Array.prototype.some.call(items, (it) => it.textContent.trim() === 'Пасічна'),
-    'dropdown must contain the exact "Пасічна" option');
+  assert.ok(Array.prototype.some.call(items, (it) => it.textContent.trim() === String(opt.name)),
+    `dropdown must contain the inline "${opt.name}" option`);
   assert.equal(dropdown.style.display, 'block', 'dropdown must be visible while typing');
+  assert.equal(select.hidden, true, 'select stays hidden in search mode');
+  assert.equal(search.closest('.position-relative').hidden, false, 'search input is used in search mode');
 
-  assert.equal(select.hidden, true, 'select must be hidden in search mode');
-  assert.equal(search.closest('.position-relative').hidden, false, 'search input must be visible in search mode');
-
-  const target = Array.prototype.find.call(items, (it) => it.textContent.trim() === 'Пасічна');
+  const target = Array.prototype.find.call(items, (it) => it.textContent.trim() === String(opt.name));
   target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush();
 
-  const chosen = ctl.getValue('district_settlement');
-  assert.ok(chosen, `choosing Пасічна must store an id in the controller, got ${JSON.stringify(chosen)}`);
-  assert.equal(search.value, 'Пасічна', 'search input must show the chosen name');
+  assert.equal(ctl.getValue(name), String(opt.id), 'choosing an option stores its inline id');
+  assert.equal(search.value, String(opt.name), 'search input must show the chosen name');
 
   search.dispatchEvent(new window.Event('blur', { bubbles: true }));
   await flush(); await flush(); await tick(20);
-  assert.equal(ctl.getValue('district_settlement'), chosen, 'chosen autocomplete value must survive blur');
-  assert.equal(search.value, 'Пасічна', 'chosen name must survive blur');
-  assert.equal(search.classList.contains('is-valid'), true, 'a picked value stays valid after blur');
+  assert.equal(ctl.getValue(name), String(opt.id), 'the chosen id survives blur');
+  assert.equal(search.value, String(opt.name), 'the chosen name survives blur');
 });
 
 test('an unpicked autocomplete keeps its text and turns invalid on blur', async () => {
@@ -222,15 +298,16 @@ test('an unpicked autocomplete keeps its text and turns invalid on blur', async 
   const app = await bootLocation(document);
   assert.ok(app, 'wireAddProperty must boot');
 
-  const search = document.querySelector('[data-autocomplete-search="type_address"]');
-  assert.ok(search, 'the type_address autocomplete must be mounted');
+  const ac = mountAutocomplete(document);
+  const { search, name } = ac;
+  assert.ok(search, `${name} autocomplete must be mounted`);
 
   search.focus();
   search.value = 'пррр';
   fire(window, search, 'input');
   await flush();
 
-  assert.equal(app.controller.getValue('type_address'), '', 'typing alone stores no value');
+  assert.equal(app.controller.getValue(name), '', 'typing alone stores no value');
   assert.equal(search.value, 'пррр', 'the typed query stays in the control');
   assert.equal(search.classList.contains('is-invalid'), true, 'a query with no matches is red while typing');
   assert.equal(search.classList.contains('is-valid'), false, 'an uncommitted query is never valid');
@@ -249,37 +326,37 @@ test('one click on the autocomplete clear button empties the field', async () =>
   const app = await bootLocation(document);
   assert.ok(app, 'wireAddProperty must boot');
 
-  const search = document.querySelector('[data-autocomplete-search="type_address"]');
-  const dropdown = document.querySelector('[data-autocomplete-dropdown="type_address"]');
-  const clearBtn = document.querySelector('[data-autocomplete-clear="type_address"]');
-  assert.ok(search && dropdown && clearBtn, 'the type_address controls must be mounted');
+  const ac = mountAutocomplete(document);
+  const { search, dropdown, clear, name } = ac;
+  assert.ok(search && dropdown && clear, `${name} controls must be mounted`);
+  const { opt, query } = uniqueOption(ac.options);
 
   search.focus();
-  search.value = 'пр';
+  search.value = query;
   fire(window, search, 'input');
   await flush();
 
-  const target = itemWith(dropdown, 'провулок');
-  assert.ok(target, 'the dropdown must offer провулок');
+  const target = itemWith(dropdown, String(opt.name));
+  assert.ok(target, `the dropdown must offer ${opt.name}`);
   target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush();
 
-  assert.equal(app.controller.getValue('type_address'), 'lane', 'the pick is stored');
-  assert.equal(search.value, 'провулок', 'the pick fills the search input');
+  assert.equal(app.controller.getValue(name), String(opt.id), 'the pick is stored');
+  assert.equal(search.value, String(opt.name), 'the pick fills the search input');
   assert.equal(search.classList.contains('is-valid'), true, 'the pick shows valid');
-  assert.equal(clearBtn.hidden, false, 'the clear button shows once a value is picked');
+  assert.equal(clear.hidden, false, 'the clear button shows once a value is picked');
 
   fire(window, search, 'blur');
   await tick(20); await flush();
   assert.equal(search.classList.contains('is-valid'), true, 'the green state survives blur');
-  assert.equal(search.value, 'провулок', 'the picked name survives blur');
+  assert.equal(search.value, String(opt.name), 'the picked name survives blur');
 
-  fire(window, clearBtn, 'click');
+  fire(window, clear, 'click');
   await flush();
 
-  assert.equal(app.controller.getValue('type_address'), '', 'one click clears the stored value');
+  assert.equal(app.controller.getValue(name), '', 'one click clears the stored value');
   assert.equal(search.value, '', 'one click clears the search input');
-  assert.equal(clearBtn.hidden, true, 'the clear button hides again');
+  assert.equal(clear.hidden, true, 'the clear button hides again');
   assert.equal(search.classList.contains('is-invalid'), true, 'a cleared required field is red');
   assert.equal(search.classList.contains('is-valid'), false, 'a cleared field is not valid');
   const icon = search.parentElement.querySelector('.autocomplete-search-icon');
@@ -287,65 +364,39 @@ test('one click on the autocomplete clear button empties the field', async () =>
   assert.equal(feedbackOf(search).style.display, 'block', 'the required message shows');
 });
 
-test('clearing type_address keeps district_settlement invalid after a no-match query', async () => {
+// MOD-13: keep the original invariant without naming either field — clearing
+// an autocomplete must not neutralize another field's invalid state.
+test('clearing an autocomplete leaves an unrelated required field invalid', async () => {
   const { window, document } = mount();
-
-  globalThis.fetch = async (url) => {
-    const abs = join(ROOT, String(url).replace(/^\//, ''));
-    try {
-      const txt = readFileSync(abs, 'utf8');
-      return { ok: true, json: async () => JSON.parse(txt) };
-    } catch {
-      return { ok: false, status: 404, json: async () => ({}) };
-    }
-  };
-
-  const app = wireAddProperty(document, { fetch: globalThis.fetch, leaflet: null, Captcha: null });
+  const app = await bootLocation(document);
   assert.ok(app, 'wireAddProperty must boot');
   const ctl = app.controller;
 
-  await flush(); await flush(); await flush();
+  const ac = mountAutocomplete(document);
+  const otherField = fieldsOf(readConfig(document), (f) =>
+    f.required && f.type === 'text' && f.name !== ac.name)
+    .find((f) => document.getElementById(`field_${f.name}`));
+  assert.ok(otherField, 'the config must carry another required text field');
+  const other = document.getElementById(`field_${otherField.name}`);
+  ctl.setServerErrors({ [otherField.name]: 'Серверна помилка' });
+  await flush();
+  assert.equal(other.classList.contains('is-invalid'), true, 'the unrelated field starts invalid');
 
-  const chain = findSettlement(JSON.parse(readFileSync(join(ROOT, 'assets', 'data', 'all.json'), 'utf8')), '30595');
-  assert.ok(chain, 'settlement 30595 must exist in all.json');
+  assert.ok(ac.search && ac.clear, `${ac.name} controls must be mounted`);
+  ac.search.focus();
+  ac.search.value = uniqueOption(ac.options).query;
+  fire(window, ac.search, 'input');
+  await flush();
+  assert.equal(ac.clear.hidden, false, `typing in ${ac.name} shows its clear button`);
 
-  ctl.setData('location_widget', {
-    oblast: '0342', oblastType: 'область', oblastName: 'Івано-Франківська область',
-    raion: chain.raion.id, raionName: chain.s.raionName,
-    hromada: chain.hromada.id, hromadaName: chain.s.hromadaName,
-    settlement: chain.s.id, settlementType: chain.s.type, settlementName: chain.s.name,
-  });
-  await flush(); await flush(); await tick(30);
+  fire(window, ac.clear, 'click');
   await flush();
 
-  const district = document.querySelector('[data-autocomplete-search="district_settlement"]');
-  const address = document.querySelector('[data-autocomplete-search="type_address"]');
-  const addressClear = document.querySelector('[data-autocomplete-clear="type_address"]');
-  assert.ok(district && address && addressClear, 'both autocomplete controls must be mounted');
-
-  district.focus();
-  district.value = 'zzz';
-  fire(window, district, 'input');
-  await flush(); await flush();
-  assert.equal(district.classList.contains('is-invalid'), true, 'a no-match query is red while typing');
-
-  fire(window, district, 'blur');
-  await tick(20); await flush();
-  assert.equal(district.classList.contains('is-invalid'), true, 'the no-match state survives blur');
-
-  address.focus();
-  address.value = 'ву';
-  fire(window, address, 'input');
-  await flush();
-  assert.equal(addressClear.hidden, false, 'typing in type_address shows its clear button');
-
-  fire(window, addressClear, 'click');
-  await flush();
-
-  assert.equal(district.value, 'zzz', 'clearing type_address leaves the district query alone');
-  assert.equal(district.classList.contains('is-invalid'), true,
-    'clearing type_address must not neutralize district_settlement');
-  assert.equal(address.classList.contains('is-invalid'), true, 'the cleared required type_address is red');
+  assert.equal(ac.search.value, '', `clearing ${ac.name} empties its search input`);
+  assert.equal(ctl.getValue(ac.name), '', `clearing ${ac.name} stores no value`);
+  assert.equal(other.classList.contains('is-invalid'), true,
+    `clearing ${ac.name} must not neutralize another field`);
+  assert.equal(ac.search.classList.contains('is-invalid'), true, `the cleared required ${ac.name} is red`);
 });
 
 test('validateStep paints an uncommitted autocomplete red without a blur', async () => {
@@ -353,20 +404,24 @@ test('validateStep paints an uncommitted autocomplete red without a blur', async
   const app = await bootLocation(document);
   assert.ok(app, 'wireAddProperty must boot');
 
-  const search = document.querySelector('[data-autocomplete-search="type_address"]');
-  assert.ok(search, 'the type_address autocomplete must be mounted');
+  const ac = mountAutocomplete(document);
+  const { search, name } = ac;
+  assert.ok(search, `${name} autocomplete must be mounted`);
 
   search.focus();
-  search.value = 'ву';
+  search.value = uniqueOption(ac.options).query;
   fire(window, search, 'input');
   await flush();
 
   assert.equal(search.classList.contains('is-invalid'), false,
     'matching but unpicked text stays neutral while typing');
 
-  const cfg = JSON.parse(document.getElementById('add-property-config').textContent);
-  const stepIndex = cfg.steps.findIndex((step) => JSON.stringify(step).includes('"type_address"'));
-  assert.ok(stepIndex >= 0, 'type_address must live in a configured step');
+  let stepIndex = -1;
+  readConfig(document).steps.forEach((step, index) => {
+    if (stepIndex >= 0) return;
+    walkConfig(step, (node) => { if (node.name === name) stepIndex = index; });
+  });
+  assert.ok(stepIndex >= 0, `${name} must live in a configured step`);
 
   app.controller.validateStep(stepIndex);
   await flush();
@@ -381,10 +436,11 @@ test('server errors still paint autocomplete search inputs after the binder hand
   const app = await bootLocation(document);
   assert.ok(app, 'wireAddProperty must boot');
 
-  const search = document.querySelector('[data-autocomplete-search="type_address"]');
-  assert.ok(search, 'the type_address autocomplete must be mounted');
+  const ac = mountAutocomplete(document);
+  const { search, name } = ac;
+  assert.ok(search, `${name} autocomplete must be mounted`);
 
-  app.controller.setServerErrors({ type_address: 'Серверна помилка' });
+  app.controller.setServerErrors({ [name]: 'Серверна помилка' });
   await flush();
 
   assert.equal(search.classList.contains('is-invalid'), true, 'a server error turns the search input red');
@@ -396,36 +452,34 @@ test('server errors still paint autocomplete search inputs after the binder hand
   assert.equal(search.classList.contains('is-invalid'), false, 'clearing the server report restores the neutral state');
 });
 
-test('autocomplete datas switch when the dependent location settlement changes', async () => {
+// MOD-13: generic invariant — a location change must not re-resolve an
+// autocomplete source. No field name is hardcoded.
+test('autocomplete source stays config-local after the location widget changes', async () => {
   const { window, document } = mount();
 
-  globalThis.fetch = async (url) => {
-    const abs = join(ROOT, String(url).replace(/^\//, ''));
-    try {
-      const txt = readFileSync(abs, 'utf8');
-      return { ok: true, json: async () => JSON.parse(txt) };
-    } catch {
-      return { ok: false, status: 404, json: async () => ({}) };
-    }
-  };
-
-  const app = wireAddProperty(document, { fetch: globalThis.fetch, leaflet: null, Captcha: null });
+  const app = wireAddProperty(document, { fetch: addrFetch, leaflet: null, Captcha: null });
   assert.ok(app, 'wireAddProperty must boot');
   const ctl = app.controller;
 
   await flush(); await flush(); await flush();
 
-  ctl.setData('location_widget', {
-    oblast: '0812', oblastType: 'область', oblastName: 'Київська область',
-    raion: '', hromada: '', settlement: '30559', settlementType: 'місто', settlementName: 'Єзупіль',
-  });
-  await flush(); await flush(); await flush(); await tick(30); await flush();
+  const cfg = readConfig(document);
+  const widget = findLocationWidget(cfg);
+  assert.ok(widget, 'the mounted config must carry the location widget');
+  const dependent = fieldsOf(cfg, (f) => f.type === 'autocomplete' &&
+    (f.datas || []).some((d) => String((d && d.field) || '').startsWith(`${widget.name}.`)));
+  assert.equal(dependent.length, 0, 'no autocomplete may resolve its source from the location widget');
+  assertAutocompleteHooksMatchConfig(document);
 
-  const search = document.querySelector('[data-autocomplete-search="district_settlement"]');
-  const dropdown = document.querySelector('[data-autocomplete-dropdown="district_settlement"]');
-  assert.ok(search && dropdown, 'district autocomplete controls must be mounted');
+  setLocationFromConfig(document, ctl, '9001');
+  await flush(); await flush(); await tick(30); await flush();
 
-  for (const ch of 'Центр') {
+  const ac = mountAutocomplete(document);
+  const { search, dropdown, name } = ac;
+  assert.ok(search && dropdown, `${name} autocomplete controls must be mounted`);
+  const opt = ac.options[ac.options.length - 1];
+
+  for (const ch of String(opt.name)) {
     search.focus();
     search.value += ch;
     fire(window, search, 'input');
@@ -433,15 +487,12 @@ test('autocomplete datas switch when the dependent location settlement changes',
   }
 
   const items = dropdown.querySelectorAll('.dropdown-item');
-  assert.ok(items.length >= 1, `expected Центр in districts-30559.json, got ${items.length}`);
-  assert.ok(Array.prototype.some.call(items, (it) => it.textContent.trim() === 'Центр'),
-    'dropdown must serve the second datas entry after the settlement change');
+  const target = Array.prototype.find.call(items, (it) => it.textContent.trim() === String(opt.name));
+  assert.ok(target, `the inline "${opt.name}" option must still be served after a location change`);
 
-  const target = Array.prototype.find.call(items, (it) => it.textContent.trim() === 'Центр');
   target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush();
-
-  assert.equal(ctl.getValue('district_settlement'), 'ezupil-01', 'id from districts-30559.json must be stored');
+  assert.equal(ctl.getValue(name), String(opt.id), 'the config-local id is stored');
 });
 
 test('location widget toggles between select and search per field according to the old engine semantics', async () => {
@@ -480,13 +531,13 @@ test('location widget toggles between select and search per field according to t
 
   assert.equal(vis('raion').select.hidden, false, 'raion is select-mode (few children), select must be visible');
 
-  ctl.setData('location_widget', {
+  ctl.setData(locationRootOf(document), {
     oblast: '0342', oblastType: 'область', oblastName: 'Івано-Франківська область',
     raion: '1338', hromada: '3991', settlement: '30595', settlementType: 'місто', settlementName: 'Івано-Франківськ',
   });
   await flush(); await flush(); await tick(30); await flush();
 
-  assert.equal(ctl.getValue('location_widget.settlement'), '30595', 'the programmatic location value is stored');
+  assert.equal(locValue(ctl, document, 'settlement'), '30595', 'the programmatic location value is stored');
 
   assert.equal(vis('raion').select.hidden, false, 'raion stays select-mode once its parent is set');
   assert.equal(vis('hromada').select.hidden, true, 'hromada flips to search-mode once its parent chain is set');
@@ -505,7 +556,7 @@ test('location widget toggles between select and search per field according to t
   assert.ok(Array.prototype.some.call(items, (it) => it.textContent.trim().includes('Івано-Франківськ')),
     'milestone: settlement search must offer Івано-Франківськ');
 
-  assert.equal(ctl.getValue('location_widget.settlement'), '', 'typing a partial query drops the uncommitted value');
+  assert.equal(locValue(ctl, document, 'settlement'), '', 'typing a partial query drops the uncommitted value');
 });
 
 test('captcha is skipped without a CaptchaSite or in local mode, and gates the form when remote', async () => {
@@ -562,10 +613,10 @@ test('method "two" fills the ancestors when the leaf settlement is picked, and c
   target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush();
 
-  assert.equal(ctl.getValue('location_widget.settlement'), '30595', 'the chosen leaf value must be stored');
-  assert.equal(ctl.getValue('location_widget.raion'), '1338', 'method two must fill the raion ancestor');
-  assert.equal(ctl.getValue('location_widget.hromada'), '3991', 'method two must fill the hromada ancestor');
-  assert.equal(ctl.getValue('location_widget.oblast'), '0342', 'method two must fill the oblast ancestor');
+  assert.equal(locValue(ctl, document, 'settlement'), '30595', 'the chosen leaf value must be stored');
+  assert.equal(locValue(ctl, document, 'raion'), '1338', 'method two must fill the raion ancestor');
+  assert.equal(locValue(ctl, document, 'hromada'), '3991', 'method two must fill the hromada ancestor');
+  assert.equal(locValue(ctl, document, 'oblast'), '0342', 'method two must fill the oblast ancestor');
 
   const raionSelect = document.querySelector('select[data-location-field="raion"]');
   assert.equal(raionSelect.closest('.form-group').hidden, false, 'a filled middle field must become visible');
@@ -573,9 +624,9 @@ test('method "two" fills the ancestors when the leaf settlement is picked, and c
 
   fire(window, document.querySelector('[data-location-clear="settlement"]'), 'click');
   await flush(); await flush();
-  assert.equal(ctl.getValue('location_widget.settlement'), '', 'clearing the leaf wipes the leaf');
-  assert.equal(ctl.getValue('location_widget.raion'), '', 'clearing the leaf wipes the raion ancestor');
-  assert.equal(ctl.getValue('location_widget.hromada'), '', 'clearing the leaf wipes the hromada ancestor');
+  assert.equal(locValue(ctl, document, 'settlement'), '', 'clearing the leaf wipes the leaf');
+  assert.equal(locValue(ctl, document, 'raion'), '', 'clearing the leaf wipes the raion ancestor');
+  assert.equal(locValue(ctl, document, 'hromada'), '', 'clearing the leaf wipes the hromada ancestor');
 });
 
 for (const readonly of [true, false]) {
@@ -601,18 +652,18 @@ for (const readonly of [true, false]) {
     target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
     await flush(); await flush();
 
-    assert.equal(ctl.getValue('location_widget.oblast'), '0342', 'the preset oblast must be auto-filled');
-    assert.equal(ctl.getValue('location_widget.hromada'), '3991', 'method two must fill the hromada ancestor');
+    assert.equal(locValue(ctl, document, 'oblast'), '0342', 'the preset oblast must be auto-filled');
+    assert.equal(locValue(ctl, document, 'hromada'), '3991', 'method two must fill the hromada ancestor');
 
     fire(window, document.querySelector('[data-location-clear="settlement"]'), 'click');
     await flush(); await flush();
 
-    assert.equal(ctl.getValue('location_widget.settlement'), '', 'clearing the leaf still wipes the leaf');
-    assert.equal(ctl.getValue('location_widget.hromada'), '', 'a non-preset ancestor is still wiped');
-    assert.equal(ctl.getValue('location_widget.raion'), '', 'a non-preset ancestor is still wiped');
-    assert.equal(ctl.getValue('location_widget.oblast'), '0342',
+    assert.equal(locValue(ctl, document, 'settlement'), '', 'clearing the leaf still wipes the leaf');
+    assert.equal(locValue(ctl, document, 'hromada'), '', 'a non-preset ancestor is still wiped');
+    assert.equal(locValue(ctl, document, 'raion'), '', 'a non-preset ancestor is still wiped');
+    assert.equal(locValue(ctl, document, 'oblast'), '0342',
       'a preset ancestor must survive the leaf clear (readonly or not)');
-    assert.equal(ctl.getValue('location_widget.oblastName'), 'Івано-Франківська',
+    assert.equal(locValue(ctl, document, 'oblastName'), 'Івано-Франківська',
       'the preset ancestor label must survive too');
   });
 }
@@ -625,12 +676,12 @@ test('location chrome follows typing: «-» is invalid, «ів» searches while 
   const clearBtn = document.querySelector('[data-location-clear="settlement"]');
   const icon = search.parentElement.querySelector('.location-search-icon');
   const dropdown = document.querySelector('[data-location-dropdown="settlement"]');
-  const label = document.querySelector('label[for^="field_location_widget_settlement"]');
+  const label = document.querySelector(`label[for^="${locId(document, 'settlement')}"]`);
   assert.ok(search && clearBtn && icon && dropdown && label, 'the settlement chrome must be mounted');
 
   assert.equal(clearBtn.hidden, true, 'no clear button before anything is typed');
   assert.equal(icon.hidden, false, 'the magnifier shows while the field is empty');
-  assert.equal(label.getAttribute('for'), 'field_location_widget_settlement_search',
+  assert.equal(label.getAttribute('for'), `${locId(document, 'settlement')}_search`,
     'the label must point at the search input while the field is in search mode');
 
   search.value = '-';
@@ -686,13 +737,13 @@ test('editing the picked label drops the stored value and the field stops being 
   assert.ok(target, 'the settlement dropdown must offer Івано-Франківськ');
   target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush();
-  assert.equal(ctl.getValue('location_widget.settlement'), '30595', 'the pick is stored');
+  assert.equal(locValue(ctl, document, 'settlement'), '30595', 'the pick is stored');
   assert.equal(search.classList.contains('is-valid'), true, 'a committed pick is valid');
 
   search.value = '-';
   fire(window, search, 'input');
   await flush();
-  assert.equal(ctl.getValue('location_widget.settlement'), '', 'overwriting the label drops the stored id');
+  assert.equal(locValue(ctl, document, 'settlement'), '', 'overwriting the label drops the stored id');
   assert.equal(search.classList.contains('is-valid'), false, 'the field must not stay valid');
   assert.equal(search.classList.contains('is-invalid'), true, 'the mismatching text is invalid');
   assert.equal(feedbackOf(search).textContent, 'Будь ласка, заповніть це поле', 'the required message returns');
@@ -716,12 +767,12 @@ test('blur keeps the typed query and its pattern state (legacy only validated)',
   assert.ok(target, 'the settlement dropdown must offer Івано-Франківськ');
   target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush();
-  assert.equal(ctl.getValue('location_widget.settlement'), '30595', 'the leaf must be stored');
+  assert.equal(locValue(ctl, document, 'settlement'), '30595', 'the leaf must be stored');
 
   search.value = '12';
   fire(window, search, 'input');
   await flush();
-  assert.equal(ctl.getValue('location_widget.settlement'), '', 'overwriting the label drops the stored id');
+  assert.equal(locValue(ctl, document, 'settlement'), '', 'overwriting the label drops the stored id');
   assert.equal(search.classList.contains('is-invalid'), true, 'digits fail the Ukrainian-only pattern');
   assert.equal(feedbackOf(search).textContent, 'Тільки українські літери', 'the field-level pattern message wins');
   assert.equal(feedbackOf(search).style.display, 'block', 'the pattern feedback shows while typing');
@@ -772,7 +823,7 @@ test('picking a parent wipes the child’s query, pattern error and dropdown', a
   hitems[0].dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush();
 
-  assert.ok(String(ctl.getValue('location_widget.hromada')), 'the parent pick must be stored');
+  assert.ok(String(locValue(ctl, document, 'hromada')), 'the parent pick must be stored');
   assert.equal(search.value, '', 'the cascade drops the child’s typed query');
   assert.equal(search.classList.contains('is-invalid'), false, 'the cascade clears the child’s pattern error');
   assert.equal(feedbackOf(search).style.display, 'none', 'the child’s feedback closes');
@@ -840,11 +891,13 @@ test('an unpicked required location sub-field keeps Next disabled until the chai
 
   ctl.setStep(3);
   await flush();
-  ctl.setData('type_address', 'street');
+  const ac = mountAutocomplete(document);
+  const { opt } = uniqueOption(ac.options);
+  ctl.setData(ac.name, String(opt.id));
   ctl.setData('name_address', 'Бандери');
   ctl.setData('house_address', '16');
   await flush(); await flush();
-  assert.equal(ctl.getValue('type_address'), 'street', 'the step address fields must be filled for the test');
+  assert.equal(ctl.getValue(ac.name), String(opt.id), 'the step address fields must be filled for the test');
   assert.equal(nextBtn.disabled, true, 'a filled step still cannot advance past an unpicked required location');
 
   const search = document.querySelector('input[data-location-search="settlement"]');
@@ -856,7 +909,7 @@ test('an unpicked required location sub-field keeps Next disabled until the chai
   assert.ok(target, 'the settlement dropdown must offer Івано-Франківськ');
   target.dispatchEvent(new window.Event('mousedown', { bubbles: true, cancelable: true }));
   await flush(); await flush(); await flush();
-  assert.ok(String(ctl.getValue('location_widget.settlement')), 'the leaf pick is stored');
+  assert.ok(String(locValue(ctl, document, 'settlement')), 'the leaf pick is stored');
   assert.equal(nextBtn.disabled, false, 'completing the location enables Next');
 });
 
