@@ -107,3 +107,9 @@ npm run build
   («Toggle line comment 893-921», `_data/add-property.yml`, 29+/29−) — не частина
   MERGE-2, цим item-ом не зачіпався. Може вплинути на `form-bake sha` / baseline
   `verify-render` — окреме рішення.
+
+- 2026-11-20: обидві застарілі розбіжності, зафіксовані вище в MERGE-2
+  (`form-bake sha` і NEW POST), **свідомо перезахоплено** в MOD-8:
+  `capturedAt = 2026-11-20T09:27:32.288Z`, трекована property-сторінка —
+  `region/city/yaremche/house/prodam-budynok-1794757537.html`. `verify` після
+  `capture` — 3/3 PASS. Деталі й повний перегляд diff — `items/MOD-8.md`.

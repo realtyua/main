@@ -192,7 +192,7 @@
 | MOD-5 | 8 | Оновити `actions/*` + `ubuntu-24.04` (`realtyua`) | MERGE-2 | todo | `feat/MOD-5-actions-versions` | `../worktrees/MOD-5-actions-versions` | — | — |
 | MOD-6 | 8 | Відновити шлях до `assets/js/form-engine/captcha.js` | MERGE-2 | done | `feat/MOD-6-captcha-path` (merged) | `../worktrees/MOD-6-captcha-path` (cleaned) | 2026-11-18 | 748ea138 |
 | MOD-7 | 8 | Turnstile: усунути подвійне завантаження `api.js` | MOD-6 | done | `feat/MOD-7-turnstile-double-load` (merged) | `../worktrees/MOD-7-turnstile-double-load` (cleaned) | 2026-11-19 | 08ca1244 |
-| MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | todo | `feat/MOD-8-baseline-recapture` | `../worktrees/MOD-8-baseline-recapture` | — | — |
+| MOD-8 | 8 | Свідоме перезахоплення baseline `verify-render` | MOD-6, MOD-7 | review | `feat/MOD-8-baseline-recapture` | `../worktrees/proud-cactus` | 2026-11-20 | — |
 | MOD-9 | 8 | Captcha як engine-асет для modal-форми (notify) | MOD-7 | done | `feat/MOD-9-realtyua-captcha` (merged) | `../worktrees/MOD-9-realtyua-captcha` (cleaned) | 2026-11-19 | 5a6b2d93 / merge d05fb9de (realtyua), d3eaf90 (form-engine) |
 | MOD-10 | 8 | Modal runtime: config-driven lifecycle (уніфікація) | MOD-9 | todo | `feat/MOD-10-modal-runtime-unify` | `../worktrees/MOD-10-modal-runtime-unify` | — | — |
 | MOD-11 | 8 | Контракт дій/chrome форм (submit/reset) для page і modal | MOD-9 | todo | `feat/MOD-11-form-actions-chrome` | `../worktrees/MOD-11-form-actions-chrome` | — | — |
@@ -286,6 +286,15 @@
 > MOD-10..MOD-12 — `todo` (2026-11-19): винесені з MOD-9 для уніфікації form-engine
 > (config-driven modal lifecycle; контракт submit/reset/chrome; паритет
 > валідації/async-перевірок між page і modal). Деталі — відповідні `items/MOD-*.md`.
+>
+> MOD-8 — `review` (2026-11-20): baseline `verify-render` перезахоплено о
+> `2026-11-20T09:27:32.288Z` після перегляду всіх 3 розбіжностей (жодна не є
+> регресією): `new.html` — SHA + digest 1.0.7 + правки конфігу `fd4978c6`/`b3f2fdb4`;
+> worker manifest — видалення `district_settlement` і новий `email.validation.pattern`;
+> property-сторінка — новий пост і engine-baked notify з MOD-9. `verify` після
+> `capture` — **3/3 PASS**. За погодженням користувача локальний цикл: спершу
+> merge в `master` (як MOD-6/7/9), потім локальне підтягування
+> `feature/form-engine` до `master`; push — користувач. Деталі — `items/MOD-8.md`.
 
 **Разом: 63 item.**
 
