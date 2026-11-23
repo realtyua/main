@@ -192,4 +192,4 @@ steps:
                 fields:
                   - name: notify_submit
                     type: raw
-                    html: '<button type="submit" id="notify-submit" class="btn btn-primary">Надіслати</button>'
+                    html: '<button type="submit" id="notify-submit" class="btn btn-primary" data-form-action="submit"><span data-submit-label>Надіслати</span><span data-submit-busy hidden>Надсилаю<span class="spinner-border spinner-border-sm ml-2" role="status"><span class="sr-only">Надсилаю...</span></span></span></button>'
