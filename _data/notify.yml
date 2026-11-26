@@ -7,7 +7,7 @@ behavior:
   modal: "#notifyModal"
 
 settings:
-  title: Повідомити про неточність - settings.title
+  title: Повідомити про неточність....
   description: |
     Якщо ви помітили, що оголошення містить неточну інформацію або вже не актуальне, будь ласка, повідомте нам про це...
   feedback:
@@ -20,13 +20,14 @@ settings:
     tooltip: Це поле є обов’язкове
     message: Будь ласка, заповніть це поле
     class: text-danger small font-weight-bold
+  # Це не працює
   #submit:
   #  action: "{{ site.notify_endpoint }}"
   #  method: POST
 
 steps:
   - id: form
-    title: Повідомити про неточність в оголошенні - steps.title
+    title: Повідомити про неточність в оголошенні...
     rows:
       - class: row
         cols:
